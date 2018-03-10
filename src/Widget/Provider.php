@@ -29,7 +29,7 @@ class Provider extends ServiceProvider
     {
 
         $this->registerServices();
-        $this->app->alias('widget', 'AvoRed\Ecommerce\Widget\Manager');
+        $this->app->alias('widget', 'AvoRed\Framework\Widget\Manager');
 
 
     }
@@ -55,6 +55,6 @@ class Provider extends ServiceProvider
      */
     public function provides()
     {
-        return ['widget', 'AvoRed\Ecommerce\Widget\Manager'];
+        return ['widget', 'AvoRed\Framework\Widget\Manager'];
     }
 }
