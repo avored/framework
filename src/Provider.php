@@ -9,6 +9,8 @@ class Provider extends ServiceProvider
 
     protected $providers = [
         \AvoRed\Framework\AdminMenu\Provider::class,
+        \AvoRed\Framework\Breadcrumb\Provider::class,
+        \AvoRed\Ecommerce\DataGrid\Provider::class,
         \AvoRed\Framework\Theme\Provider::class,
         \AvoRed\Framework\Widget\Provider::class
     ];
