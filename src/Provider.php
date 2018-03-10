@@ -30,6 +30,7 @@ class Provider extends ServiceProvider
      */
     public function register()
     {
+        dd('test');
         $this->registerProviders();
     }
 
