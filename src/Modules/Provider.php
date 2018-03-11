@@ -1,8 +1,10 @@
 <?php
 namespace AvoRed\Framework\Modules;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Modules\Facade as Module;
+
 
 class Provider extends ServiceProvider {
 
@@ -20,6 +22,7 @@ class Provider extends ServiceProvider {
     public function register()
     {
 
+        $this->registerModuleConsoleProvider();
         $this->registerModule();
         $this->app->alias('module', 'AvoRed\Framework\Modules\Manager');
 
@@ -36,6 +39,17 @@ class Provider extends ServiceProvider {
             return new Manager($app['files']);
         });
     }
+
+
+    /*
+     * Register Module console Command which Register most Module generation Command
+     *
+     * @return void
+     */
+    public function registerModuleConsoleProvider() {
+        $this->app->register('AvoRed\Framework\Modules\Console\Provider');
+    }
+
 
 
     /**

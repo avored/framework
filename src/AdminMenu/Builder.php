@@ -23,7 +23,7 @@ class Builder
      * Create new menu object and return
      *
      * @var string $key
-     * @return \AvoRed\Ecommerce\AdminMenu\AdminMenu
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu
      */
     public function add($key) {
         $menu = new AdminMenu();
@@ -38,7 +38,7 @@ class Builder
      * Return Admin Menu Object
      *
      * @var string $key
-     * @return \AvoRed\Ecommerce\AdminMenu\AdminMenu
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu
      */
     public function get($key) {
 
@@ -57,7 +57,7 @@ class Builder
     {
         if ($this->adminMenu->has($menuKey)) {
 
-            /** @var  \AvoRed\Ecommerce\AdminMenu\AdminMenu $adminMenuObj */
+            /** @var  \AvoRed\Framework\AdminMenu\AdminMenu $adminMenuObj */
             $adminMenuObj = $this->adminMenu->get($menuKey);
 
             foreach($adminMenu as $key => $menuArray) {

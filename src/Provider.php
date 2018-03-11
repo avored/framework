@@ -12,6 +12,7 @@ class Provider extends ServiceProvider
         \AvoRed\Framework\Breadcrumb\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,
         \AvoRed\Framework\Image\Provider::class,
+        \AvoRed\Framework\Modules\Provider::class,
         \AvoRed\Framework\Payment\Provider::class,
         \AvoRed\Framework\Permission\Provider::class,
         \AvoRed\Framework\Shipping\Provider::class,

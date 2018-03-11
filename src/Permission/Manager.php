@@ -25,7 +25,7 @@ class Manager {
      * Add Permission Array into Collection
      * 
      * @param array $item
-     * @return \AvoRed\Ecommerce\Permission\Manager
+     * @return \AvoRed\Framework\Permission\Manager
      */
     public function add($key) {
 
