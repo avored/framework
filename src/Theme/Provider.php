@@ -22,6 +22,8 @@ class Provider extends ServiceProvider {
         $this->registerTheme();
         $this->app->alias('theme', 'AvoRed\Framework\Theme\Manager');
 
+        $this->registerThemeConsoleProvider();
+
         $themes = Theme::all();
     }
     /**
@@ -37,6 +39,17 @@ class Provider extends ServiceProvider {
 
             return new Manager($app['files']);
         });
+    }
+
+
+
+    /*
+     * Register Module console Command which Register most Module generation Command
+     *
+     * @return void
+     */
+    public function registerThemeConsoleProvider() {
+        $this->app->register('AvoRed\Framework\Theme\Console\Provider');
     }
 
 

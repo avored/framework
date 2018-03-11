@@ -1,0 +1,19 @@
+@extends('layouts.app')
+
+@php
+
+    $metaTitle = "Home Page: DummyName";
+    $metaDescription = "Home Page Description";
+
+@endphp
+
+@section('meta_title',$metaTitle)
+@section('meta_description',$metaDescription)
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <h1>Hello New Theme DummyVendor DummyName</h1>
+        </div>
+    </div>
+@endsection

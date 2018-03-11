@@ -1,19 +1,19 @@
 <?php
 
-namespace AvoRed\Framework\Modules\Console;
+namespace AvoRed\Framework\Theme\Console;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class ModuleMakeCommand extends Command
+class ThemeMakeCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'avored:module:make';
+    protected $name = 'avored:theme:make';
 
     /**
      * The filesystem instance.
@@ -29,14 +29,14 @@ class ModuleMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new module';
+    protected $description = 'Create a new Theme';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Module';
+    protected $type = 'Theme';
 
 
     /**
@@ -64,7 +64,7 @@ class ModuleMakeCommand extends Command
         $name = strtolower($this->getNameInput());
 
 
-        $stubFiles = ['register', 'module'];
+        $stubFiles = ['register', 'layout','home'];
 
         foreach ($stubFiles as $stubFile) {
 
@@ -96,13 +96,18 @@ class ModuleMakeCommand extends Command
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . "/" . $name . "/" . "register.yaml");
+        return base_path('themes/' . $vendor . "/" . $name . "/" . "register.yaml");
     }
 
 
-    protected function getModulePath($vendor, $name)
+    protected function getLayoutPath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . "/" . $name . "/src/" . "Module.php");
+        return base_path('themes/' . $vendor . "/" . $name . "/views/layouts/" . "app.blade.php");
+    }
+
+    protected function getHomePath($vendor, $name)
+    {
+        return base_path('themes/' . $vendor . "/" . $name . "/views/home/" . "index.blade.php");
     }
 
     /**
@@ -115,7 +120,7 @@ class ModuleMakeCommand extends Command
         $stubFiles = $this->getStub('register');
 
         $stub = $this->files->get($stubFiles);
-        $this->replaceNamespace($stub);
+        $this->replaceStubFileData($stub);
 
         return $stub;
     }
@@ -125,19 +130,36 @@ class ModuleMakeCommand extends Command
      * @param  string $name
      * @return string
      */
-    protected function buildModuleFile()
+    protected function buildLayoutFile()
     {
 
 
-        $stubFiles = $this->getStub('module');
+        $stubFiles = $this->getStub('layout');
 
         $stub = $this->files->get($stubFiles);
 
-        $this->replaceNamespace($stub);
+        $this->replaceStubFileData($stub);
 
 
         return $stub;
     }
+
+
+    /**
+     * Build the class with the given name.
+     *
+     * @param  string $name
+     * @return string
+     */
+    protected function buildHomeFile()
+    {
+        $stubFiles = $this->getStub('home');
+        $stub = $this->files->get($stubFiles);
+        $this->replaceStubFileData($stub);
+
+        return $stub;
+    }
+
 
 
     /**
@@ -158,7 +180,7 @@ class ModuleMakeCommand extends Command
      * @param  string $name
      * @return $this
      */
-    protected function replaceNamespace(&$stub)
+    protected function replaceStubFileData(&$stub)
     {
         $stub = str_replace(
             ['DummyVendor', 'DummyName', 'DummyLowerVendor', 'DummyLowerName'],
