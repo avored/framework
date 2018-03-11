@@ -7,6 +7,6 @@ class Facade extends LaravelFacade
 {
     protected static function getFacadeAccessor()
     {
-        return 'AvoRed\Framework\Shipping\Manager';
+        return 'shipping';
     }
 }

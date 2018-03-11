@@ -11,7 +11,7 @@ interface Payment
      *
      * @return String
      */
-    public function getIdentifier();
+    public function identifier();
 
     /***
      *
@@ -20,7 +20,7 @@ interface Payment
      *
      * @return String
      */
-    public function getName();
+    public function name();
 
     /***
      *
@@ -29,7 +29,7 @@ interface Payment
      *
      * @return Boolean
      */
-    public function isEnabled();
+    public function enable();
 
     /***
      *
