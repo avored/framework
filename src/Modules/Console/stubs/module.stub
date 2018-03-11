@@ -35,8 +35,8 @@ class Module extends ServiceProvider
      */
     protected function registerResources()
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'DummyLowerVendor-DummyLowerName');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'DummyLowerVendor-DummyLowerName');
+        //$this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        //$this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'DummyLowerVendor-DummyLowerName');
+        //$this->loadViewsFrom(__DIR__ . '/../resources/views', 'DummyLowerVendor-DummyLowerName');
     }
 }
