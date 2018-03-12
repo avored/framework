@@ -77,7 +77,7 @@ class Manager
 
         $this->data = $this->model->paginate($this->pageItem);
 
-        return view('avored-ecommerce::datagrid.grid')->with('dataGrid', $this);
+        return view('avored-framework::datagrid.grid')->with('dataGrid', $this);
     }
 
     public function asc($identifier = "") {
@@ -97,38 +97,12 @@ class Manager
     }
 
 
-    public function dataTableData($model) {
+    public function dataTableData($model)
+    {
 
         $this->model = $model;
         return $this;
-        /**
-        $count = $model->get()->count();
-
-        $columns = $this->request->get('columns');
-        $orders = $this->request->get('order');
-
-        $order = $orders[0];
-
-        $records = $model->orderBy($columns[$order['column']]['name'], $order['dir']);
-
-        $noOfRecord = $this->request->get('length');
-        $noOfSkipRecord = $this->request->get('start');
-
-        $records->skip($noOfSkipRecord)->take($noOfRecord);
-
-        $data = [
-                "data" => $records->get(),
-                "draw" =>  $this->request->get('draw'),
-                "recordsTotal"=> $count,
-                "recordsFiltered" => $count
-                ];
-
-         */
-
-
-        //return JsonResponse::create($data);
     }
-
 
     /**
      *

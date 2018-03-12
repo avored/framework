@@ -29,6 +29,7 @@ class Provider extends ServiceProvider
     public function boot()
     {
 
+        $this->registerResources();
     }
 
     /**
@@ -55,4 +56,15 @@ class Provider extends ServiceProvider
         }
     }
 
+
+    /**
+     * Register AvoRed Framework Resources here
+     * @return void
+     */
+
+    public function registerResources() {
+
+        $this->loadViewsFrom(__DIR__. "/../resources/views", "avored-framework");
+
+    }
 }

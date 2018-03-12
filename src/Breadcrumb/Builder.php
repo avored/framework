@@ -32,8 +32,7 @@ class Builder
         if(null === $breadcrumb) {
             return "";
         }
-        //dd($breadcrumb);
-        return view('avored-ecommerce::breadcrumb.index')->with('breadcrumb', $breadcrumb);
+        return view('avored-framework::breadcrumb.index')->with('breadcrumb', $breadcrumb);
     }
 
     public function get($key) {
