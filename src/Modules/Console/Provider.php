@@ -25,8 +25,11 @@ class Provider extends ServiceProvider
         $this->app->singleton('command.avored.module.make', function ($app) {
             return new ModuleMakeCommand($app['files']);
         });
+        $this->app->singleton('command.avored.controller.make', function ($app) {
+            return new ControllerMakeCommand($app['files']);
+        });
 
-        $this->commands(['command.avored.module.make']);
+        $this->commands(['command.avored.module.make', 'command.avored.controller.make']);
     }
 
 
@@ -37,6 +40,6 @@ class Provider extends ServiceProvider
      */
     public function provides()
     {
-        return ['command.avored.module.make'];
+        return ['command.avored.module.make', 'command.avored.controller.make'];
     }
 }

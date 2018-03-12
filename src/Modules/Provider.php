@@ -1,10 +1,8 @@
 <?php
 namespace AvoRed\Framework\Modules;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Modules\Facade as Module;
-
 
 class Provider extends ServiceProvider {
 

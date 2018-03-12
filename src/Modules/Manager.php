@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Modules;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Composer;
+
 use Illuminate\Support\Facades\App;
 use RecursiveIteratorIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
-use Symfony\Component\Yaml\Yaml;
 use Illuminate\Support\Facades\File;
 use League\Flysystem\MountManager;
+use Symfony\Component\Yaml\Yaml;
 use Illuminate\Filesystem\Filesystem;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
@@ -40,40 +41,45 @@ class Manager
     {
         $modulePath = base_path('modules');
 
-        $iterator = new RecursiveIteratorIterator(
+
+        if (File::exists($modulePath)) {
+
+
+            $iterator = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator($modulePath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS)
-        );
+            );
 
-        $iterator->setMaxDepth(2);
-        $iterator->rewind();
+            $iterator->setMaxDepth(2);
+            $iterator->rewind();
 
-        while ($iterator->valid()) {
-            if (($iterator->getDepth() > 1) &&
-                $iterator->isFile() &&
-                ($iterator->getFilename() == 'register.yaml')) {
+            while ($iterator->valid()) {
+                if (($iterator->getDepth() > 1) &&
+                    $iterator->isFile() &&
+                    ($iterator->getFilename() == 'register.yaml')) {
 
-                $filePath = $iterator->getPathname();
-                $moduleRegisterContent = File::get($filePath);
-                $data = Yaml::parse($moduleRegisterContent);
+                    $filePath = $iterator->getPathname();
+                    $moduleRegisterContent = File::get($filePath);
+                    $data = Yaml::parse($moduleRegisterContent);
 
-                $namespace = $data['namespace'];
+                    $namespace = $data['namespace'];
 
-                $composerLoader =  require base_path('vendor/autoload.php');
+                    $composerLoader = require base_path('vendor/autoload.php');
 
-                $path = $iterator->getPath() . DIRECTORY_SEPARATOR . "src";
+                    $path = $iterator->getPath() . DIRECTORY_SEPARATOR . "src";
 
-                $composerLoader->addPsr4($namespace, $path);
+                    $composerLoader->addPsr4($namespace, $path);
 
-                $moduleProvider = $data['namespace'] . 'Module';
+                    $moduleProvider = $data['namespace'] . 'Module';
 
-                App::register($moduleProvider);
+                    App::register($moduleProvider);
 
-                $this->moduleList->put($data['identifier'], $data);
+                    $this->moduleList->put($data['identifier'], $data);
+                }
+                $iterator->next();
             }
-            $iterator->next();
-        }
 
-        $this->moduleLoaded = true;
+            $this->moduleLoaded = true;
+        }
 
         return $this;
     }
@@ -94,13 +100,14 @@ class Manager
         return $this->moduleList->pull($identifier);
     }
 
-    public function getService() {
+    public function getService()
+    {
         return $this->service;
     }
 
     public function getByPath($path)
     {
-        foreach ($this->moduleList as $module =>  $moduleInfo) {
+        foreach ($this->moduleList as $module => $moduleInfo) {
             $path1 = $this->pathSlashFix($path);
             $path2 = $this->pathSlashFix($moduleInfo['path']);
 
@@ -125,8 +132,8 @@ class Manager
     /**
      * Publish the directory to the given directory.
      *
-     * @param  string  $from
-     * @param  string  $to
+     * @param  string $from
+     * @param  string $to
      * @return void
      */
     protected function publishDirectory($from, $to)
@@ -143,14 +150,14 @@ class Manager
     /**
      * Move all the files in the given MountManager.
      *
-     * @param  \League\Flysystem\MountManager  $manager
+     * @param  \League\Flysystem\MountManager $manager
      * @return void
      */
     protected function moveManagedFiles($manager)
     {
         foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']))) {
-                $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
+            if ($file['type'] === 'file' && (!$manager->has('to://' . $file['path']))) {
+                $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
             }
         }
     }
