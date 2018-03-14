@@ -1,7 +1,6 @@
 <?php
 namespace AvoRed\Framework\Models\Database;
 
-use AvoRed\Ecommerce\Models\Database\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model

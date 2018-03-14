@@ -3,13 +3,7 @@ namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
-use AvoRed\Ecommerce\Models\Database\Product;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeBooleanValue;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeIntegerValue;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeDatetimeValue;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeDecimalValue;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeTextValue;
-use AvoRed\Ecommerce\Models\Database\ProductAttributeVarcharValue;
+
 
 class Category extends Model
 {

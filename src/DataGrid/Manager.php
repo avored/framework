@@ -152,9 +152,6 @@ class Manager
             }
         }
 
-
-
-
         $data = [
             "data" => (isset($jsonRecords)) ? $jsonRecords : $allRecords,
             "draw" =>  $this->request->get('draw'),
