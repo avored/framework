@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use AvoRed\Ecommerce\Models\Database\Configuration;
-use AvoRed\Ecommerce\Models\Database\TaxRule;
 
 class Product extends Model
 {
@@ -364,9 +363,7 @@ class Product extends Model
 
     public function getTaxAmount($price = NULL)
     {
-        $defaultCountryId = Configuration::getConfiguration('avored_tax_class_default_country_for_tax_calculation');
-        $taxRule = TaxRule::where('country_id', '=', $defaultCountryId)->orderBy('priority', 'DESC')->first();
-
+        $percentage = 15; //Configuration->getConfiguratiin();
         if (null === $price) {
             $price = $this->price;
         }
@@ -374,7 +371,7 @@ class Product extends Model
         if (null === $taxRule) {
             return 0.00;
         }
-        $taxAmount = ($taxRule->percentage * $price / 100);
+        $taxAmount = ($percentage * $price / 100);
 
         return $taxAmount;
     }

@@ -1,12 +1,9 @@
 <?php
 
-use AvoRed\Framework\Models\Database\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use AvoRed\Ecommerce\Models\Database\Configuration;
-use AvoRed\Ecommerce\Models\Database\Country;
-use AvoRed\Ecommerce\Models\Database\TaxRule;
+
 
 class AvoredFrameworkSchema extends Migration
 {
