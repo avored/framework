@@ -368,9 +368,11 @@ class Product extends Model
             $price = $this->price;
         }
 
+        /*
         if (null === $taxRule) {
             return 0.00;
         }
+        */
         $taxAmount = ($percentage * $price / 100);
 
         return $taxAmount;
