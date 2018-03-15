@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use AvoRed\Ecommerce\Models\Database\Configuration;
 use AvoRed\Ecommerce\Models\Database\TaxRule;
-use AvoRed\Ecommerce\Models\Database\Order;
 
 class Product extends Model
 {
