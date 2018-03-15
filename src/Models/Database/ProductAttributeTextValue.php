@@ -1,7 +1,9 @@
 <?php
 namespace AvoRed\Framework\Models\Database;
 
-class ProductAttributeTextValue extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class ProductAttributeTextValue extends Model
 {
 
     protected $fillable = ['attribute_id', 'product_id' ,'value'];

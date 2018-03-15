@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Repository;
 
-abstract class AbractRepository
+abstract class AbstractRepository
 {
 
 

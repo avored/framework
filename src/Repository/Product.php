@@ -7,7 +7,7 @@ use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Models\Database\Property;
 
-class Product extends AbractRepository {
+class Product extends AbstractRepository {
 
     public function model() {
         return new ProductModel();
