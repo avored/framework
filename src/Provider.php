@@ -10,6 +10,7 @@ class Provider extends ServiceProvider
     protected $providers = [
         \AvoRed\Framework\AdminMenu\Provider::class,
         \AvoRed\Framework\Breadcrumb\Provider::class,
+        \AvoRed\Framework\Cart\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,
         \AvoRed\Framework\Image\Provider::class,
         \AvoRed\Framework\Modules\Provider::class,
@@ -40,6 +41,7 @@ class Provider extends ServiceProvider
     public function register()
     {
         $this->registerProviders();
+        $this->registerConfigData();
     }
 
 
@@ -68,6 +70,19 @@ class Provider extends ServiceProvider
 
         //At this stage we don't use these and use avored/ecommerce/database/migration file only
         //$this->loadMigrationsFrom(__DIR__. "/../database/migrations");
+
+    }
+
+    public function registerConfigData() {
+
+        $this->mergeConfigFrom(__DIR__.'/../config/avored-framework.php', 'avored-framework');
+
+    }
+
+    public function publishFiles() {
+        $this->publishes([
+            __DIR__.'/../config/avored-framework.php' => config_path('avored-framework.php'),
+        ]);
 
     }
 }

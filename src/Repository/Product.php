@@ -9,6 +9,17 @@ use AvoRed\Framework\Models\Database\Property;
 
 class Product extends AbstractRepository {
 
+
+    /**
+     *
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public function getBySlug($slug):ProductModel {
+        return $this->model()->whereSlug($slug)->first();
+    }
+
     public function model() {
         return new ProductModel();
     }
