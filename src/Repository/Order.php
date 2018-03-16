@@ -5,6 +5,7 @@ use AvoRed\Framework\Models\Database\Order as OrderModel;
 use AvoRed\Framework\Models\Database\OrderProductVariation;
 use AvoRed\Framework\Models\Database\OrderStatus;
 
+
 class Order extends AbstractRepository {
 
     public function model() {
