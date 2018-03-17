@@ -2,7 +2,6 @@
 namespace AvoRed\Framework\Breadcrumb;
 
 use Illuminate\Support\Collection;
-use Callable;
 
 class Builder
 {
@@ -33,10 +32,10 @@ class Builder
     * Breadcrumb Make an Object
     *
     * @param string $name
-    * @param Callable $callable
+    * @param callable $callable
     * @return void
     */
-    public function make($name, Callable  $callable) {
+    public function make($name, callable  $callable) {
 
         $breadcrumb = new Breadcrumb($callable);
         $breadcrumb->route($name);
