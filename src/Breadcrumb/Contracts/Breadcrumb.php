@@ -7,7 +7,7 @@ interface Breadcrumb {
 
 
     /**
-     * Get/Set AdminMenu Label
+     * Get/Set Breadcrumb Label
      * @return string $label
      */
     public function label();

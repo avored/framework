@@ -43,6 +43,12 @@ class AdminMenu implements AdminMenuContracts
      */
     protected $routeName;
 
+
+   /**
+    * Get/Set Admin Menu Label
+    *
+    * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+    */
     public function label($label = null)
     {
         if (null !== $label) {
@@ -53,6 +59,11 @@ class AdminMenu implements AdminMenuContracts
         return $this->label;
     }
 
+    /**
+     * Get/Set Admin Menu Identifier
+     *
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -63,6 +74,11 @@ class AdminMenu implements AdminMenuContracts
         return $this->key;
     }
 
+    /**
+     * Get/Set Admin Menu Route Name
+     *
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     */
     public function route($routeName = null)
     {
         if (null !== $routeName) {
@@ -73,6 +89,11 @@ class AdminMenu implements AdminMenuContracts
         return $this->routeName;
     }
 
+    /**
+     * Get/Set Admin Menu Icon
+     *
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     */
     public function icon($icon = null)
     {
         if (null !== $icon) {
@@ -83,6 +104,11 @@ class AdminMenu implements AdminMenuContracts
         return $this->icon;
     }
 
+    /**
+     * Get/Set Admin Menu Sub Menu
+     *
+     * @return \AvoRed\Framework\AdminMenu\AdminMenu
+     */
     public function subMenu($key = null, $menuItem = null)
     {
         if (null !== $key) {
@@ -93,11 +119,17 @@ class AdminMenu implements AdminMenuContracts
         return $this->subMenu;
     }
 
-    public function menuClass()
+    /**
+     * Get Dropdown Class none
+     *
+     * @return string
+     */
+    public function menuClass():string
     {
         $currentRouteName = Route::currentRouteName();
         $found = false;
 
+      
         if(count($this->subMenu()) > 0) {
             foreach($this->subMenu() as $menu) {
                 if($menu->route() == $currentRouteName) {

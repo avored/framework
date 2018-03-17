@@ -29,7 +29,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-
         Schema::create('products', function (Blueprint $table) {
                     $table->increments('id');
                     $table->enum('type',['BASIC','VARIATION','DOWNLOADABLE','VARIABLE_PRODUCT'])->default('BASIC');
@@ -110,7 +109,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
-          
+
 
         });
 
@@ -384,19 +383,37 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('order_product_variations');
+        Schema::dropIfExists('product_variations');
+        Schema::dropIfExists('product_attribute_boolean_values');
+        Schema::dropIfExists('product_attribute_text_values');
+        Schema::dropIfExists('product_attribute_decimal_values');
+        Schema::dropIfExists('product_attribute_integer_values');
+        Schema::dropIfExists('product_attribute_datetime_values');
+        Schema::dropIfExists('product_attribute_varchar_values');
 
 
+        Schema::dropIfExists('attribute_dropdown_options');
+        Schema::dropIfExists('attribute_product');
 
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('product_property_boolean_values');
+        Schema::dropIfExists('product_property_text_values');
+        Schema::dropIfExists('product_property_decimal_values');
+        Schema::dropIfExists('product_property_integer_values');
+        Schema::dropIfExists('product_property_varchar_values');
+        Schema::dropIfExists('product_property_datetime_values');
+        Schema::dropIfExists('property_dropdown_options');
+        Schema::dropIfExists('properties');
+
+
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('product_prices');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
 
-        Schema::dropIfExists('product_attribute_values');
-        Schema::dropIfExists('attribute_dropdown_options');
-        Schema::dropIfExists('attribute_group_attribute_pivot');
-        Schema::dropIfExists('attribute_groups');
+
+
         Schema::dropIfExists('attributes');
 
         Schema::dropIfExists('order_statuses');

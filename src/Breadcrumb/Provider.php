@@ -22,11 +22,8 @@ class Provider extends ServiceProvider {
      */
     public function register()
     {
-
         $this->registerServices();
         $this->app->alias('breadcrumb', 'AvoRed\Framework\Breadcrumb\Builder');
-
-
     }
     /**
      * Register the Admin Menu instance.

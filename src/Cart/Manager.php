@@ -4,11 +4,22 @@ namespace AvoRed\Framework\Cart;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use AvoRed\Framework\Repository\Product as ProductRepository;
+use Prophecy\Prophet;
 
 class Manager
 {
+    /**
+    * AvoRed Cart Session Manager
+    *
+    * @var \Illuminate\Session\SessionManager $session
+    */
     public $session;
 
+    /**
+    * AvoRed Cart Construct
+    *
+    * @var \Illuminate\Session\SessionManager $session
+    */
     public function __construct(SessionManager $manager)
     {
         $this->session = $manager;
@@ -17,8 +28,11 @@ class Manager
 
 
     /**
+     * Add Product into cart using Slug and Qty
      *
-     * @param array $productDetails
+     * @param stirng  $slug
+     * @param integer $qty
+     * @return \AvoRed\Framework\Cart\Manager $this
      */
     public function add($slug , $qty): Manager {
         $cartProducts = $this->getSession();
@@ -39,15 +53,15 @@ class Manager
         $this->session->put($this->getSessionKey(), $cartProducts);
 
         return $this;
-
-
     }
 
 
     /**
      * Update the Cart Product Qty by Slug
      *
-     * @param \AvoRed\Framework\Cart\Manager $this
+     * @param stirng  $slug
+     * @param integer $qty
+     * @return \AvoRed\Framework\Cart\Manager $this
      */
     public function update($slug, $qty): Manager {
 
@@ -64,7 +78,11 @@ class Manager
     }
 
 
-
+    /**
+     * Get the Current Collection for the Prophetoducts
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function getSession() {
 
         $sessionKey = $this->getSessionKey();
@@ -72,16 +90,30 @@ class Manager
         return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;;
     }
 
+    /**
+     * Get the Session Key for the Session Manager
+     *
+     * @return string $sessionKey
+     */
     public function getSessionKey() {
         return config('avored-framework.cart.session_key') ?? "cart_products";
     }
 
+    /**
+     * Get the List of All the Current Session Cart Products
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function all() {
         return $this->getSession();
     }
 
+    /**
+     * Get the Total Number of Products into the Cart
+     *
+     * @return integer $count
+     */
     public function count() {
-
         return $this->getSession()->count();
     }
 }
