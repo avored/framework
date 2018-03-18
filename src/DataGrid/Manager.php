@@ -19,6 +19,14 @@ class Manager
     public $request;
 
     /**
+     * DataGrid Collection
+     *
+     * @var \Illuminate\Support\Collection
+     */
+
+    public $collection;
+
+    /**
      * Database table model
      *
      * @var \Illuminate\Support\Collection
@@ -44,9 +52,54 @@ class Manager
     protected $pageItem = 10;
 
     public function __construct(Request $request) {
-        $this->request = $request;
-        $this->columns = Collection::make([]);
+        $this->request    = $request;
+        $this->columns    = new Collection();
+        $this->collection = new Collection();
     }
+
+
+    /**
+    * Breadcrumb Make an Object
+    *
+    * @param string $name
+    * @param callable $callable
+    * @return void
+    */
+    public function make($name):DataGrid {
+
+        $dataGrid = new DataGrid($this->request);
+        $this->collection->put($name, $dataGrid);
+
+        return $dataGrid;
+    }
+
+
+    public function setPagination($item = 10) {
+        $this->pageItem = $item;
+    }
+
+    public function render($dataGrid) {
+
+        if(null !== $this->request->get('asc')) {
+            $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
+        }
+        if(null !== $this->request->get('desc')) {
+            $dataGrid->model->orderBy($this->request->get('desc'), 'desc');
+        }
+
+        $dataGrid->data = $dataGrid->model->paginate($this->pageItem);
+
+
+        return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
+    }
+
+
+
+
+
+
+
+
 
     public function model($model) {
 
@@ -60,32 +113,6 @@ class Manager
         $this->columns->put($identifier, $column );
 
         return $this;
-    }
-
-    public function setPagination($item = 10) {
-        $this->pageItem = $item;
-    }
-
-    public function render() {
-
-        if(null !== $this->request->get('asc')) {
-            $this->model->orderBy($this->request->get('asc'), 'asc');
-        }
-        if(null !== $this->request->get('desc')) {
-            $this->model->orderBy($this->request->get('desc'), 'desc');
-        }
-
-        $this->data = $this->model->paginate($this->pageItem);
-
-        return view('avored-framework::datagrid.grid')->with('dataGrid', $this);
-    }
-
-    public function asc($identifier = "") {
-        return (NULL !== $this->request->get('asc')  && $this->request->get('asc') == $identifier);
-    }
-
-    public function desc($identifier = "") {
-        return (NULL !== $this->request->get('desc') && $this->request->get('desc') == $identifier);
     }
 
     public function linkColumn($identifier, $options , $callback) {
