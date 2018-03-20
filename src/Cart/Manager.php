@@ -74,6 +74,35 @@ class Manager
         }
         $cartProduct->qty($qty);
 
+
+        return $this;
+    }
+
+
+    /**
+     * Clear the All Cart Products
+     *
+     * @return void
+     */
+    public function clear() {
+
+        $session = $this->getSessionKey();
+        $this->session->forget($session);
+    }
+
+
+    /**
+     * Remove an Item from Cart Products by Slug
+     *
+     * @param string $slug
+     * @return void
+     */
+    public function destroy($slug):Manager {
+
+        $cartProducts = $this->getSession();
+
+        $cartProduct = $cartProducts->pull($slug);
+
         return $this;
     }
 
