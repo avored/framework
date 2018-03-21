@@ -40,4 +40,15 @@ class Product extends AbstractRepository {
         return new Property();
     }
 
+
+    /**
+     * Find the Category By Slug
+     *
+     * @param string $slug
+     *
+     */
+    public function findCategoryBySlug($slug):Category {
+        return $this->categoryModel()->whereSlug($slug)->first();
+    }
+
 }

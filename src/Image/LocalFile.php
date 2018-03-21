@@ -76,8 +76,14 @@ class LocalFile {
      *
      * @return string $relativePath
      */
-    public function getRelativePath() {
-        return str_replace(asset('/'),'', $this->relativePath);
+    public function relativePath($path = null) {
+        if(null === $path) {
+            return str_replace(asset('/'),'', $this->relativePath);
+        }
+
+        $this->relativePath = $path;
+
+        return $this;
     }
 
  }
