@@ -20,5 +20,3 @@ class ProductPropertyDatetimeValue extends Model
     }
 
 }
-
-

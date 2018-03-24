@@ -18,5 +18,3 @@ class ProductPropertyVarcharValue extends Model
     }
 
 }
-
-

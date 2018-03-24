@@ -23,6 +23,4 @@ class ProductImage extends Model
 
         return $localImage;
     }
-
-
 }

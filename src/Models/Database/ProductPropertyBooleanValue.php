@@ -18,5 +18,3 @@ class ProductPropertyBooleanValue extends Model
     }
 
 }
-
-

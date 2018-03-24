@@ -261,33 +261,6 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
 
-        Schema::create('product_attribute_varchar_values', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->integer('attribute_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->string('value')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('attribute_id')
-                ->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-
-        Schema::create('product_attribute_datetime_values', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->integer('attribute_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->timestamp('value')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('attribute_id')
-                ->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
 
         Schema::create('product_attribute_integer_values', function (Blueprint $table) {
 
@@ -303,47 +276,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_attribute_decimal_values', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->integer('attribute_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->decimal('value')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('attribute_id')
-                ->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-
-        Schema::create('product_attribute_text_values', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->integer('attribute_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->text('value')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('attribute_id')
-                ->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-
-        Schema::create('product_attribute_boolean_values', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->integer('attribute_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->tinyInteger('value')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('attribute_id')
-                ->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
 
         Schema::create('product_variations', function (Blueprint $table) {
 
@@ -385,13 +318,7 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::dropIfExists('order_product_variations');
         Schema::dropIfExists('product_variations');
-        Schema::dropIfExists('product_attribute_boolean_values');
-        Schema::dropIfExists('product_attribute_text_values');
-        Schema::dropIfExists('product_attribute_decimal_values');
         Schema::dropIfExists('product_attribute_integer_values');
-        Schema::dropIfExists('product_attribute_datetime_values');
-        Schema::dropIfExists('product_attribute_varchar_values');
-
 
         Schema::dropIfExists('attribute_dropdown_options');
         Schema::dropIfExists('attribute_product');

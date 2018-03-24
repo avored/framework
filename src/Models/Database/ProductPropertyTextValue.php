@@ -18,5 +18,3 @@ class ProductPropertyTextValue extends Model
     }
 
 }
-
-

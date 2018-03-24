@@ -42,6 +42,27 @@ class Product extends AbstractRepository {
 
 
     /**
+     * Find the Product By Slug
+     *
+     * @param string $slug
+     * @return \AvoRed\Framework\Models\Database\Product $product
+     */
+    public function findProductBySlug($slug):ProductModel {
+        return $this->model()->whereSlug($slug)->first();
+    }
+
+    /**
+     * Find the Product By Id
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\Product $product
+     */
+    public function findProductById($id):ProductModel {
+        return $this->model()->find($id);
+    }
+
+
+    /**
      * Find the Category By Slug
      *
      * @param string $slug
@@ -50,5 +71,73 @@ class Product extends AbstractRepository {
     public function findCategoryBySlug($slug):Category {
         return $this->categoryModel()->whereSlug($slug)->first();
     }
+
+    /**
+     * Create Category
+     *
+     * @param array $data
+     * @return \AvoRed\Framework\Models\Database\Category $category
+     */
+    public function createCategory($data): Category {
+        return $this->categoryModel()->create($data);
+    }
+
+
+    /**
+     * Find Category BY Id
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\Category $category
+     */
+    public function findCategoryById($id): Category {
+        return $this->categoryModel()->find($id);
+    }
+
+    /**
+     * Destroy Category
+     *
+     * @param integer $id
+     * @return boolean
+     */
+    public function destroyCategoryById($id) {
+        return $this->categoryModel()->destroy($id);
+    }
+
+
+
+
+
+
+    /**
+     * Create Attribute
+     *
+     * @param array $data
+     * @return \AvoRed\Framework\Models\Database\Attribute $attribute
+     */
+    public function createAttribute($data):Attribute {
+        return $this->attributeModel()->create($data);
+    }
+
+
+    /**
+     * Find Attribute
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\Attribute $attribute
+     */
+    public function findAttributeById($id):Attribute {
+        return $this->attributeModel()->find($id);
+    }
+
+    /**
+     * Destroy Attribute
+     *
+     * @param integer $id
+     * @return boolean
+     */
+    public function destroyAttributeById($id) {
+        return $this->attributeModel()->destroy($id);
+    }
+
 
 }

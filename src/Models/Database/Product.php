@@ -11,9 +11,9 @@ use AvoRed\Ecommerce\Models\Database\Configuration;
 
 class Product extends Model
 {
-    protected $fillable = ['type', 'name', 'slug', 'sku', 'description',
-        'status', 'in_stock', 'track_stock', 'qty',
-        'is_taxable', 'meta_title', 'meta_description',
+    protected $fillable = ['type', 'name', 'slug', 'sku',
+        'description', 'status', 'in_stock', 'track_stock',
+        'qty', 'is_taxable', 'meta_title', 'meta_description',
         'weight', 'width', 'height', 'length'
     ];
 
@@ -25,8 +25,6 @@ class Product extends Model
         $productCollection->setCollection($products);
         return $productCollection;
     }
-
-
 
     public static function boot()
     {
@@ -81,6 +79,52 @@ class Product extends Model
     }
 
     /**
+     *
+     * Save Product Price
+     *
+     * @param float $price
+     * @return \AvoRed\Framework\Models\Database\Product $this
+     */
+    public function saveProductPrice($price):Product {
+
+        if ($this->prices()->get()->count() > 0) {
+            $this->prices()->get()->first()->update(['price' => $price]);
+        } else {
+            $this->prices()->create(['price' => $price]);
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     * Save Product Images
+     *
+     * @param array $images
+     * @return \AvoRed\Framework\Models\Database\Product $this
+     */
+    public function saveProductImages(array $images):Product {
+
+        $exitingIds = $this->images()->get()->pluck('id')->toArray();
+        foreach ($images as $key => $data) {
+            if (is_int($key)) {
+                if (($findKey = array_search($key, $exitingIds)) !== false) {
+                    $productImage = ProductImage::findorfail($key);
+                    $productImage->update($data);
+                    unset($exitingIds[$findKey]);
+                }
+                continue;
+            }
+            ProductImage::create($data + ['product_id' => $this->id]);
+        }
+        if (count($exitingIds) > 0) {
+            ProductImage::destroy($exitingIds);
+        }
+
+        return $this;
+    }
+
+    /**
      * Update the Product and Product Related Data
      *
      * @var \AvoRed\Ecommerce\Http\Requests\ProductRequest $request
@@ -89,37 +133,16 @@ class Product extends Model
     public function saveProduct($request)
     {
 
-        //*****  SAVING PRODUCT BASIC FIELDS  *****//
+
         $this->update($request->all());
 
+        $this->saveProductPrice($request->get('price'));
 
-        //*****  SAVING PRODUCT PRICES  *****//
-        if ($this->prices()->get()->count() > 0) {
-            $this->prices()->get()->first()->update(['price' => $request->get('price')]);
-        } else {
-            $this->prices()->create(['price' => $request->get('price')]);
-        }
 
-        //*****  SAVING PRODUCT IMAGES  *****//
         if (null !== $request->get('image')) {
-            $exitingIds = $this->images()->get()->pluck('id')->toArray();
-            foreach ($request->get('image') as $key => $data) {
-                if (is_int($key)) {
-                    if (($findKey = array_search($key, $exitingIds)) !== false) {
-                        $productImage = ProductImage::findorfail($key);
-                        $productImage->update($data);
-                        unset($exitingIds[$findKey]);
-                    }
-                    continue;
-                }
-                ProductImage::create($data + ['product_id' => $this->id]);
-            }
-            if (count($exitingIds) > 0) {
-                ProductImage::destroy($exitingIds);
-            }
+            $this->saveProductImages($request->get('image'));
         }
 
-        //*****  SAVING PRODUCT CATEGORIES  *****//
         if (count($request->get('category_id')) > 0) {
             $this->categories()->sync($request->get('category_id'));
         }
@@ -135,96 +158,7 @@ class Product extends Model
                 foreach ($property as $propertyId => $propertyValue) {
 
                     $propertyModal = Property::findorfail($propertyId);
-
-                    if ($propertyModal->data_type == 'VARCHAR') {
-
-                        $propertyVarcharValue = ProductPropertyVarcharValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyVarcharValue) {
-                            ProductPropertyVarcharValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyVarcharValue->update(['value' => $propertyValue]);
-                        }
-                    }
-
-                    if ($propertyModal->data_type == 'BOOLEAN') {
-
-                        $propertyBooleanValue = ProductPropertyBooleanValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyBooleanValue) {
-                            ProductPropertyBooleanValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyBooleanValue->update(['value' => $propertyValue]);
-                        }
-                    }
-
-                    if ($propertyModal->data_type == 'TEXT') {
-
-                        $propertyTextValue = ProductPropertyTextValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyTextValue) {
-                            ProductPropertyTextValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyTextValue->update(['value' => $propertyValue]);
-                        }
-                    }
-
-                    if ($propertyModal->data_type == 'DECIMAL') {
-
-                        $propertyDecimalValue = ProductPropertyDecimalValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyDecimalValue) {
-                            ProductPropertyDecimalValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyDecimalValue->update(['value' => $propertyValue]);
-                        }
-                    }
-                    if ($propertyModal->data_type == 'INTEGER') {
-
-                        $propertyIntegerValue = ProductPropertyIntegerValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyIntegerValue) {
-                            ProductPropertyIntegerValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyIntegerValue->update(['value' => $propertyValue]);
-                        }
-                    }
-                    if ($propertyModal->data_type == 'DATETIME') {
-
-                        $propertyDatetimeValue = ProductPropertyDatetimeValue::whereProductId($this->id)->wherePropertyId($propertyId)->get()->first();
-
-                        if (null === $propertyDatetimeValue) {
-                            ProductPropertyDatetimeValue::create([
-                                'product_id' => $this->id,
-                                'property_id' => $propertyId,
-                                'value' => $propertyValue
-                            ]);
-                        } else {
-                            $propertyDatetimeValue->update(['value' => $propertyValue]);
-                        }
-                    }
-
-
+                    $propertyModal->saveProperty($this->id, $propertyValue);
                 }
             }
 
@@ -237,12 +171,9 @@ class Product extends Model
         if(null !== $attributeWithOptions && count($attributeWithOptions) > 0) {
 
             $selectedAttributes = $request->get('attribute_selected');
-
-            //$this->attribute()->delete();
             foreach ($selectedAttributes as $selectedAttribute) {
                 $this->attribute()->sync($selectedAttribute);
             }
-
 
             $optionsArray = [];
 
@@ -255,19 +186,15 @@ class Product extends Model
 
             foreach ($listOfOptions as $option) {
 
-
-                $variationProductData['name'] = $this->name;
-                $variationProductData['type'] = 'VARIABLE_PRODUCT';
+                $variationProductData['name']   = $this->name;
+                $variationProductData['type']   = 'VARIABLE_PRODUCT';
                 $variationProductData['status'] = 0;
-                //$variationProductData['price'] = $this->price;
-                $variationProductData['qty'] = $this->qty;
-
+                $variationProductData['qty']    = $this->qty;
 
                 if(is_array($option)) {
                     foreach ($option as $attributeOptionId) {
                         $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
                         $variationProductData['name'] .= " " . $attributeOptionModel->display_text;
-
                     }
                 } else {
 
@@ -282,22 +209,17 @@ class Product extends Model
                 $variableProduct = self::create($variationProductData);
                 $variableProduct->prices()->create(['price' => $this->price]);
 
-
-
                 ProductAttributeIntegerValue::create([
                     'product_id' => $variableProduct->id,
                     'attribute_id' => $attributeOptionModel->attribute->id,
                     'value' => $attributeOptionModel->id
                 ]);
 
-
                 ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
 
-                //@todo Save ATTRIBUTE(PROPERTIES) HERE
-
             }
-
         }
+
         return $this;
 
     }
@@ -391,22 +313,12 @@ class Product extends Model
         return (isset($row->price)) ? $row->price : null;
     }
 
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function prices()
-    {
-        return $this->hasMany(ProductPrice::class);
-    }
-
-    public function images()
-    {
-        return $this->hasMany(ProductImage::class);
-    }
-
+    /**
+     * Get All Properties for the Product
+     *
+     * @param $variation
+     * @return \Illuminate\Support\Collection
+     */
     public function getProductAllProperties()
     {
         $collection = Collection::make([]);
@@ -443,6 +355,12 @@ class Product extends Model
     }
 
 
+    /**
+     * Get All Attribute for the Product
+     *
+     * @param $variation
+     * @return \Illuminate\Support\Collection
+     */
     public function getProductAllAttributes($variation = null)
     {
 
@@ -489,12 +407,17 @@ class Product extends Model
         return $collection;
     }
 
-    public function getVariableProduct($option) {
+    /**
+     * Get Variable Product by Attribute Drop down Option
+     *
+     * @param \AvoRed\Framework\Models\Database\AttributeDropdownOption
+     * @return \AvoRed\Framework\Models\Database\ProductVariation
+     */
+    public function getVariableProduct($attributeDropdownOption) {
 
-
-        $productAttributeIntegerValue = ProductAttributeIntegerValue::whereAttributeId($option->attribute_id)
-                                                                        ->whereValue($option->id)->first();
-
+        $productAttributeIntegerValue = ProductAttributeIntegerValue::
+                                                whereAttributeId($attributeDropdownOption->attribute_id)
+                                                ->whereValue($attributeDropdownOption->id)->first();
 
         if(null === $productAttributeIntegerValue) {
             return null;
@@ -505,88 +428,133 @@ class Product extends Model
     }
 
 
+    /**
+     * Product has many Categories
+     *
+     * @return \AvoRed\Framework\Models\Database\Category
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * Product has many Price
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPrice
+     */
+    public function prices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
+    /**
+     * Product has many Image
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductImage
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    /**
+     * Product has many Variation
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductVariation
+     */
     public function productVariations()
     {
         return $this->hasMany(ProductVariation::class);
     }
 
-
-    public function productVarcharAttributes()
-    {
-        return $this->hasMany(ProductAttributeVarcharValue::class);
-    }
-
-    public function productDatetimeAttributes()
-    {
-        return $this->hasMany(ProductAttributeDatetimeValue::class);
-    }
-
-    public function productBooleanAttributes()
-    {
-        return $this->hasMany(ProductAttributeBooleanValue::class);
-    }
-
-
+    /**
+     * Product has many Integer Attribute
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductAttributeIntegerValue
+     */
     public function productIntegerAttributes()
     {
         return $this->hasMany(ProductAttributeIntegerValue::class);
     }
 
-    public function productTextAttributes()
-    {
-        return $this->hasMany(ProductAttributeTextValue::class);
-    }
-
-    public function productDecimalAttributes()
-    {
-        return $this->hasMany(ProductAttributeDecimalValue::class);
-    }
-
+    /**
+     * Product has many Date Time Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyVarcharValue
+     */
     public function productVarcharProperties()
     {
         return $this->hasMany(ProductPropertyVarcharValue::class);
     }
 
+    /**
+     * Product has many Date Time Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyDatetimeValue
+     */
     public function productDatetimeProperties()
     {
         return $this->hasMany(ProductPropertyDatetimeValue::class);
     }
 
+    /**
+     * Product has many Boolean Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyBooleanValue
+     */
     public function productBooleanProperties()
     {
         return $this->hasMany(ProductPropertyBooleanValue::class);
     }
 
+    /**
+     * Product has many Integer Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyIntegerValue
+     */
     public function productIntegerProperties()
     {
         return $this->hasMany(ProductPropertyIntegerValue::class);
     }
 
+    /**
+     * Product has many Text Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyTextValue
+     */
     public function productTextProperties()
     {
         return $this->hasMany(ProductPropertyTextValue::class);
     }
 
+    /**
+     * Product has many Decimal Properties
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductPropertyDecimalValue
+     */
     public function productDecimalProperties()
     {
         return $this->hasMany(ProductPropertyDecimalValue::class);
     }
 
+    /**
+     * Product has many Attribute
+     *
+     * @return \AvoRed\Framework\Models\Database\Attribute
+     */
     public function attribute()
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->hasMany(Attribute::class);
     }
 
-
+    /**
+     * Product has many Order
+     *
+     * @return \AvoRed\Framework\Models\Database\Order
+     */
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
-
-    public function variations()
-    {
-        return $this->hasMany(ProductVariation::class);
-    }
-
-
 }
