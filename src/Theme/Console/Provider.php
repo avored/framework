@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Theme\Console;
 
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +29,6 @@ class Provider extends ServiceProvider
 
         $this->commands(['command.avored.theme.make']);
     }
-
 
     /**
      * Get the services provided by the provider.

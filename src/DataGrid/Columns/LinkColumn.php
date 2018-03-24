@@ -1,32 +1,34 @@
 <?php
+
 namespace AvoRed\Framework\DataGrid\Columns;
 
-class LinkColumn  extends AbstractColumn {
-
+class LinkColumn extends AbstractColumn
+{
     /**
-     * column type
+     * column type.
      *
      * @string
      */
-    public $type = "link";
-
+    public $type = 'link';
 
     /**
-     * Callable function for the link
+     * Callable function for the link.
      *
      * @string
      */
     public $callback;
 
-    public function __construct($identifier, $options = [], $callback = NULL) {
+    public function __construct($identifier, $options = [], $callback = null)
+    {
         parent::__construct($identifier, $options);
         $this->callback = $callback;
     }
 
-    public function executeCallback($row) {
+    public function executeCallback($row)
+    {
         $return = $this->callback;
 
-        if($row && is_callable($return)) {
+        if ($row && is_callable($return)) {
             return $return($row);
         }
 

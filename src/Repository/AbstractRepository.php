@@ -4,8 +4,6 @@ namespace AvoRed\Framework\Repository;
 
 abstract class AbstractRepository
 {
-
-
     public function create($attributes)
     {
         return $this->model()->create($attributes);

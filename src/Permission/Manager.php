@@ -1,72 +1,73 @@
 <?php
+
 namespace AvoRed\Framework\Permission;
 
 use Illuminate\Support\Collection;
 
-class Manager {
-    
+class Manager
+{
     /**
-     * Collect all the Permissions from all the modules
-     * 
+     * Collect all the Permissions from all the modules.
+     *
      * @var \Illuminate\Support\Collection
      */
     protected $permissions;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->permissions = Collection::make([]);
     }
 
-    public function all() {
+    public function all()
+    {
 
         //dd($this->permissions);
         return $this->permissions;
     }
+
     /**
-     * Add Permission Array into Collection
-     * 
+     * Add Permission Array into Collection.
+     *
      * @param array $item
      * @return \AvoRed\Framework\Permission\Manager
      */
-    public function add($key) {
-
+    public function add($key)
+    {
         $permission = new PermissionGroup();
 
         $permission->key($key);
         $this->permissions->put($key, $permission);
 
         return $permission;
-
     }
 
     /**
-     * Get Permission Collection if exists or Return Empty Collection
+     * Get Permission Collection if exists or Return Empty Collection.
      *
      * @param array $item
      * @return \Illuminate\Support\Collection
      */
-
-    public function get($key) {
-
-        if($this->permissions->has($key)) {
+    public function get($key)
+    {
+        if ($this->permissions->has($key)) {
             return $this->permissions->get($key);
         }
 
         return $collection = Collection::make([]);
-
     }
+
     /**
-     * Get Permission Collection if exists or Return Empty Collection
+     * Get Permission Collection if exists or Return Empty Collection.
      *
      * @param array $item
      * @return \Illuminate\Support\Collection
      */
-
-    public function set($key , $permissionCollection) {
+    public function set($key, $permissionCollection)
+    {
 
         //dd($permissionCollection);
         $this->permissions->put($key, $permissionCollection);
+
         return $this;
-
     }
-
 }

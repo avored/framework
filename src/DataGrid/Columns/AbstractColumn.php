@@ -1,63 +1,64 @@
 <?php
+
 namespace AvoRed\Framework\DataGrid\Columns;
 
 use AvoRed\Framework\DataGrid\Contracts\Column as ColumnContract;
 
-abstract class AbstractColumn  implements  ColumnContract {
+abstract class AbstractColumn implements ColumnContract
+{
+    /**
+     * Column Identifier.
+     * @var null|string
+     */
+    protected $identifier = null;
 
     /**
-     * Column Identifier
-     * @var null|string $identifier
+     * Column Label.
+     * @var null|string
      */
-    protected $identifier = NULL;
-
-    /**
-     * Column Label
-     * @var null|string $label
-     */
-    protected $label = NULL;
+    protected $label = null;
 
     /**
      * Is Column Sortable?
-     * @var null|string $sortable
+     * @var null|string
      */
-    protected $sortable = NULL;
-
+    protected $sortable = null;
 
     /**
-     *
-     *
      * @param string $identifier
      * @param array $options
      */
-    public function __construct($identifier, $options) {
-
+    public function __construct($identifier, $options)
+    {
         $this->identifier = $identifier;
         $this->label = (isset($options['label'])) ? $options['label'] : title_case($identifier);
         $this->sortable = (isset($options['sortable'])) ? $options['sortable'] : false;
     }
 
     /**
-     * Get the Column Type
+     * Get the Column Type.
      * @return string $type
      */
-    public function sortable() {
+    public function sortable()
+    {
         return $this->sortable;
     }
 
     /**
-     * Get the Column Type
+     * Get the Column Type.
      * @return string $type
      */
-    public function type() {
+    public function type()
+    {
         return $this->type;
     }
 
     /**
-     * Get the Column Label
+     * Get the Column Label.
      * @return string $label
      */
-    public function label() {
+    public function label()
+    {
         return $this->label;
     }
 
@@ -65,7 +66,8 @@ abstract class AbstractColumn  implements  ColumnContract {
      * Get the column identifier.
      * @return string $identifier
      */
-    public function identifier() {
+    public function identifier()
+    {
         return $this->identifier;
     }
 }

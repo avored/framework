@@ -1,10 +1,11 @@
 <?php
+
 namespace AvoRed\Framework\Shipping;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -19,9 +20,7 @@ class Provider extends ServiceProvider {
      */
     public function boot()
     {
-
     }
-
 
     /**
      * Register the service provider.
@@ -34,6 +33,7 @@ class Provider extends ServiceProvider {
 
         $this->app->alias('shipping', 'AvoRed\Framework\Shipping\Manager');
     }
+
     /**
      * Register the AdmainConfiguration instance.
      *
@@ -55,7 +55,4 @@ class Provider extends ServiceProvider {
     {
         return ['shipping', 'AvoRed\Framework\Shipping\Manager'];
     }
-
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Shipping;
 
 abstract class Shipping

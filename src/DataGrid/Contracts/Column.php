@@ -1,13 +1,14 @@
 <?php
+
 namespace AvoRed\Framework\DataGrid\Contracts;
 
-interface Column {
+interface Column
+{
     /**
      * Get the column identifier.
      * @return string $identifier
      */
     public function identifier();
-
 
     /**
      * Get the column label.
@@ -26,5 +27,4 @@ interface Column {
      * @return string $type
      */
     public function sortable();
-
 }

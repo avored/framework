@@ -2,12 +2,10 @@
 
 namespace AvoRed\Framework\Widget;
 
-use AvoRed\Framework\Widget\Facade as WidgetFacade;
 use Illuminate\Support\ServiceProvider;
 
 class Provider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -27,11 +25,8 @@ class Provider extends ServiceProvider
      */
     public function register()
     {
-
         $this->registerServices();
         $this->app->alias('widget', 'AvoRed\Framework\Widget\Manager');
-
-
     }
 
     /**
@@ -45,8 +40,6 @@ class Provider extends ServiceProvider
             return new Manager();
         });
     }
-
-
 
     /**
      * Get the services provided by the provider.

@@ -1,20 +1,17 @@
 <?php
+
 namespace AvoRed\Framework\Payment;
 
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Payment\Facade as PaymentFacade;
 
-
-
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
-
 
     /**
      * Register the service provider.
@@ -23,11 +20,7 @@ class Provider extends ServiceProvider {
      */
     public function boot()
     {
-
     }
-
-
-
 
     /**
      * Register the service provider.
@@ -40,6 +33,7 @@ class Provider extends ServiceProvider {
 
         $this->app->alias('payment', 'AvoRed\Framework\Payment\Manager');
     }
+
     /**
      * Register the AdmainConfiguration instance.
      *
@@ -61,6 +55,4 @@ class Provider extends ServiceProvider {
     {
         return ['payment', 'AvoRed\Framework\Payment\Manager'];
     }
-
-
 }

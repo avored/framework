@@ -1,10 +1,11 @@
 <?php
+
 namespace AvoRed\Framework\Cart;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -12,9 +13,10 @@ class Provider extends ServiceProvider {
      */
     protected $defer = true;
 
-    public function boot() {
-
+    public function boot()
+    {
     }
+
     /**
      * Register the service provider.
      *
@@ -22,12 +24,10 @@ class Provider extends ServiceProvider {
      */
     public function register()
     {
-
         $this->registerServices();
         $this->app->alias('cart', 'AvoRed\Framework\Cart\Manager');
-
-
     }
+
     /**
      * Register the Admin Menu instance.
      *
@@ -36,7 +36,6 @@ class Provider extends ServiceProvider {
     protected function registerServices()
     {
         $this->app->singleton('cart', function ($app) {
-
             return new Manager($app['session']);
         });
     }

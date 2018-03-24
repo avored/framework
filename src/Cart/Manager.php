@@ -1,40 +1,40 @@
 <?php
+
 namespace AvoRed\Framework\Cart;
 
-use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
+use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Repository\Product as ProductRepository;
-use Prophecy\Prophet;
 
 class Manager
 {
     /**
-    * AvoRed Cart Session Manager
-    *
-    * @var \Illuminate\Session\SessionManager $session
-    */
+     * AvoRed Cart Session Manager.
+     *
+     * @var \Illuminate\Session\SessionManager
+     */
     public $session;
 
     /**
-    * AvoRed Cart Construct
-    *
-    * @var \Illuminate\Session\SessionManager $session
-    */
+     * AvoRed Cart Construct.
+     *
+     * @var \Illuminate\Session\SessionManager
+     */
     public function __construct(SessionManager $manager)
     {
         $this->session = $manager;
         $this->productRepository = new ProductRepository();
     }
 
-
     /**
-     * Add Product into cart using Slug and Qty
+     * Add Product into cart using Slug and Qty.
      *
      * @param stirng  $slug
-     * @param integer $qty
+     * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function add($slug , $qty): Manager {
+    public function add($slug, $qty): self
+    {
         $cartProducts = $this->getSession();
 
         $product = $this->productRepository->getBySlug($slug);
@@ -47,7 +47,6 @@ class Manager
                     ->price($product->price)
                     ->image($product->image);
 
-
         $cartProducts->put($slug, $cartProduct);
 
         $this->session->put($this->getSessionKey(), $cartProducts);
@@ -55,50 +54,46 @@ class Manager
         return $this;
     }
 
-
     /**
-     * Update the Cart Product Qty by Slug
+     * Update the Cart Product Qty by Slug.
      *
      * @param stirng  $slug
-     * @param integer $qty
+     * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function update($slug, $qty): Manager {
-
+    public function update($slug, $qty): self
+    {
         $cartProducts = $this->getSession();
 
         $cartProduct = $cartProducts->get($slug);
 
-        if(null === $cartProduct) {
+        if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
         }
         $cartProduct->qty($qty);
 
-
         return $this;
     }
 
-
     /**
-     * Clear the All Cart Products
+     * Clear the All Cart Products.
      *
      * @return void
      */
-    public function clear() {
-
+    public function clear()
+    {
         $session = $this->getSessionKey();
         $this->session->forget($session);
     }
 
-
     /**
-     * Remove an Item from Cart Products by Slug
+     * Remove an Item from Cart Products by Slug.
      *
      * @param string $slug
      * @return void
      */
-    public function destroy($slug):Manager {
-
+    public function destroy($slug):self
+    {
         $cartProducts = $this->getSession();
 
         $cartProduct = $cartProducts->pull($slug);
@@ -106,43 +101,45 @@ class Manager
         return $this;
     }
 
-
     /**
-     * Get the Current Collection for the Prophetoducts
+     * Get the Current Collection for the Prophetoducts.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getSession() {
-
+    public function getSession()
+    {
         $sessionKey = $this->getSessionKey();
 
-        return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;;
+        return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;
     }
 
     /**
-     * Get the Session Key for the Session Manager
+     * Get the Session Key for the Session Manager.
      *
      * @return string $sessionKey
      */
-    public function getSessionKey() {
-        return config('avored-framework.cart.session_key') ?? "cart_products";
+    public function getSessionKey()
+    {
+        return config('avored-framework.cart.session_key') ?? 'cart_products';
     }
 
     /**
-     * Get the List of All the Current Session Cart Products
+     * Get the List of All the Current Session Cart Products.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function all() {
+    public function all()
+    {
         return $this->getSession();
     }
 
     /**
-     * Get the Total Number of Products into the Cart
+     * Get the Total Number of Products into the Cart.
      *
-     * @return integer $count
+     * @return int $count
      */
-    public function count() {
+    public function count()
+    {
         return $this->getSession()->count();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Tabs;
 
 use Illuminate\Support\Collection;
@@ -6,14 +7,14 @@ use Illuminate\Support\Collection;
 class TabsMaker
 {
     /**
-     * Tabs Collection
+     * Tabs Collection.
      *
      * @var \Illuminate\Support\Collection
      */
     protected $adminTabs;
 
     /**
-     * Tabs Construct
+     * Tabs Construct.
      */
     public function __construct()
     {
@@ -21,29 +22,29 @@ class TabsMaker
     }
 
     /**
-     * Add Tab to Tabs Collection
+     * Add Tab to Tabs Collection.
      *
-     * @var string $key
+     * @var string
      * @return \AvoRed\Framework\Tab
      */
-    public function add($key) {
+    public function add($key)
+    {
         $tab = new Tab();
         $this->adminTabs->put($key, $tab);
 
         return $tab;
     }
 
-
     /**
-     * Return all registered Tab with Specified Type
+     * Return all registered Tab with Specified Type.
      *
-     * @var string $type
+     * @var string
      * @return \Illuminate\Support\Collection
      */
-    public function all($type = "product") {
-
+    public function all($type = 'product')
+    {
         $tabs = $this->adminTabs->filter(function ($item, $key) use ($type) {
-            if($item->type == $type) {
+            if ($item->type == $type) {
                 return true;
             }
         });

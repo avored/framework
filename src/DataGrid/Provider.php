@@ -1,10 +1,11 @@
 <?php
+
 namespace AvoRed\Framework\DataGrid;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -17,8 +18,8 @@ class Provider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
-
+    public function register()
+    {
         $this->registerDataGrid();
         $this->app->alias('datagrid', 'AvoRed\Framework\DataGrid\Manager');
     }
@@ -28,10 +29,11 @@ class Provider extends ServiceProvider {
      *
      * @return void
      */
-    protected function registerDataGrid() {
+    protected function registerDataGrid()
+    {
         $this->app->singleton('datagrid', function ($app) {
+            $request = $app->request;
 
-            $request  = $app->request;
             return new Manager($request);
         });
     }
@@ -41,8 +43,8 @@ class Provider extends ServiceProvider {
      *
      * @return array
      */
-    public function provides() {
-        return [ 'datagrid', 'AvoRed\Framework\DataGrid\Manager'];
+    public function provides()
+    {
+        return ['datagrid', 'AvoRed\Framework\DataGrid\Manager'];
     }
-
 }

@@ -1,15 +1,16 @@
 <?php
+
 namespace AvoRed\Framework\Theme;
 
-use Illuminate\Support\Collection;
 use RecursiveIteratorIterator;
-use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\Yaml\Yaml;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Collection;
 use League\Flysystem\MountManager;
+use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
+use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 class Manager
 {
@@ -37,7 +38,6 @@ class Manager
         $themePath = base_path('themes');
 
         if (File::exists($themePath)) {
-
             $iterator = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator($themePath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS)
             );
@@ -49,19 +49,17 @@ class Manager
                 if (($iterator->getDepth() > 1) &&
                     $iterator->isFile() &&
                     ($iterator->getFilename() == 'register.yaml')) {
-
                     $filePath = $iterator->getPathname();
                     $themeRegisterContent = File::get($filePath);
 
                     $data = Yaml::parse($themeRegisterContent);
 
-                    $assetFolderName = isset($data['asset_folder_name']) ? $data['asset_folder_name'] : "assets";
-                    $langFolderName = isset($data['lang_folder_name']) ? $data['lang_folder_name'] : "lang";
+                    $assetFolderName = isset($data['asset_folder_name']) ? $data['asset_folder_name'] : 'assets';
+                    $langFolderName = isset($data['lang_folder_name']) ? $data['lang_folder_name'] : 'lang';
 
-
-                    $data['view_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . "views";
-                    $data['asset_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $assetFolderName;
-                    $data['lang_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $langFolderName;
+                    $data['view_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.'views';
+                    $data['asset_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.$assetFolderName;
+                    $data['lang_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.$langFolderName;
 
                     $this->themeList->put($data['identifier'], $data);
                 }
@@ -70,6 +68,7 @@ class Manager
 
             $this->themeLoaded = true;
         }
+
         return $this;
     }
 
@@ -89,7 +88,8 @@ class Manager
         return $this->themeList->pull($identifier);
     }
 
-    public function getService() {
+    public function getService()
+    {
         return $this->service;
     }
 
@@ -134,7 +134,6 @@ class Manager
         //$this->status($from, $to, 'Directory');
     }
 
-
     /**
      * Move all the files in the given MountManager.
      *
@@ -149,7 +148,6 @@ class Manager
             }
         }
     }
-
 
     public function pathSlashFix($path)
     {

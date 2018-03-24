@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Modules\Console;
 
 use Illuminate\Support\ServiceProvider;
@@ -31,7 +32,6 @@ class Provider extends ServiceProvider
 
         $this->commands(['command.avored.module.make', 'command.avored.controller.make']);
     }
-
 
     /**
      * Get the services provided by the provider.

@@ -2,30 +2,26 @@
 
 namespace AvoRed\Framework\Widget;
 
-use Illuminate\Support\Collection;
 use AvoRed\Framework\Widget\Contracts\Widget as WidgetContracts;
-use AvoRed\Framework\Widget\Facade as WidgetFacade;
 
 class Widget implements WidgetContracts
 {
-
     /**
-     * Label For Widget
+     * Label For Widget.
      *
      * @var string
      */
     public $label = null;
 
     /**
-     * Type For Widget
+     * Type For Widget.
      *
      * @var string
      */
     public $type = null;
 
-
     /**
-     * Callback for this Widget
+     * Callback for this Widget.
      *
      * @var string
      */
@@ -38,9 +34,8 @@ class Widget implements WidgetContracts
         $callable($this);
     }
 
-    public function label($label = NULL)
+    public function label($label = null)
     {
-
         if (null === $label) {
             return $this->label;
         }
@@ -49,9 +44,8 @@ class Widget implements WidgetContracts
         return $this;
     }
 
-    public function type($type = NULL)
+    public function type($type = null)
     {
-
         if (null === $type) {
             return $this->type;
         }
@@ -59,5 +53,4 @@ class Widget implements WidgetContracts
 
         return $this;
     }
-
 }

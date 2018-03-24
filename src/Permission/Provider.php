@@ -1,11 +1,11 @@
 <?php
+
 namespace AvoRed\Framework\Permission;
 
 use Illuminate\Support\ServiceProvider;
 
 class Provider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -17,8 +17,6 @@ class Provider extends ServiceProvider
     {
 
         //$this->registerPermissions();
-
-
     }
 
     /**
@@ -43,8 +41,6 @@ class Provider extends ServiceProvider
             new Manager();
         });
     }
-
-
 
     /**
      * Get the services provided by the provider.

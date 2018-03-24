@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Breadcrumb;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;

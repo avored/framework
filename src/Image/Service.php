@@ -1,33 +1,32 @@
 <?php
+
 namespace AvoRed\Framework\Image;
 
 use Illuminate\Support\Facades\File;
 
-class Service {
+class Service
+{
+    const  IMAGE_PNG = 'image/png';
 
-    const  IMAGE_PNG = "image/png";
+    const  IMAGE_JPEG = 'image/jpeg';
 
-    const  IMAGE_JPEG = "image/jpeg";
-
-    const  IMAGE_GIF = "image/gif";
+    const  IMAGE_GIF = 'image/gif';
 
     /**
-     * Image Service Image
+     * Image Service Image.
      *
      * @var null
      */
-    public $image = NULL;
-
+    public $image = null;
 
     private $imageResized;
 
-
     /**
-     * Upload Image and resize it
+     * Upload Image and resize it.
      *
-     * @var \Symfony\Component\HttpFoundation\File\File $image
+     * @var \Symfony\Component\HttpFoundation\File\File
      * @var string $path
-     * @var boolean $keepAspectRatio
+     * @var bool $keepAspectRatio
      *
      * @return \AvoRed\Framework\Image\LocalFile
      */
@@ -36,16 +35,14 @@ class Service {
         $this->directory(public_path($path));
         $name = $image->getClientOriginalName();
 
-        $image->move(public_path($path) , $name);
+        $image->move(public_path($path), $name);
 
-        $relativePath = public_path($path . DIRECTORY_SEPARATOR . $name);
+        $relativePath = public_path($path.DIRECTORY_SEPARATOR.$name);
 
         if (true === $makeDiffSizes) {
-
             $sizes = config('image.sizes');
 
             foreach ($sizes as $sizeName => $widthHeight) {
-
                 list($width, $height) = $widthHeight;
 
                 $this->make($relativePath);
@@ -53,29 +50,29 @@ class Service {
                 // *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
                 $this->resizeImage($width, $height, 'crop');
 
-                $imagePath = public_path($path) . DIRECTORY_SEPARATOR .  $sizeName . "-" . $name;
+                $imagePath = public_path($path).DIRECTORY_SEPARATOR.$sizeName.'-'.$name;
                 // *** 3) Save image
                 $this->saveImage($imagePath, 100);
             }
         }
 
-
-        $localImage = new LocalFile($path . "/" . $name);
+        $localImage = new LocalFile($path.'/'.$name);
 
         return $localImage;
     }
 
     /**
-     * Create Directories if not exists
+     * Create Directories if not exists.
      *
-     * @var string $path
+     * @var string
      * @return \AvoRed\Framework\Image\Service
      */
     public function directory($path)
     {
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             File::makeDirectory($path, 0775, true, true);
         }
+
         return $this;
     }
 
@@ -90,7 +87,6 @@ class Service {
         dd($this);
     }
 
-
     public function make($image)
     {
 
@@ -103,14 +99,11 @@ class Service {
         $this->height = imagesy($this->image);
     }
 
-
-    private function openImage($file )
+    private function openImage($file)
     {
-
 
         // *** Get extension
         $extension = strtolower(strrchr($file, '.'));
-
 
         switch ($extension) {
             case '.jpg':
@@ -131,8 +124,7 @@ class Service {
         return $img;
     }
 
-
-    public function resizeImage($newWidth, $newHeight, $option = "auto")
+    public function resizeImage($newWidth, $newHeight, $option = 'auto')
     {
 
         // *** Get optimal width and height - based on $option
@@ -153,7 +145,6 @@ class Service {
 
     private function getDimensions($newWidth, $newHeight, $option)
     {
-
         switch ($option) {
             case 'exact':
                 $optimalWidth = $newWidth;
@@ -178,13 +169,15 @@ class Service {
                 $optimalHeight = $optionArray['optimalHeight'];
                 break;
         }
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
+
+        return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
 
     private function getSizeByFixedHeight($newHeight)
     {
         $ratio = $this->width / $this->height;
         $newWidth = $newHeight * $ratio;
+
         return $newWidth;
     }
 
@@ -192,25 +185,23 @@ class Service {
     {
         $ratio = $this->height / $this->width;
         $newHeight = $newWidth * $ratio;
+
         return $newHeight;
     }
 
     private function getSizeByAuto($newWidth, $newHeight)
     {
-        if ($this->height < $this->width) // *** Image to be resized is wider (landscape)
-        {
+        if ($this->height < $this->width) { // *** Image to be resized is wider (landscape)
             $optimalWidth = $newWidth;
             $optimalHeight = $this->getSizeByFixedWidth($newWidth);
-        } elseif ($this->height > $this->width) // *** Image to be resized is taller (portrait)
-        {
+        } elseif ($this->height > $this->width) { // *** Image to be resized is taller (portrait)
             $optimalWidth = $this->getSizeByFixedHeight($newHeight);
             $optimalHeight = $newHeight;
-        } else // *** Image to be resizerd is a square
-        {
+        } else { // *** Image to be resizerd is a square
             if ($newHeight < $newWidth) {
                 $optimalWidth = $newWidth;
                 $optimalHeight = $this->getSizeByFixedWidth($newWidth);
-            } else if ($newHeight > $newWidth) {
+            } elseif ($newHeight > $newWidth) {
                 $optimalWidth = $this->getSizeByFixedHeight($newHeight);
                 $optimalHeight = $newHeight;
             } else {
@@ -220,12 +211,11 @@ class Service {
             }
         }
 
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
+        return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
 
     private function getOptimalCrop($newWidth, $newHeight)
     {
-
         $heightRatio = $this->height / $newHeight;
         $widthRatio = $this->width / $newWidth;
 
@@ -238,9 +228,8 @@ class Service {
         $optimalHeight = $this->height / $optimalRatio;
         $optimalWidth = $this->width / $optimalRatio;
 
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
+        return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
-
 
     private function crop($optimalWidth, $optimalHeight, $newWidth, $newHeight)
     {
@@ -256,7 +245,7 @@ class Service {
         imagecopyresampled($this->imageResized, $crop, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
     }
 
-    public function saveImage($savePath, $imageQuality = "100")
+    public function saveImage($savePath, $imageQuality = '100')
     {
         // *** Get extension
         $extension = strrchr($savePath, '.');
@@ -297,6 +286,4 @@ class Service {
 
         imagedestroy($this->imageResized);
     }
-
 }
-

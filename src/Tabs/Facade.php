@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Tabs;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;
