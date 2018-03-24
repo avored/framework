@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Theme;
 
 use Illuminate\Support\Facades\Facade as LaraveFacade;

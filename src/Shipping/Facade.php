@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Shipping;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;

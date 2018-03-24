@@ -30,5 +30,4 @@ interface Shipping
      * @return Boolean
      */
     public function enable();
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\AdminMenu;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;

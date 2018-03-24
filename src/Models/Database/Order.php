@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Database\Eloquent\Model;
@@ -23,10 +24,8 @@ class Order extends Model
 
     public function orderProductVariation()
     {
-        return $this->hasMany(OrderProductVariation::class,'');
+        return $this->hasMany(OrderProductVariation::class, '');
     }
-
-
 
     public function user()
     {

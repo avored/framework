@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Modules\Console;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ModuleMakeCommand extends Command
 {
@@ -22,9 +22,7 @@ class ModuleMakeCommand extends Command
      */
     protected $files;
 
-
     /**
-     *
      * The console command description.
      *
      * @var string
@@ -37,7 +35,6 @@ class ModuleMakeCommand extends Command
      * @var string
      */
     protected $type = 'Module';
-
 
     /**
      * Create a new controller creator command instance.
@@ -52,7 +49,6 @@ class ModuleMakeCommand extends Command
         $this->files = $files;
     }
 
-
     /**
      * Execute the console command.
      *
@@ -63,22 +59,19 @@ class ModuleMakeCommand extends Command
         $vendor = strtolower($this->getVendorInput());
         $name = strtolower($this->getNameInput());
 
-
         $stubFiles = ['register', 'module'];
 
         foreach ($stubFiles as $stubFile) {
-
-            $methodName = "get" . ucfirst($stubFile) . "Path";
+            $methodName = 'get'.ucfirst($stubFile).'Path';
 
             $path = $this->$methodName($vendor, $name);
             $this->createRequiredDirectories($path);
 
-            $buildMethodName = "build" . ucfirst($stubFile) . "File";
+            $buildMethodName = 'build'.ucfirst($stubFile).'File';
             $this->files->put($path, $this->$buildMethodName());
         }
 
-
-        $this->info($this->type . ' created successfully.');
+        $this->info($this->type.' created successfully.');
     }
 
     /**
@@ -88,21 +81,19 @@ class ModuleMakeCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-
-        if (!$this->files->isDirectory(dirname($path))) {
+        if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . "/" . $name . "/" . "register.yaml");
+        return base_path('modules/'.$vendor.'/'.$name.'/'.'register.yaml');
     }
-
 
     protected function getModulePath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . "/" . $name . "/src/" . "Module.php");
+        return base_path('modules/'.$vendor.'/'.$name.'/src/'.'Module.php');
     }
 
     /**
@@ -119,6 +110,7 @@ class ModuleMakeCommand extends Command
 
         return $stub;
     }
+
     /**
      * Build the class with the given name.
      *
@@ -127,18 +119,14 @@ class ModuleMakeCommand extends Command
      */
     protected function buildModuleFile()
     {
-
-
         $stubFiles = $this->getStub('module');
 
         $stub = $this->files->get($stubFiles);
 
         $this->replaceNamespace($stub);
 
-
         return $stub;
     }
-
 
     /**
      * Get the stub file for the generator.
@@ -147,9 +135,8 @@ class ModuleMakeCommand extends Command
      */
     protected function getStub($stubName)
     {
-        return __DIR__ . "/stubs/{$stubName}.stub";
+        return __DIR__."/stubs/{$stubName}.stub";
     }
-
 
     /**
      * Replace the namespace for the given stub.
@@ -179,7 +166,6 @@ class ModuleMakeCommand extends Command
         return trim($this->argument('name'));
     }
 
-
     /**
      * Get the desired vendor name from the input.
      *
@@ -189,7 +175,6 @@ class ModuleMakeCommand extends Command
     {
         return trim($this->argument('vendor'));
     }
-
 
     /**
      * Get the console command arguments.
@@ -203,5 +188,4 @@ class ModuleMakeCommand extends Command
             ['name', InputArgument::REQUIRED, 'The name of the module'],
         ];
     }
-
 }

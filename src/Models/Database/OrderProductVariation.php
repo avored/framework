@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,16 +10,16 @@ class OrderProductVariation extends Model
         'product_id',
         'order_id',
         'attribute_dropdown_option_id',
-        'attribute_id'
+        'attribute_id',
     ];
 
-    public function attribute() {
+    public function attribute()
+    {
         return $this->belongsTo(Attribute::class);
     }
 
-
-    public function attributeDropdownOption() {
+    public function attributeDropdownOption()
+    {
         return $this->belongsTo(AttributeDropdownOption::class);
     }
-
 }

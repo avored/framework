@@ -6,14 +6,12 @@ use Illuminate\Support\Collection;
 
 class Manager
 {
-
     /**
-     * Collection of Widget
+     * Collection of Widget.
      *
      * @var object \Illuminate\Support\Collection
      */
     protected $collection;
-
 
     public function __construct()
     {
@@ -22,16 +20,13 @@ class Manager
 
     public function make($name, $widget)
     {
-
         $this->collection->put($name, $widget);
 
         return $widget;
     }
 
-
     public function get($key)
     {
-
         return $this->collection->get($key);
     }
 
@@ -42,7 +37,6 @@ class Manager
 
     public function allOptions()
     {
-
         $options = Collection::make([]);
         foreach ($this->collection as $identifier => $widget) {
             $options->put($identifier, $widget->label());
@@ -50,5 +44,4 @@ class Manager
 
         return $options;
     }
-
 }

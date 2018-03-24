@@ -1,13 +1,13 @@
 <?php
+
 namespace AvoRed\Framework\AdminMenu;
 
 use Illuminate\Support\Collection;
 
 class Builder
 {
-
     /**
-     * Admin Menu Collection
+     * Admin Menu Collection.
      *
      * @var \Illuminate\Support\Collection
      */
@@ -18,14 +18,14 @@ class Builder
         $this->adminMenu = Collection::make([]);
     }
 
-
     /**
-     * Create new menu object and return
+     * Create new menu object and return.
      *
-     * @var string $key
+     * @var string
      * @return \AvoRed\Framework\AdminMenu\AdminMenu
      */
-    public function add($key) {
+    public function add($key)
+    {
         $menu = new AdminMenu();
         $menu->key($key);
         $this->adminMenu->put($key, $menu);
@@ -33,21 +33,19 @@ class Builder
         return $menu;
     }
 
-
     /**
-     * Return Admin Menu Object
+     * Return Admin Menu Object.
      *
-     * @var string $key
+     * @var string
      * @return \AvoRed\Framework\AdminMenu\AdminMenu
      */
-    public function get($key) {
-
+    public function get($key)
+    {
         return $this->adminMenu->get($key);
     }
 
-
     /**
-     * Register an Admin Menu
+     * Register an Admin Menu.
      *
      * @param string $menuKey
      * @param string $adminMenu
@@ -57,20 +55,19 @@ class Builder
     {
         if ($this->adminMenu->has($menuKey)) {
 
-            /** @var  \AvoRed\Framework\AdminMenu\AdminMenu $adminMenuObj */
+            /** @var \AvoRed\Framework\AdminMenu\AdminMenu $adminMenuObj */
             $adminMenuObj = $this->adminMenu->get($menuKey);
 
-            foreach($adminMenu as $key => $menuArray) {
-
-                if(isset($menuArray['submenu'])) {
+            foreach ($adminMenu as $key => $menuArray) {
+                if (isset($menuArray['submenu'])) {
                     $menus = $menuArray['submenu'];
-                    foreach($menus as $subKey => $subArray) {
+                    foreach ($menus as $subKey => $subArray) {
                         $subObj = new AdminMenu;
                         $subObj->key($subKey)
                                 ->label($subArray['label'])
                                 ->route($subArray['route']);
 
-                        $adminMenuObj->subMenu($subKey,$subObj);
+                        $adminMenuObj->subMenu($subKey, $subObj);
                     }
                 }
             }
@@ -79,7 +76,6 @@ class Builder
         } else {
             $adminMenuObj = new AdminMenu;
             foreach ($adminMenu as $key => $menuArray) {
-
                 $flag = true;
 
                 $adminMenuObj->key($key);
@@ -99,18 +95,16 @@ class Builder
             if (false !== $flag) {
                 $this->adminMenu->put($menuKey, $adminMenuObj);
             }
-
         }
     }
 
     /**
-     * Return all available Menu in Admin Menu
+     * Return all available Menu in Admin Menu.
      *
      *
      * @param void
      * @return \Illuminate\Support\Collection
      */
-
     public function getMenuItems()
     {
         return $this->adminMenu->all();

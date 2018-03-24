@@ -1,38 +1,31 @@
 <?php
+
 namespace AvoRed\Framework\Permission;
 
-use Illuminate\Support\Facades\Route;
 use AvoRed\Framework\Permission\Contracts\Permission as PermissionContracts;
 
 class Permission implements PermissionContracts
 {
-
     /**
-     *
-     *
-     * @var string $label
+     * @var string
      */
     protected $label;
 
     /**
-     *
-     *
-     * @var string $route
+     * @var string
      */
     protected $routes;
 
     /**
-     *
-     *
-     * @var string $key
+     * @var string
      */
     protected $key;
-
 
     public function label($label = null)
     {
         if (null !== $label) {
             $this->label = $label;
+
             return $this;
         }
 
@@ -43,6 +36,7 @@ class Permission implements PermissionContracts
     {
         if (null !== $key) {
             $this->key = $key;
+
             return $this;
         }
 
@@ -53,6 +47,7 @@ class Permission implements PermissionContracts
     {
         if (null !== $routes) {
             $this->routes = $routes;
+
             return $this;
         }
 

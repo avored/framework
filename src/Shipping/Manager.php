@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Shipping;
 
 use Illuminate\Support\Collection;
@@ -6,7 +7,6 @@ use Illuminate\Support\Collection;
 class Manager
 {
     /**
-     *
      * @var \Illuminate\Support\Collection
      */
     public $shippingOptions;

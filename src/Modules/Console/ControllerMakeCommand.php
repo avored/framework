@@ -2,11 +2,11 @@
 
 namespace AvoRed\Framework\Modules\Console;
 
-use Illuminate\Support\Facades\App;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
 use Illuminate\Filesystem\Filesystem;
 use AvoRed\Framework\Modules\Facade as Module;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ControllerMakeCommand extends Command
 {
@@ -24,9 +24,7 @@ class ControllerMakeCommand extends Command
      */
     protected $files;
 
-
     /**
-     *
      * The console command description.
      *
      * @var string
@@ -39,7 +37,6 @@ class ControllerMakeCommand extends Command
      * @var string
      */
     protected $type = 'Controller';
-
 
     /**
      * Create a new controller creator command instance.
@@ -54,7 +51,6 @@ class ControllerMakeCommand extends Command
         $this->files = $files;
     }
 
-
     /**
      * Execute the console command.
      *
@@ -62,30 +58,25 @@ class ControllerMakeCommand extends Command
      */
     public function handle()
     {
-
         $identifier = strtolower($this->getIdentifierInput());
 
         list($vendor, $name) = explode('-', $identifier);
 
         $controllerName = $this->getNameInput();
 
-
-
         $stubFiles = ['controller'];
 
         foreach ($stubFiles as $stubFile) {
+            $methodName = 'get'.ucfirst($stubFile).'Path';
 
-            $methodName = "get" . ucfirst($stubFile) . "Path";
-
-            $path = $this->$methodName($vendor, $name ,$controllerName);
+            $path = $this->$methodName($vendor, $name, $controllerName);
             $this->createRequiredDirectories($path);
 
-            $buildMethodName = "build" . ucfirst($stubFile) . "File";
+            $buildMethodName = 'build'.ucfirst($stubFile).'File';
             $this->files->put($path, $this->$buildMethodName());
         }
 
-
-        $this->info($this->type . ' created successfully.');
+        $this->info($this->type.' created successfully.');
     }
 
     /**
@@ -95,17 +86,15 @@ class ControllerMakeCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-
-        if (!$this->files->isDirectory(dirname($path))) {
+        if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }
 
     protected function getControllerPath($vendor, $name, $controllerName)
     {
-        return base_path('modules/' . $vendor . "/" . $name . "/" . "src/Http/Controllers/" . $controllerName. ".php");
+        return base_path('modules/'.$vendor.'/'.$name.'/'.'src/Http/Controllers/'.$controllerName.'.php');
     }
-
 
     /**
      * Build the class with the given name.
@@ -129,9 +118,8 @@ class ControllerMakeCommand extends Command
      */
     protected function getStub($stubName)
     {
-        return __DIR__ . "/stubs/{$stubName}.stub";
+        return __DIR__."/stubs/{$stubName}.stub";
     }
-
 
     /**
      * Replace the namespace for the given stub.
@@ -146,11 +134,9 @@ class ControllerMakeCommand extends Command
 
         $module = Module::get($this->getIdentifierInput());
 
-
         $baseNamespace = $module['namespace'];
 
-        $namespace = $baseNamespace . "Http\Controllers";
-
+        $namespace = $baseNamespace."Http\Controllers";
 
         $stub = str_replace(
             ['DummyClass', 'DummyRootNamespace', 'DummyNamespace'],
@@ -171,7 +157,6 @@ class ControllerMakeCommand extends Command
         return trim($this->argument('identifier'));
     }
 
-
     /**
      * Get the desired  name of the module from the input.
      *
@@ -181,9 +166,6 @@ class ControllerMakeCommand extends Command
     {
         return trim($this->argument('name'));
     }
-
-
-
 
     /**
      * Get the console command arguments.
@@ -197,5 +179,4 @@ class ControllerMakeCommand extends Command
             ['name', InputArgument::REQUIRED, 'The name of the Controller'],
         ];
     }
-
 }

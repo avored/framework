@@ -1,10 +1,11 @@
 <?php
+
 namespace AvoRed\Framework\Breadcrumb;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -12,9 +13,10 @@ class Provider extends ServiceProvider {
      */
     protected $defer = true;
 
-    public function boot() {
-
+    public function boot()
+    {
     }
+
     /**
      * Register the service provider.
      *
@@ -25,6 +27,7 @@ class Provider extends ServiceProvider {
         $this->registerServices();
         $this->app->alias('breadcrumb', 'AvoRed\Framework\Breadcrumb\Builder');
     }
+
     /**
      * Register the Admin Menu instance.
      *

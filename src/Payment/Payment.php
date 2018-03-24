@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Payment;
 
 abstract class Payment

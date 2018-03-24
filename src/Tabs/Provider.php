@@ -1,16 +1,18 @@
 <?php
+
 namespace AvoRed\Framework\Tabs;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
+
     /**
      * Register the service provider.
      *
@@ -21,6 +23,7 @@ class Provider extends ServiceProvider {
         $this->registerTabs();
         $this->app->alias('tabs', 'AvoRed\Framework\Tabs\TabsMaker');
     }
+
     /**
      * Register the AdmainConfiguration instance.
      *

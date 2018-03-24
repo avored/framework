@@ -1,16 +1,18 @@
 <?php
+
 namespace AvoRed\Framework\Image;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
+
     /**
      * Register the service provider.
      *
@@ -22,6 +24,7 @@ class Provider extends ServiceProvider {
 
         $this->app->alias('image', 'AvoRed\Framework\Image\Service');
     }
+
     /**
      * Register the Image Service instance.
      *

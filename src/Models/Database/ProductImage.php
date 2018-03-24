@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Image\LocalFile;
@@ -15,9 +16,8 @@ class ProductImage extends Model
 
     public function getPathAttribute()
     {
-
         if (null === $this->attributes['path'] || empty($this->attributes['path'])) {
-            return NULL;
+            return;
         }
         $localImage = new LocalFile($this->attributes['path']);
 

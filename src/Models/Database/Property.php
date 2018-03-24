@@ -1,37 +1,35 @@
 <?php
+
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    protected $fillable = ['name', 'identifier', 'data_type','field_type' ,'sort_order'];
+    protected $fillable = ['name', 'identifier', 'data_type', 'field_type', 'sort_order'];
 
-
-    public function propertyDropdownOptions() {
+    public function propertyDropdownOptions()
+    {
         return $this->hasMany(PropertyDropdownOption::class);
     }
 
     /**
-     * Save Product Property based on its data_type
+     * Save Product Property based on its data_type.
      *
      * @return void
      */
-    public function saveProperty($productId, $propertyValue) {
-
-
+    public function saveProperty($productId, $propertyValue)
+    {
         if ($this->data_type == 'VARCHAR') {
-
             $propertyVarcharValue = ProductPropertyVarcharValue::
                                             whereProductId($productId)
                                             ->wherePropertyId($this->id)->first();
-
 
             if (null === $propertyVarcharValue) {
                 ProductPropertyVarcharValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyVarcharValue->update(['value' => $propertyValue]);
@@ -39,7 +37,6 @@ class Property extends Model
         }
 
         if ($this->data_type == 'BOOLEAN') {
-
             $propertyBooleanValue = ProductPropertyBooleanValue::
                                             whereProductId($productId)
                                             ->wherePropertyId($this->id)->first();
@@ -48,7 +45,7 @@ class Property extends Model
                 ProductPropertyBooleanValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyBooleanValue->update(['value' => $propertyValue]);
@@ -56,7 +53,6 @@ class Property extends Model
         }
 
         if ($this->data_type == 'TEXT') {
-
             $propertyTextValue = ProductPropertyTextValue::
                                             whereProductId($productId)
                                             ->wherePropertyId($this->id)->get()->first();
@@ -65,7 +61,7 @@ class Property extends Model
                 ProductPropertyTextValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyTextValue->update(['value' => $propertyValue]);
@@ -73,7 +69,6 @@ class Property extends Model
         }
 
         if ($this->data_type == 'DECIMAL') {
-
             $propertyDecimalValue = ProductPropertyDecimalValue::
                                                 whereProductId($productId)
                                                 ->wherePropertyId($this->id)->first();
@@ -82,7 +77,7 @@ class Property extends Model
                 ProductPropertyDecimalValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyDecimalValue->update(['value' => $propertyValue]);
@@ -90,7 +85,6 @@ class Property extends Model
         }
 
         if ($this->data_type == 'INTEGER') {
-
             $propertyIntegerValue = ProductPropertyIntegerValue::
                                                 whereProductId($productId)
                                                 ->wherePropertyId($this->id)->get()->first();
@@ -99,7 +93,7 @@ class Property extends Model
                 ProductPropertyIntegerValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyIntegerValue->update(['value' => $propertyValue]);
@@ -107,7 +101,6 @@ class Property extends Model
         }
 
         if ($this->data_type == 'DATETIME') {
-
             $propertyDatetimeValue = ProductPropertyDatetimeValue::
                                                 whereProductId($productId)
                                                 ->wherePropertyId($this->id)->get()->first();
@@ -116,13 +109,11 @@ class Property extends Model
                 ProductPropertyDatetimeValue::create([
                     'product_id' => $productId,
                     'property_id' => $this->id,
-                    'value' => $propertyValue
+                    'value' => $propertyValue,
                 ]);
             } else {
                 $propertyDatetimeValue->update(['value' => $propertyValue]);
             }
         }
-
-
     }
 }

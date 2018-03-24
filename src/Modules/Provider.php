@@ -1,17 +1,19 @@
 <?php
+
 namespace AvoRed\Framework\Modules;
 
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Modules\Facade as Module;
 
-class Provider extends ServiceProvider {
-
+class Provider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
+
     /**
      * Register the service provider.
      *
@@ -19,13 +21,13 @@ class Provider extends ServiceProvider {
      */
     public function register()
     {
-
         $this->registerModuleConsoleProvider();
         $this->registerModule();
         $this->app->alias('module', 'AvoRed\Framework\Modules\Manager');
 
         $modules = Module::all();
     }
+
     /**
      * Register the AdmainConfiguration instance.
      *
@@ -38,17 +40,15 @@ class Provider extends ServiceProvider {
         });
     }
 
-
     /*
      * Register Module console Command which Register most Module generation Command
      *
      * @return void
      */
-    public function registerModuleConsoleProvider() {
+    public function registerModuleConsoleProvider()
+    {
         $this->app->register('AvoRed\Framework\Modules\Console\Provider');
     }
-
-
 
     /**
      * Get the services provided by the provider.
