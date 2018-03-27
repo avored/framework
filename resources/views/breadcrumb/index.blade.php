@@ -1,6 +1,6 @@
 
 
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mt-3">
 
         @if(isset($breadcrumb->parents) && $breadcrumb->parents->count() >0)
             @foreach($breadcrumb->parents as $parentBreadcrumb)

@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Cart;
 
+use AvoRed\Ecommerce\Repository\Config;
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Repository\Product as ProductRepository;
@@ -33,7 +34,7 @@ class Manager
      * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function add($slug, $qty): self
+    public function add($slug, $qty): Manager
     {
         $cartProducts = $this->getSession();
 
@@ -45,7 +46,8 @@ class Manager
                     ->qty($qty)
                     ->slug($slug)
                     ->price($product->price)
-                    ->image($product->image);
+                    ->image($product->image)
+                    ->lineTotal($qty * $product->price);
 
         $cartProducts->put($slug, $cartProduct);
 
@@ -61,7 +63,7 @@ class Manager
      * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function update($slug, $qty): self
+    public function update($slug, $qty): Manager
     {
         $cartProducts = $this->getSession();
 
@@ -71,6 +73,30 @@ class Manager
             throw new \Exception("Cart Product doesn't Exist");
         }
         $cartProduct->qty($qty);
+        $cartProduct->lineTotal($qty * $cartProduct->price());
+
+        return $this;
+    }
+
+    /**
+     * Update the Cart Product Qty by Slug.
+     *
+     * @param stirng    $slug
+     * @param float     $amount
+     * @return \AvoRed\Framework\Cart\Manager $this
+     */
+    public function updateProductTax($slug, $amount): Manager
+    {
+        $cartProducts = $this->getSession();
+
+        $cartProduct = $cartProducts->get($slug);
+
+        if (null === $cartProduct) {
+            throw new \Exception("Cart Product doesn't Exist");
+        }
+        $cartProduct->tax($amount);
+
+        $cartProduct->lineTotal($cartProduct->qty() * $cartProduct->price() + $amount);
 
         return $this;
     }
@@ -92,11 +118,28 @@ class Manager
      * @param string $slug
      * @return void
      */
-    public function destroy($slug):self
+    public function destroy($slug):Manager
     {
         $cartProducts = $this->getSession();
 
         $cartProduct = $cartProducts->pull($slug);
+
+        return $this;
+    }
+
+    /**
+     * Set/Get Cart has Tax.
+     * @param null|boolean $flag
+     * @return $this|boolean
+     */
+    public function hasTax($flag = null)
+    {
+
+        if (null === $flag) {
+            return $this->session->get('hasTax');
+        }
+
+        $this->session->put('hasTax',$flag);
 
         return $this;
     }
@@ -111,6 +154,39 @@ class Manager
         $sessionKey = $this->getSessionKey();
 
         return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;
+    }
+
+    /**
+     * Get the Current Cart Total
+     *
+     * @return float $total
+     */
+    public function total()
+    {
+        $total = 0.00;
+        $cartProducts = $this->getSession();
+        foreach ($cartProducts as $product) {
+            $total += $product->lineTotal();
+        }
+
+        return $total;
+    }
+
+
+    /**
+     * Get the Current Cart Tax Total
+     *
+     * @return float $taxTotal
+     */
+    public function taxTotal()
+    {
+        $taxTotal = 0.00;
+        $cartProducts = $this->getSession();
+        foreach ($cartProducts as $product) {
+            $taxTotal += $product->tax();
+        }
+
+        return $taxTotal;
     }
 
     /**

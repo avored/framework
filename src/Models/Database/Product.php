@@ -256,29 +256,6 @@ class Product extends Model
     }
 
     /*
-     * Calculate Tax amount based on default country and return tax amount
-     *
-     * @return float $taxAmount
-     */
-
-    public function getTaxAmount($price = null)
-    {
-        $percentage = 15; //Configuration->getConfiguratiin();
-        if (null === $price) {
-            $price = $this->price;
-        }
-
-        /*
-        if (null === $taxRule) {
-            return 0.00;
-        }
-        */
-        $taxAmount = ($percentage * $price / 100);
-
-        return $taxAmount;
-    }
-
-    /*
      * Get the Price for the Product
      *
      * @return float $value

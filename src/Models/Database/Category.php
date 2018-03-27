@@ -1,21 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Category extends Model
 {
-    protected $fillable = ['parent_id', 'name', 'slug','meta_title','meta_description'];
+    protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
 
     public function products()
     {
         return $this->belongsToMany(Product::class);
     }
 
-    public static function getCategoryOptions() {
-
+    public static function getCategoryOptions()
+    {
         $model = new static;
         $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
 
@@ -43,7 +43,7 @@ class Category extends Model
     {
         $data = [];
 
-        $rootCategories = $this->where('parent_id', '=', null)->orWhere('parent_id','=','0')->get();
+        $rootCategories = $this->where('parent_id', '=', null)->orWhere('parent_id', '=', '0')->get();
         $data = $this->list_categories($rootCategories);
 
         return $data;
@@ -68,15 +68,12 @@ class Category extends Model
         return $this->where('parent_id', '=', $id)->get();
     }
 
-
     public function getFilters()
     {
         $attrs = Collection::make([]);
 
         $productIds = Collection::make([]);
         $products = $this->products;
-
-
 
         foreach ($products as $product) {
             foreach ($product->productVariations as $variation) {
@@ -86,6 +83,7 @@ class Category extends Model
             $productIds->push($product->id);
         }
 
+
         $collections = ProductAttributeIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
 
         foreach ($collections as $booleanValue) {
@@ -93,6 +91,5 @@ class Category extends Model
         }
 
         return $attrs;
-
     }
 }

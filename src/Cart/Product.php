@@ -35,11 +35,26 @@ class Product implements CartContracts
     protected $price;
 
     /**
+     * Cart Product Tax Amount.
+     *
+     * @var null|float
+     */
+    protected $tax;
+
+    /**
      * Cart Product Image.
      *
      * @var null|string
      */
     protected $image;
+
+
+    /**
+     * Cart Product Line Total.
+     *
+     * @var null|string
+     */
+    protected $lineTotal;
 
     /**
      * Set/Get Cart Product Name.
@@ -102,6 +117,38 @@ class Product implements CartContracts
         }
 
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Set/Get Cart Product Tax.
+     * @param null|float $amount
+     * @return $this|float
+     */
+    public function tax($amount = null)
+    {
+        if (null === $amount) {
+            return $this->tax;
+        }
+
+        $this->tax = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Set/Get Cart Product Line Total.
+     * @param null|float $amount
+     * @return $this|float
+     */
+    public function lineTotal($amount = null)
+    {
+        if (null === $amount) {
+            return $this->lineTotal;
+        }
+
+        $this->lineTotal = $amount;
 
         return $this;
     }
