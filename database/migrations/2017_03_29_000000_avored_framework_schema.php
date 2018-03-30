@@ -39,6 +39,7 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('track_stock')->nullable()->default(null);
             $table->decimal('qty', 10, 6)->nullable();
             $table->tinyInteger('is_taxable')->nullable()->default(null);
+            $table->decimal('price', 10, 6)->nullable()->default(null);;
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -48,15 +49,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
-        });
-
-        Schema::create('product_prices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->decimal('price', 10, 6);
-            $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
         Schema::create('category_product', function (Blueprint $table) {

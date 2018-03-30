@@ -66,6 +66,7 @@ class Manager
 
                     $moduleProvider = $data['namespace'].'Module';
 
+                    //var_dump($moduleProvider);
                     App::register($moduleProvider);
 
                     $this->moduleList->put($data['identifier'], $data);
@@ -73,6 +74,7 @@ class Manager
                 $iterator->next();
             }
 
+            //dd(app());
             $this->moduleLoaded = true;
         }
 

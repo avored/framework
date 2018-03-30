@@ -12,7 +12,7 @@ use AvoRed\Ecommerce\Models\Database\Configuration;
 class Product extends Model
 {
     protected $fillable = ['type', 'name', 'slug', 'sku',
-        'description', 'status', 'in_stock', 'track_stock',
+        'description', 'status', 'in_stock', 'track_stock', 'price',
         'qty', 'is_taxable', 'meta_title', 'meta_description',
         'weight', 'width', 'height', 'length',
     ];
@@ -78,23 +78,6 @@ class Product extends Model
     }
 
     /**
-     * Save Product Price.
-     *
-     * @param float $price
-     * @return \AvoRed\Framework\Models\Database\Product $this
-     */
-    public function saveProductPrice($price):self
-    {
-        if ($this->prices()->get()->count() > 0) {
-            $this->prices()->get()->first()->update(['price' => $price]);
-        } else {
-            $this->prices()->create(['price' => $price]);
-        }
-
-        return $this;
-    }
-
-    /**
      * Save Product Images.
      *
      * @param array $images
@@ -130,8 +113,6 @@ class Product extends Model
     public function saveProduct($request)
     {
         $this->update($request->all());
-
-        $this->saveProductPrice($request->get('price'));
 
         if (null !== $request->get('image')) {
             $this->saveProductImages($request->get('image'));
@@ -255,18 +236,6 @@ class Product extends Model
         }
     }
 
-    /*
-     * Get the Price for the Product
-     *
-     * @return float $value
-     */
-    public function getPriceAttribute()
-    {
-        $row = $this->prices()->first();
-
-        return (isset($row->price)) ? $row->price : null;
-    }
-
     /**
      * Get All Properties for the Product.
      *
@@ -384,16 +353,6 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
-    }
-
-    /**
-     * Product has many Price.
-     *
-     * @return \AvoRed\Framework\Models\Database\ProductPrice
-     */
-    public function prices()
-    {
-        return $this->hasMany(ProductPrice::class);
     }
 
     /**
