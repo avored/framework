@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Ecommerce\Models\Database\Configuration;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Product extends Model
 {
@@ -17,14 +18,86 @@ class Product extends Model
         'weight', 'width', 'height', 'length',
     ];
 
+    /**
+     * @var \Illuminate\Database\Eloquent\Collection
+     */
+    protected $_collection = null;
+
+
+    public function setCollection($products)
+    {
+        $this->_collection = $products;
+
+        return $this;
+    }
+
     public function getCollection()
     {
         $model = new static;
         $products = $model->all();
-        $productCollection = new ProductCollection();
-        $productCollection->setCollection($products);
+        //$productCollection = new ProductCollection();
+        //$productCollection->setCollection($products);
 
-        return $productCollection;
+        $this->setCollection($products);
+
+        return $this;
+    }
+
+    public function addAttributeFilter($attributeId, $value)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
+
+            foreach ($this->getProductAllAttributes() as $productAttribute) {
+                if ($productAttribute->attribute_id == $attributeId && $productAttribute->value == $value) {
+                    return $product;
+                }
+            }
+        });
+
+        return $this->_collection;
+    }
+
+    public function addPropertyFilter($attributeId, $value)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
+
+            foreach ($product->getProductAllProperties() as $productAttribute) {
+
+                if ($productAttribute->property_id == $attributeId && $productAttribute->value == $value) {
+                    return $product;
+                }
+            }
+        });
+
+        return $this->_collection;
+    }
+
+    public function productPaginate($products , $perPage = 10)
+    {
+
+        $request    = request();
+        $page       = request('page');
+        $offset     = ($page * $perPage) - $perPage;
+
+
+        return new LengthAwarePaginator(
+            $products->slice($offset, $perPage), // Only grab the items we need
+            $products->count(), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+    }
+
+    public function addCategoryFilter($categoryId)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($categoryId) {
+            if ($product->categories->count() > 0 && $product->categories->pluck('id')->contains($categoryId)) {
+                return $product;
+            }
+        });
+
+        return $this;
     }
 
     public static function boot()

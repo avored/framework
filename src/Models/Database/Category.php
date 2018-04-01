@@ -70,24 +70,31 @@ class Category extends Model
 
     public function getFilters()
     {
-        $attrs = Collection::make([]);
+        $attrs          = Collection::make([]);
+        $productIds     = Collection::make([]);
+        $collections    = Collection::make([]);
 
-        $productIds = Collection::make([]);
         $products = $this->products;
+
 
         foreach ($products as $product) {
             foreach ($product->productVariations as $variation) {
-                //dd($variation);
                 $productIds->push($variation->variation_id);
             }
             $productIds->push($product->id);
         }
 
 
-        $collections = ProductAttributeIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
+        $intAttributes = ProductAttributeIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
+        foreach ($intAttributes as $attrValue) {
 
-        foreach ($collections as $booleanValue) {
-            $attrs->push(Attribute::find($booleanValue->attribute_id));
+            $attrs->push(['model' => Attribute::find($attrValue->attribute_id), "type" =>"ATTRIBUTE"]);
+
+        }
+
+        $intAttributes = ProductPropertyIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
+        foreach ($intAttributes as $attrValue) {
+            $attrs->push(['model' => Property::find($attrValue->property_id), "type" =>"PROPERTY"]);
         }
 
         return $attrs;
