@@ -7,9 +7,80 @@ use AvoRed\Framework\Models\Database\Property;
 use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Database\Product as ProductModel;
 use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Product extends AbstractRepository
 {
+
+
+    /*
+     * Return Products of Category with Filters
+     *
+     * @param integer $categoryId
+     * @param array   $filters
+     */
+    public function getCategoryProductWithFilter($categoryId , $filters = []) {
+
+        $prefix = config('database.connections.mysql.prefix');
+
+        $sql = "Select p.id
+                FROM {$prefix}products as p 
+                INNER JOIN {$prefix}category_product as cp on p.id = cp.product_id ";
+
+
+        foreach ($filters as $type => $filterArray) {
+            if('property' == $type) {
+                foreach ($filterArray as $identifier => $value) {
+                    $property = $this->findPropertyByIdentifier($identifier);
+
+                    if("INTEGER" == $property->data_type) {
+
+                        $sql .= "INNER JOIN {$prefix}product_property_integer_values as ppiv ON p.id = ppiv.product_id ";
+                    }
+
+                }
+            }
+        }
+
+        $sql .= "WHERE p.status=1 AND cp.category_id = ? ";
+
+        foreach ($filters as $type => $filterArray) {
+            if('property' == $type) {
+                foreach ($filterArray as $identifier => $value) {
+                    $property = $this->findPropertyByIdentifier($identifier);
+
+                    if("INTEGER" == $property->data_type) {
+
+                        $sql .= "AND ppiv.property_id = {$property->id} AND ppiv.value={$value}";
+                    }
+
+                }
+            }
+        }
+
+        $products = DB::select($sql, [$categoryId]);
+
+        $collect = Collection::make([]);
+
+        foreach ($products as $productArray) {
+            $collect->push($this->findProductById($productArray->id));
+        }
+
+        return $collect;
+
+        /**
+        * FROM avored_products as p
+        *
+         *
+            *
+            *
+         * where ppiv.property_id = 1 AND
+         */
+
+    }
+
+
     /**
      * @param $slug
      * @return mixed
@@ -132,6 +203,17 @@ class Product extends AbstractRepository
     }
 
     /**
+     * Find Property Model of a Product.
+     *
+     * @param string $identifier
+     * @return \AvoRed\Framework\Models\Database\Property $property
+     */
+    public function findPropertyByIdentifier($identifier):Property
+    {
+        return $this->propertyModel()->whereIdentifier($identifier)->first();
+    }
+
+    /**
      * Destroy Attribute.
      *
      * @param int $id
@@ -141,4 +223,5 @@ class Product extends AbstractRepository
     {
         return $this->attributeModel()->destroy($id);
     }
+
 }
