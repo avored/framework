@@ -28,6 +28,12 @@ class DataGrid
      */
     public $columns;
 
+    /**
+     *  Page Name
+     * @var string $pageName
+     */
+    public $pageName = "page";
+
     public function __construct(Request $request)
     {
         $this->columns = new Collection();
@@ -87,4 +93,20 @@ class DataGrid
     {
         return null !== $this->request->get('desc') && $this->request->get('desc') == $identifier;
     }
+
+    /**
+     *
+     *
+     * @param null|string $pageName
+     */
+    public function pageName($pageName = null) {
+        if(null === $pageName) {
+            return $this->pageName;
+        }
+
+        $this->pageName = $pageName;
+
+        return $this;
+    }
 }
+

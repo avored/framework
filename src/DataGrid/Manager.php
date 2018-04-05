@@ -42,6 +42,13 @@ class Manager
      * @var \Illuminate\Support\Collection
      */
     public $columns = null;
+
+    /**
+     *  Page Name
+     * @var string $pageName
+     */
+    public $pageName = "page";
+
     /**
      * Database table model.
      *
@@ -85,7 +92,7 @@ class Manager
             $dataGrid->model->orderBy($this->request->get('desc'), 'desc');
         }
 
-        $dataGrid->data = $dataGrid->model->paginate($this->pageItem);
+        $dataGrid->data = $dataGrid->model->paginate($this->pageItem,['*'],$dataGrid->pageName());
 
         return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
     }
@@ -176,6 +183,22 @@ class Manager
             $this->columns = Collection::make([]);
         }
         $this->columns->put($columnKey, $data);
+
+        return $this;
+    }
+
+
+    /**
+     *
+     *
+     * @param null|string $pageName
+     */
+    public function pageName($pageName = null) {
+        if(null === $pageName) {
+            return $this->pageName;
+        }
+
+        $this->pageName = $pageName;
 
         return $this;
     }

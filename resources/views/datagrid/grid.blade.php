@@ -46,4 +46,4 @@
     </tbody>
 </table>
 </div>
-{!! $dataGrid->data->appends(Request::except('page'))->render('pagination::bootstrap-4') !!}
+{!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->render('pagination::bootstrap-4') !!}

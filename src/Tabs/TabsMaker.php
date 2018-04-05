@@ -27,12 +27,27 @@ class TabsMaker
      * @var string
      * @return \AvoRed\Framework\Tab
      */
-    public function add($key)
+    public function add($key, $tab)
     {
-        $tab = new Tab();
         $this->adminTabs->put($key, $tab);
 
-        return $tab;
+        return $this;
+    }
+
+    /**
+     * Get Tab from Tabs Collection.
+     *
+     * @var string
+     * @return \AvoRed\Framework\Tab
+     */
+    public function get($key)
+    {
+        $tab = $this->adminTabs->get($key);
+
+        if(null == $tab) {
+            throw new \Exception('Required Tab is missing');
+        }
+        return $this->adminTabs->get($key);
     }
 
     /**
@@ -44,10 +59,11 @@ class TabsMaker
     public function all($type = 'product')
     {
         $tabs = $this->adminTabs->filter(function ($item, $key) use ($type) {
-            if ($item->type == $type) {
+            if ($item->type() == $type) {
                 return true;
             }
         });
+
 
         return $tabs;
     }
