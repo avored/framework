@@ -2,11 +2,12 @@
 
 namespace AvoRed\Framework\Models\Database;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    protected $fillable = ['name', 'identifier', 'data_type', 'field_type', 'sort_order'];
+    protected $fillable = ['name', 'identifier', 'data_type', 'field_type', 'sort_order', 'use_for_all_products'];
 
     public function propertyDropdownOptions()
     {

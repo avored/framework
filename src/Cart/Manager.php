@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Cart;
 
-use AvoRed\Ecommerce\Repository\Config;
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Repository\Product as ProductRepository;

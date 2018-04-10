@@ -7,7 +7,6 @@ use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Collection;
-use AvoRed\Ecommerce\Models\Database\Configuration;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class Product extends Model
@@ -180,7 +179,7 @@ class Product extends Model
     /**
      * Update the Product and Product Related Data.
      *
-     * @var \AvoRed\Ecommerce\Http\Requests\ProductRequest
+     * @var array $data
      * @return void
      */
     public function saveProduct($request)
@@ -197,14 +196,20 @@ class Product extends Model
 
         $properties = $request->get('property');
 
+
         if (null !== $properties && count($properties) > 0) {
+
             foreach ($properties as $key => $property) {
+
+
                 foreach ($property as $propertyId => $propertyValue) {
-                    $propertyModal = Property::findorfail($propertyId);
-                    $propertyModal->saveProperty($this->id, $propertyValue);
+                    $propertyModel = Property::findorfail($propertyId);
+                    $propertyModel->saveProperty($this->id, $propertyValue);
                 }
             }
         }
+
+
 
         $attributeWithOptions = $request->get('attribute');
 
@@ -309,10 +314,26 @@ class Product extends Model
         }
     }
 
+    public function getPropertiesAll() {
+
+        $properties     = Property::whereUseForAllProducts(1)->get();
+        $collections    = $this->getProductAllProperties();
+        $existingIds    = $collections->pluck('property_id');
+
+        foreach ($properties as $property) {
+
+            if(!in_array($property->id, array_values($existingIds->toArray()))) {
+                $collections->push($property);
+            }
+        }
+        return $collections;
+    }
+
+
     /**
      * Get All Properties for the Product.
      *
-     * @param $variation
+     * @param Collection $collection
      * @return \Illuminate\Support\Collection
      */
     public function getProductAllProperties()
@@ -417,6 +438,9 @@ class Product extends Model
 
         return self::findorfail($productAttributeIntegerValue->product_id);
     }
+
+
+
 
     /**
      * Product has many Categories.
