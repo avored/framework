@@ -196,8 +196,11 @@ class Product extends Model
         }
 
         if (isset($data['category_id']) && count($data['category_id']) > 0) {
+            $this->saveCategoryFilters($data);
             $this->categories()->sync($data['category_id']);
         }
+
+
 
         $properties = isset($data['property']) ? $data['property'] : [];
 
@@ -263,11 +266,40 @@ class Product extends Model
             }
         }
 
-        Event::fire(new ProductAfterSave($data));
+        Event::fire(new ProductAfterSave($this,$data));
 
         return $this;
     }
 
+    /**
+     * Save Category Filter -- Property and Attributes Ids
+     *
+     *
+     * @param array $data
+     * @return void
+     */
+    public function saveCategoryFilters($data) {
+
+        $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
+
+        foreach ($categoryIds as $categoryId) {
+            $propertyIds = isset($data['product-property']) ? $data['product-property'] : [];
+
+            foreach ($propertyIds as $propertyId) {
+
+                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($propertyId)->whereType('PROPERTY')->first();
+                if(null === $filterModel) {
+                    CategoryFilter::create([
+                        'category_id' => $categoryId,
+                        'filter_id' => $propertyId,
+                        'type' => 'PROPERTY'
+                    ]);
+                }
+            }
+
+
+        }
+    }
     public function combinations($arrays, $i = 0)
     {
         if (! isset($arrays[$i])) {

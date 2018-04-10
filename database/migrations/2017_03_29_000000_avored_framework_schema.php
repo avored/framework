@@ -26,6 +26,17 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('category_filters', function (Blueprint $table) {
+
+            $table->increments('id');
+            $table->integer('category_id')->unsigned()->nullable()->default(null);
+            $table->enum('type',['ATTRIBUTE','PROPERTY'])->nullable()->default(null);
+            $table->integer('filter_id');
+            $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        });
+
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type', ['BASIC', 'VARIATION', 'DOWNLOADABLE', 'VARIABLE_PRODUCT'])->default('BASIC');
