@@ -2,6 +2,9 @@
 
 namespace AvoRed\Framework\Models\Database;
 
+use AvoRed\Framework\Events\ProductAfterSave;
+use AvoRed\Framework\Events\ProductBeforeSave;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Database\Eloquent\Model;
@@ -182,22 +185,24 @@ class Product extends Model
      * @var array $data
      * @return void
      */
-    public function saveProduct($request)
+    public function saveProduct($data)
     {
-        $this->update($request->all());
+        Event::fire(new ProductBeforeSave($data));
 
-        if (null !== $request->get('image')) {
-            $this->saveProductImages($request->get('image'));
+        $this->update($data);
+
+        if (isset($data['image']) && count($data['image']) > 0 ) {
+            $this->saveProductImages($data['image']);
         }
 
-        if (count($request->get('category_id')) > 0) {
-            $this->categories()->sync($request->get('category_id'));
+        if (isset($data['category_id']) && count($data['category_id']) > 0) {
+            $this->categories()->sync($data['category_id']);
         }
 
-        $properties = $request->get('property');
+        $properties = isset($data['property']) ? $data['property'] : [];
 
 
-        if (null !== $properties && count($properties) > 0) {
+        if (count($properties) > 0) {
 
             foreach ($properties as $key => $property) {
 
@@ -209,12 +214,11 @@ class Product extends Model
             }
         }
 
+        $attributeWithOptions = isset($data['attribute']) ? $data['attribute'] : [];
 
+        if (count($attributeWithOptions) > 0) {
+            $selectedAttributes = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
 
-        $attributeWithOptions = $request->get('attribute');
-
-        if (null !== $attributeWithOptions && count($attributeWithOptions) > 0) {
-            $selectedAttributes = $request->get('attribute_selected');
             foreach ($selectedAttributes as $selectedAttribute) {
                 $this->attribute()->sync($selectedAttribute);
             }
@@ -258,6 +262,8 @@ class Product extends Model
                 ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
             }
         }
+
+        Event::fire(new ProductAfterSave($data));
 
         return $this;
     }
