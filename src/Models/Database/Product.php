@@ -219,12 +219,12 @@ class Product extends Model
 
         $attributeWithOptions = isset($data['attribute']) ? $data['attribute'] : [];
 
+
         if (count($attributeWithOptions) > 0) {
+
             $selectedAttributes = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
 
-            foreach ($selectedAttributes as $selectedAttribute) {
-                $this->attribute()->sync($selectedAttribute);
-            }
+            $this->attribute()->sync($selectedAttributes);
 
             $optionsArray = [];
 
@@ -239,6 +239,7 @@ class Product extends Model
                 $variationProductData['type'] = 'VARIABLE_PRODUCT';
                 $variationProductData['status'] = 0;
                 $variationProductData['qty'] = $this->qty;
+                $variationProductData['price'] = $this->price;
 
                 if (is_array($option)) {
                     foreach ($option as $attributeOptionId) {
@@ -254,7 +255,6 @@ class Product extends Model
                 $variationProductData['slug'] = str_slug($variationProductData['name']);
 
                 $variableProduct = self::create($variationProductData);
-                $variableProduct->prices()->create(['price' => $this->price]);
 
                 ProductAttributeIntegerValue::create([
                     'product_id' => $variableProduct->id,
@@ -280,6 +280,7 @@ class Product extends Model
      */
     public function saveCategoryFilters($data) {
 
+
         $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
 
         foreach ($categoryIds as $categoryId) {
@@ -297,9 +298,24 @@ class Product extends Model
                 }
             }
 
+            $attrbuteIds = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
+
+            foreach ($attrbuteIds as $attrbuteId) {
+
+                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($attrbuteId)->whereType('ATTRIBUTE')->first();
+                if(null === $filterModel) {
+                    CategoryFilter::create([
+                        'category_id' => $categoryId,
+                        'filter_id' => $attrbuteId,
+                        'type' => 'ATTRIBUTE'
+                    ]);
+                }
+            }
+
 
         }
     }
+
     public function combinations($arrays, $i = 0)
     {
         if (! isset($arrays[$i])) {
@@ -407,6 +423,15 @@ class Product extends Model
         }
 
         return $collection;
+    }
+    /**
+     * Get All Attribute for the Product.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAttributeOptions()
+    {
+        return Attribute::all()->pluck('name','id');
     }
 
     /**
@@ -587,7 +612,7 @@ class Product extends Model
      */
     public function attribute()
     {
-        return $this->hasMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class);
     }
 
     /**
