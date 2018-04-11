@@ -256,6 +256,11 @@ class Product extends Model
 
                 $variableProduct = self::create($variationProductData);
 
+                if (isset($data['category_id']) && count($data['category_id']) > 0) {
+                    $variableProduct->categories()->sync($data['category_id']);
+                }
+
+
                 ProductAttributeIntegerValue::create([
                     'product_id' => $variableProduct->id,
                     'attribute_id' => $attributeOptionModel->attribute->id,
