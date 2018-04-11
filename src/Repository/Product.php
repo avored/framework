@@ -28,7 +28,6 @@ class Product extends AbstractRepository
                 FROM {$prefix}products as p 
                 INNER JOIN {$prefix}category_product as cp on p.id = cp.product_id ";
 
-
         foreach ($filters as $type => $filterArray) {
             if('property' == $type) {
                 foreach ($filterArray as $identifier => $value) {
@@ -41,9 +40,18 @@ class Product extends AbstractRepository
 
                 }
             }
+
+            if('attribute' == $type) {
+
+
+                foreach ($filterArray as $identifier => $value) {
+                    $attribute = $this->findAttributeByIdentifier($identifier);
+                        $sql .= "INNER JOIN {$prefix}product_attribute_integer_values as paiv ON p.id = paiv.product_id ";
+                }
+            }
         }
 
-        $sql .= "WHERE p.status=1 AND cp.category_id = ? ";
+        $sql .= "WHERE cp.category_id = ? ";
 
         foreach ($filters as $type => $filterArray) {
             if('property' == $type) {
@@ -59,12 +67,31 @@ class Product extends AbstractRepository
             }
         }
 
+        foreach ($filters as $type => $filterArray) {
+            if('attribute' == $type) {
+                foreach ($filterArray as $identifier => $value) {
+                    $attribute = $this->findAttributeByIdentifier($identifier);
+
+                    $sql .= "AND paiv.attribute_id = {$attribute->id} AND paiv.value={$value}";
+
+
+                }
+            }
+        }
+
         $products = DB::select($sql, [$categoryId]);
 
         $collect = Collection::make([]);
 
         foreach ($products as $productArray) {
-            $collect->push($this->findProductById($productArray->id));
+
+            $product = $this->findProductById($productArray->id);
+
+            if($product->type == "VARIABLE_PRODUCT") {
+                $collect->push(($product->getVariableMainProduct()));
+            } else {
+                $collect->push($this->findProductById($productArray->id));
+            }
         }
 
         return $collect;
@@ -200,6 +227,18 @@ class Product extends AbstractRepository
     public function findAttributeById($id):Attribute
     {
         return $this->attributeModel()->find($id);
+    }
+
+
+    /**
+     * Find Attribute.
+     *
+     * @param int $identifier
+     * @return \AvoRed\Framework\Models\Database\Attribute $attribute
+     */
+    public function findAttributeByIdentifier($identifier):Attribute
+    {
+        return $this->attributeModel()->whereIdentifier($identifier)->first();
     }
 
     /**

@@ -63,6 +63,10 @@ class Category extends Model
         return $data;
     }
 
+    public function categoryFilter() {
+        return $this->hasMany(CategoryFilter::class);
+    }
+
     public function getChilds($id)
     {
         return $this->where('parent_id', '=', $id)->get();
