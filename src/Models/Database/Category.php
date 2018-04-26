@@ -43,7 +43,7 @@ class Category extends Model
     {
         $data = [];
 
-        $rootCategories = $this->where('parent_id', '=', null)->orWhere('parent_id', '=', '0')->get();
+        $rootCategories = $this->where('parent_id', '=', null)->orWhere('parent_id', '=', 0)->get();
         $data = $this->list_categories($rootCategories);
 
         return $data;
