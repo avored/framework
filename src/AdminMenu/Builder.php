@@ -45,60 +45,6 @@ class Builder
     }
 
     /**
-     * Register an Admin Menu.
-     *
-     * @param string $menuKey
-     * @param string $adminMenu
-     * @return void
-     */
-    public function registerMenu($menuKey, $adminMenu)
-    {
-        if ($this->adminMenu->has($menuKey)) {
-
-            /** @var \AvoRed\Framework\AdminMenu\AdminMenu $adminMenuObj */
-            $adminMenuObj = $this->adminMenu->get($menuKey);
-
-            foreach ($adminMenu as $key => $menuArray) {
-                if (isset($menuArray['submenu'])) {
-                    $menus = $menuArray['submenu'];
-                    foreach ($menus as $subKey => $subArray) {
-                        $subObj = new AdminMenu;
-                        $subObj->key($subKey)
-                                ->label($subArray['label'])
-                                ->route($subArray['route']);
-
-                        $adminMenuObj->subMenu($subKey, $subObj);
-                    }
-                }
-            }
-
-            $this->adminMenu->put($menuKey, $adminMenuObj);
-        } else {
-            $adminMenuObj = new AdminMenu;
-            foreach ($adminMenu as $key => $menuArray) {
-                $flag = true;
-
-                $adminMenuObj->key($key);
-
-                if (isset($menuArray['label'])) {
-                    $adminMenuObj->label($menuArray['label']);
-                } else {
-                    $flag = false;
-                }
-                if (isset($menuArray['route'])) {
-                    $adminMenuObj->route($menuArray['route']);
-                } else {
-                    $flag = false;
-                }
-            }
-
-            if (false !== $flag) {
-                $this->adminMenu->put($menuKey, $adminMenuObj);
-            }
-        }
-    }
-
-    /**
      * Return all available Menu in Admin Menu.
      *
      *

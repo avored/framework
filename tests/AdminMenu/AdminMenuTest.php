@@ -55,6 +55,40 @@ class AdminMenuTest extends TestCase
 
         $this->assertEquals($menu->route(), 'admin.test.route.name');
     }
+
+    /**
+     * Test to check if Builder can set the AdminMenu Label
+     *
+     * @return void
+     */
+    public function test_admin_menu_icon()
+    {
+        $builder = new Builder();
+        $menu = $builder->add('test')->icon('fa fa-book');
+
+        $adminMenu = Mockery::mock(AdminMenu::class);
+        $adminMenu->shouldReceive('icon')->with('fa fa-book')->andReturnSelf();
+
+        $this->assertEquals($menu->icon(), 'fa fa-book');
+    }
+
+    /**
+     * Test to check if Builder can set the AdminMenu Label
+     *
+     * @return void
+     */
+    public function test_admin_menu_submenu()
+    {
+
+        $builder = new Builder();
+        $menu = $builder->add('test')->subMenu('test', 'MENUOBJECT');
+
+        $adminMenu = Mockery::mock(AdminMenu::class);
+        $adminMenu->shouldReceive('subMenu')->with('test', 'MENUOBJECT')->andReturnSelf();
+
+
+        $this->assertEquals($menu->subMenu('test'), 'MENUOBJECT');
+    }
 }
 
 

@@ -68,6 +68,9 @@ class InstallCommand extends Command
             $this->call('migrate');
             $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
 
+            $this->call('vendor:publish', ['--tag' => 'public']);
+            // --tag=public --force
+
         } else {
             $this->call('key:generate');
             $this->call('migrate');
@@ -124,6 +127,7 @@ class InstallCommand extends Command
             'configuration_key' => 'avored_tax_class_percentage_of_tax',
             'configuration_value' => 15
         ]);
+
 
 
         $this->info('AvoRed Install Successfully!');

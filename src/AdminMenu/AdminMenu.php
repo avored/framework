@@ -103,37 +103,13 @@ class AdminMenu implements AdminMenuContracts
      */
     public function subMenu($key = null, $menuItem = null)
     {
-        if (null !== $key) {
-            $this->subMenu[$key] = $menuItem;
-
-            return $this;
+        if(null === $menuItem) {
+            return $this->subMenu;
         }
 
-        return $this->subMenu;
-    }
+        $this->subMenu[$key] = $menuItem;
 
-    /**
-     * Get Dropdown Class none.
-     *
-     * @return string
-     */
-    public function menuClass():string
-    {
-        $currentRouteName = Route::currentRouteName();
-        $found = false;
+        return $this;
 
-        if (count($this->subMenu()) > 0) {
-            foreach ($this->subMenu() as $menu) {
-                if ($menu->route() == $currentRouteName) {
-                    $found = true;
-                }
-            }
-        }
-
-        if (false === $found) {
-            return 'd-none';
-        } else {
-            return '';
-        }
     }
 }
