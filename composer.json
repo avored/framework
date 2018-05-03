@@ -44,7 +44,22 @@
     "laravel": {
       "providers": [
         "AvoRed\\Framework\\Provider"
-      ]
+      ],
+      "aliases": {
+        "AdminMenu": "AvoRed\\Framework\\AdminMenu\\Facade",
+        "AdminConfiguration": "AvoRed\\Framework\\AdminConfiguration\\Facade",
+        "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Facade",
+        "Cart": "AvoRed\\Framework\\Cart\\Facade",
+        "DataGrid": "AvoRed\\Framework\\DataGrid\\Facade",
+        "Image": "AvoRed\\Framework\\Image\\Facade",
+        "Menu": "AvoRed\\Framework\\Menu\\Facade",
+        "Payment": "AvoRed\\Framework\\Payment\\Facade",
+        "Permission": "AvoRed\\Framework\\Permission\\Facade",
+        "Shipping": "AvoRed\\Framework\\Shipping\\Facade",
+        "Tabs": "AvoRed\\Framework\\Tabs\\Facade",
+        "Theme": "AvoRed\\Framework\\Theme\\Facade",
+        "Widget": "AvoRed\\Framework\\Widget\\Facade"
+      }
     }
   }
 }

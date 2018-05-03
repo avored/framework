@@ -284,6 +284,13 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });
+
+        Schema::create('configurations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('configuration_key')->nullable()->default(null);
+            $table->string('configuration_value',999)->nullable()->default(null);
+            $table->timestamps();
+        });
     }
 
     /**
