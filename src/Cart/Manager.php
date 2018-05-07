@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Cart;
 
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
-use AvoRed\Framework\Repository\Product as ProductRepository;
+use AvoRed\Framework\Models\Database\Product;
 
 class Manager
 {
@@ -23,7 +23,6 @@ class Manager
     public function __construct(SessionManager $manager)
     {
         $this->session = $manager;
-        $this->productRepository = new ProductRepository();
     }
 
     /**
@@ -37,7 +36,7 @@ class Manager
     {
         $cartProducts = $this->getSession();
 
-        $product = $this->productRepository->getBySlug($slug);
+        $product = Product::whereSlug($slug)->first();
 
         $cartProduct = new Product();
 
