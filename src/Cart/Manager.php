@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Cart;
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Models\Database\Product;
+use AvoRed\Framework\Cart\Product as CartFacadeProduct;
 
 class Manager
 {
@@ -38,7 +39,7 @@ class Manager
 
         $product = Product::whereSlug($slug)->first();
 
-        $cartProduct = new Product();
+        $cartProduct = new CartFacadeProduct();
 
         $cartProduct->name($product->name)
                     ->qty($qty)
@@ -50,7 +51,7 @@ class Manager
         $cartProducts->put($slug, $cartProduct);
 
         $this->session->put($this->getSessionKey(), $cartProducts);
-
+        
         return $this;
     }
 
