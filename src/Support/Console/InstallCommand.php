@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Support\Console;
 
 use AvoRed\Ecommerce\Models\Database\Role;
 use AvoRed\Ecommerce\Models\Database\AdminUser;
-use AvoRed\Ecommerce\Models\Database\Configuration;
+use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Theme\Facade as Theme;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
