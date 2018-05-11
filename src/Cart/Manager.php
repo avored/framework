@@ -29,7 +29,7 @@ class Manager
     /**
      * Add Product into cart using Slug and Qty.
      *
-     * @param stirng  $slug
+     * @param string  $slug
      * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
@@ -58,7 +58,7 @@ class Manager
     /**
      * Update the Cart Product Qty by Slug.
      *
-     * @param stirng  $slug
+     * @param string  $slug
      * @param int $qty
      * @return \AvoRed\Framework\Cart\Manager $this
      */
@@ -80,7 +80,7 @@ class Manager
     /**
      * Update the Cart Product Qty by Slug.
      *
-     * @param stirng    $slug
+     * @param string    $slug
      * @param float     $amount
      * @return \AvoRed\Framework\Cart\Manager $this
      */

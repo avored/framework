@@ -84,10 +84,11 @@ class AdminMenuTest extends TestCase
         $menu = $builder->add('test')->subMenu('test', 'MENUOBJECT');
 
         $adminMenu = Mockery::mock(AdminMenu::class);
-        $adminMenu->shouldReceive('subMenu')->with('test', 'MENUOBJECT')->andReturnSelf();
+        $adminMenu->shouldReceive('subMenu')->with('test','MENUOBJECT')->andReturnSelf();
 
 
-        $this->assertEquals($menu->subMenu('test'), 'MENUOBJECT');
+        $subMenu = $menu->subMenu();
+        $this->assertEquals($subMenu, ['test' => 'MENUOBJECT']);
     }
 }
 

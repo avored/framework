@@ -25,7 +25,7 @@ class TabsMaker
      * Add Tab to Tabs Collection.
      *
      * @var string
-     * @return \AvoRed\Framework\Tab
+     * @return $this
      */
     public function add($key, $tab)
     {
@@ -38,7 +38,7 @@ class TabsMaker
      * Get Tab from Tabs Collection.
      *
      * @var string
-     * @return \AvoRed\Framework\Tab
+     * @return \AvoRed\Framework\Tabs\Tab
      */
     public function get($key)
     {

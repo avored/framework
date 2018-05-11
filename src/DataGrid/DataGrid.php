@@ -73,7 +73,7 @@ class DataGrid
      *
      * @param string $identifier
      * @param array $options
-     * @param callback $callback
+     * @param callable $callback
      * @return \AvoRed\Framework\DataGrid\DataGrid $this;
      */
     public function linkColumn($identifier, $options, $callback):self

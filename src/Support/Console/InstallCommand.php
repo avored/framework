@@ -7,11 +7,8 @@ use AvoRed\Ecommerce\Models\Database\AdminUser;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Theme\Facade as Theme;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
 use Illuminate\Filesystem\Filesystem;
-use AvoRed\Framework\Modules\Facade as Module;
 use Laravel\Passport\ClientRepository;
-use Symfony\Component\Console\Input\InputArgument;
 
 class InstallCommand extends Command
 {

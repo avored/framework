@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-use AvoRed\Framework\Models\Database\Product;
 
 class Category extends Model
 {

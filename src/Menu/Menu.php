@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Menu;
 
-use Illuminate\Support\Facades\Route;
 use AvoRed\Framework\Menu\Contracts\Menu as MenuContracts;
 
 class Menu implements MenuContracts

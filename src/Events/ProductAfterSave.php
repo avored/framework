@@ -6,7 +6,6 @@ use Illuminate\Queue\SerializesModels;
 use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use AvoRed\Ecommerce\Http\Requests\ProductRequest;
 
 class ProductAfterSave
 {
@@ -15,7 +14,7 @@ class ProductAfterSave
     /**
      * Product Model Object
      *
-     * @var \AvoRed\Ecommerce\Models\Database\Product|Product $product
+     * @var \AvoRed\Framework\Models\Database\Product|Product $product
      */
     public $product = null;
 
@@ -29,8 +28,8 @@ class ProductAfterSave
     /**
      * Create a new event instance.
      *
-     * @param \AvoRed\Ecommerce\Models\Database\Product $product
-     * @param data $data
+     * @param \AvoRed\Framework\Models\Database\Product $product
+     * @param array $data
      * @return void
      */
     public function __construct(Product $product, array $data)

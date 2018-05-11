@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\AdminMenu;
 
-use Illuminate\Support\Facades\Route;
 use AvoRed\Framework\AdminMenu\Contracts\AdminMenu as AdminMenuContracts;
 
 class AdminMenu implements AdminMenuContracts
