@@ -11,7 +11,7 @@ class Manager
      *
      * @var \Illuminate\Support\Collection
      */
-    protected $permissions;
+    protected $configurations;
 
     public function __construct()
     {
@@ -62,8 +62,6 @@ class Manager
      */
     public function set($key, $configurationCollection)
     {
-
-        //dd($configurationCollection);
         $this->configurations->put($key, $configurationCollection);
 
         return $this;
