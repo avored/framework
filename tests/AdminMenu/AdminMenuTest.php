@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Tests\AdminMenu;
 
-use PHPUnit\Framework\TestCase;
+use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\AdminMenu\Builder;
 
-class AdminMenuTest extends TestCase
+class AdminMenuTest extends BaseTestCase
 {
     /**
      * Test to check if Builder can set the AdminMenu Key

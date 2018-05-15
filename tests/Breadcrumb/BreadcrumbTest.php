@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Tests\Breadcrumb;
 
-use PHPUnit\Framework\TestCase;
+use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\Breadcrumb\Builder;
 
-class BreadcrumbTest extends TestCase
+class BreadcrumbTest extends BaseTestCase
 {
     /**
      * Test to check if Builder can set the Breadcrumb Route

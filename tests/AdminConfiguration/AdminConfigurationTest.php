@@ -2,11 +2,11 @@
 
 namespace AvoRed\Framework\Tests\AdminConfiguration;
 
-use PHPUnit\Framework\TestCase;
+use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\AdminConfiguration\AdminConfigurationGroup;
 use AvoRed\Framework\AdminConfiguration\AdminConfiguration;
 
-class AdminConfigurationTest extends TestCase
+class AdminConfigurationTest extends BaseTestCase
 {
     /**
      * Test to check if Builder can set the Admin Configuration Group Key
