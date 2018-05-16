@@ -61,7 +61,11 @@ class Manager
      */
     public function canAddToCart($slug, $qty) {
 
-        $checkQty = $qty + 0 ; // replace 0 with existing cart qty.
+        $cartProducts = $this->getSession();
+        $cartProduct = $cartProducts->get($slug);
+        $cartQty = $cartProduct ? $cartProduct->qty() : 0;
+
+        $checkQty = $qty +  $cartQty;
         $product = Product::whereSlug($slug)->first();
 
         $productQty = $product->qty;
