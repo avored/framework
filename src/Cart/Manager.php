@@ -36,11 +36,8 @@ class Manager
     public function add($slug, $qty): Manager
     {
         $cartProducts = $this->getSession();
-
         $product = Product::whereSlug($slug)->first();
-
         $cartProduct = new CartFacadeProduct();
-
         $cartProduct->name($product->name)
                     ->qty($qty)
                     ->slug($slug)
@@ -51,10 +48,29 @@ class Manager
         $cartProducts->put($slug, $cartProduct);
 
         $this->session->put($this->getSessionKey(), $cartProducts);
-        
+
         return $this;
     }
 
+    /**
+     * Update the Cart Product Qty by Slug.
+     *
+     * @param string  $slug
+     * @param int $qty
+     * @return boolean
+     */
+    public function canAddToCart($slug, $qty) {
+
+        $checkQty = $qty + 0 ; // replace 0 with existing cart qty.
+        $product = Product::whereSlug($slug)->first();
+
+        $productQty = $product->qty;
+        if($productQty >= $checkQty) {
+            return true;
+        }
+
+        return false;
+    }
     /**
      * Update the Cart Product Qty by Slug.
      *

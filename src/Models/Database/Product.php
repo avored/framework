@@ -129,29 +129,6 @@ class Product extends Model
         return false;
     }
 
-    public function canAddtoCart($qty = 0)
-    {
-        $products = Session::get('cart');
-
-        if (null == $products) {
-            return true;
-        }
-
-        $productId = $this->attributes['id'];
-
-        $cartProduct = $products->get($productId);
-
-        $availableQty = $this->attributes['qty'];
-
-        $currentCartQty = (isset($cartProduct['qty'])) ? $cartProduct['qty'] : 0;
-
-        if ($availableQty - $currentCartQty - $qty < 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     /**
      * Save Product Images.
      *
