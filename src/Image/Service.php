@@ -27,31 +27,22 @@ class Service
      * @var \Symfony\Component\HttpFoundation\File\File
      * @var string $path
      * @var bool $keepAspectRatio
-     *
      * @return \AvoRed\Framework\Image\LocalFile
      */
     public function upload($image, $path = null, $makeDiffSizes = true)
     {
         $this->directory(public_path($path));
         $name = $image->getClientOriginalName();
-
         $image->move(public_path($path), $name);
-
         $relativePath = public_path($path.DIRECTORY_SEPARATOR.$name);
 
         if (true === $makeDiffSizes) {
             $sizes = config('image.sizes');
-
             foreach ($sizes as $sizeName => $widthHeight) {
                 list($width, $height) = $widthHeight;
-
                 $this->make($relativePath);
-
-                // *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
                 $this->resizeImage($width, $height, 'crop');
-
                 $imagePath = public_path($path).DIRECTORY_SEPARATOR.$sizeName.'-'.$name;
-                // *** 3) Save image
                 $this->saveImage($imagePath, 100);
             }
         }
@@ -85,6 +76,11 @@ class Service
     public function destroy()
     {
         dd($this);
+
+        $sizes = config('image.sizes');
+        foreach ($sizes as $sizeName => $widthHeight) {
+            # code...
+        }
     }
 
     public function make($image)
@@ -135,7 +131,18 @@ class Service
 
         // *** Resample - create image canvas of x, y size
         $this->imageResized = imagecreatetruecolor($optimalWidth, $optimalHeight);
-        imagecopyresampled($this->imageResized, $this->image, 0, 0, 0, 0, $optimalWidth, $optimalHeight, $this->width, $this->height);
+        imagecopyresampled(
+            $this->imageResized,
+            $this->image,
+            0,
+            0,
+            0,
+            0,
+            $optimalWidth,
+            $optimalHeight,
+            $this->width,
+            $this->height
+        );
 
         // *** if option is 'crop', then crop too
         if ($option == 'crop') {
@@ -242,7 +249,18 @@ class Service
 
         // *** Now crop from center to exact requested size
         $this->imageResized = imagecreatetruecolor($newWidth, $newHeight);
-        imagecopyresampled($this->imageResized, $crop, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
+        imagecopyresampled(
+            $this->imageResized,
+            $crop,
+            0,
+            0,
+            $cropStartX,
+            $cropStartY,
+            $newWidth,
+            $newHeight,
+            $newWidth,
+            $newHeight
+        );
     }
 
     public function saveImage($savePath, $imageQuality = '100')

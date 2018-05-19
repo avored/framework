@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -48,7 +47,6 @@ class Product extends Model
     public function addAttributeFilter($attributeId, $value)
     {
         $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-
             foreach ($this->getProductAllAttributes() as $productAttribute) {
                 if ($productAttribute->attribute_id == $attributeId && $productAttribute->value == $value) {
                     return $product;
@@ -62,9 +60,7 @@ class Product extends Model
     public function addPropertyFilter($attributeId, $value)
     {
         $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-
             foreach ($product->getProductAllProperties() as $productAttribute) {
-
                 if ($productAttribute->property_id == $attributeId && $productAttribute->value == $value) {
                     return $product;
                 }
@@ -74,9 +70,8 @@ class Product extends Model
         return $this->_collection;
     }
 
-    public function productPaginate($products , $perPage = 10)
+    public function productPaginate($products, $perPage = 10)
     {
-
         $request    = request();
         $page       = request('page');
         $offset     = ($page * $perPage) - $perPage;
@@ -168,7 +163,7 @@ class Product extends Model
 
         $this->update($data);
 
-        if (isset($data['image']) && count($data['image']) > 0 ) {
+        if (isset($data['image']) && count($data['image']) > 0) {
             $this->saveProductImages($data['image']);
         }
 
@@ -183,10 +178,7 @@ class Product extends Model
 
 
         if (count($properties) > 0) {
-
             foreach ($properties as $key => $property) {
-
-
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
                     $propertyModel->saveProperty($this->id, $propertyValue);
@@ -198,7 +190,6 @@ class Product extends Model
 
 
         if (count($attributeWithOptions) > 0) {
-
             $selectedAttributes = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
 
             $this->attribute()->sync($selectedAttributes);
@@ -248,7 +239,7 @@ class Product extends Model
             }
         }
 
-        Event::fire(new ProductAfterSave($this,$data));
+        Event::fire(new ProductAfterSave($this, $data));
 
         return $this;
     }
@@ -260,18 +251,16 @@ class Product extends Model
      * @param array $data
      * @return void
      */
-    public function saveCategoryFilters($data) {
-
-
+    public function saveCategoryFilters($data)
+    {
         $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
 
         foreach ($categoryIds as $categoryId) {
             $propertyIds = isset($data['product-property']) ? $data['product-property'] : [];
 
             foreach ($propertyIds as $propertyId) {
-
                 $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($propertyId)->whereType('PROPERTY')->first();
-                if(null === $filterModel) {
+                if (null === $filterModel) {
                     CategoryFilter::create([
                         'category_id' => $categoryId,
                         'filter_id' => $propertyId,
@@ -283,9 +272,8 @@ class Product extends Model
             $attrbuteIds = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
 
             foreach ($attrbuteIds as $attrbuteId) {
-
                 $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($attrbuteId)->whereType('ATTRIBUTE')->first();
-                if(null === $filterModel) {
+                if (null === $filterModel) {
                     CategoryFilter::create([
                         'category_id' => $categoryId,
                         'filter_id' => $attrbuteId,
@@ -293,8 +281,6 @@ class Product extends Model
                     ]);
                 }
             }
-
-
         }
     }
 
@@ -350,15 +336,14 @@ class Product extends Model
         }
     }
 
-    public function getPropertiesAll() {
-
+    public function getPropertiesAll()
+    {
         $properties     = Property::whereUseForAllProducts(1)->get();
         $collections    = $this->getProductAllProperties();
         $existingIds    = $collections->pluck('property_id');
 
         foreach ($properties as $property) {
-
-            if(!in_array($property->id, array_values($existingIds->toArray()))) {
+            if (!in_array($property->id, array_values($existingIds->toArray()))) {
                 $collections->push($property);
             }
         }
@@ -413,7 +398,7 @@ class Product extends Model
      */
     public function getAttributeOptions()
     {
-        return Attribute::all()->pluck('name','id');
+        return Attribute::all()->pluck('name', 'id');
     }
 
     /**
@@ -485,8 +470,9 @@ class Product extends Model
     }
 
 
-    public function getVariableMainProduct($variationId = null) {
-        if(null === $variationId) {
+    public function getVariableMainProduct($variationId = null)
+    {
+        if (null === $variationId) {
             $variationId = $this->attributes['id'];
         }
 

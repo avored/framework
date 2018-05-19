@@ -31,19 +31,27 @@ class Manager
      *
      * @param string  $slug
      * @param int $qty
+     * @param array $attributes
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function add($slug, $qty): Manager
+    public function add($slug, $qty, $attribute = []): Manager
     {
         $cartProducts = $this->getSession();
-        $product = Product::whereSlug($slug)->first();
+        $product    = Product::whereSlug($slug)->first();
+        $price      = $product->price;
+
+        foreach ($attribute as $attributeId => $variationId) {
+            $variableProduct    = Product::find($variationId);
+            $price              = $variableProduct->price;
+        }
+
         $cartProduct = new CartFacadeProduct();
         $cartProduct->name($product->name)
                     ->qty($qty)
                     ->slug($slug)
-                    ->price($product->price)
+                    ->price($price)
                     ->image($product->image)
-                    ->lineTotal($qty * $product->price);
+                    ->lineTotal($qty * $price);
 
         $cartProducts->put($slug, $cartProduct);
 
@@ -57,10 +65,11 @@ class Manager
      *
      * @param string  $slug
      * @param int $qty
+     * @param array $attribute
      * @return boolean
      */
-    public function canAddToCart($slug, $qty) {
-
+    public function canAddToCart($slug, $qty, $attribute = [])
+    {
         $cartProducts = $this->getSession();
         $cartProduct = $cartProducts->get($slug);
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
@@ -69,7 +78,7 @@ class Manager
         $product = Product::whereSlug($slug)->first();
 
         $productQty = $product->qty;
-        if($productQty >= $checkQty) {
+        if ($productQty >= $checkQty) {
             return true;
         }
 
@@ -153,12 +162,11 @@ class Manager
      */
     public function hasTax($flag = null)
     {
-
         if (null === $flag) {
             return $this->session->get('hasTax');
         }
 
-        $this->session->put('hasTax',$flag);
+        $this->session->put('hasTax', $flag);
 
         return $this;
     }
