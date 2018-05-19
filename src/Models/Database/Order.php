@@ -3,8 +3,6 @@
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Database\Eloquent\Model;
-use AvoRed\Ecommerce\Models\Database\User;
-use AvoRed\Ecommerce\Models\Database\Address;
 
 class Order extends Model
 {
@@ -29,7 +27,8 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        $userModel = config('avored-framework.model.user');
+        return $this->belongsTo($userModel);
     }
 
     public function orderStatus()
@@ -39,7 +38,9 @@ class Order extends Model
 
     public function getShippingAddressAttribute()
     {
-        $shippingAddress = Address::findorfail($this->attributes['shipping_address_id']);
+        $addressClass = config('avored-framework.model.address');
+        $addressModel = new $addressClass;
+        $shippingAddress = $addressModel->findorfail($this->attributes['shipping_address_id']);
 
         return $shippingAddress;
     }
@@ -51,7 +52,9 @@ class Order extends Model
 
     public function getBillingAddressAttribute()
     {
-        $address = Address::findorfail($this->attributes['billing_address_id']);
+        $addressClass   = config('avored-framework.model.address');
+        $addressModel   = new $addressClass;
+        $address        = $addressModel->findorfail($this->attributes['billing_address_id']);
 
         return $address;
     }

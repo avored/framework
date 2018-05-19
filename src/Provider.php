@@ -66,7 +66,7 @@ class Provider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'avored-framework');
 
-        //At this stage we don't use these and use avored/ecommerce/database/migration file only
+        //At this stage we don't use these and use avored/framework/database/migration file only
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
