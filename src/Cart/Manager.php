@@ -2,10 +2,12 @@
 
 namespace AvoRed\Framework\Cart;
 
-use Illuminate\Support\Collection;
-use Illuminate\Session\SessionManager;
-use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Cart\Product as CartFacadeProduct;
+use AvoRed\Framework\Models\Database\Attribute;
+use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
+use AvoRed\Framework\Models\Database\Product;
+use Illuminate\Session\SessionManager;
+use Illuminate\Support\Collection;
 
 class Manager
 {
@@ -39,10 +41,28 @@ class Manager
         $cartProducts = $this->getSession();
         $product    = Product::whereSlug($slug)->first();
         $price      = $product->price;
+        $attributes = null;
 
         foreach ($attribute as $attributeId => $variationId) {
             $variableProduct    = Product::find($variationId);
+            $attributeModel     = Attribute::find($attributeId);
+
+            $productAttributeIntValModel = ProductAttributeIntegerValue::
+                                                    whereAttributeId($attributeId)
+                                                    ->whereProductId($variableProduct->id)
+                                                    ->first();
+            $optionModel = $attributeModel
+                                ->AttributeDropdownOptions()
+                                ->whereId($productAttributeIntValModel->value)
+                                ->first();
+
+
             $price              = $variableProduct->price;
+            $attributes[] = [
+                            'attribute_id' => $attributeId,
+                            'variation_id' => $variationId,
+                            'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
+                        ];
         }
 
         $cartProduct = new CartFacadeProduct();
@@ -51,7 +71,8 @@ class Manager
                     ->slug($slug)
                     ->price($price)
                     ->image($product->image)
-                    ->lineTotal($qty * $price);
+                    ->lineTotal($qty * $price)
+                    ->attributes($attributes);
 
         $cartProducts->put($slug, $cartProduct);
 

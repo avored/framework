@@ -42,6 +42,13 @@ class Product implements CartContracts
     protected $tax;
 
     /**
+    * Cart Product Attributes.
+    *
+    * @var null|array
+    */
+    protected $attributes;
+
+    /**
      * Cart Product Image.
      *
      * @var null|string
@@ -195,8 +202,14 @@ class Product implements CartContracts
      *
      * @return bool
      */
-    public function hasAttributes()
+    public function attributes($attributes = null)
     {
-        return false;
+        if (null === $attributes) {
+            return $this->attributes;
+        }
+
+        $this->attributes = $attributes;
+
+        return $this;
     }
 }
