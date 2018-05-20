@@ -43,7 +43,6 @@ class InstallCommand extends Command
     public function __construct(Filesystem $files)
     {
         parent::__construct();
-
         $this->files = $files;
     }
 
@@ -54,20 +53,17 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-
         $this->dropAllTables();
 
         $answer = $this->ask("Do you want to Install Dummy Data? (y/n)", 'yes');
 
-        if($answer == "y" || $answer == "yes") {
-
+        if ($answer == "y" || $answer == "yes") {
             $this->call('key:generate');
             $this->call('migrate');
             $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
 
             $this->call('vendor:publish', ['--tag' => 'public']);
-            // --tag=public --force
-
+        // --tag=public --force
         } else {
             $this->call('key:generate');
             $this->call('migrate');
@@ -97,7 +93,8 @@ class InstallCommand extends Command
             'role_id'       => $role->id,
         ]);
 
-        $this->call('passport:install',['--force' => true]);
+        $this->call('passport:install', ['--force' => true]);
+        $this->call('passport:keys');
 
         $request = $this->laravel->make('request');
         $clientRepository = new ClientRepository();
@@ -119,14 +116,12 @@ class InstallCommand extends Command
         Configuration::create(
             ['configuration_key' => 'avored_catalog_cart_page_display_taxamount',
                 'configuration_value' => 'yes'
-            ]);
+            ]
+        );
         Configuration::create([
             'configuration_key' => 'avored_tax_class_percentage_of_tax',
             'configuration_value' => 15
         ]);
-
-
-
         $this->info('AvoRed Install Successfully!');
     }
 
@@ -140,7 +135,5 @@ class InstallCommand extends Command
         $this->laravel['db']->connection()
             ->getSchemaBuilder()
             ->dropAllTables();
-
     }
-
 }

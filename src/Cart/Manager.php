@@ -36,33 +36,35 @@ class Manager
      * @param array $attributes
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function add($slug, $qty, $attribute = []): Manager
+    public function add($slug, $qty, $attribute = null): Manager
     {
         $cartProducts = $this->getSession();
         $product    = Product::whereSlug($slug)->first();
         $price      = $product->price;
         $attributes = null;
 
-        foreach ($attribute as $attributeId => $variationId) {
-            $variableProduct    = Product::find($variationId);
-            $attributeModel     = Attribute::find($attributeId);
+        if (null !== $attribute && count($attribute)) {
+            foreach ($attribute as $attributeId => $variationId) {
+                $variableProduct    = Product::find($variationId);
+                $attributeModel     = Attribute::find($attributeId);
 
-            $productAttributeIntValModel = ProductAttributeIntegerValue::
-                                                    whereAttributeId($attributeId)
-                                                    ->whereProductId($variableProduct->id)
-                                                    ->first();
-            $optionModel = $attributeModel
-                                ->AttributeDropdownOptions()
-                                ->whereId($productAttributeIntValModel->value)
-                                ->first();
+                $productAttributeIntValModel = ProductAttributeIntegerValue::
+                                                        whereAttributeId($attributeId)
+                                                        ->whereProductId($variableProduct->id)
+                                                        ->first();
+                $optionModel = $attributeModel
+                                    ->AttributeDropdownOptions()
+                                    ->whereId($productAttributeIntValModel->value)
+                                    ->first();
 
 
-            $price              = $variableProduct->price;
-            $attributes[] = [
-                            'attribute_id' => $attributeId,
-                            'variation_id' => $variationId,
-                            'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
-                        ];
+                $price              = $variableProduct->price;
+                $attributes[] = [
+                                'attribute_id' => $attributeId,
+                                'variation_id' => $variationId,
+                                'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
+                            ];
+            }
         }
 
         $cartProduct = new CartFacadeProduct();
