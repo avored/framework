@@ -19,9 +19,13 @@ class Category extends Model
     *
     * @param array   $filters
     */
-    public function getCategoryProductWithFilter($filters = []) {
+    public function getCategoryProductWithFilter($filters = []) 
+    {
 
         $prefix = config('database.connections.mysql.prefix');
+
+        $propetryInnerJoinFlag  = false;
+        $attributeInnerJoinFlag = false;
 
         $sql = "Select p.id
                 FROM {$prefix}products as p 
@@ -30,22 +34,25 @@ class Category extends Model
         foreach ($filters as $type => $filterArray) {
             if('property' == $type) {
                 foreach ($filterArray as $identifier => $value) {
-                    $property = $this->findPropertyByIdentifier($identifier);
-
+                    $property = Property::whereIdentifier($identifier)->first();
+                    
                     if("INTEGER" == $property->data_type) {
-
-                        $sql .= "INNER JOIN {$prefix}product_property_integer_values as ppiv ON p.id = ppiv.product_id ";
+                        if (false === $propetryInnerJoinFlag) {
+                            $propetryInnerJoinFlag = true;
+                            $sql .= "INNER JOIN {$prefix}product_property_integer_values as ppiv ON p.id = ppiv.product_id ";
+                        }
                     }
-
                 }
             }
 
             if('attribute' == $type) {
-
-
                 foreach ($filterArray as $identifier => $value) {
-                    $attribute = $this->findAttributeByIdentifier($identifier);
-                    $sql .= "INNER JOIN {$prefix}product_attribute_integer_values as paiv ON p.id = paiv.product_id ";
+                    $attribute = Attribute::whereIdentifier($identifier)->first();
+                    if(false === $attributeInnerJoinFlag) {
+                        $attributeInnerJoinFlag = true;
+                        $sql .= "INNER JOIN {$prefix}product_attribute_integer_values as paiv ON p.id = paiv.product_id ";
+                    }
+                    
                 }
             }
         }
@@ -55,11 +62,10 @@ class Category extends Model
         foreach ($filters as $type => $filterArray) {
             if('property' == $type) {
                 foreach ($filterArray as $identifier => $value) {
-                    $property = $this->findPropertyByIdentifier($identifier);
+                    $property = Property::whereIdentifier($identifier)->first();
 
                     if("INTEGER" == $property->data_type) {
-
-                        $sql .= "AND ppiv.property_id = {$property->id} AND ppiv.value={$value}";
+                        $sql .= "AND ppiv.property_id = {$property->id} AND ppiv.value={$value} ";
                     }
 
                 }
@@ -69,17 +75,15 @@ class Category extends Model
         foreach ($filters as $type => $filterArray) {
             if('attribute' == $type) {
                 foreach ($filterArray as $identifier => $value) {
-                    $attribute = $this->findAttributeByIdentifier($identifier);
-
-                    $sql .= "AND paiv.attribute_id = {$attribute->id} AND paiv.value={$value}";
+                    $attribute = Attribute::whereIdentifier($identifier)->first();
+                    $sql .= "AND paiv.attribute_id = {$attribute->id} AND paiv.value={$value} ";
 
 
                 }
             }
         }
-
+        
         $products = DB::select($sql, [$this->id]);
-
         $collect = Collection::make([]);
 
         foreach ($products as $productArray) {
