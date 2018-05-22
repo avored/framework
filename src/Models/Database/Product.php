@@ -13,6 +13,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class Product extends Model
 {
+    public static $VARIATION_TYPE = 'VARIATION';
+
+
     protected $fillable = ['type', 'name', 'slug', 'sku',
         'description', 'status', 'in_stock', 'track_stock', 'price',
         'qty', 'is_taxable', 'meta_title', 'meta_description',
@@ -23,7 +26,6 @@ class Product extends Model
      * @var \Illuminate\Database\Eloquent\Collection
      */
     protected $_collection = null;
-
 
     public function setCollection($products)
     {
@@ -72,10 +74,9 @@ class Product extends Model
 
     public function productPaginate($products, $perPage = 10)
     {
-        $request    = request();
-        $page       = request('page');
-        $offset     = ($page * $perPage) - $perPage;
-
+        $request = request();
+        $page = request('page');
+        $offset = ($page * $perPage) - $perPage;
 
         return new LengthAwarePaginator(
             $products->slice($offset, $perPage), // Only grab the items we need
@@ -103,7 +104,6 @@ class Product extends Model
 
         // registering a callback to be executed upon the creation of an activity AR
         static::creating(function ($model) {
-
             // produce a slug based on the activity title
             $slug = Str::slug($model->name);
 
@@ -117,7 +117,7 @@ class Product extends Model
 
     public function hasVariation()
     {
-        if ($this->type == 'VARIATION') {
+        if ($this->type ==  self::$VARIATION_TYPE) {
             return true;
         }
 
@@ -127,27 +127,30 @@ class Product extends Model
     /**
      * Save Product Images.
      *
-     * @param array $images
+     * @param array $$data
      * @return \AvoRed\Framework\Models\Database\Product $this
      */
-    public function saveProductImages(array $images):self
+    public function saveProductImages(array $data):self
     {
-        $exitingIds = $this->images()->get()->pluck('id')->toArray();
-        foreach ($images as $key => $data) {
-            if (is_int($key)) {
-                if (($findKey = array_search($key, $exitingIds)) !== false) {
-                    $productImage = ProductImage::findorfail($key);
-                    $productImage->update($data);
-                    unset($exitingIds[$findKey]);
-                }
-                continue;
-            }
-            ProductImage::create($data + ['product_id' => $this->id]);
-        }
-        if (count($exitingIds) > 0) {
-            ProductImage::destroy($exitingIds);
-        }
+        if (isset($data['image']) && count($data['image']) > 0) {
 
+            $exitingIds = $this->images()->get()->pluck('id')->toArray();
+            foreach ($images as $key => $data) {
+                if (is_int($key)) {
+                    if (($findKey = array_search($key, $exitingIds)) !== false) {
+                        $productImage = ProductImage::findorfail($key);
+                        $productImage->update($data);
+                        unset($exitingIds[$findKey]);
+                    }
+                    continue;
+                }
+                ProductImage::create($data + ['product_id' => $this->id]);
+            }
+            if (count($exitingIds) > 0) {
+                ProductImage::destroy($exitingIds);
+            }
+
+        }
         return $this;
     }
 
@@ -162,20 +165,37 @@ class Product extends Model
         Event::fire(new ProductBeforeSave($data));
 
         $this->update($data);
+        $this->saveProductImages($data);
+        $this->saveCategoryFilters($data);
+        $this->saveProductCategories($data);
+        $this->saveProductProperties($data);
+        $this->saveProductAttributes($data);  
 
-        if (isset($data['image']) && count($data['image']) > 0) {
-            $this->saveProductImages($data['image']);
-        }
+        Event::fire(new ProductAfterSave($this, $data));
 
+        return $this;
+    }
+    /**
+     * Save Product Categories
+     *
+     * @param array $data
+     * @return void
+     */
+    protected function saveProductCategories($data) 
+    {
         if (isset($data['category_id']) && count($data['category_id']) > 0) {
-            $this->saveCategoryFilters($data);
             $this->categories()->sync($data['category_id']);
         }
-
-
-
+    }
+    /**
+     * Save Product Attributes
+     *
+     * @param array $data
+     * @return void
+     */
+    protected function saveProductProperties($data) 
+    {
         $properties = isset($data['property']) ? $data['property'] : [];
-
 
         if (count($properties) > 0) {
             foreach ($properties as $key => $property) {
@@ -185,9 +205,17 @@ class Product extends Model
                 }
             }
         }
+    }
 
+    /**
+     * Save Product Attributes
+     *
+     * @param array $data
+     * @return void
+     */
+    protected function saveProductAttributes($data) 
+    {
         $attributeWithOptions = isset($data['attribute']) ? $data['attribute'] : [];
-
 
         if (count($attributeWithOptions) > 0) {
             $selectedAttributes = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
@@ -212,11 +240,11 @@ class Product extends Model
                 if (is_array($option)) {
                     foreach ($option as $attributeOptionId) {
                         $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
-                        $variationProductData['name'] .= ' '.$attributeOptionModel->display_text;
+                        $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
                     }
                 } else {
                     $attributeOptionModel = AttributeDropdownOption::findorfail($option);
-                    $variationProductData['name'] .= ' '.$attributeOptionModel->display_text;
+                    $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
                 }
 
                 $variationProductData['sku'] = str_slug($variationProductData['name']);
@@ -228,7 +256,6 @@ class Product extends Model
                     $variableProduct->categories()->sync($data['category_id']);
                 }
 
-
                 ProductAttributeIntegerValue::create([
                     'product_id' => $variableProduct->id,
                     'attribute_id' => $attributeOptionModel->attribute->id,
@@ -237,13 +264,9 @@ class Product extends Model
 
                 ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
             }
-        }
-
-        Event::fire(new ProductAfterSave($this, $data));
-
-        return $this;
+        }   
+        
     }
-
     /**
      * Save Category Filter -- Property and Attributes Ids
      *
@@ -286,7 +309,7 @@ class Product extends Model
 
     public function combinations($arrays, $i = 0)
     {
-        if (! isset($arrays[$i])) {
+        if (!isset($arrays[$i])) {
             return [];
         }
         if ($i == count($arrays) - 1) {
@@ -338,9 +361,9 @@ class Product extends Model
 
     public function getPropertiesAll()
     {
-        $properties     = Property::whereUseForAllProducts(1)->get();
-        $collections    = $this->getProductAllProperties();
-        $existingIds    = $collections->pluck('property_id');
+        $properties = Property::whereUseForAllProducts(1)->get();
+        $collections = $this->getProductAllProperties();
+        $existingIds = $collections->pluck('property_id');
 
         foreach ($properties as $property) {
             if (!in_array($property->id, array_values($existingIds->toArray()))) {
@@ -349,7 +372,6 @@ class Product extends Model
         }
         return $collections;
     }
-
 
     /**
      * Get All Properties for the Product.
@@ -391,6 +413,7 @@ class Product extends Model
 
         return $collection;
     }
+
     /**
      * Get All Attribute for the Product.
      *
@@ -469,7 +492,6 @@ class Product extends Model
         return self::findorfail($productAttributeIntegerValue->product_id);
     }
 
-
     public function getVariableMainProduct($variationId = null)
     {
         if (null === $variationId) {
@@ -478,11 +500,10 @@ class Product extends Model
 
         $productVariationModel = ProductVariation::whereVariationId($variationId)->first();
 
-        $model  = new static();
+        $model = new static();
 
         return $model->find($productVariationModel->product_id);
     }
-
 
     /**
      * Product has many Categories.
