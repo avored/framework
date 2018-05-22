@@ -62,6 +62,7 @@ class Manager
                 $attributes[] = [
                                 'attribute_id' => $attributeId,
                                 'variation_id' => $variationId,
+                                'attribute_dropdown_option_id' => $optionModel->id,
                                 'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
                             ];
             }

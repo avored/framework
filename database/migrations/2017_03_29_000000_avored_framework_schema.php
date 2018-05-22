@@ -117,7 +117,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
         Schema::create('properties', function (Blueprint $table) {
@@ -280,7 +280,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');;
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });

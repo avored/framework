@@ -57,7 +57,7 @@ class Category extends Model
             }
         }
 
-        $sql .= "WHERE cp.category_id = ? ";
+        $sql .= "WHERE p.type != 'VARIABLE_PRODUCT' AND  cp.category_id = ? ";
 
         foreach ($filters as $type => $filterArray) {
             if('property' == $type) {
@@ -82,6 +82,7 @@ class Category extends Model
                 }
             }
         }
+
         
         $products = DB::select($sql, [$this->id]);
         $collect = Collection::make([]);

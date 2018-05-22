@@ -494,12 +494,12 @@ class Product extends Model
 
     public function getVariableMainProduct($variationId = null)
     {
+        
         if (null === $variationId) {
             $variationId = $this->attributes['id'];
         }
-
+        
         $productVariationModel = ProductVariation::whereVariationId($variationId)->first();
-
         $model = new static();
 
         return $model->find($productVariationModel->product_id);
