@@ -34,20 +34,20 @@ class Service
         $this->directory(public_path($path));
         $name = $image->getClientOriginalName();
         $image->move(public_path($path), $name);
-        $relativePath = public_path($path.DIRECTORY_SEPARATOR.$name);
+        $relativePath = public_path($path . DIRECTORY_SEPARATOR . $name);
 
         if (true === $makeDiffSizes) {
-            $sizes = config('image.sizes');
+            $sizes = config('avored-framework.image.sizes');
             foreach ($sizes as $sizeName => $widthHeight) {
                 list($width, $height) = $widthHeight;
                 $this->make($relativePath);
                 $this->resizeImage($width, $height, 'crop');
-                $imagePath = public_path($path).DIRECTORY_SEPARATOR.$sizeName.'-'.$name;
+                $imagePath = public_path($path) . DIRECTORY_SEPARATOR . $sizeName . '-' . $name;
                 $this->saveImage($imagePath, 100);
             }
         }
 
-        $localImage = new LocalFile($path.'/'.$name);
+        $localImage = new LocalFile($path . '/' . $name);
 
         return $localImage;
     }
@@ -60,7 +60,7 @@ class Service
      */
     public function directory($path)
     {
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             File::makeDirectory($path, 0775, true, true);
         }
 
@@ -77,15 +77,14 @@ class Service
     {
         dd($this);
 
-        $sizes = config('image.sizes');
+        $sizes = config('avored-framework.image.sizes');
         foreach ($sizes as $sizeName => $widthHeight) {
-            # code...
+            // code...
         }
     }
 
     public function make($image)
     {
-
         // *** Open up the file
 
         $this->image = $this->openImage($image);
@@ -97,7 +96,6 @@ class Service
 
     private function openImage($file)
     {
-
         // *** Get extension
         $extension = strtolower(strrchr($file, '.'));
 
@@ -122,7 +120,6 @@ class Service
 
     public function resizeImage($newWidth, $newHeight, $option = 'auto')
     {
-
         // *** Get optimal width and height - based on $option
         $optionArray = $this->getDimensions($newWidth, $newHeight, strtolower($option));
 

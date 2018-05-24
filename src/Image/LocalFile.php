@@ -30,13 +30,13 @@ class LocalFile
         $this->relativePath = $relativePath;
         $this->url = asset($relativePath);
 
-        $sizes = config('image.sizes');
+        $sizes = config('avored-framework.image.sizes');
 
         foreach ($sizes as $sizeName => $widthHeight) {
-            $objectVarName = $sizeName.'Url';
+            $objectVarName = $sizeName . 'Url';
 
             $baseName = basename($relativePath);
-            $sizeNamePath = str_replace($baseName, $sizeName.'-'.$baseName, $relativePath);
+            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $relativePath);
 
             $this->$objectVarName = asset($sizeNamePath);
         }
@@ -50,11 +50,11 @@ class LocalFile
      */
     public function destroy()
     {
-        $sizes = config('image.sizes');
+        $sizes = config('avored-framework.image.sizes');
 
         foreach ($sizes as $sizeName => $widthHeight) {
             $baseName = basename($this->relativePath);
-            $sizeNamePath = str_replace($baseName, $sizeName.'-'.$baseName, $this->relativePath);
+            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $this->relativePath);
 
             $path = public_path($sizeNamePath);
             File::delete($path);
