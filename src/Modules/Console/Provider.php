@@ -7,15 +7,16 @@ use AvoRed\Framework\Support\Console\InstallCommand;
 
 class Provider extends ServiceProvider
 {
-
     /**
      * Command Name for the AvoRed Console
      *
      * @var array $commandName
      */
-    protected $commandName = ['avored.module.make',
+    protected $commandName = [
+        'avored.module.make',
         'avored.controller.make',
-        'avored.install'];
+        'avored.install'
+    ];
 
     /**
      * Command Identifier for the AvoRed Console
@@ -37,14 +38,13 @@ class Provider extends ServiceProvider
     protected function registerCommands()
     {
         foreach ($this->commandName as $commandName) {
-            $methodName = "register" . implode(array_map('ucfirst', explode(".", $commandName)));
+            $methodName = 'register' . implode(array_map('ucfirst', explode('.', $commandName)));
             $this->$methodName();
 
-            $this->commands[] = "command." . $commandName;
+            $this->commands[] = 'command.' . $commandName;
         }
 
         $this->commands($this->commands);
-
     }
 
     /**
@@ -57,7 +57,6 @@ class Provider extends ServiceProvider
         $this->app->singleton('command.avored.module.make', function ($app) {
             return new ModuleMakeCommand($app['files']);
         });
-
     }
 
     /**
@@ -70,9 +69,7 @@ class Provider extends ServiceProvider
         $this->app->singleton('command.avored.install', function ($app) {
             return new InstallCommand($app['files']);
         });
-
     }
-
 
     /**
      * Register Avored Module Controller Make Command
@@ -85,7 +82,6 @@ class Provider extends ServiceProvider
             return new ControllerMakeCommand($app['files']);
         });
     }
-
 
     /**
      * Get the services provided by the provider.

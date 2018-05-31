@@ -2,13 +2,10 @@
 
 namespace AvoRed\Framework\Support\Console;
 
-use AvoRed\Ecommerce\Models\Database\Role;
-use AvoRed\Ecommerce\Models\Database\AdminUser;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Theme\Facade as Theme;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Laravel\Passport\ClientRepository;
 
 class InstallCommand extends Command
 {
@@ -76,6 +73,7 @@ class InstallCommand extends Command
 
         Theme::publishItem($fromPath, $toPath);
 
+        /* 
         //CREATE AN ADMIN USER
         $firstName = $this->ask('What is your First Name:');
         $lastName = $this->ask('What is your Last Name:');
@@ -93,13 +91,11 @@ class InstallCommand extends Command
             'role_id' => $role->id,
         ]);
 
+        */
         $this->call('passport:install', ['--force' => true]);
         $this->call('passport:keys');
 
-        $request = $this->laravel->make('request');
-        $clientRepository = new ClientRepository();
-        $clientRepository->createPasswordGrantClient($adminUser->id, $adminUser->full_name, $request->getUriForPath('/'));
-
+        
         Configuration::create([
             'configuration_key' => 'active_theme_identifier',
             'configuration_value' => 'avored-default'
