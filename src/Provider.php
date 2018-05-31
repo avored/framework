@@ -4,6 +4,8 @@ namespace AvoRed\Framework;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use AvoRed\Framework\Models\Repository\ProductRepository;
 
 class Provider extends ServiceProvider
 {
@@ -33,6 +35,7 @@ class Provider extends ServiceProvider
     public function boot()
     {
         $this->registerResources();
+        //Route::model('product', ProductRepository::class);
     }
 
     /**

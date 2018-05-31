@@ -7,17 +7,7 @@ use AvoRed\Framework\Models\Contracts\ProductInterface;
 
 class ProductRepository implements ProductInterface
 {
-    /**
-     * Product Eloquent Database Model
-     * @var \AvoRed\Framework\Models\Database\Product
-     */
-    protected $model;
-
-    public function __construct(Product $product)
-    {
-        $this->model = $product;
-    }
-
+   
     /**
      * Find a Product by a given id of a product
      *
@@ -26,7 +16,7 @@ class ProductRepository implements ProductInterface
      */
     public function find($id)
     {
-        return $this->model->find($id);
+        return Product::find($id);
     }
 
     /**
@@ -37,6 +27,6 @@ class ProductRepository implements ProductInterface
     */
     public function findBySlug($slug)
     {
-        return $this->model->whereSlug($slug)->first();
+        return Product::whereSlug($slug)->first();
     }
 }

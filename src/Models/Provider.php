@@ -5,6 +5,10 @@ namespace AvoRed\Framework\Models;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
 use AvoRed\Framework\Models\Repository\ProductRepository;
+use AvoRed\Framework\Models\Contracts\AttributeInterface;
+use AvoRed\Framework\Models\Repository\AttributeRepository;
+use AvoRed\Framework\Models\Repository\CategoryRepository;
+use AvoRed\Framework\Models\Contracts\CategoryInterface;
 
 class Provider extends ServiceProvider
 {
@@ -39,6 +43,14 @@ class Provider extends ServiceProvider
         $this->app->bind(
             ProductInterface::class,
             ProductRepository::class
+        );
+        $this->app->bind(
+            AttributeInterface::class,
+            AttributeRepository::class
+        );
+        $this->app->bind(
+            CategoryInterface::class,
+            CategoryRepository::class
         );
     }
 }
