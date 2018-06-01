@@ -11,7 +11,7 @@ class CategoryRepository implements CategoryInterface
      * Find an Category by given Id
      *
      * @param $id
-     * @return \AvoRed\Ecommerce\Models\Database\Category
+     * @return \AvoRed\Framework\Models\Database\Category
      */
     public function find($id)
     {
@@ -51,7 +51,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * Find an Category Query
      *
-     * @return \AvoRed\Ecommerce\Models\Database\Attribute
+     * @return \AvoRed\Framework\Models\Database\Attribute
      */
     public function create($data)
     {

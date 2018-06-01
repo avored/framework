@@ -135,7 +135,7 @@ class Product extends Model
         if (isset($data['image']) && count($data['image']) > 0) {
 
             $exitingIds = $this->images()->get()->pluck('id')->toArray();
-            foreach ($images as $key => $data) {
+            foreach ($data['image'] as $key => $data) {
                 if (is_int($key)) {
                     if (($findKey = array_search($key, $exitingIds)) !== false) {
                         $productImage = ProductImage::findorfail($key);

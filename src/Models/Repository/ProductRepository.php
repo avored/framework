@@ -7,7 +7,6 @@ use AvoRed\Framework\Models\Contracts\ProductInterface;
 
 class ProductRepository implements ProductInterface
 {
-   
     /**
      * Find a Product by a given id of a product
      *
@@ -28,5 +27,15 @@ class ProductRepository implements ProductInterface
     public function findBySlug($slug)
     {
         return Product::whereSlug($slug)->first();
+    }
+
+    /**
+    * Find all product except the Variable Product to display
+    *
+    * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function query()
+    {
+        return Product::query();
     }
 }

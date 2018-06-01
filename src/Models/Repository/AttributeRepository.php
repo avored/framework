@@ -11,7 +11,7 @@ class AttributeRepository implements AttributeInterface
      * Find an Attributeby given Id
      *
      * @param $id
-     * @return \AvoRed\Ecommerce\Models\Database\Attribute
+     * @return \AvoRed\Framework\Models\Database\Attribute
      */
     public function find($id)
     {
@@ -22,7 +22,7 @@ class AttributeRepository implements AttributeInterface
     * Find an Attributeby given Id
     *
     * @param $id
-    * @return \AvoRed\Ecommerce\Models\Database\Attribute
+    * @return \AvoRed\Framework\Models\Database\Attribute
     */
     public function findMany(array $ids)
     {
@@ -62,7 +62,7 @@ class AttributeRepository implements AttributeInterface
     /**
      * Find an Attribute Query
      *
-     * @return \AvoRed\Ecommerce\Models\Database\Attribute
+     * @return \AvoRed\Framework\Models\Database\Attribute
      */
     public function create($data)
     {
