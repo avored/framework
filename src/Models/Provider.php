@@ -11,6 +11,8 @@ use AvoRed\Framework\Models\Repository\CategoryRepository;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 use AvoRed\Framework\Models\Repository\ConfigurationRepository;
+use AvoRed\Framework\Models\Contracts\OrderInterface;
+use AvoRed\Framework\Models\Repository\OrderRepository;
 
 class Provider extends ServiceProvider
 {
@@ -57,6 +59,10 @@ class Provider extends ServiceProvider
         $this->app->bind(
             ConfigurationInterface::class,
             ConfigurationRepository::class
+        );
+        $this->app->bind(
+            OrderInterface::class,
+            OrderRepository::class
         );
     }
 }
