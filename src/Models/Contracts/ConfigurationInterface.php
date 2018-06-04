@@ -21,6 +21,14 @@ interface ConfigurationInterface
     public function findByKey($key);
 
     /**
+    * Find an Configuration_value  by  given configurationKey
+    *
+    * @param string $key
+    * @return string $configurationValue
+    */
+    public function getValueByKey($key);
+
+    /**
      * Find an All Configuration which returns Eloquent Collection
      *
      * @return \Illuminate\Database\Eloquent\Collection

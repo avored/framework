@@ -19,6 +19,17 @@ class CategoryRepository implements CategoryInterface
     }
 
     /**
+    * Find an Category by given key which returns Category Model
+    *
+    * @param string $key
+    * @return \AvoRed\Framework\Models\Database\Category
+    */
+    public function findByKey($key)
+    {
+        return Category::whereSlug($key)->first();
+    }
+
+    /**
      * Find an Category by given Id
      *
      * @return \Illuminate\Database\Eloquent\Collection

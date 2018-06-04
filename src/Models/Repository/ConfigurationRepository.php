@@ -19,14 +19,31 @@ class ConfigurationRepository implements ConfigurationInterface
     }
 
     /**
-         * Find an Configuration by  given Id
-         *
-         * @param $id
-         * @return \AvoRed\Framework\Models\Database\Configuration
-         */
+     * Find an Configuration by  given Id
+     *
+     * @param $id
+     * @return \AvoRed\Framework\Models\Database\Configuration
+     */
     public function findByKey($key)
     {
         return Configuration::whereConfigurationKey($key)->first();
+    }
+
+    /**
+    * Find an Configuration_value  by  given configurationKey
+    *
+    * @param string $key
+    * @return string $configurationValue
+    */
+    public function getValueByKey($key)
+    {
+        $model = Configuration::whereConfigurationKey($key)->first();
+
+        if (null === $model) {
+            return null;
+        }
+
+        return $model->configuration_value;
     }
 
     /**
