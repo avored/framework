@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Models\Repository;
 
 use AvoRed\Framework\Models\Contracts\OrderInterface;
+use AvoRed\Framework\Models\Database\Order;
 
 class OrderRepository implements OrderInterface
 {
@@ -18,12 +19,22 @@ class OrderRepository implements OrderInterface
     }
 
     /**
-    * Get an Order Query Builder 
+    * Get an Order Query Builder
     *
     * @return \Illuminate\Database\Eloquent\Collection
     */
     public function query()
     {
         return Order::query();
+    }
+
+    /**
+    * Get an Order Query Builder
+    *
+    * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function all()
+    {
+        return Order::all();
     }
 }

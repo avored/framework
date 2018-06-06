@@ -72,6 +72,17 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
+        Schema::create('product_downloadable_urls', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('product_id')->unsigned();
+            $table->string('demo_path')->nullable()->default(null);
+            $table->string('main_path')->nullable()->default(null);
+            $table->string('token');
+            $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        });
+
         Schema::create('product_images', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
