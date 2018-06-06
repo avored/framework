@@ -18,4 +18,11 @@ interface OrderInterface
     * @return \Illuminate\Database\Eloquent\Builder
     */
     public function query();
+
+    /**
+    * All Orders Collection
+    *
+    * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function all();
 }
