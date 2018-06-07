@@ -68,4 +68,16 @@ class CategoryRepository implements CategoryInterface
     {
         return Category::create($data);
     }
+
+    /**
+     * Get an Category Options for Vue Components
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function options()
+    {
+        $empty = new Category();
+        $empty->name = 'Please Select';
+        return Category::all()->prepend($empty);
+    }
 }

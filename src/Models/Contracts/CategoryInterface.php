@@ -51,4 +51,13 @@ interface CategoryInterface
      * @return \AvoRed\Framework\Models\Database\Category
      */
     public function create(array $data);
+
+    /**
+     * Get an Category Options for Vue Components
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function options();
+
+    
 }
