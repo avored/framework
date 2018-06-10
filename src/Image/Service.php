@@ -31,10 +31,10 @@ class Service
      */
     public function upload($image, $path = null, $makeDiffSizes = true)
     {
-        $this->directory(public_path($path));
+        $this->directory(storage_path('app/public/' . $path));
         $name = $image->getClientOriginalName();
-        $image->move(public_path($path), $name);
-        $relativePath = public_path($path . DIRECTORY_SEPARATOR . $name);
+        $image->move(storage_path('app/public/' . $path), $name);
+        $relativePath = storage_path('app/public/' . $path . DIRECTORY_SEPARATOR . $name);
 
         if (true === $makeDiffSizes) {
             $sizes = config('avored-framework.image.sizes');
@@ -42,7 +42,7 @@ class Service
                 list($width, $height) = $widthHeight;
                 $this->make($relativePath);
                 $this->resizeImage($width, $height, 'crop');
-                $imagePath = public_path($path) . DIRECTORY_SEPARATOR . $sizeName . '-' . $name;
+                $imagePath = storage_path('app/public/' . $path) . DIRECTORY_SEPARATOR . $sizeName . '-' . $name;
                 $this->saveImage($imagePath, 100);
             }
         }
