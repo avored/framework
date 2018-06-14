@@ -14,6 +14,15 @@ return [
         'address' => AvoRed\Ecommerce\Models\Database\Address::class,
     ],
 
+   
+    'filesystems' => [    
+        'disks' => [
+            'avored' => [
+                'driver' => 'local',
+                'root' => storage_path('app/public'),
+            ],
+        ],
+    ],
     'image' => [
         'driver' => 'gd',
         'sizes' => [

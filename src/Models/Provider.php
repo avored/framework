@@ -13,6 +13,8 @@ use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 use AvoRed\Framework\Models\Repository\ConfigurationRepository;
 use AvoRed\Framework\Models\Contracts\OrderInterface;
 use AvoRed\Framework\Models\Repository\OrderRepository;
+use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
+use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 
 class Provider extends ServiceProvider
 {
@@ -63,6 +65,11 @@ class Provider extends ServiceProvider
         $this->app->bind(
             OrderInterface::class,
             OrderRepository::class
+        );
+
+        $this->app->bind(
+            ProductDownloadableUrlInterface::class,
+            ProductDownloadableUrlRepository::class
         );
     }
 }

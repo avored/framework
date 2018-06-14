@@ -31,23 +31,23 @@ class Service
      */
     public function upload($image, $path = null, $makeDiffSizes = true)
     {
-        $this->directory(storage_path('app/public/' . $path));
-        $name = $image->getClientOriginalName();
-        $image->move(storage_path('app/public/' . $path), $name);
-        $relativePath = storage_path('app/public/' . $path . DIRECTORY_SEPARATOR . $name);
+      
+        $dbPath = $image->store($path, 'avored');
+       
+        $name = basename($dbPath);
 
         if (true === $makeDiffSizes) {
             $sizes = config('avored-framework.image.sizes');
             foreach ($sizes as $sizeName => $widthHeight) {
                 list($width, $height) = $widthHeight;
-                $this->make($relativePath);
+                $this->make("storage" . DIRECTORY_SEPARATOR .$dbPath);
                 $this->resizeImage($width, $height, 'crop');
                 $imagePath = storage_path('app/public/' . $path) . DIRECTORY_SEPARATOR . $sizeName . '-' . $name;
                 $this->saveImage($imagePath, 100);
             }
         }
 
-        $localImage = new LocalFile($path . '/' . $name);
+        $localImage = new LocalFile("storage" . DIRECTORY_SEPARATOR . $dbPath);
 
         return $localImage;
     }
@@ -99,10 +99,12 @@ class Service
         // *** Get extension
         $extension = strtolower(strrchr($file, '.'));
 
+      
         switch ($extension) {
             case '.jpg':
             case '.jpeg':
                 $img = @imagecreatefromjpeg($file);
+
                 break;
             case '.gif':
                 $img = @imagecreatefromgif($file);
@@ -115,6 +117,7 @@ class Service
                 break;
         }
 
+       
         return $img;
     }
 
