@@ -10,6 +10,9 @@ use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\App;
+use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
+use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 
 class Product extends Model
 {
@@ -170,6 +173,7 @@ class Product extends Model
         $this->saveProductCategories($data);
         $this->saveProductProperties($data);
         $this->saveProductAttributes($data);  
+        $this->saveProductDownloadable($data);  
 
         Event::fire(new ProductAfterSave($this, $data));
 
@@ -185,6 +189,58 @@ class Product extends Model
     {
         if (isset($data['category_id']) && count($data['category_id']) > 0) {
             $this->categories()->sync($data['category_id']);
+        }
+    }
+
+    /**
+     * Save Product Downloadable Information
+     *
+     * @param array $data
+     * @return void
+     */
+    protected function saveProductDownloadable($data) 
+    {
+       
+        if (isset($data['downloadable']) && count($data['downloadable']) > 0) {
+
+            $repository = App::get(ProductDownloadableUrlInterface::class);
+
+            
+            $mainDownloadableMedia = ($data['downloadable']['main_product']) ?? null;
+
+            if(null === $mainDownloadableMedia) {
+                throw new \Exception('Invalid Downloadable Media Given or Nothing Given');
+            }
+            
+            $tmpPath = str_split(strtolower(str_random(3)));
+            $path = 'uploads/downloadables/' . implode('/', $tmpPath);
+            $dbPath = $mainDownloadableMedia->store($path,'avored');
+            $token = str_random(32);
+
+
+            $downModel = $repository->query()->whereProductId($this->id)->first();
+
+           if (null === $downModel) {
+               $downModel = ProductDownloadableUrl::create([
+                                        'token' => $token,
+                                        'product_id' => $this->id,
+                                        'main_path' => $dbPath
+                                        ]);
+           } else {
+               $downModel->update(['main_path' => $dbPath]); 
+           }
+
+            
+
+            $demoDownloadableMedia = ($data['downloadable']['demo_product']) ?? null;
+            
+            if (null !== $demoDownloadableMedia) {
+                $tmpPath = str_split(strtolower(str_random(3)));
+                $path = 'uploads/downloadables/' . implode('/', $tmpPath);
+                $demoDbPath = $demoDownloadableMedia->store($path,'avored');
+
+                $downModel->update(['demo_path' => $demoDbPath]);
+            }
         }
     }
     /**
@@ -623,5 +679,15 @@ class Product extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Product has downladable Url.
+     *
+     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+     */
+    public function downloadable()
+    {
+        return $this->hasOne(ProductDownloadableUrl::class);
     }
 }
