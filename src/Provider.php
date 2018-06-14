@@ -74,7 +74,16 @@ class Provider extends ServiceProvider
 
     public function registerConfigData()
     {
+        
         $this->mergeConfigFrom(__DIR__ . '/../config/avored-framework.php', 'avored-framework');
+
+        $avoredConfigData = include(__DIR__ . '/../config/avored-framework.php');
+        $fileSystemConfig = $this->app['config']->get('filesystems', []);
+       
+       
+        $this->app['config']->set('filesystems', array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig));
+
+       
     }
 
     public function publishFiles()
