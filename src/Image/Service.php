@@ -98,8 +98,6 @@ class Service
     {
         // *** Get extension
         $extension = strtolower(strrchr($file, '.'));
-
-      
         switch ($extension) {
             case '.jpg':
             case '.jpeg':
@@ -295,10 +293,8 @@ class Service
                 }
                 break;
 
-            // ... etc
-
             default:
-                // *** No extension - No save.
+            
                 break;
         }
 
