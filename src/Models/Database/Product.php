@@ -13,6 +13,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Ecommerce\Models\Contracts\SiteCurrencyInterface;
 
 class Product extends Model
 {
@@ -126,6 +128,23 @@ class Product extends Model
 
         return false;
     }
+
+
+    public function getPriceAttribute($val)
+    {
+        $currentCurrencyCode = Session::get('currency_code');
+
+        if(null === $currentCurrencyCode) {
+            return $val;
+        }
+
+        $siteCurrency = App::get(SiteCurrencyInterface::class);
+        $model = $siteCurrency->findByCode($currentCurrencyCode);
+        
+          
+        return $val * $model->conversion_rate;
+    }
+
 
     /**
      * Save Product Images.

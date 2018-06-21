@@ -3,9 +3,8 @@
 namespace AvoRed\Framework\AdminConfiguration;
 
 use Illuminate\Support\Collection;
-use AvoRed\Framework\AdminConfiguration\Contracts\AdminConfiguration as AdminConfigurationContracts;
 
-class AdminConfigurationGroup implements AdminConfigurationContracts
+class AdminConfigurationGroup
 {
     /**
      * @var string $label
@@ -49,7 +48,8 @@ class AdminConfigurationGroup implements AdminConfigurationContracts
         return $this->key;
     }
 
-    public function all() {
+    public function all()
+    {
         return $this->groupList;
     }
 

@@ -3,8 +3,9 @@
 namespace AvoRed\Framework\AdminConfiguration;
 
 use AvoRed\Framework\AdminConfiguration\Contracts\AdminConfiguration as AdminConfigurationContracts;
+use AvoRed\Framework\AdminConfiguration\Contracts\DropdownFieldContract;
 
-class AdminConfiguration implements AdminConfigurationContracts
+class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldContract
 {
     /**
      * @var string $label
@@ -64,6 +65,7 @@ class AdminConfiguration implements AdminConfigurationContracts
 
         return $this->name;
     }
+
     public function type($type = null)
     {
         if (null === $type) {
@@ -78,7 +80,13 @@ class AdminConfiguration implements AdminConfigurationContracts
     public function options($callable = null)
     {
         if (null === $callable) {
-            return $this->options;
+            if (is_callable($this->options)) {
+                return call_user_func($this->options);
+            }
+
+            $rep = new $this->options;
+
+            return $rep->options();
         }
 
         $this->options = $callable;
