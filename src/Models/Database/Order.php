@@ -13,6 +13,7 @@ class Order extends Model
         'shipping_option',
         'payment_option',
         'order_status_id',
+        'currency_code'
     ];
 
     public function products()

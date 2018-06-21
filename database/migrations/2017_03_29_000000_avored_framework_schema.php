@@ -113,6 +113,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('shipping_option');
             $table->string('payment_option');
             $table->integer('order_status_id')->unsigned();
+            $table->string('currency_code')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
