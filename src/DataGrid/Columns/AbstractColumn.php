@@ -31,8 +31,8 @@ abstract class AbstractColumn implements ColumnContract
     public function __construct($identifier, $options)
     {
         $this->identifier = $identifier;
-        $this->label = (isset($options['label'])) ? $options['label'] : title_case($identifier);
-        $this->sortable = (isset($options['sortable'])) ? $options['sortable'] : false;
+        $this->label = (isset($options['label'])) ?? title_case($identifier);
+        $this->sortable = (isset($options['sortable'])) ?? false;
     }
 
     /**

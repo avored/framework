@@ -47,7 +47,7 @@ class Manager
      *  Page Name
      * @var string $pageName
      */
-    public $pageName = "page";
+    public $pageName = 'page';
 
     /**
      * Database table model.
@@ -58,13 +58,13 @@ class Manager
 
     public function __construct(Request $request)
     {
-        $this->request = $request;
-        $this->columns = new Collection();
-        $this->collection = new Collection();
+        $this->request      = $request;
+        $this->columns      = new Collection();
+        $this->collection   = new Collection();
     }
 
     /**
-     * Breadcrumb Make an Object.
+     * DataGrid Make an Object.
      *
      * @param string $name
      * @param callable $callable
@@ -92,7 +92,7 @@ class Manager
             $dataGrid->model->orderBy($this->request->get('desc'), 'desc');
         }
 
-        $dataGrid->data = $dataGrid->model->paginate($this->pageItem,['*'],$dataGrid->pageName());
+        $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
 
         return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
     }
@@ -112,7 +112,7 @@ class Manager
         return $this;
     }
 
-    public function linkColumn($identifier, $options, $callback)
+    public function linkColumn($identifier, $options = [], $callback)
     {
         $column = new LinkColumn($identifier, $options, $callback);
         $this->columns->put($identifier, $column);
@@ -120,6 +120,7 @@ class Manager
         return $this;
     }
 
+    /*
     public function dataTableData($model)
     {
         $this->model = $model;
@@ -127,9 +128,7 @@ class Manager
         return $this;
     }
 
-    /**
-     * @return static
-     */
+
     public function get()
     {
         $count = $this->model->get()->count();
@@ -169,8 +168,8 @@ class Manager
 
         $data = [
             'data' => (isset($jsonRecords)) ? $jsonRecords : $allRecords,
-            'draw' =>  $this->request->get('draw'),
-            'recordsTotal'=> $count,
+            'draw' => $this->request->get('draw'),
+            'recordsTotal' => $count,
             'recordsFiltered' => $count,
         ];
 
@@ -187,14 +186,14 @@ class Manager
         return $this;
     }
 
-
     /**
      *
      *
      * @param null|string $pageName
      */
-    public function pageName($pageName = null) {
-        if(null === $pageName) {
+    public function pageName($pageName = null)
+    {
+        if (null === $pageName) {
             return $this->pageName;
         }
 

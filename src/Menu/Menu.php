@@ -99,7 +99,7 @@ class Menu implements MenuContracts
     }
 
     /**
-     * Get/Set Admin Menu Route Name.
+     * Get/Set Admin Menu Route Params Name.
      *
      * @return \AvoRed\Framework\Menu\Menu|string
      */

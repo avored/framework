@@ -18,27 +18,30 @@ class Manager
         $this->permissions = Collection::make([]);
     }
 
+    /**
+     * Get all  Permission Collection.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function all()
     {
-
-        //dd($this->permissions);
         return $this->permissions;
     }
 
     /**
-     * Add Permission Array into Collection.
+     * Add Permission into Collection.
      *
-     * @param array $item
+     * @param string $key
      * @return \AvoRed\Framework\Permission\Manager
      */
     public function add($key)
     {
-        $permission = new PermissionGroup();
+        $permissionGroup = new PermissionGroup();
 
-        $permission->key($key);
-        $this->permissions->put($key, $permission);
+        $permissionGroup->key($key);
+        $this->permissions->put($key, $permissionGroup);
 
-        return $permission;
+        return $permissionGroup;
     }
 
     /**
@@ -64,10 +67,7 @@ class Manager
      */
     public function set($key, $permissionCollection)
     {
-
-        //dd($permissionCollection);
         $this->permissions->put($key, $permissionCollection);
-
         return $this;
     }
 }

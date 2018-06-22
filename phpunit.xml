@@ -7,7 +7,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false"
+        
 >
     <testsuites>
         <testsuite name="AvoRed Framework Tests">
@@ -22,8 +22,7 @@
     </filter>
 
     <!--logging>
-        <log type="coverage-html" target="../../../public/cov" charset="UTF-8"
-             yui="true" highlight="true"
+        <log type="coverage-html" target="../../../public/cov/framework" 
              lowUpperBound="50" highLowerBound="80"/>
     </logging-->
-</phpunit>
+</phpunit>  

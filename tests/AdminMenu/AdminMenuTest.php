@@ -15,7 +15,7 @@ class AdminMenuTest extends BaseTestCase
     public function test_admin_menu_key()
     {
         $builder = new Builder();
-        
+
         $this->assertEquals($builder->add('test')->key(), 'test');
     }
 
@@ -64,7 +64,6 @@ class AdminMenuTest extends BaseTestCase
      */
     public function test_admin_menu_submenu()
     {
-
         $builder = new Builder();
         $menu = $builder->add('test')->subMenu('test', 'MENUOBJECT');
 
@@ -72,5 +71,3 @@ class AdminMenuTest extends BaseTestCase
         $this->assertEquals($subMenu, ['test' => 'MENUOBJECT']);
     }
 }
-
-
