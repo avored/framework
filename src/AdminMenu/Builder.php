@@ -19,18 +19,20 @@ class Builder
     }
 
     /**
-     * Create new menu object and return.
+     * Add Menu to a Collection
      *
-     * @var string
+     * @param string
+     * @param callable $callable
      * @return \AvoRed\Framework\AdminMenu\AdminMenu
      */
-    public function add($key)
+    public function add($key, $callable)
     {
-        $menu = new AdminMenu();
-        $menu->key($key);
+        
+        $menu = new AdminMenu($callable);  
+        
         $this->adminMenu->put($key, $menu);
 
-        return $menu;
+        return $this;
     }
 
     /**

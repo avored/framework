@@ -39,6 +39,8 @@ class Builder
         $breadcrumb->route($name);
 
         $this->collection->put($name, $breadcrumb);
+
+        
     }
 
     /**
