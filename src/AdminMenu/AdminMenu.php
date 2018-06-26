@@ -32,6 +32,16 @@ class AdminMenu implements AdminMenuContracts
     protected $routeName;
 
     /**
+     *  AvoRed AdminMenu Construct method.
+     */
+    public function __construct($callable = null)
+    {
+        if(is_callable($callable)) {
+            $callable($this);
+        }
+        
+    }
+    /**
      * Get/Set Admin Menu Label.
      *
      * @return \AvoRed\Framework\AdminMenu\AdminMenu|string

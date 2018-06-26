@@ -31,9 +31,7 @@ class Service
      */
     public function upload($image, $path = null, $makeDiffSizes = true)
     {
-      
-        $dbPath = $image->store($path, 'avored');
-       
+        $dbPath = $image->store($path, 'avored');  
         $name = basename($dbPath);
 
         if (true === $makeDiffSizes) {

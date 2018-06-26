@@ -12,11 +12,33 @@ class AdminMenuTest extends BaseTestCase
      *
      * @return void
      */
-    public function test_admin_menu_key()
+    public function test_admin_menu_builder_add()
     {
         $builder = new Builder();
+        $builder->add('test', function($menu) {
+            $menu->label('label');
+        });
+        $menu = $builder->get('test');
+        $this->assertEquals('label', $menu->label());
+    }
+
+    /**
+     * Test to check if Builder can set the AdminMenu Label
+     *
+     * @return void
+     */
+    public function test_admin_menu_builder_all()
+    {
+        $builder = new Builder();
+        $builder->add('test1', function($menu) {
+            $menu->label('label1');
+        });
         
-        $this->assertEquals($builder->add('test')->key(), 'test');
+        $builder->add('test2', function($menu) {
+            $menu->label('label2');
+        });
+        $menus = $builder->getMenuItems();
+        $this->assertCount(2, $menus);
     }
 
     /**
@@ -27,21 +49,12 @@ class AdminMenuTest extends BaseTestCase
     public function test_admin_menu_label()
     {
         $builder = new Builder();
-        $menu = $builder->add('test')->label('Test Menu Label');
-        $this->assertEquals($menu->label(), 'Test Menu Label');
-    }
+        $builder->add('test', function($menu) {
+            $menu->label('label1');
+        });
+        $menu = $builder->get('test');
 
-    /**
-     * Test to check if Builder can set the AdminMenu Label
-     *
-     * @return void
-     */
-    public function test_admin_menu_route()
-    {
-        $builder = new Builder();
-        $menu = $builder->add('test')->route('admin.test.route.name');
-
-        $this->assertEquals($menu->route(), 'admin.test.route.name');
+        $this->assertEquals('label1', $menu->label());
     }
 
     /**
@@ -52,9 +65,12 @@ class AdminMenuTest extends BaseTestCase
     public function test_admin_menu_icon()
     {
         $builder = new Builder();
-        $menu = $builder->add('test')->icon('fa fa-book');
+        $builder->add('test', function($menu) {
+            $menu->icon('icon');
+        });
+        $menu = $builder->get('test');
 
-        $this->assertEquals($menu->icon(), 'fa fa-book');
+        $this->assertEquals('icon', $menu->icon());
     }
 
     /**
@@ -64,13 +80,13 @@ class AdminMenuTest extends BaseTestCase
      */
     public function test_admin_menu_submenu()
     {
-
         $builder = new Builder();
-        $menu = $builder->add('test')->subMenu('test', 'MENUOBJECT');
+        $builder->add('test', function($menu) {
+            $menu->subMenu('sub_menu_key', 'test_object');
+        });
+        $menu = $builder->get('test');
 
-        $subMenu = $menu->subMenu();
-        $this->assertEquals($subMenu, ['test' => 'MENUOBJECT']);
+        
+        $this->assertArrayHasKey('sub_menu_key', $menu->subMenu());
     }
 }
-
-

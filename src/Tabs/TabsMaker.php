@@ -44,7 +44,7 @@ class TabsMaker
     {
         $tab = $this->adminTabs->get($key);
 
-        if(null == $tab) {
+        if (null == $tab) {
             throw new \Exception('Required Tab is missing');
         }
         return $this->adminTabs->get($key);
@@ -63,7 +63,6 @@ class TabsMaker
                 return true;
             }
         });
-
 
         return $tabs;
     }

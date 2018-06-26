@@ -31,6 +31,8 @@ class Builder
         $menu->key($key);
 
         $this->collection->put($key, $menu);
+
+        return $this;
     }
 
     /**
@@ -41,19 +43,7 @@ class Builder
      */
     public function get($key)
     {
-        return $this->menu->get($key);
-    }
-
-    /**
-     * Register an Menu.
-     *
-     * @param string $menuKey
-     * @param string $menu
-     * @return void
-     */
-    public function registerMenu($menuKey, $menu)
-    {
-
+        return $this->collection->get($key);
     }
 
     /**
