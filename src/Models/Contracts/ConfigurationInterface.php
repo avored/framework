@@ -41,5 +41,5 @@ interface ConfigurationInterface
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Configuration
      */
-    public function create(array $data);
+    public function create($data);
 }
