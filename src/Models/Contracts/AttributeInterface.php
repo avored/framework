@@ -18,7 +18,7 @@ interface AttributeInterface
      * @param array $ids
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function findMany(array $id);
+    public function findMany($id);
 
     /**
      * Find an All Admin Users which returns Eloquent Collection
@@ -48,5 +48,5 @@ interface AttributeInterface
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Attribute
      */
-    public function create(array $data);
+    public function create($data);
 }

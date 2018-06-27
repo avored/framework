@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Models\Contracts;
 
 interface ProductDownloadableUrlInterface
 {
-
     /**
      * Find an Downloadable Product by given Id which returns ProductDownloadableUrl Model
      *
@@ -44,13 +43,10 @@ interface ProductDownloadableUrlInterface
     public function query();
 
     /**
-     * Create an Product Downloadable Url 
+     * Create an Product Downloadable Url
      *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
      */
-    public function create(array $data);
-
-  
-    
+    public function create($data);
 }
