@@ -21,6 +21,11 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('price', 'qty', 'tax_amount');
     }
 
+    public function history()
+    {
+        return $this->hasMany(OrderHistory::class);
+    }
+
     public function orderProductVariation()
     {
         return $this->hasMany(OrderProductVariation::class, '');
@@ -53,9 +58,9 @@ class Order extends Model
 
     public function getBillingAddressAttribute()
     {
-        $addressClass   = config('avored-framework.model.address');
-        $addressModel   = new $addressClass;
-        $address        = $addressModel->findorfail($this->attributes['billing_address_id']);
+        $addressClass = config('avored-framework.model.address');
+        $addressModel = new $addressClass;
+        $address = $addressModel->findorfail($this->attributes['billing_address_id']);
 
         return $address;
     }

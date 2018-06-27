@@ -50,7 +50,7 @@ interface CategoryInterface
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Category
      */
-    public function create(array $data);
+    public function create($data);
 
     /**
      * Get an Category Options for Vue Components
@@ -58,6 +58,4 @@ interface CategoryInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function options();
-
-    
 }

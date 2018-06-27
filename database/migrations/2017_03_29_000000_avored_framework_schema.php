@@ -27,10 +27,9 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('category_filters', function (Blueprint $table) {
-
             $table->increments('id');
             $table->integer('category_id')->unsigned()->nullable()->default(null);
-            $table->enum('type',['ATTRIBUTE','PROPERTY'])->nullable()->default(null);
+            $table->enum('type', ['ATTRIBUTE', 'PROPERTY'])->nullable()->default(null);
             $table->integer('filter_id');
             $table->timestamps();
 
@@ -50,7 +49,8 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('track_stock')->nullable()->default(null);
             $table->decimal('qty', 10, 6)->nullable();
             $table->tinyInteger('is_taxable')->nullable()->default(null);
-            $table->decimal('price', 10, 6)->nullable()->default(null);;
+            $table->decimal('price', 10, 6)->nullable()->default(null);
+            ;
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -117,6 +117,18 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
+        });
+
+        Schema::table('order_histories', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('order_id')->unsigned()->nullable()->default(null);
+            $table->integer('order_status_id')->unsigned()->nullable()->default(null);
+        
+            $table->timestamps();
+
+            $table->foreign('order_status_id')->references('id')->on('order_statuses');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
 
         Schema::create('order_product', function (Blueprint $table) {
@@ -292,7 +304,8 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');;
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            ;
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });
@@ -300,7 +313,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::create('configurations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('configuration_key')->nullable()->default(null);
-            $table->string('configuration_value',999)->nullable()->default(null);
+            $table->string('configuration_value', 999)->nullable()->default(null);
             $table->timestamps();
         });
     }
