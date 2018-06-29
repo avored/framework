@@ -28,7 +28,7 @@ class LocalFile
     public function __construct($relativePath = null)
     {
         $this->relativePath = $relativePath;
-        $this->url = asset('storage' . DIRECTORY_SEPARATOR . $relativePath);
+        $this->url = asset($relativePath);
 
         $sizes = config('avored-framework.image.sizes');
 
@@ -38,7 +38,7 @@ class LocalFile
             $baseName = basename($relativePath);
             $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $relativePath);
 
-            $this->$objectVarName = asset('storage' . DIRECTORY_SEPARATOR . $sizeNamePath);
+            $this->$objectVarName = asset($sizeNamePath);
         }
     }
 

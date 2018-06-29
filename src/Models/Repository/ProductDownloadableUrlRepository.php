@@ -2,19 +2,19 @@
 
 namespace AvoRed\Framework\Models\Repository;
 
-
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\Models\Database\ProductDownloadableUrl;
 
 class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterface
 {
-   /**
-     * Find an Downloadable Product by given Id which returns ProductDownloadableUrl Model
-     *
-     * @param integer $id
-     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
-     */
-    public function find($id) {
+    /**
+      * Find an Downloadable Product by given Id which returns ProductDownloadableUrl Model
+      *
+      * @param integer $id
+      * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+      */
+    public function find($id)
+    {
         return ProductDownloadableUrl::find($id);
     }
 
@@ -24,7 +24,8 @@ class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterfac
     * @param string $token
     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
     */
-    public function findByToken($token) {
+    public function findByToken($token)
+    {
         return ProductDownloadableUrl::whereToken($token)->first();
     }
 
@@ -33,7 +34,8 @@ class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterfac
     *
     * @return \Illuminate\Database\Eloquent\Collection
     */
-    public function all() {
+    public function all()
+    {
         return ProductDownloadableUrl::all();
     }
 
@@ -43,7 +45,8 @@ class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterfac
      * @param integer $noOfItem
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function paginate($noOfItem = 10) {
+    public function paginate($noOfItem = 10)
+    {
         return ProductDownloadableUrl::paginate($noOfItem);
     }
 
@@ -52,17 +55,19 @@ class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterfac
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query() {
+    public function query()
+    {
         return ProductDownloadableUrl::query();
     }
 
     /**
-     * Create an Product Downloadable Url 
+     * Create an Product Downloadable Url
      *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
      */
-    public function create(array $data) {
+    public function create($data)
+    {
         return ProductDownloadableUrl::create($data);
     }
 }

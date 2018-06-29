@@ -119,7 +119,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
         });
 
-        Schema::table('order_histories', function (Blueprint $table) {
+        Schema::create('order_histories', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('order_id')->unsigned()->nullable()->default(null);
