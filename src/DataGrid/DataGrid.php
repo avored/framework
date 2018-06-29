@@ -32,7 +32,7 @@ class DataGrid
      *  Page Name
      * @var string $pageName
      */
-    public $pageName = "page";
+    public $pageName = 'page';
 
     public function __construct(Request $request)
     {
@@ -62,7 +62,12 @@ class DataGrid
      */
     public function column($identifier, $options = []):self
     {
-        $column = new TextColumn($identifier, $options);
+        if (is_callable($options)) {
+            $column = new TextColumn($identifier, $options);
+        } else {
+            $column = new TextColumn($identifier, $options);
+        }
+
         $this->columns->put($identifier, $column);
 
         return $this;
@@ -99,8 +104,9 @@ class DataGrid
      *
      * @param null|string $pageName
      */
-    public function pageName($pageName = null) {
-        if(null === $pageName) {
+    public function pageName($pageName = null)
+    {
+        if (null === $pageName) {
             return $this->pageName;
         }
 
@@ -109,4 +115,3 @@ class DataGrid
         return $this;
     }
 }
-

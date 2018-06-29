@@ -1,8 +1,14 @@
+<?php 
+//dd($dataGrid->columns);
+?>
+
 <div class="table-responsive">
 <table class="avored-table-grid table table-striped">
     <thead class="thead-">
-    <tr >
+    <tr>
         @foreach($dataGrid->columns as $column)
+
+        <?php  //dd($column->descUrl());?>
             <th>
                 @if($column->sortable() && $dataGrid->desc($column->identifier()))
                     <a href="{{ $column->ascUrl() }}">
@@ -29,6 +35,17 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+        @foreach($dataGrid->columns as $column)
+            <th>
+                @if($column->canFilter())
+                <div class="form-group">
+                    <input type="text" class="form-control" />
+                </div>
+                @endif
+            </th>
+        @endforeach
+    </tr>
     @foreach($dataGrid->data as $row)
         <tr>
             @foreach($dataGrid->columns as $column)

@@ -58,9 +58,9 @@ class Manager
 
     public function __construct(Request $request)
     {
-        $this->request      = $request;
-        $this->columns      = new Collection();
-        $this->collection   = new Collection();
+        $this->request = $request;
+        $this->columns = new Collection();
+        $this->collection = new Collection();
     }
 
     /**
@@ -107,6 +107,7 @@ class Manager
     public function column($identifier, $options = [])
     {
         $column = new TextColumn($identifier, $options);
+
         $this->columns->put($identifier, $column);
 
         return $this;

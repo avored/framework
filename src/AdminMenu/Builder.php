@@ -27,9 +27,8 @@ class Builder
      */
     public function add($key, $callable)
     {
-        
-        $menu = new AdminMenu($callable);  
-        
+        $menu = new AdminMenu($callable);
+
         $this->adminMenu->put($key, $menu);
 
         return $this;
