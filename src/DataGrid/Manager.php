@@ -58,9 +58,9 @@ class Manager
 
     public function __construct(Request $request)
     {
-        $this->request      = $request;
-        $this->columns      = new Collection();
-        $this->collection   = new Collection();
+        $this->request = $request;
+        $this->columns = new Collection();
+        $this->collection = new Collection();
     }
 
     /**
@@ -85,6 +85,12 @@ class Manager
 
     public function render($dataGrid)
     {
+        if (null !== $this->request->get('q')) {
+            foreach ($this->request->get('q') as $key => $val) {
+                $dataGrid->model->where($key, 'like', '%' . $val . '%');
+            }
+        }
+
         if (null !== $this->request->get('asc')) {
             $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
         }
@@ -107,6 +113,7 @@ class Manager
     public function column($identifier, $options = [])
     {
         $column = new TextColumn($identifier, $options);
+
         $this->columns->put($identifier, $column);
 
         return $this;

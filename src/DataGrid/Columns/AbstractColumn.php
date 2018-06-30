@@ -19,6 +19,12 @@ abstract class AbstractColumn implements ColumnContract
     protected $label = null;
 
     /**
+     * Column Can Filter.
+     * @var false|boolean
+     */
+    protected $canFilter = false;
+
+    /**
      * Is Column Sortable?
      * @var null|string
      */
@@ -30,44 +36,82 @@ abstract class AbstractColumn implements ColumnContract
      */
     public function __construct($identifier, $options)
     {
-        $this->identifier = $identifier;
-        $this->label = $options['label'] ?? title_case($identifier);
-        $this->sortable = $options['sortable'] ?? false;
+        if (is_callable($options)) {
+            $options($this);
+        } else {
+            $this->identifier = $identifier;
+            $this->label = $options['label'] ?? title_case($identifier);
+            $this->sortable = $options['sortable'] ?? false;
+        }
     }
 
     /**
      * Get the Column Type.
      * @return string $type
      */
-    public function sortable()
+    public function sortable($order = null)
     {
-        return $this->sortable;
+        if (null === $order) {
+            return $this->sortable;
+        }
+
+        $this->sortable = $order;
+        return $this;
     }
 
     /**
      * Get the Column Type.
      * @return string $type
      */
-    public function type()
+    public function type($type = null)
     {
-        return $this->type;
+        if (null === $type) {
+            return $this->type;
+        }
+
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * get/set if column can filter ?.
+     * @return string $type
+     */
+    public function canFilter($canFilter = null)
+    {
+        if (null === $canFilter) {
+            return $this->canFilter;
+        }
+
+        $this->canFilter = $canFilter;
+        return $this;
     }
 
     /**
      * Get the Column Label.
      * @return string $label
      */
-    public function label()
+    public function label($label = null)
     {
-        return $this->label;
+        if (null === $label) {
+            return $this->label;
+        }
+
+        $this->label = $label;
+        return $this;
     }
 
     /**
      * Get the column identifier.
      * @return string $identifier
      */
-    public function identifier()
+    public function identifier($identifier = null)
     {
-        return $this->identifier;
+        if (null === $identifier) {
+            return $this->identifier;
+        }
+
+        $this->identifier = $identifier;
+        return $this;
     }
 }
