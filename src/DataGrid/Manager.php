@@ -85,6 +85,12 @@ class Manager
 
     public function render($dataGrid)
     {
+        if (null !== $this->request->get('q')) {
+            foreach ($this->request->get('q') as $key => $val) {
+                $dataGrid->model->where($key, 'like', '%' . $val . '%');
+            }
+        }
+
         if (null !== $this->request->get('asc')) {
             $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
         }

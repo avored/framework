@@ -39,9 +39,31 @@
         @foreach($dataGrid->columns as $column)
             <th>
                 @if($column->canFilter())
-                <div class="form-group">
-                    <input type="text" class="form-control" />
-                </div>
+                <form method="get" action="{{ URL::full() }}">
+                  
+                    @if(Request::get('asc'))
+                    <input type="hidden" name="asc" value="{{ Request::get('asc') }}">
+                    @endif
+                    @if(Request::get('desc'))
+                    <input type="hidden" name="desc" value="{{ Request::get('desc') }}">
+                    @endif
+
+                    <div class="form-group">
+                        <input type="text" 
+                            name="q[{{ $column->identifier() }}]" 
+                            @if(
+                                null !== request()->get('q') && 
+                                isset(request()->get('q')[$column->identifier()])
+                            )
+                                value="{{ request()->get('q')[$column->identifier()] }}"
+                            @endif
+                            
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="d-none"></button>
+                    </div>
+                </form>
                 @endif
             </th>
         @endforeach
