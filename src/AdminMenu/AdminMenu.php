@@ -36,11 +36,11 @@ class AdminMenu implements AdminMenuContracts
      */
     public function __construct($callable = null)
     {
-        if(is_callable($callable)) {
+        if (is_callable($callable)) {
             $callable($this);
         }
-        
     }
+
     /**
      * Get/Set Admin Menu Label.
      *
@@ -112,13 +112,17 @@ class AdminMenu implements AdminMenuContracts
      */
     public function subMenu($key = null, $menuItem = null)
     {
-        if(null === $menuItem) {
+        if (null === $menuItem) {
             return $this->subMenu;
         }
 
-        $this->subMenu[$key] = $menuItem;
+        if (is_callable($menuItem)) {
+            $menu = new AdminMenu($menuItem);
+            $this->subMenu[$key] = $menu;
+        } else {
+            $this->subMenu[$key] = $menuItem;
+        }
 
         return $this;
-
     }
 }

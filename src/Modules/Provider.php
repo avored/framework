@@ -14,7 +14,8 @@ class Provider extends ServiceProvider
      */
     protected $defer = true;
 
-    public function boot() {
+    public function boot()
+    {
         $modules = Module::all();
     }
 
@@ -28,9 +29,6 @@ class Provider extends ServiceProvider
         $this->registerModuleConsoleProvider();
         $this->registerModule();
         $this->app->alias('module', 'AvoRed\Framework\Modules\Manager');
-
-
-        //$modules = Module::all();
     }
 
     /**
