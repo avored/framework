@@ -61,19 +61,18 @@ class Manager
                     $module->namespace($data['namespace']);
                     $module->identifier($data['identifier']);
                     $module->name($data['name']);
+                    $module->status($data['status']);
                     $module->description($data['description']);
                     $module->basePath($iterator->getPath());
                     $module->publishedTags($data['published_tags'] ?? []);
 
                     $composerLoader = require base_path('vendor/autoload.php');
-
-                    $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
-
-                    $composerLoader->addPsr4($module->namespace(), $path);
-
-                    $moduleProvider = $module->namespace() . 'Module';
-
-                    App::register($moduleProvider);
+                    if (strtolower($module->status()) == 'enabled') {
+                        $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
+                        $composerLoader->addPsr4($module->namespace(), $path);
+                        $moduleProvider = $module->namespace() . 'Module';
+                        App::register($moduleProvider);
+                    }
 
                     $this->moduleList->put($module->identifier(), $module);
                 }
