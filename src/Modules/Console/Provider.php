@@ -13,6 +13,7 @@ class Provider extends ServiceProvider
      * @var array $commandName
      */
     protected $commandName = [
+        'avored.module.install',
         'avored.module.make',
         'avored.controller.make',
         'avored.install'
@@ -56,6 +57,18 @@ class Provider extends ServiceProvider
     {
         $this->app->singleton('command.avored.module.make', function ($app) {
             return new ModuleMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the Avored Module Install .
+     *
+     * @return void
+     */
+    protected function registerAvoredModuleInstall()
+    {
+        $this->app->singleton('command.avored.module.install', function ($app) {
+            return new ModuleInstallCommand($app['migrator']);
         });
     }
 

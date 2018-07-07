@@ -56,20 +56,25 @@ class Manager
                     $moduleRegisterContent = File::get($filePath);
                     $data = Yaml::parse($moduleRegisterContent);
 
-                    $namespace = $data['namespace'];
+                    $module = new Module();
+
+                    $module->namespace($data['namespace']);
+                    $module->identifier($data['identifier']);
+                    $module->name($data['name']);
+                    $module->status($data['status']);
+                    $module->description($data['description']);
+                    $module->basePath($iterator->getPath());
+                    $module->publishedTags($data['published_tags'] ?? []);
 
                     $composerLoader = require base_path('vendor/autoload.php');
+                    if (strtolower($module->status()) == 'enabled') {
+                        $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
+                        $composerLoader->addPsr4($module->namespace(), $path);
+                        $moduleProvider = $module->namespace() . 'Module';
+                        App::register($moduleProvider);
+                    }
 
-                    $path = $iterator->getPath().DIRECTORY_SEPARATOR.'src';
-
-                    $composerLoader->addPsr4($namespace, $path);
-
-                    $moduleProvider = $data['namespace'].'Module';
-
-                    //var_dump($moduleProvider);
-                    App::register($moduleProvider);
-
-                    $this->moduleList->put($data['identifier'], $data);
+                    $this->moduleList->put($module->identifier(), $module);
                 }
                 $iterator->next();
             }
@@ -152,8 +157,8 @@ class Manager
     protected function moveManagedFiles($manager)
     {
         foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']))) {
-                $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
+            if ($file['type'] === 'file' && (!$manager->has('to://' . $file['path']))) {
+                $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
             }
         }
     }
