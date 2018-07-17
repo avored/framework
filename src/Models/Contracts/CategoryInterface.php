@@ -58,4 +58,23 @@ interface CategoryInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function options();
+
+    /*
+    * Paginate Category Page Product
+    *
+    * @param \Illuminate\Support\Collection $products
+    * @param integer $perPage
+    * @return \Illuminate\Pagination\LengthAwarePaginator
+    */
+
+    public function paginateProducts($products, $perPage = 10);
+
+    /*
+    * Return Products of Category with Filters
+    *
+    * @param integer $categoryId
+    * @param array   $filters
+    * @return \Illuminate\Support\Collection $collect
+    */
+    public function getCategoryProductWithFilter($categoryId, $filters = []);
 }
