@@ -91,34 +91,6 @@ class Product extends Model
     }
 
     /**
-     * Save Product Images.
-     *
-     * @param array $$data
-     * @return \AvoRed\Framework\Models\Database\Product $this
-     */
-    public function saveProductImages(array $data):self
-    {
-        if (isset($data['image']) && count($data['image']) > 0) {
-            $exitingIds = $this->images()->get()->pluck('id')->toArray();
-            foreach ($data['image'] as $key => $data) {
-                if (is_int($key)) {
-                    if (($findKey = array_search($key, $exitingIds)) !== false) {
-                        $productImage = ProductImage::findorfail($key);
-                        $productImage->update($data);
-                        unset($exitingIds[$findKey]);
-                    }
-                    continue;
-                }
-                ProductImage::create($data + ['product_id' => $this->id]);
-            }
-            if (count($exitingIds) > 0) {
-                ProductImage::destroy($exitingIds);
-            }
-        }
-        return $this;
-    }
-
-    /**
      * Update the Product and Product Related Data.
      *
      * @var array $data
@@ -126,32 +98,17 @@ class Product extends Model
      */
     public function saveProduct($data)
     {
-        Event::fire(new ProductBeforeSave($data));
+        //Event::fire(new ProductBeforeSave($data));
 
         $this->update($data);
-        $this->saveProductImages($data);
-        $this->saveCategoryFilters($data);
-        $this->saveProductCategories($data);
+
         $this->saveProductProperties($data);
         $this->saveProductAttributes($data);
         $this->saveProductDownloadable($data);
 
-        Event::fire(new ProductAfterSave($this, $data));
+        //Event::fire(new ProductAfterSave($this, $data));
 
         return $this;
-    }
-
-    /**
-     * Save Product Categories
-     *
-     * @param array $data
-     * @return void
-     */
-    protected function saveProductCategories($data)
-    {
-        if (isset($data['category_id']) && count($data['category_id']) > 0) {
-            $this->categories()->sync($data['category_id']);
-        }
     }
 
     /**
@@ -276,46 +233,6 @@ class Product extends Model
                 ]);
 
                 ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
-            }
-        }
-    }
-
-    /**
-     * Save Category Filter -- Property and Attributes Ids
-     *
-     *
-     * @param array $data
-     * @return void
-     */
-    public function saveCategoryFilters($data)
-    {
-        $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
-
-        foreach ($categoryIds as $categoryId) {
-            $propertyIds = isset($data['product-property']) ? $data['product-property'] : [];
-
-            foreach ($propertyIds as $propertyId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($propertyId)->whereType('PROPERTY')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $propertyId,
-                        'type' => 'PROPERTY'
-                    ]);
-                }
-            }
-
-            $attrbuteIds = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
-
-            foreach ($attrbuteIds as $attrbuteId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($attrbuteId)->whereType('ATTRIBUTE')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $attrbuteId,
-                        'type' => 'ATTRIBUTE'
-                    ]);
-                }
             }
         }
     }
