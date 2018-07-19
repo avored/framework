@@ -291,33 +291,20 @@ class Product extends Model
      */
     public function saveCategoryFilters($data)
     {
-        $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
+        $categoryIds = array_get($data, 'category_id', []);
 
         foreach ($categoryIds as $categoryId) {
-            $propertyIds = isset($data['product-property']) ? $data['product-property'] : [];
+            $rep = app(CategoryFilterInterface::class);
+
+            $propertyIds = array_get($data, 'product-property', []);
 
             foreach ($propertyIds as $propertyId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($propertyId)->whereType('PROPERTY')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $propertyId,
-                        'type' => 'PROPERTY'
-                    ]);
-                }
+                $rep->saveFilter($categoryId, $propertyId, $type = 'PROPERTY');
             }
 
-            $attrbuteIds = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
-
+            $attributeIds = array_get($data, 'attribute_selected', []);
             foreach ($attrbuteIds as $attrbuteId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($attrbuteId)->whereType('ATTRIBUTE')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $attrbuteId,
-                        'type' => 'ATTRIBUTE'
-                    ]);
-                }
+                $rep->saveFilter($categoryId, $attrbuteId, $type = 'ATTRIBUTE');
             }
         }
     }

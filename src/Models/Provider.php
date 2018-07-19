@@ -19,6 +19,8 @@ use AvoRed\Framework\Models\Repository\OrderHistoryRepository;
 use AvoRed\Framework\Models\Contracts\OrderHistoryInterface;
 use AvoRed\Framework\Models\Repository\PropertyRepository;
 use AvoRed\Framework\Models\Contracts\PropertyInterface;
+use AvoRed\Framework\Models\Repository\CategoryFilterRepository;
+use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Provider extends ServiceProvider
 {
@@ -82,6 +84,10 @@ class Provider extends ServiceProvider
         $this->app->bind(
             PropertyInterface::class,
             PropertyRepository::class
+        );
+        $this->app->bind(
+            CategoryFilterInterface::class,
+            CategoryFilterRepository::class
         );
     }
 }
