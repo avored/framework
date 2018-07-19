@@ -17,6 +17,8 @@ use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 use AvoRed\Framework\Models\Repository\OrderHistoryRepository;
 use AvoRed\Framework\Models\Contracts\OrderHistoryInterface;
+use AvoRed\Framework\Models\Repository\PropertyRepository;
+use AvoRed\Framework\Models\Contracts\PropertyInterface;
 
 class Provider extends ServiceProvider
 {
@@ -76,6 +78,10 @@ class Provider extends ServiceProvider
         $this->app->bind(
             OrderHistoryInterface::class,
             OrderHistoryRepository::class
+        );
+        $this->app->bind(
+            PropertyInterface::class,
+            PropertyRepository::class
         );
     }
 }

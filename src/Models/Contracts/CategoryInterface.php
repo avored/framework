@@ -57,7 +57,7 @@ interface CategoryInterface
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function options();
+    public function options($empty = true);
 
     /*
     * Paginate Category Page Product

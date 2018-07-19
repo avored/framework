@@ -188,10 +188,13 @@ class CategoryRepository implements CategoryInterface
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function options()
+    public function options($empty = true)
     {
-        $empty = new Category();
-        $empty->name = 'Please Select';
-        return Category::all()->prepend($empty);
+        if (true === $empty) {
+            $empty = new Category();
+            $empty->name = 'Please Select';
+            return Category::all()->prepend($empty);
+        }
+        return Category::all();
     }
 }

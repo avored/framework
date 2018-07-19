@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Ecommerce\Models\Contracts\SiteCurrencyInterface;
+use AvoRed\Framework\Models\Contracts\PropertyInterface;
 
 class Product extends Model
 {
@@ -213,8 +214,9 @@ class Product extends Model
         if (count($properties) > 0) {
             foreach ($properties as $key => $property) {
                 foreach ($property as $propertyId => $propertyValue) {
-                    $propertyModel = Property::findorfail($propertyId);
-                    $propertyModel->saveProperty($this->id, $propertyValue);
+                    $rep = app(PropertyInterface::class);
+                    $propertyModel = $rep->find($propertyId);
+                    $propertyModel->attachProduct($this)->fill(['value' => $propertyValue])->save();
                 }
             }
         }
