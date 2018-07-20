@@ -26,7 +26,7 @@ class AttributeRepository implements AttributeInterface
     */
     public function findMany($ids)
     {
-        return Attribute::whereIn($id)->get();
+        return Attribute::whereIn('id', $ids)->get();
     }
 
     /**

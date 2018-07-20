@@ -39,12 +39,12 @@ class CategoryFilterRepository implements CategoryFilterInterface
     public function saveFilter($categoryId, $filterId, $type)
     {
         $filterModel = CategoryFilter::whereCategoryId($categoryId)
-                                        ->whereFilterId($propertyId)
+                                        ->whereFilterId($filterId)
                                         ->whereType('PROPERTY')->first();
         if (null === $filterModel) {
             CategoryFilter::create([
                 'category_id' => $categoryId,
-                'filter_id' => $propertyId,
+                'filter_id' => $filterId,
                 'type' => 'PROPERTY'
             ]);
         }

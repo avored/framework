@@ -14,6 +14,7 @@ use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Ecommerce\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\Models\Contracts\PropertyInterface;
+use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Product extends Model
 {
@@ -245,41 +246,101 @@ class Product extends Model
 
             $listOfOptions = $this->combinations($optionsArray);
 
+            //dd($listOfOptions);
+
             foreach ($listOfOptions as $option) {
-                $variationProductData['name'] = $this->name;
-                $variationProductData['type'] = 'VARIABLE_PRODUCT';
-                $variationProductData['status'] = 0;
-                $variationProductData['qty'] = $this->qty;
-                $variationProductData['price'] = $this->price;
-
-                if (is_array($option)) {
-                    foreach ($option as $attributeOptionId) {
-                        $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
-                        $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
-                    }
-                } else {
-                    $attributeOptionModel = AttributeDropdownOption::findorfail($option);
-                    $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
-                }
-
-                $variationProductData['sku'] = str_slug($variationProductData['name']);
-                $variationProductData['slug'] = str_slug($variationProductData['name']);
-
+                $variationProductData = $this->getVariationProductDataGivenOptions($option);
                 $variableProduct = self::create($variationProductData);
 
                 if (isset($data['category_id']) && count($data['category_id']) > 0) {
                     $variableProduct->categories()->sync($data['category_id']);
                 }
 
-                ProductAttributeIntegerValue::create([
-                    'product_id' => $variableProduct->id,
-                    'attribute_id' => $attributeOptionModel->attribute->id,
-                    'value' => $attributeOptionModel->id,
-                ]);
+                if (is_array($option)) {
+                    foreach ($option as $attributeOptionId) {
+                        $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
+                        ProductAttributeIntegerValue::create([
+                            'product_id' => $variableProduct->id,
+                            'attribute_id' => $attributeOptionModel->attribute->id,
+                            'value' => $attributeOptionModel->id,
+                        ]);
+                    }
+                } else {
+                    $attributeOptionModel = AttributeDropdownOption::findorfail($option);
+                    ProductAttributeIntegerValue::create([
+                        'product_id' => $variableProduct->id,
+                        'attribute_id' => $attributeOptionModel->attribute->id,
+                        'value' => $attributeOptionModel->id,
+                    ]);
+                }
 
-                ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
+                ProductVariation::create(['product_id' => $this->id,
+                                        'variation_id' => $variableProduct->id
+                                        ]);
             }
         }
+    }
+
+    /**
+     * Make all combination based on attributes array
+     *
+     * @param array $options
+     * @return void
+     */
+    public function getVariationProductDataGivenOptions($options)
+    {
+        $data['name'] = $this->name;
+
+        if (is_array($options)) {
+            foreach ($options as $attributeOptionId) {
+                $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
+                $data['name'] .= ' ' . $attributeOptionModel->display_text;
+            }
+        } else {
+            $attributeOptionModel = AttributeDropdownOption::findorfail($option);
+            $data['name'] .= ' ' . $attributeOptionModel->display_text;
+        }
+
+        $data['sku'] = str_slug($data['name']);
+        $data['slug'] = str_slug($data['name']);
+
+        $data['type'] = 'VARIABLE_PRODUCT';
+        $data['status'] = 0;
+        $data['qty'] = $this->qty;
+        $data['price'] = $this->price;
+
+        return $data;
+    }
+
+    /**
+    * Make all combination based on attributes array
+    *
+    * @param array $arrays
+    * @param integer $i
+    * @return array $result
+    */
+    public function combinations($arrays, $i = 0)
+    {
+        if (!isset($arrays[$i])) {
+            return [];
+        }
+        if ($i == count($arrays) - 1) {
+            return $arrays[$i];
+        }
+
+        $tmp = $this->combinations($arrays, $i + 1);
+
+        $result = [];
+
+        foreach ($arrays[$i] as $v) {
+            foreach ($tmp as $t) {
+                $result[] = is_array($t) ?
+                    array_merge([$v], $t) :
+                    [$v, $t];
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -303,36 +364,10 @@ class Product extends Model
             }
 
             $attributeIds = array_get($data, 'attribute_selected', []);
-            foreach ($attrbuteIds as $attrbuteId) {
+            foreach ($attributeIds as $attrbuteId) {
                 $rep->saveFilter($categoryId, $attrbuteId, $type = 'ATTRIBUTE');
             }
         }
-    }
-
-    public function combinations($arrays, $i = 0)
-    {
-        if (!isset($arrays[$i])) {
-            return [];
-        }
-        if ($i == count($arrays) - 1) {
-            return $arrays[$i];
-        }
-
-        // get combinations from subsequent arrays
-        $tmp = $this->combinations($arrays, $i + 1);
-
-        $result = [];
-
-        // concat each array from tmp with each element from $arrays[$i]
-        foreach ($arrays[$i] as $v) {
-            foreach ($tmp as $t) {
-                $result[] = is_array($t) ?
-                    array_merge([$v], $t) :
-                    [$v, $t];
-            }
-        }
-
-        return $result;
     }
 
     /**
