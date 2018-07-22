@@ -202,7 +202,7 @@ class Product extends Model
         }
     }
 
-    /**
+     /**
      * Save Product Attributes
      *
      * @param array $data
@@ -214,11 +214,14 @@ class Product extends Model
 
         if (count($properties) > 0) {
             foreach ($properties as $key => $property) {
+                
+                
                 foreach ($property as $propertyId => $propertyValue) {
-                    $rep = app(PropertyInterface::class);
-                    $propertyModel = $rep->find($propertyId);
-                    $propertyModel->attachProduct($this)->fill(['value' => $propertyValue])->save();
+                    $propertyModel = Property::findorfail($propertyId);
+                    $syncProperty[] = $propertyId;  
+                    $propertyModel->saveProperty($this->id, $propertyValue);
                 }
+                $this->properties()->sync($syncProperty);
             }
         }
     }

@@ -122,6 +122,17 @@ class Property extends Model
         return $valueModel;
     }
 
+
+    /**
+    * Property belongs to many Products.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
     /*
       * Save Product Property based on its data_type.
       *
