@@ -164,6 +164,18 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('properties')->onDelete('cascade');
         });
 
+        Schema::create('product_property', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('property_id')->unsigned();
+            $table->integer('product_id')->unsigned();
+           
+            $table->timestamps();
+
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
         Schema::create('product_property_varchar_values', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
