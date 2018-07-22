@@ -9,17 +9,16 @@ use Illuminate\Support\Str;
 use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
-use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Ecommerce\Models\Contracts\SiteCurrencyInterface;
+use AvoRed\Framework\Models\Contracts\PropertyInterface;
+use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Product extends Model
 {
     public static $VARIATION_TYPE = 'VARIATION';
-
 
     protected $fillable = ['type', 'name', 'slug', 'sku',
         'description', 'status', 'in_stock', 'track_stock', 'price',
@@ -32,75 +31,34 @@ class Product extends Model
      */
     protected $_collection = null;
 
-    public function setCollection($products)
+    public function getPropertiesAll()
     {
-        $this->_collection = $products;
+        $properties = Property::whereUseForAllProducts(1)->get();
+        $collections = $this->getProductAllProperties();
+        $existingIds = $collections->pluck('property_id');
 
-        return $this;
+        foreach ($properties as $property) {
+            if (!in_array($property->id, array_values($existingIds->toArray()))) {
+                $collections->push($property);
+            }
+        }
+        return $collections;
     }
 
-    public function getCollection()
+    public function hasVariation()
+    {
+        if ($this->type == self::$VARIATION_TYPE) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getProductBySlug($slug)
     {
         $model = new static;
-        $products = $model->all();
-        //$productCollection = new ProductCollection();
-        //$productCollection->setCollection($products);
 
-        $this->setCollection($products);
-
-        return $this;
-    }
-
-    public function addAttributeFilter($attributeId, $value)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-            foreach ($this->getProductAllAttributes() as $productAttribute) {
-                if ($productAttribute->attribute_id == $attributeId && $productAttribute->value == $value) {
-                    return $product;
-                }
-            }
-        });
-
-        return $this->_collection;
-    }
-
-    public function addPropertyFilter($attributeId, $value)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-            foreach ($product->getProductAllProperties() as $productAttribute) {
-                if ($productAttribute->property_id == $attributeId && $productAttribute->value == $value) {
-                    return $product;
-                }
-            }
-        });
-
-        return $this->_collection;
-    }
-
-    public function productPaginate($products, $perPage = 10)
-    {
-        $request = request();
-        $page = request('page');
-        $offset = ($page * $perPage) - $perPage;
-
-        return new LengthAwarePaginator(
-            $products->slice($offset, $perPage), // Only grab the items we need
-            $products->count(), // Total items
-            $perPage, // Items per page
-            $page, // Current page
-            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-        );
-    }
-
-    public function addCategoryFilter($categoryId)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($categoryId) {
-            if ($product->categories->count() > 0 && $product->categories->pluck('id')->contains($categoryId)) {
-                return $product;
-            }
-        });
-
-        return $this;
+        return $model->where('slug', '=', $slug)->first();
     }
 
     public static function boot()
@@ -120,31 +78,19 @@ class Product extends Model
         });
     }
 
-    public function hasVariation()
-    {
-        if ($this->type ==  self::$VARIATION_TYPE) {
-            return true;
-        }
-
-        return false;
-    }
-
-
     public function getPriceAttribute($val)
     {
         $currentCurrencyCode = Session::get('currency_code');
 
-        if(null === $currentCurrencyCode) {
+        if (null === $currentCurrencyCode) {
             return $val;
         }
 
         $siteCurrency = App::get(SiteCurrencyInterface::class);
         $model = $siteCurrency->findByCode($currentCurrencyCode);
-        
-          
+
         return $val * $model->conversion_rate;
     }
-
 
     /**
      * Save Product Images.
@@ -155,7 +101,6 @@ class Product extends Model
     public function saveProductImages(array $data):self
     {
         if (isset($data['image']) && count($data['image']) > 0) {
-
             $exitingIds = $this->images()->get()->pluck('id')->toArray();
             foreach ($data['image'] as $key => $data) {
                 if (is_int($key)) {
@@ -171,7 +116,6 @@ class Product extends Model
             if (count($exitingIds) > 0) {
                 ProductImage::destroy($exitingIds);
             }
-
         }
         return $this;
     }
@@ -191,20 +135,21 @@ class Product extends Model
         $this->saveCategoryFilters($data);
         $this->saveProductCategories($data);
         $this->saveProductProperties($data);
-        $this->saveProductAttributes($data);  
-        $this->saveProductDownloadable($data);  
+        $this->saveProductAttributes($data);
+        $this->saveProductDownloadable($data);
 
         Event::fire(new ProductAfterSave($this, $data));
 
         return $this;
     }
+
     /**
      * Save Product Categories
      *
      * @param array $data
      * @return void
      */
-    protected function saveProductCategories($data) 
+    protected function saveProductCategories($data)
     {
         if (isset($data['category_id']) && count($data['category_id']) > 0) {
             $this->categories()->sync($data['category_id']);
@@ -217,67 +162,66 @@ class Product extends Model
      * @param array $data
      * @return void
      */
-    protected function saveProductDownloadable($data) 
+    protected function saveProductDownloadable($data)
     {
-       
         if (isset($data['downloadable']) && count($data['downloadable']) > 0) {
-
             $repository = App::get(ProductDownloadableUrlInterface::class);
 
-            
             $mainDownloadableMedia = ($data['downloadable']['main_product']) ?? null;
 
-            if(null === $mainDownloadableMedia) {
+            if (null === $mainDownloadableMedia) {
                 throw new \Exception('Invalid Downloadable Media Given or Nothing Given');
             }
-            
+
             $tmpPath = str_split(strtolower(str_random(3)));
             $path = 'uploads/downloadables/' . implode('/', $tmpPath);
-            $dbPath = $mainDownloadableMedia->store($path,'avored');
+            $dbPath = $mainDownloadableMedia->store($path, 'avored');
             $token = str_random(32);
-
 
             $downModel = $repository->query()->whereProductId($this->id)->first();
 
-           if (null === $downModel) {
-               $downModel = ProductDownloadableUrl::create([
+            if (null === $downModel) {
+                $downModel = ProductDownloadableUrl::create([
                                         'token' => $token,
                                         'product_id' => $this->id,
                                         'main_path' => $dbPath
                                         ]);
-           } else {
-               $downModel->update(['main_path' => $dbPath]); 
-           }
-
-            
+            } else {
+                $downModel->update(['main_path' => $dbPath]);
+            }
 
             $demoDownloadableMedia = ($data['downloadable']['demo_product']) ?? null;
-            
+
             if (null !== $demoDownloadableMedia) {
                 $tmpPath = str_split(strtolower(str_random(3)));
                 $path = 'uploads/downloadables/' . implode('/', $tmpPath);
-                $demoDbPath = $demoDownloadableMedia->store($path,'avored');
+                $demoDbPath = $demoDownloadableMedia->store($path, 'avored');
 
                 $downModel->update(['demo_path' => $demoDbPath]);
             }
         }
     }
-    /**
+
+     /**
      * Save Product Attributes
      *
      * @param array $data
      * @return void
      */
-    protected function saveProductProperties($data) 
+    protected function saveProductProperties($data)
     {
         $properties = isset($data['property']) ? $data['property'] : [];
 
         if (count($properties) > 0) {
             foreach ($properties as $key => $property) {
+                
+                
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
+                    $syncProperty[] = $propertyId;  
                     $propertyModel->saveProperty($this->id, $propertyValue);
                 }
+                $this->properties()->sync($syncProperty);
             }
         }
     }
@@ -288,7 +232,7 @@ class Product extends Model
      * @param array $data
      * @return void
      */
-    protected function saveProductAttributes($data) 
+    protected function saveProductAttributes($data)
     {
         $attributeWithOptions = isset($data['attribute']) ? $data['attribute'] : [];
 
@@ -305,83 +249,79 @@ class Product extends Model
 
             $listOfOptions = $this->combinations($optionsArray);
 
+            //dd($listOfOptions);
+
             foreach ($listOfOptions as $option) {
-                $variationProductData['name'] = $this->name;
-                $variationProductData['type'] = 'VARIABLE_PRODUCT';
-                $variationProductData['status'] = 0;
-                $variationProductData['qty'] = $this->qty;
-                $variationProductData['price'] = $this->price;
-
-                if (is_array($option)) {
-                    foreach ($option as $attributeOptionId) {
-                        $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
-                        $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
-                    }
-                } else {
-                    $attributeOptionModel = AttributeDropdownOption::findorfail($option);
-                    $variationProductData['name'] .= ' ' . $attributeOptionModel->display_text;
-                }
-
-                $variationProductData['sku'] = str_slug($variationProductData['name']);
-                $variationProductData['slug'] = str_slug($variationProductData['name']);
-
+                $variationProductData = $this->getVariationProductDataGivenOptions($option);
                 $variableProduct = self::create($variationProductData);
 
                 if (isset($data['category_id']) && count($data['category_id']) > 0) {
                     $variableProduct->categories()->sync($data['category_id']);
                 }
 
-                ProductAttributeIntegerValue::create([
-                    'product_id' => $variableProduct->id,
-                    'attribute_id' => $attributeOptionModel->attribute->id,
-                    'value' => $attributeOptionModel->id,
-                ]);
-
-                ProductVariation::create(['product_id' => $this->id, 'variation_id' => $variableProduct->id]);
-            }
-        }   
-        
-    }
-    /**
-     * Save Category Filter -- Property and Attributes Ids
-     *
-     *
-     * @param array $data
-     * @return void
-     */
-    public function saveCategoryFilters($data)
-    {
-        $categoryIds = isset($data['category_id']) ? $data['category_id'] : [];
-
-        foreach ($categoryIds as $categoryId) {
-            $propertyIds = isset($data['product-property']) ? $data['product-property'] : [];
-
-            foreach ($propertyIds as $propertyId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($propertyId)->whereType('PROPERTY')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $propertyId,
-                        'type' => 'PROPERTY'
+                if (is_array($option)) {
+                    foreach ($option as $attributeOptionId) {
+                        $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
+                        ProductAttributeIntegerValue::create([
+                            'product_id' => $variableProduct->id,
+                            'attribute_id' => $attributeOptionModel->attribute->id,
+                            'value' => $attributeOptionModel->id,
+                        ]);
+                    }
+                } else {
+                    $attributeOptionModel = AttributeDropdownOption::findorfail($option);
+                    ProductAttributeIntegerValue::create([
+                        'product_id' => $variableProduct->id,
+                        'attribute_id' => $attributeOptionModel->attribute->id,
+                        'value' => $attributeOptionModel->id,
                     ]);
                 }
-            }
 
-            $attrbuteIds = isset($data['attribute_selected']) ? $data['attribute_selected'] : [];
-
-            foreach ($attrbuteIds as $attrbuteId) {
-                $filterModel = CategoryFilter::whereCategoryId($categoryId)->whereFilterId($attrbuteId)->whereType('ATTRIBUTE')->first();
-                if (null === $filterModel) {
-                    CategoryFilter::create([
-                        'category_id' => $categoryId,
-                        'filter_id' => $attrbuteId,
-                        'type' => 'ATTRIBUTE'
-                    ]);
-                }
+                ProductVariation::create(['product_id' => $this->id,
+                                        'variation_id' => $variableProduct->id
+                                        ]);
             }
         }
     }
 
+    /**
+     * Make all combination based on attributes array
+     *
+     * @param array $options
+     * @return void
+     */
+    public function getVariationProductDataGivenOptions($options)
+    {
+        $data['name'] = $this->name;
+
+        if (is_array($options)) {
+            foreach ($options as $attributeOptionId) {
+                $attributeOptionModel = AttributeDropdownOption::findorfail($attributeOptionId);
+                $data['name'] .= ' ' . $attributeOptionModel->display_text;
+            }
+        } else {
+            $attributeOptionModel = AttributeDropdownOption::findorfail($option);
+            $data['name'] .= ' ' . $attributeOptionModel->display_text;
+        }
+
+        $data['sku'] = str_slug($data['name']);
+        $data['slug'] = str_slug($data['name']);
+
+        $data['type'] = 'VARIABLE_PRODUCT';
+        $data['status'] = 0;
+        $data['qty'] = $this->qty;
+        $data['price'] = $this->price;
+
+        return $data;
+    }
+
+    /**
+    * Make all combination based on attributes array
+    *
+    * @param array $arrays
+    * @param integer $i
+    * @return array $result
+    */
     public function combinations($arrays, $i = 0)
     {
         if (!isset($arrays[$i])) {
@@ -391,12 +331,10 @@ class Product extends Model
             return $arrays[$i];
         }
 
-        // get combinations from subsequent arrays
         $tmp = $this->combinations($arrays, $i + 1);
 
         $result = [];
 
-        // concat each array from tmp with each element from $arrays[$i]
         foreach ($arrays[$i] as $v) {
             foreach ($tmp as $t) {
                 $result[] = is_array($t) ?
@@ -408,11 +346,31 @@ class Product extends Model
         return $result;
     }
 
-    public static function getProductBySlug($slug)
+    /**
+     * Save Category Filter -- Property and Attributes Ids
+     *
+     *
+     * @param array $data
+     * @return void
+     */
+    public function saveCategoryFilters($data)
     {
-        $model = new static;
+        $categoryIds = array_get($data, 'category_id', []);
 
-        return $model->where('slug', '=', $slug)->first();
+        foreach ($categoryIds as $categoryId) {
+            $rep = app(CategoryFilterInterface::class);
+
+            $propertyIds = array_get($data, 'product-property', []);
+
+            foreach ($propertyIds as $propertyId) {
+                $rep->saveFilter($categoryId, $propertyId, $type = 'PROPERTY');
+            }
+
+            $attributeIds = array_get($data, 'attribute_selected', []);
+            foreach ($attributeIds as $attrbuteId) {
+                $rep->saveFilter($categoryId, $attrbuteId, $type = 'ATTRIBUTE');
+            }
+        }
     }
 
     /**
@@ -432,20 +390,6 @@ class Product extends Model
         if ($image->path instanceof LocalFile) {
             return $image->path;
         }
-    }
-
-    public function getPropertiesAll()
-    {
-        $properties = Property::whereUseForAllProducts(1)->get();
-        $collections = $this->getProductAllProperties();
-        $existingIds = $collections->pluck('property_id');
-
-        foreach ($properties as $property) {
-            if (!in_array($property->id, array_values($existingIds->toArray()))) {
-                $collections->push($property);
-            }
-        }
-        return $collections;
     }
 
     /**
@@ -569,11 +513,10 @@ class Product extends Model
 
     public function getVariableMainProduct($variationId = null)
     {
-        
         if (null === $variationId) {
             $variationId = $this->attributes['id'];
         }
-        
+
         $productVariationModel = ProductVariation::whereVariationId($variationId)->first();
         $model = new static();
 
@@ -709,4 +652,75 @@ class Product extends Model
     {
         return $this->hasOne(ProductDownloadableUrl::class);
     }
+
+    /*
+    public function getCollection()
+    {
+        $model = new static;
+        $products = $model->all();
+        //$productCollection = new ProductCollection();
+        //$productCollection->setCollection($products);
+
+        $this->setCollection($products);
+
+        return $this;
+    }
+    public function setCollection($products)
+    {
+        $this->_collection = $products;
+
+        return $this;
+    }
+
+       public function addAttributeFilter($attributeId, $value)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
+            foreach ($this->getProductAllAttributes() as $productAttribute) {
+                if ($productAttribute->attribute_id == $attributeId && $productAttribute->value == $value) {
+                    return $product;
+                }
+            }
+        });
+
+        return $this->_collection;
+    }
+
+    public function addPropertyFilter($attributeId, $value)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
+            foreach ($product->getProductAllProperties() as $productAttribute) {
+                if ($productAttribute->property_id == $attributeId && $productAttribute->value == $value) {
+                    return $product;
+                }
+            }
+        });
+
+        return $this->_collection;
+    }
+
+    public function productPaginate($products, $perPage = 10)
+    {
+        $request = request();
+        $page = request('page');
+        $offset = ($page * $perPage) - $perPage;
+
+        return new LengthAwarePaginator(
+            $products->slice($offset, $perPage), // Only grab the items we need
+            $products->count(), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+    }
+
+    public function addCategoryFilter($categoryId)
+    {
+        $this->_collection = $this->_collection->filter(function ($product) use ($categoryId) {
+            if ($product->categories->count() > 0 && $product->categories->pluck('id')->contains($categoryId)) {
+                return $product;
+            }
+        });
+
+        return $this;
+    } */
 }

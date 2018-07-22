@@ -4,7 +4,8 @@ namespace AvoRed\Framework;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
+use AvoRed\Framework\Models\Database\Product;
+use AvoRed\Framework\Observers\ProductObserver;
 
 class Provider extends ServiceProvider
 {
@@ -34,6 +35,7 @@ class Provider extends ServiceProvider
     public function boot()
     {
         $this->registerResources();
+        $this->registerEventObserver();
     }
 
     /**
@@ -74,16 +76,12 @@ class Provider extends ServiceProvider
 
     public function registerConfigData()
     {
-        
         $this->mergeConfigFrom(__DIR__ . '/../config/avored-framework.php', 'avored-framework');
 
-        $avoredConfigData = include(__DIR__ . '/../config/avored-framework.php');
+        $avoredConfigData = include __DIR__ . '/../config/avored-framework.php';
         $fileSystemConfig = $this->app['config']->get('filesystems', []);
-       
-       
-        $this->app['config']->set('filesystems', array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig));
 
-       
+        $this->app['config']->set('filesystems', array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig));
     }
 
     public function publishFiles()
@@ -91,5 +89,14 @@ class Provider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/avored-framework.php' => config_path('avored-framework.php'),
         ]);
+    }
+
+    /**
+     * Register an Event Observer for the Database Model
+     * @return void
+     */
+    public function registerEventObserver()
+    {
+        Product::observe(ProductObserver::class);
     }
 }

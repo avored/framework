@@ -24,9 +24,9 @@ class AttributeRepository implements AttributeInterface
     * @param $id
     * @return \AvoRed\Framework\Models\Database\Attribute
     */
-    public function findMany(array $ids)
+    public function findMany($ids)
     {
-        return Attribute::whereIn($id)->get();
+        return Attribute::whereIn('id', $ids)->get();
     }
 
     /**
