@@ -1,44 +1,39 @@
-<?php 
-//dd($dataGrid->columns);
-?>
-
-<div class="table-responsive">
-<table class="avored-table-grid table table-striped">
-    <thead class="thead-">
-    <tr>
+<div class="avored-table">
+    <div class="avored-table-row header">
         @foreach($dataGrid->columns as $column)
-
-        <?php  //dd($column->descUrl());?>
-            <th>
+           
+            <div class="{{ $column->class() }} avored-table-cell" >
                 @if($column->sortable() && $dataGrid->desc($column->identifier()))
                     <a href="{{ $column->ascUrl() }}">
                         {{ $column->label() }}
-                        <i class="text-primary fa fa-sort-down"></i>
+                        <i class="text-white fa fa-sort-down"></i>
                     </a>
                 @elseif($column->sortable() && $dataGrid->asc($column->identifier()))
                         <a href="{{ $column->descUrl() }}">
                             {{ $column->label() }}
-                            <i class="text-primary fa fa-sort-up"></i>
+                            <i class="text-white fa fa-sort-up"></i>
                         </a>
                 @elseif($column->sortable() )
                     <a href="{{ $column->descUrl() }}">
                         {{ $column->label() }}
-                        <i class="text-secondary fa fa-sort"></i>
+                        <i class="text-white fa fa-sort"></i>
                     </a>
                 @else
                     {{ $column->label() }}
 
                 @endif
 
-            </th>
+            </div>
         @endforeach
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
+           
+       
+    </div>
+
+    <div class="avored-table-row filter">
         @foreach($dataGrid->columns as $column)
-            <th>
-                @if($column->canFilter())
+
+        <div class="col avored-table-cell">
+        @if($column->canFilter())
                 <form method="get" action="{{ URL::full() }}">
                   
                     @if(Request::get('asc'))
@@ -65,24 +60,37 @@
                     </div>
                 </form>
                 @endif
-            </th>
-        @endforeach
-    </tr>
-    @foreach($dataGrid->data as $row)
-        <tr>
+            </div>
+       
+          
+        @endforeach   
+        
+
+    </div>
+
+    <div class="avored-table-body">
+       
+        @foreach($dataGrid->data as $row)
+        <div class="avored-table-row ">
             @foreach($dataGrid->columns as $column)
-                <td>
+                <div class="{{ $column->class() }} avored-table-cell">
                     @if($column->type() == "link")
                         {!! $column->executeCallback($row) !!}
                     @else
                         <?php $identifier = $column->identifier() ?>
                         {{ $row->$identifier }}
                     @endif
-                </td>
+                </div>
             @endforeach
-        </tr>
+        </div>
     @endforeach
-    </tbody>
-</table>
+        
+    </div>
+   
+
+    {!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->render('pagination::bootstrap-4') !!}
+
 </div>
-{!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->render('pagination::bootstrap-4') !!}
+
+
+
