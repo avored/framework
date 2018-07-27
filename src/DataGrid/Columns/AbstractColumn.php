@@ -13,6 +13,12 @@ abstract class AbstractColumn implements ColumnContract
     protected $identifier = null;
 
     /**
+     * Column Class.
+     * @var null|string
+     */
+    protected $class = "col";
+
+    /**
      * Column Label.
      * @var null|string
      */
@@ -112,6 +118,20 @@ abstract class AbstractColumn implements ColumnContract
         }
 
         $this->identifier = $identifier;
+        return $this;
+    }
+
+    /**
+     * Get the column Class.
+     * @return string $class
+     */
+    public function class($class = null)
+    {
+        if (null === $class) {
+            return $this->class;
+        }
+
+        $this->class = $class;
         return $this;
     }
 }
