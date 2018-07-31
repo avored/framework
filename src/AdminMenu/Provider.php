@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\AdminMenu;
 
 use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\AdminMenu\Facade as AdminMenuFacade;
 
 class Provider extends ServiceProvider
 {
@@ -15,6 +16,7 @@ class Provider extends ServiceProvider
 
     public function boot()
     {
+        $this->registerAdminMenu();
     }
 
     /**
@@ -48,5 +50,31 @@ class Provider extends ServiceProvider
     public function provides()
     {
         return ['adminmenu', 'AvoRed\Framework\AdminMenu\Builder'];
+    }
+
+
+    /**
+     * Register the Menus.
+     *
+     * @return void
+     */
+    protected function registerAdminMenu()
+    {
+        /*
+        AdminMenuFacade::add('shop', function (AdminMenu $shopMenu) {
+            $shopMenu->label('Shop')
+                    ->route('#')
+                    ->icon('fas fa-cart-plus');
+        });
+        */
+        
+        $shopMenu = AdminMenuFacade::get('shop');
+
+        $shopMenu->subMenu('category',   function(AdminMenu $categoryMenu) {
+            $categoryMenu->key('category')
+            ->label('Category')
+            ->route('admin.category.index')
+            ->icon('far fa-building');
+        });
     }
 }

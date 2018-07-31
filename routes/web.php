@@ -20,5 +20,16 @@ Route::middleware(['web'])
         Route::get('password/reset', 'User\Controllers\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
         Route::post('password/reset', 'User\Controllers\ResetPasswordController@reset')->name('password.reset.token');
 
-
     });
+
+
+
+Route::middleware(['web', 'admin.auth', 'permission'])
+->prefix($baseAdminUrl)
+->name('admin.')
+->namespace('AvoRed\Framework')
+->group(function () {
+
+    Route::resource('category', 'Product\Controllers\CategoryController');
+    
+});
