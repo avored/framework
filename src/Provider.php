@@ -69,6 +69,7 @@ class Provider extends ServiceProvider
     public function registerResources()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'avored-framework');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         //At this stage we don't use these and use avored/framework/database/migration file only
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -78,10 +79,18 @@ class Provider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/avored-framework.php', 'avored-framework');
 
-        $avoredConfigData = include __DIR__ . '/../config/avored-framework.php';
-        $fileSystemConfig = $this->app['config']->get('filesystems', []);
+        $avoredConfigData   = include __DIR__ . '/../config/avored-framework.php';
+        $fileSystemConfig   = $this->app['config']->get('filesystems', []);
+        $authConfig         = $this->app['config']->get('auth', []);
 
-        $this->app['config']->set('filesystems', array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig));
+        $this->app['config']->set(
+                    'filesystems', 
+                    array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig)
+                );
+        $this->app['config']->set(
+                    'auth', 
+                    array_merge_recursive($avoredConfigData['auth'], $authConfig)
+                );
     }
 
     public function publishFiles()
