@@ -15,7 +15,7 @@ class AdminConfigurationTest extends BaseTestCase
      * @return void
      */
     public function test_admin_configuration_group_key()
-    {
+    { 
         $group = new AdminConfigurationGroup();
         $group->key('test');
 

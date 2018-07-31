@@ -7,6 +7,10 @@
  */
 
 return [
+
+    'admin_url' => 'admin',
+
+
     'cart' => ['session_key' => 'cart_products'],
 
     'model' => [
@@ -29,6 +33,29 @@ return [
             'small' => ['150', '150'],
             'med' => ['350', '350'],
             'large' => ['750', '750'],
+        ],
+    ],
+    'auth' => [
+        'guards' => [
+            'admin' => [
+                'driver' => 'session',
+                'provider' => 'admin-users',
+            ],
+        ],
+    
+        'providers' => [
+            'admin-users' => [
+                'driver' => 'eloquent',
+                'model' => AvoRed\Framework\Models\Database\AdminUser::class,
+            ],
+        ],
+    
+        'passwords' => [
+            'adminusers' => [
+                'provider' => 'admin-users',
+                'table' => 'admin_password_resets',
+                'expire' => 60,
+            ],
         ],
     ]
 ];

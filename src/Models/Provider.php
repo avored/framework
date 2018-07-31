@@ -21,6 +21,8 @@ use AvoRed\Framework\Models\Repository\PropertyRepository;
 use AvoRed\Framework\Models\Contracts\PropertyInterface;
 use AvoRed\Framework\Models\Repository\CategoryFilterRepository;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
+use AvoRed\Framework\Models\Repository\AdminUserRepository;
+use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 
 class Provider extends ServiceProvider
 {
@@ -88,6 +90,10 @@ class Provider extends ServiceProvider
         $this->app->bind(
             CategoryFilterInterface::class,
             CategoryFilterRepository::class
+        );
+        $this->app->bind(
+            AdminUserInterface::class,
+            AdminUserRepository::class
         );
     }
 }
