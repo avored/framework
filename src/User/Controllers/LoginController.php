@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use AvoRed\Ecommerce\Http\Controllers\Controller;
+use AvoRed\Framework\System\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -53,7 +53,7 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('avored-ecommerce::lang.failed')],
+            $this->username() => [trans('avored-framework::lang.failed')],
         ]);
     }
 

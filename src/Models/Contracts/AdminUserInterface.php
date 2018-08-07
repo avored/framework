@@ -8,7 +8,7 @@ interface AdminUserInterface {
      * Find an Admin User by given Id which returns Admin User
      * 
      * @param $id
-     * @return \AvoRed\Ecommerce\Models\AdminUser
+     * @return \AvoRed\Framework\Models\AdminUser
      */
     public function find($id);
 
@@ -40,7 +40,7 @@ interface AdminUserInterface {
      * Create anAdmin User 
      * 
      * @param array $data
-     * @return \AvoRed\Ecommerce\Models\AdminUser
+     * @return \AvoRed\Framework\Models\AdminUser
      */
     public function create($data);
 

@@ -5,7 +5,7 @@ namespace AvoRed\Framework\User\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use AvoRed\Ecommerce\Http\Controllers\Controller;
+use AvoRed\Framework\System\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
-use AvoRed\Ecommerce\Models\Contracts\SiteCurrencyInterface;
+use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\Models\Contracts\PropertyInterface;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 

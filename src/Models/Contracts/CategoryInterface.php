@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Models\Contracts;
 
-use AvoRed\Framework\Models\Database\Category;
-
 interface CategoryInterface
 {
     /**

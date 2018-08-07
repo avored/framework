@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Models\Database;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use AvoRed\Ecommerce\Notifications\ResetPassword;
+use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AdminUser extends Authenticatable

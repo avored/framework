@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Modules\Console;
 
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Support\Console\InstallCommand;
+use AvoRed\Framework\Support\Console\AdminMakeCommand;
 
 class Provider extends ServiceProvider
 {
@@ -16,7 +17,8 @@ class Provider extends ServiceProvider
         'avored.module.install',
         'avored.module.make',
         'avored.controller.make',
-        'avored.install'
+        'avored.install',
+        'avored.admin.make'
     ];
 
     /**
@@ -57,6 +59,17 @@ class Provider extends ServiceProvider
     {
         $this->app->singleton('command.avored.module.make', function ($app) {
             return new ModuleMakeCommand($app['files']);
+        });
+    }
+    /**
+     * Register the Avored Admin Make .
+     *
+     * @return void
+     */
+    protected function registerAvoredAdminMake()
+    {
+        $this->app->singleton('command.avored.admin.make', function ($app) {
+            return new AdminMakeCommand($app['files']);
         });
     }
 

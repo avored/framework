@@ -38,7 +38,7 @@
 
                                 <avored-form-input 
                                     field-name="email"
-                                    label="{{ __('avored-ecommerce::lang.admin-email-label') }}" 
+                                    label="{{ __('avored-framework::lang.admin-email-label') }}" 
                                     error-text="{!! $errors->first('email') !!}"
                                     v-on:change="changeModelValue"
                                     autofocus="autofocus"
@@ -48,7 +48,7 @@
                                 <avored-form-input 
                                     field-name="password"
                                     field-type="password"
-                                    label="{{ __('avored-ecommerce::lang.admin-password-label') }}" 
+                                    label="{{ __('avored-framework::lang.admin-password-label') }}" 
                                     error-text="{!! $errors->first('password') !!}"
                                     v-on:change="changeModelValue"
                                     
@@ -58,7 +58,7 @@
                                 <avored-form-input 
                                     field-name="password_confirmation"
                                     field-type="password"
-                                    label="{{ __('avored-ecommerce::lang.admin-confirm-password-label') }}" 
+                                    label="{{ __('avored-framework::lang.admin-confirm-password-label') }}" 
                                     error-text="{!! $errors->first('password_confirmation') !!}"
                                     v-on:change="changeModelValue"
                                     

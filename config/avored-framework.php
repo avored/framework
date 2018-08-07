@@ -14,8 +14,8 @@ return [
     'cart' => ['session_key' => 'cart_products'],
 
     'model' => [
-        'user' => AvoRed\Ecommerce\Models\Database\User::class,
-        'address' => AvoRed\Ecommerce\Models\Database\Address::class,
+        'user' => AvoRed\Framework\Models\Database\User::class,
+        'address' => AvoRed\Framework\Models\Database\Address::class,
     ],
 
    

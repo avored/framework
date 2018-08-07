@@ -1,8 +1,8 @@
 <?php
 namespace AvoRed\Framework\Models\Repository;
 
-use AvoRed\Ecommerce\Models\Contracts\AdminUserInterface;
-use AvoRed\Ecommerce\Models\Database\AdminUser;
+use AvoRed\Framework\Models\Contracts\AdminUserInterface;
+use AvoRed\Framework\Models\Database\AdminUser;
 
 class AdminUserRepository implements AdminUserInterface{
 
@@ -10,7 +10,7 @@ class AdminUserRepository implements AdminUserInterface{
      * Find an Admin User by given Id
      * 
      * @param $id
-     * @return \AvoRed\Ecommerce\Models\AdminUser
+     * @return \AvoRed\Framework\Models\AdminUser
      */
     public function find($id) 
     {
@@ -50,7 +50,7 @@ class AdminUserRepository implements AdminUserInterface{
     /**
      * Find an Admin User Query
      * 
-     * @return \AvoRed\Ecommerce\Models\AdminUser
+     * @return \AvoRed\Framework\Models\AdminUser
      */
     public function create($data) 
     {

@@ -3,6 +3,8 @@
 namespace AvoRed\Framework\Payment;
 
 use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Payment\Facade as PaymentFacade;
+use AvoRed\Framework\Payment\Stripe\Payment as StripePayment;
 
 class Provider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class Provider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerPaymentOptions();
     }
 
     /**
@@ -54,5 +57,18 @@ class Provider extends ServiceProvider
     public function provides()
     {
         return ['payment', 'AvoRed\Framework\Payment\Manager'];
+    }
+
+
+    /**
+     * Registering Payment Option for the App.
+     *
+     *
+     * @return void
+     */
+    protected function registerPaymentOptions()
+    {
+        $stripe = new StripePayment();
+        PaymentFacade::put($stripe->identifier(), $stripe);
     }
 }
