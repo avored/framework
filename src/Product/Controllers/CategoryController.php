@@ -3,10 +3,10 @@
 namespace AvoRed\Framework\Product\Controllers;
 
 use AvoRed\Framework\Models\Database\Category as Model;
-use AvoRed\Ecommerce\Http\Requests\CategoryRequest;
+use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
-use AvoRed\Ecommerce\DataGrid\CategoryDataGrid;
-use AvoRed\Ecommerce\Http\Controllers\Controller;
+use AvoRed\Framework\Product\DataGrid\CategoryDataGrid;
+use AvoRed\Framework\System\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -46,7 +46,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \AvoRed\Ecommerce\Http\Requests\CategoryRequest $request
+     * @param \AvoRed\Framework\Product\Requests\CategoryRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -71,7 +71,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \AvoRed\Ecommerce\Http\Requests\CategoryRequest $request
+     * @param \AvoRed\Framework\Product\Requests\CategoryRequest $request
      * @param \AvoRed\Framework\Models\Database\Category $category
      *
      * @return \Illuminate\Http\Response

@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Shipping;
 
 use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Shipping\Facade as ShippingFacade;
 
 class Provider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class Provider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerShippingOption();   
     }
 
     /**
@@ -54,5 +56,17 @@ class Provider extends ServiceProvider
     public function provides()
     {
         return ['shipping', 'AvoRed\Framework\Shipping\Manager'];
+    }
+
+
+    /**
+     * Register Shippiong Option for App.
+     *
+     * @return void
+     */
+    protected function registerShippingOption()
+    {
+        $freeShipping = new FreeShipping();
+        ShippingFacade::put($freeShipping->identifier(), $freeShipping);
     }
 }

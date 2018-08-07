@@ -30,7 +30,7 @@
             <div class="card">
 
                 <div class="card-header bg-primary text-white">
-                    {{ __('avored-ecommerce::lang.admin-login-card-title') }}
+                    {{ __('avored-framework::lang.admin-login-card-title') }}
                 </div>
                 <div class="card-body" >
 
@@ -39,7 +39,7 @@
 
                         <avored-form-input 
                             field-name="email"
-                            label="{{ __('avored-ecommerce::lang.admin-email-label') }}" 
+                            label="{{ __('avored-framework::lang.admin-email-label') }}" 
                             error-text="{!! $errors->first('email') !!}"
                             v-on:change="changeModelValue"
                             autofocus="autofocus"
@@ -58,11 +58,11 @@
                         <div class="form-group">
 
                             <button type="submit" :disabled='isLoginDisbled'  class="btn btn-primary">
-                                {{ __('avored-ecommerce::lang.admin-login-button-title') }}
+                                {{ __('avored-framework::lang.admin-login-button-title') }}
                             </button>
 
                             <a href="{{ route('admin.password.reset') }}">
-                                {{ __('avored-ecommerce::lang.admin-login-forget-password-link') }}
+                                {{ __('avored-framework::lang.admin-login-forget-password-link') }}
                             </a>
                         </div>
 

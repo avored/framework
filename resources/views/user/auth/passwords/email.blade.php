@@ -43,7 +43,7 @@
 
                             <avored-form-input 
                                 field-name="email"
-                                label="{{ __('avored-ecommerce::lang.admin-email-label') }}" 
+                                label="{{ __('avored-framework::lang.admin-email-label') }}" 
                                 error-text="{!! $errors->first('email') !!}"
                                 v-on:change="changeModelValue"
                                 autofocus="autofocus"
@@ -56,7 +56,7 @@
                                     type="submit" 
                                     :disabled='isSendPasswordSubmitDisbled'  
                                     class="btn btn-primary">
-                                    {{ __('avored-ecommerce::lang.admin-reset-button-title') }}
+                                    {{ __('avored-framework::lang.admin-reset-button-title') }}
                                 </button>
 
                             </div>

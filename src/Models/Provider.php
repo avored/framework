@@ -23,6 +23,14 @@ use AvoRed\Framework\Models\Repository\CategoryFilterRepository;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 use AvoRed\Framework\Models\Repository\AdminUserRepository;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
+use AvoRed\Framework\Models\Contracts\MenuInterface;
+use AvoRed\Framework\Models\Repository\MenuRepository;
+use AvoRed\Framework\Models\Contracts\PageInterface;
+use AvoRed\Framework\Models\Repository\PageRepository;
+use AvoRed\Framework\Models\Contracts\RoleInterface;
+use AvoRed\Framework\Models\Repository\RoleRepository;
+use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
+use AvoRed\Framework\Models\Repository\SiteCurrencyRepository;
 
 class Provider extends ServiceProvider
 {
@@ -95,5 +103,11 @@ class Provider extends ServiceProvider
             AdminUserInterface::class,
             AdminUserRepository::class
         );
+
+       
+        $this->app->bind(MenuInterface::class, MenuRepository::class);
+        $this->app->bind(PageInterface::class, PageRepository::class);
+        $this->app->bind(RoleInterface::class, RoleRepository::class);
+        $this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
     }
 }

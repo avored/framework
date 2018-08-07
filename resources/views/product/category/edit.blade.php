@@ -1,4 +1,4 @@
-@extends('avored-ecommerce::layouts.app')
+@extends('avored-framework::layouts.app')
 
 @section('content')
 <div id="admin-category-edit-page">
