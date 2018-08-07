@@ -26,23 +26,16 @@
 		"laravel/framework" : "5.6.*",
 		"barryvdh/laravel-dompdf": "0.8.*",
 		"laravel/passport": "5.0.*",
-		"stripe/stripe-php": "^6.3"
-	},
-	"require-dev" : {
+		"stripe/stripe-php": "^6.3",
 		"phpunit/phpunit" : "~7.0",
 		"orchestra/testbench" : "~3.6"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"AvoRed\\Framework\\" : "src/"
-		
+			"AvoRed\\Framework\\" : "src/",
+			"AvoRed\\Framework\\Tests\\" : "tests/"
 		}
 	},
-	"autoload-dev": {
-        "psr-4": {
-			"AvoRed\\Framework\\Tests\\" : "tests/"
-        }
-    },
 	"extra" : {
 		"laravel" : {
 			"providers" : [
