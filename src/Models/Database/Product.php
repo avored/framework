@@ -7,7 +7,6 @@ use AvoRed\Framework\Events\ProductBeforeSave;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use AvoRed\Framework\Image\LocalFile;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
@@ -16,7 +15,7 @@ use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\Models\Contracts\PropertyInterface;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
-class Product extends Model
+class Product extends BaseModel
 {
     public static $VARIATION_TYPE = 'VARIATION';
 

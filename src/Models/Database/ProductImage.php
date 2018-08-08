@@ -3,9 +3,8 @@
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Image\LocalFile;
-use Illuminate\Database\Eloquent\Model;
 
-class ProductImage extends Model
+class ProductImage extends BaseModel
 {
     protected $fillable = ['product_id', 'path', 'is_main_image'];
 

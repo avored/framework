@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class CategoryFilter extends Model
+class CategoryFilter extends BaseModel
 {
     protected $fillable = ['category_id', 'type', 'filter_id'];
 

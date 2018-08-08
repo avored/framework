@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ProductVariation extends Model
+class ProductVariation extends BaseModel
 {
     protected $fillable = ['variation_id', 'product_id'];
 

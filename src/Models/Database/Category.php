@@ -3,10 +3,9 @@
 namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Category extends Model
+class Category extends BaseModel
 {
     protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
 

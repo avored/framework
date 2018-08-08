@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Models\Database\Page as Model;
+use AvoRed\Framework\Models\Database\Page;
 use AvoRed\Framework\Widget\Facade as Widget;
 use AvoRed\Framework\Cms\DataGrid\PageDataGrid;
 use AvoRed\Framework\Cms\Requests\PageRequest;
@@ -68,7 +68,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Model $page)
+    public function edit(Page $page)
     {
         $widgetOptions = Widget::allOptions();
 
@@ -85,7 +85,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PageRequest $request, Model $page)
+    public function update(PageRequest $request, Page $page)
     {
         $page->update($request->all());
         return redirect()->route('admin.page.index');
@@ -98,7 +98,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Model $page)
+    public function destroy(Page $page)
     {
         $page->delete();
         return redirect()->route('admin.page.index');

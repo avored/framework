@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Order extends Model
+class Order extends BaseModel
 {
     protected $fillable = [
         'shipping_address_id',

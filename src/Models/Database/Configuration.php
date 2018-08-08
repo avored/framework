@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Configuration extends Model
+class Configuration extends BaseModel
 {
     protected $fillable = ['configuration_key', 'configuration_value'];
 

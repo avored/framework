@@ -63,7 +63,7 @@ class OrderController extends Controller
         $user = $order->user;
         $view = view('avored-framework::mail.order-pdf')->with('order', $order);
 
-        $folderPath = public_path('uploads/order/invoice');
+        $folderPath = storage_path('app/public/uploads/order/invoice');
         if (!File::exists($folderPath)) {
             File::makeDirectory($folderPath, '0775', true, true);
         }
@@ -84,9 +84,7 @@ class OrderController extends Controller
     public function editStatus(Model $order)
     {
         $orderStatus = OrderStatus::all()->pluck('name', 'id');
-
-        //INSERT a RECORD INTO ORDER_HISTORY TABLE
-
+        
         $view = view('avored-framework::order.view')
             ->with('order', $order)
             ->with('orderStatus', $orderStatus)

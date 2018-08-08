@@ -2,10 +2,13 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class AttributeDropdownOption extends Model
+class AttributeDropdownOption extends BaseModel
 {
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['attribute_id', 'display_text'];
 
     /**

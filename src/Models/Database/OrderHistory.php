@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class OrderHistory extends Model
+class OrderHistory extends BaseModel
 {
     protected $fillable = ['order_id', 'order_status_id'];
 

@@ -2,10 +2,15 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use AvoRed\Framework\Models\Database\Configuration;
+use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 
 class Address extends BaseModel
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'type',
@@ -19,24 +24,35 @@ class Address extends BaseModel
         'country_id',
         'phone',
     ];
-
+    
+    /**
+     * The address belongs to an Country.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function country()
     {
         return $this->belongsTo(Country::class);
     }
 
+    /**
+     * To Check If Country Id is Null then it Returns Default Country ID from Configuration
+     *
+     * @return int|null $countryId
+     */
     public function getCountryIdAttribute()
     {
         if (isset($this->attributes['country_id']) && $this->attributes['country_id'] > 0) {
             return $this->attributes['country_id'];
         }
 
-        $defaultCountry = Configuration::getConfiguration('user_default_country');
-
+        $configRepository = app(ConfigurationInterface::class);
+        $defaultCountry =  $configRepository->getValueByKey('user_default_country');
+        
         if (isset($defaultCountry)) {
             return $defaultCountry;
         }
 
-        return '';
+        return null;
     }
 }
