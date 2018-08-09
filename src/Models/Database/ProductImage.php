@@ -18,7 +18,9 @@ class ProductImage extends BaseModel
         if (null === $this->attributes['path'] || empty($this->attributes['path'])) {
             return;
         }
-        $localImage = new LocalFile($this->attributes['path']);
+        $symlink = config('avored-framework.symlink_storage_folder');
+        $relativePath =  $symlink . DIRECTORY_SEPARATOR .$this->attributes['path'];
+        $localImage = new LocalFile($relativePath);
 
         return $localImage;
     }
