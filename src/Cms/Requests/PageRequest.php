@@ -26,13 +26,12 @@ class PageRequest extends Request
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
         $validationRule['content'] = 'required';
-        if ($this->getMethod() == 'POST') {
-            $validationRule['slug'] = 'required|max:255|alpha_dash|unique:pages';
-        }
-        if ($this->getMethod() == 'PUT') {
-            $validationRule['slug'] = 'required|max:255|alpha_dash';
-        }
+        $validationRule['slug'] = 'required|max:255|alpha_dash';
 
+        if ($this->getMethod() == 'POST') {
+            $validationRule['slug'] .= '|unique:pages';
+        }
+    
         return $validationRule;
     }
 }

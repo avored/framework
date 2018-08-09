@@ -63,7 +63,7 @@
 
 
                     <ul class="front-menu list-group border p-3">
-                        @include('avored-framework::menu.menu-tree')
+                        @include('avored-framework::cms.menu.menu-tree')
                     </ul>
 
                 </div>

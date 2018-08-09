@@ -14,6 +14,7 @@ use AvoRed\Framework\User\ViewComposers\AdminUserFieldsComposer;
 use AvoRed\Framework\System\ViewComposers\AdminNavComposer;
 use AvoRed\Framework\Product\ViewComposers\CategoryFieldsComposer;
 use AvoRed\Framework\Product\ViewComposers\ProductFieldsComposer;
+use AvoRed\Framework\Cms\ViewComposers\PageFieldsComposer;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\View;
 use AvoRed\Framework\User\Widget\TotalUserWidget;
@@ -24,6 +25,7 @@ use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
 use AvoRed\Framework\User\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
 {
@@ -157,6 +159,8 @@ class Provider extends ServiceProvider
         View::composer('avored-framework::site-currency._fields', SiteCurrencyFieldsComposer::class);
         View::composer(['avored-framework::product.category._fields'], CategoryFieldsComposer::class);
         View::composer(['avored-framework::system.admin-user._fields'], AdminUserFieldsComposer::class);
+        View::composer('avored-framework::cms.page._fields', PageFieldsComposer::class);
+        View::composer('avored-framework::cms.menu.index', MenuComposer::class);
         View::composer(['avored-framework::product.create',
                         'avored-framework::product.edit',
                         ], ProductFieldsComposer::class);

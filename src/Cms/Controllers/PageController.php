@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Cms\Controllers;
 
 use AvoRed\Framework\Models\Database\Page;
-use AvoRed\Framework\Widget\Facade as Widget;
 use AvoRed\Framework\Cms\DataGrid\PageDataGrid;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Models\Contracts\PageInterface;
@@ -41,10 +40,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        $widgetOptions = Widget::allOptions();
-
-        return view('avored-framework::cms.page.create')
-            ->with('widgetOptions', $widgetOptions);
+        return view('avored-framework::cms.page.create');
     }
 
     /**
@@ -70,11 +66,8 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        $widgetOptions = Widget::allOptions();
-
         return view('avored-framework::cms.page.edit')
-            ->with('model', $page)
-            ->with('widgetOptions', $widgetOptions);
+            ->with('model', $page);
     }
 
     /**
