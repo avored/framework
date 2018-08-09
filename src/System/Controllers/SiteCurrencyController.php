@@ -9,7 +9,7 @@ use AvoRed\Framework\System\Requests\SiteCurrencyRequest;
 class SiteCurrencyController extends Controller
 {
     /**
-     * 
+     *
      * @var \AvoRed\Framework\Models\Repository\SiteCurrencyRepository
      */
     protected $repository;
@@ -18,6 +18,7 @@ class SiteCurrencyController extends Controller
     {
         $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +50,6 @@ class SiteCurrencyController extends Controller
      */
     public function store(SiteCurrencyRequest $request)
     {
-
         $this->repository->create($request->all());
 
         return redirect()->route('admin.site-currency.index');
@@ -78,8 +78,7 @@ class SiteCurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(SiteCurrencyRequest $request, $id)
-    {  
-       
+    {
         $siteCurrency = $this->repository->find($id);
         $siteCurrency->update($request->all());
 
@@ -99,5 +98,4 @@ class SiteCurrencyController extends Controller
         $siteCurreny->delete();
         return redirect()->route('admin.site-currency.index');
     }
-
 }
