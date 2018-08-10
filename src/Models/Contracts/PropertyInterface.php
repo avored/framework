@@ -18,7 +18,7 @@ interface PropertyInterface
      * @param array $ids
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function find($ids);
+    public function findMany($ids);
 
     /**
      * Product Property Query Builder
