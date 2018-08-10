@@ -21,7 +21,7 @@ class ThemeController extends Controller
         $themes = Theme::all();
         $activeTheme = Configuration::getConfiguration('active_theme_identifier');
 
-        return view('avored-framework::theme.index')
+        return view('avored-framework::system.theme.index')
             ->with('themes', $themes)
             ->with('activeTheme', $activeTheme);
     }
@@ -33,7 +33,7 @@ class ThemeController extends Controller
      */
     public function create()
     {
-        return view('avored-framework::theme.create');
+        return view('avored-framework::system.theme.create');
     }
 
     /**

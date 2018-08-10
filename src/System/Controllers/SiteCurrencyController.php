@@ -28,7 +28,7 @@ class SiteCurrencyController extends Controller
     {
         $siteCurrencyGrid = new SiteCurrencyDataGrid($this->repository->query());
 
-        return view('avored-framework::site-currency.index')->with('dataGrid', $siteCurrencyGrid->dataGrid);
+        return view('avored-framework::system.site-currency.index')->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
@@ -38,7 +38,7 @@ class SiteCurrencyController extends Controller
      */
     public function create()
     {
-        return view('avored-framework::site-currency.create');
+        return view('avored-framework::system.site-currency.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class SiteCurrencyController extends Controller
     public function edit($id)
     {
         $model = $this->repository->find($id);
-        return view('avored-framework::site-currency.edit')
+        return view('avored-framework::system.site-currency.edit')
                     ->with('model', $model);
     }
 

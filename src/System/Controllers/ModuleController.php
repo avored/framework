@@ -17,7 +17,7 @@ class ModuleController extends Controller
     {
         $modules = Module::all();
 
-        return view('avored-framework::module.index')
+        return view('avored-framework::system.module.index')
             ->with('modules', $modules);
     }
 
@@ -28,7 +28,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('avored-framework::module.create');
+        return view('avored-framework::system.module.create');
     }
 
     /**
