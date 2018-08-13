@@ -156,7 +156,7 @@
                         jQuery('#widget-list-modal').modal();
                         jQuery(document).on('click', '#widget-insert-button', function (event) {
                             var widgetIdentifier = jQuery('#widget_list').val();
-                            context.invoke('editor.insertText', "@{{ " + widgetIdentifier + " }}");
+                            context.invoke('editor.insertText', "### " + widgetIdentifier + " ###");
                             jQuery('#widget-list-modal').modal('hide');
                         });
                     };

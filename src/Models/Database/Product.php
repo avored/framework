@@ -213,12 +213,15 @@ class Product extends BaseModel
 
         if (count($properties) > 0) {
             foreach ($properties as $key => $property) {
-                
-                
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
+
+                    //dd($propertyModel->attachProduct($this));
+                    $propertyModel->attachProduct($this)
+                                    ->fill(['value' => $propertyValue])
+                                    ->save();
                     $syncProperty[] = $propertyId;  
-                    $propertyModel->saveProperty($this->id, $propertyValue);
+                
                 }
                 $this->properties()->sync($syncProperty);
             }
@@ -525,7 +528,7 @@ class Product extends BaseModel
     /**
      * Product has many Categories.
      *
-     * @return \AvoRed\Framework\Models\Database\Category
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories()
     {
@@ -533,9 +536,20 @@ class Product extends BaseModel
     }
 
     /**
+     * Product has many Categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 
+     */
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class);
+    }
+
+    /**
      * Product has many Image.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductImage
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
     {
@@ -545,7 +559,7 @@ class Product extends BaseModel
     /**
      * Product has many Variation.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductVariation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productVariations()
     {
@@ -555,7 +569,7 @@ class Product extends BaseModel
     /**
      * Product has many Integer Attribute.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductAttributeIntegerValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productIntegerAttributes()
     {
@@ -565,7 +579,7 @@ class Product extends BaseModel
     /**
      * Product has many Date Time Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyVarcharValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productVarcharProperties()
     {
@@ -575,7 +589,7 @@ class Product extends BaseModel
     /**
      * Product has many Date Time Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyDatetimeValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productDatetimeProperties()
     {
@@ -585,7 +599,7 @@ class Product extends BaseModel
     /**
      * Product has many Boolean Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyBooleanValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productBooleanProperties()
     {
@@ -595,7 +609,7 @@ class Product extends BaseModel
     /**
      * Product has many Integer Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyIntegerValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productIntegerProperties()
     {
@@ -605,7 +619,7 @@ class Product extends BaseModel
     /**
      * Product has many Text Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyTextValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productTextProperties()
     {
@@ -615,7 +629,7 @@ class Product extends BaseModel
     /**
      * Product has many Decimal Properties.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductPropertyDecimalValue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productDecimalProperties()
     {
@@ -625,7 +639,7 @@ class Product extends BaseModel
     /**
      * Product has many Attribute.
      *
-     * @return \AvoRed\Framework\Models\Database\Attribute
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function attribute()
     {
@@ -635,7 +649,7 @@ class Product extends BaseModel
     /**
      * Product has many Order.
      *
-     * @return \AvoRed\Framework\Models\Database\Order
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orders()
     {
@@ -645,81 +659,11 @@ class Product extends BaseModel
     /**
      * Product has downladable Url.
      *
-     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function downloadable()
     {
         return $this->hasOne(ProductDownloadableUrl::class);
     }
 
-    /*
-    public function getCollection()
-    {
-        $model = new static;
-        $products = $model->all();
-        //$productCollection = new ProductCollection();
-        //$productCollection->setCollection($products);
-
-        $this->setCollection($products);
-
-        return $this;
-    }
-    public function setCollection($products)
-    {
-        $this->_collection = $products;
-
-        return $this;
-    }
-
-       public function addAttributeFilter($attributeId, $value)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-            foreach ($this->getProductAllAttributes() as $productAttribute) {
-                if ($productAttribute->attribute_id == $attributeId && $productAttribute->value == $value) {
-                    return $product;
-                }
-            }
-        });
-
-        return $this->_collection;
-    }
-
-    public function addPropertyFilter($attributeId, $value)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($attributeId, $value) {
-            foreach ($product->getProductAllProperties() as $productAttribute) {
-                if ($productAttribute->property_id == $attributeId && $productAttribute->value == $value) {
-                    return $product;
-                }
-            }
-        });
-
-        return $this->_collection;
-    }
-
-    public function productPaginate($products, $perPage = 10)
-    {
-        $request = request();
-        $page = request('page');
-        $offset = ($page * $perPage) - $perPage;
-
-        return new LengthAwarePaginator(
-            $products->slice($offset, $perPage), // Only grab the items we need
-            $products->count(), // Total items
-            $perPage, // Items per page
-            $page, // Current page
-            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-        );
-    }
-
-    public function addCategoryFilter($categoryId)
-    {
-        $this->_collection = $this->_collection->filter(function ($product) use ($categoryId) {
-            if ($product->categories->count() > 0 && $product->categories->pluck('id')->contains($categoryId)) {
-                return $product;
-            }
-        });
-
-        return $this;
-    } */
 }

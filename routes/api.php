@@ -1,8 +1,8 @@
 <?php
 
 Route::prefix('api')
-    ->middleware(['api'])
-    ->namespace("AvoRed\Framework\Http\Controllers\Api")
+    ->middleware(['api','admin.api.auth'])
+    ->namespace("AvoRed\Framework\Api\Controllers")
     ->group(function () {
         Route::get('v1/category', 'CategoryController@index');
 

@@ -8,7 +8,7 @@ class Page extends BaseModel
 {
     protected $fillable = ['name', 'slug', 'content', 'meta_title', 'meta_description'];
 
-    protected $contentTags = ['{{', '}}'];
+    protected $contentTags = ['###', '###'];
 
     public function getContentAttribute($content)
     {

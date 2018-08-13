@@ -5,7 +5,7 @@ namespace AvoRed\Framework;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Models\Database\Product;
-use AvoRed\Framework\User\Middleware\AdminApiAuth;
+use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\User\Middleware\Permission;
