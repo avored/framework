@@ -1,7 +1,7 @@
 @extends('avored-framework::layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="h1">
             {{ __('avored-framework::user.admin-user-list') }}
 

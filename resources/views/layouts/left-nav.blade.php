@@ -12,6 +12,10 @@
 </div>
 
 <ul class="side-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
+    </li>
+    
     @if(isset($adminMenus))
     @foreach($adminMenus as $key => $menu)
         @if(count($menu->subMenu()) > 0)
