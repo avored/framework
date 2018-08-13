@@ -1,7 +1,6 @@
 language: php
 php:
   - '7.2'
-  - hhvm # on Trusty only
 script:
 - vendor/bin/phpunit -c phpunit.xml
 
