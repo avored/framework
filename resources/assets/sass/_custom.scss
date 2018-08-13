@@ -1,4 +1,3 @@
-
 .admin-header {
   .nav-link {
     color: $white;
@@ -42,6 +41,7 @@ aside {
     color: $white;
     .logo {
       a {
+        margin-left: 20px;
         text-decoration: none;
         color: $white;
       }
