@@ -6,42 +6,39 @@ use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Api\Controllers\Controller;
+use AvoRed\Framework\Api\Resources\Category\CategoryResource;
+use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $data = Category::all();
+        $categories = Category::paginate(10);
 
-        return JsonResponse::create(['data' => $data, 'status' => true]);
+        return new CategoryCollectionResource($categories);
     }
 
     public function store(CategoryRequest $request)
     {
-        $data = Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return JsonResponse::create(['data' => $data, 'status' => true], 201);
+        return (new CategoryResource($category));
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $data = Category::find($id);
-
-        return JsonResponse::create(['data' => $data, 'status' => true]);
+        return new CategoryResource($category);
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $data = Category::find($id);
-        $data->update($request->all());
-
-        return JsonResponse::create(['data' => $data, 'status' => true]);
+        $category->update($request->all());
+        return new CategoryResource($category);
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::destroy($id);
-
+        $category->delete();
         return JsonResponse::create(null, 204);
     }
 }

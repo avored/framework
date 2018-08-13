@@ -8,9 +8,9 @@ Route::prefix('api')
 
         Route::post('v1/category', 'CategoryController@store');
 
-        Route::get('v1/category/{id}', 'CategoryController@show');
+        Route::get('v1/category/{category}', 'CategoryController@show');
 
-        Route::put('v1/category/{id}', 'CategoryController@update');
+        Route::put('v1/category/{category}', 'CategoryController@update');
 
-        Route::delete('v1/category/{id}', 'CategoryController@destroy');
+        Route::delete('v1/category/{category}', 'CategoryController@destroy');
     });
