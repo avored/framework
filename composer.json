@@ -41,7 +41,6 @@
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			
 			"AvoRed\\Framework\\Tests\\" : "tests/"
 		}
 	},

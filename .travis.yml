@@ -1,4 +1,8 @@
 language: php
 php:
-  - '7.0'
+  - '7.2'
   - hhvm # on Trusty only
+script:
+- vendor/bin/phpunit -c phpunit.xml
+
+install: composer install --no-interaction
