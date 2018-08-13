@@ -1,28 +1,27 @@
 @extends('avored-framework::layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="main-title-wrap">
-                <div class='h1'>
-                    Order View
+<div class="row">
+    <div class="col-12">
+        <div class="main-title-wrap">
+            <div class='h1'>
+                Order View
+                <div class="float-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a class="nav-link" href="{{ route('admin.order.send-email-invoice', $order->id) }}">Email Invoice</a>
+                            </li>
 
-                    <div class="float-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Option <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ route('admin.order.send-email-invoice', $order->id) }}">SendEmail
-                                        Invoice</a></li>
-                                <li><a class="nav-link" href="{{ route('admin.order.change-status', $order->id) }}">Change Status</a>
-                                </li>
-                            </ul>
-                        </div>
-
+                            <li>
+                                <a class="nav-link" href="{{ route('admin.order.change-status', $order->id) }}">Change Status</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+            
                 <div class="clearfix"></div>
                 <br/>
 
