@@ -12,7 +12,7 @@
 </div>
 
 <ul class="side-nav">
-    @if(isset($adminMenus))
+   @if(isset($adminMenus))
     @foreach($adminMenus as $key => $menu)
         @if(count($menu->subMenu()) > 0)
             <?php $subMenu = $menu->subMenu(); ?>
