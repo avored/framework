@@ -9,7 +9,8 @@
 <ul class="side-nav">
    @if(isset($adminMenus))
     @foreach($adminMenus as $key => $menu)
-        @if(count($menu->subMenu()) > 0)
+    
+        @if(null !== $menu->subMenu() && count($menu->subMenu()) > 0)
             <?php $subMenu = $menu->subMenu(); ?>
 
             <li class="nav-item has-dropdown">
