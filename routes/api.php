@@ -18,4 +18,10 @@ Route::prefix('api')
         Route::put('v1/property/{property}', 'PropertyController@update');
         Route::delete('v1/property/{property}', 'PropertyController@destroy');
         
+        Route::get('v1/attribute', 'AttributeController@index');
+        Route::post('v1/attribute', 'AttributeController@store');
+        Route::get('v1/attribute/{attribute}', 'AttributeController@show');
+        Route::put('v1/attribute/{attribute}', 'AttributeController@update');
+        Route::delete('v1/attribute/{attribute}', 'AttributeController@destroy');
+        
     });
