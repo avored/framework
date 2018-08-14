@@ -28,7 +28,7 @@
         <div class="col-6">
             <div class="offset-1 col-md-10">
             <div class="card">
-                <div class="card-header">Reset Password</div>
+                <div class="card-header bg-primary text-white">Reset Password</div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
