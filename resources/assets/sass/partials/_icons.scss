@@ -1,15 +1,3 @@
-@font-face {
-  font-weight:normal;
-  font-style:normal;
-  font-family:"summernote";
-  src:url("../fonts/summernote.eot");
-  src:url("../fonts/summernote.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/summernote.woff") format("woff"),
-      url("../fonts/summernote.ttf") format("truetype");
-}
-
-
-
 // Bootstrap Overrides
 [class^="note-icon-"]:before,
 [class*=" note-icon-"]:before {
@@ -505,4 +493,3 @@
   }
 
 }
-

@@ -1,0 +1,36 @@
+.remove-variation-card {
+  position: absolute;
+  right: 25px;
+  z-index: 1;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  top: 15px;
+}
+
+.widget-column {
+  min-height: 100px;
+}
+
+body.dragging, body.dragging {
+  cursor: move !important;
+}
+
+.left-menu .list-group-item, .front-menu .list-group-item {
+  cursor: move;
+}
+
+.left-menu .destroy-menu {
+  visibility: hidden;
+}
+
+.front .destroy-menu {
+  visibility: visible;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
