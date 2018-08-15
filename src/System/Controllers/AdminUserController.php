@@ -123,7 +123,6 @@ class AdminUserController extends Controller
      */
     public function detail()
     {
-       
         $user = Auth::guard('admin')->user();
 
         return view('avored-framework::system.admin-user.detail')->with('user', $user);

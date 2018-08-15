@@ -39,7 +39,20 @@
                 <form method="post" action="{{ route('admin.admin-user.destroy', $user->id)  }}">
                     @csrf()
                     @method('delete')
-                    <button class="btn btn-danger" >
+                    <button
+                        onClick="event.preventDefault(); 
+                                    swal({
+                                        dangerMode: true,
+                                        title: 'Are you sure?',
+                                        icon: 'warning',
+                                        buttons: true,
+                                        text: 'Once deleted, you will not be able to recover this User!',
+                                    }).then((willDelete) => {
+                                        if (willDelete) {
+                                            jQuery(this).parents('form:first').submit();
+                                        }
+                                    });"    
+                        class="btn btn-danger" >
                         Destroy
                     </button>
                 </form>

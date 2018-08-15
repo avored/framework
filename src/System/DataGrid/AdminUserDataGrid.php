@@ -23,7 +23,7 @@ class AdminUserDataGrid
                     return "<a href='".route('admin.admin-user.edit', $model->id)."' >Edit</a>";
                 })->linkColumn('destroy', [], function ($model) {
 
-                    return "<a href='".route('admin.admin-user.show', $model->id)."' >Destroy</a>";
+                    return "<a href='".route('admin.admin-user.show', $model->id)."' >Show</a>";
 
                     /*
                     if($model->is_super_admin === 1) {
