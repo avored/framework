@@ -1,18 +1,10 @@
 <div class="widget">
-    <span class="bg-dark   d-block" style="cursor: move">
-        <i class="ml-2 text-white pt-2 fas fa-bars"></i>
-    </span>
-    <div class="card  ">
+    <div class="card mb-3 d-block" style="cursor: move;">
+        <div class="card-header">
+            <h5 class="card-title text-center">{{ __('avored-framework::lang.admin-dashboard-total-user-title') }}</h5>
+        </div>        
         <div class="card-body">
-            <div class="row">
-                <div class="col-4 text-center bg-primary-dark pv-lg">
-                    <em class="fa fa-" style="font-size: 50px"></em>
-                </div>
-                <div class="col-8 pv-lg">
-                    <div class="h2 mt0">{{ $totalRegisteredUser }}</div>
-                    <div class="text-uppercase">{{ __('avored-framework::lang.admin-dashboard-total-user-title') }}</div>
-                </div>
-            </div>
+            <p class="card-text text-center">{{ $totalRegisteredUser }}</p>
         </div>
     </div>
 </div>
