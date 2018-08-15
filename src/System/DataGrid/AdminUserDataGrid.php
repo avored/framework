@@ -22,15 +22,19 @@ class AdminUserDataGrid
                 ->linkColumn('edit', [], function ($model) {
                     return "<a href='".route('admin.admin-user.edit', $model->id)."' >Edit</a>";
                 })->linkColumn('destroy', [], function ($model) {
-                    return "<form id='admin-admin-user-destroy-".$model->id."'
+                    if($model->is_super_admin === 1) {
+                        return "<span>Destroy</span>";
+                    }  else {
+                        return "<form id='admin-admin-user-destroy-" . $model->id . "'
                                                 method='POST'
-                                                action='".route('admin.admin-user.destroy', $model->id)."'>
+                                                action='" . route('admin.admin-user.destroy', $model->id) . "'>
                                             <input name='_method' type='hidden' value='DELETE' />
-                                            ".csrf_field()."
+                                            " . csrf_field() . "
                                             <a href='#'
                                                 onclick=\"jQuery('#admin-admin-user-destroy-$model->id').submit()\"
                                                 >Destroy</a>
                                         </form>";
+                    }
                 });
 
         $this->dataGrid = $dataGrid;
