@@ -11,6 +11,11 @@ use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
 
 class CategoryController extends Controller
 {
+    /**
+     * Return upto 10 Record for an Resource in Json Formate
+     * 
+     * @return \Illuminate\Http\Resources\CollectsResources
+     */
     public function index()
     {
         $categories = Category::paginate(10);
@@ -18,6 +23,11 @@ class CategoryController extends Controller
         return new CategoryCollectionResource($categories);
     }
 
+    /**
+     * Create an Resource and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function store(CategoryRequest $request)
     {
         $category = Category::create($request->all());
@@ -25,17 +35,31 @@ class CategoryController extends Controller
         return (new CategoryResource($category));
     }
 
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function show(Category $category)
     {
         return new CategoryResource($category);
     }
-
+    /**
+     * Update and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->all());
         return new CategoryResource($category);
     }
 
+    /**
+     * Destroy an Record and Return Null Json Response
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function destroy(Category $category)
     {
         $category->delete();

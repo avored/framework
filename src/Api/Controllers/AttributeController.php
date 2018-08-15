@@ -11,6 +11,11 @@ use AvoRed\Framework\Product\Requests\AttributeRequest;
 
 class AttributeController extends Controller
 {
+    /**
+     * Return upto 10 Record for an Resource in Json Formate
+     * 
+     * @return \Illuminate\Http\Resources\CollectsResources
+     */
     public function index()
     {
         $attributes = Attribute::paginate(10);
@@ -18,6 +23,11 @@ class AttributeController extends Controller
         return new AttributeCollectionResource($attributes);
     }
 
+    /**
+     * Create an Resource and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function store(AttributeRequest $request)
     {
         $attribute = Attribute::create($request->all());
@@ -25,18 +35,33 @@ class AttributeController extends Controller
         return (new AttributeResource($attribute));
     }
 
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function show(Attribute $attribute)
     {
         return new AttributeResource($attribute);
     }
 
+    /**
+     * Update and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function update(AttributeRequest $request, Attribute $attribute)
     {
         $attribute->update($request->all());
         return new AttributeResource($attribute);
     }
 
-    public function destroy(Attribute $attribute)
+    /**
+     * Destroy an Record and Return Null Json Response
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+        public function destroy(Attribute $attribute)
     {
         $attribute->delete();
         return JsonResponse::create(null, 204);
