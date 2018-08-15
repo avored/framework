@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header">
             Account Details
-            <a class="float-right" href="{{ route('admin.admin-user.edit', $user->id) }}">Edit</a>
+            
         </div>
 
         <div class="card-body table-bordered">
@@ -24,7 +24,28 @@
                     <td>Role</td>
                     <td>{{ $user->role->name }}</td>
                 </tr>
+                <tr>
+                    <td>Is Super Admin</td>
+                    <td>{{ (1 === $user->is_super_admin) ? "Yes" : "No" }}</td>
+                </tr>
             </table>
+
+            <div class="float-left">
+                @if($user->is_super_admin === 1)
+                <button class="btn btn-danger" disabled >
+                    Destroy
+                </button>
+                @else
+                <form method="post" action="{{ route('admin.admin-user.destroy', $user->id)  }}">
+                    @csrf()
+                    @method('delete')
+                    <button class="btn btn-danger" >
+                        Destroy
+                    </button>
+                </form>
+                @endif
+            </div>
+            <a class="btn" href="{{ route('admin.admin-user.index') }}">Cancel</a>
         </div>
     </div>
 

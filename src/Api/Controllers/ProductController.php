@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Api\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use AvoRed\Framework\Models\Database\Category;
-use AvoRed\Framework\Product\Requests\CategoryRequest;
+use AvoRed\Framework\Models\Database\Product;
+use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Api\Controllers\Controller;
-use AvoRed\Framework\Api\Resources\Category\CategoryResource;
-use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
+use AvoRed\Framework\Api\Resources\Product\ProductResource;
+use AvoRed\Framework\Api\Resources\Product\ProductCollectionResource;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
@@ -18,9 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $products = Product::paginate(10);
 
-        return new CategoryCollectionResource($categories);
+        return new ProductCollectionResource($products);
     }
 
     /**
@@ -28,11 +28,11 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store(CategoryRequest $request)
+    public function store(ProductRequest $request)
     {
-        $category = Category::create($request->all());
+        $product = Product::create($request->all());
 
-        return (new CategoryResource($category));
+        return (new ProductResource($product));
     }
 
     /**
@@ -40,29 +40,33 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        return new CategoryResource($category);
+        $product = Product::find($id);
+        return new ProductResource($product);
     }
+
     /**
      * Update and Returns a Json Resrouce for that Record
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(ProductRequest $request, $id)
     {
-        $category->update($request->all());
-        return new CategoryResource($category);
+        $product = Product::find($id);
+        $product->update($request->all());
+        return new ProductResource($product);
     }
-
+ 
     /**
      * Destroy an Record and Return Null Json Response
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category->delete();
+        $product = Product::find($id);
+        $product->delete();
         return JsonResponse::create(null, 204);
     }
 }

@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Api\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use AvoRed\Framework\Models\Database\Category;
-use AvoRed\Framework\Product\Requests\CategoryRequest;
+use AvoRed\Framework\Models\Database\Page;
 use AvoRed\Framework\Api\Controllers\Controller;
-use AvoRed\Framework\Api\Resources\Category\CategoryResource;
-use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
+use AvoRed\Framework\Api\Resources\Page\PageResource;
+use AvoRed\Framework\Api\Resources\Page\PageCollectionResource;
+use AvoRed\Framework\Cms\Requests\PageRequest;
 
-class CategoryController extends Controller
+class PageController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
@@ -18,9 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $pages = Page::paginate(10);
 
-        return new CategoryCollectionResource($categories);
+        return new PageCollectionResource($pages);
     }
 
     /**
@@ -28,31 +28,32 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store(CategoryRequest $request)
+    public function store(PageRequest $request)
     {
-        $category = Category::create($request->all());
+        $page = Page::create($request->all());
 
-        return (new CategoryResource($category));
+        return (new PageResource($page));
     }
 
-    /**
+   /**
      * Find a Record and Returns a Json Resrouce for that Record
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(Category $category)
+    public function show(Page $page)
     {
-        return new CategoryResource($category);
+        return new PageResource($page);
     }
+
     /**
      * Update and Returns a Json Resrouce for that Record
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(PageRequest $request, Page $page)
     {
-        $category->update($request->all());
-        return new CategoryResource($category);
+        $page->update($request->all());
+        return new PageResource($page);
     }
 
     /**
@@ -60,9 +61,9 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy(Category $category)
+    public function destroy(Page $page)
     {
-        $category->delete();
+        $page->delete();
         return JsonResponse::create(null, 204);
     }
 }

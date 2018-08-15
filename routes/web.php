@@ -35,7 +35,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('dashboard');
         
 
-    Route::resource('admin-user', 'System\Controllers\AdminUserController')->except('show');
+    Route::resource('admin-user', 'System\Controllers\AdminUserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');
     Route::resource('category', 'Product\Controllers\CategoryController');
     Route::resource('page', 'Cms\Controllers\PageController');
@@ -89,8 +89,8 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::get('menu', 'Cms\Controllers\MenuController@index')->name('menu.index');
     Route::post('menu', 'Cms\Controllers\MenuController@store')->name('menu.store');
 
-    Route::get('admin-user/view', 'System\Controllers\AdminUserController@show')
-                ->name('admin-user.show');
+    Route::get('admin-user-detail', 'System\Controllers\AdminUserController@detail')
+                ->name('admin-user.detail');
     Route::get('admin-user-api-show', 'System\Controllers\AdminUserController@apiShow')
                 ->name('admin-user.show.api');
 
