@@ -121,6 +121,19 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function detail()
+    {
+       
+        $user = Auth::guard('admin')->user();
+
+        return view('avored-framework::system.admin-user.detail')->with('user', $user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show()
     {
         $user = Auth::guard('admin')->user();

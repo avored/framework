@@ -22,6 +22,10 @@ class AdminUserDataGrid
                 ->linkColumn('edit', [], function ($model) {
                     return "<a href='".route('admin.admin-user.edit', $model->id)."' >Edit</a>";
                 })->linkColumn('destroy', [], function ($model) {
+
+                    return "<a href='".route('admin.admin-user.show', $model->id)."' >Destroy</a>";
+
+                    /*
                     if($model->is_super_admin === 1) {
                         return "<span>Destroy</span>";
                     }  else {
@@ -35,6 +39,7 @@ class AdminUserDataGrid
                                                 >Destroy</a>
                                         </form>";
                     }
+                    */
                 });
 
         $this->dataGrid = $dataGrid;
