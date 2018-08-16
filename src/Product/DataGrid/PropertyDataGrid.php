@@ -18,16 +18,8 @@ class PropertyDataGrid
           ->column('identifier')
           ->linkColumn('edit', [], function ($model) {
               return "<a href='".route('admin.property.edit', $model->id)."' >Edit</a>";
-          })->linkColumn('destroy', [], function ($model) {
-              return "<form id='admin-property-destroy-".$model->id."'
-                                          method='POST'
-                                          action='".route('admin.property.destroy', $model->id)."'>
-                                      <input name='_method' type='hidden' value='DELETE' />
-                                      ".csrf_field()."
-                                      <a href='#'
-                                          onclick=\"jQuery('#admin-property-destroy-$model->id').submit()\"
-                                          >Destroy</a>
-                                  </form>";
+          })->linkColumn('show', [], function ($model) {
+            return "<a href='".route('admin.property.show', $model->id)."' >Show</a>";
           });
 
         $this->dataGrid = $dataGrid;
