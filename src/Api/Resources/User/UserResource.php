@@ -1,0 +1,45 @@
+<?php
+
+namespace AvoRed\Framework\Api\Resources\User;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class UserResource extends JsonResource
+{
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,     
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'company_name' => $this->company_name,
+            'image_path' => $this->image_path,
+            'status' => $this->status,
+            'language' => $this->language,
+            'address' => $this->addresses,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
+    }
+
+    /**
+     * Added a Status Success with Response
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
+    public function with($request){
+
+        return [
+          'status'=>'success'
+        ];
+    }
+}

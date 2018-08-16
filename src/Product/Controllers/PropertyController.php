@@ -4,13 +4,25 @@ namespace AvoRed\Framework\Product\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use AvoRed\Framework\Models\Database\Property as Model;
+use AvoRed\Framework\Models\Database\Property;
 use AvoRed\Framework\Product\DataGrid\PropertyDataGrid;
 use AvoRed\Framework\Product\Requests\PropertyRequest;
 use AvoRed\Framework\System\Controllers\Controller;
+use AvoRed\Framework\Models\Contracts\PropertyInterface;
 
 class PropertyController extends Controller
 {
+    /**
+     *
+     * @var \AvoRed\Framework\Models\Repository\PropertyRepository
+     */
+    protected $repository;
+
+    public function __construct(PropertyInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the Property.
      *
@@ -18,7 +30,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $propertyGrid = new PropertyDataGrid(Model::query()->orderBy('id', 'desc'));
+        $propertyGrid = new PropertyDataGrid($this->repository->query()->orderBy('id', 'desc'));
 
         return view('avored-framework::product.property.index')
                     ->with('dataGrid', $propertyGrid->dataGrid);
@@ -43,7 +55,7 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        $property = Model::create($request->all());
+        $property = $this->repository->create($request->all());
 
         $this->_saveDropdownOptions($property, $request);
 
@@ -57,7 +69,7 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Model $property)
+    public function edit(Property $property)
     {
         return view('avored-framework::product.property.edit')->with('model', $property);
     }
@@ -70,7 +82,7 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PropertyRequest $request, Model $property)
+    public function update(PropertyRequest $request, Property $property)
     {
         $property->update($request->all());
 
@@ -86,9 +98,9 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Model $property)
+    public function destroy(Property $property)
     {
-        Model::destroy($id);
+        $property->delete();
 
         return redirect()->route('admin.property.index');
     }
@@ -101,7 +113,7 @@ class PropertyController extends Controller
      */
     public function getElementHtml(Request $request)
     {
-        $properties = Model::whereIn('id', $request->get('property_id'))->get();
+        $properties = $this->repository->findMany('id', $request->get('property_id'))->get();
 
         $tmpString = str_random();
         $view = view('avored-framework::product.property.get-element')
@@ -134,5 +146,16 @@ class PropertyController extends Controller
                 $property->propertyDropdownOptions()->create($val);
             }
         }
+    }
+
+
+    /**
+     * Find a Record and Returns a Html Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Property $property)
+    {
+        return view('avored-framework::product.property.show')->with('property', $property);
     }
 }

@@ -31,6 +31,8 @@ use AvoRed\Framework\Models\Contracts\RoleInterface;
 use AvoRed\Framework\Models\Repository\RoleRepository;
 use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\Models\Repository\SiteCurrencyRepository;
+use AvoRed\Framework\Models\Contracts\UserInterface;
+use AvoRed\Framework\Models\Repository\UserRepository;
 
 class Provider extends ServiceProvider
 {
@@ -109,5 +111,7 @@ class Provider extends ServiceProvider
         $this->app->bind(PageInterface::class, PageRepository::class);
         $this->app->bind(RoleInterface::class, RoleRepository::class);
         $this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
+        $this->app->bind(UserInterface::class, UserRepository::class);
+        //$this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
     }
 }

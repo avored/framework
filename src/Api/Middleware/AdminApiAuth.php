@@ -18,7 +18,7 @@ class AdminApiAuth
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'admin')
+    public function handle($request, Closure $next, $guard = 'api')
     {
         if (Auth::guard($guard)->guest()) {
             return JsonResponse::create(['message' => 'you are not authorized to access this api', 'status' => false], 401);

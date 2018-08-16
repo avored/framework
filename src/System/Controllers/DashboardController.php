@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\System\Controllers;
 
 use AvoRed\Framework\Models\Contracts\OrderInterface;
-use AvoRed\Framework\Models\Database\User;
+use AvoRed\Framework\Models\Contracts\UserInterface;
 
 class DashboardController extends Controller
 {
@@ -25,7 +25,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalRegisteredUser = User::all()->count();
+        
+        $totalRegisteredUser = app(UserInterface::class)->all();
         $totalOrder = $this->repository->all()->count();
 
         return view('avored-framework::home')

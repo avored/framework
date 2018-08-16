@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PropertyDropdownOption extends Model
+class PropertyDropdownOption extends BaseModel
 {
     protected $fillable = ['property_id', 'display_text'];
 

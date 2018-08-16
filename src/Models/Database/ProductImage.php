@@ -3,9 +3,8 @@
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Image\LocalFile;
-use Illuminate\Database\Eloquent\Model;
 
-class ProductImage extends Model
+class ProductImage extends BaseModel
 {
     protected $fillable = ['product_id', 'path', 'is_main_image'];
 
@@ -19,7 +18,9 @@ class ProductImage extends Model
         if (null === $this->attributes['path'] || empty($this->attributes['path'])) {
             return;
         }
-        $localImage = new LocalFile($this->attributes['path']);
+        $symlink = config('avored-framework.symlink_storage_folder');
+        $relativePath =  $symlink . DIRECTORY_SEPARATOR .$this->attributes['path'];
+        $localImage = new LocalFile($relativePath);
 
         return $localImage;
     }

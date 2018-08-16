@@ -353,7 +353,7 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('admin_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('is_super_admin')->nullable();
+            $table->tinyInteger('is_super_admin')->nullable()->default(null);
             $table->integer('role_id')->unsigned()->default(null);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();

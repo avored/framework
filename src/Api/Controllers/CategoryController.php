@@ -6,42 +6,63 @@ use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Api\Controllers\Controller;
+use AvoRed\Framework\Api\Resources\Category\CategoryResource;
+use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
 
 class CategoryController extends Controller
 {
+    /**
+     * Return upto 10 Record for an Resource in Json Formate
+     * 
+     * @return \Illuminate\Http\Resources\CollectsResources
+     */
     public function index()
     {
-        $data = Category::all();
+        $categories = Category::paginate(10);
 
-        return JsonResponse::create(['data' => $data, 'status' => true]);
+        return new CategoryCollectionResource($categories);
     }
 
+    /**
+     * Create an Resource and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function store(CategoryRequest $request)
     {
-        $data = Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return JsonResponse::create(['data' => $data, 'status' => true], 201);
+        return (new CategoryResource($category));
     }
 
-    public function show($id)
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function show(Category $category)
     {
-        $data = Category::find($id);
-
-        return JsonResponse::create(['data' => $data, 'status' => true]);
+        return new CategoryResource($category);
+    }
+    /**
+     * Update and Returns a Json Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function update(CategoryRequest $request, Category $category)
+    {
+        $category->update($request->all());
+        return new CategoryResource($category);
     }
 
-    public function update(CategoryRequest $request, $id)
+    /**
+     * Destroy an Record and Return Null Json Response
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function destroy(Category $category)
     {
-        $data = Category::find($id);
-        $data->update($request->all());
-
-        return JsonResponse::create(['data' => $data, 'status' => true]);
-    }
-
-    public function destroy($id)
-    {
-        Category::destroy($id);
-
+        $category->delete();
         return JsonResponse::create(null, 204);
     }
 }

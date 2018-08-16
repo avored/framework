@@ -19,16 +19,8 @@ class ProductDataGrid
           })->column('name')
           ->linkColumn('edit', [], function ($model) {
               return "<a href='".route('admin.product.edit', $model->id)."' >Edit</a>";
-          })->linkColumn('destroy', [], function ($model) {
-              return "<form id='admin-product-destroy-".$model->id."'
-                                          method='POST'
-                                          action='".route('admin.product.destroy', $model->id)."'>
-                                      <input name='_method' type='hidden' value='DELETE' />
-                                      ".csrf_field()."
-                                      <a href='#'
-                                          onclick=\"jQuery('#admin-product-destroy-$model->id').submit()\"
-                                          >Destroy</a>
-                                  </form>";
+          })->linkColumn('show', [], function ($model) {
+            return "<a href='".route('admin.product.show', $model->id)."' >Show</a>";
           });
 
         $this->dataGrid = $dataGrid;

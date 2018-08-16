@@ -17,16 +17,8 @@ class RoleDataGrid
               ->column('name')
               ->linkColumn('edit', [], function ($model) {
                   return "<a href='".route('admin.role.edit', $model->id)."' >Edit</a>";
-              })->linkColumn('destroy', [], function ($model) {
-                  return "<form id='admin-role-destroy-".$model->id."'
-                                            method='POST'
-                                            action='".route('admin.role.destroy', $model->id)."'>
-                                        <input name='_method' type='hidden' value='DELETE' />
-                                        ".csrf_field()."
-                                        <a href='#'
-                                            onclick=\"jQuery('#admin-role-destroy-$model->id').submit()\"
-                                            >Destroy</a>
-                                    </form>";
+              })->linkColumn('show', [], function ($model) {
+                return "<a href='".route('admin.role.show', $model->id)."' >Show</a>";
               });
 
         $this->dataGrid = $dataGrid;

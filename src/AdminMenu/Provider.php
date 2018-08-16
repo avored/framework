@@ -60,6 +60,9 @@ class Provider extends ServiceProvider
      */
     protected function registerAdminMenu()
     {
+        AdminMenuFacade::add('dashboard', function (AdminMenu $shopMenu) {
+            $shopMenu->label('Dashboard')->route('admin.dashboard')->icon('fas fa-home');
+        });
         
         AdminMenuFacade::add('shop', function (AdminMenu $shopMenu) {
             $shopMenu->label('Shop')
@@ -86,7 +89,7 @@ class Provider extends ServiceProvider
 
         $shopMenu->subMenu('order',   function(AdminMenu $menu) {
             $menu->key('order')
-            ->label('Order')
+            ->label('Orders')
             ->route('admin.order.index')
             ->icon('fas fa-dollar-sign');
         });

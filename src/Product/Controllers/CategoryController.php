@@ -1,8 +1,7 @@
 <?php
-
 namespace AvoRed\Framework\Product\Controllers;
 
-use AvoRed\Framework\Models\Database\Category as Model;
+use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 use AvoRed\Framework\Product\DataGrid\CategoryDataGrid;
@@ -63,7 +62,7 @@ class CategoryController extends Controller
      * @param \AvoRed\Framework\Models\Database\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Model $category)
+    public function edit(Category $category)
     {
         return view('avored-framework::product.category.edit')->with('model', $category);
     }
@@ -73,10 +72,9 @@ class CategoryController extends Controller
      *
      * @param \AvoRed\Framework\Product\Requests\CategoryRequest $request
      * @param \AvoRed\Framework\Models\Database\Category $category
-     *
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Model $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->all());
 
@@ -87,10 +85,9 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \AvoRed\Framework\Models\Database\Category $category
-     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Model $category)
+    public function destroy(Category $category)
     {
         foreach ($category->children as $child) {
             $child->parent_id = 0;
@@ -100,5 +97,15 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.category.index');
+    }
+
+    /**
+     * Find a Record and Returns a Html Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category)
+    {
+        return view('avored-framework::product.category.show')->with('category', $category);
     }
 }

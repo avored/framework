@@ -10,6 +10,7 @@ return [
 
     'admin_url' => 'admin',
 
+    'symlink_storage_folder' => 'storage',
 
     'cart' => ['session_key' => 'cart_products'],
 

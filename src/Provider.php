@@ -5,7 +5,7 @@ namespace AvoRed\Framework;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Models\Database\Product;
-use AvoRed\Framework\User\Middleware\AdminApiAuth;
+use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\User\Middleware\Permission;
@@ -14,6 +14,7 @@ use AvoRed\Framework\User\ViewComposers\AdminUserFieldsComposer;
 use AvoRed\Framework\System\ViewComposers\AdminNavComposer;
 use AvoRed\Framework\Product\ViewComposers\CategoryFieldsComposer;
 use AvoRed\Framework\Product\ViewComposers\ProductFieldsComposer;
+use AvoRed\Framework\Cms\ViewComposers\PageFieldsComposer;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\View;
 use AvoRed\Framework\User\Widget\TotalUserWidget;
@@ -24,6 +25,7 @@ use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
 use AvoRed\Framework\User\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
 {
@@ -154,9 +156,11 @@ class Provider extends ServiceProvider
     public function registerViewComposerData()
     {
         View::composer('avored-framework::layouts.left-nav', AdminNavComposer::class);
-        View::composer('avored-framework::site-currency._fields', SiteCurrencyFieldsComposer::class);
+        View::composer('avored-framework::system.site-currency._fields', SiteCurrencyFieldsComposer::class);
         View::composer(['avored-framework::product.category._fields'], CategoryFieldsComposer::class);
         View::composer(['avored-framework::system.admin-user._fields'], AdminUserFieldsComposer::class);
+        View::composer('avored-framework::cms.page._fields', PageFieldsComposer::class);
+        View::composer('avored-framework::cms.menu.index', MenuComposer::class);
         View::composer(['avored-framework::product.create',
                         'avored-framework::product.edit',
                         ], ProductFieldsComposer::class);

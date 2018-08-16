@@ -5,7 +5,7 @@ namespace AvoRed\Framework\Product\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Product\DataGrid\AttributeDataGrid;
-use AvoRed\Framework\Models\Database\Attribute as Model;
+use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Product\Requests\AttributeRequest;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\System\Controllers\Controller;
@@ -47,8 +47,9 @@ class AttributeController extends Controller
     }
 
     /**
-     * @param \AvoRed\Framework\Product\Requests\AttributeRequest $request
+     * Store an Atttibute into Database and Redirect to List Route
      *
+     * @param \AvoRed\Framework\Product\Requests\AttributeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AttributeRequest $request)
@@ -64,12 +65,12 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(Model $attribute)
+    public function edit(Attribute $attribute)
     {
         return view('avored-framework::product.attribute.edit')->with('model', $attribute);
     }
 
-    public function update(AttributeRequest $request, Model $attribute)
+    public function update(AttributeRequest $request, Attribute $attribute)
     {
         $attribute->update($request->all());
 
@@ -82,7 +83,7 @@ class AttributeController extends Controller
      * @param \AvoRed\Framework\Models\Database\Attribute $attribute
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Model $attribute)
+    public function destroy(Attribute $attribute)
     {
         $attribute->delete();
         return redirect()->route('admin.attribute.index');
@@ -96,7 +97,7 @@ class AttributeController extends Controller
      */
     public function getAttribute(Request $request)
     {
-        $attribute = Model::find($request->get('id'));
+        $attribute = $this->repository->find($request->get('id'));
 
         return view('avored-framework::product.attribute-card-values')
             ->with('attribute', $attribute);
@@ -145,5 +146,17 @@ class AttributeController extends Controller
                 $attribute->attributeDropdownOptions()->create($val);
             }
         }
+    }
+
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @param \AvoRed\Framework\Models\Database\Attribute $attribute
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function show(Attribute $attribute)
+    {
+        return view('avored-framework::product.attribute.show')
+                    ->with('attribute', $attribute);
     }
 }

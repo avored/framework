@@ -1,20 +1,16 @@
 <div class="brand-nav">
-
-    <i class="fas fa-bars nav-icon"></i>
-
     <span class="logo">
         <a href="{{ route('admin.dashboard') }}">
-            AvoRed Admin
+            <img src="https://www.avored.com/img/logo.svg" height="50px" width="30px" /> AvoRed
         </a>
     </span>
-
-
 </div>
 
 <ul class="side-nav">
-    @if(isset($adminMenus))
+   @if(isset($adminMenus))
     @foreach($adminMenus as $key => $menu)
-        @if(count($menu->subMenu()) > 0)
+    
+        @if(null !== $menu->subMenu() && count($menu->subMenu()) > 0)
             <?php $subMenu = $menu->subMenu(); ?>
 
             <li class="nav-item has-dropdown">

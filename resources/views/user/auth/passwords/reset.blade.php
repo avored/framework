@@ -28,7 +28,7 @@
         <div class="col-6">
             <div class="offset-1 col-10">
                 <div class="card">
-                    <div class="card-header">Reset Password</div>
+                    <div class="card-header bg-primary text-white">Reset Password</div>
 
                     <div class="card-body">
                         <div class="col-md-12">
@@ -115,7 +115,5 @@
         }
     });
 </script>
-
 </body>
-
 </html>

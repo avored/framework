@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ProductPropertyIntegerValue extends Model
+class ProductPropertyIntegerValue extends BaseModel
 {
     protected $fillable = ['property_id', 'product_id', 'value'];
 

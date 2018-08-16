@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Model;
-
-class OrderStatus extends Model
+class OrderStatus extends BaseModel
 {
     protected $fillable = ['name', 'is_default'];
 

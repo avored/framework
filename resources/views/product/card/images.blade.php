@@ -12,7 +12,8 @@
                     <img class="img-thumbnail img-tag img-responsive"
                         data-path="{{ $image->path->relativePath }}"
                         src="{{ ($image->path->smallUrl) }}"/>
-                    <input type="hidden" name="image[{{ $image->id }}][path]" value="{{ $image->path->relativePath }}"/>
+                    <input type="hidden" name="image[{{ $image->id }}][path]" 
+                            value="{{ str_replace('storage/', '', $image->path->relativePath) }}"/>
                     @if($image->is_main_image)
                         <input type="hidden" class="is_main_image_hidden_field"
                                name="image[{{ $image->id }}][is_main_image]" value="1"/>

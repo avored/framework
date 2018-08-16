@@ -10,6 +10,7 @@ use AvoRed\Framework\Models\Database\Role;
 use AvoRed\Framework\Image\Facade as Image;
 use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
+use AvoRed\Framework\Models\Database\AdminUser;
 
 class AdminUserController extends Controller
 {
@@ -121,11 +122,21 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function detail()
     {
         $user = Auth::guard('admin')->user();
 
-        return view('avored-framework::system.admin-user.show')->with('user', $user);
+        return view('avored-framework::system.admin-user.detail')->with('user', $user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(AdminUser $adminUser)
+    {
+        return view('avored-framework::system.admin-user.show')->with('user', $adminUser);
     }
 
     private function _getUserImageRelativePath()

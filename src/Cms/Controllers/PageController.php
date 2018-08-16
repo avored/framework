@@ -2,8 +2,7 @@
 
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Models\Database\Page as Model;
-use AvoRed\Framework\Widget\Facade as Widget;
+use AvoRed\Framework\Models\Database\Page;
 use AvoRed\Framework\Cms\DataGrid\PageDataGrid;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Models\Contracts\PageInterface;
@@ -41,10 +40,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        $widgetOptions = Widget::allOptions();
-
-        return view('avored-framework::cms.page.create')
-            ->with('widgetOptions', $widgetOptions);
+        return view('avored-framework::cms.page.create');
     }
 
     /**
@@ -68,13 +64,10 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Model $page)
+    public function edit(Page $page)
     {
-        $widgetOptions = Widget::allOptions();
-
         return view('avored-framework::cms.page.edit')
-            ->with('model', $page)
-            ->with('widgetOptions', $widgetOptions);
+            ->with('model', $page);
     }
 
     /**
@@ -85,7 +78,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PageRequest $request, Model $page)
+    public function update(PageRequest $request, Page $page)
     {
         $page->update($request->all());
         return redirect()->route('admin.page.index');
@@ -98,9 +91,21 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Model $page)
+    public function destroy(Page $page)
     {
         $page->delete();
         return redirect()->route('admin.page.index');
+    }
+
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @param \AvoRed\Framework\Models\Database\Page $page
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function show(Page $page)
+    {
+        return view('avored-framework::cms.page.show')
+                    ->with('page', $page);
     }
 }
