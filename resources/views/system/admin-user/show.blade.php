@@ -31,6 +31,7 @@
             </table>
 
             <div class="float-left">
+                
                 @if($user->is_super_admin === 1)
                 <button class="btn btn-danger" disabled >
                     Destroy
@@ -46,7 +47,7 @@
                                         title: 'Are you sure?',
                                         icon: 'warning',
                                         buttons: true,
-                                        text: 'Once deleted, you will not be able to recover this User!',
+                                        text: 'Once deleted, you will not be able to recover this AdminUser!',
                                     }).then((willDelete) => {
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
