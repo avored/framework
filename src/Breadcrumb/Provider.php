@@ -108,10 +108,20 @@ class Provider extends ServiceProvider
                 ->parent('admin.property.index');
         });
 
-        BreadcrumbFacade::make('admin.attribute.edit', function (Breadcrumb $breadcrumb) {
+        BreadcrumbFacade::make('admin.page.index', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Page')
+                ->parent('admin.dashboard');
+        });
+
+        BreadcrumbFacade::make('admin.page.create', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Create')
+                ->parent('admin.dashboard')
+                ->parent('admin.page.index');
+        });
+        BreadcrumbFacade::make('admin.page.edit', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Edit')
                 ->parent('admin.dashboard')
-                ->parent('admin.attribute.index');
+                ->parent('admin.page.index');
         });
 
         BreadcrumbFacade::make('admin.order.index', function (Breadcrumb $breadcrumb) {

@@ -19,16 +19,8 @@ class PageDataGrid
               ->column('meta_title',['label' => 'Meta Title'])
               ->linkColumn('edit', [], function ($model) {
                   return "<a href='".route('admin.page.edit', $model->id)."' >Edit</a>";
-              })->linkColumn('destroy', [], function ($model) {
-                  return "<form id='admin-page-destroy-".$model->id."'
-                                            method='POST'
-                                            action='".route('admin.page.destroy', $model->id)."'>
-                                        <input name='_method' type='hidden' value='DELETE' />
-                                        ".csrf_field()."
-                                        <a href='#'
-                                            onclick=\"jQuery('#admin-page-destroy-$model->id').submit()\"
-                                            >Destroy</a>
-                                    </form>";
+              })->linkColumn('show', [], function ($model) {
+                return "<a href='".route('admin.page.show', $model->id)."' >Show</a>";
               });
 
         $this->dataGrid = $dataGrid;

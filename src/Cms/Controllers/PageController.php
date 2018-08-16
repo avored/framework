@@ -96,4 +96,16 @@ class PageController extends Controller
         $page->delete();
         return redirect()->route('admin.page.index');
     }
+
+    /**
+     * Find a Record and Returns a Json Resrouce for that Record
+     * 
+     * @param \AvoRed\Framework\Models\Database\Page $page
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function show(Page $page)
+    {
+        return view('avored-framework::cms.page.show')
+                    ->with('page', $page);
+    }
 }
