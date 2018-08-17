@@ -7,6 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use AvoRed\Framework\DataGrid\Columns\LinkColumn;
 use AvoRed\Framework\DataGrid\Columns\TextColumn;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class Manager
 {
@@ -98,16 +100,53 @@ class Manager
             $dataGrid->model->orderBy($this->request->get('desc'), 'desc');
         }
 
-        $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
 
+        $options = ['path' => asset(request()->path())]; 
+
+        if(!$dataGrid->model instanceof Collection) {
+            $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
+        } else {
+           $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
+        }
+       
         return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
     }
 
+    /**
+     * Set the model or Collection for the DataGrid Data
+     * 
+     * @param mixed $model
+     * @return self
+     */
     public function model($model)
     {
         $this->model = $model;
 
         return $this;
+    }
+
+    /**
+     * Gera a paginação dos itens de um array ou collection.
+    *
+    * @param array|Collection      $items
+    * @param int   $perPage
+    * @param int  $page
+    * @param array $options
+    *
+    * @return LengthAwarePaginator
+    */
+    public function paginate($items, $perPage = 10, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+
+        return new LengthAwarePaginator(
+                        $items->forPage($page, $perPage), 
+                        $items->count(), 
+                        $perPage, 
+                        $page, 
+                        $options);
     }
 
     public function column($identifier, $options = [])
