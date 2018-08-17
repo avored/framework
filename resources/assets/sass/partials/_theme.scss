@@ -13,3 +13,9 @@ body {
 .bg-site-second-color {
   background-color: $bg-site-second-color;
 }
+
+.note-popover.note-table-popover.in.bottom,
+.note-popover.note-image-popover.in.bottom,
+.note-popover.note-link-popover.in.bottom {
+  display:none;
+}
