@@ -17,7 +17,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+
+    {!! DataGrid::render($dataGrid) !!}
+
+ <!--div class="row">
         @if(count($themes) <= 0)
             <p>Sorry No Theme Found</p>
         @else
@@ -56,7 +59,6 @@
 
         @endif
 
-    </div>
-
+    </div-->
 @endsection
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Theme\Facade as Theme;
+use AvoRed\Framework\System\DataGrid\ThemeDataGrid;
 
 class ThemeController extends Controller
 {
@@ -19,11 +20,17 @@ class ThemeController extends Controller
     public function index()
     {
         $themes = Theme::all();
+
+        //dd($themes);
         $activeTheme = Configuration::getConfiguration('active_theme_identifier');
+
+        
+        $siteCurrencyGrid = new ThemeDataGrid($themes, $activeTheme);
 
         return view('avored-framework::system.theme.index')
             ->with('themes', $themes)
-            ->with('activeTheme', $activeTheme);
+            ->with('activeTheme', $activeTheme)
+            ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**

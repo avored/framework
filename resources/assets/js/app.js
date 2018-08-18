@@ -21,6 +21,7 @@ require('select2');
 require('summernote');
 require('pc-bootstrap4-datetimepicker');
 require('chartjs');
+require('sweetalert');
 require('jquery-sortable');
 window.Vue = require('vue/dist/vue');
 window.axios = require('axios');

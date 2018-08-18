@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use AvoRed\Framework\Models\Database\Product as ProductModel;
+use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Image\Facade as Image;
 use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
@@ -75,7 +75,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $product = ProductModel::create($request->all());
+            $product = Product::create($request->all());
         } catch (\Exception $e) {
             echo 'Error in Saving Product: ', $e->getMessage(), "\n";
         }
@@ -93,7 +93,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductModel $product)
+    public function edit(Product $product)
     {
         $attributes = Collection::make([]);
 
@@ -119,7 +119,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Exception
      */
-    public function update(ProductRequest $request, ProductModel $product)
+    public function update(ProductRequest $request, Product $product)
     {
         //dd($request->all());
         try {
@@ -141,7 +141,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        ProductModel::destroy($id);
+        Product::destroy($id);
 
         return redirect()->route('admin.product.index');
     }
@@ -239,7 +239,7 @@ class ProductController extends Controller
      */
     public function editVariation(Request $request)
     {
-        $product = ProductModel::findorfail($request->get('variation_id'));
+        $product = Product::findorfail($request->get('variation_id'));
         $view = view('avored-framework::product.variation-modal')
                             ->with('model', $product);
 
@@ -258,4 +258,20 @@ class ProductController extends Controller
 
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
+
+    
+    /**
+     * return random string only lower and without digits.
+     *
+     * @param \AvoRed\Framework\Models\Database\Product $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $product)
+    {
+        
+        return view('avored-framework::product.show')
+                ->with('product', $product);
+    }
+
+
 }

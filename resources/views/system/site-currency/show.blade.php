@@ -2,42 +2,38 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Account Details
-            
+            Site Currency Details
         </div>
 
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>First Name</td>
-                    <td>{{ $user->first_name }}</td>
+                    <td>Name</td>
+                    <td>{{ $siteCurrency->name }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Last Name</td>
-                    <td>{{ $user->last_name }}</td>
+                    <td>Curreny Code</td>
+                    <td>{{ $siteCurrency->curreny_code }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Email</td>
-                    <td>{{ $user->email }}</td>
+                    <td>Conversion Rate</td>
+                    <td>{{ $siteCurrency->conversion_rate }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Role</td>
-                    <td>{{ $user->role->name }}</td>
+                    <td>Status</td>
+                    <td>{{ $siteCurrency->status }}</td>
                 </tr>
-                <tr>
-                    <td>Is Super Admin</td>
-                    <td>{{ (1 === $user->is_super_admin) ? "Yes" : "No" }}</td>
-                </tr>
+                
+
+                
             </table>
 
             <div class="float-left">
-                
-                @if($user->is_super_admin === 1)
-                <button class="btn btn-danger" disabled >
-                    Destroy
-                </button>
-                @else
-                <form method="post" action="{{ route('admin.admin-user.destroy', $user->id)  }}">
+            
+                <form method="post" action="{{ route('admin.site-currency.destroy', $siteCurrency->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
@@ -47,7 +43,7 @@
                                         title: 'Are you sure?',
                                         icon: 'warning',
                                         buttons: true,
-                                        text: 'Once deleted, you will not be able to recover this AdminUser!',
+                                        text: 'Once deleted, you will not be able to recover this Site Currency!',
                                     }).then((willDelete) => {
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
@@ -57,9 +53,9 @@
                         Destroy
                     </button>
                 </form>
-                @endif
+               
             </div>
-            <a class="btn" href="{{ route('admin.admin-user.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.site-currency.index') }}">Cancel</a>
         </div>
     </div>
 

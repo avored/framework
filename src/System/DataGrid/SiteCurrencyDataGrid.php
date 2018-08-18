@@ -19,16 +19,8 @@ class SiteCurrencyDataGrid
                 ->column('conversion_rate', ['label' => 'Convertion Rate'])
                 ->linkColumn('edit', [], function ($model) {
                     return "<a href='".route('admin.site-currency.edit', $model->id)."' >Edit</a>";
-                })->linkColumn('destroy', [], function ($model) {
-                    return "<form id='admin-site-currency-destroy-".$model->id."'
-                                    method='POST'
-                                    action='".route('admin.site-currency.destroy', $model->id)."'>
-                                <input name='_method' type='hidden' value='DELETE' />
-                                ".csrf_field()."
-                                <a href='#'
-                                    onclick=\"jQuery('#admin-site-currency-destroy-$model->id').submit()\"
-                                    >Destroy</a>
-                            </form>";
+                })->linkColumn('show', [], function ($model) {
+                    return "<a href='".route('admin.site-currency.show', $model->id)."' >Show</a>";
                 });
 
         $this->dataGrid = $dataGrid;

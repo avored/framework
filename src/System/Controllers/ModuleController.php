@@ -5,6 +5,7 @@ namespace AvoRed\Framework\System\Controllers;
 use AvoRed\Framework\Modules\Facade as Module;
 use AvoRed\Framework\System\Requests\UploadModuleRequest;
 use ZipArchive;
+use AvoRed\Framework\System\DataGrid\ModuleDataGrid;
 
 class ModuleController extends Controller
 {
@@ -16,9 +17,11 @@ class ModuleController extends Controller
     public function index()
     {
         $modules = Module::all();
+        $moduleDataGrid = new ModuleDataGrid($modules);
 
         return view('avored-framework::system.module.index')
-            ->with('modules', $modules);
+            ->with('modules', $modules)
+            ->with('dataGrid', $moduleDataGrid->dataGrid);
     }
 
     /**

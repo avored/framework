@@ -2,42 +2,37 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Account Details
-            
+            Page Details
         </div>
 
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>First Name</td>
-                    <td>{{ $user->first_name }}</td>
+                    <td>Name</td>
+                    <td>{{ $page->name }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Last Name</td>
-                    <td>{{ $user->last_name }}</td>
+                    <td>Slug</td>
+                    <td>{{ $page->slug }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Email</td>
-                    <td>{{ $user->email }}</td>
+                    <td>Meta Title</td>
+                    <td>{{ $page->meta_title }}</td>
                 </tr>
+                
                 <tr>
-                    <td>Role</td>
-                    <td>{{ $user->role->name }}</td>
+                    <td>Meta Description</td>
+                    <td>{{ $page->meta_description }}</td>
                 </tr>
-                <tr>
-                    <td>Is Super Admin</td>
-                    <td>{{ (1 === $user->is_super_admin) ? "Yes" : "No" }}</td>
-                </tr>
+            
+                
             </table>
 
             <div class="float-left">
-                
-                @if($user->is_super_admin === 1)
-                <button class="btn btn-danger" disabled >
-                    Destroy
-                </button>
-                @else
-                <form method="post" action="{{ route('admin.admin-user.destroy', $user->id)  }}">
+            
+                <form method="post" action="{{ route('admin.page.destroy', $page->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
@@ -47,7 +42,7 @@
                                         title: 'Are you sure?',
                                         icon: 'warning',
                                         buttons: true,
-                                        text: 'Once deleted, you will not be able to recover this AdminUser!',
+                                        text: 'Once deleted, you will not be able to recover this Page!',
                                     }).then((willDelete) => {
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
@@ -57,9 +52,9 @@
                         Destroy
                     </button>
                 </form>
-                @endif
+               
             </div>
-            <a class="btn" href="{{ route('admin.admin-user.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.page.index') }}">Cancel</a>
         </div>
     </div>
 

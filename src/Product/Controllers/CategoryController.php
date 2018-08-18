@@ -98,4 +98,14 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index');
     }
+
+    /**
+     * Find a Record and Returns a Html Resrouce for that Record
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category)
+    {
+        return view('avored-framework::product.category.show')->with('category', $category);
+    }
 }

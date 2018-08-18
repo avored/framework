@@ -69,7 +69,7 @@
     </div>
 
     <div class="avored-table-body">
-       
+      
         @foreach($dataGrid->data as $row)
         <div class="avored-table-row ">
             @foreach($dataGrid->columns as $column)
@@ -77,8 +77,15 @@
                     @if($column->type() == "link")
                         {!! $column->executeCallback($row) !!}
                     @else
-                        <?php $identifier = $column->identifier() ?>
-                        {{ $row->$identifier }}
+                        <?php  
+                        $identifier = $column->identifier();
+                        ?>
+                        @if(is_array($row))
+                            {{ array_get($row, $identifier) }}
+                        @else
+                            {{ $row->$identifier }}
+                        @endif
+                       
                     @endif
                 </div>
             @endforeach
@@ -86,9 +93,8 @@
     @endforeach
         
     </div>
-   
 
-    {!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->render('pagination::bootstrap-4') !!}
+    {!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->links('pagination::bootstrap-4') !!}
 
 </div>
 

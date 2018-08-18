@@ -5,6 +5,7 @@ namespace AvoRed\Framework\System\Controllers;
 use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\System\DataGrid\SiteCurrencyDataGrid;
 use AvoRed\Framework\System\Requests\SiteCurrencyRequest;
+use AvoRed\Framework\Models\Database\SiteCurrency;
 
 class SiteCurrencyController extends Controller
 {
@@ -28,7 +29,8 @@ class SiteCurrencyController extends Controller
     {
         $siteCurrencyGrid = new SiteCurrencyDataGrid($this->repository->query());
 
-        return view('avored-framework::system.site-currency.index')->with('dataGrid', $siteCurrencyGrid->dataGrid);
+        return view('avored-framework::system.site-currency.index')
+                    ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
@@ -97,5 +99,16 @@ class SiteCurrencyController extends Controller
         $siteCurreny = $this->repository->find($id);
         $siteCurreny->delete();
         return redirect()->route('admin.site-currency.index');
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(SiteCurrency $siteCurrency)
+    {
+        return view('avored-framework::system.site-currency.show')->with('siteCurrency', $siteCurrency);
     }
 }

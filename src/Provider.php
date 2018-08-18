@@ -156,7 +156,7 @@ class Provider extends ServiceProvider
     public function registerViewComposerData()
     {
         View::composer('avored-framework::layouts.left-nav', AdminNavComposer::class);
-        View::composer('avored-framework::site-currency._fields', SiteCurrencyFieldsComposer::class);
+        View::composer('avored-framework::system.site-currency._fields', SiteCurrencyFieldsComposer::class);
         View::composer(['avored-framework::product.category._fields'], CategoryFieldsComposer::class);
         View::composer(['avored-framework::system.admin-user._fields'], AdminUserFieldsComposer::class);
         View::composer('avored-framework::cms.page._fields', PageFieldsComposer::class);
