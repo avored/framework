@@ -2,7 +2,7 @@
 
 return [
 
-    'role-list' => 'Role List',
+    'role-list' => 'Roles',
     'role-create' => 'Create Role',
     'role-edit' => 'Edit Role',
 
