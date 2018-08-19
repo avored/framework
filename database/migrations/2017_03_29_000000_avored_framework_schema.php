@@ -104,9 +104,11 @@ class AvoredFrameworkSchema extends Migration
         });
 
         OrderStatus::insert([
-            ['name' => 'Pending', 'is_default' => 1],
+            ['name' => 'New', 'is_default' => 1],
+            ['name' => 'Pending Payment', 'is_default' => 0],
+            ['name' => 'Processing', 'is_default' => 0],
+            ['name' => 'Shipped', 'is_default' => 0],
             ['name' => 'Delivered', 'is_default' => 0],
-            ['name' => 'Received', 'is_default' => 0],
             ['name' => 'Canceled', 'is_default' => 0],
         ]);
 

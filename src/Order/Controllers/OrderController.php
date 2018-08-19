@@ -49,7 +49,8 @@ class OrderController extends Controller
      */
     public function view(Model $order)
     {
-        return view('avored-framework::order.view')->with('order', $order);
+        $orderStatus = OrderStatus::all()->pluck('name', 'id');
+        return view('avored-framework::order.view')->with('order', $order)->with('orderStatus', $orderStatus);
     }
 
     /**

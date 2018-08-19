@@ -4,112 +4,107 @@
 <div class="row">
     <div class="col-12">
         <div class="main-title-wrap">
-            <div class='h1'>
-                Order View
-                <div class="float-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a class="nav-link" href="{{ route('admin.order.send-email-invoice', $order->id) }}">Email Invoice</a>
-                            </li>
+            <div class='h2'>
+                {{  __('avored-framework::orders.order-details') }} (#{{ $order->id }}) 
 
-                            <li>
-                                <a class="nav-link" href="{{ route('admin.order.change-status', $order->id) }}">Change Status</a>
-                            </li>
-                        </ul>
+                @if($order->orderStatus->name === "Delivered")
+                <small><span class="badge badge-success">{{ $order->orderStatus->name }}</span></small>
+                @else
+                <small><span class="badge badge-info">{{ $order->orderStatus->name }}</span></small>
+                @endif
+
+                <div class="float-right">
+                    <button type="button" data-toggle="modal" data-target="#changeModal" class="btn btn-dark">{{  __('avored-framework::orders.change-status') }}</button>
+
+                    <a href="{{ route('admin.order.send-email-invoice', $order->id) }}" class="btn btn-dark">{{  __('avored-framework::orders.send-invoice') }}</a>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-white bg-secondary">
+                            <h6 class="modal-title" id="exampleModalLabel">{{  __('avored-framework::orders.change-status') }}</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>                        
+
+                        <form action="{{ route('admin.order.update-status', $order->id) }}" method="post">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <div>
+                                   {{  __('avored-framework::orders.change-status-helper') }}
+                                </div>
+                                
+                                <input type="hidden" name="_method" value="put">
+                                    @include('avored-framework::forms.select', 
+                                    ['name' => 'order_status_id',  'label' => '', 'options' => $orderStatus])
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-md btn-success">{{  __('avored-framework::orders.save') }}</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            
-                <div class="clearfix"></div>
-                <br/>
 
-                <div class="card mt-3">
-                    <h3 class="card-header">Order Basic Info</h3>
+            <div class="clearfix"></div>
+                <div class="mt-3 card">
+                    <div class="card-header text-white bg-secondary"><span class="fa fa-user"></span> {{  __('avored-framework::orders.customer-data') }}</div>
 
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>{{  __('avored-framework::orders.shipping-address') }}</h4>
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Transaction No</th>
-                                <td>{{ $order->id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Shipping Option</th>
-                                <td>{{ $order->shipping_option }}</td>
-                            </tr>
-                            <tr>
-                                <th>Payment Option</th>
-                                <td>{{ $order->payment_option }}</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>
-                                    @if(isset($changeStatus) && $changeStatus ===true)
-                                        <form action="{{ route('admin.order.update-status',$order->id) }}"
-                                              method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="_method" value="put">
-
-                                            @include('avored-framework::forms.select',
-                                                        ['name' => 'order_status_id',
-                                                        'label' => 'Order Status',
-                                                        'options' => $orderStatus])
-
-
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </form>
-
-                                    @else
-
-                                        {{ $order->orderStatus->name }}
-                                    @endif
-
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-                <div class="mt-3 card ">
-                    <h3 class="card-header">Order History</h3>
-
-                    <div class="card-body">
-
-                        
-                            @foreach($order->history as $orderHistory)
                                 <p>
-                                    This Order status was {{ $orderHistory->orderStatus->name }}
+                                    {{ $order->shipping_address->first_name }} {{ $order->shipping_address->last_name }}
+                                    <br/>
+                                    {{ $order->shipping_address->address1 }}<br/>
+                                    {{ $order->shipping_address->address2 }}<br/>
+                                    {{ $order->shipping_address->area }}<br/>
+                                    {{ $order->shipping_address->city }}<br/>
+                                    {{ $order->shipping_address->state }} {{ $order->shipping_address->country->name }}
+                                    <br/>
+                                    {{ $order->shipping_address->phone }}<br/>
                                 </p>
-                                
-                            @endforeach
-                           
+                            </div>
+                            <div class="col-md-6">
+                                <h4>{{  __('avored-framework::orders.billing-address') }}</h4>
+
+                                <p>
+                                    {{ $order->billing_address->first_name }} {{ $order->shipping_address->last_name }}
+                                    <br/>
+                                    {{ $order->billing_address->address1 }}<br/>
+                                    {{ $order->billing_address->address2 }}<br/>
+                                    {{ $order->billing_address->area }}<br/>
+                                    {{ $order->billing_address->city }}<br/>
+                                    {{ $order->billing_address->state }} {{ $order->shipping_address->country->name }}
+                                    <br/>
+                                    {{ $order->billing_address->phone }}<br/>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-                <div class="mt-3 card ">
-                    <h3 class="card-header">Order Item Info</h3>
 
+                <div class="mt-3 card">
                     <div class="card-body">
-
-                        <table class="table table-bordered">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>total</th>
-                            </tr>
                             @foreach($order->products as $product)
                                 <tr>
-                                    <td> {{ $product->id }}</td>
                                     <td>
-
                                         {{ $product->name }}
 
                                         @if($product->type == "VARIATION")
@@ -132,48 +127,45 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-                <div class="mt-3 card">
-                    <h3 class="card-header">Order Address Info</h3>
 
+                <div class="card mt-3">
+                    <div class="card-header text-white bg-secondary">{{  __('avored-framework::orders.other-data') }}</div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Shipping Info</h6>
+                        <table class="table">
+                            <tr>
+                                <th>Shipping Option</th>
+                                <td><span class="badge badge-info"> {{ $order->shipping_option }} </span></td>
+                            </tr>
+                            <tr>
+                                <th>Payment Option</th>
+                                <td>{{ $order->payment_option }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
-                                <p>
-                                    {{ $order->shipping_address->first_name }} {{ $order->shipping_address->last_name }}
-                                    <br/>
-                                    {{ $order->shipping_address->address1 }}<br/>
-                                    {{ $order->shipping_address->address2 }}<br/>
-                                    {{ $order->shipping_address->area }}<br/>
-                                    {{ $order->shipping_address->city }}<br/>
-                                    {{ $order->shipping_address->state }} {{ $order->shipping_address->country->name }}
-                                    <br/>
-                                    {{ $order->shipping_address->phone }}<br/>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Billing Info</h6>
-
-                                <p>
-                                    {{ $order->billing_address->first_name }} {{ $order->shipping_address->last_name }}
-                                    <br/>
-                                    {{ $order->billing_address->address1 }}<br/>
-                                    {{ $order->billing_address->address2 }}<br/>
-                                    {{ $order->billing_address->area }}<br/>
-                                    {{ $order->billing_address->city }}<br/>
-                                    {{ $order->billing_address->state }} {{ $order->shipping_address->country->name }}
-                                    <br/>
-                                    {{ $order->billing_address->phone }}<br/>
-                                </p>
-                            </div>
+                <div class="mt-3 card">
+                    <div class="card-header text-white bg-secondary"><span class="fa fa-history"></span> {{  __('avored-framework::orders.history') }}</div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{{  __('avored-framework::orders.history-action') }}</th>
+                                    <th scope="col">{{  __('avored-framework::orders.history-updated-at') }}</th>
+                                </tr>
+                            </thead>
+                            @foreach($order->history as $orderHistory)
+                                <tbody>
+                                    <tr>
+                                        <td>This Order status has changed to {{ $orderHistory->orderStatus->name }}</td>
+                                        <td>{{ $orderHistory->updated_at }}</td>
+                                    </tr>
+                                </tbody>                            
+                                @endforeach
+                            </table>
                         </div>
                     </div>
-
-                </div>
-
             </div>
         </div>
     </div>

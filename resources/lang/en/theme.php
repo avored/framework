@@ -1,12 +1,10 @@
 <?php
 
 return [
-
-    'theme-list' => 'Theme List',
+    'theme-list' => 'Themes overview',
     'theme-upload' => 'Upload Theme',
-    'theme-upload-file' => 'Upload Theme File',
+    'theme-upload-file' => 'Select theme file',
 
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
-
 ];

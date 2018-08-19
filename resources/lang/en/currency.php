@@ -1,9 +1,7 @@
 <?php
 
 return [
-
-    'title' => 'Currency',
+	'title' => 'Currency',
     'create' => 'Create Currency',
     'update' => 'Update Currency',
-
 ];
