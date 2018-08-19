@@ -49,7 +49,7 @@
         @if (Route::getCurrentRoute()->getName() === 'admin.dashboard')
 
         @else
-            {!! Breadcrumb::render(Route::getCurrentRoute()->getName()  ) !!}
+            {!! Breadcrumb::render(Route::getCurrentRoute()->getName()) !!}
         @endif
 
         @yield('content')
