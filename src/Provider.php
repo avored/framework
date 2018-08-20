@@ -17,9 +17,6 @@ use AvoRed\Framework\Product\ViewComposers\ProductFieldsComposer;
 use AvoRed\Framework\Cms\ViewComposers\PageFieldsComposer;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\View;
-use AvoRed\Framework\User\Widget\TotalUserWidget;
-use AvoRed\Framework\Order\Widget\TotalOrderWidget;
-use AvoRed\Framework\Widget\Facade as WidgetFacade;
 use Illuminate\Support\Carbon;
 use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
@@ -44,7 +41,7 @@ class Provider extends ServiceProvider
         \AvoRed\Framework\Shipping\Provider::class,
         \AvoRed\Framework\Tabs\Provider::class,
         \AvoRed\Framework\Theme\Provider::class,
-        \AvoRed\Framework\Widget\Provider::class,
+        \AvoRed\Framework\Widget\WidgetProvider::class,
     ];
 
     /**
@@ -58,8 +55,6 @@ class Provider extends ServiceProvider
         $this->registerViewComposerData();
         $this->registerResources();
         $this->registerPassportResources();
-        $this->registerWidget();
-        
     }
 
     /**
@@ -94,10 +89,9 @@ class Provider extends ServiceProvider
     public function registerResources()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'avored-framework');
-
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-        
+
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'avored-framework');
         //At this stage we don't use these and use avored/framework/database/migration file only
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -108,7 +102,7 @@ class Provider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/avored-framework.php', 'avored-framework');
 
         $avoredConfigData = include __DIR__ . '/../config/avored-framework.php';
-        
+
         $fileSystemConfig = $this->app['config']->get('filesystems', []);
         $authConfig = $this->app['config']->get('auth', []);
         $this->app['config']->set(
@@ -120,9 +114,7 @@ class Provider extends ServiceProvider
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
         $authConfig = $this->app['config']->get('auth', []);
-        //dd($authConfig);
-
-               
+        
     }
 
     public function publishFiles()
@@ -181,20 +173,5 @@ class Provider extends ServiceProvider
           ClientCommand::class,
           KeysCommand::class,
       ]);
-    }
-
-
-    /**
-     * Register the Widget.
-     *
-     * @return void
-     */
-    protected function registerWidget()
-    {
-        $totalUserWidget = new TotalUserWidget();
-        WidgetFacade::make($totalUserWidget->identifier(), $totalUserWidget);
-
-        $totalOrderWidget = new TotalOrderWidget();
-        WidgetFacade::make($totalOrderWidget->identifier(), $totalOrderWidget);
     }
 }
