@@ -380,6 +380,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('phone')->nullable();
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
             $table->string('activation_token')->nullable()->default(null);
+            $table->string('tax_no')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });
