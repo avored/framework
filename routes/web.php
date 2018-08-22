@@ -35,6 +35,8 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('dashboard');
         
 
+    Route::resource('user-group', 'User\Controllers\UserGroupController');
+    Route::resource('user', 'User\Controllers\UserController');
     Route::resource('admin-user', 'System\Controllers\AdminUserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');
     Route::resource('category', 'Product\Controllers\CategoryController');

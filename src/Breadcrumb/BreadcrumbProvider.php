@@ -5,7 +5,7 @@ namespace AvoRed\Framework\Breadcrumb;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Breadcrumb\Facade as BreadcrumbFacade;
 
-class Provider extends ServiceProvider
+class BreadcrumbProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -78,6 +78,23 @@ class Provider extends ServiceProvider
             $breadcrumb->label('Edit')
                 ->parent('admin.dashboard')
                 ->parent('admin.product.index');
+        });
+
+        BreadcrumbFacade::make('admin.user-group.index', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('User Group')
+                ->parent('admin.dashboard');
+        });
+
+        BreadcrumbFacade::make('admin.user-group.create', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Create')
+                ->parent('admin.dashboard')
+                ->parent('admin.user-group.index');
+        });
+
+        BreadcrumbFacade::make('admin.user-group.edit', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.user-group.index');
         });
 
         BreadcrumbFacade::make('admin.attribute.index', function (Breadcrumb $breadcrumb) {

@@ -385,6 +385,23 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('user_groups', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('user_user_group', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('user_group_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_group_id')->references('id')->on('user_groups')->onDelete('cascade');
+        });
+
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');

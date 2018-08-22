@@ -1,9 +1,17 @@
 <?php
 
 return [
-    'admin-user-list' => 'Users overview',
+    'admin-user-list' => 'Users',
     'admin-user-create' => 'Create Admin User',
     'admin-user-update' => 'Update Admin User',
+
+    'user-group-list' => 'User Groups',
+    'user-group-create' => 'Create User Group',
+    'user-group-update' => 'Update User Group',
+    'user-group-edit' => 'Edit User Group',
+
+    'user-group-name' => ' Name',
+    'is_default' => ' Is Default',
 
     'first-name' => 'First Name',
     'last-name' => 'Last Name',
