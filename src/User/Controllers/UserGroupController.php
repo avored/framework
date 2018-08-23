@@ -2,15 +2,9 @@
 
 namespace AvoRed\Framework\User\Controllers;
 
-use Laravel\Passport\Client;
-use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Models\Database\AdminUser as Model;
-use AvoRed\Framework\System\DataGrid\AdminUserDataGrid;
 use AvoRed\Framework\Models\Database\UserGroup;
-use AvoRed\Framework\Image\Facade as Image;
-use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Models\Contracts\UserGroupInterface;
-use AvoRed\Framework\Models\Database\AdminUser;
 use AvoRed\Framework\System\Controllers\Controller;
 use AvoRed\Framework\User\DataGrid\UserGroupDataGrid;
 use AvoRed\Framework\User\Requests\UserGroupRequest;
@@ -18,7 +12,7 @@ use AvoRed\Framework\User\Requests\UserGroupRequest;
 class UserGroupController extends Controller
 {
     /**
-     * 
+     *
      * @var \AvoRed\Framework\Models\Repository\UserGroupRepository
      */
     protected $repository;
@@ -27,6 +21,7 @@ class UserGroupController extends Controller
     {
         $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,7 +67,7 @@ class UserGroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(UserGroup $userGroup)
-    {  
+    {
         return view('avored-framework::user.user-group.edit')
                     ->with('model', $userGroup);
     }
@@ -86,7 +81,7 @@ class UserGroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UserGroupRequest $request, UserGroup $userGroup)
-    {  
+    {
         $this->_syncIsDefault();
 
         $userGroup->update($request->all());
@@ -114,17 +109,15 @@ class UserGroupController extends Controller
      */
     public function show(UserGroup $userGroup)
     {
-      
         return view('avored-framework::user.user-group.show')->with('userGroup', $userGroup);
     }
 
     private function _syncIsDefault()
     {
-       $model = $this->repository->query()->whereIsDefault(1)->first();
+        $model = $this->repository->query()->whereIsDefault(1)->first();
 
-       if(null !== $model) {
-        $model->update(['is_default' => 1]);
-       }
+        if (null !== $model) {
+            $model->update(['is_default' => 1]);
+        }
     }
-
 }

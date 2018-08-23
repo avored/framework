@@ -10,6 +10,11 @@ return [
     'user-group-update' => 'Update User Group',
     'user-group-edit' => 'Edit User Group',
 
+    'user-list' => 'Users',
+    'user-create' => 'Create User',
+    'user-update' => 'Update User',
+    'user-edit' => 'Edit User',
+
     'user-group-name' => ' Name',
     'is_default' => ' Is Default',
 

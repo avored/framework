@@ -96,6 +96,22 @@ class BreadcrumbProvider extends ServiceProvider
                 ->parent('admin.dashboard')
                 ->parent('admin.user-group.index');
         });
+        BreadcrumbFacade::make('admin.user.index', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('User')
+                ->parent('admin.dashboard');
+        });
+
+        BreadcrumbFacade::make('admin.user.create', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Create')
+                ->parent('admin.dashboard')
+                ->parent('admin.user.index');
+        });
+
+        BreadcrumbFacade::make('admin.user.edit', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.user.index');
+        });
 
         BreadcrumbFacade::make('admin.attribute.index', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Attribute')
