@@ -14,6 +14,7 @@ return [
     'user-create' => 'Create User',
     'user-update' => 'Update User',
     'user-edit' => 'Edit User',
+    'user-details' => 'User Details',
 
     'user-group-name' => ' Name',
     'is_default' => ' Is Default',

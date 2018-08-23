@@ -7,6 +7,8 @@ use AvoRed\Framework\System\Controllers\Controller;
 use AvoRed\Framework\Models\Contracts\UserInterface;
 use AvoRed\Framework\User\DataGrid\UserDataGrid;
 use AvoRed\Framework\User\Requests\UserRequest;
+use AvoRed\Framework\Models\Contracts\OrderInterface;
+use AvoRed\Framework\User\DataGrid\UserOrderDataGrid;
 
 class UserController extends Controller
 {
@@ -107,7 +109,14 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('avored-framework::user.user.show')->with('user', $user);
+        $orderRepository = app(OrderInterface::class);
+
+        $userOrders = $orderRepository->query()->whereUserId($user->id);
+       // dd($userOrders);
+        $dataGrid = new UserOrderDataGrid($userOrders);
+        return view('avored-framework::user.user.show')
+                ->with('user', $user)
+                ->with('userOrderDataGrid', $dataGrid->dataGrid);
     }
 
 }
