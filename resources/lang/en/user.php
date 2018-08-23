@@ -10,6 +10,10 @@ return [
     'user-group-update' => 'Update User Group',
     'user-group-edit' => 'Edit User Group',
 
+    'change-password' => 'Change Password',
+    'new-password' => 'New Password',
+    'confirm-password' => 'Confirm Password',
+
     'user-list' => 'Users',
     'user-create' => 'Create User',
     'user-update' => 'Update User',

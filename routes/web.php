@@ -123,10 +123,13 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::delete('themes/{name}', 'System\Controllers\ThemeController@destroy')
                 ->name('theme.destroy');
         
-    Route::get('user/change-password', 'User\Controllers\UserController@changePasswordGet')
-                ->name('user.change-password');
-    Route::post('user/change-password', 'User\Controllers\UserController@changePasswordUpdate')
-                ->name('user.change-password.update'); 
+    Route::get('user/{user}/change-password', 
+                'User\Controllers\UserController@changePasswordGet'
+                )->name('user.change-password');
+                
+    Route::put('user/{user}/change-password', 
+                'User\Controllers\UserController@changePasswordUpdate'
+            )->name('user.change-password.update'); 
 
     
 });

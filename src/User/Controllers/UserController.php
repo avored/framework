@@ -9,6 +9,7 @@ use AvoRed\Framework\User\DataGrid\UserDataGrid;
 use AvoRed\Framework\User\Requests\UserRequest;
 use AvoRed\Framework\Models\Contracts\OrderInterface;
 use AvoRed\Framework\User\DataGrid\UserOrderDataGrid;
+use AvoRed\Framework\User\Requests\ChangePasswordRequest;
 
 class UserController extends Controller
 {
@@ -54,7 +55,6 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-       
         $this->repository->create($request->all());
 
         return redirect()->route('admin.user.index');
@@ -83,7 +83,6 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-      
         $user->update($request->all());
 
         return redirect()->route('admin.user.index');
@@ -112,11 +111,41 @@ class UserController extends Controller
         $orderRepository = app(OrderInterface::class);
 
         $userOrders = $orderRepository->query()->whereUserId($user->id);
-       // dd($userOrders);
+        // dd($userOrders);
         $dataGrid = new UserOrderDataGrid($userOrders);
         return view('avored-framework::user.user.show')
                 ->with('user', $user)
                 ->with('userOrderDataGrid', $dataGrid->dataGrid);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \AvoRed\Framework\Models\Database\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changePasswordGet(User $user)
+    {
+        return view('avored-framework::user.user.change-password')
+                ->with('user', $user);
+    }
+
+    /**
+     * Update the specified User Password in storage.
+     *
+     * @param \AvoRed\Framework\User\Requests\ChnagePasswordRequest $request
+     * @param AvoRed\Framework\Models\Database\User $user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePasswordUpdate(ChangePasswordRequest $request, User $user)
+    {
+        
+        $user->update(['password' => bcrypt($request->get('password'))]);
+
+        //SEND AN NEW PASSWORD EMAIL HERE
+        
+        
+        return redirect()->route('admin.user.index');
+    }
 }

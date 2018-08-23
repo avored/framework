@@ -60,7 +60,7 @@
                 
             <div class="float-left">
             
-                <a class="btn btn-warning" href="{{ route('admin.user.change-password') }}">
+                <a class="btn btn-warning" href="{{ route('admin.user.change-password', $user->id) }}">
                     Chnage Password
                 </a>
 
