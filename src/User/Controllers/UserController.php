@@ -10,6 +10,9 @@ use AvoRed\Framework\User\Requests\UserRequest;
 use AvoRed\Framework\Models\Contracts\OrderInterface;
 use AvoRed\Framework\User\DataGrid\UserOrderDataGrid;
 use AvoRed\Framework\User\Requests\ChangePasswordRequest;
+use Illuminate\Support\Facades\Mail;
+use AvoRed\Framework\User\Mail\ChangePasswordMail;
+
 
 class UserController extends Controller
 {
@@ -140,11 +143,9 @@ class UserController extends Controller
      */
     public function changePasswordUpdate(ChangePasswordRequest $request, User $user)
     {
-        
-        $user->update(['password' => bcrypt($request->get('password'))]);
-
-        //SEND AN NEW PASSWORD EMAIL HERE
-        
+        $password = $request->get('password');
+        $user->update(['password' => bcrypt($password)]);
+        Mail::to($user->email)->send(new ChangePasswordMail($user, $password));
         
         return redirect()->route('admin.user.index');
     }
