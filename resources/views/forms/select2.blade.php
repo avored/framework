@@ -6,13 +6,11 @@ if(!isset($values)) {
 
 if(isset($attributes)) {
     $attributes['name'] = $name;
-    $attributes['type'] = "text";
     if(!isset($attributes['id'])) {
         $attributes['id'] = $name;
     }
 
 } else {
-    $attributes['type'] = "text";
     $attributes['class'] = 'form-control select2';
     $attributes['id'] = $name;
     $attributes['name'] = $name;

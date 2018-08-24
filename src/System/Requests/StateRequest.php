@@ -4,7 +4,7 @@ namespace AvoRed\Framework\System\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequst extends FormRequest
+class StateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class RoleRequst extends FormRequest
      */
     public function rules()
     {
-        $validation ['name'] = 'required|max:255';
-
+        $validation['name'] = 'required|max:255';
+        $validation['code'] = 'required|max:255';
+        $validation['country_id'] = 'required|max:255';
         return $validation;
     }
 }

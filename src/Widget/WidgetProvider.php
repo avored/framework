@@ -3,8 +3,12 @@
 namespace AvoRed\Framework\Widget;
 
 use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\User\Widget\TotalUserWidget;
+use AvoRed\Framework\Order\Widget\TotalOrderWidget;
+use AvoRed\Framework\Order\Widget\RecentOrderWidget;
+use AvoRed\Framework\Widget\Facade as WidgetFacade;
 
-class Provider extends ServiceProvider
+class WidgetProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -15,7 +19,7 @@ class Provider extends ServiceProvider
 
     public function boot()
     {
-        //
+        $this->registerWidget();
     }
 
     /**
@@ -49,5 +53,23 @@ class Provider extends ServiceProvider
     public function provides()
     {
         return ['widget', 'AvoRed\Framework\Widget\Manager'];
+    }
+
+
+    /**
+     * Register the Widget.
+     *
+     * @return void
+     */
+    protected function registerWidget()
+    {
+        $totalUserWidget = new TotalUserWidget();
+        WidgetFacade::make($totalUserWidget->identifier(), $totalUserWidget);
+
+        $totalOrderWidget = new TotalOrderWidget();
+        WidgetFacade::make($totalOrderWidget->identifier(), $totalOrderWidget);
+
+        $recentOrderWidget = new RecentOrderWidget();
+        WidgetFacade::make($recentOrderWidget->identifier(), $recentOrderWidget);
     }
 }
