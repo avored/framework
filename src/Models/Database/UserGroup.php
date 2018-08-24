@@ -1,6 +1,6 @@
 <?php
-
 namespace AvoRed\Framework\Models\Database;
+
 
 class UserGroup extends BaseModel
 {
@@ -13,4 +13,12 @@ class UserGroup extends BaseModel
         'name', 'is_default'
     ];
 
+    /**
+     * One User Group has Many User Attahced with it.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMAny
+     */
+    public function users() {
+        return $this->hasMany(User::class);
+    }
 }

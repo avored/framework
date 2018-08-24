@@ -537,6 +537,7 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->integer('billing_address_id')->unsigned()->nullable();
+            $table->string('track_code')->nullable()->default(null);
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('shipping_address_id')->references('id')->on('addresses');

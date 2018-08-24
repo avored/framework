@@ -11,7 +11,8 @@ class Order extends BaseModel
         'shipping_option',
         'payment_option',
         'order_status_id',
-        'currency_code'
+        'currency_code',
+        'track_code'
     ];
 
     public function products()

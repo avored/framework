@@ -15,6 +15,7 @@ use AvoRed\Framework\System\ViewComposers\AdminNavComposer;
 use AvoRed\Framework\Product\ViewComposers\CategoryFieldsComposer;
 use AvoRed\Framework\Product\ViewComposers\ProductFieldsComposer;
 use AvoRed\Framework\Cms\ViewComposers\PageFieldsComposer;
+use AvoRed\Framework\User\ViewComposers\UserFieldsComposer;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Carbon;
@@ -148,6 +149,7 @@ class Provider extends ServiceProvider
     public function registerViewComposerData()
     {
         View::composer('avored-framework::layouts.left-nav', AdminNavComposer::class);
+        View::composer('avored-framework::user.user._fields', UserFieldsComposer::class);
         View::composer('avored-framework::system.site-currency._fields', SiteCurrencyFieldsComposer::class);
         View::composer(['avored-framework::product.category._fields'], CategoryFieldsComposer::class);
         View::composer(['avored-framework::system.admin-user._fields'], AdminUserFieldsComposer::class);

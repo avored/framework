@@ -5,6 +5,7 @@ return [
     'admin-user-create' => 'Create Admin User',
     'admin-user-update' => 'Update Admin User',
 
+    'user-group-id' => 'User Groups',
     'user-group-list' => 'User Groups',
     'user-group-create' => 'Create User Group',
     'user-group-update' => 'Update User Group',

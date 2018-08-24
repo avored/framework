@@ -87,7 +87,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $user->update($request->all());
-
+        $this->_syncUserGroups($user, $request->get('user_group_id'));
         return redirect()->route('admin.user.index');
     }
 
@@ -137,7 +137,7 @@ class UserController extends Controller
      * Update the specified User Password in storage.
      *
      * @param \AvoRed\Framework\User\Requests\ChnagePasswordRequest $request
-     * @param AvoRed\Framework\Models\Database\User $user
+     * @param \AvoRed\Framework\Models\Database\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -148,5 +148,17 @@ class UserController extends Controller
         Mail::to($user->email)->send(new ChangePasswordMail($user, $password));
         
         return redirect()->route('admin.user.index');
+    }
+
+    /**
+     * User Group Sync with User Model
+     * 
+     * @param \AvoRed\Framework\Models\Database\User $user
+     * @param array $userGroupIds
+     * @return void
+     */
+    private function _syncUserGroups($user, $userGroupIds) 
+    {
+        $user->userGroups()->sync($userGroupIds);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace AvoRed\Framework\User\Requests;
+namespace AvoRed\Framework\Order\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest as Request;
 
-class UserGroupRequest extends FormRequest
+class UpdateTrackCodeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,6 +15,7 @@ class UserGroupRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,9 +23,9 @@ class UserGroupRequest extends FormRequest
      */
     public function rules()
     {
-        $validation['name'] = 'required|max:255';
-        $validation['is_default'] = 'max:255';
-       
-        return $validation;
+        $rules = [];
+        $rules['track_code'] = 'required|max:255';
+
+        return $rules;
     }
 }

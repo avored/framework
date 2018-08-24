@@ -87,6 +87,9 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('order.change-status');
     Route::put('order/{order}/update-status', 'Order\Controllers\OrderController@updateStatus')
                 ->name('order.update-status');
+
+    Route::put('order/{order}/update-track-codes', 'Order\Controllers\OrderController@updateTrackCode')
+                ->name('order.update-track-code');
     
     Route::get('menu', 'Cms\Controllers\MenuController@index')->name('menu.index');
     Route::post('menu', 'Cms\Controllers\MenuController@store')->name('menu.store');

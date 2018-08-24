@@ -38,9 +38,24 @@ class User extends Authenticatable
         return (empty($this->attributes['image_path'])) ? '' : new LocalFile($this->attributes['image_path']);
     }
 
+    /**
+     * One User has Many Address attached with it.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMAny
+     */
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+
+    /**
+     * One User has Many User Group attached with it.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMAny
+     */
+    public function userGroups()
+    {
+        return $this->belongsToMany(UserGroup::class);
     }
 
     public function getShippingAddress()
