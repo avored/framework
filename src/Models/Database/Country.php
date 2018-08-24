@@ -11,8 +11,7 @@ class Country extends BaseModel
         'code',
         'phone_code',
         'currency_code',
-        'lang_code',
-        'is_active'
+        'lang_code'
     ];
 
     public function states()

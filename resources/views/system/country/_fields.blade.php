@@ -37,13 +37,3 @@
     v-on:change="changeModelValue"
         >
 </avored-form-input>
-
-<avored-form-select 
-    field-name="is_active"
-    label="Is Active?" 
-    field-value="{!! $model->is_active ?? "" !!}" 
-    error-text="{!! $errors->first('is_active') !!}"
-    v-on:change="changeModelValue"
-    field-options='{!! $isActiveOptions !!}'
-        >
-</avored-form-select>
