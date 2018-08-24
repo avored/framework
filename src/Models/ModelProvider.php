@@ -35,8 +35,10 @@ use AvoRed\Framework\Models\Contracts\UserInterface;
 use AvoRed\Framework\Models\Repository\UserRepository;
 use AvoRed\Framework\Models\Contracts\UserGroupInterface;
 use AvoRed\Framework\Models\Repository\UserGroupRepository;
+use AvoRed\Framework\Models\Contracts\CountryInterface;
+use AvoRed\Framework\Models\Repository\CountryRepository;
 
-class Provider extends ServiceProvider
+class ModelProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -115,6 +117,7 @@ class Provider extends ServiceProvider
         $this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
         $this->app->bind(UserInterface::class, UserRepository::class);
         $this->app->bind(UserGroupInterface::class, UserGroupRepository::class);
+        $this->app->bind(CountryInterface::class, CountryRepository::class);
         //$this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
     }
 }

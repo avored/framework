@@ -80,6 +80,23 @@ class BreadcrumbProvider extends ServiceProvider
                 ->parent('admin.product.index');
         });
 
+        BreadcrumbFacade::make('admin.country.index', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Country')
+                ->parent('admin.dashboard');
+        });
+
+        BreadcrumbFacade::make('admin.country.create', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Create')
+                ->parent('admin.dashboard')
+                ->parent('admin.country.index');
+        });
+
+        BreadcrumbFacade::make('admin.country.edit', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.country.index');
+        });
+
         BreadcrumbFacade::make('admin.user-group.index', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('User Group')
                 ->parent('admin.dashboard');

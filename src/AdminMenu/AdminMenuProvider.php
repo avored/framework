@@ -115,7 +115,15 @@ class AdminMenuProvider extends ServiceProvider
         $userMenu->subMenu('user_group', function(AdminMenu $menu) {
             $menu->key('user_group')->label('User Group')->route('admin.user-group.index')->icon('fas fa-users');
         });
+
+        $userMenu->subMenu('admin-user', function(AdminMenu $menu) {
+            $menu->key('admin-user')->label('Admin Users')->route('admin.admin-user.index')->icon('fas fa-users');
+        });
         
+        $userMenu->subMenu('role', function(AdminMenu $menu) {
+            $menu->key('role')->label('Role/Permissions')->route('admin.role.index')->icon('fab fa-periscope');
+        });
+       
         AdminMenuFacade::add('system', function (AdminMenu $systemMenu) {
             $systemMenu->label('System')->route('#')->icon('fas fa-cogs');
         });
@@ -130,16 +138,15 @@ class AdminMenuProvider extends ServiceProvider
             $menu->key('site_currency_setup')->label('Currencies')->route('admin.site-currency.index')->icon('fas fa-dollar-sign');
         });
 
+        $systemMenu->subMenu('country', function(AdminMenu $menu) {
+            $menu->key('country')
+                ->label('Country')
+                ->route('admin.country.index')
+                ->icon('fas fa-globe');
+        });
+
         $systemMenu->subMenu('module', function(AdminMenu $menu) {
             $menu->key('module')->label('Modules')->route('admin.module.index')->icon('fas fa-adjust');
-        });
-
-        $systemMenu->subMenu('role', function(AdminMenu $menu) {
-            $menu->key('role')->label('Roles')->route('admin.role.index')->icon('fab fa-periscope');
-        });
-
-        $systemMenu->subMenu('admin-user', function(AdminMenu $menu) {
-            $menu->key('admin-user')->label('Users')->route('admin.admin-user.index')->icon('fas fa-users');
         });
 
         $systemMenu->subMenu('themes', function(AdminMenu $menu) {

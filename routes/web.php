@@ -35,16 +35,17 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('dashboard');
         
 
+                Route::resource('page', 'Cms\Controllers\PageController');
     Route::resource('user-group', 'User\Controllers\UserGroupController');
     Route::resource('user', 'User\Controllers\UserController');
-    Route::resource('admin-user', 'System\Controllers\AdminUserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');
     Route::resource('category', 'Product\Controllers\CategoryController');
-    Route::resource('page', 'Cms\Controllers\PageController');
     Route::resource('product', 'Product\Controllers\ProductController');
     Route::resource('property', 'Product\Controllers\PropertyController');
     Route::resource('role', 'System\Controllers\RoleController');
     Route::resource('site-currency', 'System\Controllers\SiteCurrencyController');
+    Route::resource('admin-user', 'System\Controllers\AdminUserController');
+    Route::resource('country', 'System\Controllers\CountryController');
 
 
     Route::post('get-attribute-element', 'Product\Controllers\AttributeController@getElementHtml')

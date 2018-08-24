@@ -409,6 +409,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('phone_code')->nullable()->default(null);
             $table->string('currency_code')->nullable()->default(null);
             $table->string('lang_code')->nullable()->default(null);
+            $table->tinyInteger('is_active')->nullable()->default(0);
             $table->timestamps();
         });
 
@@ -568,6 +569,7 @@ class AvoredFrameworkSchema extends Migration
         });
 
         $countryModel = Country::whereCode('nz')->first();
+        $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
             'name'              => 'NZ Dollars',
             'code'              => 'NZD',
