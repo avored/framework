@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Models\Repository;
 
 use AvoRed\Framework\Models\Contracts\CountryInterface;
 use AvoRed\Framework\Models\Database\Country;
+use Illuminate\Support\Collection;
 
 class CountryRepository implements CountryInterface
 {
@@ -56,5 +57,22 @@ class CountryRepository implements CountryInterface
     public function create($data)
     {
         return Country::create($data);
+    }
+
+
+    /**
+     * Get All Country Options for Dropdown Field
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function options() 
+    {
+        $countries = $this->all();
+        $options = Collection::make();
+        foreach($countries as $country) {
+            $options->push(['name' => $country->name,'id' => $country->id]);
+
+        } 
+        return $options;
     }
 }

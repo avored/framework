@@ -10,7 +10,7 @@ class State extends BaseModel
         'code',
     ];
 
-    public function state()
+    public function country()
     {
         return $this->belongsTo(Country::class);
     }

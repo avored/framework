@@ -145,6 +145,13 @@ class AdminMenuProvider extends ServiceProvider
                 ->icon('fas fa-globe');
         });
 
+        $systemMenu->subMenu('state', function(AdminMenu $menu) {
+            $menu->key('state')
+                ->label('State')
+                ->route('admin.state.index')
+                ->icon('fas fa-globe');
+        });
+
         $systemMenu->subMenu('module', function(AdminMenu $menu) {
             $menu->key('module')->label('Modules')->route('admin.module.index')->icon('fas fa-adjust');
         });
