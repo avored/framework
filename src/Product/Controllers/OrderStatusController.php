@@ -121,7 +121,7 @@ class OrderStatusController extends Controller
      */
     public function show(OrderStatus $orderStatus)
     {
-        return view('avored-framework::product.order-status.show')->with('order-status', $orderStatus);
+        return view('avored-framework::product.order-status.show')->with('orderStatus', $orderStatus);
     }
     
     private function _setIsDefault()

@@ -2,24 +2,24 @@
 
 @section('content')
 
-    <div id="admin-country-page" class="row">
+    <div id="admin-order-status-page" class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::system.country-create') }}
+                    {{ __('avored-framework::shop.order-status-create') }}
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.country.store') }}" method="post">
+                    <form action="{{ route('admin.order-status.store') }}" method="post">
                         @csrf
 
-                        @include('avored-framework::system.country._fields')
+                        @include('avored-framework::product .order-status._fields')
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
-                                {{ __('avored-framework::system.country-create') }}
+                                {{ __('avored-framework::shop.order-status-create') }}
                             </button>
-                            <a href="{{ route('admin.country.index') }}" class="btn">
+                            <a href="{{ route('admin.order-status.index') }}" class="btn">
                                 {{ __('avored-framework::lang.cancel') }}
                             </a>
                         </div>
@@ -38,7 +38,7 @@
 <script>
 
  var app = new Vue({
-        el: '#admin-country-page',
+        el: '#admin-order-status-page',
         data : {
             model: {},
             autofocus:true,
