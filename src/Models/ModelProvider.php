@@ -39,6 +39,8 @@ use AvoRed\Framework\Models\Contracts\CountryInterface;
 use AvoRed\Framework\Models\Repository\CountryRepository;
 use AvoRed\Framework\Models\Contracts\StateInterface;
 use AvoRed\Framework\Models\Repository\StateRepository;
+use AvoRed\Framework\Models\Contracts\OrderStatusInterface;
+use AvoRed\Framework\Models\Repository\OrderStatusRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -121,6 +123,7 @@ class ModelProvider extends ServiceProvider
         $this->app->bind(UserGroupInterface::class, UserGroupRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
         $this->app->bind(StateInterface::class, StateRepository::class);
+        $this->app->bind(OrderStatusInterface::class, OrderStatusRepository::class);
         //$this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
     }
 }

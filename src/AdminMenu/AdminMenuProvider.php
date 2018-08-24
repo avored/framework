@@ -94,6 +94,10 @@ class AdminMenuProvider extends ServiceProvider
             $menu->key('order')->label("Orders")->route('admin.order.index')->icon('fas fa-dollar-sign');
         });
 
+        $shopMenu->subMenu('order_status', function(AdminMenu $menu) {
+            $menu->key('order')->label("Order Status")->route('admin.order-status.index')->icon('fas fa-dollar-sign');
+        });
+
         $shopMenu->subMenu('attribute', function(AdminMenu $menu) {
             $menu->key('attribute')->label('Products Attributes')->route('admin.attribute.index')->icon('fas fa-file-alt');
         });

@@ -96,6 +96,33 @@ class BreadcrumbProvider extends ServiceProvider
                 ->parent('admin.dashboard')
                 ->parent('admin.country.index');
         });
+        BreadcrumbFacade::make('admin.country.show', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Show')
+                ->parent('admin.dashboard')
+                ->parent('admin.country.index');
+        });
+
+        BreadcrumbFacade::make('admin.order-status.index', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Order Status')
+                ->parent('admin.dashboard');
+        });
+
+        BreadcrumbFacade::make('admin.order-status.create', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Create')
+                ->parent('admin.dashboard')
+                ->parent('admin.order-status.index');
+        });
+
+        BreadcrumbFacade::make('admin.order-status.edit', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.order-status.index');
+        });
+        BreadcrumbFacade::make('admin.order-status.show', function (Breadcrumb $breadcrumb) {
+            $breadcrumb->label('Show')
+                ->parent('admin.dashboard')
+                ->parent('admin.order-status.index');
+        });
 
         BreadcrumbFacade::make('admin.state.index', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('State')
