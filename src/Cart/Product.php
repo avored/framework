@@ -177,7 +177,7 @@ class Product implements CartContracts
      */
     public function finalPrice()
     {
-        return number_format($this->price() * $this->qty(), 2);
+        return number_format(($this->price() + $this->tax()) * $this->qty(), 2);
     }
 
     /**

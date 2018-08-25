@@ -125,7 +125,10 @@ class Manager
             throw new \Exception("Cart Product doesn't Exist");
         }
         $cartProduct->qty($qty);
-        $cartProduct->lineTotal($qty * $cartProduct->price());
+        $cartProduct->lineTotal($qty * ($cartProduct->price() + $cartProduct->tax()) );
+
+        
+        //$this->session->put($this->getSessionKey(), $cartProducts);
 
         return $this;
     }
@@ -134,10 +137,10 @@ class Manager
      * Update the Cart Product Qty by Slug.
      *
      * @param string    $slug
-     * @param float     $amount
+     * @param float     $taxAmount
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function updateProductTax($slug, $amount): Manager
+    public function updateProductTax($slug, $taxAmount): Manager
     {
         $cartProducts = $this->getSession();
 
@@ -146,9 +149,10 @@ class Manager
         if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
         }
-        $cartProduct->tax($amount);
+        $cartProduct->tax($taxAmount);
 
-        $cartProduct->lineTotal($cartProduct->qty() * $cartProduct->price() + $amount);
+        $cartProduct->lineTotal($cartProduct->qty() * ($cartProduct->price() + $taxAmount));       
+        //$this->session->put($this->getSessionKey(), $cartProducts);
 
         return $this;
     }
@@ -216,6 +220,7 @@ class Manager
     {
         $total = 0.00;
         $cartProducts = $this->getSession();
+
         foreach ($cartProducts as $product) {
             $total += $product->lineTotal();
         }
