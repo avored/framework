@@ -7,7 +7,7 @@ use AvoRed\Framework\Permission\Facade as PermissionFacade;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 
-class Provider extends ServiceProvider
+class PermissionProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -63,9 +63,10 @@ class Provider extends ServiceProvider
      */
     protected function registerPermissions()
     {
-        $permissionGroup = PermissionFacade::add('category')
-            ->label('Category Permissions');
-
+        $permissionGroup = PermissionFacade::add('category', function(PermissionGroup $group){
+            $group->label('Category Permissions');
+        });
+           
         $permissionGroup->addPermission('admin-category-list')
             ->label('Category List')
             ->routes('admin.category.index');
@@ -82,8 +83,9 @@ class Provider extends ServiceProvider
             ->label('Destroy Category')
             ->routes('admin.category.destroy');
 
-        $permissionGroup = PermissionFacade::add('product')
-            ->label('Product Permissions');
+        $permissionGroup = PermissionFacade::add('product', function(PermissionGroup $group){
+            $group->label('Product Permissions');
+        });
 
         $permissionGroup->addPermission('admin-product-list')
             ->label('Product List')
@@ -98,8 +100,9 @@ class Provider extends ServiceProvider
             ->label('Destroy Product')
             ->routes('admin.product.destroy');
 
-        $permissionGroup = PermissionFacade::add('attribute')
-            ->label('Attribute Permissions');
+        $permissionGroup = PermissionFacade::add('attribute', function(PermissionGroup $group){
+            $group->label('Attribute Permissions');
+        });
 
         $permissionGroup->addPermission('admin-attribute-list')
             ->label('Attribute List')
@@ -114,8 +117,9 @@ class Provider extends ServiceProvider
             ->label('Attribute')
             ->routes('admin.attribute.destroy');
 
-        $permissionGroup = PermissionFacade::add('property')
-            ->label('Attribute Permissions');
+        $permissionGroup = PermissionFacade::add('property', function(PermissionGroup $group){
+            $group->label('Property Permissions');
+        });
 
         $permissionGroup->addPermission('admin-property-list')
             ->label('Property List')
@@ -130,8 +134,9 @@ class Provider extends ServiceProvider
             ->label('Property Destroy')
             ->routes('admin.property.destroy');
 
-        $permissionGroup = PermissionFacade::add('admin-user')
-            ->label('Admin User Permissions');
+        $permissionGroup = PermissionFacade::add('admin-user', function(PermissionGroup $group){
+            $group->label('Admin User Permissions');
+        });
 
         $permissionGroup->addPermission('admin-admin-user-list')
             ->label('Admin User List')
@@ -149,8 +154,9 @@ class Provider extends ServiceProvider
             ->label('Admin User Destroy')
             ->routes('admin.admin-user.destroy');
 
-        $permissionGroup = PermissionFacade::add('role')
-            ->label('Role Permissions');
+        $permissionGroup = PermissionFacade::add('role', function(PermissionGroup $group){
+            $group->label('Role Permissions');
+        });
 
         $permissionGroup->addPermission('admin-role-list')
             ->label('Role List')
@@ -168,8 +174,9 @@ class Provider extends ServiceProvider
             ->label('Role Destroy')
             ->routes('admin.role.destroy');
 
-        $permissionGroup = PermissionFacade::add('role')
-            ->label('Theme Permissions');
+        $permissionGroup = PermissionFacade::add('theme', function(PermissionGroup $group){
+            $group->label('Theme Permissions');
+        });
 
         $permissionGroup->addPermission('admin-theme-list')
             ->label('Theme List')
@@ -191,8 +198,9 @@ class Provider extends ServiceProvider
             ->label('Theme Destroy')
             ->routes('admin.destroy.index');
 
-        $permissionGroup = PermissionFacade::add('configuration')
-            ->label('Configuration Permissions');
+        $permissionGroup = PermissionFacade::add('configuration', function(PermissionGroup $group){
+            $group->label('Configuration Permissions');
+        });
 
         $permissionGroup->addPermission('admin-configuration')
             ->label('Configuration')
@@ -202,9 +210,10 @@ class Provider extends ServiceProvider
             ->label('Configuration Store')
             ->routes('admin.configuration.store');
 
-        $permissionGroup = PermissionFacade::add('order')
-            ->label('Order Permissions');
-
+        $permissionGroup = PermissionFacade::add('order', function(PermissionGroup $group){
+            $group->label('Order Permissions');
+        });
+        
         $permissionGroup->addPermission('admin-order-list')
             ->label('Order List')
             ->routes('admin.order.index');
