@@ -388,6 +388,7 @@ class Product extends BaseModel
         $defaultPath = '/img/default-product.jpg';
         $image = $this->images()->where('is_main_image', '=', 1)->first();
 
+        
         if (null === $image) {
             return new LocalFile($defaultPath);
         }
