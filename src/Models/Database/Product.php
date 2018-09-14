@@ -77,6 +77,12 @@ class Product extends BaseModel
         });
     }
 
+    /**
+     * Get the Price for the Product
+     * 
+     * @param float $val
+     * @return float $price
+     */
     public function getPriceAttribute($val)
     {
         $currentCurrencyCode = Session::get('currency_code');
