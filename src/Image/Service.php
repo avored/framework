@@ -45,7 +45,7 @@ class Service
             }
         }
 
-        $localImage = new LocalFile("storage" . DIRECTORY_SEPARATOR . $dbPath);
+        $localImage = new LocalFile($dbPath);
 
         return $localImage;
     }

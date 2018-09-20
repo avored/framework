@@ -35,14 +35,19 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('dashboard');
         
 
-    Route::resource('admin-user', 'System\Controllers\AdminUserController');
+                Route::resource('page', 'Cms\Controllers\PageController');
+    Route::resource('user-group', 'User\Controllers\UserGroupController');
+    Route::resource('user', 'User\Controllers\UserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');
     Route::resource('category', 'Product\Controllers\CategoryController');
-    Route::resource('page', 'Cms\Controllers\PageController');
     Route::resource('product', 'Product\Controllers\ProductController');
     Route::resource('property', 'Product\Controllers\PropertyController');
+    Route::resource('order-status', 'Product\Controllers\OrderStatusController');
     Route::resource('role', 'System\Controllers\RoleController');
     Route::resource('site-currency', 'System\Controllers\SiteCurrencyController');
+    Route::resource('admin-user', 'System\Controllers\AdminUserController');
+    Route::resource('country', 'System\Controllers\CountryController');
+    Route::resource('state', 'System\Controllers\StateController');
 
 
     Route::post('get-attribute-element', 'Product\Controllers\AttributeController@getElementHtml')
@@ -85,6 +90,9 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('order.change-status');
     Route::put('order/{order}/update-status', 'Order\Controllers\OrderController@updateStatus')
                 ->name('order.update-status');
+
+    Route::put('order/{order}/update-track-codes', 'Order\Controllers\OrderController@updateTrackCode')
+                ->name('order.update-track-code');
     
     Route::get('menu', 'Cms\Controllers\MenuController@index')->name('menu.index');
     Route::post('menu', 'Cms\Controllers\MenuController@store')->name('menu.store');
@@ -121,7 +129,13 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::delete('themes/{name}', 'System\Controllers\ThemeController@destroy')
                 ->name('theme.destroy');
         
+    Route::get('user/{user}/change-password', 
+                'User\Controllers\UserController@changePasswordGet'
+                )->name('user.change-password');
                 
+    Route::put('user/{user}/change-password', 
+                'User\Controllers\UserController@changePasswordUpdate'
+            )->name('user.change-password.update'); 
 
     
 });

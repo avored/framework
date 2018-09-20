@@ -22,11 +22,25 @@ class PermissionGroup implements PermissionContracts
      */
     protected $key;
 
-    public function __construct()
+    /**
+     * Construct for a permission group
+     * @param callable $callable
+     * @return void
+     */
+    public function __construct($callable = null)
     {
         $this->permissionList = Collection::make([]);
+        if(null !== $callable) {
+            $callable($this);
+        }
     }
 
+    /**
+     * Specify a label for permission group
+     * 
+     * @param string $label
+     * @return mixed $this|$label
+     */
     public function label($label = null)
     {
         if (null !== $label) {

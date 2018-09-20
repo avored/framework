@@ -39,14 +39,14 @@ class Manager
     public function add($slug, $qty, $attribute = null): Manager
     {
         $cartProducts = $this->getSession();
-        $product    = Product::whereSlug($slug)->first();
-        $price      = $product->price;
+        $product = Product::whereSlug($slug)->first();
+        $price = $product->price;
         $attributes = null;
 
         if (null !== $attribute && count($attribute)) {
             foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct    = Product::find($variationId);
-                $attributeModel     = Attribute::find($attributeId);
+                $variableProduct = Product::find($variationId);
+                $attributeModel = Attribute::find($attributeId);
 
                 $productAttributeIntValModel = ProductAttributeIntegerValue::
                                                         whereAttributeId($attributeId)
@@ -57,14 +57,13 @@ class Manager
                                     ->whereId($productAttributeIntValModel->value)
                                     ->first();
 
-
-                $price              = $variableProduct->price;
+                $price = $variableProduct->price;
                 $attributes[] = [
-                                'attribute_id' => $attributeId,
-                                'variation_id' => $variationId,
-                                'attribute_dropdown_option_id' => $optionModel->id,
-                                'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
-                            ];
+                    'attribute_id' => $attributeId,
+                    'variation_id' => $variationId,
+                    'attribute_dropdown_option_id' => $optionModel->id,
+                    'variation_display_text' => $attributeModel->name . ': ' . $optionModel->display_text
+                ];
             }
         }
 
@@ -98,7 +97,7 @@ class Manager
         $cartProduct = $cartProducts->get($slug);
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
 
-        $checkQty = $qty +  $cartQty;
+        $checkQty = $qty + $cartQty;
         $product = Product::whereSlug($slug)->first();
 
         $productQty = $product->qty;
@@ -108,6 +107,7 @@ class Manager
 
         return false;
     }
+
     /**
      * Update the Cart Product Qty by Slug.
      *
@@ -125,7 +125,7 @@ class Manager
             throw new \Exception("Cart Product doesn't Exist");
         }
         $cartProduct->qty($qty);
-        $cartProduct->lineTotal($qty * $cartProduct->price());
+        $cartProduct->lineTotal($qty * ($cartProduct->price() + $cartProduct->tax()));
 
         return $this;
     }
@@ -134,21 +134,20 @@ class Manager
      * Update the Cart Product Qty by Slug.
      *
      * @param string    $slug
-     * @param float     $amount
+     * @param float     $taxAmount
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function updateProductTax($slug, $amount): Manager
+    public function updateProductTax($slug, $taxAmount): Manager
     {
-        $cartProducts = $this->getSession();
-
-        $cartProduct = $cartProducts->get($slug);
+        $cartProducts   = $this->getSession();
+        $cartProduct    = $cartProducts->get($slug);
 
         if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
         }
-        $cartProduct->tax($amount);
 
-        $cartProduct->lineTotal($cartProduct->qty() * $cartProduct->price() + $amount);
+        $cartProduct->tax($taxAmount);
+        $cartProduct->lineTotal($cartProduct->qty() * ($cartProduct->price() + $taxAmount));
 
         return $this;
     }
@@ -160,8 +159,7 @@ class Manager
      */
     public function clear()
     {
-        $session = $this->getSessionKey();
-        $this->session->forget($session);
+        $this->session->forget($this->getSessionKey());
     }
 
     /**
@@ -172,9 +170,8 @@ class Manager
      */
     public function destroy($slug):Manager
     {
-        $cartProducts = $this->getSession();
-
-        $cartProduct = $cartProducts->pull($slug);
+        $cartProducts   = $this->getSession();
+        $cartProduct    = $cartProducts->pull($slug);
 
         return $this;
     }
@@ -182,16 +179,14 @@ class Manager
     /**
      * Set/Get Cart has Tax.
      * @param null|boolean $flag
-     * @return $this|boolean
+     * @return $this|boolean $hasTax
      */
     public function hasTax($flag = null)
     {
         if (null === $flag) {
             return $this->session->get('hasTax');
         }
-
         $this->session->put('hasTax', $flag);
-
         return $this;
     }
 
@@ -216,13 +211,13 @@ class Manager
     {
         $total = 0.00;
         $cartProducts = $this->getSession();
+
         foreach ($cartProducts as $product) {
             $total += $product->lineTotal();
         }
 
         return $total;
     }
-
 
     /**
      * Get the Current Cart Tax Total

@@ -31,6 +31,7 @@ return [
 
     'admin-dashboard-total-user-title' => 'Total User',
     'admin-dashboard-total-order-title' => 'Total Orders',
+    'admin-dashboard-recent-order-title' => 'Recent Order',
 
     'category.index.title' => 'Category List',
     'category.index.create' => 'Create Category',

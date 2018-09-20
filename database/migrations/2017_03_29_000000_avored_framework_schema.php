@@ -380,8 +380,26 @@ class AvoredFrameworkSchema extends Migration
             $table->string('phone')->nullable();
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
             $table->string('activation_token')->nullable()->default(null);
+            $table->string('tax_no')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::create('user_groups', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('user_user_group', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('user_group_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_group_id')->references('id')->on('user_groups')->onDelete('cascade');
         });
 
         Schema::create('countries', function (Blueprint $table) {
@@ -519,6 +537,7 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->integer('billing_address_id')->unsigned()->nullable();
+            $table->string('track_code')->nullable()->default(null);
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('shipping_address_id')->references('id')->on('addresses');
@@ -549,6 +568,7 @@ class AvoredFrameworkSchema extends Migration
         });
 
         $countryModel = Country::whereCode('nz')->first();
+        $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
             'name'              => 'NZ Dollars',
             'code'              => 'NZD',

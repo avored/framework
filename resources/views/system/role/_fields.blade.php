@@ -32,16 +32,20 @@
                                     @if(isset($model) && $model->hasPermission($permission->routes()))
                                     <input type="checkbox" checked
                                            class="permission-checkbox form-check-input"
+                                           id="{{ $permission->key() }}"
                                            name="permissions[{{ $permission->routes() }}]"
                                            value='1'/>
-                                    @else
-                                        <input type="checkbox"
-                                               class="permission-checkbox form-check-input"
-                                               name="permissions[{{ $permission->routes() }}]"
-                                               value='1'/>
+                                           @else
+                                           <input type="checkbox"
+                                                class="permission-checkbox form-check-input"
+                                                id="{{ $permission->key() }}"
+                                                name="permissions[{{ $permission->routes() }}]"
+                                                value='1'/>
                                     @endif
-                                        <label class="form-check-label">    {{ $permission->label() }}
-                                </label>
+                                        <label  for="{{ $permission->key() }}" 
+                                                class="form-check-label">    
+                                            {{ $permission->label() }}
+                                        </label>
                             </div>
 
                         @endforeach

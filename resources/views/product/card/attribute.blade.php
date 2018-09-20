@@ -1,29 +1,22 @@
-<?php
-$productVariations = $model->attribute;
-
-$attributeOptions = $model->getAttributeOptions();
-
-?>
-
-
+@php
+    $productVariations = $model->attribute;
+    $attributeOptions = $model->getAttributeOptions();
+@endphp
 <div class="row">
-
     <div class="col-12">
-
-
         @if($attributeOptions !== null && $attributeOptions->count() >= 0)
-
             <div class="input-group mb-3">
-
-                <select class="select2 attribute-dropdown-element  form-control" multiple name="attribute_selected[]"
+                <select class="select2 attribute-dropdown-element  form-control" 
+                        multiple 
+                        name="attribute_selected[]"
                         style="width: 80%">
                     @foreach($attributeOptions as $value => $label)
                         <option
-                                @if($productVariations->contains('id',$value))
-                                selected
-                                @endif
+                            @if($productVariations->contains('id',$value))
+                            selected
+                            @endif
 
-                                value="{{ $value }}">{{ $label }}</option>
+                            value="{{ $value }}">{{ $label }}</option>
                     @endforeach
                 </select>
 
@@ -36,7 +29,7 @@ $attributeOptions = $model->getAttributeOptions();
 
             </div>
 
-            <div class="product-variation-card-wrapper   row"></div>
+            <div class="product-variation-card-wrapper row"></div>
 
             @if(null != $model->productVariations)
 
@@ -50,11 +43,9 @@ $attributeOptions = $model->getAttributeOptions();
                         <th scope="col">Edit</th>
                         <th scope="col">Destroy</th>
 
-
                     </tr>
                     </thead>
                     <tbody>
-
 
                     @foreach($model->productVariations as $variation)
                         <tr>
@@ -78,22 +69,15 @@ $attributeOptions = $model->getAttributeOptions();
                                         data-url="{{ route('admin.product.destroy', $variation->variationProduct->id) }}"
                                     >
                                     Destroy
-                                </a>
-                               
+                                </a>     
                             </td>
                         </tr>
                     @endforeach
-
-
                     </tbody>
-
                 </table>
-
             @endif
-
         @endif
     </div>
-
 </div>
 
 

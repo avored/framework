@@ -77,6 +77,12 @@ class Product extends BaseModel
         });
     }
 
+    /**
+     * Get the Price for the Product
+     * 
+     * @param float $val
+     * @return float $price
+     */
     public function getPriceAttribute($val)
     {
         $currentCurrencyCode = Session::get('currency_code');
@@ -251,7 +257,7 @@ class Product extends BaseModel
 
             $listOfOptions = $this->combinations($optionsArray);
 
-            //dd($listOfOptions);
+           
 
             foreach ($listOfOptions as $option) {
                 $variationProductData = $this->getVariationProductDataGivenOptions($option);
@@ -294,6 +300,8 @@ class Product extends BaseModel
      */
     public function getVariationProductDataGivenOptions($options)
     {
+
+        
         $data['name'] = $this->name;
 
         if (is_array($options)) {
@@ -302,7 +310,7 @@ class Product extends BaseModel
                 $data['name'] .= ' ' . $attributeOptionModel->display_text;
             }
         } else {
-            $attributeOptionModel = AttributeDropdownOption::findorfail($option);
+            $attributeOptionModel = AttributeDropdownOption::findorfail($options);
             $data['name'] .= ' ' . $attributeOptionModel->display_text;
         }
 
@@ -314,6 +322,7 @@ class Product extends BaseModel
         $data['qty'] = $this->qty;
         $data['price'] = $this->price;
 
+       
         return $data;
     }
 
@@ -362,7 +371,7 @@ class Product extends BaseModel
         foreach ($categoryIds as $categoryId) {
             $rep = app(CategoryFilterInterface::class);
 
-            $propertyIds = array_get($data, 'product-property', []);
+            $propertyIds = array_get($data, 'product_property', []);
 
             foreach ($propertyIds as $propertyId) {
                 $rep->saveFilter($categoryId, $propertyId, $type = 'PROPERTY');
@@ -385,6 +394,7 @@ class Product extends BaseModel
         $defaultPath = '/img/default-product.jpg';
         $image = $this->images()->where('is_main_image', '=', 1)->first();
 
+        
         if (null === $image) {
             return new LocalFile($defaultPath);
         }

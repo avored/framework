@@ -4,6 +4,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="row">
+
             <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="widget-wrapper">
                     <div class="widget mt-3 mb-3" id="widget-{{ Widget::get('total-user')->identifier() }}"
@@ -13,17 +14,23 @@
                 </div>
             </div>
 
-                <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="widget-wrapper">
-                        <div class="widget mt-3 mb-3" id="widget-{{ Widget::get('total-order')->identifier() }}"
-                             draggable="true" ondragstart="drag(event)">
-                            @include (Widget::get('total-order')->view(),Widget::get('total-order')->with())
-                        </div>
+            <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="widget-wrapper">
+                    <div class="widget mt-3 mb-3" id="widget-{{ Widget::get('total-order')->identifier() }}"
+                            draggable="true" ondragstart="drag(event)">
+                        @include (Widget::get('total-order')->view(),Widget::get('total-order')->with())
                     </div>
                 </div>
+            </div>
 
-                <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-
+            <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="widget-wrapper">
+                        <div class="widget mt-3 mb-3" 
+                                id="widget-{{ Widget::get('recent-order')->identifier() }}"
+                                draggable="true" ondragstart="drag(event)">
+                            @include (Widget::get('recent-order')->view(),Widget::get('recent-order')->with())
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ namespace AvoRed\Framework\AdminMenu;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\AdminMenu\Facade as AdminMenuFacade;
 
-class Provider extends ServiceProvider
+class AdminMenuProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -64,16 +64,16 @@ class Provider extends ServiceProvider
             $shopMenu->label('Dashboard')->route('admin.dashboard')->icon('fas fa-home');
         });
         
-        AdminMenuFacade::add('cms', function (AdminMenu $cmsMenu) {
-            $cmsMenu->label('Content')->route('#')->icon('fas fa-folder');
+        AdminMenuFacade::add('content', function (AdminMenu $menu) {
+            $menu->label('Content')->route('#')->icon('fas fa-folder');
         });
         
-        $cmsMenu = AdminMenuFacade::get('cms');        
-        $cmsMenu->subMenu('page', function(AdminMenu $menu) {
+        $contentMenu = AdminMenuFacade::get('content');        
+        $contentMenu->subMenu('page', function(AdminMenu $menu) {
             $menu->key('page')->label('Pages')->route('admin.page.index')->icon('fas fa-file');
         });
         
-        $cmsMenu->subMenu('menu', function(AdminMenu $menu) {
+        $contentMenu->subMenu('menu', function(AdminMenu $menu) {
             $menu->key('menu')->label('Menu')->route('admin.menu.index')->icon('fas fa-leaf');
         });
 
@@ -94,6 +94,10 @@ class Provider extends ServiceProvider
             $menu->key('order')->label("Orders")->route('admin.order.index')->icon('fas fa-dollar-sign');
         });
 
+        $shopMenu->subMenu('order_status', function(AdminMenu $menu) {
+            $menu->key('order')->label("Order Status")->route('admin.order-status.index')->icon('fas fa-dollar-sign');
+        });
+
         $shopMenu->subMenu('attribute', function(AdminMenu $menu) {
             $menu->key('attribute')->label('Products Attributes')->route('admin.attribute.index')->icon('fas fa-file-alt');
         });
@@ -101,7 +105,29 @@ class Provider extends ServiceProvider
         $shopMenu->subMenu('property',   function(AdminMenu $menu) {
             $menu->key('property')->label('Property')->route('admin.property.index')->icon('fas fa-file-powerpoint');
         });
+
+        AdminMenuFacade::add('user', function (AdminMenu $menu) {
+            $menu->label('Users')->route('#')->icon('fas fa-user');
+        });
         
+
+        $userMenu = AdminMenuFacade::get('user');        
+        
+        $userMenu->subMenu('user', function(AdminMenu $menu) {
+            $menu->key('user')->label('User')->route('admin.user.index')->icon('fas fa-user');
+        });
+        $userMenu->subMenu('user_group', function(AdminMenu $menu) {
+            $menu->key('user_group')->label('User Group')->route('admin.user-group.index')->icon('fas fa-users');
+        });
+
+        $userMenu->subMenu('admin-user', function(AdminMenu $menu) {
+            $menu->key('admin-user')->label('Admin Users')->route('admin.admin-user.index')->icon('fas fa-users');
+        });
+        
+        $userMenu->subMenu('role', function(AdminMenu $menu) {
+            $menu->key('role')->label('Role/Permissions')->route('admin.role.index')->icon('fab fa-periscope');
+        });
+       
         AdminMenuFacade::add('system', function (AdminMenu $systemMenu) {
             $systemMenu->label('System')->route('#')->icon('fas fa-cogs');
         });
@@ -116,16 +142,22 @@ class Provider extends ServiceProvider
             $menu->key('site_currency_setup')->label('Currencies')->route('admin.site-currency.index')->icon('fas fa-dollar-sign');
         });
 
+        $systemMenu->subMenu('country', function(AdminMenu $menu) {
+            $menu->key('country')
+                ->label('Country')
+                ->route('admin.country.index')
+                ->icon('fas fa-globe');
+        });
+
+        $systemMenu->subMenu('state', function(AdminMenu $menu) {
+            $menu->key('state')
+                ->label('State')
+                ->route('admin.state.index')
+                ->icon('fas fa-globe');
+        });
+
         $systemMenu->subMenu('module', function(AdminMenu $menu) {
             $menu->key('module')->label('Modules')->route('admin.module.index')->icon('fas fa-adjust');
-        });
-
-        $systemMenu->subMenu('role', function(AdminMenu $menu) {
-            $menu->key('role')->label('Roles')->route('admin.role.index')->icon('fab fa-periscope');
-        });
-
-        $systemMenu->subMenu('admin-user', function(AdminMenu $menu) {
-            $menu->key('admin-user')->label('Users')->route('admin.admin-user.index')->icon('fas fa-users');
         });
 
         $systemMenu->subMenu('themes', function(AdminMenu $menu) {
