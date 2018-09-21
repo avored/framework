@@ -43,10 +43,10 @@
             @include('avored-framework::forms.text',['name' => 'price','label' => 'Price'])
         </div>
     @endif
-    <div class="col-6">
-        @include('avored-framework::forms.select',['name' => 'status','label' => 'Status', 'options' => ['1' => 'Enabled','0' => 'Disabled']])
+        <div class="col-6">
+            @include('avored-framework::forms.text',['name' => 'cost_price','label' => 'Cost Price'])
+        </div>
     </div>
-</div>
 
 
 <div class="row">
@@ -71,15 +71,18 @@
 
 @if($model->type !== "DOWNLOADABLE")
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         @include('avored-framework::forms.text',['name' => 'weight','label' => 'Weight'])
     </div>
-
-
+    <div class="col-md-6">
+        @include('avored-framework::forms.select',['name' => 'status','label' => 'Status', 'options' => ['1' => 'Enabled','0' => 'Disabled']])
+    </div>
+    
+    
 </div>
 
 <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
         @include('avored-framework::forms.text',['name' => 'width','label' => 'Width'])
     </div>
     <div class="col-4">
