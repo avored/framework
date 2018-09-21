@@ -52,6 +52,12 @@ class PermissionGroup implements PermissionContracts
         return $this->label;
     }
 
+    /**
+     * Add an Unique key to a group of permission
+     * 
+     * @param string $key 
+     * @return mixed $key|$this
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -63,12 +69,30 @@ class PermissionGroup implements PermissionContracts
         return $this->key;
     }
 
-    public function addPermission($key = null)
-    {
-        $permission = new Permission();
 
-        $permission->key($key);
-        $this->permissionList->put($key, $permission);
+    /**
+     * Add Permission to a group
+     * 
+     * @param string $key
+     * @param callable $callable
+     * @return \AvoRed\Framework\Permission\Permission $permission
+     * 
+     */
+    public function addPermission($key, $callable = null)
+    {
+        if(null !== $callable) {
+
+            $permission = new Permission($callable);
+            $permission->key($key);
+    
+            $this->permissionList->put($key, $permission);
+            
+        } else {
+            $permission = new Permission();
+
+            $permission->key($key);
+            $this->permissionList->put($key, $permission);
+        }
 
         return $permission;
     }

@@ -66,21 +66,26 @@ class PermissionProvider extends ServiceProvider
         $group = PermissionFacade::add('page', function(PermissionGroup $group){
             $group->label('Page Permissions');
         });
-        $group->addPermission('admin-page-list')
-            ->label('Page List')
-            ->routes('admin.page.index');
-        $group->addPermission('admin-page-create')
-            ->label('Create Page')
-            ->routes('admin.page.create,admin.page.store');
-        $group->addPermission('admin-page-update')
-            ->label('Update Page')
-            ->routes('admin.page.edit,admin.page.update');
-        $group->addPermission('admin-page-destroy')
-            ->label('Destroy Page')
-            ->routes('admin.page.destroy');
-        $group->addPermission('admin-page-show')
-            ->label('Show Page')
-            ->routes('admin.page.show');
+        $group->addPermission('admin-page-list', function(Permission $permission){
+            $permission->label('Page List')
+                    ->routes('admin.page.index');
+        });      
+        $group->addPermission('admin-page-create', function(Permission $permission){
+            $permission->label('Create Page')
+                    ->routes('admin.page.create,admin.page.store');
+        });
+        $group->addPermission('admin-page-update', function(Permission $permission){
+            $permission->label('Update Page')
+                    ->routes('admin.page.edit,admin.page.update');
+        });
+        $group->addPermission('admin-page-destroy', function(Permission $permission){
+            $permission->label('Destroy Page')
+                    ->routes('admin.page.destroy');
+        });
+        $group->addPermission('admin-page-show', function(Permission $permission){
+            $permission->label('Show Page')
+                    ->routes('admin.page.show');
+        });
     
 
         $group = PermissionFacade::add('menu', function(PermissionGroup $group){
