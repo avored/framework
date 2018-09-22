@@ -115,7 +115,7 @@ class AttributeController extends Controller
         $attributes = $this->repository->findMany($request->get('attribute_id'));
 
         $tmpString = '__RANDOM__STRING__';
-        $view = view('avored-framework::product.get-element')
+        $view = view('avored-framework::product.attribute.get-element')
             ->with('attributes', $attributes)
             ->with('tmpString', $tmpString);
 

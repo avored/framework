@@ -29,6 +29,7 @@ return [
     'admin-confirm-password-label' => 'Confirm Password',
     'admin-email-label' => 'Email Address',
 
+    'admin-dashboard-monthly-revenue-title' => 'Monthly Revenue',
     'admin-dashboard-total-user-title' => 'Total User',
     'admin-dashboard-total-order-title' => 'Total Orders',
     'admin-dashboard-recent-order-title' => 'Recent Order',

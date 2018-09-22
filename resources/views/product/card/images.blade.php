@@ -6,13 +6,15 @@
 
     @if(isset($model) && $model->images()->get()->count() > 0)
         @foreach($model->images()->get() as $image)
+        
             <?php $class = ($image->is_main_image == 1) ? "active" : ""; ?>
             <div class="image-preview">
                 <div class="actual-image-thumbnail">
                     <img class="img-thumbnail img-tag img-responsive"
                         data-path="{{ $image->path->relativePath }}"
                         src="{{ ($image->path->smallUrl) }}"/>
-                    <input type="hidden" name="image[{{ $image->id }}][path]" 
+                    <input type="hidden" 
+                            name="image[{{ $image->id }}][path]" 
                             value="{{ str_replace('storage/', '', $image->path->relativePath) }}"/>
                     @if($image->is_main_image)
                         <input type="hidden" class="is_main_image_hidden_field"
@@ -34,7 +36,9 @@
                                     title="Select as Main Image">
                                 <i class="fas fa-check-square"></i>
                             </button>
-                            <button type="button" class="destroy-image btn btn-xs btn-default" title="Remove file">
+                            <button type="button" 
+                                    class="destroy-image btn btn-xs btn-default" 
+                                    title="Remove file">
                                 <i class="fas fa-trash-alt text-danger"></i>
                             </button>
                         </div>

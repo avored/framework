@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin-user-list' => 'Users',
+    'admin-user-list' => 'Admin User List',
     'admin-user-create' => 'Create Admin User',
     'admin-user-update' => 'Update Admin User',
 
