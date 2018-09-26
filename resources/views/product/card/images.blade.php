@@ -2,13 +2,13 @@
 <input type="file" class="product-image-element form-control" data-token="{{ csrf_token() }}"
         >
 
-<div class="product-image-list">
+<div class="product-image-list mt-3 row">
 
     @if(isset($model) && $model->images()->get()->count() > 0)
         @foreach($model->images()->get() as $image)
         
-            <?php $class = ($image->is_main_image == 1) ? "active" : ""; ?>
-            <div class="image-preview">
+          
+            <div class="image-preview col-md-3">
                 <div class="actual-image-thumbnail">
                     <img class="img-thumbnail img-tag img-responsive"
                         data-path="{{ $image->path->relativePath }}"
@@ -29,17 +29,19 @@
                         {{ $image->path->name() }}
                     </div>
                     <div class="actions">
-                        <div class="action-buttons pull-right">
+                        <div class="action-buttons">
 
                             <button type="button"
-                                    class="btn is_main_image_button {{ $class }} selected-icon"
+                                    class="btn is_main_image_button 
+                                            {{ $image->is_main_image === 1 ? "active" : "" }} 
+                                            selected-icon"
                                     title="Select as Main Image">
-                                <i class="fas fa-check-square"></i>
+                                <i class="{{ ($image->is_main_image == 1) ? "text-info" : "" }} ti-check-box"></i>
                             </button>
                             <button type="button" 
                                     class="destroy-image btn btn-xs btn-default" 
                                     title="Remove file">
-                                <i class="fas fa-trash-alt text-danger"></i>
+                                <i class="ti-trash text-danger"></i>
                             </button>
                         </div>
                     </div>
@@ -89,26 +91,24 @@
 
         jQuery(document).on('click', '.product-image-list .is_main_image_button', function (e) {
             e.preventDefault();
-            //jQuery(this).toggleClass('active');
+            e.stopPropagation();
 
-            //x = this;
 
-            //var mainImageSrc = jQuery(this).parents('.image-preview:first').find('img').attr('src');
-            //jQuery('.top-header img').attr('src', mainImageSrc);
-
-            //console.info(mainImageSrc);
-
-            jQuery('.product-image-list .is_main_image_button').removeClass('active');
             jQuery('.product-image-list .is_main_image_hidden_field').val(0);
 
-
             if (jQuery(this).hasClass('active')) {
-
                 jQuery(this).removeClass('active');
+                jQuery(this).children().removeClass('text-info');
                 jQuery(this).parents('.image-preview:first').find('.is_main_image_hidden_field').val(0);
+                
             } else {
-                jQuery(this).addClass('active');
+                
+                jQuery('.product-image-list .is_main_image_button').removeClass('active');    
+                jQuery('.product-image-list .ti-check-box').removeClass('text-info');    
+
                 jQuery(this).parents('.image-preview:first').find('.is_main_image_hidden_field').val(1);
+                jQuery(this).addClass('active');
+                jQuery(this).children().addClass('text-info');
             }
 
         });
