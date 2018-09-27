@@ -1,7 +1,7 @@
 <div class="brand-nav">
     <span class="logo">
         <a href="{{ route('admin.dashboard') }}">
-            <img src="https://www.avored.com/img/logo.svg" height="50px" width="30px" /> AvoRed
+            <img src="{{ asset('vendor/avored-admin/images/logo.svg') }}" height="50px" width="30px" /> AvoRed
         </a>
     </span>
 </div>

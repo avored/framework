@@ -53,7 +53,8 @@ class AvoredFrameworkSchema extends Migration
             $table->decimal('qty', 10, 6)->nullable();
             $table->tinyInteger('is_taxable')->nullable()->default(null);
             $table->decimal('price', 10, 6)->nullable()->default(null);
-            ;
+            $table->decimal('cost_price', 10, 6)->nullable()->default(null);
+            
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);

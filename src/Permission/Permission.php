@@ -21,6 +21,21 @@ class Permission implements PermissionContracts
      */
     protected $key;
 
+
+
+    /**
+     * Construct for a permission group
+     * @param callable $callable
+     * @return void
+     */
+    public function __construct($callable = null)
+    {
+        if(null !== $callable) {
+            $callable($this);
+        }
+    }
+
+
     public function label($label = null)
     {
         if (null !== $label) {

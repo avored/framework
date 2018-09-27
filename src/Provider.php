@@ -38,7 +38,7 @@ class Provider extends ServiceProvider
         \AvoRed\Framework\Models\ModelProvider::class,
         \AvoRed\Framework\Modules\Provider::class,
         \AvoRed\Framework\Payment\Provider::class,
-        \AvoRed\Framework\Permission\Provider::class,
+        \AvoRed\Framework\Permission\PermissionProvider::class,
         \AvoRed\Framework\Shipping\Provider::class,
         \AvoRed\Framework\Tabs\Provider::class,
         \AvoRed\Framework\Theme\Provider::class,

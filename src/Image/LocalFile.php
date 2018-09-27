@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\File;
 class LocalFile
 {
     /**
-     * relative path for the image.
+     * Relative path for the image.
      *
-     * @var null
+     * @var string
      */
-    public $relativePath = null;
+    public $relativePath;
+
+    /**
+     * DB path for the image.
+     *
+     * @var string $dbPath
+     */
+    public $dbPath;
 
     /**
      * url for the image.
@@ -27,7 +34,8 @@ class LocalFile
      */
     public function __construct($relativePath = null)
     {
-        $this->relativePath = $relativePath;
+        
+        $this->relativePath = str_replace("storage/" , "" ,$relativePath);
         $this->url = asset($relativePath);
 
         $sizes = config('avored-framework.image.sizes');
@@ -38,7 +46,7 @@ class LocalFile
             $baseName = basename($relativePath);
             $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $relativePath);
 
-            $this->$objectVarName = asset($sizeNamePath);
+            $this->$objectVarName = asset("storage/" . $sizeNamePath);
         }
     }
 
@@ -79,10 +87,26 @@ class LocalFile
     public function relativePath($path = null)
     {
         if (null === $path) {
+
             return str_replace(asset('/'), '', $this->relativePath);
         }
 
         $this->relativePath = $path;
+
+        return $this;
+    }
+
+    /**
+     * return Relative path for the image.
+     *
+     * @return string $relativePath
+     */
+    public function dbPath($path = null)
+    {
+        if (null === $path) {
+            return $this->dbPath;
+        }
+        $this->dbPath = $path;
 
         return $this;
     }
