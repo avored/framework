@@ -28,7 +28,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pageGrid = new PageDataGrid($this->repository->query()->orderBy('id', 'desc'));
+        $pageGrid = new PageDataGrid($this->repository->query());
 
         return view('avored-framework::cms.page.index')->with('dataGrid', $pageGrid->dataGrid);
     }
@@ -99,7 +99,7 @@ class PageController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Page $page
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
