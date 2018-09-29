@@ -13,11 +13,8 @@ use AvoRed\Framework\Image\Facade as Image;
 use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
-use AvoRed\Framework\Models\Database\ProductDownloadableUrl;
-use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\System\Controllers\Controller;
-
 
 class ProductController extends Controller
 {
@@ -35,11 +32,9 @@ class ProductController extends Controller
 
     public function __construct(ProductInterface $repository, ProductDownloadableUrlInterface $downRep)
     {
-        $this->repository       = $repository;
-        $this->downRepository   = $downRep;
+        $this->repository = $repository;
+        $this->downRepository = $downRep;
     }
-
-    
 
     /**
      * Display a listing of the resource.
@@ -49,7 +44,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productsBuilder = $this->repository->query()->where('type', '!=', 'VARIABLE_PRODUCT')->orderBy('id', 'desc');
+        $productsBuilder = $this->repository->query()
+                                ->where('type', '!=', 'VARIABLE_PRODUCT');
         $productGrid = new ProductDataGrid($productsBuilder);
 
         return view('avored-framework::product.index')->with('dataGrid', $productGrid->dataGrid);
@@ -210,22 +206,22 @@ class ProductController extends Controller
     public function downloadMainToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path("app/public" . DIRECTORY_SEPARATOR. $downloadableUrl->main_path);
+        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->main_path);
 
         return response()->download($path);
     }
 
-     /**
-     * Products Downloadable Main Media Download.
-     *
-     * @param string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * Products Downloadable Main Media Download.
+    *
+    * @param string $token
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function downloadDemoToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path("app/public" . DIRECTORY_SEPARATOR. $downloadableUrl->demo_path);
+        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->demo_path);
 
         return response()->download($path);
     }
@@ -259,7 +255,6 @@ class ProductController extends Controller
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
 
-    
     /**
      * return random string only lower and without digits.
      *
@@ -268,10 +263,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        
         return view('avored-framework::product.show')
                 ->with('product', $product);
     }
-
-
 }

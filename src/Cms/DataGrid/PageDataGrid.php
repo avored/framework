@@ -14,7 +14,7 @@ class PageDataGrid
 
         $dataGrid->model($model)
               ->column('id', ['sortable' => true])
-              ->column('name')
+              ->column('name', ['sortable' => true])
               ->column('slug')
               ->column('meta_title',['label' => 'Meta Title'])
               ->linkColumn('edit', [], function ($model) {

@@ -96,25 +96,24 @@ class Manager
         if (null !== $this->request->get('asc')) {
             $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
         }
-        if (null !== $this->request->get('desc')) {
-            $dataGrid->model->orderBy($this->request->get('desc'), 'desc');
+        if (null !== $this->request->get('desc', 'id')) {
+            $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
         }
 
+        $options = ['path' => asset(request()->path())];
 
-        $options = ['path' => asset(request()->path())]; 
-
-        if(!$dataGrid->model instanceof Collection) {
+        if (!$dataGrid->model instanceof Collection) {
             $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
         } else {
-           $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
+            $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
         }
-       
+
         return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
     }
 
     /**
      * Set the model or Collection for the DataGrid Data
-     * 
+     *
      * @param mixed $model
      * @return self
      */
@@ -140,13 +139,13 @@ class Manager
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
 
-
         return new LengthAwarePaginator(
-                        $items->forPage($page, $perPage), 
-                        $items->count(), 
-                        $perPage, 
-                        $page, 
-                        $options);
+                        $items->forPage($page, $perPage),
+                        $items->count(),
+                        $perPage,
+                        $page,
+                        $options
+        );
     }
 
     public function column($identifier, $options = [])
