@@ -52,7 +52,6 @@ class AdminMenuProvider extends ServiceProvider
         return ['adminmenu', 'AvoRed\Framework\AdminMenu\Builder'];
     }
 
-
     /**
      * Register the Menus.
      *
@@ -60,108 +59,102 @@ class AdminMenuProvider extends ServiceProvider
      */
     protected function registerAdminMenu()
     {
-        AdminMenuFacade::add('dashboard', function (AdminMenu $shopMenu) {
-            $shopMenu->label('Dashboard')->route('admin.dashboard')->icon('fas fa-home');
-        });
-        
-        AdminMenuFacade::add('content', function (AdminMenu $menu) {
-            $menu->label('Content')->route('#')->icon('fas fa-folder');
-        });
-        
-        $contentMenu = AdminMenuFacade::get('content');        
-        $contentMenu->subMenu('page', function(AdminMenu $menu) {
-            $menu->key('page')->label('Pages')->route('admin.page.index')->icon('fas fa-file');
-        });
-        
-        $contentMenu->subMenu('menu', function(AdminMenu $menu) {
-            $menu->key('menu')->label('Menu')->route('admin.menu.index')->icon('fas fa-leaf');
-        });
-
         AdminMenuFacade::add('shop', function (AdminMenu $shopMenu) {
-            $shopMenu->label('Shop')->route('#')->icon('fas fa-cart-plus');
+            $shopMenu->label('Catalog')->route('#')->icon('ti-shopping-cart');
         });
         
         $shopMenu = AdminMenuFacade::get('shop');
         $shopMenu->subMenu('category', function(AdminMenu $menu) {
-            $menu->key('category') ->label('Categories')->route('admin.category.index')->icon('far fa-building');
+            $menu->key('category') ->label('Categories')->route('admin.category.index');
         });
 
         $shopMenu->subMenu('product', function(AdminMenu $menu) {
-            $menu->key('category')->label('Products')->route('admin.product.index')->icon('fab fa-dropbox');
-        });
-
-        $shopMenu->subMenu('order', function(AdminMenu $menu) {
-            $menu->key('order')->label("Orders")->route('admin.order.index')->icon('fas fa-dollar-sign');
-        });
-
-        $shopMenu->subMenu('order_status', function(AdminMenu $menu) {
-            $menu->key('order')->label("Order Status")->route('admin.order-status.index')->icon('fas fa-dollar-sign');
+            $menu->key('category')->label('Products')->route('admin.product.index');
         });
 
         $shopMenu->subMenu('attribute', function(AdminMenu $menu) {
-            $menu->key('attribute')->label('Products Attributes')->route('admin.attribute.index')->icon('fas fa-file-alt');
+            $menu->key('attribute')->label('Products Attributes')->route('admin.attribute.index');
         });
 
         $shopMenu->subMenu('property',   function(AdminMenu $menu) {
-            $menu->key('property')->label('Property')->route('admin.property.index')->icon('fas fa-file-powerpoint');
+            $menu->key('property')->label('Property')->route('admin.property.index');
+        });
+
+        AdminMenuFacade::add('content', function (AdminMenu $menu) {
+            $menu->label('Content')->route('#')->icon('ti-files');
+        });
+        
+        $contentMenu = AdminMenuFacade::get('content');        
+        $contentMenu->subMenu('page', function(AdminMenu $menu) {
+            $menu->key('page')->label('Pages')->route('admin.page.index');
+        });
+        
+        $contentMenu->subMenu('menu', function(AdminMenu $menu) {
+            $menu->key('menu')->label('Menu')->route('admin.menu.index');
         });
 
         AdminMenuFacade::add('user', function (AdminMenu $menu) {
-            $menu->label('Users')->route('#')->icon('fas fa-user');
+            $menu->label('Customers')->route('#')->icon('ti-user');
         });
         
-
         $userMenu = AdminMenuFacade::get('user');        
         
         $userMenu->subMenu('user', function(AdminMenu $menu) {
-            $menu->key('user')->label('User')->route('admin.user.index')->icon('fas fa-user');
+            $menu->key('user')->label('Overview')->route('admin.user.index');
         });
         $userMenu->subMenu('user_group', function(AdminMenu $menu) {
-            $menu->key('user_group')->label('User Group')->route('admin.user-group.index')->icon('fas fa-users');
+            $menu->key('user_group')->label('Customers Groups')->route('admin.user-group.index');
         });
 
-        $userMenu->subMenu('admin-user', function(AdminMenu $menu) {
-            $menu->key('admin-user')->label('Admin Users')->route('admin.admin-user.index')->icon('fas fa-users');
+        AdminMenuFacade::add('orders', function (AdminMenu $menu) {
+            $menu->label('Orders')->route('#')->icon('ti-truck');
         });
         
-        $userMenu->subMenu('role', function(AdminMenu $menu) {
-            $menu->key('role')->label('Role/Permissions')->route('admin.role.index')->icon('fab fa-periscope');
+        $orderMenu = AdminMenuFacade::get('orders');        
+        $orderMenu->subMenu('order', function(AdminMenu $menu) {
+            $menu->key('order')->label("Overview")->route('admin.order.index');
         });
-       
+
+        $orderMenu->subMenu('order_status', function(AdminMenu $menu) {
+            $menu->key('order')->label("Order Status")->route('admin.order-status.index');
+        }); 
+
         AdminMenuFacade::add('system', function (AdminMenu $systemMenu) {
-            $systemMenu->label('System')->route('#')->icon('fas fa-cogs');
-        });
+            $systemMenu->label('Settings')->route('#')->icon('ti-settings');
+        });    
 
         $systemMenu = AdminMenuFacade::get('system');
 
         $systemMenu->subMenu('configuration', function(AdminMenu $menu) {
-            $menu->key('configuration')->label('Configuration')->route('admin.configuration')->icon('fas fa-cog');
+            $menu->key('configuration')->label('Configuration')->route('admin.configuration')->icon('ti-settings');
         });
 
         $systemMenu->subMenu('site_currency_setup', function(AdminMenu $menu) {
-            $menu->key('site_currency_setup')->label('Currencies')->route('admin.site-currency.index')->icon('fas fa-dollar-sign');
+            $menu->key('site_currency_setup')->label('Currencies')->route('admin.site-currency.index');
         });
 
         $systemMenu->subMenu('country', function(AdminMenu $menu) {
-            $menu->key('country')
-                ->label('Country')
-                ->route('admin.country.index')
-                ->icon('fas fa-globe');
+            $menu->key('country')->label('Country')->route('admin.country.index');
         });
 
         $systemMenu->subMenu('state', function(AdminMenu $menu) {
-            $menu->key('state')
-                ->label('State')
-                ->route('admin.state.index')
-                ->icon('fas fa-globe');
+            $menu->key('state')->label('State')->route('admin.state.index');
         });
 
         $systemMenu->subMenu('module', function(AdminMenu $menu) {
-            $menu->key('module')->label('Modules')->route('admin.module.index')->icon('fas fa-adjust');
+            $menu->key('module')->label('Modules')->route('admin.module.index');
+        });
+
+        $systemMenu->subMenu('admin-user', function(AdminMenu $menu) {
+            $menu->key('admin-user')->label('Staff')->route('admin.admin-user.index');
+        });
+
+        $systemMenu->subMenu('role', function(AdminMenu $menu) {
+            $menu->key('role')->label('Roles/Permissions')->route('admin.role.index');
         });
 
         $systemMenu->subMenu('themes', function(AdminMenu $menu) {
-            $menu->key('themes')->label('Themes')->route('admin.theme.index')->icon('fas fa-adjust');
+            $menu->key('themes')->label('Themes')->route('admin.theme.index');
         });
     }
 }
