@@ -9,7 +9,7 @@
     <title>{{ config('app.name', 'AvoRed Ecommerce') }}</title>
 
     <!-- Styles -->
-    <link href="{{ mix('vendor/avored-admin/css/app.css') }}" rel="stylesheet"> 
+    <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet"> 
     
     @yield('css')
 
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <script src="{{ mix('vendor/avored-admin/js/app.js') }}"></script>
+  <script src="{{ url('vendor/avored-admin/js/app.js') }}"></script>
   @stack('scripts')
 </body>
 </html>
