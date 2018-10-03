@@ -33,7 +33,7 @@ class Provider extends ServiceProvider
         \AvoRed\Framework\Breadcrumb\BreadcrumbProvider::class,
         \AvoRed\Framework\Cart\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,
-        \AvoRed\Framework\Image\Provider::class,
+        \AvoRed\Framework\Image\ImageProvider::class,
         \AvoRed\Framework\Menu\Provider::class,
         \AvoRed\Framework\Models\ModelProvider::class,
         \AvoRed\Framework\Modules\Provider::class,
@@ -115,7 +115,6 @@ class Provider extends ServiceProvider
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
         $authConfig = $this->app['config']->get('auth', []);
-        
     }
 
     public function publishFiles()

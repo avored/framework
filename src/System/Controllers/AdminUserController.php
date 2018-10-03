@@ -6,8 +6,7 @@ use Laravel\Passport\Client;
 use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Models\Database\AdminUser as Model;
 use AvoRed\Framework\System\DataGrid\AdminUserDataGrid;
-use AvoRed\Framework\Models\Database\Role;
-use AvoRed\Framework\Image\Facade as Image;
+use AvoRed\Framework\Image\Facades\Image;
 use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 use AvoRed\Framework\Models\Database\AdminUser;
@@ -15,7 +14,7 @@ use AvoRed\Framework\Models\Database\AdminUser;
 class AdminUserController extends Controller
 {
     /**
-     * 
+     *
      * @var \AvoRed\Framework\Models\Repository\AdminUserRepository
      */
     protected $repository;
@@ -24,6 +23,7 @@ class AdminUserController extends Controller
     {
         $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,10 +84,11 @@ class AdminUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(AdminUserRequest $request, Model $adminUser)
-    {  
-        if(null !== $request->file('image')) {
-            $path   = $this->_getUserImageRelativePath();
-            $image  = Image::upload($request->file('image'), $path);
+    {
+        if (null !== $request->file('image')) {
+            $path = $this->_getUserImageRelativePath();
+            $image = Image::upload($request->file('image'), $path)->makeSizes()->get();
+
             $request->merge(['image_path' => $image->relativePath]);
         }
 
@@ -111,7 +112,7 @@ class AdminUserController extends Controller
 
     public function apiShow()
     {
-        $user   = Auth::guard('admin')->user();
+        $user = Auth::guard('admin')->user();
         $client = Client::wherePasswordClient(1)->whereUserId($user->id)->first();
 
         return view('avored-framework::system.admin-user.show-api')->with('client', $client);
@@ -142,6 +143,6 @@ class AdminUserController extends Controller
     private function _getUserImageRelativePath()
     {
         $tmpPath = str_split(strtolower(str_random(3)));
-        return '/uploads/users/images/'.implode('/', $tmpPath);
+        return '/uploads/users/images/' . implode('/', $tmpPath);
     }
 }

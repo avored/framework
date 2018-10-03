@@ -1,10 +1,10 @@
 <?php
 
-namespace AvoRed\Framework\Image;
+namespace AvoRed\Framework\Image\Facades;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;
 
-class Facade extends LaravelFacade
+class Image extends LaravelFacade
 {
     protected static function getFacadeAccessor()
     {
