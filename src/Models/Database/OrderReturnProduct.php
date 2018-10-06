@@ -8,7 +8,7 @@ class OrderReturnProduct extends BaseModel
 
     /**
     * Get all of the owning commentable models.
-    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
     public function model()
     {

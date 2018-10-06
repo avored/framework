@@ -31,7 +31,10 @@
 
             <div class="clearfix"></div>
                 <div class="mt-3 card">
-                    <div class="card-header text-white bg-secondary"><span class="fa fa-user"></span> {{  __('avored-framework::orders.customer-data') }}</div>
+                    <div class="card-header text-white bg-secondary">
+                        <span class="fa fa-user"></span>
+                        {{  __('avored-framework::orders.customer-data') }}
+                    </div>
 
                     <div class="card-body">
                         <div class="row">
