@@ -78,6 +78,13 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::get('order', 'Order\Controllers\OrderController@index')
                 ->name('order.index');
 
+    Route::get('order-return-request', 'Order\Controllers\OrderReturnRequestController@index')
+                ->name('order-return-request.index');
+    Route::get('order-return-request/{returnRequest}', 'Order\Controllers\OrderReturnRequestController@view')
+                ->name('order-return-request.view');
+    Route::put('order-return-request/{returnRequest}/update-status/{status}', 'Order\Controllers\OrderReturnRequestController@updateStatus')
+                ->name('order-return-request.update-status');
+
     Route::get('order/{order}', 'Order\Controllers\OrderController@view')
                 ->name('order.view');
 

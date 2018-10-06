@@ -10,8 +10,8 @@ class OrderReturnProduct extends BaseModel
     * Get all of the owning commentable models.
     *
     */
-    public function product()
+    public function model()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

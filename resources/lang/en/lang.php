@@ -38,6 +38,7 @@ return [
     'category.index.create' => 'Create Category',
 
     'product.index.title' => 'Product List',
+    'products' => 'Products',
     'product.create.text' => 'Create Product',
 
     'address.configuration.title' => 'Address Configuration List',

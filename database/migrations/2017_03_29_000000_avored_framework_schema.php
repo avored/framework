@@ -155,7 +155,7 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('order_id')->unsigned()->nullable()->default(null);
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-            $table->enum('status', ['PENDING', 'IN_PROGRESSS', 'APPROVED'])->nullable()->default(null);
+            $table->enum('status', ['PENDING', 'IN_PROGRESSS', 'APPROVED' , 'REJECTED'])->nullable()->default(null);
             $table->text('comment')->nullable()->default(null);
 
             $table->timestamps();

@@ -93,11 +93,14 @@ class Manager
             }
         }
 
-        if (null !== $this->request->get('asc')) {
-            $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
-        }
-        if (null !== $this->request->get('desc', 'id')) {
-            $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
+        //@todo Fix this bug
+        if (false) {
+            if (null !== $this->request->get('asc')) {
+                $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
+            }
+            if (null !== $this->request->get('desc', 'id')) {
+                $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
+            }
         }
 
         $options = ['path' => asset(request()->path())];
