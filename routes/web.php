@@ -1,6 +1,5 @@
 <?php
 
-
 $baseAdminUrl = config('avored-framework.admin_url');
 
 Route::middleware(['web'])
@@ -8,7 +7,6 @@ Route::middleware(['web'])
     ->name('admin.')
     ->namespace('AvoRed\Framework')
     ->group(function () {
-
         Route::get('login', 'User\Controllers\LoginController@loginForm')->name('login');
         Route::post('login', 'User\Controllers\LoginController@login')->name('login.post');
 
@@ -19,10 +17,7 @@ Route::middleware(['web'])
 
         Route::get('password/reset', 'User\Controllers\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
         Route::post('password/reset', 'User\Controllers\ResetPasswordController@reset')->name('password.reset.token');
-
     });
-
-
 
 Route::middleware(['web', 'admin.auth', 'permission'])
 //Route::middleware(['web'])
@@ -30,12 +25,10 @@ Route::middleware(['web', 'admin.auth', 'permission'])
 ->name('admin.')
 ->namespace('AvoRed\Framework')
 ->group(function () {
-    
     Route::get('', 'System\Controllers\DashboardController@index')
                 ->name('dashboard');
-        
 
-                Route::resource('page', 'Cms\Controllers\PageController');
+    Route::resource('page', 'Cms\Controllers\PageController');
     Route::resource('user-group', 'User\Controllers\UserGroupController');
     Route::resource('user', 'User\Controllers\UserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');
@@ -49,7 +42,6 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::resource('country', 'System\Controllers\CountryController');
     Route::resource('state', 'System\Controllers\StateController');
 
-
     Route::post('get-attribute-element', 'Product\Controllers\AttributeController@getElementHtml')
                 ->name('attribute.element');
     Route::post('product-attribute-panel', 'Product\Controllers\AttributeController@getAttribute')
@@ -58,28 +50,33 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::post('get-property-element', 'Product\Controllers\PropertyController@getElementHtml')
                 ->name('property.element');
 
-
-    Route::post('product-image/upload', 
-                'Product\Controllers\ProductController@uploadImage')
+    Route::post(
+        'product-image/upload',
+                'Product\Controllers\ProductController@uploadImage'
+    )
                 ->name('product.upload-image');
-    Route::post('product-image/delete', 
-                'Product\Controllers\ProductController@deleteImage')
+    Route::post(
+        'product-image/delete',
+                'Product\Controllers\ProductController@deleteImage'
+    )
                 ->name('product.delete-image');
 
-    Route::get('product-downloadable-demo/{token}', 
-                'Product\Controllers\ProductController@downloadDemoToken')
+    Route::get(
+        'product-downloadable-demo/{token}',
+                'Product\Controllers\ProductController@downloadDemoToken'
+    )
                 ->name('product.download.demo.media');
-    Route::get('product-downloadable-main/{token}', 
-                'Product\Controllers\ProductController@downloadMainToken')
+    Route::get(
+        'product-downloadable-main/{token}',
+                'Product\Controllers\ProductController@downloadMainToken'
+    )
                 ->name('product.download.main.media');
-    
+
     Route::post('edit-product-variation', 'Product\Controllers\ProductController@editVariation')
                 ->name('variation.edit');
-        
 
     Route::get('order', 'Order\Controllers\OrderController@index')
                 ->name('order.index');
-
 
     Route::get('order/{order}', 'Order\Controllers\OrderController@view')
                 ->name('order.view');
@@ -93,7 +90,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
 
     Route::put('order/{order}/update-track-codes', 'Order\Controllers\OrderController@updateTrackCode')
                 ->name('order.update-track-code');
-    
+
     Route::get('menu', 'Cms\Controllers\MenuController@index')->name('menu.index');
     Route::post('menu', 'Cms\Controllers\MenuController@store')->name('menu.store');
 
@@ -101,7 +98,6 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('admin-user.detail');
     Route::get('admin-user-api-show', 'System\Controllers\AdminUserController@apiShow')
                 ->name('admin-user.show.api');
-
 
     Route::get('configuration', 'System\Controllers\ConfigurationController@index')
                 ->name('configuration');
@@ -128,14 +124,14 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('theme.deactivated');
     Route::delete('themes/{name}', 'System\Controllers\ThemeController@destroy')
                 ->name('theme.destroy');
-        
-    Route::get('user/{user}/change-password', 
+
+    Route::get(
+        'user/{user}/change-password',
                 'User\Controllers\UserController@changePasswordGet'
                 )->name('user.change-password');
-                
-    Route::put('user/{user}/change-password', 
-                'User\Controllers\UserController@changePasswordUpdate'
-            )->name('user.change-password.update'); 
 
-    
+    Route::put(
+        'user/{user}/change-password',
+                'User\Controllers\UserController@changePasswordUpdate'
+            )->name('user.change-password.update');
 });
