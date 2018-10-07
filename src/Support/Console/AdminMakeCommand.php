@@ -71,6 +71,6 @@ class AdminMakeCommand extends Command
         $clientRepository   = new ClientRepository;
         $clientRepository->createPasswordGrantClient($adminUser->id, $adminUser->full_name, $request->getUriForPath('/'));
 
-        $this->info('AvoRed Ecommerce Administraotr Account Created Successfully!');
+        $this->info('AvoRed Ecommerce Administrator Account Created Successfully!');
     }
 }

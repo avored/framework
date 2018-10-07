@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use AvoRed\Framework\Models\Database\Product;
-use AvoRed\Framework\Image\Facade as Image;
+use AvoRed\Framework\Image\Facades\Image;
 use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
@@ -44,8 +44,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productsBuilder = $this->repository->query()
-                                ->where('type', '!=', 'VARIABLE_PRODUCT');
+        $productsBuilder = $this->repository->query()->where('type', '!=', 'VARIABLE_PRODUCT')->orderBy('id', 'desc');
         $productGrid = new ProductDataGrid($productsBuilder);
 
         return view('avored-framework::product.index')->with('dataGrid', $productGrid->dataGrid);
@@ -157,8 +156,7 @@ class ProductController extends Controller
         $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
 
         $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-
-        $image = Image::upload($image, $checkDirectory);
+        $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
 
         $tmp = $this->_getTmpString();
 

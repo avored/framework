@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Image;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider
+class ImageProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -22,7 +22,7 @@ class Provider extends ServiceProvider
     {
         $this->registerImageService();
 
-        $this->app->alias('image', 'AvoRed\Framework\Image\Service');
+        $this->app->alias('image', 'AvoRed\Framework\Image\Manager');
     }
 
     /**
@@ -33,7 +33,7 @@ class Provider extends ServiceProvider
     protected function registerImageService()
     {
         $this->app->singleton('image', function ($app) {
-            return new Service();
+            return new Manager();
         });
     }
 
@@ -44,6 +44,6 @@ class Provider extends ServiceProvider
      */
     public function provides()
     {
-        return ['image', 'AvoRed\Framework\Image\Service'];
+        return ['image', 'AvoRed\Framework\Image\Manager'];
     }
 }

@@ -32,19 +32,19 @@ class LocalFile
      *
      * @param null|string $relativePath
      */
-    public function __construct($relativePath = null)
+    public function __construct($dbPath = null)
     {
-        
-        $this->relativePath = str_replace("storage/" , "" ,$relativePath);
-        $this->url = asset($relativePath);
+        $this->dbPath = $dbPath;
+        $this->relativePath = str_replace("storage/" , "" , $dbPath);
+        $this->url = asset('storage/' .$dbPath);
 
         $sizes = config('avored-framework.image.sizes');
 
         foreach ($sizes as $sizeName => $widthHeight) {
             $objectVarName = $sizeName . 'Url';
 
-            $baseName = basename($relativePath);
-            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $relativePath);
+            $baseName = basename($dbPath);
+            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $dbPath);
 
             $this->$objectVarName = asset("storage/" . $sizeNamePath);
         }
@@ -61,14 +61,14 @@ class LocalFile
         $sizes = config('avored-framework.image.sizes');
 
         foreach ($sizes as $sizeName => $widthHeight) {
-            $baseName = basename($this->relativePath);
-            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $this->relativePath);
+            $baseName = basename($this->dbPath);
+            $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $this->dbPath);
 
             $path = public_path($sizeNamePath);
             File::delete($path);
         }
 
-        $path = public_path($this->relativePath);
+        $path = public_path($this->dbPath);
         File::delete($path);
 
         return $this;
@@ -76,7 +76,7 @@ class LocalFile
 
     public function name()
     {
-        return basename($this->relativePath);
+        return basename($this->dbPath);
     }
 
     /**
