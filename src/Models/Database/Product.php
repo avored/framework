@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
-use AvoRed\Framework\Models\Contracts\PropertyInterface;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Product extends BaseModel
@@ -79,7 +78,7 @@ class Product extends BaseModel
 
     /**
      * Get the Price for the Product
-     * 
+     *
      * @param float $val
      * @return float $price
      */
@@ -187,10 +186,10 @@ class Product extends BaseModel
 
             if (null === $downModel) {
                 $downModel = ProductDownloadableUrl::create([
-                                        'token' => $token,
-                                        'product_id' => $this->id,
-                                        'main_path' => $dbPath
-                                        ]);
+                    'token' => $token,
+                    'product_id' => $this->id,
+                    'main_path' => $dbPath
+                ]);
             } else {
                 $downModel->update(['main_path' => $dbPath]);
             }
@@ -207,12 +206,12 @@ class Product extends BaseModel
         }
     }
 
-     /**
-     * Save Product Attributes
-     *
-     * @param array $data
-     * @return void
-     */
+    /**
+    * Save Product Attributes
+    *
+    * @param array $data
+    * @return void
+    */
     protected function saveProductProperties($data)
     {
         $properties = isset($data['property']) ? $data['property'] : [];
@@ -226,8 +225,7 @@ class Product extends BaseModel
                     $propertyModel->attachProduct($this)
                                     ->fill(['value' => $propertyValue])
                                     ->save();
-                    $syncProperty[] = $propertyId;  
-                
+                    $syncProperty[] = $propertyId;
                 }
                 $this->properties()->sync($syncProperty);
             }
@@ -257,8 +255,6 @@ class Product extends BaseModel
 
             $listOfOptions = $this->combinations($optionsArray);
 
-           
-
             foreach ($listOfOptions as $option) {
                 $variationProductData = $this->getVariationProductDataGivenOptions($option);
                 $variableProduct = self::create($variationProductData);
@@ -286,8 +282,8 @@ class Product extends BaseModel
                 }
 
                 ProductVariation::create(['product_id' => $this->id,
-                                        'variation_id' => $variableProduct->id
-                                        ]);
+                    'variation_id' => $variableProduct->id
+                ]);
             }
         }
     }
@@ -300,8 +296,6 @@ class Product extends BaseModel
      */
     public function getVariationProductDataGivenOptions($options)
     {
-
-        
         $data['name'] = $this->name;
 
         if (is_array($options)) {
@@ -322,7 +316,6 @@ class Product extends BaseModel
         $data['qty'] = $this->qty;
         $data['price'] = $this->price;
 
-       
         return $data;
     }
 
@@ -394,7 +387,6 @@ class Product extends BaseModel
         $defaultPath = '/img/default-product.jpg';
         $image = $this->images()->where('is_main_image', '=', 1)->first();
 
-        
         if (null === $image) {
             return new LocalFile($defaultPath);
         }
@@ -549,7 +541,7 @@ class Product extends BaseModel
      * Product has many Categories.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     * 
+     *
      */
     public function properties()
     {
@@ -675,5 +667,4 @@ class Product extends BaseModel
     {
         return $this->hasOne(ProductDownloadableUrl::class);
     }
-
 }
