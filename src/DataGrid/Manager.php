@@ -93,16 +93,15 @@ class Manager
             }
         }
 
-        if (null !== $this->request->get('asc')) {
-            $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
-        }
-        if (null !== $this->request->get('desc', 'id')) {
-            $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
-        }
-
         $options = ['path' => asset(request()->path())];
 
         if (!$dataGrid->model instanceof Collection) {
+            if (null !== $this->request->get('asc')) {
+                $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
+            }
+            if (null !== $this->request->get('desc', 'id')) {
+                $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
+            }
             $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
         } else {
             $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
