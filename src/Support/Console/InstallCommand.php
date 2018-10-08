@@ -48,76 +48,58 @@ class InstallCommand extends Command
      * @return void
      */
     public function handle()
-    {
-        $this->dropAllTables();
+    {     
+        if($this->call('self-diagnosis') === 1) {
+            $this->error('Please Fixed all Required Check');
+        }   else {
+            $this->dropAllTables();
 
-        $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
+            $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
 
-        if ($answer == 'y' || $answer == 'yes') {
-            $this->call('key:generate');
-            $this->call('migrate');
-            $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
+            if ($answer == 'y' || $answer == 'yes') {
+                $this->call('key:generate');
+                $this->call('migrate');
+                $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
 
-            $this->call('vendor:publish', ['--tag' => 'public']);
-            $this->call('storage:link');
-        // --tag=public --force
-        } else {
-            $this->call('key:generate');
-            $this->call('migrate');
+                $this->call('vendor:publish', ['--tag' => 'public']);
+                $this->call('storage:link');
+            // --tag=public --force
+            } else {
+                $this->call('key:generate');
+                $this->call('migrate');
+            }
+
+            // THEME PUBLISH
+            $theme = Theme::get('avored-default');
+            $fromPath = $theme['asset_path'];
+            $toPath = public_path('vendor/' . $theme['identifier']);
+            Theme::publishItem($fromPath, $toPath);
+            $this->call('passport:install', ['--force' => true]);
+            $this->call('passport:keys');
+            
+            Configuration::create([
+                'configuration_key' => 'active_theme_identifier',
+                'configuration_value' => 'avored-default'
+            ]);
+            Configuration::create([
+                'configuration_key' => 'active_theme_path',
+                'configuration_value' => base_path('themes\avored\default')
+            ]);
+            Configuration::create([
+                'configuration_key' => 'avored_catalog_no_of_product_category_page',
+                'configuration_value' => 9
+            ]);
+            Configuration::create(
+                ['configuration_key' => 'avored_catalog_cart_page_display_taxamount',
+                    'configuration_value' => 'yes'
+                ]
+            );
+            Configuration::create([
+                'configuration_key' => 'avored_tax_class_percentage_of_tax',
+                'configuration_value' => 15
+            ]);
+            $this->info('AvoRed Install Successfully!');
         }
-
-        // THEME PUBLISH
-        $theme = Theme::get('avored-default');
-        $fromPath = $theme['asset_path'];
-        $toPath = public_path('vendor/' . $theme['identifier']);
-
-        Theme::publishItem($fromPath, $toPath);
-
-        /* 
-        //CREATE AN ADMIN USER
-        $firstName = $this->ask('What is your First Name:');
-        $lastName = $this->ask('What is your Last Name:');
-        $email = $this->ask('What is your Email:');
-        $password = $this->secret('What is your password:');
-
-        $role = Role::create(['name' => 'administrator', 'description' => 'Administrator Role has all access']);
-
-        $adminUser = AdminUser::create([
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'email' => $email,
-            'password' => bcrypt($password),
-            'is_super_admin' => 1,
-            'role_id' => $role->id,
-        ]);
-
-        */
-        $this->call('passport:install', ['--force' => true]);
-        $this->call('passport:keys');
-
-        
-        Configuration::create([
-            'configuration_key' => 'active_theme_identifier',
-            'configuration_value' => 'avored-default'
-        ]);
-        Configuration::create([
-            'configuration_key' => 'active_theme_path',
-            'configuration_value' => base_path('themes\avored\default')
-        ]);
-        Configuration::create([
-            'configuration_key' => 'avored_catalog_no_of_product_category_page',
-            'configuration_value' => 9
-        ]);
-        Configuration::create(
-            ['configuration_key' => 'avored_catalog_cart_page_display_taxamount',
-                'configuration_value' => 'yes'
-            ]
-        );
-        Configuration::create([
-            'configuration_key' => 'avored_tax_class_percentage_of_tax',
-            'configuration_value' => 15
-        ]);
-        $this->info('AvoRed Install Successfully!');
     }
 
     /**
