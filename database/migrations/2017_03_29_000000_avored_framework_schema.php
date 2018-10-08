@@ -182,6 +182,7 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('data_type', ['INTEGER', 'DECIMAL', 'DATETIME', 'VARCHAR', 'BOOLEAN', 'TEXT'])->nullable()->default(null);
             $table->enum('field_type', ['TEXT', 'TEXTAREA', 'CKEDITOR', 'SELECT', 'FILE', 'DATETIME', 'CHECKBOX', 'RADIO', 'SWITCH']);
             $table->tinyInteger('use_for_all_products')->default(0);
+            $table->tinyInteger('is_visible_frontend')->nullable()->default(1);
             $table->integer('sort_order')->nullable()->default(0);
             $table->timestamps();
         });
