@@ -116,7 +116,6 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        //dd($request->all());
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
@@ -173,24 +172,25 @@ class ProductController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function deleteImage(Request $request)
-    {
+    {       
         $path = $request->get('path');
 
-        $path = 'uploads/catalog/images/e/0/v/1382542458778.jpeg';
         $fileName = pathinfo($path, PATHINFO_BASENAME);
         $relativeDir = pathinfo($path, PATHINFO_DIRNAME);
 
         $sizes = config('avored-framework.image.sizes');
         foreach ($sizes as $sizeName => $widthHeight) {
             $imagePath = $relativeDir . DIRECTORY_SEPARATOR . $sizeName . '-' . $fileName;
-            if (File::exists($imagePath)) {
+        
+            if (File::exists(storage_path('app/public/' .$imagePath))) {
                 File::delete(storage_path('app/public/' . $imagePath));
             }
         }
-
-        if (File::exists($path)) {
+    
+        if (File::exists(storage_path('app/public/' .$path))) {
             File::delete(storage_path('app/public/' . $path));
         }
+       
         return JsonResponse::create(['success' => true]);
     }
 
