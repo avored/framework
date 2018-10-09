@@ -7,8 +7,8 @@ use AvoRed\Framework\Models\Contracts\ProductInterface;
 use AvoRed\Framework\Models\Repository\ProductRepository;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\Models\Repository\AttributeRepository;
-use AvoRed\Framework\Models\Repository\CategoryRepository;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
+use AvoRed\Framework\Models\Repository\CategoryRepository;
 use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 use AvoRed\Framework\Models\Repository\ConfigurationRepository;
 use AvoRed\Framework\Models\Contracts\OrderInterface;
@@ -41,6 +41,10 @@ use AvoRed\Framework\Models\Contracts\StateInterface;
 use AvoRed\Framework\Models\Repository\StateRepository;
 use AvoRed\Framework\Models\Contracts\OrderStatusInterface;
 use AvoRed\Framework\Models\Repository\OrderStatusRepository;
+use AvoRed\Framework\Models\Contracts\OrderReturnRequestInterface;
+use AvoRed\Framework\Models\Repository\OrderReturnRequestRepository;
+use AvoRed\Framework\Models\Contracts\OrderReturnProductInterface;
+use AvoRed\Framework\Models\Repository\OrderReturnProductRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -51,9 +55,33 @@ class ModelProvider extends ServiceProvider
      */
     protected $defer = true;
 
-    public function boot()
-    {
-    }
+    /**
+     * Models Array list to bind with It's Contact
+     * @var array $models
+     */
+    protected $models = [
+        AdminUserInterface::class => AdminUserRepository::class,
+        AttributeInterface::class => AttributeRepository::class,
+        CategoryInterface::class => CategoryRepository::class,
+        CategoryFilterInterface::class => CategoryFilterRepository::class,
+        ConfigurationInterface::class => ConfigurationRepository::class,
+        CountryInterface::class => CountryRepository::class,
+        MenuInterface::class => MenuRepository::class,
+        OrderInterface::class => OrderRepository::class,
+        OrderHistoryInterface::class => OrderHistoryRepository::class,
+        OrderReturnProductInterface::class => OrderReturnProductRepository::class,
+        OrderReturnRequestInterface::class => OrderReturnRequestRepository::class,
+        OrderStatusInterface::class => OrderStatusRepository::class,
+        PageInterface::class => PageRepository::class,
+        ProductInterface::class => ProductRepository::class,
+        ProductDownloadableUrlInterface::class => ProductDownloadableUrlRepository::class,
+        PropertyInterface::class => PropertyRepository::class,
+        RoleInterface::class => RoleRepository::class,
+        SiteCurrencyInterface::class => SiteCurrencyRepository::class,
+        StateInterface::class => StateRepository::class,
+        UserInterface::class => UserRepository::class,
+        UserGroupInterface::class => UserGroupRepository::class,
+    ];
 
     /**
      * Register the service provider.
@@ -66,64 +94,14 @@ class ModelProvider extends ServiceProvider
     }
 
     /**
-     * Register the Admin Menu instance.
+     * Bind The Eloquent Model with their contract.
      *
      * @return void
      */
     protected function registerModelContracts()
     {
-        $this->app->bind(
-            ProductInterface::class,
-            ProductRepository::class
-        );
-        $this->app->bind(
-            AttributeInterface::class,
-            AttributeRepository::class
-        );
-        $this->app->bind(
-            CategoryInterface::class,
-            CategoryRepository::class
-        );
-        $this->app->bind(
-            ConfigurationInterface::class,
-            ConfigurationRepository::class
-        );
-        $this->app->bind(
-            OrderInterface::class,
-            OrderRepository::class
-        );
-
-        $this->app->bind(
-            ProductDownloadableUrlInterface::class,
-            ProductDownloadableUrlRepository::class
-        );
-        $this->app->bind(
-            OrderHistoryInterface::class,
-            OrderHistoryRepository::class
-        );
-        $this->app->bind(
-            PropertyInterface::class,
-            PropertyRepository::class
-        );
-        $this->app->bind(
-            CategoryFilterInterface::class,
-            CategoryFilterRepository::class
-        );
-        $this->app->bind(
-            AdminUserInterface::class,
-            AdminUserRepository::class
-        );
-
-       
-        $this->app->bind(MenuInterface::class, MenuRepository::class);
-        $this->app->bind(PageInterface::class, PageRepository::class);
-        $this->app->bind(RoleInterface::class, RoleRepository::class);
-        $this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
-        $this->app->bind(UserInterface::class, UserRepository::class);
-        $this->app->bind(UserGroupInterface::class, UserGroupRepository::class);
-        $this->app->bind(CountryInterface::class, CountryRepository::class);
-        $this->app->bind(StateInterface::class, StateRepository::class);
-        $this->app->bind(OrderStatusInterface::class, OrderStatusRepository::class);
-        //$this->app->bind(SiteCurrencyInterface::class, SiteCurrencyRepository::class);
+        foreach ($this->models as $interface => $repository) {
+            $this->app->bind($interface, $repository);
+        }
     }
 }

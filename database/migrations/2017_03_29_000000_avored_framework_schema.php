@@ -54,7 +54,6 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('is_taxable')->nullable()->default(null);
             $table->decimal('price', 10, 6)->nullable()->default(null);
             $table->decimal('cost_price', 10, 6)->nullable()->default(null);
-            
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -130,7 +129,7 @@ class AvoredFrameworkSchema extends Migration
 
             $table->integer('order_id')->unsigned()->nullable()->default(null);
             $table->integer('order_status_id')->unsigned()->nullable()->default(null);
-        
+
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
@@ -150,6 +149,32 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
+        Schema::create('order_return_requests', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('order_id')->unsigned()->nullable()->default(null);
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            $table->enum('status', ['PENDING', 'IN_PROGRESSS', 'APPROVED' , 'REJECTED'])->nullable()->default(null);
+            $table->text('comment')->nullable()->default(null);
+
+            $table->timestamps();
+        });
+
+        Schema::create('order_return_products', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('order_return_request_id')->unsigned()->nullable()->default(null);
+            $table->foreign('order_return_request_id')->references('id')->on('order_return_requests')->onDelete('cascade');
+
+            $table->integer('product_id')->unsigned()->nullable()->default(null);
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            $table->integer('qty');
+            $table->text('reason')->nullable()->default(null);
+            $table->timestamps();
+        });
+
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -157,6 +182,7 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('data_type', ['INTEGER', 'DECIMAL', 'DATETIME', 'VARCHAR', 'BOOLEAN', 'TEXT'])->nullable()->default(null);
             $table->enum('field_type', ['TEXT', 'TEXTAREA', 'CKEDITOR', 'SELECT', 'FILE', 'DATETIME', 'CHECKBOX', 'RADIO', 'SWITCH']);
             $table->tinyInteger('use_for_all_products')->default(0);
+            $table->tinyInteger('is_visible_frontend')->nullable()->default(1);
             $table->integer('sort_order')->nullable()->default(0);
             $table->timestamps();
         });
@@ -174,7 +200,7 @@ class AvoredFrameworkSchema extends Migration
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
-           
+
             $table->timestamps();
 
             $table->foreign('property_id')
@@ -418,7 +444,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('code');
             $table->string('name');
             $table->float('conversion_rate');
-            $table->enum('status',['ENABLED','DISABLED'])->nullable()->default(null);
+            $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
             $table->timestamps();
         });
 
@@ -545,17 +571,15 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('billing_address_id')->references('id')->on('addresses');
         });
 
-        
-        $path = __DIR__ .'/../../assets/countries.json';
+        $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $code => $country) {
-            
-            Country::create(['code' => strtolower($code), 
-                            'name' => $country['name'],
-                            'phone_code' => $country['phone'],
-                            'currency_code' => $country['currency'],
-                            'lang_code' => (isset($country['languages'][0]) && $country['languages']) ?? null,
-                            ]);
+            Country::create(['code' => strtolower($code),
+                'name' => $country['name'],
+                'phone_code' => $country['phone'],
+                'currency_code' => $country['currency'],
+                'lang_code' => (isset($country['languages'][0]) && $country['languages']) ?? null,
+            ]);
         }
 
         Schema::create('menus', function (Blueprint $table) {
@@ -571,21 +595,21 @@ class AvoredFrameworkSchema extends Migration
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
-            'name'              => 'NZ Dollars',
-            'code'              => 'NZD',
-            'conversion_rate'   => 1,
-            'status'            => 'ENABLED'
+            'name' => 'NZ Dollars',
+            'code' => 'NZD',
+            'conversion_rate' => 1,
+            'status' => 'ENABLED'
         ]);
 
         Configuration::create([
             'configuration_key' => 'general_site_currency',
             'configuration_value' => $siteCurrency->id,
-            ]);
+        ]);
 
         Configuration::create([
             'configuration_key' => 'tax_default_country',
             'configuration_value' => $countryModel->id,
-            ]);
+        ]);
 
         Configuration::create([
             'configuration_key' => 'tax_enabled',
@@ -598,15 +622,15 @@ class AvoredFrameworkSchema extends Migration
         ]);
 
         Configuration::create([
-            'configuration_key' => 'general_site_title', 
+            'configuration_key' => 'general_site_title',
             'configuration_value' => 'AvoRed an Laravel Ecommerce'
         ]);
         Configuration::create([
             'configuration_key' => 'general_site_description',
-            'configuration_value' => 'AvoRed is a free open-source e-commerce application development platform written in PHP based on Laravel. Its an ingenuous and modular e-commerce that is easily customizable according to your needs, with a modern responsive mobile friendly interface as default'            
+            'configuration_value' => 'AvoRed is a free open-source e-commerce application development platform written in PHP based on Laravel. Its an ingenuous and modular e-commerce that is easily customizable according to your needs, with a modern responsive mobile friendly interface as default'
         ]);
         Configuration::create([
-            'configuration_key' => 'general_site_description', 
+            'configuration_key' => 'general_site_description',
             'configuration_value' => 'AvoRed Laravel Ecommerce
         ']);
     }
@@ -645,7 +669,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('product_order');
         Schema::dropIfExists('orders');
-
 
         Schema::dropIfExists('oauth_personal_access_clients');
         Schema::dropIfExists('oauth_clients');

@@ -4,7 +4,15 @@ namespace AvoRed\Framework\Models\Database;
 
 class Property extends BaseModel
 {
-    protected $fillable = ['name', 'identifier', 'data_type', 'field_type', 'sort_order', 'use_for_all_products'];
+    protected $fillable = [
+        'name',
+        'identifier',
+        'data_type',
+        'field_type',
+        'sort_order',
+        'is_visible_frontend',
+        'use_for_all_products'
+    ];
 
     /**
      * Get the Select Property Dropdown options collection.

@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use AvoRed\Framework\Models\Database\Product;
-use AvoRed\Framework\Image\Facade as Image;
+use AvoRed\Framework\Image\Facades\Image;
 use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
@@ -44,8 +44,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productsBuilder = $this->repository->query()
-                                ->where('type', '!=', 'VARIABLE_PRODUCT');
+        $productsBuilder = $this->repository->query()->where('type', '!=', 'VARIABLE_PRODUCT')->orderBy('id', 'desc');
         $productGrid = new ProductDataGrid($productsBuilder);
 
         return view('avored-framework::product.index')->with('dataGrid', $productGrid->dataGrid);
@@ -117,7 +116,6 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        //dd($request->all());
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
@@ -157,8 +155,7 @@ class ProductController extends Controller
         $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
 
         $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-
-        $image = Image::upload($image, $checkDirectory);
+        $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
 
         $tmp = $this->_getTmpString();
 
@@ -175,24 +172,25 @@ class ProductController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function deleteImage(Request $request)
-    {
+    {       
         $path = $request->get('path');
 
-        $path = 'uploads/catalog/images/e/0/v/1382542458778.jpeg';
         $fileName = pathinfo($path, PATHINFO_BASENAME);
         $relativeDir = pathinfo($path, PATHINFO_DIRNAME);
 
         $sizes = config('avored-framework.image.sizes');
         foreach ($sizes as $sizeName => $widthHeight) {
             $imagePath = $relativeDir . DIRECTORY_SEPARATOR . $sizeName . '-' . $fileName;
-            if (File::exists($imagePath)) {
+        
+            if (File::exists(storage_path('app/public/' .$imagePath))) {
                 File::delete(storage_path('app/public/' . $imagePath));
             }
         }
-
-        if (File::exists($path)) {
+    
+        if (File::exists(storage_path('app/public/' .$path))) {
             File::delete(storage_path('app/public/' . $path));
         }
+       
         return JsonResponse::create(['success' => true]);
     }
 
