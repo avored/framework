@@ -207,13 +207,19 @@ class Manager
      *
      * @return float $total
      */
-    public function total()
+    public function total($formatted = true)
     {
         $total = 0.00;
         $cartProducts = $this->getSession();
 
         foreach ($cartProducts as $product) {
             $total += $product->lineTotal();
+        }
+
+        if ($formatted == true) {
+            $total = number_format($total, 2);
+            $currentcy_code = Session::get('currency_code');
+            $total = $currentcy_code . $total;
         }
 
         return $total;
