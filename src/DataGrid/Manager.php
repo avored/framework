@@ -92,17 +92,18 @@ class Manager
                 $dataGrid->model->where($key, 'like', '%' . $val . '%');
             }
         }
-
+        
         $options = ['path' => asset(request()->path())];
-
         if (!$dataGrid->model instanceof Collection) {
+            $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
+
             if (null !== $this->request->get('asc')) {
                 $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
             }
             if (null !== $this->request->get('desc', 'id')) {
                 $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
             }
-            $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
+
         } else {
             $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
         }
@@ -114,7 +115,7 @@ class Manager
      * Set the model or Collection for the DataGrid Data
      *
      * @param mixed $model
-     * @return self
+     * @return self $this
      */
     public function model($model)
     {
@@ -156,6 +157,10 @@ class Manager
         return $this;
     }
 
+    /**
+     * I feel this method is moved to DataGrid file
+     * 
+     */
     public function linkColumn($identifier, $options = [], $callback)
     {
         $column = new LinkColumn($identifier, $options, $callback);
@@ -164,74 +169,8 @@ class Manager
         return $this;
     }
 
-    /*
-    public function dataTableData($model)
-    {
-        $this->model = $model;
-
-        return $this;
-    }
-
-
-    public function get()
-    {
-        $count = $this->model->get()->count();
-
-        $columns = $this->request->get('columns');
-
-        $orders = $this->request->get('order');
-
-        $order = $orders[0];
-
-        $records = $this->model->orderBy($columns[$order['column']]['name'], $order['dir']);
-
-        $noOfRecord = $this->request->get('length');
-        $noOfSkipRecord = $this->request->get('start');
-
-        $records->skip($noOfSkipRecord)->take($noOfRecord);
-
-        $allRecords = $records->get();
-
-        if (isset($this->columns) && $this->columns->count() > 0) {
-            $jsonRecords = Collection::make([]);
-
-            foreach ($allRecords as $i => $singleRecord) {
-                foreach ($this->columns as $key => $columnData) {
-                    if (is_callable($columnData)) {
-                        $columnValue = $columnData($singleRecord);
-                    } else {
-                        $columnValue = $columnData;
-                    }
-
-                    $singleRecord->setAttribute($key, $columnValue);
-                }
-
-                $jsonRecords->put($i, $singleRecord);
-            }
-        }
-
-        $data = [
-            'data' => (isset($jsonRecords)) ? $jsonRecords : $allRecords,
-            'draw' => $this->request->get('draw'),
-            'recordsTotal' => $count,
-            'recordsFiltered' => $count,
-        ];
-
-        return JsonResponse::create($data);
-    }
-
-    public function addColumn($columnKey, $data)
-    {
-        if (null === $this->columns) {
-            $this->columns = Collection::make([]);
-        }
-        $this->columns->put($columnKey, $data);
-
-        return $this;
-    }
-
     /**
-     *
+     * I feel this method is moved to DataGrid file
      *
      * @param null|string $pageName
      */
