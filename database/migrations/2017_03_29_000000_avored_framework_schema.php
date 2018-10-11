@@ -435,6 +435,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('name');
             $table->string('phone_code')->nullable()->default(null);
             $table->string('currency_code')->nullable()->default(null);
+            $table->string('currency_symbol')->nullable()->default(null);
             $table->string('lang_code')->nullable()->default(null);
             $table->timestamps();
         });
@@ -442,6 +443,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::create('site_currencies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
+            $table->string('symbol');
             $table->string('name');
             $table->float('conversion_rate');
             $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
@@ -573,12 +575,14 @@ class AvoredFrameworkSchema extends Migration
 
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
-        foreach ($json as $code => $country) {
-            Country::create(['code' => strtolower($code),
-                'name' => $country['name'],
-                'phone_code' => $country['phone'],
-                'currency_code' => $country['currency'],
-                'lang_code' => (isset($country['languages'][0]) && $country['languages']) ?? null,
+        foreach ($json as $country) {
+            Country::create([
+                'code' => strtolower(array_get($country, 'alpha2Code')),
+                'name' => array_get($country, 'name'),
+                'phone_code' => array_get($country, 'callingCodes.0'),
+                'currency_code' => array_get($country, 'currencies.0.code'),
+                'currency_symbol' => array_get($country, 'currencies.0.symbol'),
+                'lang_code' => array_get($country, 'languages.0.name'),
             ]);
         }
 
@@ -597,6 +601,7 @@ class AvoredFrameworkSchema extends Migration
         $siteCurrency = SiteCurrency::create([
             'name' => 'NZ Dollars',
             'code' => 'NZD',
+            'symbol' => '$',
             'conversion_rate' => 1,
             'status' => 'ENABLED'
         ]);

@@ -21,12 +21,25 @@ class SiteCurrencyFieldsComposer
     {
         $countries = Country::all();
         $options = Collection::make();
+        $symbolOption = Collection::make();
         foreach ($countries as $country) {
-            $options->put($country->currency_code,['id' => $country->currency_code,'name' => $country->currency_code] );
+            $options->put($country->currency_code,[
+                    'id' => $country->currency_code,
+                    'name' => $country->currency_code
+                ]);
+
+            if(!empty($country->currency_symbol)) {
+                $symbolOption->put($country->currency_symbol,[
+                    'id' => $country->currency_symbol,
+                    'name' => $country->currency_symbol
+                ]);
+            }
         }
         $statusOptions = Collection::make([['id' => 'ENABLED','name' => 'Enabled'],['id' => 'DISABLED','name' => 'Disabled']]);
        
-        $view->with('codeOptions', $options)
-                    ->with('statusOptions',$statusOptions);
+        $view
+            ->with('codeOptions', $options)
+            ->with('symbolOptions', $symbolOption)
+            ->with('statusOptions',$statusOptions);
     }
 }

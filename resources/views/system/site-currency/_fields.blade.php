@@ -23,6 +23,16 @@
         >
 </avored-form-select>
 
+<avored-form-select 
+    field-name="symbol"
+    label="Currency Symbol" 
+    error-text="{!! $errors->first('symbol') !!}"
+    field-options='{!! $symbolOptions !!}'
+    field-value="{!! $model->symbol ?? "" !!}" 
+    v-on:change="changeModelValue"
+        >
+</avored-form-select>
+
 
 <avored-form-input 
     field-name="conversion_rate"

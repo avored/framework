@@ -66,9 +66,11 @@ class SiteCurrencyMiddleware
             $siteCurrencyModel = $this->curRep->find($configCurrency);
             
             $currencyCode = $siteCurrencyModel->code;
+            $currencySymbol = $siteCurrencyModel->symbol;
         }
 
         $sessionCode = Session::get('currency_code', $currencyCode);
+        
         
         // If cart has any product then re calculate the price and save it into db
         if(null !== $sessionCode && $sessionCode !== $currencyCode) {
@@ -109,6 +111,7 @@ class SiteCurrencyMiddleware
         }
       
         Session::put('currency_code', $currencyCode);
+        Session::put('currency_symbol', $currencySymbol);
        
         return $next($request);
     }
