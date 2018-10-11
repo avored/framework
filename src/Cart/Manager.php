@@ -8,7 +8,8 @@ use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
 use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Facades\Session;
+ 
 class Manager
 {
     /**
@@ -217,9 +218,8 @@ class Manager
         }
 
         if ($formatted == true) {
-            $total = number_format($total, 2);
-            $currentcy_code = Session::get('currency_code');
-            $total = $currentcy_code . $total;
+            $symbol = Session::get('currency_symbol');
+            return $symbol . number_format($total, 2);
         }
 
         return $total;
@@ -230,12 +230,17 @@ class Manager
      *
      * @return float $taxTotal
      */
-    public function taxTotal()
+    public function taxTotal($formatted = true)
     {
         $taxTotal = 0.00;
         $cartProducts = $this->getSession();
         foreach ($cartProducts as $product) {
             $taxTotal += $product->tax();
+        }
+
+        if ($formatted == true) {
+            $symbol = Session::get('currency_symbol');
+            return  $symbol . number_format($taxTotal, 2);
         }
 
         return $taxTotal;

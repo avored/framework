@@ -11,6 +11,7 @@ class Country extends BaseModel
         'code',
         'phone_code',
         'currency_code',
+        'currency_symbol',
         'lang_code'
     ];
 
