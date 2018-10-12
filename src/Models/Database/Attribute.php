@@ -9,7 +9,7 @@ class Attribute extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'identifier']; //, 'data_type','field_type' ,'sort_order'];
+    protected $fillable = ['name', 'identifier'];
 
     /**
      * The attributes has Many Dropdown Options.
