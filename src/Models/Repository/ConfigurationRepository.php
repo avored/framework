@@ -47,6 +47,24 @@ class ConfigurationRepository implements ConfigurationInterface
     }
 
     /**
+     * Set an Configuration value  by  given configuration Key
+     *
+     * @param string $key
+     * @return string $value
+     */
+    public function setValueByKey($key, $value)
+    { 
+        $model = Configuration::whereConfigurationKey($key)->first();
+        
+        if (null === $model) {
+            return null;
+        }
+        $model->update(['configuration_value' => $value]);
+
+        return $model;
+    }
+
+    /**
     * Find all Configuration
     *
     * @return \Illuminate\Database\Eloquent\Collection

@@ -29,6 +29,15 @@ interface ConfigurationInterface
     public function getValueByKey($key);
 
     /**
+    * Set an Configuration value  by  given configuration Key
+    *
+    * @param string $key
+    * @param string $value
+    * @return \AvoRed\Framework\Models\Database\Configuration $configuration
+    */
+    public function setValueByKey($key, $value);
+
+    /**
      * Find an All Configuration which returns Eloquent Collection
      *
      * @return \Illuminate\Database\Eloquent\Collection

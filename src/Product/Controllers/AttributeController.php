@@ -55,7 +55,7 @@ class AttributeController extends Controller
     public function store(AttributeRequest $request)
     {
         $attribute = $this->repository->create($request->all());
-        $this->_saveDropdownOptions($attribute, $request);
+        $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
     }
@@ -74,7 +74,7 @@ class AttributeController extends Controller
     {
         $attribute->update($request->all());
 
-        $this->_saveDropdownOptions($attribute, $request);
+        $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
     }
@@ -129,16 +129,16 @@ class AttributeController extends Controller
      * @param \AvoRed\Framework\Product\Requests\AttributeRequest $request
      * @return void
      */
-    private function _saveDropdownOptions($attribute, $request)
+    private function saveDropdownOptions($attribute, $request)
     {
-        if (null !== $request->get('dropdown-options')) {
+        if (null !== $request->get('dropdown_options')) {
             if (null != $attribute->attributeDropdownOptions()->get() &&
                 $attribute->attributeDropdownOptions()->get()->count() >= 0
                 ) {
                 $attribute->attributeDropdownOptions()->delete();
             }
 
-            foreach ($request->get('dropdown-options') as $key => $val) {
+            foreach ($request->get('dropdown_options') as $key => $val) {
                 if ($key == '__RANDOM_STRING__') {
                     continue;
                 }
