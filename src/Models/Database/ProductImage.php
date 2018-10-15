@@ -12,11 +12,11 @@ class ProductImage extends BaseModel
      */
     protected $fillable = ['product_id', 'path', 'is_main_image'];
 
-     /**
-     * Every image belogns to one product
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $product
-     */
+    /**
+    * Every image belogns to one product
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $product
+    */
     public function products()
     {
         return $this->belongsTo(Product::class);
@@ -24,7 +24,7 @@ class ProductImage extends BaseModel
 
     /**
      * Get Path Attribute for the Image
-     * 
+     *
      * @param string $path
      * @return \AvoRed\Framework\Image\LocalFile $localImage
      */
@@ -33,10 +33,10 @@ class ProductImage extends BaseModel
         if (null === $this->attributes['path'] || empty($this->attributes['path'])) {
             return;
         }
-        
-        $symlink        = config('avored-framework.symlink_storage_folder');
-        $relativePath   =  $this->attributes['path'];
-        $localImage     = new LocalFile($relativePath);
+
+        $symlink = config('avored-framework.symlink_storage_folder');
+        $relativePath = $this->attributes['path'];
+        $localImage = new LocalFile($relativePath);
 
         return $localImage;
     }

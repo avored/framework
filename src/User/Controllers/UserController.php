@@ -13,7 +13,6 @@ use AvoRed\Framework\User\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Mail;
 use AvoRed\Framework\User\Mail\ChangePasswordMail;
 
-
 class UserController extends Controller
 {
     /**
@@ -114,7 +113,6 @@ class UserController extends Controller
         $orderRepository = app(OrderInterface::class);
 
         $userOrders = $orderRepository->query()->whereUserId($user->id);
-        // dd($userOrders);
         $dataGrid = new UserOrderDataGrid($userOrders);
         return view('avored-framework::user.user.show')
                 ->with('user', $user)
@@ -146,18 +144,18 @@ class UserController extends Controller
         $password = $request->get('password');
         $user->update(['password' => bcrypt($password)]);
         Mail::to($user->email)->send(new ChangePasswordMail($user, $password));
-        
+
         return redirect()->route('admin.user.index');
     }
 
     /**
      * User Group Sync with User Model
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\User $user
      * @param array $userGroupIds
      * @return void
      */
-    private function _syncUserGroups($user, $userGroupIds) 
+    private function _syncUserGroups($user, $userGroupIds)
     {
         $user->userGroups()->sync($userGroupIds);
     }

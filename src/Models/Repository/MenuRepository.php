@@ -25,10 +25,10 @@ class MenuRepository implements MenuInterface
      */
     public function parentsAll()
     {
-        return Menu::whereParentId(null)->orWhere('parent_id','=',0)->get();
+        return Menu::whereParentId(null)->orWhere('parent_id', '=', 0)->get();
     }
 
-      /**
+    /**
      * Get all Menu
      *
      * @return \Illuminate\Database\Eloquent\Collection
@@ -69,32 +69,29 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * 
+     *
      * @param array $menus
      * @return \AvoRed\Framework\Models\Repository\MenuRepository
      */
-     public function truncateAndCreateMenus($menus) 
-     {
-
+    public function truncateAndCreateMenus($menus)
+    {
         Menu::truncate();
         foreach ($menus as $menu) {
             $this->_saveMenu($menu);
         }
-       
-     }
+    }
 
-     private function _saveMenu($menus, $parentId = null) {
-
+    private function _saveMenu($menus, $parentId = null)
+    {
         foreach ($menus as $menu) {
             $menuModel = $this->create(['name' => $menu->name,
-                                        'route' => $menu->route,
-                                        'params' => $menu->params,
-                                        'parent_id' => $parentId]);
+                'route' => $menu->route,
+                'params' => $menu->params,
+                'parent_id' => $parentId]);
 
-            if(isset($menu->children) && count($menu->children[0]) >0) {
+            if (isset($menu->children) && count($menu->children[0]) > 0) {
                 $this->_saveMenu($menu->children[0], $menuModel->id);
             }
-
         }
-}
+    }
 }

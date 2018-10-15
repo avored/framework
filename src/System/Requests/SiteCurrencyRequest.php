@@ -26,8 +26,6 @@ class SiteCurrencyRequest extends Request
         $validation['name'] = 'required|max:255';
         $validation['code'] = 'required|max:255';
 
-    
-
         return $validation;
     }
 }

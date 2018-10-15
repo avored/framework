@@ -79,7 +79,6 @@ class Manager
                 $iterator->next();
             }
 
-            //dd(app());
             $this->moduleLoaded = true;
         }
 

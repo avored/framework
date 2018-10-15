@@ -1,10 +1,6 @@
 
 @include('avored-framework::forms.file',['name' => 'downloadable[demo_product]','label' => 'Demo Product (If any)'])
 
-<?php 
-
-//dd($model->downloadable);
-?>
 @if(isset($model) && isset($model->downloadable) && $model->downloadable->demo_path != "")
         
 <a href="{{ route('admin.product.download.demo.media', $model->downloadable->token) }}"

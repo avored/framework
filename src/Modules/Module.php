@@ -147,13 +147,13 @@ class Module
 
     /**
      * To check If method Exist then it will execute other wise do nothing
-     * 
+     *
      * @param string $name
-     * @return mixed 
+     * @return mixed
      */
     public function __get($name)
     {
-        if(method_exists($this,$name)) {
+        if (method_exists($this, $name)) {
             return $this->$name();
         }
     }

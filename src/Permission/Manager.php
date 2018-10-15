@@ -37,14 +37,11 @@ class Manager
      */
     public function add($key, $callable = null)
     {
-
-        if(null !== $callable) {
-
+        if (null !== $callable) {
             $group = new PermissionGroup($callable);
             $group->key($key);
-    
+
             $this->permissions->put($key, $group);
-            
         } else {
             $group = new PermissionGroup();
 

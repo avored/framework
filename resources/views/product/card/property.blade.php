@@ -40,7 +40,6 @@
                     @php
                     if(!$productVarcharPropertyValue instanceof \AvoRed\Framework\Models\Database\Property) {
                         $property = $productVarcharPropertyValue->property;
-                        //dd($productVarcharPropertyValue);
                     } else {
                         $property = $productVarcharPropertyValue;
                     }

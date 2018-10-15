@@ -6,7 +6,6 @@ use AvoRed\Framework\System\DataGrid\RoleDataGrid;
 use AvoRed\Framework\Models\Database\Role as Model;
 use AvoRed\Framework\User\Requests\RoleRequst;
 use AvoRed\Framework\Models\Database\Permission;
-use AvoRed\Framework\DataGrid\Facade as DataGrid;
 use AvoRed\Framework\Models\Contracts\RoleInterface;
 use AvoRed\Framework\Models\Database\Role;
 
@@ -139,7 +138,6 @@ class RoleController extends Controller
         $ids = array_unique($permissionIds);
         $role->permissions()->sync($ids);
     }
-
 
     /**
      * Display a listing of the resource.

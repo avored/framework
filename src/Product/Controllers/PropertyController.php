@@ -148,10 +148,9 @@ class PropertyController extends Controller
         }
     }
 
-
     /**
      * Find a Record and Returns a Html Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Property $property)

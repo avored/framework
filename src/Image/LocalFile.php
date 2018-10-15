@@ -35,8 +35,8 @@ class LocalFile
     public function __construct($dbPath = null)
     {
         $this->dbPath = $dbPath;
-        $this->relativePath = str_replace("storage/" , "" , $dbPath);
-        $this->url = asset('storage/' .$dbPath);
+        $this->relativePath = str_replace('storage/', '', $dbPath);
+        $this->url = asset('storage/' . $dbPath);
 
         $sizes = config('avored-framework.image.sizes');
 
@@ -46,7 +46,7 @@ class LocalFile
             $baseName = basename($dbPath);
             $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $dbPath);
 
-            $this->$objectVarName = asset("storage/" . $sizeNamePath);
+            $this->$objectVarName = asset('storage/' . $sizeNamePath);
         }
     }
 
@@ -87,7 +87,6 @@ class LocalFile
     public function relativePath($path = null)
     {
         if (null === $path) {
-
             return str_replace(asset('/'), '', $this->relativePath);
         }
 

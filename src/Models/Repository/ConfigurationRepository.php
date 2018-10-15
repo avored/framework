@@ -53,9 +53,9 @@ class ConfigurationRepository implements ConfigurationInterface
      * @return string $value
      */
     public function setValueByKey($key, $value)
-    { 
+    {
         $model = Configuration::whereConfigurationKey($key)->first();
-        
+
         if (null === $model) {
             return null;
         }

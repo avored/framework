@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Api\Resources\Order;
 use Illuminate\Http\Resources\Json\JsonResource;
 use AvoRed\Framework\Api\Resources\User\UserResource;
 use AvoRed\Framework\Api\Resources\User\UserAddressResource;
-use AvoRed\Framework\Api\Resources\Order\OrderProductCollectionResource;
 use Illuminate\Database\Eloquent\Collection;
 
 class OrderResource extends JsonResource
@@ -20,15 +19,14 @@ class OrderResource extends JsonResource
     {
         $products = Collection::make([]);
         foreach ($this->products as $product) {
-           
             $products->push([
-                'id'=> $product->id,
-                'qty'=> $product->getRelationValue('pivot')->qty,
-                'price'=> $product->getRelationValue('pivot')->price,
-                'tax_amount'=> $product->getRelationValue('pivot')->tax_amount,
+                'id' => $product->id,
+                'qty' => $product->getRelationValue('pivot')->qty,
+                'price' => $product->getRelationValue('pivot')->price,
+                'tax_amount' => $product->getRelationValue('pivot')->tax_amount,
             ]);
         }
-        
+
         return [
             'id' => $this->id,
             'shipping_option' => $this->shipping_option,
@@ -48,10 +46,10 @@ class OrderResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

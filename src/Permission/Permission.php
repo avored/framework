@@ -21,8 +21,6 @@ class Permission implements PermissionContracts
      */
     protected $key;
 
-
-
     /**
      * Construct for a permission group
      * @param callable $callable
@@ -30,11 +28,10 @@ class Permission implements PermissionContracts
      */
     public function __construct($callable = null)
     {
-        if(null !== $callable) {
+        if (null !== $callable) {
             $callable($this);
         }
     }
-
 
     public function label($label = null)
     {

@@ -55,7 +55,6 @@ class Product implements CartContracts
      */
     protected $image;
 
-
     /**
      * Cart Product Line Total.
      *

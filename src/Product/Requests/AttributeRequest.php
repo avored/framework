@@ -31,7 +31,7 @@ class AttributeRequest extends Request
                 if ($key == '__RANDOM_STRING__') {
                     continue;
                 }
-                $validationRule['dropdown-options.'.$key.'.display_text'] = 'required';
+                $validationRule['dropdown-options.' . $key . '.display_text'] = 'required';
             }
         }
 

@@ -101,7 +101,6 @@ class SiteCurrencyController extends Controller
         return redirect()->route('admin.site-currency.index');
     }
 
-
     /**
      * Display a listing of the resource.
      *

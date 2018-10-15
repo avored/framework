@@ -32,7 +32,7 @@ class Tab
      */
     public function type($type = null)
     {
-        if(null === $type) {
+        if (null === $type) {
             return $this->type;
         }
 
@@ -47,7 +47,7 @@ class Tab
      */
     public function label($label = null)
     {
-        if(null === $label) {
+        if (null === $label) {
             return $this->label;
         }
         $this->label = $label;
@@ -62,7 +62,7 @@ class Tab
      */
     public function view($view = null)
     {
-        if(null === $view) {
+        if (null === $view) {
             return $this->view;
         }
 

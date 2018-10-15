@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Api\Resources\Property;
 
-use AvoRed\Framework\Api\Resources\Property\PropertyDropdownOptionCollectionResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PropertyResource extends JsonResource
@@ -22,7 +21,7 @@ class PropertyResource extends JsonResource
             'data_type' => $this->data_type,
             'field_type' => $this->field_type,
             'sort_order' => $this->sort_order,
-            'dropdown_options' => $this->when($this->field_type == "SELECT", new PropertyDropdownOptionCollectionResource($this->propertyDropdownOptions)),
+            'dropdown_options' => $this->when($this->field_type == 'SELECT', new PropertyDropdownOptionCollectionResource($this->propertyDropdownOptions)),
             'use_for_all_products' => $this->use_for_all_products,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
@@ -35,10 +34,10 @@ class PropertyResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace AvoRed\Framework;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
@@ -155,8 +154,8 @@ class Provider extends ServiceProvider
         View::composer('avored-framework::cms.page._fields', PageFieldsComposer::class);
         View::composer('avored-framework::cms.menu.index', MenuComposer::class);
         View::composer(['avored-framework::product.create',
-                        'avored-framework::product.edit',
-                        ], ProductFieldsComposer::class);
+            'avored-framework::product.edit',
+        ], ProductFieldsComposer::class);
     }
 
     /*
@@ -170,9 +169,9 @@ class Provider extends ServiceProvider
         Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addDays(15));
         $this->commands([
-          InstallCommand::class,
-          ClientCommand::class,
-          KeysCommand::class,
-      ]);
+            InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class,
+        ]);
     }
 }

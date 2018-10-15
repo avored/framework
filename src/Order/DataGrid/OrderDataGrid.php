@@ -22,7 +22,7 @@ class OrderDataGrid
                   ->column('created_at', ['label' => 'Date created'])
                    ->column('updated_at', ['label' => 'Recent updated'])
                   ->linkColumn('view', [], function ($model) {
-                      return "<a href='".route('admin.order.view', $model->id)."' >View</a>";
+                      return "<a href='" . route('admin.order.view', $model->id) . "' >View</a>";
                   });
 
         $this->dataGrid = $dataGrid;

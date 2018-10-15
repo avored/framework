@@ -11,7 +11,7 @@ interface PropertyInterface
      * @return \AvoRed\Framework\Models\Database\Property
      */
     public function find($id);
-    
+
     /**
      * Find an Property collection by given an array of Ids
      *
@@ -29,7 +29,7 @@ interface PropertyInterface
 
     /**
      * Product Property Query Builder
-     * 
+     *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Property
      */

@@ -13,10 +13,6 @@ class AttributeRepositoryTest extends BaseTestCase
      */
     public function test_attribute_respository()
     {
-        //$repository = new AttributeRepository();
-
-        //$attribute = $repository->find(1);
-        //dd($repository);
         $this->assertTrue(true);
 
         

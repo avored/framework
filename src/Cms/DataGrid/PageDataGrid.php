@@ -16,11 +16,11 @@ class PageDataGrid
               ->column('id', ['sortable' => true])
               ->column('name', ['sortable' => true])
               ->column('slug')
-              ->column('meta_title',['label' => 'Meta Title'])
+              ->column('meta_title', ['label' => 'Meta Title'])
               ->linkColumn('edit', [], function ($model) {
-                  return "<a href='".route('admin.page.edit', $model->id)."' >Edit</a>";
+                  return "<a href='" . route('admin.page.edit', $model->id) . "' >Edit</a>";
               })->linkColumn('show', [], function ($model) {
-                return "<a href='".route('admin.page.show', $model->id)."' >Show</a>";
+                  return "<a href='" . route('admin.page.show', $model->id) . "' >Show</a>";
               });
 
         $this->dataGrid = $dataGrid;

@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Api\Resources\Product;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use AvoRed\Framework\Api\Resources\Property\PropertyCollectionResource;
-use AvoRed\Framework\Api\Resources\Attribute\AttributeCollectionResource;
 
 class ProductResource extends JsonResource
 {
@@ -47,10 +46,10 @@ class ProductResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

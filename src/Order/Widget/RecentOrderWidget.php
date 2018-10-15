@@ -78,17 +78,16 @@ class RecentOrderWidget implements WidgetContract
 
         $order = app(OrderInterface::class);
 
-        $latestOrder = $order->query()->orderBy('id','desc')->first();
-        if($latestOrder !== null) {
-            $totalAmount = "";
-            foreach($latestOrder->products as $product) {
-                $totalAmount = $product->getRelationValue('pivot')->qty * $product->getRelationValue('pivot')->price; 
+        $latestOrder = $order->query()->orderBy('id', 'desc')->first();
+        if ($latestOrder !== null) {
+            $totalAmount = '';
+            foreach ($latestOrder->products as $product) {
+                $totalAmount = $product->getRelationValue('pivot')->qty * $product->getRelationValue('pivot')->price;
             }
 
-            $recentOrder['user']            =  $latestOrder->user->fullName;
-            $recentOrder['product_count']   =  $latestOrder->products->count();
-            $recentOrder['total_amount']    =  $totalAmount;
-
+            $recentOrder['user'] = $latestOrder->user->fullName;
+            $recentOrder['product_count'] = $latestOrder->products->count();
+            $recentOrder['total_amount'] = $totalAmount;
         }
 
         return ['recentOrderData' => $recentOrder];

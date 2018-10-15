@@ -9,7 +9,7 @@ use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
- 
+
 class Manager
 {
     /**
@@ -140,8 +140,8 @@ class Manager
      */
     public function updateProductTax($slug, $taxAmount): Manager
     {
-        $cartProducts   = $this->getSession();
-        $cartProduct    = $cartProducts->get($slug);
+        $cartProducts = $this->getSession();
+        $cartProduct = $cartProducts->get($slug);
 
         if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
@@ -171,8 +171,8 @@ class Manager
      */
     public function destroy($slug):Manager
     {
-        $cartProducts   = $this->getSession();
-        $cartProduct    = $cartProducts->pull($slug);
+        $cartProducts = $this->getSession();
+        $cartProduct = $cartProducts->pull($slug);
 
         return $this;
     }

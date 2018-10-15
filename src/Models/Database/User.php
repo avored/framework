@@ -5,8 +5,6 @@ namespace AvoRed\Framework\Models\Database;
 use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class User extends Authenticatable
 {
@@ -18,8 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'phone', 
-        'company_name', 'image_path', 'status', 
+        'first_name', 'last_name', 'email', 'password', 'phone',
+        'company_name', 'image_path', 'status',
         'language', 'activation_token', 'tax_no'
     ];
 
@@ -44,7 +42,7 @@ class User extends Authenticatable
 
     /**
      * One User has Many Address attached with it.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMAny
      */
     public function addresses()
@@ -54,7 +52,7 @@ class User extends Authenticatable
 
     /**
      * One User has Many User Group attached with it.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMAny
      */
     public function userGroups()

@@ -16,7 +16,7 @@ class PageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-           
+
             'name' => $this->name,
             'slug' => $this->slug,
             'content' => $this->content,
@@ -33,10 +33,10 @@ class PageResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

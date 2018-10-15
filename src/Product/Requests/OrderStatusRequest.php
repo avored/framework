@@ -26,7 +26,6 @@ class OrderStatusRequest extends Request
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
         $validationRule['is_default'] = 'max:255';
-        
 
         return $validationRule;
     }

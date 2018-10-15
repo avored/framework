@@ -57,9 +57,9 @@ class Manager
                     $assetFolderName = isset($data['asset_folder_name']) ? $data['asset_folder_name'] : 'assets';
                     $langFolderName = isset($data['lang_folder_name']) ? $data['lang_folder_name'] : 'lang';
 
-                    $data['view_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.'views';
-                    $data['asset_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.$assetFolderName;
-                    $data['lang_path'] = $iterator->getPath().DIRECTORY_SEPARATOR.$langFolderName;
+                    $data['view_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . 'views';
+                    $data['asset_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $assetFolderName;
+                    $data['lang_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $langFolderName;
 
                     $this->themeList->put($data['identifier'], $data);
                 }
@@ -95,7 +95,7 @@ class Manager
 
     public function getByPath($path)
     {
-        foreach ($this->themeList as $theme  =>  $themeInfo) {
+        foreach ($this->themeList as $theme => $themeInfo) {
             $path1 = $this->pathSlashFix($path);
             $path2 = $this->pathSlashFix($themeInfo['path']);
 
@@ -143,8 +143,8 @@ class Manager
     protected function moveManagedFiles($manager)
     {
         foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']))) {
-                $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
+            if ($file['type'] === 'file' && (!$manager->has('to://' . $file['path']))) {
+                $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
             }
         }
     }

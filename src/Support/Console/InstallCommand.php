@@ -48,10 +48,10 @@ class InstallCommand extends Command
      * @return void
      */
     public function handle()
-    {     
-        if($this->call('self-diagnosis') === 1) {
+    {
+        if ($this->call('self-diagnosis') === 1) {
             $this->error('Please Fixed all Required Check');
-        }   else {
+        } else {
             $this->dropAllTables();
 
             $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
@@ -76,7 +76,7 @@ class InstallCommand extends Command
             Theme::publishItem($fromPath, $toPath);
             $this->call('passport:install', ['--force' => true]);
             $this->call('passport:keys');
-            
+
             Configuration::create([
                 'configuration_key' => 'active_theme_identifier',
                 'configuration_value' => 'avored-default'
