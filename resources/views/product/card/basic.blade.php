@@ -101,6 +101,4 @@
     <script>
         var simplemde = new SimpleMDE({ element: document.getElementById("description") });
     </script>
-
-
 @endpush
