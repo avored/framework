@@ -3,11 +3,11 @@
         <div class="sidebar-logo">
             <div class="peers ai-c fxw-nw">
                 <div class="peer peer-greed">
-                    <a class="sidebar-link td-n" href="index.html">
+                    <a class="sidebar-link td-n" href="{{ route('admin.dashboard') }}">
                         <div class="peers ai-c fxw-nw">
                             <div class="peer">
                                 <div class="logo">
-                                    <img src="http://avored.shop/vendor/avored-default/images/logo.svg" alt="" height="50" width="60">
+                                    <img src="{{ asset('/vendor/avored-default/images/logo.svg') }}" alt="" height="50" width="60">
                                 </div>
                             </div>
 
