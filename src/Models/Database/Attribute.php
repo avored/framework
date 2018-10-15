@@ -4,11 +4,11 @@ namespace AvoRed\Framework\Models\Database;
 
 class Attribute extends BaseModel
 {
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = ['name', 'identifier'];
 
     /**
@@ -20,7 +20,7 @@ class Attribute extends BaseModel
     {
         return $this->hasMany(AttributeDropdownOption::class);
     }
-    
+
     /**
      * The attributes has Many Products.
      *

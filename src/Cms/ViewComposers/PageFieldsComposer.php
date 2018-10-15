@@ -7,7 +7,6 @@ use AvoRed\Framework\Widget\Facade as Widget;
 
 class PageFieldsComposer
 {
-
     /**
      * Bind data to the view.
      *

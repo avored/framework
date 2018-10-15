@@ -5,7 +5,6 @@ namespace AvoRed\Framework\User\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use AvoRed\Framework\Models\Database\Order;
 
 class ChangePasswordMail extends Mailable
 {
@@ -28,7 +27,7 @@ class ChangePasswordMail extends Mailable
     public function __construct($user, $password)
     {
         $this->user = $user;
-        $this->password = $password;    
+        $this->password = $password;
     }
 
     /**

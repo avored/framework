@@ -56,7 +56,6 @@ class WidgetProvider extends ServiceProvider
         return ['widget', 'AvoRed\Framework\Widget\Manager'];
     }
 
-
     /**
      * Register the Widget.
      *

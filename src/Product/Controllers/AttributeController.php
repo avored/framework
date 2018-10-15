@@ -150,7 +150,7 @@ class AttributeController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Attribute $attribute
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */

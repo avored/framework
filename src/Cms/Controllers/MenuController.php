@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Models\Database\Menu;
-use AvoRed\Framework\Models\Database\Category;
 use Illuminate\Http\Request;
 use AvoRed\Framework\Models\Contracts\MenuInterface;
 use AvoRed\Framework\System\Controllers\Controller;

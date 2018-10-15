@@ -15,7 +15,7 @@ class Page extends BaseModel
         $pattern = sprintf('/(@)?%s\s*(.+?)\s*%s(\r?\n)?/s', $this->contentTags[0], $this->contentTags[1]);
 
         $callback = function ($matches) {
-            $whitespace = empty($matches[3]) ? '' : $matches[3].$matches[3];
+            $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
             $widget = Widget::get($matches[2]);
 
             if (method_exists($widget, 'render')) {
@@ -31,12 +31,12 @@ class Page extends BaseModel
         return preg_replace_callback($pattern, $callback, $content);
     }
 
-    public static function options($empty = true) {
-
+    public static function options($empty = true)
+    {
         $model = new static();
 
         $options = $model->all()->pluck('name', 'id');
-        if(true === $empty) {
+        if (true === $empty) {
             $options->prepend('Please Select', null);
         }
         return $options;

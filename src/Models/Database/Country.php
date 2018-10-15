@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-use Illuminate\Database\Eloquent\Collection;
-
 class Country extends BaseModel
 {
     protected $fillable = [
@@ -20,12 +18,12 @@ class Country extends BaseModel
         return $this->hasMany(State::class);
     }
 
-    public static function options($empty = true) {
-
+    public static function options($empty = true)
+    {
         $model = new static();
 
         $options = $model->all()->pluck('name', 'id');
-        if(true === $empty) {
+        if (true === $empty) {
             $options->prepend('Please Select', null);
         }
         return $options;

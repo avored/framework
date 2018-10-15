@@ -7,8 +7,6 @@ if(old($name)) {
     $value = $model->$name;
 }
 
-//dd($value);
-
 if(isset($attributes)) {
     $attributes['name'] = $name;
     $attributes['type'] = "file";

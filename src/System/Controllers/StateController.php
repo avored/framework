@@ -10,7 +10,6 @@ use AvoRed\Framework\Models\Contracts\CountryInterface;
 
 class StateController extends Controller
 {
-   
     /**
      *
      * @var \AvoRed\Framework\Models\Repository\StateRepository
@@ -20,7 +19,6 @@ class StateController extends Controller
     public function __construct(StateInterface $repository)
     {
         $this->repository = $repository;
-        
     }
 
     /**
@@ -30,8 +28,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        
-        $dataGrid = new StateDataGrid($this->repository->query()->orderBy('id','desc'));
+        $dataGrid = new StateDataGrid($this->repository->query()->orderBy('id', 'desc'));
 
         return view('avored-framework::system.state.index')->with('dataGrid', $dataGrid->dataGrid);
     }
@@ -43,7 +40,7 @@ class StateController extends Controller
      */
     public function create()
     {
-        $countryOptions = $this->_getCountryOptions(); 
+        $countryOptions = $this->_getCountryOptions();
 
         return view('avored-framework::system.state.create')
             ->with('countryOptions', $countryOptions);
@@ -74,7 +71,8 @@ class StateController extends Controller
         $countryOptions = $this->_getCountryOptions();
         return view('avored-framework::system.state.edit')
                     ->with('model', $state)
-                    ->with('countryOptions', $countryOptions);;
+                    ->with('countryOptions', $countryOptions);
+        ;
     }
 
     /**
@@ -103,7 +101,6 @@ class StateController extends Controller
         return redirect()->route('admin.state.index');
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -119,7 +116,8 @@ class StateController extends Controller
      * Get the Country Options for the Country Id Fields
      * @return \Illuminate\Support\Collection
      */
-    private function _getCountryOptions() {
+    private function _getCountryOptions()
+    {
         $countryRepository = app(CountryInterface::class);
         return $countryRepository->options();
     }

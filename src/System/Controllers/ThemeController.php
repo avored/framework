@@ -40,7 +40,7 @@ class ThemeController extends Controller
         $themes = Theme::all();
 
         $activeTheme = $this->configurationRepository->getValueByKey('active_theme_identifier');
-        
+
         $siteCurrencyGrid = new ThemeDataGrid($themes, $activeTheme);
 
         return view('avored-framework::system.theme.index')
@@ -71,13 +71,11 @@ class ThemeController extends Controller
 
         $zip = new ZipArchive();
 
-       
-        if ($zip->open(storage_path('app/public/'. $filePath)) === true) {
+        if ($zip->open(storage_path('app/public/' . $filePath)) === true) {
             $extractPath = base_path('themes');
             $zip->extractTo($extractPath);
             $zip->close();
         } else {
-            dd($filePath);
             throwException('Error in Zip Extract error.');
         }
 

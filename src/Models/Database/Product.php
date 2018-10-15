@@ -220,8 +220,6 @@ class Product extends BaseModel
             foreach ($properties as $key => $property) {
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
-
-                    //dd($propertyModel->attachProduct($this));
                     $propertyModel->attachProduct($this)
                                     ->fill(['value' => $propertyValue])
                                     ->save();

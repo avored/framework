@@ -26,7 +26,6 @@ class Menu implements MenuContracts
      */
     protected $key;
 
-
     /**
      * @var string $params
      */
@@ -48,7 +47,6 @@ class Menu implements MenuContracts
         $callable($this);
     }
 
-
     /**
      * Get/Set Admin Menu Label.
      *
@@ -61,7 +59,6 @@ class Menu implements MenuContracts
 
             return $this;
         }
-
 
         return $this->label;
     }
@@ -130,7 +127,6 @@ class Menu implements MenuContracts
         return $this->icon;
     }
 
-
     /**
      * Get/Set Admin Menu Icon.
      *
@@ -146,6 +142,4 @@ class Menu implements MenuContracts
 
         return $this->attributes;
     }
-
-
 }

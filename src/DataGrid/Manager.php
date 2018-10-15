@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\DataGrid;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use AvoRed\Framework\DataGrid\Columns\LinkColumn;
 use AvoRed\Framework\DataGrid\Columns\TextColumn;
@@ -92,7 +91,7 @@ class Manager
                 $dataGrid->model->where($key, 'like', '%' . $val . '%');
             }
         }
-        
+
         $options = ['path' => asset(request()->path())];
         if (!$dataGrid->model instanceof Collection) {
             $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
@@ -103,7 +102,6 @@ class Manager
             if (null !== $this->request->get('desc', 'id')) {
                 $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
             }
-
         } else {
             $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
         }
@@ -159,7 +157,7 @@ class Manager
 
     /**
      * I feel this method is moved to DataGrid file
-     * 
+     *
      */
     public function linkColumn($identifier, $options = [], $callback)
     {

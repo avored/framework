@@ -62,16 +62,16 @@ class ThemeMakeCommand extends Command
         $stubFiles = ['register', 'layout', 'home'];
 
         foreach ($stubFiles as $stubFile) {
-            $methodName = 'get'.ucfirst($stubFile).'Path';
+            $methodName = 'get' . ucfirst($stubFile) . 'Path';
 
             $path = $this->$methodName($vendor, $name);
             $this->createRequiredDirectories($path);
 
-            $buildMethodName = 'build'.ucfirst($stubFile).'File';
+            $buildMethodName = 'build' . ucfirst($stubFile) . 'File';
             $this->files->put($path, $this->$buildMethodName());
         }
 
-        $this->info($this->type.' created successfully.');
+        $this->info($this->type . ' created successfully.');
     }
 
     /**
@@ -81,24 +81,24 @@ class ThemeMakeCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-        if (! $this->files->isDirectory(dirname($path))) {
+        if (!$this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('themes/'.$vendor.'/'.$name.'/'.'register.yaml');
+        return base_path('themes/' . $vendor . '/' . $name . '/' . 'register.yaml');
     }
 
     protected function getLayoutPath($vendor, $name)
     {
-        return base_path('themes/'.$vendor.'/'.$name.'/views/layouts/'.'app.blade.php');
+        return base_path('themes/' . $vendor . '/' . $name . '/views/layouts/' . 'app.blade.php');
     }
 
     protected function getHomePath($vendor, $name)
     {
-        return base_path('themes/'.$vendor.'/'.$name.'/views/home/'.'index.blade.php');
+        return base_path('themes/' . $vendor . '/' . $name . '/views/home/' . 'index.blade.php');
     }
 
     /**
@@ -155,7 +155,7 @@ class ThemeMakeCommand extends Command
      */
     protected function getStub($stubName)
     {
-        return __DIR__."/stubs/{$stubName}.stub";
+        return __DIR__ . "/stubs/{$stubName}.stub";
     }
 
     /**

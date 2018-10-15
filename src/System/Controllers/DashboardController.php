@@ -25,7 +25,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
         $totalRegisteredUser = app(UserInterface::class)->all();
         $totalOrder = $this->repository->all()->count();
 

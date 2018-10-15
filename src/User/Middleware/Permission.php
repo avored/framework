@@ -18,15 +18,14 @@ class Permission
      */
     public function handle($request, Closure $next, $guard = 'admin')
     {
-       
         config(['auth.defaults.guard' => 'admin']);
 
         $permissionName = $request->route()->getName();
 
         if (in_array($permissionName, ['admin.login', 'admin.login.post',
-                                        'admin.password.reset.token', 'admin.password.email.post',
-                                        'admin.password.reset.token', 'admin.password.reset',
-                                        ])) {
+            'admin.password.reset.token', 'admin.password.email.post',
+            'admin.password.reset.token', 'admin.password.reset',
+        ])) {
             return $next($request);
         }
 
@@ -36,7 +35,7 @@ class Permission
 
         $user = Auth::guard('admin')->user();
 
-        if (! $user->hasPermission($permissionName)) {
+        if (!$user->hasPermission($permissionName)) {
             throw new \Exception('User Don\'t have permissions', 401);
         }
 

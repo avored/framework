@@ -24,7 +24,7 @@ class Address extends BaseModel
         'country_id',
         'phone',
     ];
-    
+
     /**
      * The address belongs to an Country.
      *
@@ -47,8 +47,8 @@ class Address extends BaseModel
         }
 
         $configRepository = app(ConfigurationInterface::class);
-        $defaultCountry =  $configRepository->getValueByKey('user_default_country');
-        
+        $defaultCountry = $configRepository->getValueByKey('user_default_country');
+
         if (isset($defaultCountry)) {
             return $defaultCountry;
         }

@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Models\Repository;
 
 use AvoRed\Framework\Models\Contracts\OrderStatusInterface;
 use AvoRed\Framework\Models\Database\OrderStatus;
-use Illuminate\Support\Collection;
 
 class OrderStatusRepository implements OrderStatusInterface
 {
@@ -58,5 +57,4 @@ class OrderStatusRepository implements OrderStatusInterface
     {
         return OrderStatus::create($data);
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\Models\Database\AdminUser as Model;
 use AvoRed\Framework\Models\Database\UserGroup;
 use AvoRed\Framework\Models\Contracts\UserGroupInterface;
 use AvoRed\Framework\System\Controllers\Controller;

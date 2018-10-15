@@ -20,7 +20,6 @@ class Provider extends ServiceProvider
     public function boot()
     {
         $this->registerAdminConfiguration();
-        
     }
 
     /**
@@ -56,7 +55,6 @@ class Provider extends ServiceProvider
         return ['adminconfiguration', 'AvoRed\Framework\AdminConfiguration\Manager'];
     }
 
-        
     /**
      * Register the Menus.
      *
@@ -188,5 +186,4 @@ class Provider extends ServiceProvider
                 return $options;
             });
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Product\Widget;
 
-use AvoRed\Framework\Models\Database\User;
 use AvoRed\Framework\Widget\Contracts\Widget as WidgetContract;
 use AvoRed\Framework\Models\Contracts\OrderInterface;
 use Carbon\Carbon;
@@ -37,8 +36,6 @@ class MonthlyRevenueWidget implements WidgetContract
      */
     protected $identifier = 'monthly-revenue';
 
-
-  
     public function view()
     {
         return $this->view;
@@ -78,23 +75,23 @@ class MonthlyRevenueWidget implements WidgetContract
      */
     public function with()
     {
-        $monthlyRevenue = 0;                
+        $monthlyRevenue = 0;
         $orderRepository = app(OrderInterface::class);
         $lastMonth = Carbon::now()->subMonths(1);
-        
+
         $orders = $orderRepository->query()
                         ->where('created_at', '>=', $lastMonth)
-                        ->get(); 
+                        ->get();
 
-        foreach($orders as $order) {
-            foreach($order->products as $product) {
+        foreach ($orders as $order) {
+            foreach ($order->products as $product) {
                 $monthlyRevenue += $product->price - $product->cost_price;
             }
         }
-        $currencySymbol = "$";
+        $currencySymbol = '$';
         //$monthlyRevenue = rand(100, 200);
 
-        return ['monthlyRevenue' => number_format($monthlyRevenue,2), 'currencySymbol' => $currencySymbol];
+        return ['monthlyRevenue' => number_format($monthlyRevenue, 2), 'currencySymbol' => $currencySymbol];
     }
 
     /**

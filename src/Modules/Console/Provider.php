@@ -61,6 +61,7 @@ class Provider extends ServiceProvider
             return new ModuleMakeCommand($app['files']);
         });
     }
+
     /**
      * Register the Avored Admin Make .
      *

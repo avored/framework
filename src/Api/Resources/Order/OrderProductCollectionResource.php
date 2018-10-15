@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class OrderProductCollectionResource extends ResourceCollection
 {
-        /**
+    /**
      * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request
@@ -25,10 +25,10 @@ class OrderProductCollectionResource extends ResourceCollection
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

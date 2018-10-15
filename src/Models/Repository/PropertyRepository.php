@@ -41,7 +41,7 @@ class PropertyRepository implements PropertyInterface
 
     /**
      * Create an Property an Return an Property Instance
-     * 
+     *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Property
      */

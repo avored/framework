@@ -40,6 +40,4 @@ interface OrderStatusInterface
      * @return \AvoRed\Framework\Models\OrderStatus
      */
     public function create($data);
-
-  
 }

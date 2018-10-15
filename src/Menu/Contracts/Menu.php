@@ -33,7 +33,7 @@ interface Menu
      * @param  array $attributes
      * @return $attributes|self
      */
-    public function attributes($attributes= []);
+    public function attributes($attributes = []);
 
     /**
      * Get/Set Menu Route Name.

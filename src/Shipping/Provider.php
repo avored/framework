@@ -21,7 +21,7 @@ class Provider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerShippingOption();   
+        $this->registerShippingOption();
     }
 
     /**
@@ -57,7 +57,6 @@ class Provider extends ServiceProvider
     {
         return ['shipping', 'AvoRed\Framework\Shipping\Manager'];
     }
-
 
     /**
      * Register Shippiong Option for App.

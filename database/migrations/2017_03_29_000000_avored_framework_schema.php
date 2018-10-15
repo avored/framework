@@ -391,6 +391,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('language')->nullable()->default('en');
             $table->string('image_path')->nullable()->default(null);
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
@@ -406,8 +407,8 @@ class AvoredFrameworkSchema extends Migration
             $table->string('company_name')->nullable();
             $table->string('phone')->nullable();
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
-            $table->string('activation_token')->nullable()->default(null);
             $table->string('tax_no')->nullable()->default(null);
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

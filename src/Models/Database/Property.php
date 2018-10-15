@@ -118,16 +118,15 @@ class Property extends BaseModel
             $valueClass = __NAMESPACE__ . '\\' . ucfirst($method);
 
             $valueModel = new $valueClass([
-                                    'property_id' => $this->id,
-                                    'product_id' => $productId
-                                    ]);
+                'property_id' => $this->id,
+                'product_id' => $productId
+            ]);
         } else {
             $valueModel = $this->$method()->whereProductId($productId)->first();
         }
-       
+
         return $valueModel;
     }
-
 
     /**
     * Property belongs to many Products.
@@ -138,5 +137,4 @@ class Property extends BaseModel
     {
         return $this->belongsToMany(Product::class);
     }
-
 }

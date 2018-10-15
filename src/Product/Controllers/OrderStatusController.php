@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Product\Controllers;
 
 use AvoRed\Framework\Models\Database\OrderStatus;
@@ -10,7 +11,6 @@ use Illuminate\Support\Collection;
 
 class OrderStatusController extends Controller
 {
-
     protected $isDefaultOptins;
     /**
     *
@@ -22,8 +22,8 @@ class OrderStatusController extends Controller
     {
         $this->repository = $repository;
         $this->isDefaultOptins = Collection::make([
-            ['id' => 0,'name' => 'No'],
-            ['id' => 1,'name' => 'Yes'],
+            ['id' => 0, 'name' => 'No'],
+            ['id' => 1, 'name' => 'Yes'],
         ]);
     }
 
@@ -62,7 +62,7 @@ class OrderStatusController extends Controller
         if ($request->is_default == 1) {
             $this->_setIsDefault();
         }
-        
+
         $this->repository->create($request->all());
 
         return redirect()->route('admin.order-status.index');
@@ -78,9 +78,7 @@ class OrderStatusController extends Controller
     {
         return view('avored-framework::product.order-status.edit')
                 ->with('model', $orderStatus)
-                ->with('isDefaultOptions', $this->isDefaultOptins)
-                
-                ;
+                ->with('isDefaultOptions', $this->isDefaultOptins);
     }
 
     /**
@@ -96,7 +94,6 @@ class OrderStatusController extends Controller
             $this->_setIsDefault();
         }
         $orderStatus->update($request->all());
-
 
         return redirect()->route('admin.order-status.index');
     }
@@ -116,19 +113,19 @@ class OrderStatusController extends Controller
 
     /**
      * Find a Record and Returns a Html Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(OrderStatus $orderStatus)
     {
         return view('avored-framework::product.order-status.show')->with('orderStatus', $orderStatus);
     }
-    
+
     private function _setIsDefault()
     {
         $model = $this->repository->query()->whereIsDefault(1)->first();
 
-        if(null !== $model) {
+        if (null !== $model) {
             $model->update(['is_default' => 0]);
         }
     }

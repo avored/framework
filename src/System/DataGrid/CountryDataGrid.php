@@ -15,11 +15,11 @@ class CountryDataGrid
         $dataGrid->model($model)
                 ->column('id', ['sortable' => true])
                 ->column('name', ['label' => 'Name'])
-            
+
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='".route('admin.country.edit', $model->id)."' >Edit</a>";
+                    return "<a href='" . route('admin.country.edit', $model->id) . "' >Edit</a>";
                 })->linkColumn('show', [], function ($model) {
-                    return "<a href='".route('admin.country.show', $model->id)."' >Show</a>";
+                    return "<a href='" . route('admin.country.show', $model->id) . "' >Show</a>";
                 });
 
         $this->dataGrid = $dataGrid;
