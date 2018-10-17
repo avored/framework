@@ -99,7 +99,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyInteger('is_default')->default(false);
+            $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
 

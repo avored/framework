@@ -33,6 +33,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
      */
     protected $key;
 
+    /**
+     * Get/Set Label for admin configuration
+     * 
+     * @return mixed $this|$label
+     */
     public function label($label = null)
     {
         if (null !== $label) {
@@ -44,6 +49,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->label;
     }
 
+    /**
+     * Get/Set Key for admin configuration
+     * 
+     * @return mixed $this|$key
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -66,6 +76,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->name;
     }
 
+    /**
+     * Get/Set type for admin configuration
+     * 
+     * @return mixed $this|$type
+     */
     public function type($type = null)
     {
         if (null === $type) {
@@ -77,6 +92,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this;
     }
 
+    /**
+     * Get/Set option for admin configuration
+     * 
+     * @return mixed $this|$options
+     */
     public function options($callable = null)
     {
         if (null === $callable) {

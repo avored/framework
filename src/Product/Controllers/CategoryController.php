@@ -86,7 +86,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \AvoRed\Framework\Models\Database\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Category $category)
     {
