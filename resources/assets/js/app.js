@@ -22,6 +22,7 @@ require('chartjs');
 require('sweetalert');
 require('jquery-sortable');
 
+window.SimpleMDE = require('simplemde');
 window.Vue = require('vue');
 window.axios = require('axios');
 
