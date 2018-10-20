@@ -65,6 +65,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->key;
     }
 
+    /**
+     * Get/Set name for admin configuration
+     * 
+     * @return mixed $this|$name
+     */
     public function name($name = null)
     {
         if (null !== $name) {

@@ -18,16 +18,21 @@ class Manager
         $this->configurations = Collection::make([]);
     }
 
+    /**
+     * returns all existing configurations
+     * 
+     * @return \Illuminate\Support\Collection $configurations
+     */
     public function all()
     {
         return $this->configurations;
     }
 
     /**
-     * Add Permission Array into Collection.
+     * Add Admin Configuration into Collection.
      *
      * @param string $key
-     * @return \AvoRed\Framework\Permission\Manager
+     * @return \AvoRed\Framework\AdminConfiguration\AdminConfigurationGroup
      */
     public function add($key)
     {
@@ -40,10 +45,10 @@ class Manager
     }
 
     /**
-     * Get Permission Collection if exists or Return Empty Collection.
+     * Get Admin Configuration Collection if exists or Return Empty Collection.
      *
      * @param array $item
-     * @return \Illuminate\Support\Collection
+     * @return mixed \AvoRed\Framework\AdminConfiguration\AdminConfigurationGroup|\Illuminate\Support\Collection
      */
     public function get($key)
     {
@@ -51,14 +56,14 @@ class Manager
             return $this->configurations->get($key);
         }
 
-        return $collection = Collection::make([]);
+        return Collection::make([]);
     }
 
     /**
-     * Get Permission Collection if exists or Return Empty Collection.
+     * Set the Configuration collection and return self
      *
      * @param array $item
-     * @return \Illuminate\Support\Collection
+     * @return \AvoRed\Framework\AdminConfiguration\Manager
      */
     public function set($key, $configurationCollection)
     {

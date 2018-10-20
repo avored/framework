@@ -17,6 +17,11 @@ class Provider extends ServiceProvider
      */
     protected $defer = true;
 
+    /**
+     * Boot the Provider
+     * 
+     * @return void
+     */
     public function boot()
     {
         $this->registerAdminConfiguration();
@@ -56,7 +61,7 @@ class Provider extends ServiceProvider
     }
 
     /**
-     * Register the Menus.
+     * Register the Admin Configuration.
      *
      * @return void
      */
