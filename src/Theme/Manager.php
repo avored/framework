@@ -68,7 +68,7 @@ class Manager
             while ($iterator->valid()) {
                 if (($iterator->getDepth() > 1) &&
                     $iterator->isFile() &&
-                    ($iterator->getFilename() == 'register.yaml')) {
+                    ($iterator->getFilename() == 'register.yml')) {
                     $filePath = $iterator->getPathname();
                     $themeRegisterContent = File::get($filePath);
 
