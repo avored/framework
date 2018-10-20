@@ -5,6 +5,31 @@ namespace AvoRed\Framework\Api\Resources\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 use AvoRed\Framework\Api\Resources\Property\PropertyCollectionResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Product\ProductResource
+ * @property int id
+ * @property string type
+ * @property string name
+ * @property string slug
+ * @property string sku
+ * @property string description
+ * @property bool status
+ * @property bool in_stock
+ * @property bool track_stock
+ * @property float price
+ * @property int qty
+ * @property bool is_taxable
+ * @property string meta_title
+ * @property string meta_description
+ * @property float weight
+ * @property float height
+ * @property float length
+ * @property float width
+ * @property array properties
+ * @property string created_at
+ * @property string updated_at
+ */
 class ProductResource extends JsonResource
 {
     /**

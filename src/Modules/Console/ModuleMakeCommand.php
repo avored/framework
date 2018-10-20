@@ -88,7 +88,7 @@ class ModuleMakeCommand extends Command
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . '/' . $name . '/' . 'register.yaml');
+        return base_path('modules/' . $vendor . '/' . $name . '/' . 'register.yml');
     }
 
     protected function getModulePath($vendor, $name)
