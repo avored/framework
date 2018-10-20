@@ -30,7 +30,7 @@ class Provider extends ServiceProvider
     }
 
     /**
-     * Register the AdmainConfiguration instance.
+     * Register the Them Provider instance.
      *
      * @return void
      */
@@ -39,7 +39,6 @@ class Provider extends ServiceProvider
         $this->app->singleton('theme', function ($app) {
             $loadDefaultLangPath = base_path('themes/avored/default/lang');
             $app['path.lang'] = $loadDefaultLangPath;
-
             return new Manager($app['files']);
         });
     }

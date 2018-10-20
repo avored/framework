@@ -36,7 +36,7 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set Label for admin configuration
      * 
-     * @return mixed $this|$label
+     * @return mixed $label|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
     public function label($label = null)
     {
@@ -52,7 +52,7 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set Key for admin configuration
      * 
-     * @return mixed $this|$key
+     * @return mixed $key|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
     public function key($key = null)
     {
@@ -68,7 +68,7 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set name for admin configuration
      * 
-     * @return mixed $this|$name
+     * @return mixed $name|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
     public function name($name = null)
     {
@@ -84,7 +84,7 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set type for admin configuration
      * 
-     * @return mixed $this|$type
+     * @return mixed $type|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
     public function type($type = null)
     {
@@ -100,7 +100,7 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set option for admin configuration
      * 
-     * @return mixed $this|$options
+     * @return mixed $options|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
     public function options($callable = null)
     {
