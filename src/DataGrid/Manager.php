@@ -79,11 +79,22 @@ class Manager
         return $dataGrid;
     }
 
+    /**
+     * Set the pagination item for the model
+     * @param int $noOfItem
+     * @return void
+     */
     public function setPagination($item = 10)
     {
         $this->pageItem = $item;
     }
 
+    /**
+     * Render the Datagrid by given datagrid object
+     *
+     * @param \AvoRed\Framework\DataGrid\DataGrid
+     * @return \Illuminate\View\View $response
+     */
     public function render($dataGrid)
     {
         if (null !== $this->request->get('q')) {

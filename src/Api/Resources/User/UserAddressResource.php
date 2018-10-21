@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Api\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+
 /**
  *
  * Class \AvoRed\Framework\Api\Resources\User\UserAddressResource
@@ -15,7 +16,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property string postcode
  * @property string city
  * @property string state
- * @property int country_id
+ * @property \AvoRed\Framework\Models\Database\Country country
  * @property string phone
  * @property string created_at
  * @property string updated_at

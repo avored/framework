@@ -6,8 +6,19 @@ use AvoRed\Framework\DataGrid\Facade as DataGrid;
 
 class PageDataGrid
 {
+    /**
+     * Page Model Builder
+     *
+     * @var \Illuminate\Database\Schema\Builder $dataGrid
+     */
     public $dataGrid;
 
+    /**
+     * Construct to build a page datagrid
+     *
+     * @param \Illuminate\Database\Schema\Builder $model
+     * @return void
+     */
     public function __construct($model)
     {
         $dataGrid = DataGrid::make('admin_page_controller');

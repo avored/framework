@@ -19,7 +19,7 @@ class Provider extends ServiceProvider
 
     /**
      * Boot the Provider
-     * 
+     *
      * @return void
      */
     public function boot()

@@ -9,56 +9,56 @@ class Product implements CartContracts
     /**
      * Cart Product Name.
      *
-     * @var null|string
+     * @var string
      */
     protected $name;
 
     /**
      * Cart Product Qty.
      *
-     * @var null|int
+     * @var int
      */
     protected $qty;
 
     /**
      * Cart Product Slug.
      *
-     * @var null|string
+     * @var string
      */
     protected $slug;
 
     /**
      * Cart Product Price.
      *
-     * @var null|float
+     * @var float
      */
     protected $price;
 
     /**
      * Cart Product Tax Amount.
      *
-     * @var null|float
+     * @var float
      */
     protected $tax;
-
-    /**
-     * Cart Product Attributes.
-     *
-     * @var null|array
-     */
+    
+    /** 
+    * Cart Product Attributes.
+    *
+    * @var array
+    */
     protected $attributes;
 
     /**
      * Cart Product Image.
      *
-     * @var null|string
+     * @var string
      */
     protected $image;
 
     /**
      * Cart Product Line Total.
      *
-     * @var null|string
+     * @var string
      */
     protected $lineTotal;
 
@@ -162,7 +162,7 @@ class Product implements CartContracts
     /**
      * Get Cart Product Formatted Price.
      *
-     * @return float
+     * @return double
      */
     public function priceFormat()
     {
@@ -172,7 +172,7 @@ class Product implements CartContracts
     /**
      * Get Cart Product Formatted Price.
      *
-     * @return float
+     * @return double
      */
     public function finalPrice()
     {

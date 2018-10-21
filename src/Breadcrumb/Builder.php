@@ -45,7 +45,7 @@ class Builder
      * Render BreakCrumb for the Route Name.
      *
      * @param string $routeName
-     * @return \Illuminate\View\View
+     * @return string|\Illuminate\View\View
      */
     public function render($routeName)
     {
@@ -55,7 +55,8 @@ class Builder
             return '';
         }
 
-        return view('avored-framework::breadcrumb.index')->with('breadcrumb', $breadcrumb);
+        return view('avored-framework::breadcrumb.index')
+                ->with('breadcrumb', $breadcrumb);
     }
 
     /**

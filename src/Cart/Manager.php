@@ -167,12 +167,12 @@ class Manager
      * Remove an Item from Cart Products by Slug.
      *
      * @param string $slug
-     * @return void
+     * @return self $this
      */
     public function destroy($slug):Manager
     {
         $cartProducts = $this->getSession();
-        $cartProduct = $cartProducts->pull($slug);
+        $cartProducts->pull($slug);
 
         return $this;
     }
@@ -206,7 +206,7 @@ class Manager
     /**
      * Get the Current Cart Total
      *
-     * @return float $total
+     * @return double $total
      */
     public function total($formatted = true)
     {
@@ -228,7 +228,7 @@ class Manager
     /**
      * Get the Current Cart Tax Total
      *
-     * @return float $taxTotal
+     * @return double $taxTotal
      */
     public function taxTotal($formatted = true)
     {

@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Api\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+
 /**
  *
  * Class \AvoRed\Framework\Api\Resources\User\UserResource
@@ -14,6 +15,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property string company_name
  * @property string image_path
  * @property int status
+ * @property string language
  * @property \Illuminate\Database\Eloquent\Collection addresses
  * @property string created_at
  * @property string updated_at

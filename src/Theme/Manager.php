@@ -28,10 +28,10 @@ class Manager
      * @var bool $themeLoaded
      */
     public $themeLoaded = false;
-   
+
     /**
-     * Construct for the theme Manager 
-     * 
+     * Construct for the theme Manager
+     *
      * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files)
@@ -94,7 +94,7 @@ class Manager
 
     /**
      * Put the theme into an collection
-     * 
+     *
      * @param string $identifier
      * @param array $themeInfo
      * @return self $this
@@ -108,7 +108,7 @@ class Manager
 
     /**
      * Get the theme into an collection
-     * 
+     *
      * @param string $identifier
      * @return array $themInfo
      */
@@ -123,7 +123,7 @@ class Manager
 
     /**
      * Get the ThemeInfo By Path
-     * 
+     *
      * @param string $path
      * @return array $themInfo
      */
@@ -144,7 +144,7 @@ class Manager
 
     /**
      * Publish theme asset to a public directory
-     * 
+     *
      * @param string $from
      * @param string $to
      * @return mixed $isSuccess|Exception

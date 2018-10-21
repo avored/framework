@@ -20,7 +20,7 @@ class Manager
 
     /**
      * returns all existing configurations
-     * 
+     *
      * @return \Illuminate\Support\Collection $configurations
      */
     public function all()

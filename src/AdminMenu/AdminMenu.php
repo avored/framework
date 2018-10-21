@@ -43,7 +43,7 @@ class AdminMenu implements AdminMenuContracts
 
     /**
      * Get/Set Admin Menu Label.
-     * 
+     *
      * @param null|string $label
      * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $label
      */
@@ -77,7 +77,7 @@ class AdminMenu implements AdminMenuContracts
 
     /**
      * Get/Set Admin Menu Route Name
-     * 
+     *
      * @param null|string $route
      * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $routeName
      */

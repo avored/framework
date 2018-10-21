@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Api\Resources\Attribute;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+
 /**
  *
  * Class \AvoRed\Framework\Api\Resources\AttributeAttributeResource

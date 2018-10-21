@@ -28,7 +28,7 @@ class AdminConfigurationGroup
 
     /**
      * Get/Set Label for Admin Configuration Group
-     * 
+     *
      * @param string|null $label
      * @return string|self $label|$this
      */
@@ -45,7 +45,7 @@ class AdminConfigurationGroup
 
     /**
      * Get/Set Key for Admin Configuration Group
-     * 
+     *
      * @param string|null $key
      * @return string|self $key|$this
      */
@@ -72,7 +72,7 @@ class AdminConfigurationGroup
 
     /**
      * Add Configuration to the group list
-     * 
+     *
      * @param string $key
      * @return \AvoRed\Framework\AdminConfiguration\AdminConfiguration $adminConfiguration
      */
