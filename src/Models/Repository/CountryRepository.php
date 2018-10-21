@@ -20,10 +20,10 @@ class CountryRepository implements CountryInterface
     }
 
     /**
-    * Get all Country
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all Country
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Country::all();

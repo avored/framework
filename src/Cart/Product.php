@@ -42,10 +42,10 @@ class Product implements CartContracts
     protected $tax;
 
     /**
-    * Cart Product Attributes.
-    *
-    * @var null|array
-    */
+     * Cart Product Attributes.
+     *
+     * @var null|array
+     */
     protected $attributes;
 
     /**

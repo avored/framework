@@ -210,12 +210,12 @@ class ProductController extends Controller
     }
 
     /**
-    * Products Downloadable Main Media Download.
-    *
-    * @param string $token
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
+     * Products Downloadable Main Media Download.
+     *
+     * @param string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function downloadDemoToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);

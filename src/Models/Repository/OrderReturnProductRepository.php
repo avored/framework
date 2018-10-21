@@ -30,20 +30,20 @@ class OrderReturnProductRepository implements OrderReturnProductInterface
     }
 
     /**
-    * Get an Order Return Product Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an Order Return Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function query()
     {
         return OrderReturnProduct::query();
     }
 
     /**
-    * Get an Order Return Product Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an Order Return Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return OrderReturnProduct::all();

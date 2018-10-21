@@ -13,10 +13,10 @@ class ProductImage extends BaseModel
     protected $fillable = ['product_id', 'path', 'is_main_image'];
 
     /**
-    * Every image belogns to one product
-    *
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $product
-    */
+     * Every image belogns to one product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $product
+     */
     public function products()
     {
         return $this->belongsTo(Product::class);

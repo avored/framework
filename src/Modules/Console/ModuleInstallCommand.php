@@ -44,10 +44,10 @@ class ModuleInstallCommand extends Command
     }
 
     /**
-         * Execute the console command.
-         *
-         * @return void
-         */
+     * Execute the console command.
+     *
+     * @return void
+     */
     public function handle()
     {
         $identifier = strtolower($this->getIdentifierInput());

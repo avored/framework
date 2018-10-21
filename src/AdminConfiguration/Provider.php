@@ -45,7 +45,7 @@ class Provider extends ServiceProvider
      */
     protected function registerManager()
     {
-        $this->app->singleton('adminconfiguration', function () {
+        $this->app->singleton('adminconfiguration', function() {
             new Manager();
         });
     }
@@ -96,7 +96,7 @@ class Provider extends ServiceProvider
             ->label('Term & Condition Page')
             ->type('select')
             ->name('general_term_condition_page')
-            ->options(function () {
+            ->options(function() {
                 $options = Page::all()->pluck('name', 'id');
                 return $options;
             });
@@ -105,7 +105,7 @@ class Provider extends ServiceProvider
             ->label('Home Page')
             ->type('select')
             ->name('general_home_page')
-            ->options(function () {
+            ->options(function() {
                 $options = Page::all()->pluck('name', 'id');
                 return $options;
             });
@@ -117,7 +117,7 @@ class Provider extends ServiceProvider
             ->label('User Default Country')
             ->type('select')
             ->name('user_default_country')
-            ->options(function () {
+            ->options(function() {
                 $options = Country::all()->pluck('name', 'id');
                 return $options;
             });
@@ -126,7 +126,7 @@ class Provider extends ServiceProvider
             ->label('User Activation Required')
             ->type('select')
             ->name('user_activation_required')
-            ->options(function () {
+            ->options(function() {
                 $options = [0 => 'No', 1 => 'Yes'];
                 return $options;
             });
@@ -138,7 +138,7 @@ class Provider extends ServiceProvider
             ->label('Is Free Shipping Enabled')
             ->type('select')
             ->name('shipping_free_shipping_enabled')
-            ->options(function () {
+            ->options(function() {
                 $options = [1 => 'Yes', 0 => 'No'];
                 return $options;
             });
@@ -150,7 +150,7 @@ class Provider extends ServiceProvider
             ->label('Payment Stripe Enabled')
             ->type('select')
             ->name('payment_stripe_enabled')
-            ->options(function () {
+            ->options(function() {
                 $options = [0 => 'No', 1 => 'Yes'];
                 return $options;
             });
@@ -172,7 +172,7 @@ class Provider extends ServiceProvider
             ->label('Is Tax Enabled')
             ->type('select')
             ->name('tax_enabled')
-            ->options(function () {
+            ->options(function() {
                 $options = [1 => 'Yes', 0 => 'No'];
                 return $options;
             });
@@ -186,7 +186,7 @@ class Provider extends ServiceProvider
             ->label('Tax Default Country')
             ->type('select')
             ->name('tax_default_country')
-            ->options(function () {
+            ->options(function() {
                 $options = $options = Country::all()->pluck('name', 'id');
                 return $options;
             });

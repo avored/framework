@@ -64,7 +64,7 @@ class Product extends BaseModel
         parent::boot();
 
         // registering a callback to be executed upon the creation of an activity AR
-        static::creating(function ($model) {
+        static::creating(function($model) {
             // produce a slug based on the activity title
             $slug = Str::slug($model->name);
 
@@ -207,11 +207,11 @@ class Product extends BaseModel
     }
 
     /**
-    * Save Product Attributes
-    *
-    * @param array $data
-    * @return void
-    */
+     * Save Product Attributes
+     *
+     * @param array $data
+     * @return void
+     */
     protected function saveProductProperties($data)
     {
         $properties = isset($data['property']) ? $data['property'] : [];
@@ -318,12 +318,12 @@ class Product extends BaseModel
     }
 
     /**
-    * Make all combination based on attributes array
-    *
-    * @param array $arrays
-    * @param integer $i
-    * @return array $result
-    */
+     * Make all combination based on attributes array
+     *
+     * @param array $arrays
+     * @param integer $i
+     * @return array $result
+     */
     public function combinations($arrays, $i = 0)
     {
         if (!isset($arrays[$i])) {
@@ -340,8 +340,7 @@ class Product extends BaseModel
         foreach ($arrays[$i] as $v) {
             foreach ($tmp as $t) {
                 $result[] = is_array($t) ?
-                    array_merge([$v], $t) :
-                    [$v, $t];
+                    array_merge([$v], $t) : [$v, $t];
             }
         }
 

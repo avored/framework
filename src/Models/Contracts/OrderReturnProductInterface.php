@@ -21,16 +21,16 @@ interface OrderReturnProductInterface
     public function create($data);
 
     /**
-    * Order Return Product Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Order Return Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query();
 
     /**
-    * All Order Return Product Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * All Order Return Product Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 }

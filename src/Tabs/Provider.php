@@ -31,7 +31,7 @@ class Provider extends ServiceProvider
      */
     protected function registerTabs()
     {
-        $this->app->singleton('tabs', function () {
+        $this->app->singleton('tabs', function() {
             return new TabsMaker();
         });
     }

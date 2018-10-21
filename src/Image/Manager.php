@@ -26,13 +26,13 @@ class Manager
     }
 
     /**
-         * Upload Image and resize it.
-         *
-         * @var \Illuminate\Http\UploadedFile $image
-         * @var string $path
-         *
-         * @return self $this
-         */
+     * Upload Image and resize it.
+     *
+     * @var \Illuminate\Http\UploadedFile $image
+     * @var string $path
+     *
+     * @return self $this
+     */
     public function upload($image, $path)
     {
         $this->dbPath = $image->store($path, 'avored');
