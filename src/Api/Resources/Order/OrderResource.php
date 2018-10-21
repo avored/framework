@@ -7,6 +7,18 @@ use AvoRed\Framework\Api\Resources\User\UserResource;
 use AvoRed\Framework\Api\Resources\User\UserAddressResource;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Order\OrderResource
+ * @property int id
+ * @property string shipping_option
+ * @property string payment_option
+ * @property \AvoRed\Framework\Models\Database\Address shipping_address
+ * @property \AvoRed\Framework\Models\Database\Address billing_address
+ * @property \AvoRed\Framework\Models\Database\User user
+ * @property string created_at
+ * @property string updated_at
+ */
 class OrderResource extends JsonResource
 {
     /**

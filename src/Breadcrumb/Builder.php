@@ -45,7 +45,7 @@ class Builder
      * Render BreakCrumb for the Route Name.
      *
      * @param string $routeName
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function render($routeName)
     {
@@ -59,10 +59,10 @@ class Builder
     }
 
     /**
-     * Get Breadcrum to set the Parent.
+     * Get Breadcrum from collection.
      *
      * @param string $key
-     * @return \Illuminate\Http\Response
+     * @return callable $callable
      */
     public function get($key)
     {

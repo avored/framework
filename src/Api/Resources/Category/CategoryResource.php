@@ -4,6 +4,18 @@ namespace AvoRed\Framework\Api\Resources\Category;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Category\CategoryResource
+ * @property int id
+ * @property int parent_id
+ * @property string name
+ * @property string slug
+ * @property string meta_title
+ * @property string meta_description
+ * @property string created_at
+ * @property string updated_at
+ */
 class CategoryResource extends JsonResource
 {
     /**

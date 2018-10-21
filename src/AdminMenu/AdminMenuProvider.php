@@ -37,7 +37,7 @@ class AdminMenuProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('adminmenu', function ($app) {
+        $this->app->singleton('adminmenu', function () {
             return new Builder();
         });
     }

@@ -29,6 +29,8 @@ use AvoRed\Framework\Api\Resources\Property\PropertyCollectionResource;
  * @property array properties
  * @property string created_at
  * @property string updated_at
+ * @property string updated_at
+ * @method \AvoRed\Framework\Models\Database\Product getPropertiesAll
  */
 class ProductResource extends JsonResource
 {

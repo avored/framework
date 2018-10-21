@@ -4,6 +4,18 @@ namespace AvoRed\Framework\Api\Resources\Page;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Page\PageResource
+ * @property int id
+ * @property string name
+ * @property string slug
+ * @property string content
+ * @property string meta_title
+ * @property string meta_description
+ * @property string created_at
+ * @property string updated_at
+ */
 class PageResource extends JsonResource
 {
     /**

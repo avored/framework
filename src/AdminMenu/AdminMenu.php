@@ -45,7 +45,7 @@ class AdminMenu implements AdminMenuContracts
      * Get/Set Admin Menu Label.
      * 
      * @param null|string $label
-     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $label
      */
     public function label($label = null)
     {
@@ -62,7 +62,7 @@ class AdminMenu implements AdminMenuContracts
      * Get/Set Admin Menu Identifier.
      *
      * @param null|string $key
-     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $keu
      */
     public function key($key = null)
     {
@@ -79,7 +79,7 @@ class AdminMenu implements AdminMenuContracts
      * Get/Set Admin Menu Route Name
      * 
      * @param null|string $route
-     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $routeName
      */
     public function route($routeName = null)
     {
@@ -95,7 +95,7 @@ class AdminMenu implements AdminMenuContracts
     /**
      * Get/Set Admin Menu Icon.
      * @param null|string $icon
-     * @return \AvoRed\Framework\AdminMenu\AdminMenu|string
+     * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string
      */
     public function icon($icon = null)
     {
