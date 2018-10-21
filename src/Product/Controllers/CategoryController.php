@@ -11,9 +11,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class CategoryController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\CategoryRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\CategoryRepository
+     */
     protected $repository;
 
     public function __construct(CategoryInterface $repository)

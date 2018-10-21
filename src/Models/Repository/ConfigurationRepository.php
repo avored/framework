@@ -30,11 +30,11 @@ class ConfigurationRepository implements ConfigurationInterface
     }
 
     /**
-    * Find an Configuration_value  by  given configurationKey
-    *
-    * @param string $key
-    * @return string $configurationValue
-    */
+     * Find an Configuration_value  by  given configurationKey
+     *
+     * @param string $key
+     * @return string $configurationValue
+     */
     public function getValueByKey($key)
     {
         $model = Configuration::whereConfigurationKey($key)->first();
@@ -65,10 +65,10 @@ class ConfigurationRepository implements ConfigurationInterface
     }
 
     /**
-    * Find all Configuration
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Find all Configuration
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Configuration::all();

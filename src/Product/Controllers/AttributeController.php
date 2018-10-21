@@ -13,9 +13,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class AttributeController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\AttributeRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\AttributeRepository
+     */
     protected $repository;
 
     public function __construct(AttributeInterface $repository)

@@ -17,9 +17,9 @@ class SiteCurrencyDataGrid
                 ->column('code', ['label' => 'Code'])
                 ->column('name', ['label' => 'Name'])
                 ->column('conversion_rate', ['label' => 'Convertion Rate'])
-                ->linkColumn('edit', [], function ($model) {
+                ->linkColumn('edit', [], function($model) {
                     return "<a href='" . route('admin.site-currency.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function ($model) {
+                })->linkColumn('show', [], function($model) {
                     return "<a href='" . route('admin.site-currency.show', $model->id) . "' >Show</a>";
                 });
 

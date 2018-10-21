@@ -19,10 +19,10 @@ class RoleRepository implements RoleInterface
     }
 
     /**
-    * Get all Role
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all Role
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Role::all();

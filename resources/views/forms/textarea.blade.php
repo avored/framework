@@ -1,16 +1,16 @@
 <?php
 
 $value = "";
-if(old($name)) {
+if (old($name)) {
     $value = old($name);
-}  elseif(isset($model) && $model->$name) {
+}  elseif (isset($model) && $model->$name) {
     $value = $model->$name;
 }
 
-if(isset($attributes)) {
+if (isset($attributes)) {
     $attributes['name'] = $name;
     $attributes['type'] = "text";
-    if(!isset($attributes['id'])) {
+    if (!isset($attributes['id'])) {
         $attributes['id'] = $name;
     }
 
@@ -22,7 +22,7 @@ if(isset($attributes)) {
 }
 $attrString = "";
 
-foreach($attributes as $attrKey => $attrValue) {
+foreach ($attributes as $attrKey => $attrValue) {
     $attrString .= "{$attrKey}=\"{$attrValue}\"";
 }
 

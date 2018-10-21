@@ -43,7 +43,7 @@ class Provider extends ServiceProvider
      */
     protected function registerShipping()
     {
-        $this->app->singleton('shipping', function ($app) {
+        $this->app->singleton('shipping', function($app) {
             return new Manager();
         });
     }

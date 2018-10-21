@@ -1,12 +1,12 @@
 <?php
 
-if(!isset($values)) {
+if (!isset($values)) {
     $values = $values;
 }
 
-if(isset($attributes)) {
+if (isset($attributes)) {
     $attributes['name'] = $name;
-    if(!isset($attributes['id'])) {
+    if (!isset($attributes['id'])) {
         $attributes['id'] = $name;
     }
 
@@ -18,7 +18,7 @@ if(isset($attributes)) {
 }
 $attrString = "";
 
-foreach($attributes as $attrKey => $attrValue) {
+foreach ($attributes as $attrKey => $attrValue) {
     $attrString .= "{$attrKey}=\"{$attrValue}\"";
 }
 

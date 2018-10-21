@@ -19,20 +19,20 @@ class OrderRepository implements OrderInterface
     }
 
     /**
-    * Get an Order Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an Order Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function query()
     {
         return Order::query();
     }
 
     /**
-    * Get an Order Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an Order Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Order::all();

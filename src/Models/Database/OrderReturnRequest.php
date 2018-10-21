@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Models\Database;
 
 class OrderReturnRequest extends BaseModel
 {
-    protected $fillable = ['order_id', 'status',  'comment'];
+    protected $fillable = ['order_id', 'status', 'comment'];
 
     /**
      * Get Order Model

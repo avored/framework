@@ -19,11 +19,11 @@ class AttributeRepository implements AttributeInterface
     }
 
     /**
-    * Find an Attributeby given Id
-    *
-    * @param $id
-    * @return \AvoRed\Framework\Models\Database\Attribute
-    */
+     * Find an Attributeby given Id
+     *
+     * @param $id
+     * @return \AvoRed\Framework\Models\Database\Attribute
+     */
     public function findMany($ids)
     {
         return Attribute::whereIn('id', $ids)->get();

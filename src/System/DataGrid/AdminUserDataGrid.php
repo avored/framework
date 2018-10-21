@@ -16,12 +16,12 @@ class AdminUserDataGrid
                 ->column('id', ['sortable' => true])
                 ->column('first_name', ['label' => 'First Name'])
                 ->column('last_name', ['label' => 'Last Name'])
-                ->linkColumn('show_api', ['label' => 'Show API'], function ($model) {
+                ->linkColumn('show_api', ['label' => 'Show API'], function($model) {
                     return "<a href='" . route('admin.admin-user.show.api') . "' >Show API</a>";
                 })
-                ->linkColumn('edit', [], function ($model) {
+                ->linkColumn('edit', [], function($model) {
                     return "<a href='" . route('admin.admin-user.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function ($model) {
+                })->linkColumn('show', [], function($model) {
                     return "<a href='" . route('admin.admin-user.show', $model->id) . "' >Show</a>";
 
                     /*

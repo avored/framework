@@ -36,7 +36,7 @@ class Provider extends ServiceProvider
      */
     protected function registerTheme()
     {
-        $this->app->singleton('theme', function ($app) {
+        $this->app->singleton('theme', function($app) {
             $loadDefaultLangPath = base_path('themes/avored/default/lang');
             $app['path.lang'] = $loadDefaultLangPath;
             return new Manager($app['files']);

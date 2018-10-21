@@ -19,10 +19,10 @@ class StateRepository implements StateInterface
     }
 
     /**
-    * Get all State
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all State
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return State::all();

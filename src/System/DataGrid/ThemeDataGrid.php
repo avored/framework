@@ -26,13 +26,13 @@ class ThemeDataGrid
         $dataGrid->model($model)
                 ->column('name', ['label' => 'Name'])
                 ->column('identifier', ['label' => 'Identifier'])
-                ->linkColumn('is_active', ['label' => 'Is Active'], function ($model) use ($activeTheme) {
+                ->linkColumn('is_active', ['label' => 'Is Active'], function($model) use ($activeTheme) {
                     if ($model['identifier'] == $activeTheme) {
                         return 'Yes';
                     }
                     return 'No';
                 })
-                ->linkColumn('activate_route', ['label' => 'Action'], function ($model) use ($activeTheme) {
+                ->linkColumn('activate_route', ['label' => 'Action'], function($model) use ($activeTheme) {
                     if ($model['identifier'] != $activeTheme) {
                         return '<form action="' . route('admin.theme.activated', $model['identifier']) . '" 
                                         method="post">

@@ -13,23 +13,23 @@ interface OrderReturnRequestInterface
     public function find($id);
 
     /**
-    * Order Return Request Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Order Return Request Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query();
 
     /**
-    * Create an Order Return Request
-    *
-    * @return \Illuminate\Database\Eloquent\Model
-    */
+     * Create an Order Return Request
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function create($data);
 
     /**
-    * All Order Return Request Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * All Order Return Request Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 }

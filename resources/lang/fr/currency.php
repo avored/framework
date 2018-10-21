@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'title' => 'Devise',
+    'title' => 'Devise',
     'create' => 'Créer une devise',
     'update' => 'Editer la devise',
 ];

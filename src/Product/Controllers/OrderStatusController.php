@@ -13,9 +13,9 @@ class OrderStatusController extends Controller
 {
     protected $isDefaultOptins;
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\OrderStatusRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\OrderStatusRepository
+     */
     protected $repository;
 
     public function __construct(OrderStatusInterface $repository)

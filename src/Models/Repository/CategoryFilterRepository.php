@@ -8,34 +8,33 @@ use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 class CategoryFilterRepository implements CategoryFilterInterface
 {
     /**
-    * Find a Category filter by Id
-    *
-    * @param integer $id
-    * @return \AvoRed\Framework\Models\Database\CategoryFilter
-    */
+     * Find a Category filter by Id
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\CategoryFilter
+     */
     public function find($id)
     {
         return CategoryFilter::find($id);
     }
 
     /**
-    * Category Filter Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Category Filter Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query()
     {
         return CategoryFilter::query();
     }
 
     /**
-    * Save Categoy Filter
-
-    * @param integer $categoryId
-    * @param integer $filterId
-    * @param string $type
-    * @return \AvoRed\Framework\Models\Database\CategoryFilter
-    */
+     * Save Categoy Filter
+     * @param integer $categoryId
+     * @param integer $filterId
+     * @param string $type
+     * @return \AvoRed\Framework\Models\Database\CategoryFilter
+     */
     public function saveFilter($categoryId, $filterId, $type)
     {
         $filterModel = CategoryFilter::whereCategoryId($categoryId)

@@ -7,10 +7,10 @@ use AvoRed\Framework\Image\ImageNotFoundException;
 class Gd
 {
     /**
-    * origional image GD resource
-    *
-    * @var resource GD Resouce
-    */
+     * origional image GD resource
+     *
+     * @var resource GD Resouce
+     */
     protected $image;
 
     /**
