@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\Cms\ViewComposers;
 
 use Illuminate\View\View;
-use AvoRed\Framework\Menu\Facade as MenuFacade;
+use AvoRed\Framework\Menu\Facades\Menu as MenuFacade;
 use AvoRed\Framework\Models\Contracts\MenuInterface;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 

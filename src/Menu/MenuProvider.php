@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Menu;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider
+class MenuProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -35,7 +35,7 @@ class Provider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('menu', function($app) {
+        $this->app->singleton('menu', function() {
             return new Builder();
         });
     }

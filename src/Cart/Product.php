@@ -37,7 +37,7 @@ class Product implements CartContracts
     /**
      * Cart Product Tax Amount.
      *
-     * @var float
+     * @var double
      */
     protected $tax;
     
@@ -58,7 +58,7 @@ class Product implements CartContracts
     /**
      * Cart Product Line Total.
      *
-     * @var string
+     * @var double
      */
     protected $lineTotal;
 
@@ -81,8 +81,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Qty.
-     * @param null|string $qty
-     * @return $this|string
+     * @param null|int $qty
+     * @return $this|int
      */
     public function qty($qty = null)
     {
@@ -129,8 +129,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Tax.
-     * @param null|float $amount
-     * @return $this|float
+     * @param null|double $amount
+     * @return $this|double
      */
     public function tax($amount = null)
     {
@@ -145,8 +145,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Line Total.
-     * @param null|float $amount
-     * @return $this|float
+     * @param null|double $amount
+     * @return $this|double
      */
     public function lineTotal($amount = null)
     {

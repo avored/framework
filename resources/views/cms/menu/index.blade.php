@@ -2,18 +2,12 @@
 
 @section('content')
     <div class="row">
-
-
         <div class="col-md-12">
             <div class="h1">Menu</div>
-
             <div class="row">
-
                 <div class="col-md-6">
-
                     <div class="col-md-6">
                         <div class="h4">Categories List</div>
-
                         <ul class="left-menu list-group ">
 
                             @foreach($categories as $category)
@@ -22,18 +16,17 @@
                                     data-params="{{ $category->slug }}"
                                     data-name="{{ $category->name }}"
                                 >
-                                    <i class="fas fa-bars"></i>
+                                    <i class="ti-menu-alt"></i>
                                     <a href="#"
                                        data-route="{{ route('category.view', $category->slug) }}">{{ $category->name }}</a>
                                     <span class="float-right">
-                                    <a href="#" class="destroy-menu"><i class="fas fa-trash"></i> </a>
+                                    <a href="#" class="destroy-menu"><i class="ti-trash"></i> </a>
                                 </span>
                                 </li>
                             @endforeach
 
                         </ul>
                         <div class="h4">Front Menu List</div>
-
                         <ul class="left-menu list-group ">
 
                             @foreach($frontMenus as $frontMenu)
@@ -42,12 +35,12 @@
                                     data-params="{{ $frontMenu->params() }}"
                                     data-name="{{ $frontMenu->label() }}"
                                 >
-                                    <i class="fas fa-bars"></i>
+                                    <i class="ti-menu-alt"></i>
                                     <a href="#"
                                        data-route="{{ route($frontMenu->route()) }}"
                                     >{{ $frontMenu->label() }}</a>
                                     <span class="float-right">
-                                    <a href="#" class="destroy-menu"><i class="fas fa-trash"></i> </a>
+                                    <a href="#" class="destroy-menu"><i class="ti-trash"></i> </a>
                                 </span>
                                 </li>
                             @endforeach
@@ -55,22 +48,31 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="col-md-6">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item ">
+                        <a class="nav-link bg-primary text-white active" href="#front-menu">Front Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#add-menu-group">
+                            <i class='ti-plus'>&nbsp;</i>
+                        </a>
+                    </li>
+                </ul>
                     <div class="h4">
-                        Front Menu
+                        
                     </div>
-
-
-                    <ul class="front-menu list-group border p-3">
-                        @include('avored-framework::cms.menu.menu-tree')
-                    </ul>
-
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="front-menu">
+                            @include('avored-framework::cms.menu.menu-tree')
+                        </div>
+                        <div class="tab-pane fade" id="add-menu-group">
+                            <h2>Add New Menu Group</h2>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
-
             <div class="col-md-12">
                 <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
                     @csrf
@@ -81,7 +83,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 
 @endsection
