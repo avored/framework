@@ -7,6 +7,7 @@ use AvoRed\Framework\Models\Database\OrderStatus;
 use AvoRed\Framework\Models\Database\Country;
 use AvoRed\Framework\Models\Database\SiteCurrency;
 use AvoRed\Framework\Models\Database\Configuration;
+use AvoRed\Framework\Models\Database\MenuGroup;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -587,14 +588,23 @@ class AvoredFrameworkSchema extends Migration
             ]);
         }
 
+        Schema::create('menu_groups', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('identifier')->nullable()->default(null);
+            $table->timestamps();
+        });
+
         Schema::create('menus', function(Blueprint $table) {
             $table->increments('id');
+            $table->integer('menu_group_id');
             $table->integer('parent_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('route')->nullable()->default(null);
             $table->string('params')->nullable()->default(null);
-
             $table->timestamps();
+
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups');
         });
 
         $countryModel = Country::whereCode('nz')->first();
@@ -639,6 +649,7 @@ class AvoredFrameworkSchema extends Migration
             'configuration_key' => 'general_site_description',
             'configuration_value' => 'AvoRed Laravel Ecommerce
         ']);
+        
     }
 
     /**

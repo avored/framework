@@ -7,3 +7,4 @@ import './skycons';
 import './datatable';
 import './utils';
 import './select2';
+import './menu'

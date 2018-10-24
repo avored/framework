@@ -49,28 +49,26 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                <ul class="nav nav-tabs nav-fill">
+                <ul id='menu-nav-list' class="nav nav-tabs nav-fill">
                     <li class="nav-item ">
-                        <a class="nav-link bg-primary text-white active" href="#front-menu">Front Menu</a>
+                        <a class="nav-link bg-primary text-white active" 
+                            data-toggle="tab" 
+                            href="#front-menu">Front Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#add-menu-group">
+                        <a class="nav-link" data-toggle="tab"  href="#add-menu-group">
                             <i class='ti-plus'>&nbsp;</i>
                         </a>
                     </li>
                 </ul>
-                    <div class="h4">
-                        
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="front-menu">
+                        @include('avored-framework::cms.menu.menu-tree')
                     </div>
-                    
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="front-menu">
-                            @include('avored-framework::cms.menu.menu-tree')
-                        </div>
-                        <div class="tab-pane fade" id="add-menu-group">
-                            <h2>Add New Menu Group</h2>
-                        </div>
+                    <div class="tab-pane fade" id="add-menu-group">
+                        <h2>Add New Menu Group</h2>
                     </div>
+                </div>
                 </div>
             </div>
             <div class="col-md-12">
@@ -86,53 +84,3 @@
     </div>
 
 @endsection
-
-@push('scripts')
-    <script>
-        jQuery(function () {
-            var frontMenu = jQuery("ul.front-menu").sortable({
-                nested: true,
-                group: "front-menu",
-                onDragStart: function ($item, container, _super) {
-                    // Duplicate items of the no drop area
-                    if (!container.options.drop)
-                        $item.clone().insertAfter($item);
-                    _super($item, container);
-                },
-                onDrop: function ($item, container, _super) {
-                    var data = frontMenu.sortable("serialize").get();
-
-                    var jsonString = JSON.stringify(data, null, ' ');
-
-
-                    jQuery('#menu-list').val(jsonString);
-                    _super($item, container);
-                }
-            });
-
-            jQuery(document).on('click', '.destroy-menu', function (e) {
-                e.preventDefault();
-                jQuery(e.target).parents('li:first').remove();
-
-                var data = frontMenu.sortable("serialize").get();
-
-                var jsonString = JSON.stringify(data, null, ' ');
-                jQuery('#menu-list').val(jsonString);
-                _super($item, container);
-            });
-
-            jQuery("ul.left-menu").sortable({
-                nested: false,
-                group: "front-menu",
-                drag: true,
-                drop: false
-            });
-            
-            let data = frontMenu.sortable("serialize").get();
-            let current_menu = JSON.stringify(data, null, ' ');
-            jQuery('#menu-list').val(current_menu);
-
-
-        });
-    </script>
-@endpush
