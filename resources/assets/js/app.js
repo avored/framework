@@ -19,7 +19,6 @@ require('select2');
 require('pc-bootstrap4-datetimepicker');
 require('chartjs');
 require('sweetalert');
-require('jquery-sortable');
 
 window.SimpleMDE = require('simplemde');
 window.Vue = require('vue');

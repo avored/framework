@@ -19,9 +19,7 @@
                 @include('avored-framework::menu.menu-tree',['menus' => $children])
             </ul>
         @else
-
             <ul class="list-group"></ul>
-
         @endif
 
     </li>
