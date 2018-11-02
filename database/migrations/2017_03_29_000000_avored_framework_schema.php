@@ -597,14 +597,14 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('menus', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('menu_group_id');
+            $table->integer('menu_group_id')->unsigned();
             $table->integer('parent_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('route')->nullable()->default(null);
             $table->string('params')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('menu_group_id')->references('id')->on('menu_groups');
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');;
         });
 
         $countryModel = Country::whereCode('nz')->first();
