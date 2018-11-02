@@ -13,18 +13,18 @@ interface CategoryInterface
     public function find($id);
 
     /**
-    * Find an Category by given key which returns Category Model
-    *
-    * @param string $key
-    * @return \AvoRed\Framework\Models\Database\Category
-    */
+     * Find an Category by given key which returns Category Model
+     *
+     * @param string $key
+     * @return \AvoRed\Framework\Models\Database\Category
+     */
     public function findByKey($key);
 
     /**
-    * Find an All Category which returns Eloquent Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Find an All Category which returns Eloquent Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 
     /**

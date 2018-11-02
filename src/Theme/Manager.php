@@ -14,16 +14,36 @@ use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 class Manager
 {
+    /**
+     * @var \Illuminate\Support\Collection $themeList
+     */
     public $themeList;
+
+    /**
+     * @var \Illuminate\Filesystem\Filesystem $files
+     */
     public $files;
+
+    /**
+     * @var bool $themeLoaded
+     */
     public $themeLoaded = false;
 
+    /**
+     * Construct for the theme Manager
+     *
+     * @param \Illuminate\Filesystem\Filesystem $files
+     */
     public function __construct(Filesystem $files)
     {
         $this->files = $files;
         $this->themeList = Collection::make([]);
     }
 
+    /**
+     * Return All available theme Collection
+     * @return \Illuminate\Support\Collection $themeList
+     */
     public function all()
     {
         if ($this->themeLoaded === false) {
@@ -48,7 +68,7 @@ class Manager
             while ($iterator->valid()) {
                 if (($iterator->getDepth() > 1) &&
                     $iterator->isFile() &&
-                    ($iterator->getFilename() == 'register.yaml')) {
+                    ($iterator->getFilename() == 'register.yml')) {
                     $filePath = $iterator->getPathname();
                     $themeRegisterContent = File::get($filePath);
 
@@ -72,6 +92,13 @@ class Manager
         return $this;
     }
 
+    /**
+     * Put the theme into an collection
+     *
+     * @param string $identifier
+     * @param array $themeInfo
+     * @return self $this
+     */
     public function put($identifier, $themeInfo)
     {
         $this->themeList->put($identifier, $themeInfo);
@@ -79,20 +106,27 @@ class Manager
         return $this;
     }
 
+    /**
+     * Get the theme into an collection
+     *
+     * @param string $identifier
+     * @return array $themInfo
+     */
     public function get($identifier)
     {
         if ($this->themeLoaded === false) {
             $this->loadThemes();
         }
 
-        return $this->themeList->pull($identifier);
+        return $this->themeList->get($identifier);
     }
 
-    public function getService()
-    {
-        return $this->service;
-    }
-
+    /**
+     * Get the ThemeInfo By Path
+     *
+     * @param string $path
+     * @return array $themInfo
+     */
     public function getByPath($path)
     {
         foreach ($this->themeList as $theme => $themeInfo) {
@@ -108,6 +142,13 @@ class Manager
         return $actualTheme;
     }
 
+    /**
+     * Publish theme asset to a public directory
+     *
+     * @param string $from
+     * @param string $to
+     * @return mixed $isSuccess|Exception
+     */
     public function publishItem($from, $to)
     {
         if ($this->files->isDirectory($from)) {
@@ -130,8 +171,6 @@ class Manager
             'from' => new Flysystem(new LocalAdapter($from)),
             'to' => new Flysystem(new LocalAdapter($to)),
         ]));
-
-        //$this->status($from, $to, 'Directory');
     }
 
     /**
@@ -149,7 +188,12 @@ class Manager
         }
     }
 
-    public function pathSlashFix($path)
+    /**
+     * Remove Slash and return back
+     * @param string $path
+     * @return string $path
+     */
+    protected function pathSlashFix($path)
     {
         return (DIRECTORY_SEPARATOR === '\\') ? str_replace('/', '\\', $path) : str_replace('\\', '/', $path);
     }

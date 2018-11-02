@@ -4,6 +4,22 @@ namespace AvoRed\Framework\Api\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\User\UserResource
+ * @property int id
+ * @property string first_name
+ * @property string last_name
+ * @property string email
+ * @property string phone
+ * @property string company_name
+ * @property string image_path
+ * @property int status
+ * @property string language
+ * @property \Illuminate\Database\Eloquent\Collection addresses
+ * @property string created_at
+ * @property string updated_at
+ */
 class UserResource extends JsonResource
 {
     /**

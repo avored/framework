@@ -113,13 +113,14 @@ class PropertyController extends Controller
      */
     public function getElementHtml(Request $request)
     {
-        $properties = $this->repository->findMany('id', $request->get('property_id'))->get();
+        $properties = $this->repository->findMany($request->get('property_id'));
 
         $tmpString = str_random();
         $view = view('avored-framework::product.property.get-element')
                         ->with('properties', $properties)
                         ->with('tmpString', $tmpString);
 
+                      
         $json = new JsonResponse(['success' => true, 'content' => $view->render()]);
 
         return $json;
@@ -136,14 +137,27 @@ class PropertyController extends Controller
     private function _saveDropdownOptions($property, $request)
     {
         if (null !== $request->get('dropdown-options')) {
-            $property->propertyDropdownOptions()->delete();
 
+            $existingIds = $property->propertyDropdownOptions->keyBy('id');           
             foreach ($request->get('dropdown-options') as $key => $val) {
                 if ($key == '__RANDOM_STRING__') {
                     continue;
                 }
 
-                $property->propertyDropdownOptions()->create($val);
+                if($existingIds->has($key)) {
+                    $existingIds->pull($key);
+                }
+
+                if(is_int($key)) {
+                    $property->propertyDropdownOptions()->find($key)->update($val);
+                } else {
+                    $property->propertyDropdownOptions()->create($val);
+                }
+            }
+            if($existingIds->count() > 0) {
+                foreach ($existingIds as $option) {
+                    $option->delete();
+                }
             }
         }
     }

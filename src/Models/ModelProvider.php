@@ -25,6 +25,8 @@ use AvoRed\Framework\Models\Repository\AdminUserRepository;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 use AvoRed\Framework\Models\Contracts\MenuInterface;
 use AvoRed\Framework\Models\Repository\MenuRepository;
+use AvoRed\Framework\Models\Contracts\MenuGroupInterface;
+use AvoRed\Framework\Models\Repository\MenuGroupRepository;
 use AvoRed\Framework\Models\Contracts\PageInterface;
 use AvoRed\Framework\Models\Repository\PageRepository;
 use AvoRed\Framework\Models\Contracts\RoleInterface;
@@ -67,6 +69,7 @@ class ModelProvider extends ServiceProvider
         ConfigurationInterface::class => ConfigurationRepository::class,
         CountryInterface::class => CountryRepository::class,
         MenuInterface::class => MenuRepository::class,
+        MenuGroupInterface::class => MenuGroupRepository::class,
         OrderInterface::class => OrderRepository::class,
         OrderHistoryInterface::class => OrderHistoryRepository::class,
         OrderReturnProductInterface::class => OrderReturnProductRepository::class,

@@ -77,8 +77,7 @@
                 <button type="button"   
                     id="widget-close-button" 
                     data-dismiss="modal"
-                     class="btn btn-default">
-                     
+                     class="btn btn-default">    
                      Close
                 </button>
             </div>
@@ -165,21 +164,9 @@
 
         }));
 
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 300,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol']],
-                    ['misc', ['codeview']],
-                    ['custom', ['avoredWidget', 'makeSpecialCharSetTable']],
-                ]
-
-            });
+        jQuery(document).ready(function() {
+            var simplemde = new SimpleMDE({ element: document.getElementById('content') });
         });
-
 
 
 

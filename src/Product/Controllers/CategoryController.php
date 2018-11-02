@@ -11,9 +11,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class CategoryController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\CategoryRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\CategoryRepository
+     */
     protected $repository;
 
     public function __construct(CategoryInterface $repository)
@@ -86,7 +86,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \AvoRed\Framework\Models\Database\Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Category $category)
     {

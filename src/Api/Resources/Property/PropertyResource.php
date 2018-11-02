@@ -4,6 +4,20 @@ namespace AvoRed\Framework\Api\Resources\Property;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Product\PropertyResource
+ * @property int id
+ * @property string name
+ * @property string identifier
+ * @property string data_type
+ * @property string field_type
+ * @property int sort_order
+ * @property \Illuminate\Database\Eloquent\Collection propertyDropdownOptions
+ * @property bool use_for_all_products
+ * @property string created_at
+ * @property string updated_at
+ */
 class PropertyResource extends JsonResource
 {
     /**

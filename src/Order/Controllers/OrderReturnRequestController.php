@@ -10,9 +10,9 @@ use AvoRed\Framework\Order\DataGrid\OrderReturnRequestDataGrid;
 class OrderReturnRequestController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\OrderReturnRequestRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\OrderReturnRequestRepository
+     */
     protected $repository;
 
     public function __construct(OrderReturnRequestInterface $repository)

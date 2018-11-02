@@ -88,7 +88,7 @@ class ThemeMakeCommand extends Command
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('themes/' . $vendor . '/' . $name . '/' . 'register.yaml');
+        return base_path('themes/' . $vendor . '/' . $name . '/' . 'register.yml');
     }
 
     protected function getLayoutPath($vendor, $name)

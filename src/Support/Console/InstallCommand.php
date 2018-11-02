@@ -49,9 +49,9 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        if ($this->call('self-diagnosis') === 1) {
-            $this->error('Please Fixed all Required Check');
-        } else {
+        //if ($this->call('self-diagnosis') === 1) {
+        //    $this->error('Please Fixed all Required Check');
+        //} else {
             $this->dropAllTables();
 
             $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
@@ -99,7 +99,7 @@ class InstallCommand extends Command
                 'configuration_value' => 15
             ]);
             $this->info('AvoRed Install Successfully!');
-        }
+        //}
     }
 
     /**

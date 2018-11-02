@@ -33,7 +33,7 @@ class Provider extends ServiceProvider
         \AvoRed\Framework\Cart\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,
         \AvoRed\Framework\Image\ImageProvider::class,
-        \AvoRed\Framework\Menu\Provider::class,
+        \AvoRed\Framework\Menu\MenuProvider::class,
         \AvoRed\Framework\Models\ModelProvider::class,
         \AvoRed\Framework\Modules\Provider::class,
         \AvoRed\Framework\Payment\Provider::class,

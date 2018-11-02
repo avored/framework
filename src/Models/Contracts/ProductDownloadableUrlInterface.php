@@ -13,18 +13,18 @@ interface ProductDownloadableUrlInterface
     public function find($id);
 
     /**
-    * Find an Category by given token which returns Category Model
-    *
-    * @param string $token
-    * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
-    */
+     * Find an Category by given token which returns Category Model
+     *
+     * @param string $token
+     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+     */
     public function findByToken($token);
 
     /**
-    * Get an All  which returns Eloquent Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an All  which returns Eloquent Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 
     /**

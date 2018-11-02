@@ -29,7 +29,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -41,7 +41,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -53,7 +53,7 @@ class UserController extends Controller
      *
      * @param \AvoRed\Framework\Http\Requests\AdminUserRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserRequest $request)
     {
@@ -67,7 +67,7 @@ class UserController extends Controller
      *
      * @param \AvoRed\Framework\Models\Database\User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(User $user)
     {
@@ -81,7 +81,7 @@ class UserController extends Controller
      * @param \AvoRed\Framework\User\Requests\UserRequest $request
      * @param AvoRed\Framework\Models\Database\User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserRequest $request, User $user)
     {
@@ -94,7 +94,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \AvoRed\Framework\Models\Database\User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
@@ -106,7 +106,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @param \AvoRed\Framework\Models\Database\User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(User $user)
     {
@@ -123,7 +123,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @param \AvoRed\Framework\Models\Database\User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function changePasswordGet(User $user)
     {
@@ -137,7 +137,7 @@ class UserController extends Controller
      * @param \AvoRed\Framework\User\Requests\ChnagePasswordRequest $request
      * @param \AvoRed\Framework\Models\Database\User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function changePasswordUpdate(ChangePasswordRequest $request, User $user)
     {

@@ -6,7 +6,7 @@ Route::middleware(['web'])
     ->prefix($baseAdminUrl)
     ->name('admin.')
     ->namespace('AvoRed\Framework')
-    ->group(function () {
+    ->group(function() {
         Route::get('login', 'User\Controllers\LoginController@loginForm')->name('login');
         Route::post('login', 'User\Controllers\LoginController@login')->name('login.post');
 
@@ -24,7 +24,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
 ->prefix($baseAdminUrl)
 ->name('admin.')
 ->namespace('AvoRed\Framework')
-->group(function () {
+->group(function() {
     Route::get('', 'System\Controllers\DashboardController@index')
                 ->name('dashboard');
 

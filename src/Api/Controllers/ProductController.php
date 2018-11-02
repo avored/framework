@@ -60,7 +60,7 @@ class ProductController extends Controller
     /**
      * Destroy an Record and Return Null Json Response
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

@@ -103,11 +103,11 @@ class ThemeController extends Controller
 
             $activeThemePath = $this->configurationRepository->findByKey('active_theme_path');
             if (null !== $activeThemePath) {
-                $this->configurationRepository->setValueByKey('active_theme_path', $theme['view_path']);
+                $this->configurationRepository->setValueByKey('active_theme_path', str_replace(base_path() . '/', '', $theme['view_path']));
             } else {
                 $this->configurationRepository->create([
                     'configuration_key' => 'active_theme_path',
-                    'configuration_value' => $theme['view_path'],
+                    'configuration_value' => str_replace(base_path() . '/', '', $theme['view_path']),
                 ]);
             }
 

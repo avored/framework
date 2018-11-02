@@ -30,16 +30,15 @@ class Provider extends ServiceProvider
     }
 
     /**
-     * Register the AdmainConfiguration instance.
+     * Register the Them Provider instance.
      *
      * @return void
      */
     protected function registerTheme()
     {
-        $this->app->singleton('theme', function ($app) {
+        $this->app->singleton('theme', function($app) {
             $loadDefaultLangPath = base_path('themes/avored/default/lang');
             $app['path.lang'] = $loadDefaultLangPath;
-
             return new Manager($app['files']);
         });
     }

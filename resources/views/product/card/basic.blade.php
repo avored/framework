@@ -96,12 +96,7 @@
 </div>
 @endif
 @push('scripts')
-
     <script>
-
-        $('.summernote').summernote({});
-
+        var simplemde = new SimpleMDE({ element: document.getElementById("description") });
     </script>
-
-
 @endpush

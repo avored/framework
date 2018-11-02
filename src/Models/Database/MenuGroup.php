@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Models\Database;
 
-class Menu extends BaseModel
+class MenuGroup extends BaseModel
 {
-    protected $fillable = ['name', 'route', 'params', 'parent_id', 'menu_group_id'];
+    protected $fillable = ['name', 'identifier'];
 
     public function children()
     {

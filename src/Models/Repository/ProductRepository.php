@@ -19,21 +19,21 @@ class ProductRepository implements ProductInterface
     }
 
     /**
-    * Find a Product by a given id of a product
-    *
-    * @param integer $id
-    * @return \AvoRed\Framework\Models\Database\Product
-    */
+     * Find a Product by a given id of a product
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\Product
+     */
     public function findBySlug($slug)
     {
         return Product::whereSlug($slug)->first();
     }
 
     /**
-    * Find all product except the Variable Product to display
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Find all product except the Variable Product to display
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function query()
     {
         return Product::query();

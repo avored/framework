@@ -58,7 +58,7 @@ class TabsMaker
      */
     public function all($type = 'product')
     {
-        $tabs = $this->adminTabs->filter(function ($item, $key) use ($type) {
+        $tabs = $this->adminTabs->filter(function($item, $key) use ($type) {
             if ($item->type() == $type) {
                 return true;
             }

@@ -16,12 +16,11 @@ try {
 } catch (e) {}
 
 require('select2');
-require('summernote');
 require('pc-bootstrap4-datetimepicker');
 require('chartjs');
 require('sweetalert');
-require('jquery-sortable');
 
+window.SimpleMDE = require('simplemde');
 window.Vue = require('vue');
 window.axios = require('axios');
 

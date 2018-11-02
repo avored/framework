@@ -5,10 +5,10 @@ namespace AvoRed\Framework\Models\Database;
 class AttributeDropdownOption extends BaseModel
 {
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['attribute_id', 'display_text'];
 
     /**

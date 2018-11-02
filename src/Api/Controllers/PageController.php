@@ -35,10 +35,10 @@ class PageController extends Controller
     }
 
     /**
-      * Find a Record and Returns a Json Resrouce for that Record
-      *
-      * @return \Illuminate\Http\Resources\Json\JsonResource
-      */
+     * Find a Record and Returns a Json Resrouce for that Record
+     *
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     public function show(Page $page)
     {
         return new PageResource($page);
@@ -58,7 +58,7 @@ class PageController extends Controller
     /**
      * Destroy an Record and Return Null Json Response
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Page $page)
     {

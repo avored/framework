@@ -44,27 +44,22 @@ class ModuleInstallCommand extends Command
     }
 
     /**
-         * Execute the console command.
-         *
-         * @return void
-         */
+     * Execute the console command.
+     *
+     * @return void
+     */
     public function handle()
     {
         $identifier = strtolower($this->getIdentifierInput());
-
         $module = Module::get($identifier);
-
         $provider = $module->namespace() . 'Module';
-
         $this->call('vendor:publish', ['--provider' => $provider]);
-
         $path = $module->basePath() . DIRECTORY_SEPARATOR . 'database/migrations';
-
         $this->migrator->run($path);
+
         foreach ($this->migrator->getNotes() as $note) {
             $this->output->writeln($note);
         }
-
         $this->info('Module:' . $module->name() . ' has been installed successfully.');
     }
 

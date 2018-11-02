@@ -19,10 +19,10 @@ class OrderStatusRepository implements OrderStatusInterface
     }
 
     /**
-    * Get all Order Status
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all Order Status
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return OrderStatus::all();

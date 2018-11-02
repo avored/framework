@@ -12,7 +12,7 @@ class AdminConfigurationGroup
     protected $label;
 
     /**
-     * @var array $groupList
+     * @var \Illuminate\Support\Collection $groupList
      */
     public $groupList;
 
@@ -26,6 +26,12 @@ class AdminConfigurationGroup
         $this->groupList = Collection::make([]);
     }
 
+    /**
+     * Get/Set Label for Admin Configuration Group
+     *
+     * @param string|null $label
+     * @return string|self $label|$this
+     */
     public function label($label = null)
     {
         if (null !== $label) {
@@ -37,6 +43,12 @@ class AdminConfigurationGroup
         return $this->label;
     }
 
+    /**
+     * Get/Set Key for Admin Configuration Group
+     *
+     * @param string|null $key
+     * @return string|self $key|$this
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -48,12 +60,23 @@ class AdminConfigurationGroup
         return $this->key;
     }
 
+    /**
+     * Return all the group list
+     *
+     * @return \Illuminate\Support\Collection $groupList
+     */
     public function all()
     {
         return $this->groupList;
     }
 
-    public function addConfiguration($key = null)
+    /**
+     * Add Configuration to the group list
+     *
+     * @param string $key
+     * @return \AvoRed\Framework\AdminConfiguration\AdminConfiguration $adminConfiguration
+     */
+    public function addConfiguration($key)
     {
         $adminConfiguration = new AdminConfiguration();
 

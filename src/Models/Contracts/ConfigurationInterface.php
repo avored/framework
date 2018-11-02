@@ -13,28 +13,28 @@ interface ConfigurationInterface
     public function find($id);
 
     /**
-    * Find an Configuration by given Id which returns Configuration Model
-    *
-    * @param string $key
-    * @return \AvoRed\Framework\Models\Database\Configuration
-    */
+     * Find an Configuration by given Id which returns Configuration Model
+     *
+     * @param string $key
+     * @return \AvoRed\Framework\Models\Database\Configuration
+     */
     public function findByKey($key);
 
     /**
-    * Find an Configuration_value  by  given configurationKey
-    *
-    * @param string $key
-    * @return string $configurationValue
-    */
+     * Find an Configuration_value  by  given configurationKey
+     *
+     * @param string $key
+     * @return string $configurationValue
+     */
     public function getValueByKey($key);
 
     /**
-    * Set an Configuration value  by  given configuration Key
-    *
-    * @param string $key
-    * @param string $value
-    * @return \AvoRed\Framework\Models\Database\Configuration $configuration
-    */
+     * Set an Configuration value  by  given configuration Key
+     *
+     * @param string $key
+     * @param string $value
+     * @return \AvoRed\Framework\Models\Database\Configuration $configuration
+     */
     public function setValueByKey($key, $value);
 
     /**

@@ -55,20 +55,20 @@ class Property extends BaseModel
     }
 
     /**
-    * Get the Property Integer Value of a given Product.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Get the Property Integer Value of a given Product.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function productPropertyIntegerValue()
     {
         return $this->hasMany(ProductPropertyIntegerValue::class);
     }
 
     /**
-    * Get the Property Text Value of a given Product.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Get the Property Text Value of a given Product.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function productPropertyTextValue()
     {
         return $this->hasMany(ProductPropertyTextValue::class);
@@ -85,11 +85,11 @@ class Property extends BaseModel
     }
 
     /**
-      * Attach  Product to a Property Model.
-      *
-      * @param \AvoRed\Framework\Models\Database\Product $model
-      * @return \Illuminate\Database\Eloquent\Model
-      */
+     * Attach  Product to a Property Model.
+     *
+     * @param \AvoRed\Framework\Models\Database\Product $model
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function attachProduct($model)
     {
         $valueModel = $this->getProductValueModel($model->id);
@@ -98,11 +98,11 @@ class Property extends BaseModel
     }
 
     /**
-    * Get Product Property Value Model based by ProductID.
-    *
-    * @param integer $productId
-    * @return \Illuminate\Database\Eloquent\Model
-    */
+     * Get Product Property Value Model based by ProductID.
+     *
+     * @param integer $productId
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function getProductValueModel($productId)
     {
         $dataType = ucfirst(strtolower($this->data_type));
@@ -129,10 +129,10 @@ class Property extends BaseModel
     }
 
     /**
-    * Property belongs to many Products.
-    *
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    */
+     * Property belongs to many Products.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function products()
     {
         return $this->belongsToMany(Product::class);

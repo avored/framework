@@ -23,7 +23,7 @@ class Provider extends ServiceProvider
      */
     protected function registerMakeTheme()
     {
-        $this->app->singleton('command.avored.theme.make', function ($app) {
+        $this->app->singleton('command.avored.theme.make', function($app) {
             return new ThemeMakeCommand($app['files']);
         });
 

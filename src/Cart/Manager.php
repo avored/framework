@@ -17,7 +17,7 @@ class Manager
      *
      * @var \Illuminate\Session\SessionManager
      */
-    public $session;
+    public $sessionManager;
 
     /**
      * AvoRed Cart Construct.
@@ -26,7 +26,7 @@ class Manager
      */
     public function __construct(SessionManager $manager)
     {
-        $this->session = $manager;
+        $this->sessionManager = $manager;
     }
 
     /**
@@ -79,7 +79,7 @@ class Manager
 
         $cartProducts->put($slug, $cartProduct);
 
-        $this->session->put($this->getSessionKey(), $cartProducts);
+        $this->sessionManager->put($this->getSessionKey(), $cartProducts);
 
         return $this;
     }
@@ -160,19 +160,19 @@ class Manager
      */
     public function clear()
     {
-        $this->session->forget($this->getSessionKey());
+        $this->sessionManager->forget($this->getSessionKey());
     }
 
     /**
      * Remove an Item from Cart Products by Slug.
      *
      * @param string $slug
-     * @return void
+     * @return self $this
      */
     public function destroy($slug):Manager
     {
         $cartProducts = $this->getSession();
-        $cartProduct = $cartProducts->pull($slug);
+        $cartProducts->pull($slug);
 
         return $this;
     }
@@ -185,9 +185,9 @@ class Manager
     public function hasTax($flag = null)
     {
         if (null === $flag) {
-            return $this->session->get('hasTax');
+            return $this->sessionManager->get('hasTax');
         }
-        $this->session->put('hasTax', $flag);
+        $this->sessionManager->put('hasTax', $flag);
         return $this;
     }
 
@@ -200,13 +200,13 @@ class Manager
     {
         $sessionKey = $this->getSessionKey();
 
-        return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;
+        return $this->sessionManager->has($sessionKey) ? $this->sessionManager->get($sessionKey) : new Collection;
     }
 
     /**
      * Get the Current Cart Total
      *
-     * @return float $total
+     * @return double $total
      */
     public function total($formatted = true)
     {
@@ -228,7 +228,7 @@ class Manager
     /**
      * Get the Current Cart Tax Total
      *
-     * @return float $taxTotal
+     * @return double $taxTotal
      */
     public function taxTotal($formatted = true)
     {

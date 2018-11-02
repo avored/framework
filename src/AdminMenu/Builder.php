@@ -23,7 +23,7 @@ class Builder
      *
      * @param string
      * @param callable $callable
-     * @return \AvoRed\Framework\AdminMenu\AdminMenu
+     * @return \AvoRed\Framework\AdminMenu\Builder
      */
     public function add($key, $callable)
     {

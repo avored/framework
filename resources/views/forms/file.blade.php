@@ -1,16 +1,16 @@
 <?php
 
 $value = "";
-if(old($name)) {
+if (old($name)) {
     $value = old($name);
-}  elseif(isset($model) && $model->$name) {
+}  elseif (isset($model) && $model->$name) {
     $value = $model->$name;
 }
 
-if(isset($attributes)) {
+if (isset($attributes)) {
     $attributes['name'] = $name;
     $attributes['type'] = "file";
-    if(!isset($attributes['id'])) {
+    if (!isset($attributes['id'])) {
         $attributes['id'] = $name;
     }
     //$attributes['value'] = $value;
@@ -23,15 +23,15 @@ if(isset($attributes)) {
     //$attributes['value'] = $value;
 }
 
-if($errors->has($name) && isset($attributes['class'])) {
+if ($errors->has($name) && isset($attributes['class'])) {
     $attributes['class'] .= " is-invalid";
-} elseif ($errors->has($name) && !isset($attributes['class'])){
+} elseif ($errors->has($name) && !isset($attributes['class'])) {
     $attributes['class'] = "is-invalid";
 }
 
 $attrString = "";
 
-foreach($attributes as $attrKey => $attrValue) {
+foreach ($attributes as $attrKey => $attrValue) {
     $attrString .= "{$attrKey}=\"{$attrValue}\"";
 }
 

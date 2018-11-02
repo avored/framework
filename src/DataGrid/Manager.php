@@ -79,11 +79,22 @@ class Manager
         return $dataGrid;
     }
 
+    /**
+     * Set the pagination item for the model
+     * @param int $noOfItem
+     * @return void
+     */
     public function setPagination($item = 10)
     {
         $this->pageItem = $item;
     }
 
+    /**
+     * Render the Datagrid by given datagrid object
+     *
+     * @param \AvoRed\Framework\DataGrid\DataGrid
+     * @return \Illuminate\View\View $response
+     */
     public function render($dataGrid)
     {
         if (null !== $this->request->get('q')) {
@@ -124,14 +135,14 @@ class Manager
 
     /**
      * Gera a paginação dos itens de um array ou collection.
-    *
-    * @param array|Collection      $items
-    * @param int   $perPage
-    * @param int  $page
-    * @param array $options
-    *
-    * @return LengthAwarePaginator
-    */
+     *
+     * @param array|Collection      $items
+     * @param int   $perPage
+     * @param int  $page
+     * @param array $options
+     *
+     * @return LengthAwarePaginator
+     */
     public function paginate($items, $perPage = 10, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);

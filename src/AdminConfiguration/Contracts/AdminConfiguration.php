@@ -5,9 +5,9 @@ namespace AvoRed\Framework\AdminConfiguration\Contracts;
 interface AdminConfiguration
 {
     /**
-         * Get/Set Admin Configuration Name.
-         * @return string|null $name
-         */
+     * Get/Set Admin Configuration Name.
+     * @return string|null $name
+     */
     public function name();
 
     /**

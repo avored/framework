@@ -13,9 +13,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class AttributeController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\AttributeRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\AttributeRepository
+     */
     protected $repository;
 
     public function __construct(AttributeInterface $repository)
@@ -108,7 +108,7 @@ class AttributeController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getElementHtml(Request $request)
     {
