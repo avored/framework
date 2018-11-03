@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Theme;
 
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Theme\Facade as Theme;
+use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 
 class Provider extends ServiceProvider
 {
@@ -13,6 +14,20 @@ class Provider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
+
+    /**
+     * Load the Default Theme in the Boot method
+     * @return void
+     */
+    public function boot() 
+    {
+        $repository = $this->app->get(ConfigurationInterface::class);
+
+        $activeTheme = $repository->getValueByKey('active_theme_identifier');
+        $theme = Theme::get($activeTheme);
+        $fallBackPath  = base_path('themes/avored/default/lang');
+        $this->app['lang.path'] = array_get($theme,'lang_path');
+    }
 
     /**
      * Register the service provider.
