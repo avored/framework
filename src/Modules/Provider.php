@@ -38,7 +38,7 @@ class Provider extends ServiceProvider
      */
     protected function registerModule()
     {
-        $this->app->singleton('module', function($app) {
+        $this->app->singleton('module', function ($app) {
             return new Manager($app['files']);
         });
     }

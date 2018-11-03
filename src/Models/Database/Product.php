@@ -64,7 +64,7 @@ class Product extends BaseModel
         parent::boot();
 
         // registering a callback to be executed upon the creation of an activity AR
-        static::creating(function($model) {
+        static::creating(function ($model) {
             // produce a slug based on the activity title
             $slug = Str::slug($model->name);
 

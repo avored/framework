@@ -137,24 +137,23 @@ class PropertyController extends Controller
     private function _saveDropdownOptions($property, $request)
     {
         if (null !== $request->get('dropdown-options')) {
-
-            $existingIds = $property->propertyDropdownOptions->keyBy('id');           
+            $existingIds = $property->propertyDropdownOptions->keyBy('id');
             foreach ($request->get('dropdown-options') as $key => $val) {
                 if ($key == '__RANDOM_STRING__') {
                     continue;
                 }
 
-                if($existingIds->has($key)) {
+                if ($existingIds->has($key)) {
                     $existingIds->pull($key);
                 }
 
-                if(is_int($key)) {
+                if (is_int($key)) {
                     $property->propertyDropdownOptions()->find($key)->update($val);
                 } else {
                     $property->propertyDropdownOptions()->create($val);
                 }
             }
-            if($existingIds->count() > 0) {
+            if ($existingIds->count() > 0) {
                 foreach ($existingIds as $option) {
                     $option->delete();
                 }

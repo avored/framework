@@ -56,18 +56,18 @@ class InstallCommand extends Command
 
             $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
 
-            if ($answer == 'y' || $answer == 'yes') {
-                $this->call('key:generate');
-                $this->call('migrate');
-                $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
+        if ($answer == 'y' || $answer == 'yes') {
+            $this->call('key:generate');
+            $this->call('migrate');
+            $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
 
-                $this->call('vendor:publish', ['--tag' => 'public']);
-                $this->call('storage:link');
+            $this->call('vendor:publish', ['--tag' => 'public']);
+            $this->call('storage:link');
             // --tag=public --force
-            } else {
-                $this->call('key:generate');
-                $this->call('migrate');
-            }
+        } else {
+            $this->call('key:generate');
+            $this->call('migrate');
+        }
 
             // THEME PUBLISH
             $theme = Theme::get('avored-default');

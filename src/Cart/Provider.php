@@ -35,7 +35,7 @@ class Provider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('cart', function($app) {
+        $this->app->singleton('cart', function ($app) {
             return new Manager($app['session']);
         });
     }

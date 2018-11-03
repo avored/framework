@@ -57,7 +57,7 @@ class Provider extends ServiceProvider
      */
     protected function registerAvoredModuleMake()
     {
-        $this->app->singleton('command.avored.module.make', function($app) {
+        $this->app->singleton('command.avored.module.make', function ($app) {
             return new ModuleMakeCommand($app['files']);
         });
     }
@@ -69,7 +69,7 @@ class Provider extends ServiceProvider
      */
     protected function registerAvoredAdminMake()
     {
-        $this->app->singleton('command.avored.admin.make', function($app) {
+        $this->app->singleton('command.avored.admin.make', function ($app) {
             return new AdminMakeCommand($app['files']);
         });
     }
@@ -81,7 +81,7 @@ class Provider extends ServiceProvider
      */
     protected function registerAvoredModuleInstall()
     {
-        $this->app->singleton('command.avored.module.install', function($app) {
+        $this->app->singleton('command.avored.module.install', function ($app) {
             return new ModuleInstallCommand($app['migrator']);
         });
     }
@@ -93,7 +93,7 @@ class Provider extends ServiceProvider
      */
     protected function registerAvoredInstall()
     {
-        $this->app->singleton('command.avored.install', function($app) {
+        $this->app->singleton('command.avored.install', function ($app) {
             return new InstallCommand($app['files']);
         });
     }
@@ -105,7 +105,7 @@ class Provider extends ServiceProvider
      */
     protected function registerAvoredControllerMake()
     {
-        $this->app->singleton('command.avored.controller.make', function($app) {
+        $this->app->singleton('command.avored.controller.make', function ($app) {
             return new ControllerMakeCommand($app['files']);
         });
     }

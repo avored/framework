@@ -26,7 +26,7 @@ class PropertyRepository implements PropertyInterface
      */
     public function findMany($ids)
     {
-        return Property::whereIn('id',$ids)->get();
+        return Property::whereIn('id', $ids)->get();
     }
 
     /**

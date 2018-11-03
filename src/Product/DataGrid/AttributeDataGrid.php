@@ -15,9 +15,9 @@ class AttributeDataGrid
         $dataGrid->model($model)
                 ->column('name', ['label' => 'Name', 'sortable' => true])
                 ->column('identifier', ['sortable' => true])
-                ->linkColumn('edit', [], function($model) {
+                ->linkColumn('edit', [], function ($model) {
                     return "<a href='" . route('admin.attribute.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function($model) {
+                })->linkColumn('show', [], function ($model) {
                     return "<a href='" . route('admin.attribute.show', $model->id) . "' >Show</a>";
                 });
 

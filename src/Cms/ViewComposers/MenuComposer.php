@@ -22,8 +22,8 @@ class MenuComposer
 
     public function __construct(
         MenuInterface $menuRepository,
-                                CategoryInterface $categoryRepository
-                            ) {
+        CategoryInterface $categoryRepository
+    ) {
         $this->menuRepository = $menuRepository;
         $this->categoryRepository = $categoryRepository;
     }

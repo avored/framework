@@ -34,9 +34,9 @@ class SiteCurrencyMiddleware
      *
      */
     public function __construct(
-            ConfigurationInterface $rep,
-            SiteCurrencyInterface $curRep,
-            ProductInterface $productRepository
+        ConfigurationInterface $rep,
+        SiteCurrencyInterface $curRep,
+        ProductInterface $productRepository
     ) {
         $this->repository = $rep;
         $this->curRep = $curRep;

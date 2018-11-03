@@ -19,14 +19,14 @@ class Provider extends ServiceProvider
      * Load the Default Theme in the Boot method
      * @return void
      */
-    public function boot() 
+    public function boot()
     {
         $repository = $this->app->get(ConfigurationInterface::class);
 
         $activeTheme = $repository->getValueByKey('active_theme_identifier');
         $theme = Theme::get($activeTheme);
-        $fallBackPath  = base_path('themes/avored/default/lang');
-        $this->app['lang.path'] = array_get($theme,'lang_path');
+        $fallBackPath = base_path('themes/avored/default/lang');
+        $this->app['lang.path'] = array_get($theme, 'lang_path');
     }
 
     /**
@@ -51,7 +51,7 @@ class Provider extends ServiceProvider
      */
     protected function registerTheme()
     {
-        $this->app->singleton('theme', function($app) {
+        $this->app->singleton('theme', function ($app) {
             $loadDefaultLangPath = base_path('themes/avored/default/lang');
             $app['path.lang'] = $loadDefaultLangPath;
             return new Manager($app['files']);

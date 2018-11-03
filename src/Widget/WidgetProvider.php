@@ -41,7 +41,7 @@ class WidgetProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('widget', function($app) {
+        $this->app->singleton('widget', function ($app) {
             return new Manager();
         });
     }
