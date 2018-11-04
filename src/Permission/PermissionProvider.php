@@ -39,9 +39,7 @@ class PermissionProvider extends ServiceProvider
      */
     protected function registerManager()
     {
-        $this->app->singleton('permission', function () {
-            new Manager();
-        });
+        $this->app->singleton('permission', function () { new Manager(); });
     }
 
     /**

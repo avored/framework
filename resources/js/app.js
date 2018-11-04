@@ -23,11 +23,9 @@ require('sweetalert');
 window.SimpleMDE = require('simplemde');
 window.Vue = require('vue');
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
-
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
@@ -38,9 +36,7 @@ Vue.component('avored-form-input', require('../components/forms/avored-form-inpu
 Vue.component('avored-form-select', require('../components/forms/avored-form-select.vue'));
 Vue.component('avored-form-textarea', require('../components/forms/avored-form-textarea.vue'));
 
-
 require('./bootstrap');
-
 // window.Vue = require('vue');
 
 /**

@@ -23,7 +23,7 @@ class Permission implements PermissionContracts
 
     /**
      * Construct for a permission group
-     * @param callable $callable
+     * @param callable $callable 
      * @return void
      */
     public function __construct($callable = null)
@@ -33,6 +33,12 @@ class Permission implements PermissionContracts
         }
     }
 
+    /**
+     * Set/Get Label for permission
+     * 
+     * @param string $label
+     * @return mixed $label|$this
+     */
     public function label($label = null)
     {
         if (null !== $label) {

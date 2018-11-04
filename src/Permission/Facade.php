@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\Permission;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;
