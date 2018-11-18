@@ -6,8 +6,8 @@ class MenuGroup extends BaseModel
 {
     protected $fillable = ['name', 'identifier'];
 
-    public function children()
+    public function menus()
     {
-        return $this->whereParentId($this->attributes['id'])->get();
+        return $this->hasMany(Menu::class);
     }
 }

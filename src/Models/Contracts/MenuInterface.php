@@ -32,7 +32,7 @@ interface MenuInterface
      * @param array $menus
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function truncateAndCreateMenus($menus);
+    public function truncateAndCreateMenus($menuGroup, $menus);
 
     /**
      * Menu Collection with Limit which returns paginate class

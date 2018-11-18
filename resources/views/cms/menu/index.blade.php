@@ -51,11 +51,22 @@
                 </div>
                 <div class="col-md-6">
                     <ul id='menu-nav-list' class="nav nav-tabs nav-fill">
+                        @foreach($menuGroups as $menuGroup)
                         <li class="nav-item ">
-                            <a class="nav-link bg-primary text-white active" 
+                            @if ($loop === 0)
+                                @php 
+                                $class = 'active';
+                                @endphp
+                            @else 
+                                @php 
+                                $class = '';
+                                @endphp
+                            @endif
+                            <a class="nav-link bg-primary text-white {{ $class }}" 
                                 data-toggle="tab" 
-                                href="#front-menu">Front Menu</a>
+                                href="#{{ $menuGroup->identifier }}">{{ $menuGroup->name }}</a>
                         </li>
+                        @endforeach
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab"  href="#add-menu-group">
                                 <i class='ti-plus'>&nbsp;</i>
@@ -63,35 +74,78 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane border fade active show" id="front-menu">
+                    @foreach($menuGroups as $menuGroup)
+                         @if ($loop === 0)
+                            @php 
+                            $class = 'active';
+                            @endphp
+                        @else 
+                            @php 
+                            $class = '';
+                            @endphp
+                        @endif
+                        <div class="tab-pane border fade {{ $class }} show" id="{{ $menuGroup->identifier }}">
                             <div class="pl-3 pr-3">
                                 <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
 
                                     <div class="form-group">
                                         <label>Menu Name</label>
-                                        <input type="text" name="name" class="form-control" />
+                                        <input type="text" name="name" value="{{ $menuGroup->name }}" class="form-control" />
                                     </div>
                                     <div class="form-group">
                                         <label>Menu Identifier</label>
-                                        <input type="text" name="identifier" class="form-control" />
+                                        <input type="text" name="identifier" value="{{ $menuGroup->identifier }}" class="form-control" />
                                     </div>
+
+                                    @php
+                                        $menus = $menuGroup->menus;
+                                        
+                                    @endphp
                                     <div class="display-menu-tree">
-                                       <ul class="dropable-menu-tree">
-                                           <li></li><!-- ALWAYS CREATE ONE EMPTY ELEMENT -->
-                                            @include('avored-framework::cms.menu.menu-tree')
+                                       <ul data-identifier="{{ $menuGroup->identifier }}" class="dropable-menu-tree">
+                                           <li></li>
+                                            @include('avored-framework::cms.menu.menu-tree', ['menus' => $menus])
                                        </ul>
                                     </div>
                                 
                                     @csrf
-                                    <input type="hidden" name="menu_json" id="menu-list" value=""/>
+                                    <input type="hidden" name="menu_json" class="menu-json" value=""/>
+                                    <input type="hidden" name="menu_group_id" value="{{ $menuGroup->id }}"/>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Save Menu</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        @endforeach
+
                         <div class="tab-pane fade" id="add-menu-group">
-                            <h2>Add New Menu Group</h2>
+                            <div class="pl-3 pr-3">
+                                <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
+                                    <div class="form-group">
+                                        <label>Menu Name</label>
+                                        <input type="text" name="name" value="" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Menu Identifier</label>
+                                        <input type="text" name="identifier" value="" class="form-control" />
+                                    </div>
+                                  
+                                    <div class="display-menu-tree">
+                                       <ul data-identifier="add-new-group" class="dropable-menu-tree">
+                                           <li></li>
+                                            @include('avored-framework::cms.menu.menu-tree', ['menus' => []])
+                                       </ul>
+                                    </div>
+                                
+                                    @csrf
+                                    <input type="hidden" name="menu_json" class="menu-json" value=""/>
+                                    <input type="hidden" name="menu_group_id" value=""/>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Save Menu</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
