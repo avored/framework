@@ -16,7 +16,7 @@ class Provider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
-
+        
     /**
      * Boot the Provider
      *

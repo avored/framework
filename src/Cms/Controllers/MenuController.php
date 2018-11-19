@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use AvoRed\Framework\Models\Contracts\MenuInterface;
 use AvoRed\Framework\System\Controllers\Controller;
 use AvoRed\Framework\Models\Contracts\MenuGroupInterface;
+use AvoRed\Framework\Models\Database\MenuGroup;
+use AvoRed\Framework\Cms\Requests\MenuRequest;
 
 class MenuController extends Controller
 {
@@ -35,20 +37,30 @@ class MenuController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $menuGroups = $this->menuGroupRepository->all();
+        if ($request->get('group_id') == 'new') {
+            $menuGroup = new MenuGroup;
+            $menuGroup->name = 'New Group';
+        } elseif ($request->get('group_id') > 0) {
+            $menuGroup = $this->menuGroupRepository->find($request->get('group_id'));
+        } else {
+            $menuGroup = $this->menuGroupRepository->query()->whereIsDefault(1)->first();
+        }
 
         return view('avored-framework::cms.menu.index')
-                    ->withMenuGroups($menuGroups);
+                    ->withMenuGroups($menuGroups)
+                    ->withGroup($menuGroup);
     }
 
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
         $menuGroup = $this->menuGroupRepository->find($request->get('menu_group_id'));
         if (null === $menuGroup) {

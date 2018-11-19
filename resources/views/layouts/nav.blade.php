@@ -2,12 +2,12 @@
     <div class="header-container">
         <ul class="nav-left">
             <li>
-                <a id='sidebar-toggle' class="sidebar-toggle" href="javascript:void(0);">
+                <a id='sidebar-toggle' class="sidebar-toggle" href="#">
                     <i class="ti-menu"></i>
                 </a>
             </li>
             <li class="search-box">
-                <a class="search-toggle no-pdd-right" href="javascript:void(0);">
+                <a class="search-toggle no-pdd-right" href="#">
                     <i class="search-icon ti-search pdd-right-10"></i>
                     <i class="search-icon-close ti-close pdd-right-10"></i>
                 </a>

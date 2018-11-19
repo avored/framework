@@ -53,56 +53,52 @@
                     <ul id='menu-nav-list' class="nav nav-tabs nav-fill">
                         @foreach($menuGroups as $menuGroup)
                         <li class="nav-item ">
-                            @if ($loop === 0)
+                           
+                            @if ($loop === 0 && $group->name == $menuGroup->name)
                                 @php 
-                                $class = 'active';
+                                    $class = 'active';
                                 @endphp
                             @else 
                                 @php 
-                                $class = '';
+                                    $class = '';
                                 @endphp
                             @endif
                             <a class="nav-link bg-primary text-white {{ $class }}" 
-                                data-toggle="tab" 
-                                href="#{{ $menuGroup->identifier }}">{{ $menuGroup->name }}</a>
+                                href="{{ route('admin.menu.index',['group_id' => $menuGroup->id]) }}">
+                                {{ $menuGroup->name }}
+                            </a>
                         </li>
                         @endforeach
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab"  href="#add-menu-group">
+                            <a class="nav-link"  href="{{ route('admin.menu.index',['group_id' => 'new']) }}">
                                 <i class='ti-plus'>&nbsp;</i>
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                    @foreach($menuGroups as $menuGroup)
-                         @if ($loop === 0)
-                            @php 
-                            $class = 'active';
-                            @endphp
-                        @else 
-                            @php 
-                            $class = '';
-                            @endphp
-                        @endif
-                        <div class="tab-pane border fade {{ $class }} show" id="{{ $menuGroup->identifier }}">
+                        <?php 
+                        
+                        ?>
+                        @if($group->id > 0):
+                        <div class="tab-pane border fade active show" id="{{ $group->identifier }}">
                             <div class="pl-3 pr-3">
                                 <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
 
                                     <div class="form-group">
                                         <label>Menu Name</label>
-                                        <input type="text" name="name" value="{{ $menuGroup->name }}" class="form-control" />
+                                        <input type="text" name="name" value="{{ $group->name }}" class="form-control" />
                                     </div>
                                     <div class="form-group">
                                         <label>Menu Identifier</label>
-                                        <input type="text" name="identifier" value="{{ $menuGroup->identifier }}" class="form-control" />
+                                        <input type="text" name="identifier" value="{{ $group->identifier }}" class="form-control" />
                                     </div>
 
                                     @php
-                                        $menus = $menuGroup->menus;
+                                        $menus = $group->menus;
                                         
                                     @endphp
                                     <div class="display-menu-tree">
-                                       <ul data-identifier="{{ $menuGroup->identifier }}" class="dropable-menu-tree">
+                                       <ul data-identifier="{{ $group->identifier }}" class="dropable-menu-tree">
                                            <li></li>
                                             @include('avored-framework::cms.menu.menu-tree', ['menus' => $menus])
                                        </ul>
@@ -110,16 +106,16 @@
                                 
                                     @csrf
                                     <input type="hidden" name="menu_json" class="menu-json" value=""/>
-                                    <input type="hidden" name="menu_group_id" value="{{ $menuGroup->id }}"/>
+                                    <input type="hidden" name="menu_group_id" value="{{ $group->id }}"/>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Save Menu</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        @endforeach
+                        @else
 
-                        <div class="tab-pane fade" id="add-menu-group">
+                        <div class="tab-pane show active fade" id="add-menu-group">
                             <div class="pl-3 pr-3">
                                 <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
                                     <div class="form-group">
@@ -147,6 +143,10 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
+
+
+
                     </div>
                 </div>
             </div>

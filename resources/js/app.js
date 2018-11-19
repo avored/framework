@@ -5,9 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-window._ = require('lodash');
-window.Popper = require('popper.js').default;
-
+//window._ = require('lodash');
+require('popper.js');
 
 try {
     window.$ = window.jQuery = require('jquery');
@@ -38,7 +37,6 @@ Vue.component('avored-form-select', require('../components/forms/avored-form-sel
 Vue.component('avored-form-textarea', require('../components/forms/avored-form-textarea.vue'));
 
 require('./bootstrap');
-// window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
