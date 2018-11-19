@@ -19,6 +19,8 @@ class MenuTest extends BaseTestCase
         $response->assertSee('Menu');
 
         //
+        $data['name'] = 'test menu';
+        $data['identifier'] = 'test-menu';
         $data['menu_json'] = '[[{
              "name": "Kitchen",
              "params": "kitchen",
