@@ -69,9 +69,8 @@ class MenuController extends Controller
             $menuGroup->update($request->all());
         }
         $menuJson = $request->get('menu_json');
-
         $menuArray = json_decode($menuJson);
-
+        
         $this->repository->truncateAndCreateMenus($menuGroup, $menuArray);
 
         return redirect()->route('admin.menu.index')
