@@ -49,6 +49,10 @@ class MenuController extends Controller
             $menuGroup = $this->menuGroupRepository->query()->whereIsDefault(1)->first();
         }
 
+        if(null === $menuGroup) {
+            $menuGroup = new MenuGroup;
+        }
+
         return view('avored-framework::cms.menu.index')
                     ->withMenuGroups($menuGroups)
                     ->withGroup($menuGroup);
