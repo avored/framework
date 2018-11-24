@@ -26,7 +26,7 @@ class Order extends BaseModel
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price', 'qty', 'tax_amount');
+        return $this->belongsToMany(Product::class)->withPivot('price', 'qty', 'tax_amount', 'product_info');
     }
 
     public function history()

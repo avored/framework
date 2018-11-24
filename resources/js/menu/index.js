@@ -41,6 +41,7 @@ export default (function () {
         var jsonString = JSON.stringify(data, null, ' ');
         jQuery('#menu-list').val(jsonString);
         _super($item, container);
+
     });
     
    
