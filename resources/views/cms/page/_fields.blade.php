@@ -86,91 +86,10 @@
 </div>
 
 @push('scripts')
-
     <script>
-
-        (function (factory) {
-            /* global define */
-            if (typeof define === 'function' && define.amd) {
-                // AMD. Register as an anonymous module.
-                define(['jquery'], factory);
-            } else if (typeof module === 'object' && module.exports) {
-                // Node/CommonJS
-                module.exports = factory(require('jquery'));
-            } else {
-                // Browser globals
-                factory(window.jQuery);
-            }
-        }(function ($) {
-
-            $.extend(true, $.summernote.lang, {
-                'en-US': {
-                    /* US English(Default Language) */
-                    avoredWidget: {
-                        exampleText: 'Widget Panel',
-                        dialogTitle: 'Widget Panel',
-                        okButton: 'OK'
-                    }
-                }
-            });
-
-
-            $.extend($.summernote.options, {
-                avoredWidget: {
-                    icon: '<i class="fab fa-usb"/>',
-                    tooltip: 'Please Select AvoRed Widget'
-                }
-            });
-
-            $.extend($.summernote.plugins, {
-                'avoredWidget': function (context) {
-                    var self = this,
-                        ui = $.summernote.ui,
-                        $note = context.layoutInfo.note,
-                        $editor = context.layoutInfo.editor,
-                        $editable = context.layoutInfo.editable,
-                        $toolbar = context.layoutInfo.toolbar,
-
-                        options = context.options,
-                        lang = options.langInfo;
-
-                    context.memo('button.avoredWidget', function () {
-
-
-                        var button = ui.button({
-
-                            contents: options.avoredWidget.icon,
-                            tooltip: lang.avoredWidget.tooltip,
-                            click: function (e) {
-                               
-                                context.invoke('avoredWidget.show');
-                            }
-                        });
-                        
-                        return button.render();
-                    });
-
-
-                    this.show = function () {
-                        jQuery('#widget-list-modal').modal();
-                        jQuery(document).on('click', '#widget-insert-button', function (event) {
-                            var widgetIdentifier = jQuery('#widget_list').val();
-                            context.invoke('editor.insertText', "### " + widgetIdentifier + " ###");
-                            jQuery('#widget-list-modal').modal('hide');
-                        });
-                    };
-                }
-            });
-
-        }));
-
         jQuery(document).ready(function() {
-            var simplemde = new SimpleMDE({ element: document.getElementById('content') });
+          
+            
         });
-
-
-
     </script>
-
-
 @endpush
