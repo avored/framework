@@ -6,12 +6,14 @@ use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\Models\Database\Role;
 use AvoRed\Framework\Models\Database\UserGroup;
 
+ /**
+ * Test the Customer Group Routes
+ */
 class UserGroupTest extends BaseTestCase
 {
     /**
      * Test the Customer Group Index Route
      * @test
-     * @runInSeparateProcess
      */
     public function testIndexRoute()
     {
@@ -23,7 +25,6 @@ class UserGroupTest extends BaseTestCase
     /**
      * Test the Customer Group Create Route
      * @test
-     * @runInSeparateProcess
      */
     public function test_user_group_create_route()
     {
@@ -35,7 +36,6 @@ class UserGroupTest extends BaseTestCase
     /**
      * Test the Customer Group Store Route
      * @test
-     * @runInSeparateProcess
      */
     public function test_user_group_store_route()
     {
@@ -56,7 +56,6 @@ class UserGroupTest extends BaseTestCase
     /**
      * Test the Customer Group Store Route
      * @test
-     * @runInSeparateProcess
      */
     public function test_user_group_edit_route()
     {
@@ -72,7 +71,6 @@ class UserGroupTest extends BaseTestCase
     /**
      * Test the Customer Group Store Route
      * @test
-     * @runInSeparateProcess
      */
     public function test_user_group_update_route()
     {
@@ -92,7 +90,6 @@ class UserGroupTest extends BaseTestCase
     /**
      * Test the Customer Group Store Route
      * @test
-     * @runInSeparateProcess
      */
     public function test_user_group_destroy_route()
     {
