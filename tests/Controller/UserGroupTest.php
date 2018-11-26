@@ -15,7 +15,7 @@ class UserGroupTest extends BaseTestCase
      * Test the Customer Group Index Route
      * @test
      */
-    public function testIndexRoute()
+    public function test_user_group_index_route()
     {
         $user = $this->_getAdminUser();
         $response = $this->actingAs($user, 'admin')->get(route('admin.user-group.index'));

@@ -18,7 +18,6 @@ class AdminUserTest extends BaseTestCase
         $response = $this->actingAs($user, 'admin')->get(route('admin.admin-user.index'));
         $response->assertStatus(200);
         $response->assertSee('Admin User List');
-
         $response = $this->get(route('admin.admin-user.create'));
         $response->assertStatus(200);
         $response->assertSee('Create Admin User');

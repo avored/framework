@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="h1">
-        {{ __('avored-framework::currency.title') }}
-        <a href="{{ route('admin.site-currency.create') }}" class="float-right btn btn-default bg-dark">{{ __('avored-framework::currency.create') }}</a>
+        {{ __('avored-framework::system.site-currency.title') }}
+        <a href="{{ route('admin.site-currency.create') }}" class="float-right btn btn-default bg-dark">
+            {{ __('avored-framework::system.site-currency.create') }}
+        </a>
     </div>
 
     <div class="card">

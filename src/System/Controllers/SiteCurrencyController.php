@@ -30,7 +30,7 @@ class SiteCurrencyController extends Controller
         $siteCurrencyGrid = new SiteCurrencyDataGrid($this->repository->query());
 
         return view('avored-framework::system.site-currency.index')
-                    ->with('dataGrid', $siteCurrencyGrid->dataGrid);
+            ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
