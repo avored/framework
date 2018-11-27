@@ -11,10 +11,7 @@ use AvoRed\Framework\Models\Database\UserGroup;
  */
 class UserGroupTest extends BaseTestCase
 {
-    /**
-     * Test the Customer Group Index Route
-     * @test
-     */
+    /*** @test */
     public function test_user_group_index_route()
     {
         $user = $this->_getAdminUser();
@@ -22,10 +19,8 @@ class UserGroupTest extends BaseTestCase
         
         $response->assertStatus(200);
     }
-    /**
-     * Test the Customer Group Create Route
-     * @test
-     */
+
+    /*** @test */
     public function test_user_group_create_route()
     {
         $user = $this->_getAdminUser();
@@ -53,10 +48,8 @@ class UserGroupTest extends BaseTestCase
                     'name' => 'test group name'
                 ]);
     }
-    /**
-     * Test the Customer Group Store Route
-     * @test
-     */
+
+    /*** @test */
     public function test_user_group_edit_route()
     {
         $userGroup = factory(UserGroup::class)->create();
@@ -68,10 +61,8 @@ class UserGroupTest extends BaseTestCase
         $response->assertStatus(200)
                 ->assertSee($userGroup->name);
     }
-    /**
-     * Test the Customer Group Store Route
-     * @test
-     */
+    
+    /*** @test */
     public function test_user_group_update_route()
     {
         $userGroup = factory(UserGroup::class)->create();
@@ -87,10 +78,8 @@ class UserGroupTest extends BaseTestCase
                     'name' => 'test new name'
                 ]);
     }
-    /**
-     * Test the Customer Group Store Route
-     * @test
-     */
+   
+    /*** @test */
     public function test_user_group_destroy_route()
     {
         $userGroup = factory(UserGroup::class)->create();

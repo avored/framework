@@ -30,7 +30,7 @@
             <div class="card">
 
                 <div class="card-header bg-primary text-white">
-                    {{ __('avored-framework::lang.admin-login-card-title') }}
+                    {{ __('avored-framework::lang.user.login-card-title') }}
                 </div>
                 <div class="card-body" >
 
@@ -39,7 +39,7 @@
 
                         <avored-form-input 
                             field-name="email"
-                            label="{{ __('avored-framework::lang.admin-email-label') }}" 
+                            label="{{ __('avored-framework::lang.user.email-label') }}" 
                             error-text="{!! $errors->first('email') !!}"
                             v-on:change="changeModelValue"
                             autofocus="autofocus"
