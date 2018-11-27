@@ -2,8 +2,7 @@
 
 namespace AvoRed\Framework\AdminMenu\Contracts;
 
-interface AdminMenu
-{
+interface AdminMenu {
     /**
      * Get/Set AdminMenu Key.
      * @return string $key

@@ -27,8 +27,8 @@ use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 class Provider extends ServiceProvider
 {
     protected $providers = [
-        \AvoRed\Framework\AdminMenu\AdminMenuProvider::class,
         \AvoRed\Framework\AdminConfiguration\Provider::class,
+        \AvoRed\Framework\AdminMenu\AdminMenuProvider::class,
         \AvoRed\Framework\Breadcrumb\BreadcrumbProvider::class,
         \AvoRed\Framework\Cart\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,

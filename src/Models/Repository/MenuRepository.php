@@ -71,26 +71,32 @@ class MenuRepository implements MenuInterface
     /**
      *
      * @param array $menus
+     * @param \AvoRed\Framework\Models\Database\MenuGroup $menuGroup
      * @return \AvoRed\Framework\Models\Repository\MenuRepository
      */
-    public function truncateAndCreateMenus($menus)
+    public function truncateAndCreateMenus($menuGroup, $menus)
     {
-        Menu::truncate();
+        $menuGroup->menus()->delete();
         foreach ($menus as $menu) {
-            $this->_saveMenu($menu);
+            $this->_saveMenu($menuGroup, $menu);
         }
     }
 
-    private function _saveMenu($menus, $parentId = null)
+    private function _saveMenu($menuGroup, $menus, $parentId = null)
     {
         foreach ($menus as $menu) {
-            $menuModel = $this->create(['name' => $menu->name,
-                'route' => $menu->route,
-                'params' => $menu->params,
-                'parent_id' => $parentId]);
+            if (isset($menu->name)) {
+                $menuModel = $this->create([
+                    'menu_group_id' => $menuGroup->id,
+                    'name' => $menu->name,
+                    'route' => $menu->route,
+                    'params' => $menu->params,
+                    'parent_id' => $parentId
+                ]);
+            }
 
             if (isset($menu->children) && count($menu->children[0]) > 0) {
-                $this->_saveMenu($menu->children[0], $menuModel->id);
+                $this->_saveMenu($menuGroup, $menu->children[0], $menuModel->id);
             }
         }
     }

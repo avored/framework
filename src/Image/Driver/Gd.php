@@ -136,7 +136,6 @@ class Gd
                 break;
 
             case '.png':
-
                 $scaleQuality = round(($imageQuality / 100) * 9);
                 $invertScaleQuality = 9 - $scaleQuality;
 
@@ -146,7 +145,6 @@ class Gd
                 break;
 
             default:
-
                 break;
         }
 

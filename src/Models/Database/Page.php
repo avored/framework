@@ -8,13 +8,13 @@ class Page extends BaseModel
 {
     protected $fillable = ['name', 'slug', 'content', 'meta_title', 'meta_description'];
 
-    protected $contentTags = ['###', '###'];
+    protected $contentTags = ['%%%', '%%%'];
 
     public function getContentAttribute($content)
     {
         $pattern = sprintf('/(@)?%s\s*(.+?)\s*%s(\r?\n)?/s', $this->contentTags[0], $this->contentTags[1]);
 
-        $callback = function($matches) {
+        $callback = function ($matches) {
             $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
             $widget = Widget::get($matches[2]);
 

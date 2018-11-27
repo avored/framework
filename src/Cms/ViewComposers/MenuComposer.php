@@ -22,8 +22,8 @@ class MenuComposer
 
     public function __construct(
         MenuInterface $menuRepository,
-                                CategoryInterface $categoryRepository
-                            ) {
+        CategoryInterface $categoryRepository
+    ) {
         $this->menuRepository = $menuRepository;
         $this->categoryRepository = $categoryRepository;
     }
@@ -38,10 +38,10 @@ class MenuComposer
     {
         $frontMenus = MenuFacade::all();
         $categories = $this->categoryRepository->all();
-        $menus = $this->menuRepository->parentsAll();
+        //$menus = $this->menuRepository->parentsAll();
 
         $view->with('categories', $categories)
-            ->with('frontMenus', $frontMenus)
-            ->with('menus', $menus);
+            ->with('frontMenus', $frontMenus);
+            //->with('menus', $menus);
     }
 }

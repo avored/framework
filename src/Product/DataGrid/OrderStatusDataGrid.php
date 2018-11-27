@@ -14,17 +14,17 @@ class OrderStatusDataGrid
         $dataGrid = DataGrid::make('admin_product_order_status_controller');
 
         $dataGrid->model($model)
-                ->column('name', function(TextColumn $column) {
+                ->column('name', function (TextColumn $column) {
                     $column->identifier('name')
                             ->label('Name')
                             ->sortable(true);
                 })
-                ->linkColumn('is_default', ['label' => 'Is Default'], function($model) {
+                ->linkColumn('is_default', ['label' => 'Is Default'], function ($model) {
                     return ($model->is_default == 1) ? 'Yes' : 'No';
                 })
-                ->linkColumn('edit', [], function($model) {
+                ->linkColumn('edit', [], function ($model) {
                     return "<a href='" . route('admin.order-status.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function($model) {
+                })->linkColumn('show', [], function ($model) {
                     return "<a href='" . route('admin.order-status.show', $model->id) . "' >Show</a>";
                 });
 

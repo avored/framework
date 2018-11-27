@@ -32,7 +32,7 @@ class ImageProvider extends ServiceProvider
      */
     protected function registerImageService()
     {
-        $this->app->singleton('image', function($app) {
+        $this->app->singleton('image', function ($app) {
             return new Manager();
         });
     }

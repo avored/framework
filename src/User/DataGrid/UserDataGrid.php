@@ -17,9 +17,9 @@ class UserDataGrid
                 ->column('first_name', ['label' => 'First Name'])
                 ->column('last_name', ['label' => 'Last Name'])
                 ->column('email', ['label' => 'Email'])
-                ->linkColumn('edit', [], function($model) {
+                ->linkColumn('edit', [], function ($model) {
                     return "<a href='" . route('admin.user.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function($model) {
+                })->linkColumn('show', [], function ($model) {
                     return "<a href='" . route('admin.user.show', $model->id) . "' >Show</a>";
                 });
 

@@ -44,7 +44,7 @@ class Provider extends ServiceProvider
      */
     protected function registerPayment()
     {
-        $this->app->singleton('payment', function($app) {
+        $this->app->singleton('payment', function ($app) {
             return new Manager();
         });
     }

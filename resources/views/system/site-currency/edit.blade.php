@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::currency.update') }}
+                    {{ __('avored-framework::system.site-currency.update') }}
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.site-currency.update', $model->id) }}" 
@@ -19,7 +19,7 @@
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
-                                {{ __('avored-framework::currency.update') }}
+                                {{ __('avored-framework::system.site-currency.update') }}
                             </button>
                             <a href="{{ route('admin.site-currency.index') }}" class="btn">
                                 {{ __('avored-framework::lang.cancel') }}

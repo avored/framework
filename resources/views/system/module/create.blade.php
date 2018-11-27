@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::module.module-upload') }}
+                    {{ __('avored-framework::system.module-upload') }}
                 </div>
                 <div class="card-body">
                     <form method="post"
@@ -17,7 +17,7 @@
 
                         <div class="form-group">
                             <label for="module_zip_file">
-                                {{ __('avored-framework::module.module-upload-file') }}
+                                {{ __('avored-framework::system.module-upload-file') }}
                             </label>
                             <input type="file" 
                                 class="form-control" 
@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('avored-framework::module.module-upload') }}
+                                {{ __('avored-framework::system.module-upload') }}
                             </button>
 
                             <a href="{{ route('admin.module.index') }}" class="btn">Cancel</a>

@@ -4,10 +4,10 @@ namespace AvoRed\Framework\Models\Database;
 
 class MenuGroup extends BaseModel
 {
-    protected $fillable = ['name', 'identifier'];
+    protected $fillable = ['name', 'identifier', 'is_default'];
 
-    public function children()
+    public function menus()
     {
-        return $this->whereParentId($this->attributes['id'])->get();
+        return $this->hasMany(Menu::class);
     }
 }

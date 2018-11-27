@@ -144,6 +144,7 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('qty');
             $table->decimal('price', 11, 6);
             $table->decimal('tax_amount', 11, 6);
+            $table->json('product_info')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
@@ -592,6 +593,7 @@ class AvoredFrameworkSchema extends Migration
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->string('identifier')->nullable()->default(null);
+            $table->tinyInteger('is_default')->nullable()->default(0);
             $table->timestamps();
         });
 

@@ -31,7 +31,7 @@ class Provider extends ServiceProvider
      */
     protected function registerDataGrid()
     {
-        $this->app->singleton('datagrid', function($app) {
+        $this->app->singleton('datagrid', function ($app) {
             $request = $app->request;
 
             return new Manager($request);

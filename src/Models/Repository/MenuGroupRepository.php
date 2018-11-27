@@ -47,5 +47,4 @@ class MenuGroupRepository implements MenuGroupInterface
     {
         return MenuGroup::create($data);
     }
-
 }

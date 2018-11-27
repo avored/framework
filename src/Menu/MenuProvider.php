@@ -35,7 +35,7 @@ class MenuProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('menu', function() {
+        $this->app->singleton('menu', function () {
             return new Builder();
         });
     }

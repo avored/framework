@@ -11,7 +11,7 @@ use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 class ConfigurationController extends Controller
 {
     /**
-     *
+     * Configuration Respository
      * @var \AvoRed\Framework\Models\Repository\ConfigurationRepository
      */
     protected $repository;
@@ -33,9 +33,9 @@ class ConfigurationController extends Controller
         $countryOptions = Country::options();
 
         return view('avored-framework::system.configuration.index')
-                            ->with('model', $model)
-                            ->with('pageOptions', $pageOptions)
-                            ->with('countryOptions', $countryOptions);
+            ->withModel($model)
+            ->withPageOptions($pageOptions)
+            ->withCountryOptions($countryOptions);
     }
 
     /**
@@ -57,7 +57,7 @@ class ConfigurationController extends Controller
                 $configModel->update(['configuration_value' => $value]);
             }
         }
-
-        return redirect()->back()->with('notificationText', 'All Configuration saved!');
+        return redirect()->route('admin.configuration')
+            ->with('notificationText', 'All Configuration saved!');
     }
 }
