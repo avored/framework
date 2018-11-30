@@ -12,5 +12,15 @@ return [
     'field-type'            => 'Tipo de Campo',
     'sort-order'            => 'Ordenação',
     'use_for_all_products'  => 'Usar para todos os produtos',
-    'is_visible_frontend'  => 'Visível ao público?'
+    'is_visible_frontend'  => 'Visível ao público?',
+
+
+    'category_name' => 'Categoria',
+
+    'category' => [
+        'edit' => 'Editar Categoria',
+        'create' => 'Cadastrar Categoria',
+    ]
+
+
 ];

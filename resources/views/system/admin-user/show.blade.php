@@ -59,7 +59,7 @@
                 </form>
                 @endif
             </div>
-            <a class="btn" href="{{ route('admin.admin-user.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.admin-user.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
     </div>
 

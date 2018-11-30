@@ -8,11 +8,11 @@
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $category->name }}</td>
                 </tr>
                 <tr>
-                    <td>Category Slug</td>
+                    <td>{{ __('avored-framework::product.category_name') }} Slug</td>
                     <td>{{ $category->slug }}</td>
                 </tr>
                
@@ -27,7 +27,7 @@
                 </tr>
                
                 <tr>
-                    <td>Parent Category</td>
+                    <td>Parent {{ __('avored-framework::product.category_name') }}</td>
                     <td>{{ $category->parent_name }}</td>
                 </tr>
                
@@ -57,7 +57,7 @@
                 </form>
                
             </div>
-            <a class="btn" href="{{ route('admin.category.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.category.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
     </div>
 

@@ -8,7 +8,7 @@
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $state->name }}</td>
                 </tr>
                 <tr>
@@ -47,7 +47,7 @@
                 </form>
                
             </div>
-            <a class="btn" href="{{ route('admin.state.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.state.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
     </div>
 

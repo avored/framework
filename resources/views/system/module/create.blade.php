@@ -30,7 +30,7 @@
                                 {{ __('avored-framework::system.module-upload') }}
                             </button>
 
-                            <a href="{{ route('admin.module.index') }}" class="btn">Cancel</a>
+                            <a href="{{ route('admin.module.index') }}" class="btn">{{ __('avored-framework::lang.cancel') }}</a>
                         </div>
 
                     </form>

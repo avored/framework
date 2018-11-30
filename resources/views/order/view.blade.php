@@ -77,9 +77,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>{{ __('avored-framework::lang.name') }}</th>
                                     <th>Qty</th>
-                                    <th>Price</th>
+                                    <th>{{ __('avored-framework::lang.price') }}</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>

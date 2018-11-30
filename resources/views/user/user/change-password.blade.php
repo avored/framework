@@ -25,7 +25,7 @@
                     Update
                 </button>
 
-                <a href="{{ route('admin.user.index') }}" class="btn" >Cancel</a>
+                <a href="{{ route('admin.user.index') }}" class="btn" >{{ __('avored-framework::lang.cancel') }}</a>
 
 
             </form>

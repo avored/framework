@@ -15,7 +15,7 @@
 
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Create Page</button>
-                                <a href="{{ route('admin.page.index') }}" class="btn">Cancel</a>
+                                <a href="{{ route('admin.page.index') }}" class="btn">{{ __('avored-framework::lang.cancel') }}</a>
                             </div>
 
                         </form>

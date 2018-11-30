@@ -8,7 +8,7 @@
         @endif
 
         @include('avored-framework::forms.select2',['name' => 'category_id[]',
-                                                'label' => 'Category',
+                                                'label' => __('avored-framework::product.category_name'),
                                                 'attributes' => ['class' => 'form-control select2',
                                                                 'id' => 'category_id',
                                                                 'multiple' => true,

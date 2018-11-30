@@ -25,7 +25,7 @@
                                 {{ __('avored-framework::system.theme-upload') }}
                             </button>
 
-                            <a href="{{ route('admin.theme.index') }}" class="btn">Cancel</a>
+                            <a href="{{ route('admin.theme.index') }}" class="btn">{{ __('avored-framework::lang.cancel') }}</a>
                         </div>
 
                     </form>

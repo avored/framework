@@ -8,7 +8,7 @@
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $product->name }}</td>
                 </tr>
                 
@@ -22,7 +22,7 @@
                     <td>{{ $product->sku }}</td>
                 </tr>
                 <tr>
-                    <td>Category</td>
+                    <td>{{ __('avored-framework::product.category_name') }}</td>
                     <td>
                         <ul>
                             @foreach($product->categories as $category)
@@ -33,7 +33,7 @@
                 </tr>
 
                 <tr>
-                    <td>Price</td>
+                    <td>{{ __('avored-framework::lang.price') }}</td>
                     <td>{{ $product->price }}</td>
                 </tr>
                 
@@ -106,7 +106,7 @@
                 </form>
                
             </div>
-            <a class="btn" href="{{ route('admin.product.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.product.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
     </div>
 

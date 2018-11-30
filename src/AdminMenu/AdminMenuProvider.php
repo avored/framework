@@ -59,8 +59,12 @@ class AdminMenuProvider extends ServiceProvider
      */
     protected function registerAdminMenu()
     {
+
+        //trans('avored-framework::admin.menu.catalog')
+
+
         AdminMenuFacade::add('shop', function (AdminMenu $shopMenu) {
-            $shopMenu->label('Catalog')->route('#')->icon('ti-shopping-cart');
+            $shopMenu->label( 'Catalog')->route('#')->icon('ti-shopping-cart');
         });
 
         $shopMenu = AdminMenuFacade::get('shop');

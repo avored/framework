@@ -50,4 +50,10 @@ return [
     'address.configuration.title' => 'Lista de Configuração de Endereço',
 
     'cancel' => 'Cancelar',
+    'name' => 'Nome',
+    'price' => 'Preço',
+    'search' => 'Procurar',
+    'settings' => 'Configurações',
+    'visit_site' => 'Visitar Site',
+    'basic_details' => 'Informações Básicas',
 ];

@@ -39,7 +39,7 @@
                                        class="form-control"/>
                             </div>
                             <div class="col-md-3">
-                                <label>Price</label>
+                                <label>{{ __('avored-framework::lang.price') }}</label>
                                 <input type="text"
                                        name="variations[{{ $attribute->id }}][dropdown][{{ $dropdownValue->id }}][price]"
                                        class="form-control"/>

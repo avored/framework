@@ -13,14 +13,14 @@
                 </a>
             </li>
             <li class="search-input">
-                <input class="form-control" type="text" placeholder="Search...">
+                <input class="form-control" type="text" placeholder="{{ __('avored-framework::lang.search') }}...">
             </li>
         </ul>
         <ul class="nav-right">
             
             <li>
                 <a target="_blank" href="{{ asset('') }}">
-                    Visit Site <i class="ti-new-window"></i>
+                    {{ __('avored-framework::lang.visit_site') }} <i class="ti-new-window"></i>
                 </a>
             </li>
             <li class="dropdown">
@@ -38,7 +38,7 @@
                         <a href="{{ route('admin.admin-user.detail') }}"
                             class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-settings mR-10"></i>
-                            <span>Settings</span>
+                            <span>{{ __('avored-framework::lang.settings') }}</span>
                         </a>
                     </li>
                     <li role="separator" class="divider"></li>

@@ -47,4 +47,11 @@ return [
     'address.configuration.title' => 'Address Configuration List',
 
     'cancel' => 'Cancel',
+    'name' => 'Name',
+    'price' => 'Price',
+    'search' => 'Search',
+    'settings' => 'Settings',
+    'visit_site' => 'Visit Site',
+
+    'basic_details' => 'Basic Details'
 ];

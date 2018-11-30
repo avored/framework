@@ -16,7 +16,7 @@ id="variation-modal-{{ $model->id }}"
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label for="variation-name-{{ $model->id }}">Name</label>
+                    <label for="variation-name-{{ $model->id }}">{{ __('avored-framework::lang.name') }}</label>
                     <input type="text" value="{{ $model->name }}"
                            id="variation-name-{{ $model->id }}"
                            class="form-control" name="name" />
@@ -31,7 +31,7 @@ id="variation-modal-{{ $model->id }}"
 
 
                 <div class="form-group">
-                    <label for="variation-price-{{ $model->id }}">Price</label>
+                    <label for="variation-price-{{ $model->id }}">{{ __('avored-framework::lang.price') }}</label>
                     <input type="text" value="{{ $model->price }}"
                            id="variation-price-{{ $model->id }}"
                            class="form-control" name="price" />

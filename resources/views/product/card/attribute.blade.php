@@ -37,8 +37,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">{{ __('avored-framework::lang.name') }}</th>
+                        <th scope="col">{{ __('avored-framework::lang.price') }}</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Destroy</th>

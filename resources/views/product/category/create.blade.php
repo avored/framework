@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-12">
 
-            <div class="h1 mt-1">Create Category</div>
+            <div class="h1 mt-1">{{ __('avored-framework::product.category.create') }}</div>
 
             <form method="post" action="{{ route('admin.category.store') }}">
 
                 <div class="card mt-3 mb-3">
-                    <div class="card-header">Basic Details</div>
+                    <div class="card-header">{{ __('avored-framework::lang.basic_details') }}</div>
                     <div class="card-body">
 
                         @csrf()
@@ -48,9 +48,9 @@
                     </div>
                 </div>
 
-                <button type="submit"  class="btn btn-primary category-save-button">Create Category</button>
+                <button type="submit"  class="btn btn-primary category-save-button">{{ __('avored-framework::product.category.create') }}</button>
 
-                <a href="{{ route('admin.category.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.category.index') }}" class="btn btn-default">{{ __('avored-framework::lang.cancel') }}</a>
             </form>
 
 

@@ -8,7 +8,7 @@
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $user->first_name }}</td>
                 </tr>
                 
@@ -86,7 +86,7 @@
                 </form>
                
             </div>
-            <a class="btn" href="{{ route('admin.user.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.user.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
     </div>
 

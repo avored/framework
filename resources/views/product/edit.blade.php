@@ -24,7 +24,7 @@
                     <a data-toggle="collapse" data-parent="#product-save-accordion"
                        class="float-right" href="#basic">
                     <div class="card-header">
-                        Basic Details
+                        {{ __('avored-framework::lang.basic_details') }}
                     </div>
                     </a>
                     <div class="card-body collapse show" id="basic">
