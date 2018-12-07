@@ -64,33 +64,33 @@ class AdminMenuProvider extends ServiceProvider
 
 
         AdminMenuFacade::add('shop', function (AdminMenu $shopMenu) {
-            $shopMenu->label( 'Catalog')->route('#')->icon('ti-shopping-cart');
+            $shopMenu->label( 'Catálogo')->route('#')->icon('ti-shopping-cart');
         });
 
         $shopMenu = AdminMenuFacade::get('shop');
         $shopMenu->subMenu('category', function (AdminMenu $menu) {
-            $menu->key('category')->label('Categories')->route('admin.category.index');
+            $menu->key('category')->label('Categorias')->route('admin.category.index');
         });
 
         $shopMenu->subMenu('product', function (AdminMenu $menu) {
-            $menu->key('category')->label('Products')->route('admin.product.index');
+            $menu->key('category')->label('Produtos')->route('admin.product.index');
         });
 
         $shopMenu->subMenu('attribute', function (AdminMenu $menu) {
-            $menu->key('attribute')->label('Products Attributes')->route('admin.attribute.index');
+            $menu->key('attribute')->label('Produto - Atributos')->route('admin.attribute.index');
         });
 
         $shopMenu->subMenu('property', function (AdminMenu $menu) {
-            $menu->key('property')->label('Property')->route('admin.property.index');
+            $menu->key('property')->label('Produto - Propriedades')->route('admin.property.index');
         });
 
         AdminMenuFacade::add('content', function (AdminMenu $menu) {
-            $menu->label('Content')->route('#')->icon('ti-files');
+            $menu->label('Conteúdo')->route('#')->icon('ti-files');
         });
 
         $contentMenu = AdminMenuFacade::get('content');
         $contentMenu->subMenu('page', function (AdminMenu $menu) {
-            $menu->key('page')->label('Pages')->route('admin.page.index');
+            $menu->key('page')->label('Paǵinas')->route('admin.page.index');
         });
 
         $contentMenu->subMenu('menu', function (AdminMenu $menu) {
@@ -98,7 +98,7 @@ class AdminMenuProvider extends ServiceProvider
         });
 
         AdminMenuFacade::add('user', function (AdminMenu $menu) {
-            $menu->label('Customers')->route('#')->icon('ti-user');
+            $menu->label('Clientes')->route('#')->icon('ti-user');
         });
 
         $userMenu = AdminMenuFacade::get('user');
@@ -107,47 +107,47 @@ class AdminMenuProvider extends ServiceProvider
             $menu->key('user')->label('Overview')->route('admin.user.index');
         });
         $userMenu->subMenu('user_group', function (AdminMenu $menu) {
-            $menu->key('user_group')->label('Customers Groups')->route('admin.user-group.index');
+            $menu->key('user_group')->label('Grupo de Clientes')->route('admin.user-group.index');
         });
 
         AdminMenuFacade::add('orders', function (AdminMenu $menu) {
-            $menu->label('Orders')->route('#')->icon('ti-truck');
+            $menu->label('Compras')->route('#')->icon('ti-truck');
         });
 
         $orderMenu = AdminMenuFacade::get('orders');
         $orderMenu->subMenu('order', function (AdminMenu $menu) {
-            $menu->key('order')->label('Overview')->route('admin.order.index');
+            $menu->key('order')->label('Visão Geral')->route('admin.order.index');
         });
         $orderMenu->subMenu('order_return_request', function (AdminMenu $menu) {
             $menu->key('order_return_request')
-                ->label('Order Return Request')
+                ->label('Solicitações de devolução')
                 ->route('admin.order-return-request.index');
         });
 
         $orderMenu->subMenu('order_status', function (AdminMenu $menu) {
-            $menu->key('order')->label('Order Status')->route('admin.order-status.index');
+            $menu->key('order')->label('Status de Pedido')->route('admin.order-status.index');
         });
 
         AdminMenuFacade::add('system', function (AdminMenu $systemMenu) {
-            $systemMenu->label('Settings')->route('#')->icon('ti-settings');
+            $systemMenu->label('Configuração')->route('#')->icon('ti-settings');
         });
 
         $systemMenu = AdminMenuFacade::get('system');
 
         $systemMenu->subMenu('configuration', function (AdminMenu $menu) {
-            $menu->key('configuration')->label('Configuration')->route('admin.configuration')->icon('ti-settings');
+            $menu->key('configuration')->label('Configuração')->route('admin.configuration')->icon('ti-settings');
         });
 
         $systemMenu->subMenu('site_currency_setup', function (AdminMenu $menu) {
-            $menu->key('site_currency_setup')->label('Currencies')->route('admin.site-currency.index');
+            $menu->key('site_currency_setup')->label('Moedas')->route('admin.site-currency.index');
         });
 
         $systemMenu->subMenu('country', function (AdminMenu $menu) {
-            $menu->key('country')->label('Country')->route('admin.country.index');
+            $menu->key('country')->label('País')->route('admin.country.index');
         });
 
         $systemMenu->subMenu('state', function (AdminMenu $menu) {
-            $menu->key('state')->label('State')->route('admin.state.index');
+            $menu->key('state')->label('Estado')->route('admin.state.index');
         });
 
         $systemMenu->subMenu('module', function (AdminMenu $menu) {
@@ -155,15 +155,15 @@ class AdminMenuProvider extends ServiceProvider
         });
 
         $systemMenu->subMenu('admin-user', function (AdminMenu $menu) {
-            $menu->key('admin-user')->label('Staff')->route('admin.admin-user.index');
+            $menu->key('admin-user')->label('Equipe')->route('admin.admin-user.index');
         });
 
         $systemMenu->subMenu('role', function (AdminMenu $menu) {
-            $menu->key('role')->label('Roles/Permissions')->route('admin.role.index');
+            $menu->key('role')->label('Grupos/Permissões')->route('admin.role.index');
         });
 
         $systemMenu->subMenu('themes', function (AdminMenu $menu) {
-            $menu->key('themes')->label('Themes')->route('admin.theme.index');
+            $menu->key('themes')->label('Temas')->route('admin.theme.index');
         });
     }
 }

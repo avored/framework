@@ -116,12 +116,24 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+
+
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
         } catch (\Exception $e) {
             throw new \Exception('Error in Saving Product: ' . $e->getMessage());
         }
+
+        //dd($product);
+//        if ($request->expectsJson())
+//        {
+//            return response()->json(['success' => true, 'msg' => 'Atualizado com sucesso!']);
+//        }
+
+        // I think is better to redirect to edit product.
+        if ($product->type !== 'VARIABLE_PRODUCT')
+            return redirect()->route('admin.product.edit', ['id' => $product->id]);
 
         return redirect()->route('admin.product.index');
     }

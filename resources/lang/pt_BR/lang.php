@@ -56,4 +56,7 @@ return [
     'settings' => 'Configurações',
     'visit_site' => 'Visitar Site',
     'basic_details' => 'Informações Básicas',
+    'qty' => 'Qtd',
+    'enabled' => 'Sim',
+    'disabled' => 'Não',
 ];

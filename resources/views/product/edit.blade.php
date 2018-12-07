@@ -4,7 +4,7 @@
 <div id="admin-product-edit-page">
         <div class="row">
             <div class="col-12">
-                <div class="h1">Edit Product</div>
+                <div class="h1">Editar Produto</div>
             </div>
         </div>
     
@@ -12,11 +12,8 @@
         <?php
         $productCategories = $model->categories()->get()->pluck('id')->toArray();
         ?>
-        <form id="product-save-form"
-              action="{{route('admin.product.update', $model->id)}}"
-              enctype="multipart/form-data" method="post">
-            @csrf
-            @method('put')
+
+        {!! Form::open()->fill($model)->route('admin.product.update', [$model->id])->id('product-save-form')->multipart()->method('put') !!}
 
         <div class="row" id="product-save-accordion" data-children=".product-card">
             <div class="col-12 mb-2 mt-2">
@@ -36,7 +33,7 @@
                     <a data-toggle="collapse" data-parent="#product-save-accordion"
                        class="float-right" href="#images">
                     <div class="card-header">
-                        Images
+                        Imagens
                     </div>
                     </a>
                     <div class="card-body collapse" id="images">
@@ -59,7 +56,7 @@
                     <a data-toggle="collapse" data-parent="#product-save-accordion"
                        class="float-right" href="#property">
                     <div class="card-header">
-                        Property
+                        Propriedade
                     </div>
                     </a>
                     <div class="card-body collapse" id="property">
@@ -73,7 +70,7 @@
                         <a data-toggle="collapse" data-parent="#product-save-accordion"
                            class="float-right" href="#attribute">
                             <div class="card-header">
-                                Attribute
+                                Atributos
                             </div>
                         </a>
                         <div class="card-body collapse" id="attribute">
@@ -89,7 +86,7 @@
                     <a data-toggle="collapse" data-parent="#product-save-accordion"
                     class="float-right" href="#downloadable">
                         <div class="card-header ">
-                            Downloadable Info
+                            Informações de Download
                         </div>
                     </a>
                     <div class="card-body collapse" id="downloadable">
@@ -125,15 +122,15 @@
                         class="btn btn-primary" 
                         name="save" 
                         onclick="jQuery('#product-save-form').submit()">
-                    Save Product
+                    Salvar
                 </button>
                
                 <button type="button"  class="btn" onclick="location='{{ route('admin.product.index') }}'">
-                    Cancel
+                    Cancelar
                 </button>
             </div>
 
-        </form>
+        {!! Form::close() !!}
 </div>
 @endsection
 

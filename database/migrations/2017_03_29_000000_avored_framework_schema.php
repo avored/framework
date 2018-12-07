@@ -51,10 +51,10 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('status')->nullable()->default(null);
             $table->tinyInteger('in_stock')->nullable()->default(null);
             $table->tinyInteger('track_stock')->nullable()->default(null);
-            $table->decimal('qty', 10, 6)->nullable();
+            $table->decimal('qty', 10, 2)->nullable();
             $table->tinyInteger('is_taxable')->nullable()->default(null);
-            $table->decimal('price', 10, 6)->nullable()->default(null);
-            $table->decimal('cost_price', 10, 6)->nullable()->default(null);
+            $table->decimal('price', 10, 2)->nullable()->default(null);
+            $table->decimal('cost_price', 10, 2)->nullable()->default(null);
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -612,9 +612,9 @@ class AvoredFrameworkSchema extends Migration
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
-            'name' => 'NZ Dollars',
-            'code' => 'NZD',
-            'symbol' => '$',
+            'name' => 'Real Brasileiro',
+            'code' => 'BRL',
+            'symbol' => 'R$',
             'conversion_rate' => 1,
             'status' => 'ENABLED'
         ]);
@@ -661,6 +661,8 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('order_product_variations');
         Schema::dropIfExists('product_variations');
         Schema::dropIfExists('product_attribute_integer_values');
@@ -710,5 +712,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
+
     }
 }

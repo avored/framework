@@ -45,11 +45,7 @@ class Product extends BaseModel
 
     public function hasVariation()
     {
-        if ($this->type == self::$VARIATION_TYPE) {
-            return true;
-        }
-
-        return false;
+        return ($this->type == self::$VARIATION_TYPE);
     }
 
     public static function getProductBySlug($slug)
@@ -102,7 +98,7 @@ class Product extends BaseModel
      * @param array $$data
      * @return \AvoRed\Framework\Models\Database\Product $this
      */
-    public function saveProductImages(array $data):self
+    public function saveProductImages(array $data): self
     {
         if (isset($data['image']) && count($data['image']) > 0) {
             $exitingIds = $this->images()->get()->pluck('id')->toArray();
@@ -221,8 +217,8 @@ class Product extends BaseModel
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
                     $propertyModel->attachProduct($this)
-                                    ->fill(['value' => $propertyValue])
-                                    ->save();
+                        ->fill(['value' => $propertyValue])
+                        ->save();
                     $syncProperty[] = $propertyId;
                 }
                 $this->properties()->sync($syncProperty);
@@ -502,8 +498,8 @@ class Product extends BaseModel
     public function getVariableProduct($attributeDropdownOption)
     {
         $productAttributeIntegerValue = ProductAttributeIntegerValue::
-                                                whereAttributeId($attributeDropdownOption->attribute_id)
-                                                ->whereValue($attributeDropdownOption->id)->first();
+        whereAttributeId($attributeDropdownOption->attribute_id)
+            ->whereValue($attributeDropdownOption->id)->first();
 
         if (null === $productAttributeIntegerValue) {
             return;

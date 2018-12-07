@@ -68,32 +68,32 @@ class Provider extends ServiceProvider
     protected function registerAdminConfiguration()
     {
         $configurationGroup = AdminConfigurationFacade::add('general')
-            ->label('General');
+            ->label('Geral');
 
         $configurationGroup->addConfiguration('general_site_title')
-            ->label('Default Site Title')
+            ->label('Título do Site Padrão')
             ->type('text')
             ->name('general_site_title');
 
         $configurationGroup->addConfiguration('general_site_description')
-            ->label('Default Site Description')
+            ->label('Descrição do Site Padrão')
             ->type('text')
             ->name('general_site_description');
 
         $siteCurrencyRepository = new SiteCurrencyRepository;
         $configurationGroup->addConfiguration('general_site_currency')
-            ->label('Default Site Currency')
+            ->label('Moeda do Site Padrão')
             ->type('select')
             ->name('general_site_currency')
             ->options($siteCurrencyRepository);
 
         $configurationGroup->addConfiguration('general_administrator_email')
-            ->label('Administrator Email')
+            ->label('E-mail do Administrador')
             ->type('text')
             ->name('general_administrator_email');
 
         $configurationGroup->addConfiguration('general_term_condition_page')
-            ->label('Term & Condition Page')
+            ->label('Página - Termos e Condições')
             ->type('select')
             ->name('general_term_condition_page')
             ->options(function () {
@@ -102,7 +102,7 @@ class Provider extends ServiceProvider
             });
 
         $configurationGroup->addConfiguration('general_home_page')
-            ->label('Home Page')
+            ->label('Página Inicial')
             ->type('select')
             ->name('general_home_page')
             ->options(function () {
@@ -114,7 +114,7 @@ class Provider extends ServiceProvider
             ->label('Users');
 
         $userGroup->addConfiguration('user_default_country')
-            ->label('User Default Country')
+            ->label('País Padrão')
             ->type('select')
             ->name('user_default_country')
             ->options(function () {
@@ -123,11 +123,11 @@ class Provider extends ServiceProvider
             });
 
         $userGroup->addConfiguration('user_activation_required')
-            ->label('User Activation Required')
+            ->label('Ativação de Usuário Obrigatório')
             ->type('select')
             ->name('user_activation_required')
             ->options(function () {
-                $options = [0 => 'No', 1 => 'Yes'];
+                $options = [0 => 'Não', 1 => 'Sim'];
                 return $options;
             });
 
@@ -135,11 +135,11 @@ class Provider extends ServiceProvider
             ->label('Shipping');
 
         $shippingGroup->addConfiguration('shipping_free_shipping_enabled')
-            ->label('Is Free Shipping Enabled')
+            ->label('Ativar Frete Grátis?')
             ->type('select')
             ->name('shipping_free_shipping_enabled')
             ->options(function () {
-                $options = [1 => 'Yes', 0 => 'No'];
+                $options = [0 => 'Não', 1 => 'Sim'];
                 return $options;
             });
 
@@ -151,7 +151,7 @@ class Provider extends ServiceProvider
             ->type('select')
             ->name('payment_stripe_enabled')
             ->options(function () {
-                $options = [0 => 'No', 1 => 'Yes'];
+                $options = [0 => 'Não', 1 => 'Sim'];
                 return $options;
             });
 
@@ -173,7 +173,7 @@ class Provider extends ServiceProvider
             ->type('select')
             ->name('tax_enabled')
             ->options(function () {
-                $options = [1 => 'Yes', 0 => 'No'];
+                $options = [0 => 'Não', 1 => 'Sim'];
                 return $options;
             });
 

@@ -52,6 +52,9 @@ return [
     'search' => 'Search',
     'settings' => 'Settings',
     'visit_site' => 'Visit Site',
+    'qty' => 'Qty',
 
-    'basic_details' => 'Basic Details'
+    'basic_details' => 'Basic Details',
+    'enabled' => 'Enabled',
+    'disabled' => 'Disabled',
 ];

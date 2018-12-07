@@ -19,21 +19,21 @@
 
                         @csrf
 
-                        @include("avored-framework::forms.text",['name'=> 'name','label' => 'Name'])
-                        @include("avored-framework::forms.select",['name'=> 'type','label' => 'Type',
-                                                                    'options' => ['BASIC' => 'Basic Product',
-                                                                                    'VARIATION' => 'Variable Product',
-                                                                                    'DOWNLOADABLE' => 'Downloadable Product'
+                        @include("avored-framework::forms.text",['name'=> 'name','label' => __('avored-framework::product.name')])
+                        @include("avored-framework::forms.select",['name'=> 'type','label' =>  __('avored-framework::product.type_name'),
+                                                                    'options' => ['BASIC' => __('avored-framework::product.type.basic'),
+                                                                                    'VARIATION' => __('avored-framework::product.type.variable'),
+                                                                                    'DOWNLOADABLE' => __('avored-framework::product.type.downloadable')
                                                                                 ]
                                                                     ])
 
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Create & Continue</button>
+                            <button type="submit" class="btn btn-primary">Cadastrar & Continuar</button>
                             <button type="button"
                                     onclick="location='{{ route('admin.product.index') }}'"
 
-                                    class="btn">Cancel
+                                    class="btn">Cancelar
                             </button>
                         </div>
                     </form>

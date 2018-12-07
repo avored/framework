@@ -55,6 +55,7 @@ class AttributeController extends Controller
     public function store(AttributeRequest $request)
     {
         $attribute = $this->repository->create($request->all());
+
         $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
@@ -139,10 +140,9 @@ class AttributeController extends Controller
             }
 
             foreach ($request->get('dropdown_options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__') {
+                if ($key == '__RANDOM_STRING__' || empty($val['display_text'])) {
                     continue;
                 }
-
                 $attribute->attributeDropdownOptions()->create($val);
             }
         }

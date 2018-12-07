@@ -5,14 +5,9 @@
                 <div class="peer peer-greed">
                     <a class="sidebar-link td-n" href="{{ route('admin.dashboard') }}">
                         <div class="peers ai-c fxw-nw">
-                            <div class="peer">
-                                <div class="logo">
-                                    <img src="{{ asset('/vendor/avored-default/images/logo.svg') }}" alt="" height="50" width="60">
-                                </div>
-                            </div>
 
-                            <div class="peer peer-greed">
-                                <h5 class="lh-1 mB-0 logo-text">{!! config('app.name', 'Avored') !!}</h5>
+                            <div class="peer">
+                                <h5 class="lh-1 mB-0 logo-text">{!! config('app.name', 'Nome da Loja') !!}</h5>
                             </div>
                         </div>
                     </a>

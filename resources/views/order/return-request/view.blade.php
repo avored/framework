@@ -111,7 +111,7 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('avored-framework::lang.name') }}</th>
-                                    <th>Qty</th>
+                                    <th>{{ __('avored-framework::lang.qty') }}</th>
                                     
                                     <th>Reason</th>
                                 </tr>

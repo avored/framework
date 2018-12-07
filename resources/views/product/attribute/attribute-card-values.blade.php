@@ -34,7 +34,7 @@
                                        class="form-control"/>
                             </div>
                             <div class="col-md-3">
-                                <label>Qty</label>
+                                <label>{{ __('avored-framework::lang.qty') }}</label>
                                 <input type="text" name="variations[{{ $attribute->id }}][dropdown][{{ $dropdownValue->id }}][qty]"
                                        class="form-control"/>
                             </div>

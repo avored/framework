@@ -43,17 +43,17 @@
                 </tr>
                 
                 <tr>
-                    <td>Qty</td>
+                    <td>{{ __('avored-framework::lang.qty') }}</td>
                     <td>{{ $product->qty }}</td>
                 </tr>
                 
                 <tr>
                     <td>In Stock</td>
-                    <td>{{ ($product->in_stock) ? "Enabled" : "Disabled" }}</td>
+                    <td>{{ ($product->in_stock) ? __('avored-framework::lang.enabled') : __('avored-framework::lang.disabled') }}</td>
                 </tr>
                 <tr>
                     <td>Track Stock</td>
-                    <td>{{ ($product->track_stock) ? "Enabled" : "Disabled" }}</td>
+                    <td>{{ ($product->track_stock) ? __('avored-framework::lang.enabled') : __('avored-framework::lang.disabled') }}</td>
                 </tr>
                 
 

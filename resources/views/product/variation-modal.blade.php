@@ -38,7 +38,7 @@ id="variation-modal-{{ $model->id }}"
                 </div>
 
                 <div class="form-group">
-                    <label for="variation-qty-{{ $model->id }}">Qty</label>
+                    <label for="variation-qty-{{ $model->id }}">{{ __('avored-framework::lang.qty') }}</label>
                     <input type="text" value="{{ $model->qty }}"
                            id="variation-qty-{{ $model->id }}"
                            class="form-control" name="qty" />

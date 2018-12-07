@@ -25,7 +25,7 @@
                 <button type="button"
                         data-token="{{ csrf_token() }}"
                         class="btn btn-warning modal-use-selected">
-                    Use Selected
+                    Usar selecionados
                 </button>
             </div>
 
