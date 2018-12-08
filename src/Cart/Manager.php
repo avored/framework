@@ -63,10 +63,6 @@ class Manager
                     'attribute_id' => $attributeId,
                     'variation_id' => $variationId,
                     'attribute_dropdown_option_id' => $optionModel->id,
-                    'variation_display' => [
-                        'name' => $attributeModel->name,
-                        'text' => $optionModel->display_text
-                    ],
                     'variation_display_text' => $attributeModel->name . ': ' . $optionModel->display_text
                 ];
             }
@@ -103,15 +99,7 @@ class Manager
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
 
         $checkQty = $qty + $cartQty;
-        $product = Product::with(['attribute'])
-            ->whereSlug($slug)->first();
-
-        if (null !== $attribute && count($attribute)) {
-            foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct = Product::find($variationId);
-                return ($variableProduct->qty >= $checkQty);
-            }
-        }
+        $product = Product::whereSlug($slug)->first();
 
         $productQty = $product->qty;
         if ($productQty >= $checkQty) {
