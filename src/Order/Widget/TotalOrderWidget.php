@@ -19,7 +19,7 @@ class TotalOrderWidget implements WidgetContract
      *
      * @var string
      */
-    protected $label = 'Total Order';
+    protected $label = 'Total Pedido';
 
     /**
      * Widget Type.

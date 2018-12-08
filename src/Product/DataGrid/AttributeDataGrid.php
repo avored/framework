@@ -13,12 +13,12 @@ class AttributeDataGrid
         $dataGrid = DataGrid::make('admin_attribute_controller');
 
         $dataGrid->model($model)
-                ->column('name', ['label' => 'Name', 'sortable' => true])
+                ->column('name', ['label' => 'Nome', 'sortable' => true])
                 ->column('identifier', ['sortable' => true])
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='" . route('admin.attribute.edit', $model->id) . "' >Edit</a>";
+                    return "<a href='" . route('admin.attribute.edit', $model->id) . "' >Editar</a>";
                 })->linkColumn('show', [], function ($model) {
-                    return "<a href='" . route('admin.attribute.show', $model->id) . "' >Show</a>";
+                    return "<a href='" . route('admin.attribute.show', $model->id) . "' >Visualizar</a>";
                 });
 
         $this->dataGrid = $dataGrid;

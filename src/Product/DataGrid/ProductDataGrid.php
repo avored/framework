@@ -18,9 +18,9 @@ class ProductDataGrid
                 return "<img src='" . $model->image->smallUrl . "' style='max-height: 50px;' />";
             })->column('name')
             ->linkColumn('edit', [], function ($model) {
-                return "<a href='" . route('admin.product.edit', $model->id) . "' >Edit</a>";
+                return "<a href='" . route('admin.product.edit', $model->id) . "' >Editar</a>";
             })->linkColumn('show', [], function ($model) {
-                return "<a href='" . route('admin.product.show', $model->id) . "' >Show</a>";
+                return "<a href='" . route('admin.product.show', $model->id) . "' >Visualizar</a>";
             });
 
         $this->dataGrid = $dataGrid;

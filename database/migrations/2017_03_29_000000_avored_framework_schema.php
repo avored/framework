@@ -131,6 +131,8 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('order_id')->unsigned()->nullable()->default(null);
             $table->integer('order_status_id')->unsigned()->nullable()->default(null);
 
+            $table->json('transaction_data')->nullable();
+
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');

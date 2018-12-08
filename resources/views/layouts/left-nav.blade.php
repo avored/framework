@@ -5,9 +5,8 @@
                 <div class="peer peer-greed">
                     <a class="sidebar-link td-n" href="{{ route('admin.dashboard') }}">
                         <div class="peers ai-c fxw-nw">
-
                             <div class="peer">
-                                <h5 class="lh-1 mB-0 logo-text">{!! config('app.name', 'Nome da Loja') !!}</h5>
+                                <h5 class="lh-1 mB-0 logo-text">Shop Dashboard</h5>
                             </div>
                         </div>
                     </a>

@@ -13,16 +13,16 @@ class OrderDataGrid
         $dataGrid = DataGrid::make('admin_order_controller');
 
         $dataGrid->model($model)
-                    ->column('id', ['label' => 'Order Number', 'sortable' => true])
-                    ->column('shipping_option', ['label' => 'Shipping Option'])
-                    ->column('payment_option', ['label' => 'Payment Option'])
+                    ->column('id', ['label' => 'N. Pedido', 'sortable' => true])
+                    ->column('shipping_option', ['label' => 'Frete'])
+                    ->column('payment_option', ['label' => 'Pagamento'])
                     ->linkColumn('order_status', ['label' => 'Status'], function ($model) {
                         return $model->orderStatus->name;
                     })
-                    ->column('created_at', ['label' => 'Date created'])
-                    ->column('updated_at', ['label' => 'Recent updated'])
+                    ->column('created_at', ['label' => 'Criação'])
+                    ->column('updated_at', ['label' => 'Atualização'])
                     ->linkColumn('view', [], function ($model) {
-                        return "<a href='" . route('admin.order.view', $model->id) . "' >View</a>";
+                        return "<a href='" . route('admin.order.view', $model->id) . "' >Visualizar</a>";
                     });
 
         $this->dataGrid = $dataGrid;

@@ -19,7 +19,7 @@ class RecentOrderWidget implements WidgetContract
      *
      * @var string
      */
-    protected $label = 'Recent Order';
+    protected $label = 'Pedido Recente';
 
     /**
      * Widget Type.

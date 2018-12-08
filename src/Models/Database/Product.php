@@ -102,16 +102,17 @@ class Product extends BaseModel
     {
         if (isset($data['image']) && count($data['image']) > 0) {
             $exitingIds = $this->images()->get()->pluck('id')->toArray();
-            foreach ($data['image'] as $key => $data) {
+
+            foreach ($data['image'] as $key => $dataImage) {
                 if (is_int($key)) {
                     if (($findKey = array_search($key, $exitingIds)) !== false) {
                         $productImage = ProductImage::findorfail($key);
-                        $productImage->update($data);
+                        $productImage->update($dataImage);
                         unset($exitingIds[$findKey]);
                     }
                     continue;
                 }
-                ProductImage::create($data + ['product_id' => $this->id]);
+                ProductImage::create($dataImage + ['product_id' => $this->id]);
             }
             if (count($exitingIds) > 0) {
                 ProductImage::destroy($exitingIds);

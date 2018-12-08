@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AvoRed Admin Login</title>
+    <title>Área Restrita</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/avored-admin/css/app.css') }}" rel="stylesheet">
@@ -30,7 +30,7 @@
             <div class="card">
 
                 <div class="card-header bg-primary text-white">
-                    {{ __('avored-framework::lang.user.login-card-title') }}
+                    Área Restrita
                 </div>
                 <div class="card-body" >
 

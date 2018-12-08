@@ -16,7 +16,7 @@ class CategoryDataGrid
         $dataGrid->model($model)
                 ->column('name', function (TextColumn $column) {
                     $column->identifier('name')
-                            ->label('Name')
+                            ->label('Nome')
                             ->sortable(true)
                             ->canFilter(true);
                 })

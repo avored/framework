@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Order\Controllers;
 
+use AvoRed\Framework\Order\Services\OrderService;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -25,9 +26,10 @@ class OrderController extends Controller
      */
     protected $repository;
 
-    public function __construct(OrderInterface $repository)
+    public function __construct(OrderInterface $repository, OrderService $orderService)
     {
         $this->repository = $repository;
+        $this->service = $orderService;
     }
 
     /**
@@ -62,19 +64,11 @@ class OrderController extends Controller
      */
     public function sendEmailInvoice(Model $order)
     {
-        $user = $order->user;
-        $view = view('avored-framework::mail.order-pdf')->with('order', $order);
-
-        $folderPath = storage_path('app/public/uploads/order/invoice');
-        if (!File::exists($folderPath)) {
-            File::makeDirectory($folderPath, '0775', true, true);
+        if ($this->service->sendEmailInvoice($order))
+        {
+            return redirect()->back()->with('notificationText', 'E-mail enviado com sucesso');
         }
-        $path = $folderPath . DIRECTORY_SEPARATOR . $order->id . '.pdf';
-        PDF::loadHTML($view->render())->save($path);
-
-        Mail::to($user->email)->send(new OrderInvoicedMail($order, $path));
-
-        return redirect()->back()->with('notificationText', 'Email Sent Successfully!!');
+        return redirect()->back()->with('notificationText', 'Falha ao enviar e-mail');
     }
 
     /**

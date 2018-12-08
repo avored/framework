@@ -5,6 +5,8 @@ namespace AvoRed\Framework\Models\Repository;
 use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
 
+use AvoRed\Framework\Image\Facades\Image;
+
 class ProductRepository implements ProductInterface
 {
     /**
@@ -38,4 +40,40 @@ class ProductRepository implements ProductInterface
     {
         return Product::query();
     }
+
+    /**
+     * return random string only lower and without digits.
+     *
+     * @param int $length
+     * @return string $randomString
+     */
+    public function _getTmpString($length = 6)
+    {
+        $pool = 'abcdefghijklmnopqrstuvwxyz';
+
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+    }
+
+
+    /**
+     *
+     */
+    public function uploadImage($request)
+    {
+        try {
+            $image = $request->image;
+            $tmpPath = str_split(strtolower(str_random(3)));
+            $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
+
+            $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
+            $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
+
+            return $image;
+        }
+        catch(\Exception $e)
+        {
+            return false;
+        }
+    }
+
 }

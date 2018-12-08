@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Product\Controllers;
 
 use AvoRed\Framework\Models\Database\AttributeDropdownOption;
+use AvoRed\Framework\Models\Database\ProductImage;
 use AvoRed\Framework\Models\Database\Property;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -116,20 +117,20 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-
-
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
+
+            // verify if has image (for variation cases).
+            if ($request->hasFile('image') && $product->type == 'VARIABLE_PRODUCT') {
+                $image = $this->repository->uploadImage($request);
+                ProductImage::whereProductId($product->id)->delete();
+                ProductImage::create(['product_id' => $product->id, 'path' => $image->relativePath, 'is_main_image' => true]);
+            }
+
         } catch (\Exception $e) {
             throw new \Exception('Error in Saving Product: ' . $e->getMessage());
         }
-
-        //dd($product);
-//        if ($request->expectsJson())
-//        {
-//            return response()->json(['success' => true, 'msg' => 'Atualizado com sucesso!']);
-//        }
 
         // I think is better to redirect to edit product.
         if ($product->type !== 'VARIABLE_PRODUCT')
@@ -161,19 +162,19 @@ class ProductController extends Controller
      */
     public function uploadImage(Request $request)
     {
-        $image = $request->image;
+        $this->validate($request, [
+            'image' => 'mimes:jpg,jpeg,png'
+        ]);
 
-        $tmpPath = str_split(strtolower(str_random(3)));
-        $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
+        if ($image = $this->repository->uploadImage($request))
+        {
+            $tmp = $this->_getTmpString();
+            return view('avored-framework::product.upload-image')
+                ->with('image', $image)
+                ->with('tmp', $tmp);
+        }
 
-        $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-        $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
-
-        $tmp = $this->_getTmpString();
-
-        return view('avored-framework::product.upload-image')
-            ->with('image', $image)
-            ->with('tmp', $tmp);
+        return view()->make('Falha ao enviar imagem');
     }
 
     /**
