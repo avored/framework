@@ -15,4 +15,5 @@ class ProductVariation extends BaseModel
     {
         return $this->belongsTo(Product::class, 'variation_id');
     }
+
 }

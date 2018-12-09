@@ -13,6 +13,9 @@
             </div>
             <div class="modal-body">
 
+                Atribute
+                {!! $model->productIntegerAttributes !!}
+
                 {!! Form::text('name', __('avored-framework::lang.name'))->id('variation-name-' . $model->id) !!}
                 {!! Form::text('sku', 'SKU')->id('variation-sku-' . $model->id) !!}
                 <div class="row">

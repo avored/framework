@@ -56,7 +56,9 @@ class ProductRepository implements ProductInterface
 
 
     /**
-     *
+     * Send image for a product.
+     * @param $request
+     * @return bool
      */
     public function uploadImage($request)
     {
@@ -74,6 +76,29 @@ class ProductRepository implements ProductInterface
         {
             return false;
         }
+    }
+
+    public function getProductVariationWithCombinations($parentId, $attributes = [])
+    {
+        $product = $this->query()
+            ->with(['productVariations', 'productVariations.variationProduct.productIntegerAttributes'])
+            ->whereHas('productVariations.variationProduct.productIntegerAttributes', function($q) use ($attributes) {
+                $i = 1;
+                foreach ($attributes as $keyId => $keyValue)
+                {
+                    $string = $i > 1 ? 'where' : 'orWhere';
+                    $q->$string(function ($query) use ($keyId, $keyValue) {
+                        $query->where('attribute_id', '=', $keyId)
+                            ->where('value', '=', $keyValue);
+                    });
+                    $i++;
+                }
+            })
+            ->whereHas('productVariations', function($q) use ($parentId) {
+                $q->where('product_id', '=', $parentId);
+            })
+            ->get();
+        return $product;
     }
 
 }

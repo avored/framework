@@ -455,36 +455,36 @@ class Product extends BaseModel
 
         $collection = Collection::make([]);
 
-        if (null === $variations || $variations->count() <= 0) {
+        if (isset($variations) && null === $variations || $variations->count() <= 0) {
             return $collection;
         }
 
         foreach ($variations as $variation) {
-            $variationModel = self::findorfail($variation->variation_id);
+            $variationModel = self::findOrFail($variation->variation_id);
 
-            foreach ($variationModel->productVarcharAttributes as $item) {
+            foreach ($variationModel->productIntegerAttributes()->select(['id', 'product_id', 'value', 'attribute_id'])->get() as $item) {
                 $collection->push($item);
             }
-            foreach ($variationModel->productBooleanAttributes as $item) {
-                $collection->push($item);
-            }
-
-            foreach ($variationModel->productTextAttributes as $item) {
-                $collection->push($item);
-            }
-            foreach ($variationModel->productDecimalAttributes as $item) {
-                $collection->push($item);
-            }
-            foreach ($variationModel->productDecimalAttributes as $item) {
-                $collection->push($item);
-            }
-            foreach ($variationModel->productIntegerAttributes as $item) {
-                $collection->push($item);
-            }
-
-            foreach ($variationModel->productDatetimeAttributes as $item) {
-                $collection->push($item);
-            }
+//
+//            foreach ($variationModel->productVarcharAttributes as $item) {
+//                $collection->push($item);
+//            }
+//            foreach ($variationModel->productBooleanAttributes as $item) {
+//                $collection->push($item);
+//            }
+//
+//            foreach ($variationModel->productTextAttributes as $item) {
+//                $collection->push($item);
+//            }
+//            foreach ($variationModel->productDecimalAttributes as $item) {
+//                $collection->push($item);
+//            }
+//            foreach ($variationModel->productDecimalAttributes as $item) {
+//                $collection->push($item);
+//            }
+//            foreach ($variationModel->productDatetimeAttributes as $item) {
+//                $collection->push($item);
+//            }
         }
 
         return $collection;
@@ -519,6 +519,31 @@ class Product extends BaseModel
         $model = new static();
 
         return $model->find($productVariationModel->product_id);
+    }
+
+    public function getVariationsWithAttributes()
+    {
+        $variations = $this->productVariations()->with('variationProduct')->get();
+        $data = [];
+        foreach ($variations as $variationModel)
+        {
+            $item = array(
+                'parent_id' => $variationModel->product_id,
+                'id' => $variationModel->variation_id,
+                'name' => $variationModel->variationProduct->name,
+                'sku' => $variationModel->variationProduct->sku,
+                'qty' => $variationModel->variationProduct->qty,
+                'weight' => $variationModel->variationProduct->weight,
+                'width' => $variationModel->variationProduct->width,
+                'height' => $variationModel->variationProduct->height,
+                'length' => $variationModel->variationProduct->length,
+                'attributes' => $variationModel->variationProduct->productIntegerAttributes()->where('product_id', '=', $variationModel->variation_id)
+                    ->select(['id', 'product_id', 'value', 'attribute_id'])->get()->toArray()
+            );
+            $data[$variationModel->variation_id] = $item;
+        }
+
+        return collect($data);
     }
 
     /**
