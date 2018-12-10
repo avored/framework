@@ -6,6 +6,14 @@ use AvoRed\Framework\Cart\Contracts\Cart as CartContracts;
 
 class Product implements CartContracts
 {
+
+    /**
+     * Cart Product Model
+     *
+     * @var
+     */
+    protected $model;
+
     /**
      * Cart Product Name.
      *
@@ -211,4 +219,19 @@ class Product implements CartContracts
 
         return $this;
     }
+
+    /**
+     *
+     * @param mixed $model
+     */
+    public function model($model)
+    {
+        if (null === $model)
+            return $this->model;
+
+        $this->model = $model;
+
+        return $this;
+    }
+
 }

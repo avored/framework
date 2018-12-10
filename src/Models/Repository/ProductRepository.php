@@ -6,6 +6,7 @@ use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
 
 use AvoRed\Framework\Image\Facades\Image;
+use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
 
 class ProductRepository implements ProductInterface
 {
@@ -80,25 +81,26 @@ class ProductRepository implements ProductInterface
 
     public function getProductVariationWithCombinations($parentId, $attributes = [])
     {
-        $product = $this->query()
-            ->with(['productVariations', 'productVariations.variationProduct.productIntegerAttributes'])
-            ->whereHas('productVariations.variationProduct.productIntegerAttributes', function($q) use ($attributes) {
-                $i = 1;
-                foreach ($attributes as $keyId => $keyValue)
-                {
-                    $string = $i > 1 ? 'where' : 'orWhere';
-                    $q->$string(function ($query) use ($keyId, $keyValue) {
-                        $query->where('attribute_id', '=', $keyId)
-                            ->where('value', '=', $keyValue);
-                    });
-                    $i++;
-                }
-            })
-            ->whereHas('productVariations', function($q) use ($parentId) {
-                $q->where('product_id', '=', $parentId);
-            })
-            ->get();
-        return $product;
+        // Get variations with attributes
+        $variations = $this->query()
+            ->with('productVariations')
+            ->find($parentId);
+
+        $variations = $variations->productVariations->pluck('variation_id');
+
+        $collections = array();
+        foreach ($attributes as $key => $value)
+        {
+            $collections[] = ProductAttributeIntegerValue::whereIn('product_id', $variations)
+                ->where(['attribute_id' => $key, 'value' => $value])->pluck('product_id')->toArray();
+        }
+
+        $intersecao = array_intersect(...$collections);
+        if (count($intersecao) > 0) {
+            return $this->query()->select(['id', 'price', 'name', 'width', 'height', 'length', 'weight', 'slug', 'qty'])->find(reset($intersecao));
+        }
+
+        return false;
     }
 
 }

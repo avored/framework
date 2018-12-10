@@ -43,6 +43,7 @@ class Product extends BaseModel
         return $collections;
     }
 
+
     public function hasVariation()
     {
         return ($this->type == self::$VARIATION_TYPE);
@@ -89,7 +90,7 @@ class Product extends BaseModel
         $siteCurrency = App::get(SiteCurrencyInterface::class);
         $model = $siteCurrency->findByCode($currentCurrencyCode);
 
-        return $val * $model->conversion_rate;
+        return number_format($val * $model->conversion_rate, 2);
     }
 
     /**
@@ -509,6 +510,10 @@ class Product extends BaseModel
         return self::findorfail($productAttributeIntegerValue->product_id);
     }
 
+    /**
+     * @param null $variationId
+     * @return mixed
+     */
     public function getVariableMainProduct($variationId = null)
     {
         if (null === $variationId) {
@@ -521,6 +526,9 @@ class Product extends BaseModel
         return $model->find($productVariationModel->product_id);
     }
 
+    /**
+     * @return mixed
+     */
     public function getVariationsWithAttributes()
     {
         $variations = $this->productVariations()->with('variationProduct')->get();
@@ -545,6 +553,7 @@ class Product extends BaseModel
 
         return collect($data);
     }
+
 
     /**
      * Product has many Categories.

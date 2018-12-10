@@ -6,6 +6,7 @@ use AvoRed\Framework\Cart\Product as CartFacadeProduct;
 use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
 use AvoRed\Framework\Models\Database\Product;
+use AvoRed\Framework\Models\Repository\ProductRepository;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +20,8 @@ class Manager
      */
     public $sessionManager;
 
+    public $repo;
+
     /**
      * AvoRed Cart Construct.
      *
@@ -27,6 +30,7 @@ class Manager
     public function __construct(SessionManager $manager)
     {
         $this->sessionManager = $manager;
+        $this->repo = app()->make(ProductRepository::class);
     }
 
     /**
@@ -41,47 +45,31 @@ class Manager
     {
         $cartProducts = $this->getSession();
         $product = Product::whereSlug($slug)->first();
+        $productVariation = false;
+        if (null !== $attribute && count($attribute)) {
+            $productParent = $product;
+            $product = $this->repo->getProductVariationWithCombinations($product->id, $attribute);
+            $productVariation = true;
+        }
+
         $price = $product->price;
         $attributes = null;
-
-        if (null !== $attribute && count($attribute)) {
-            foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct = Product::find($variationId);
-                $attributeModel = Attribute::find($attributeId);
-
-                $productAttributeIntValModel = ProductAttributeIntegerValue::
-                                                        whereAttributeId($attributeId)
-                                                        ->whereProductId($variableProduct->id)
-                                                        ->first();
-                $optionModel = $attributeModel
-                                    ->AttributeDropdownOptions()
-                                    ->whereId($productAttributeIntValModel->value)
-                                    ->first();
-
-                $price = $variableProduct->price;
-                $attributes[] = [
-                    'attribute_id' => $attributeId,
-                    'variation_id' => $variationId,
-                    'attribute_dropdown_option_id' => $optionModel->id,
-                    'variation_display' => [
-                        'name' => $attributeModel->name,
-                        'text' => $optionModel->display_text
-                    ],
-                    'variation_display_text' => $attributeModel->name . ': ' . $optionModel->display_text
-                ];
-            }
+        $image = $product->image;
+        if ($productVariation && !count($product->images)) {
+             $image = $productParent->image;
         }
 
         $cartProduct = new CartFacadeProduct();
         $cartProduct->name($product->name)
+                    ->model($product)
                     ->qty($qty)
-                    ->slug($slug)
-                    ->price($price)
-                    ->image($product->image)
+                    ->slug($product->slug)
+                    ->price($product->price)
+                    ->image($image)
                     ->lineTotal($qty * $price)
                     ->attributes($attributes);
 
-        $cartProducts->put($slug, $cartProduct);
+        $cartProducts->put($product->slug, $cartProduct);
 
         $this->sessionManager->put($this->getSessionKey(), $cartProducts);
 
@@ -99,19 +87,18 @@ class Manager
     public function canAddToCart($slug, $qty, $attribute = [])
     {
         $cartProducts = $this->getSession();
-        $cartProduct = $cartProducts->get($slug);
-        $cartQty = $cartProduct ? $cartProduct->qty() : 0;
-
-        $checkQty = $qty + $cartQty;
-        $product = Product::with(['attribute'])
-            ->whereSlug($slug)->first();
+        $product = Product::whereSlug($slug)->first();
 
         if (null !== $attribute && count($attribute)) {
-            foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct = Product::find($variationId);
-                return ($variableProduct->qty >= $checkQty);
-            }
+            $product = $this->repo->getProductVariationWithCombinations($product->id, $attribute);
+            $cartProduct = $cartProducts->get($product->slug);
         }
+        else {
+            $cartProduct = $cartProducts->get($slug);
+        }
+
+        $cartQty = $cartProduct ? $cartProduct->qty() : 0;
+        $checkQty = $qty + $cartQty;
 
         $productQty = $product->qty;
         if ($productQty >= $checkQty) {
