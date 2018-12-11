@@ -14,7 +14,6 @@ class SiteCurrencyTest extends BaseTestCase
 {
     /**
      * Test the Site Currency Index Route
-     * @test
      */
     public function test_site_currency_index_route()
     {
@@ -26,7 +25,6 @@ class SiteCurrencyTest extends BaseTestCase
     }
     /**
      * Test the Site Currency Create Route
-     * @test
      */
     public function test_site_currency_create_route()
     {
@@ -38,7 +36,6 @@ class SiteCurrencyTest extends BaseTestCase
     }
     /**
      * Test the Site Currency Store Route
-     * @test
      */
     public function test_site_currency_store_route()
     {
@@ -61,7 +58,6 @@ class SiteCurrencyTest extends BaseTestCase
     }
     /**
      * Test the Site Currency Store Route
-     * @test
      */
     public function test_site_currency_edit_route()
     {
@@ -77,7 +73,6 @@ class SiteCurrencyTest extends BaseTestCase
     }
     /**
      * Test the Site Currency Store Route
-     * @test
      */
     public function test_site_currency_update_route()
     {
@@ -97,7 +92,6 @@ class SiteCurrencyTest extends BaseTestCase
     }
     /**
      * Test the Site Currency Store Route
-     * @test
      */
     public function test_site_currency_destroy_route()
     {
