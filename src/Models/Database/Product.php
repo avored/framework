@@ -16,7 +16,7 @@ use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Product extends BaseModel
 {
-    public static $VARIATION_TYPE = 'VARIATION';
+    const VARIATION_TYPE = 'VARIATION';
 
     protected $fillable = ['type', 'name', 'slug', 'sku',
         'description', 'status', 'in_stock', 'track_stock', 'price', 'cost_price',
@@ -43,9 +43,37 @@ class Product extends BaseModel
         return $collections;
     }
 
+    /**
+     * Get the Product Variation Product Json Data
+     * @return array $jsonData
+     */
+    public function getProductVariationJsonData()
+    {
+        $lists = ProductAttributeIntegerValue::whereIn(
+            'product_id',
+            $product->productVariations->pluck('variation_id')
+        )->get();
+        
+        foreach ($lists as $list) {
+            $variationModel = $this->repository->find($list->product_id);
+            if (array_has($jsonData, $list->product_id)) {
+                $data = array_get($jsonData, $list->product_id);
+                $data[$list->attribute_id] = [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]
+                ];
+                $jsonData[$list->product_id] = $data;
+            } else {
+                $jsonData[$list->product_id] = [$list->attribute_id => [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]]
+                ];
+            }
+        }
+        return $jsonData;
+    }
+
     public function hasVariation()
     {
-        if ($this->type == self::$VARIATION_TYPE) {
+        if ($this->type == self::VARIATION_TYPE) {
             return true;
         }
 

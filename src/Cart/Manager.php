@@ -45,6 +45,7 @@ class Manager
         $attributes = null;
 
         if (null !== $attribute && count($attribute)) {
+
             foreach ($attribute as $attributeId => $variationId) {
                 $variableProduct = Product::find($variationId);
                 $attributeModel = Attribute::find($attributeId);
@@ -97,12 +98,11 @@ class Manager
         $cartProducts = $this->getSession();
         $cartProduct = $cartProducts->get($slug);
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
-
         $checkQty = $qty + $cartQty;
         $product = Product::whereSlug($slug)->first();
-
         $productQty = $product->qty;
-        if ($productQty >= $checkQty) {
+
+        if ($productQty > $checkQty) {
             return true;
         }
 
