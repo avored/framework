@@ -105,7 +105,11 @@ class Manager
 
         $options = ['path' => asset(request()->path())];
         if (!$dataGrid->model instanceof Collection) {
-            $dataGrid->data = $dataGrid->model->paginate($this->pageItem, ['*'], $dataGrid->pageName());
+            $dataGrid->data = $dataGrid->model->paginate(
+                $this->pageItem,
+                ['*'],
+                $dataGrid->pageName()
+            );
 
             if (null !== $this->request->get('asc')) {
                 $dataGrid->model->orderBy($this->request->get('asc'), 'asc');
@@ -114,7 +118,12 @@ class Manager
                 $dataGrid->model->orderBy($this->request->get('desc', 'id'), 'desc');
             }
         } else {
-            $dataGrid->data = $this->paginate($dataGrid->model, $this->pageItem, null, $options);
+            $dataGrid->data = $this->paginate(
+                $dataGrid->model,
+                $this->pageItem,
+                null,
+                $options
+            );
         }
 
         return view('avored-framework::datagrid.grid')->with('dataGrid', $dataGrid);
@@ -160,7 +169,6 @@ class Manager
     public function column($identifier, $options = [])
     {
         $column = new TextColumn($identifier, $options);
-
         $this->columns->put($identifier, $column);
 
         return $this;
