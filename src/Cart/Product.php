@@ -7,6 +7,14 @@ use AvoRed\Framework\Cart\Contracts\Cart as CartContracts;
 class Product implements CartContracts
 {
 
+
+    /**
+     * Cart Product ID
+     *
+     * @var
+     */
+    protected $id;
+
     /**
      * Cart Product Model
      *
@@ -69,6 +77,17 @@ class Product implements CartContracts
      * @var double
      */
     protected $lineTotal;
+
+
+
+    public function id($id = null)
+    {
+        if (null === $id)
+            return $this->id;
+
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * Set/Get Cart Product Name.

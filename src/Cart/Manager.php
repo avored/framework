@@ -60,10 +60,12 @@ class Manager
         }
 
         $cartProduct = new CartFacadeProduct();
-        $cartProduct->name($product->name)
+        $cartProduct
+                    ->id($product->id)
+                    ->name($product->name)
                     ->model($product)
                     ->qty($qty)
-                    ->slug($product->slug)
+                    ->slug($slug)
                     ->price($product->price)
                     ->image($image)
                     ->lineTotal($qty * $price)

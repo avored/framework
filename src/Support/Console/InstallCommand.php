@@ -52,9 +52,9 @@ class InstallCommand extends Command
     {
             $this->dropAllTables();
 
-            $answer = $this->ask('Do you want to Install Dummy Data? (y/n)', 'yes');
+            $answer = $this->ask('Deseja instalar produtos Demo? (s/n)', 'yes');
 
-        if ($answer == 'y' || $answer == 'yes') {
+        if (in_array($answer, ['y', 'yes', 'sim', 's'])) {
             $this->call('key:generate');
             $this->call('migrate');
             $this->call('db:seed', ['--class' => 'AvoRedDataSeeder']);
@@ -91,13 +91,13 @@ class InstallCommand extends Command
             );
             Configuration::create(
                 ['configuration_key' => 'avored_catalog_cart_page_display_taxamount',
-                    'configuration_value' => 'yes']
+                    'configuration_value' => 'no']
             );
             Configuration::create(
                 ['configuration_key' => 'avored_tax_class_percentage_of_tax',
-                'configuration_value' => 15]
+                'configuration_value' => 0]
             );
-            $this->info('AvoRed Install Successfully!');
+            $this->info('Plataforma instalada com sucesso!');
     }
 
     /**

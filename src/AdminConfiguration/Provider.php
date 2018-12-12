@@ -169,7 +169,7 @@ class Provider extends ServiceProvider
             ->label('Tax');
 
         $taxGroup->addConfiguration('tax_enabled')
-            ->label('Is Tax Enabled')
+            ->label('Ativar Taxa')
             ->type('select')
             ->name('tax_enabled')
             ->options(function () {
@@ -178,7 +178,7 @@ class Provider extends ServiceProvider
             });
 
         $taxGroup->addConfiguration('tax_percentage')
-            ->label('Tax Percentage')
+            ->label('Porcentagem de Taxa')
             ->type('text')
             ->name('tax_percentage');
 
