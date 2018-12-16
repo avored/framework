@@ -129,17 +129,15 @@ class AttributeController extends Controller
      * @param \AvoRed\Framework\Product\Requests\AttributeRequest $request
      * @return void
      */
-    private function saveDropdownOptions($attribute, $request)
+    protected function saveDropdownOptions($attribute, $request)
     {
         if (null !== $request->get('dropdown_options')) {
-            if (null != $attribute->attributeDropdownOptions()->get() &&
-                $attribute->attributeDropdownOptions()->get()->count() >= 0
-                ) {
+            if ($attribute->attributeDropdownOptions()->get() != null && $attribute->attributeDropdownOptions()->get()->count() >= 0) {
                 $attribute->attributeDropdownOptions()->delete();
             }
 
             foreach ($request->get('dropdown_options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__') {
+                if ($key == '__RANDOM_STRING__' || empty($val['display_text'])) {
                     continue;
                 }
 
