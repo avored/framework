@@ -24,7 +24,7 @@ class Country extends BaseModel
 
         $options = $model->all()->pluck('name', 'id');
         if (true === $empty) {
-            $options->prepend('Please Select', null);
+            $options->prepend('Please Select', '');
         }
         return $options;
     }
