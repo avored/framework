@@ -555,6 +555,38 @@ class Product extends BaseModel
     }
 
 
+
+    /**
+     * Get the Product Variation Product Json Data
+     * @return array $jsonData
+     */
+    public function getProductVariationJsonData()
+    {
+        $lists = ProductAttributeIntegerValue::whereIn(
+            'product_id',
+            $this->productVariations->pluck('variation_id')
+        )->get();
+
+        $jsonData = array();
+
+        foreach ($lists as $list) {
+            $variationModel = Product::find($list->product_id);
+            if (array_has($jsonData, $list->product_id)) {
+                $data = array_get($jsonData, $list->product_id);
+                $data[$list->attribute_id] = [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]
+                ];
+                $jsonData[$list->product_id] = $data;
+            } else {
+                $jsonData[$list->product_id] = [$list->attribute_id => [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]]
+                ];
+            }
+        }
+        return $jsonData;
+    }
+
+
     /**
      * Product has many Categories.
      *
