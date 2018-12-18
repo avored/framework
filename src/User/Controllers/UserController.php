@@ -58,7 +58,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->repository->create($request->all());
-
+        $this->_syncUserGroups($user, $request->get('user_group_id'));
         return redirect()->route('admin.user.index');
     }
 
