@@ -10,12 +10,21 @@ class UserRepository implements UserInterface
     /**
      * Find an User by given Id
      *
-     * @param $id
+     * @param int $id
      * @return \AvoRed\Framework\Models\User
      */
     public function find($id)
     {
         return User::find($id);
+    }
+    /**
+     * Find an User by given Email
+     * @param string $email
+     * @return \AvoRed\Framework\Models\User
+     */
+    public function findByEmail($email)
+    {
+        return User::whereEmail($email)->first();
     }
 
     /**

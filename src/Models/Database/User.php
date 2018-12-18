@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function getImagePathAttribute()
     {
-        return (empty($this->attributes['image_path'])) ? '' : new LocalFile($this->attributes['image_path']);
+        return new LocalFile($this->attributes['image_path']);
     }
 
     /**

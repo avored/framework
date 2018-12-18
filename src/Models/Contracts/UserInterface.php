@@ -7,10 +7,17 @@ interface UserInterface
     /**
      * Find an  User by given Id which returns  User
      *
-     * @param $id
+     * @param int $id
      * @return \AvoRed\Framework\Models\User
      */
     public function find($id);
+
+    /**
+     * Find an User by given Email
+     * @param string $email
+     * @return \AvoRed\Framework\Models\User
+     */
+    public function findByEmail($email);
 
     /**
      * Find an All Users which returns Eloquent Collection
