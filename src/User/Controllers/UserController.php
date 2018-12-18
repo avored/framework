@@ -35,7 +35,8 @@ class UserController extends Controller
     {
         $dataGrid = new UserDataGrid($this->repository->query());
 
-        return view('avored-framework::user.user.index')->with('dataGrid', $dataGrid->dataGrid);
+        return view('avored-framework::user.user.index')
+            ->withDataGrid($dataGrid->dataGrid);
     }
 
     /**
@@ -115,8 +116,8 @@ class UserController extends Controller
         $userOrders = $orderRepository->query()->whereUserId($user->id);
         $dataGrid = new UserOrderDataGrid($userOrders);
         return view('avored-framework::user.user.show')
-                ->with('user', $user)
-                ->with('userOrderDataGrid', $dataGrid->dataGrid);
+            ->with('user', $user)
+            ->with('userOrderDataGrid', $dataGrid->dataGrid);
     }
 
     /**

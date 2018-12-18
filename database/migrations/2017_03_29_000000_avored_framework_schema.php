@@ -411,6 +411,7 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
             $table->string('tax_no')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('registered_channel', ['WEBSITE', 'FACEBOOK', 'TWITTER', 'GOOGLE'])->default('WEBSITE');
             $table->rememberToken();
             $table->timestamps();
         });

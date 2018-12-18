@@ -11,13 +11,13 @@
 
 @endif
 
-<?php
-if (isset($model)) {
-    $values = $model->userGroups->pluck('id')->toArray();
-} else {
-    $values = [];
-}
-?>
+@php
+    if (isset($model)) {
+        $values = $model->userGroups->pluck('id')->toArray();
+    } else {
+        $values = [];
+    }
+@endphp
 @include(
     'avored-framework::forms.select2',
     [
