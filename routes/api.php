@@ -2,7 +2,7 @@
 // Auth
 
 Route::prefix('public/api/v1')
-    ->middleware(['api',  'cors'])
+    ->middleware(['api'])
     ->namespace("AvoRed\Framework\Api\Controllers")
     ->group(function() {
         Route::post('authenticate', 'AuthController@login');
