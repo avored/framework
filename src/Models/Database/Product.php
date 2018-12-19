@@ -49,13 +49,14 @@ class Product extends BaseModel
      */
     public function getProductVariationJsonData()
     {
+        $jsonData = [];
         $lists = ProductAttributeIntegerValue::whereIn(
             'product_id',
-            $product->productVariations->pluck('variation_id')
+            $this->productVariations->pluck('variation_id')
         )->get();
         
         foreach ($lists as $list) {
-            $variationModel = $this->repository->find($list->product_id);
+            $variationModel = self::find($list->product_id);
             if (array_has($jsonData, $list->product_id)) {
                 $data = array_get($jsonData, $list->product_id);
                 $data[$list->attribute_id] = [
