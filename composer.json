@@ -27,7 +27,8 @@
 		"barryvdh/laravel-dompdf": "0.8.*",
 		"laravel/passport": "7.0.*",
 		"stripe/stripe-php": "^6.3",
-		"netojose/laravel-bootstrap-4-forms": "^2.0"
+		"netojose/laravel-bootstrap-4-forms": "^2.0",
+		"smartins/passport-multiauth": "^4.0"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "~7.0",
@@ -40,7 +41,7 @@
         ],
 		"psr-4" : {
 			"AvoRed\\Framework\\" : "src/"
-			
+
 		}
 	},
 	"autoload-dev" : {

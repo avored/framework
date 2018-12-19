@@ -19,7 +19,7 @@ class Product extends BaseModel
     public static $VARIATION_TYPE = 'VARIATION';
 
     protected $fillable = ['type', 'name', 'slug', 'sku',
-        'description', 'status', 'in_stock', 'track_stock', 'price', 'cost_price',
+        'description', 'status', 'in_stock', 'track_stock', 'price', 'regular_price', 'cost_price',
         'qty', 'is_taxable', 'meta_title', 'meta_description',
         'weight', 'width', 'height', 'length',
     ];

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ludio
- * Date: 17/12/18
- * Time: 18:42
- */
-
 namespace AvoRed\Framework\Api\Controllers;
 
 
@@ -15,19 +8,16 @@ class AuthController extends Controller
 {
     public function login()
     {
-        // Check if a user with the specified email exists
-        $user = User::whereEmail(request('username'))->first();
+        $email = request()->get('username');
+        $password = request()->get('password');
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Wrong email or password',
-                'status' => 422
-            ], 422);
+        $user = null;
+        if(\Auth::guard('web')->attempt(['email'=>$email,'password'=>$password]))
+        {
+            $user = User::whereEmail($email)->first();
         }
 
-        // If a user with the email was found - check if the specified password
-        // belongs to this user
-        if (!\Hash::check(request('password'), $user->password)) {
+        if (!$user) {
             return response()->json([
                 'message' => 'Wrong email or password',
                 'status' => 422
@@ -53,6 +43,7 @@ class AuthController extends Controller
             'client_secret' => $client->secret,
             'username' => request('username'),
             'password' => request('password'),
+            'provider' => 'users'
         ];
 
         $request = \Request::create('/oauth/token', 'POST', $data);
@@ -60,7 +51,7 @@ class AuthController extends Controller
         $response = app()->handle($request);
 
         // Check if the request was successful
-        if ($response->getStatusCode() != 200) {
+        if ((int) $response->getStatusCode() != 200) {
             return response()->json([
                 'message' => 'Wrong email or password',
                 'status' => 422
@@ -72,7 +63,8 @@ class AuthController extends Controller
 
         // Format the final response in a desirable format
         return response()->json([
-            'token' => $data->access_token,
+            'access_token' => $data->access_token,
+            'refresh_token' => $data->refresh_token,
             'user' => $user,
             'status' => 200
         ]);

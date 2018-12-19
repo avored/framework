@@ -10,7 +10,7 @@ Route::prefix('public/api/v1')
 
 
 Route::prefix('api')
-    ->middleware(['api', 'admin.api.auth'])
+    ->middleware(['api', 'multiauth:adminapi'])
     ->namespace("AvoRed\Framework\Api\Controllers")
     ->group(function() {
 

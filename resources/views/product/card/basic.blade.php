@@ -23,10 +23,10 @@
 
 <div class="row">
     <div class="col-6">
-        @include('avored-framework::forms.text',['name' => 'slug','label' => 'Slug'])
+        {!! Form::text('slug', 'Slug')->required() !!}
     </div>
     <div class="col-6">
-        @include('avored-framework::forms.text',['name' => 'sku','label' => 'Sku'])
+        {!! Form::text('sku', 'SKU')->required() !!}
     </div>
 </div>
 
@@ -42,10 +42,11 @@
             {!! Form::text('price' , __('avored-framework::lang.price'))->attrs(['data-mask' => '##9.99', 'data-mask-reverse' => 'true'])->required() !!}
         </div>
     @endif
-        <div class="col-6">
-            {!! Form::text('cost_price' , __('avored-framework::product.basic.cost_price'))->attrs(['data-mask' => '##9.99', 'data-mask-reverse' => 'true'])->required() !!}
-        </div>
+    <div class="col-6">
+        {!! Form::text('cost_price' , __('avored-framework::product.basic.cost_price'))->attrs(['data-mask' => '##9.99', 'data-mask-reverse' => 'true'])->required() !!}
+        {!! Form::text('regular_price' , 'Preço de Varejo')->attrs(['data-mask' => '##9.99', 'data-mask-reverse' => 'true'])->required() !!}
     </div>
+</div>
 
 
 <div class="row">
@@ -69,34 +70,32 @@
 
 
 @if($model->type !== "DOWNLOADABLE")
-<div class="row">
-    <div class="col-md-6">
-        @include('avored-framework::forms.text',['name' => 'weight','label' =>  __('avored-framework::product.basic.weight')])
-    </div>
-    <div class="col-md-6">
-        @include('avored-framework::forms.select',['name' => 'status','label' => 'Status', 'options' => ['1' => __('avored-framework::lang.enabled'),'0' => __('avored-framework::lang.disabled')]])
-    </div>
-    
-    
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        @include('avored-framework::forms.text',['name' => 'width','label' =>  __('avored-framework::product.basic.width')])
-    </div>
-    <div class="col-4">
-        @include('avored-framework::forms.text',['name' => 'height','label' =>  __('avored-framework::product.basic.height')])
-    </div>
-    <div class="col-4">
-        @include('avored-framework::forms.text',['name' => 'length','label' =>  __('avored-framework::product.basic.length')])
-    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @include('avored-framework::forms.text',['name' => 'weight','label' =>  __('avored-framework::product.basic.weight')])
+        </div>
+        <div class="col-md-6">
+            @include('avored-framework::forms.select',['name' => 'status','label' => 'Status', 'options' => ['1' => __('avored-framework::lang.enabled'),'0' => __('avored-framework::lang.disabled')]])
+        </div>
 
 
-</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            {!! Form::text('width', __('avored-framework::product.basic.width'))->required() !!}
+        </div>
+        <div class="col-md-4">
+            {!! Form::text('height', __('avored-framework::product.basic.height'))->required() !!}
+        </div>
+        <div class="col-md-4">
+            {!! Form::text('length', __('avored-framework::product.basic.length'))->required() !!}
+        </div>
+    </div>
 @endif
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script>
-        var simplemde = new SimpleMDE({ element: document.getElementById("description") });
+        var simplemde = new SimpleMDE({element: document.getElementById("description")});
     </script>
 @endpush

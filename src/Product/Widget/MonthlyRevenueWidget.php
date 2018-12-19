@@ -88,7 +88,7 @@ class MonthlyRevenueWidget implements WidgetContract
                 $monthlyRevenue += $product->price - $product->cost_price;
             }
         }
-        $currencySymbol = '$';
+        $currencySymbol = 'R$';
         //$monthlyRevenue = rand(100, 200);
 
         return ['monthlyRevenue' => number_format($monthlyRevenue, 2), 'currencySymbol' => $currencySymbol];

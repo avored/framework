@@ -55,6 +55,7 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('is_taxable')->nullable()->default(null);
             $table->decimal('price', 10, 2)->nullable()->default(null);
             $table->decimal('cost_price', 10, 2)->nullable()->default(null);
+            $table->decimal('regular_price', 10, 2)->nullable()->default(null);
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -653,7 +654,7 @@ class AvoredFrameworkSchema extends Migration
             'configuration_key' => 'general_site_description',
             'configuration_value' => 'AvoRed Laravel Ecommerce
         ']);
-        
+
     }
 
     /**
