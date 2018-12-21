@@ -9,14 +9,14 @@ class PageDataGrid
     /**
      * Page Model Builder
      *
-     * @var \Illuminate\Database\Schema\Builder $dataGrid
+     * @var \Illuminate\Database\Eloquent\Builder $dataGrid
      */
     public $dataGrid;
 
     /**
      * Construct to build a page datagrid
      *
-     * @param \Illuminate\Database\Schema\Builder $model
+     * @param \Illuminate\Database\Eloquent\Builder $model
      * @return void
      */
     public function __construct($model)
@@ -24,15 +24,23 @@ class PageDataGrid
         $dataGrid = DataGrid::make('admin_page_controller');
 
         $dataGrid->model($model)
-                ->column('id', ['sortable' => true])
-                ->column('name', ['sortable' => true])
-                ->column('slug')
-                ->column('meta_title', ['label' => 'Meta Title'])
-                ->linkColumn('edit', [], function ($model) {
+            ->column('id', ['sortable' => true])
+            ->column('name', ['sortable' => true])
+            ->column('slug')
+            ->column('meta_title', ['label' => 'Meta Title'])
+            ->linkColumn(
+                'edit',
+                [],
+                function ($model) {
                     return "<a href='" . route('admin.page.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function ($model) {
+                }
+            )->linkColumn(
+                'show',
+                [], 
+                function ($model) {
                     return "<a href='" . route('admin.page.show', $model->id) . "' >Show</a>";
-                });
+                }
+            );
 
         $this->dataGrid = $dataGrid;
     }

@@ -4,6 +4,7 @@
 @import 'spec/index';
 @import 'vendor/index';
 @import '~simplemde/dist/simplemde.min.css';
+@import "~select2/src/scss/core";
 
 .card-header {
     color: $white;

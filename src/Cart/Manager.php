@@ -45,23 +45,28 @@ class Manager
         $attributes = null;
 
         if (null !== $attribute && count($attribute)) {
-            foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct = Product::find($variationId);
+
+            foreach ($attribute as $attributeId => $attributeValueId) {
+                if ('variation_id' == $attributeId) {
+                    continue;
+                }
+                $variableProduct = Product::find($attribute['variation_id']);
                 $attributeModel = Attribute::find($attributeId);
 
                 $productAttributeIntValModel = ProductAttributeIntegerValue::
-                                                        whereAttributeId($attributeId)
-                                                        ->whereProductId($variableProduct->id)
-                                                        ->first();
+                    whereAttributeId($attributeId)
+                    ->whereProductId($variableProduct->id)
+                    ->first();
+
                 $optionModel = $attributeModel
-                                    ->AttributeDropdownOptions()
-                                    ->whereId($productAttributeIntValModel->value)
-                                    ->first();
+                    ->AttributeDropdownOptions()
+                    ->whereId($productAttributeIntValModel->value)
+                    ->first();
 
                 $price = $variableProduct->price;
                 $attributes[] = [
                     'attribute_id' => $attributeId,
-                    'variation_id' => $variationId,
+                    'variation_id' => $variableProduct->id,
                     'attribute_dropdown_option_id' => $optionModel->id,
                     'variation_display_text' => $attributeModel->name . ': ' . $optionModel->display_text
                 ];
@@ -97,11 +102,22 @@ class Manager
         $cartProducts = $this->getSession();
         $cartProduct = $cartProducts->get($slug);
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
-
-        $checkQty = $qty + $cartQty;
+        $checkQty = $qty;
+        
         $product = Product::whereSlug($slug)->first();
+        if ($product->hasVariation()) {
 
-        $productQty = $product->qty;
+            $findVaritationId = false;
+            foreach ($attribute['attributes'] as $attributeId => $attributeInfo) {
+                if (false === $findVaritationId && (isset($attributeInfo['variation_id']))) {
+                    $variationId = $attributeInfo['variation_id'];
+                }
+
+            }
+            $product = Product::find($variationId);
+        }
+       
+        $productQty = $product->qty; 
         if ($productQty >= $checkQty) {
             return true;
         }

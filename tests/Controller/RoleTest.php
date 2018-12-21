@@ -9,7 +9,6 @@ class RoleTest extends BaseTestCase
 {
    /**
      * Test the Role Index Route
-     * @test
      */
     public function test_role_index_route()
     {
@@ -20,7 +19,6 @@ class RoleTest extends BaseTestCase
     }
     /**
      * Test the Role Create Route
-     * @test
      */
     public function test_role_create_route()
     {
@@ -31,7 +29,6 @@ class RoleTest extends BaseTestCase
     }
     /**
      * Test the Role Store Route
-     * @test
      */
     public function test_role_store_route()
     {
@@ -54,7 +51,6 @@ class RoleTest extends BaseTestCase
     }
     /**
      * Test the Role Store Route
-     * @test
      */
     public function test_role_edit_route()
     {
@@ -69,7 +65,6 @@ class RoleTest extends BaseTestCase
     }
     /**
      * Test the Role Store Route
-     * @test
      */
     public function test_role_update_route()
     {
@@ -91,7 +86,6 @@ class RoleTest extends BaseTestCase
     }
     /**
      * Test the Role Store Route
-     * @test
      */
     public function test_role_destroy_route()
     {
@@ -106,7 +100,5 @@ class RoleTest extends BaseTestCase
         $this->assertDatabaseMissing('roles', [
                     'id' => $role->id
                 ]);
-    }
-
-   
+    }   
 }

@@ -401,8 +401,8 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('users', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable()->default(null);
+            $table->string('last_name')->nullable()->default(null);
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image_path')->nullable();
@@ -411,6 +411,7 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
             $table->string('tax_no')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('registered_channel', ['WEBSITE', 'FACEBOOK', 'TWITTER', 'GOOGLE'])->default('WEBSITE');
             $table->rememberToken();
             $table->timestamps();
         });

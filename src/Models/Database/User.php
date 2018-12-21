@@ -18,7 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'phone',
         'company_name', 'image_path', 'status',
-        'language', 'activation_token', 'tax_no'
+        'language', 'activation_token', 'tax_no', 'registered_channel'
     ];
 
     /**
@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function getImagePathAttribute()
     {
-        return (empty($this->attributes['image_path'])) ? '' : new LocalFile($this->attributes['image_path']);
+        return new LocalFile($this->attributes['image_path']);
     }
 
     /**

@@ -16,7 +16,7 @@ class Product implements CartContracts
     /**
      * Cart Product Qty.
      *
-     * @var int
+     * @var float
      */
     protected $qty;
 
@@ -42,10 +42,10 @@ class Product implements CartContracts
     protected $tax;
     
     /**
-    * Cart Product Attributes.
-    *
-    * @var array
-    */
+     * Cart Product Attributes.
+     *
+     * @var array
+     */
     protected $attributes;
 
     /**
@@ -65,7 +65,7 @@ class Product implements CartContracts
     /**
      * Set/Get Cart Product Name.
      *
-     * @param null|string $name
+     * @param string $name
      * @return $this|string
      */
     public function name($name = null)
@@ -81,8 +81,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Qty.
-     * @param null|int $qty
-     * @return $this|int
+     * @param float $qty
+     * @return $this|float
      */
     public function qty($qty = null)
     {
@@ -97,7 +97,7 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Slug.
-     * @param null|string $slug
+     * @param string $slug
      * @return $this|string
      */
     public function slug($slug = null)
@@ -113,7 +113,7 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Price.
-     * @param null|float $price
+     * @param float $price
      * @return $this|float
      */
     public function price($price = null)
@@ -129,7 +129,7 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Tax.
-     * @param null|double $amount
+     * @param double $amount
      * @return $this|double
      */
     public function tax($amount = null)
@@ -145,16 +145,16 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Line Total.
-     * @param null|double $amount
+     * @param double $lineTotal
      * @return $this|double
      */
-    public function lineTotal($amount = null)
+    public function lineTotal($lineTotal = null)
     {
-        if (null === $amount) {
+        if (null === $lineTotal) {
             return $this->lineTotal;
         }
 
-        $this->lineTotal = $amount;
+        $this->lineTotal = $lineTotal;
 
         return $this;
     }
@@ -198,8 +198,8 @@ class Product implements CartContracts
 
     /**
      * To Check if Cart Product Has Attributes.
-     *
-     * @return bool
+     * @param array $attributes
+     * @return self|array
      */
     public function attributes($attributes = null)
     {
