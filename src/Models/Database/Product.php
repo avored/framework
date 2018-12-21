@@ -543,8 +543,12 @@ class Product extends BaseModel
                 'qty' => $variationModel->variationProduct->qty,
                 'weight' => $variationModel->variationProduct->weight,
                 'width' => $variationModel->variationProduct->width,
+                'price' => $variationModel->variationProduct->price,
+                'regular_price' => $variationModel->variationProduct->regular_price,
                 'height' => $variationModel->variationProduct->height,
                 'length' => $variationModel->variationProduct->length,
+                'created_at' => $variationModel->variationProduct->created_at,
+                'updated_at' => $variationModel->variationProduct->updated_at,
                 'attributes' => $variationModel->variationProduct->productIntegerAttributes()->where('product_id', '=', $variationModel->variation_id)
                     ->select(['id', 'product_id', 'value', 'attribute_id'])->get()->toArray()
             );

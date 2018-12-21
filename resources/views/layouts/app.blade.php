@@ -6,11 +6,11 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'AvoRed Ecommerce') }}</title>
+    <title>{{ config('app.name', 'LeadStore') }}</title>
 
     <!-- Styles -->
-    <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet"> 
-    
+    <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet">
+
     @yield('css')
 
     <script>
@@ -19,7 +19,7 @@
                 'csrfToken' => csrf_token(),
         ]);
         ?>
-    </script>    
+    </script>
 
 </head>
 

@@ -1,12 +1,12 @@
-<div class="sidebar">
+<div class="sidebar" style="background: #7328c6">
     <div class="sidebar-inner">
-        <div class="sidebar-logo">
+        <div class="sidebar-logo py-2" style="background: #fff">
             <div class="peers ai-c fxw-nw">
                 <div class="peer peer-greed">
                     <a class="sidebar-link td-n" href="{{ route('admin.dashboard') }}">
                         <div class="peers ai-c fxw-nw">
-                            <div class="peer">
-                                <h5 class="lh-1 mB-0 logo-text">Shop Dashboard</h5>
+                            <div class="peer" style="flex: 1">
+                                <img src="/logo-leadstore.png" width="100%" class="lh-1 mB-0">
                             </div>
                         </div>
                     </a>
