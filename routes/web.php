@@ -35,7 +35,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::resource('category', 'Product\Controllers\CategoryController');
     Route::resource('product', 'Product\Controllers\ProductController');
     Route::resource('property', 'Product\Controllers\PropertyController');
-    Route::resource('order-status', 'Product\Controllers\OrderStatusController');
+    Route::resource('order-status', 'Order\Controllers\OrderStatusController');
     Route::resource('role', 'System\Controllers\RoleController');
     Route::resource('site-currency', 'System\Controllers\SiteCurrencyController');
     Route::resource('admin-user', 'System\Controllers\AdminUserController');

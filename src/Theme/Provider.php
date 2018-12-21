@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Theme\Facade as Theme;
 use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Db;
 
 class Provider extends ServiceProvider
 {
@@ -23,8 +24,15 @@ class Provider extends ServiceProvider
     public function boot()
     {
         $activeTheme = 'avored-default';
-        if(Schema::hasTable('configurations')) {
+        
+        $dbConnectError = false;
 
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            $dbConnectError = true;
+        }
+        if (false === $dbConnectError && Schema::hasTable('configurations')) {
             $repository = $this->app->get(ConfigurationInterface::class);
             $activeTheme = $repository->getValueByKey('active_theme_identifier');
 

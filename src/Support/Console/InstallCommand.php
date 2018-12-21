@@ -72,8 +72,8 @@ class InstallCommand extends Command
             $fromPath = $theme['asset_path'];
             $toPath = public_path('vendor/' . $theme['identifier']);
             Theme::publishItem($fromPath, $toPath);
-            $this->call('passport:install');
-            $this->call('passport:keys');
+            $this->call('passport:install', ['--force' => true]);
+            $this->call('passport:keys', ['--force' => true]);
 
             $configurationRepository = app(ConfigurationInterface::class);
             
