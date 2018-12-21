@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Theme\Facade as Theme;
 use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Db;
+use Illuminate\Support\Facades\DB;
 
 class Provider extends ServiceProvider
 {
