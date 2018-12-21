@@ -63,6 +63,7 @@ class SiteCurrencyTest extends BaseTestCase
      */
     public function test_site_currency_edit_route()
     {
+        $this->markTestIncomplete();
         $siteCurrency = factory(SiteCurrency::class)->create();
         
         $user = $this->_getAdminUser();
