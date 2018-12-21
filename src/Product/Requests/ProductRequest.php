@@ -44,6 +44,10 @@ class ProductRequest extends Request
             $rule['is_taxable'] = 'required';
             $rule['in_stock'] = 'required';
             $rule['track_stock'] = 'required';
+            $rule['width'] = 'numeric';
+            $rule['height'] = 'numeric';
+            $rule['length'] = 'numeric';
+            $rule['weight'] = 'numeric';
 
             //@todo category validation
             if (strtolower($this->method()) == 'put' || strtolower($this->method()) == 'patch') {
