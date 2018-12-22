@@ -19,7 +19,9 @@ img {
     border: none;
     background: none;
 }
-
+.extra-product-link {
+   left: -120px !important;
+}
 #dataTable tr th:last-of-type {
     min-width: 95px;
 }
