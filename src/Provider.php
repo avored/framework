@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
 use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
-use AvoRed\Framework\User\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\System\ViewComposers\SiteCurrencyFieldsComposer;
 use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
