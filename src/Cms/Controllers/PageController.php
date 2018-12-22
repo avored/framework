@@ -24,11 +24,11 @@ class PageController extends Controller
     /**
      * Display a listing of the Page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $pageGrid = new PageDataGrid($this->repository->query()->orderBy('id', 'desc'));
+        $pageGrid = new PageDataGrid($this->repository->query());
 
         return view('avored-framework::cms.page.index')->with('dataGrid', $pageGrid->dataGrid);
     }
@@ -36,7 +36,7 @@ class PageController extends Controller
     /**
      * Show the form for creating a new page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -48,7 +48,7 @@ class PageController extends Controller
      *
      * @param \AvoRed\Frameowork\Cms\Requests\PageRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PageRequest $request)
     {
@@ -62,7 +62,7 @@ class PageController extends Controller
      *
      * @param \AvoRed\Framework\Models\Database\Page $page
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Page $page)
     {
@@ -99,9 +99,9 @@ class PageController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Page $page
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\View\View
      */
     public function show(Page $page)
     {

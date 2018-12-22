@@ -1,88 +1,65 @@
-<div class="brand-nav">
-    <span class="logo">
-        <a href="{{ route('admin.dashboard') }}">
-            <img src="https://www.avored.com/img/logo.svg" height="50px" width="30px" /> AvoRed
-        </a>
-    </span>
-</div>
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <div class="sidebar-logo">
+            <div class="peers ai-c fxw-nw">
+                <div class="peer peer-greed">
+                    <a class="sidebar-link td-n" href="{{ route('admin.dashboard') }}">
+                        <div class="peers ai-c fxw-nw">
+                            <div class="peer">
+                                <div class="logo">
+                                    <img src="{{ asset('/vendor/avored-default/images/logo.svg') }}" alt="" height="50" width="60">
+                                </div>
+                            </div>
 
-<ul class="side-nav">
-   @if(isset($adminMenus))
-    @foreach($adminMenus as $key => $menu)
-    
-        @if(null !== $menu->subMenu() && count($menu->subMenu()) > 0)
-            <?php $subMenu = $menu->subMenu(); ?>
+                            <div class="peer peer-greed">
+                                <h5 class="lh-1 mB-0 logo-text">Avored</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-            <li class="nav-item has-dropdown">
-                <a class="has-submenu nav-link"  href="#"><i class="{{ $menu->icon() }}"></i> {{ $menu->label() }}
-                    <span class="float-right">
-                        <i class="fas fa-angle-down"></i>
-                    </span>
+                <div class="peer">
+                    <div class="mobile-toggle sidebar-toggle">
+                        <a href="" class="td-n"><i class="ti-arrow-circle-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <ul class="sidebar-menu scrollable pos-r">
+            <li class="nav-item mT-30 active">
+                <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
+                    <span class="icon-holder"><i class="c-white-500 ti-home"></i></span>
+                    <span class="title">Dashboard</span>
                 </a>
+            </li>
+            @if(isset($adminMenus))
+                @foreach($adminMenus as $key => $menu)
+                    @if(null !== $menu->subMenu() && count($menu->subMenu()) > 0)
+                        <?php $subMenu = $menu->subMenu(); ?>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="javascript:void(0);">
+                                <span class="icon-holder"> <i class="c-white-500 {{ $menu->icon() }}"></i></span>
+                                <span class="title"> {{ $menu->label() }}</span>
+                                <span class="arrow"> <i class="ti-angle-right"></i></span>
+                            </a>
 
-                <ul class="sub-nav">
-
-                    @foreach($subMenu as $subKey => $subMenuObj)
-                        <li class="nav-item">
-
-                        <a class="nav-link pl-5 list-group-item-action"
-                           href="{{ route($subMenuObj->route()) }}"><i class="{{ $subMenuObj->icon() }}"></i>  {{ $subMenuObj->label() }}</a>
+                            <ul class="dropdown-menu">
+                                @foreach($subMenu as $subKey => $subMenuObj)
+                                    <li><a class='sidebar-link' href="{{ route($subMenuObj->route()) }}">{{ $subMenuObj->label() }}</a></li>
+                                @endforeach
+                            </ul>
                         </li>
-                    @endforeach
-
-                </ul>
-            </li>
-
-        @else
-            <li class="nav-item">
-
-            <a class="nav-link " href="
-                @if("#" == $menu->route())
-                    #
-                @else
-                    {{ route($menu->route()) }}
-                @endif
-                ">
-                <i class="{{ $menu->icon() }}"></i>
-                {{ $menu->label() }}
-            </a>
-            </li>
-        @endif
-    @endforeach
-    @endif
-</ul>
-
-@push('scripts')
-<script>
-    $(function() {
-        $(document).on('click','.has-submenu',function(e) {
-            e.preventDefault();
-            var subNav = jQuery(this).parents("li:first").find('.sub-nav:first');
-
-            if(jQuery(subNav).attr('data-open') == "true") {
-
-                jQuery(subNav).slideUp(500,function() {
-
-                    jQuery(this).parents('.has-dropdown:first').find('.has-submenu .float-right i').removeClass('fa-angle-up');
-                    jQuery(this).parents('.has-dropdown:first').find('.has-submenu .float-right i').addClass('fa-angle-down');
-
-                    jQuery(this).attr('data-open',false);
-                    jQuery(this).css('display','none');
-                });
-
-            } else {
-                jQuery(subNav).slideDown(500,function() {
-
-                    jQuery(this).parents('.has-dropdown:first').find('.has-submenu .float-right i').removeClass('fa-angle-down');
-                    jQuery(this).parents('.has-dropdown:first').find('.has-submenu .float-right i').addClass('fa-angle-up');
-
-                    jQuery(this).css('display','block');
-                    jQuery(this).attr('data-open','true');
-                });
-            }
-
-        });
-    });
-</script>
-@endpush
+                    @else
+                        <li class="nav-item mT-30 active">
+                            <a class="sidebar-link" href="index.html">
+                                <span class="icon-holder"> <i class="c-blue-500 {{ $menu->icon() }}"></i></span>
+                                <span class="title"> {{ $menu->label() }}</span>
+                            </a>
+                        </li>
+                    @endif
+                @endforeach
+            @endif
+        </ul>
+    </div>
+</div>

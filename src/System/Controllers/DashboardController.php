@@ -8,9 +8,9 @@ use AvoRed\Framework\Models\Contracts\UserInterface;
 class DashboardController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\OrderRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\OrderRepository
+     */
     protected $repository;
 
     public function __construct(OrderInterface $repository)
@@ -25,7 +25,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        
         $totalRegisteredUser = app(UserInterface::class)->all();
         $totalOrder = $this->repository->all()->count();
 

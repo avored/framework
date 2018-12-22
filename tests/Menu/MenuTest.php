@@ -7,10 +7,8 @@ use AvoRed\Framework\Menu\Builder;
 
 class MenuTest extends BaseTestCase
 {
-    /**
-     * Test to check if Menu Builder make
-     *
-     */
+   
+    /** @test */
     public function test_menu_builder_make()
     {
         $manager = new Builder();

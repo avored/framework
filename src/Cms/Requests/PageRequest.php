@@ -31,7 +31,7 @@ class PageRequest extends Request
         if ($this->getMethod() == 'POST') {
             $validationRule['slug'] .= '|unique:pages';
         }
-    
+
         return $validationRule;
     }
 }

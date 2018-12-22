@@ -1,14 +1,10 @@
-<?php
-$productProperties = $model->getPropertiesAll();
-?>
-
+@php
+    $productProperties = $model->getPropertiesAll();
+@endphp
 <div class="row">
-
     <div class="col-12">
-
         <div id="add-property" class="input-group">
-
-            <select name="product-property[]"
+            <select name="product_property[]"
                     multiple="true"
                     class="select2 form-control modal-product-property-select"
                     style="width: 88%">
@@ -37,7 +33,6 @@ $productProperties = $model->getPropertiesAll();
         <hr/>
         <div class="property-content-wrapper">
 
-
             @if($productProperties->count() > 0 )
 
                 @foreach($productProperties as $productVarcharPropertyValue)
@@ -45,7 +40,6 @@ $productProperties = $model->getPropertiesAll();
                     @php
                     if(!$productVarcharPropertyValue instanceof \AvoRed\Framework\Models\Database\Property) {
                         $property = $productVarcharPropertyValue->property;
-                        //dd($productVarcharPropertyValue);
                     } else {
                         $property = $productVarcharPropertyValue;
                     }
@@ -107,30 +101,24 @@ $productProperties = $model->getPropertiesAll();
 
                                 @foreach($property->propertyDropdownOptions as $option)
                                     <option
-                                            value="{{ $option->id }}"
+                                        value="{{ $option->id }}"
 
-                                            @if($productVarcharPropertyValue->value == $option->id)
-                                            selected
-                                            @endif
+                                        @if($productVarcharPropertyValue->value == $option->id)
+                                        selected
+                                        @endif
                                     >
                                         {{ $option->display_text }}
                                     </option>
                                 @endforeach
-
                             </select>
-
                         </div>
                     @endif
-
                     @if($property->field_type == 'CHECKBOX')
-
                         <div class="form-check">
-
                             <input type="hidden"
                                    name="property[{{ str_random() }}][{{ $property->id  }}]"
                                    value="0"
                             />
-
                             <input type="checkbox"
                                    name="property[{{ str_random() }}][{{ $property->id  }}]"
                                    class="form-check-input"
@@ -146,21 +134,12 @@ $productProperties = $model->getPropertiesAll();
                                    for="property-{{ $property->id }}">
                                 {{ $property->name }}
                             </label>
-
-
                         </div>
-
-
                     @endif
-
-
-
                 @endforeach
-
             @else
                 <p>Sorry No Property Found assign Yet</p>
             @endif
-
         </div>
     </div>
 </div>

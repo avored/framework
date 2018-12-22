@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::theme.theme-upload') }}
+                    {{ __('avored-framework::system.theme-upload') }}
                 </div>
                 <div class="card-body">
                     <form method="post"
@@ -16,13 +16,13 @@
                         @csrf()
 
                         <div class="form-group">
-                            <label for="theme_zip_file">{{ __('avored-framework::theme.theme-upload-file') }}</label>
+                            <label for="theme_zip_file">{{ __('avored-framework::system.theme-upload-file') }}</label>
                             <input type="file" class="form-control" name="theme_zip_file" id="theme_zip_file"/>
                         </div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('avored-framework::theme.theme-upload') }}
+                                {{ __('avored-framework::system.theme-upload') }}
                             </button>
 
                             <a href="{{ route('admin.theme.index') }}" class="btn">Cancel</a>

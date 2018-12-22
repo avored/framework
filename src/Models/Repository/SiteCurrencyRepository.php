@@ -20,11 +20,11 @@ class SiteCurrencyRepository implements SiteCurrencyInterface, DropdownFieldCont
     }
 
     /**
-    * Find an Site Currency by given code
-    *
-    * @param string $code
-    * @return \AvoRed\Framework\Models\SiteCurrency
-    */
+     * Find an Site Currency by given code
+     *
+     * @param string $code
+     * @return \AvoRed\Framework\Models\SiteCurrency
+     */
     public function findByCode($code)
     {
         return SiteCurrency::whereCode($code)->first();

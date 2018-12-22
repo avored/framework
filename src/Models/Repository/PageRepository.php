@@ -19,10 +19,10 @@ class PageRepository implements PageInterface
     }
 
     /**
-    * Get all Page
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all Page
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Page::all();

@@ -12,21 +12,38 @@
                     </div>
                 </div>
             </div>
+            <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="widget-wrapper">
+                    <div class="widget mt-3 mb-3" 
+                                id="widget-{{ Widget::get('monthly-revenue')->identifier() }}"
+                                draggable="true" ondragstart="drag(event)">
+                            @include (Widget::get('monthly-revenue')->view(),Widget::get('monthly-revenue')->with())
+                    </div>
+                </div>
+            </div>
 
-                <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="widget-wrapper">
-                        <div class="widget mt-3 mb-3" id="widget-{{ Widget::get('total-order')->identifier() }}"
-                             draggable="true" ondragstart="drag(event)">
-                            @include (Widget::get('total-order')->view(),Widget::get('total-order')->with())
+            <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="widget-wrapper">
+                    <div class="widget mt-3 mb-3" id="widget-{{ Widget::get('total-order')->identifier() }}"
+                            draggable="true" ondragstart="drag(event)">
+                        @include (Widget::get('total-order')->view(),Widget::get('total-order')->with())
+                    </div>
+                </div>
+            </div>
+        </div> <!--END OF FIRST -->
+        <div class="row">
+            <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="widget-wrapper">
+                        <div class="widget mt-3 mb-3" 
+                                id="widget-{{ Widget::get('recent-order')->identifier() }}"
+                                draggable="true" ondragstart="drag(event)">
+                            @include (Widget::get('recent-order')->view(),Widget::get('recent-order')->with())
                         </div>
                     </div>
                 </div>
-
-                <div class="col-4 widget-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-                </div>
             </div>
         </div>
+        
     </div>
 
 

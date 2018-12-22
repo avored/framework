@@ -4,6 +4,18 @@ namespace AvoRed\Framework\Api\Resources\Page;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\Page\PageResource
+ * @property int id
+ * @property string name
+ * @property string slug
+ * @property string content
+ * @property string meta_title
+ * @property string meta_description
+ * @property string created_at
+ * @property string updated_at
+ */
 class PageResource extends JsonResource
 {
     /**
@@ -16,7 +28,7 @@ class PageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-           
+
             'name' => $this->name,
             'slug' => $this->slug,
             'content' => $this->content,
@@ -33,10 +45,10 @@ class PageResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

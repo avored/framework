@@ -39,15 +39,13 @@ class Builder
         $breadcrumb->route($name);
 
         $this->collection->put($name, $breadcrumb);
-
-        
     }
 
     /**
      * Render BreakCrumb for the Route Name.
      *
      * @param string $routeName
-     * @return \Illuminate\Http\Response
+     * @return string|\Illuminate\View\View
      */
     public function render($routeName)
     {
@@ -57,14 +55,15 @@ class Builder
             return '';
         }
 
-        return view('avored-framework::breadcrumb.index')->with('breadcrumb', $breadcrumb);
+        return view('avored-framework::breadcrumb.index')
+                ->with('breadcrumb', $breadcrumb);
     }
 
     /**
-     * Get Breadcrum to set the Parent.
+     * Get Breadcrum from collection.
      *
      * @param string $key
-     * @return \Illuminate\Http\Response
+     * @return callable $callable
      */
     public function get($key)
     {

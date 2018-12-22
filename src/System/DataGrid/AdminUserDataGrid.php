@@ -17,13 +17,12 @@ class AdminUserDataGrid
                 ->column('first_name', ['label' => 'First Name'])
                 ->column('last_name', ['label' => 'Last Name'])
                 ->linkColumn('show_api', ['label' => 'Show API'], function ($model) {
-                    return "<a href='".route('admin.admin-user.show.api')."' >Show API</a>";
+                    return "<a href='" . route('admin.admin-user.show.api') . "' >Show API</a>";
                 })
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='".route('admin.admin-user.edit', $model->id)."' >Edit</a>";
+                    return "<a href='" . route('admin.admin-user.edit', $model->id) . "' >Edit</a>";
                 })->linkColumn('show', [], function ($model) {
-
-                    return "<a href='".route('admin.admin-user.show', $model->id)."' >Show</a>";
+                    return "<a href='" . route('admin.admin-user.show', $model->id) . "' >Show</a>";
 
                     /*
                     if($model->is_super_admin === 1) {

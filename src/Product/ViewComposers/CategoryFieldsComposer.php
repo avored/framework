@@ -8,9 +8,9 @@ use AvoRed\Framework\Models\Contracts\CategoryInterface;
 class CategoryFieldsComposer
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\CategoryRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\CategoryRepository
+     */
     protected $repository;
 
     public function __construct(CategoryInterface $repository)

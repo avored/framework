@@ -7,9 +7,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Theme\Facade as Theme;
+use AvoRed\Framework\System\DataGrid\ThemeDataGrid;
+use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
+use ZipArchive;
 
 class ThemeController extends Controller
 {
+    /**
+     * Configuration Repository
+     *
+     * @var \AvoRed\Framework\Models\Repository\ConfigurationRepository $configurationRepository
+     */
+    protected $configurationRepository;
+
+    /**
+     * Set the Configuration Repository for Theme Controller
+     *
+     * @param \AvoRed\Framework\Models\Repository\ConfigurationRepository $configurationRepository
+     */
+    public function __construct(ConfigurationInterface $configurationRepository)
+    {
+        $this->configurationRepository = $configurationRepository;
+    }
 
     /**
      * Display a listing of the theme.
@@ -19,11 +38,15 @@ class ThemeController extends Controller
     public function index()
     {
         $themes = Theme::all();
-        $activeTheme = Configuration::getConfiguration('active_theme_identifier');
+
+        $activeTheme = $this->configurationRepository->getValueByKey('active_theme_identifier');
+
+        $siteCurrencyGrid = new ThemeDataGrid($themes, $activeTheme);
 
         return view('avored-framework::system.theme.index')
             ->with('themes', $themes)
-            ->with('activeTheme', $activeTheme);
+            ->with('activeTheme', $activeTheme)
+            ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
@@ -40,16 +63,15 @@ class ThemeController extends Controller
      * Store a newly created theme in database.
      *
      * @param \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $filePath = $this->handleImageUpload($request->file('theme_zip_file'));
 
-        $zip = new \ZipArchive();
+        $zip = new ZipArchive();
 
-        if ($zip->open($filePath) === true) {
+        if ($zip->open(storage_path('app/public/' . $filePath)) === true) {
             $extractPath = base_path('themes');
             $zip->extractTo($extractPath);
             $zip->close();
@@ -68,29 +90,29 @@ class ThemeController extends Controller
         $theme = Theme::get($name);
 
         try {
-            $activeThemeConfiguration = Configuration::getConfiguration('active_theme_identifier');
+            $activeThemeConfiguration = $this->configurationRepository->getValueByKey('active_theme_identifier');
 
             if (null !== $activeThemeConfiguration) {
-                Configuration::setConfiguration('active_theme_identifier', $theme['name']);
+                $this->configurationRepository->setValueByKey('active_theme_identifier', $theme['identifier']);
             } else {
-                Configuration::create([
+                $this->configurationRepository->create([
                     'configuration_key' => 'active_theme_identifier',
-                    'configuration_value' => $theme['name'],
+                    'configuration_value' => $theme['identifier'],
                 ]);
             }
 
-            $activeThemePath = Configuration::getConfiguration('active_theme_path');
+            $activeThemePath = $this->configurationRepository->findByKey('active_theme_path');
             if (null !== $activeThemePath) {
-                Configuration::setConfiguration('active_theme_path', $theme['view_path']);
+                $this->configurationRepository->setValueByKey('active_theme_path', str_replace(base_path() . '/', '', $theme['view_path']));
             } else {
-                Configuration::create([
+                $this->configurationRepository->create([
                     'configuration_key' => 'active_theme_path',
-                    'configuration_value' => $theme['view_path'],
+                    'configuration_value' => str_replace(base_path() . '/', '', $theme['view_path']),
                 ]);
             }
 
             $fromPath = $theme['asset_path'];
-            $toPath = public_path('vendor/'.$theme['name']);
+            $toPath = public_path('vendor/' . $theme['name']);
 
             //If Path Doesn't Exist it means its under development So no need to publish anything...
             if (File::isDirectory($fromPath)) {
@@ -115,22 +137,22 @@ class ThemeController extends Controller
         $theme = Theme::get('avored-default');
 
         try {
-            $activeThemeConfiguration = Configuration::whereConfigurationKey('active_theme_identifier')->first();
+            $activeThemeConfiguration = $this->configurationRepository->findByKey('active_theme_identifier');
 
             if (null !== $activeThemeConfiguration) {
                 $activeThemeConfiguration->update(['configuration_value' => $theme['name']]);
             } else {
-                Configuration::create([
+                $this->configurationRepository->create([
                     'configuration_key' => 'active_theme_identifier',
                     'configuration_value' => $theme['name'],
                 ]);
             }
 
-            $activeThemePathConfiguration = Configuration::whereConfigurationKey('active_theme_path')->first();
+            $activeThemePathConfiguration = $this->configurationRepository->findByKey('active_theme_path');
             if (null !== $activeThemePathConfiguration) {
                 $activeThemePathConfiguration->update(['configuration_value' => $theme['view_path']]);
             } else {
-                Configuration::create([
+                $this->configurationRepository->create([
                     'configuration_key' => 'active_theme_path',
                     'configuration_value' => $theme['name'],
                 ]);
@@ -149,12 +171,8 @@ class ThemeController extends Controller
      */
     public function handleImageUpload($file)
     {
-        // $file = $request->file('image'); or
-        // $fileName = 'somename';
-        $destinationPath = public_path('uploads/avored/themes');
-        $fileName = $file->getClientOriginalName();
-        $file->move($destinationPath, $fileName);
+        $path = $file->store('uploads/themes', 'avored');
 
-        return $destinationPath.DIRECTORY_SEPARATOR.$fileName;
+        return $path;
     }
 }

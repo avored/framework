@@ -25,7 +25,7 @@ class LoginController extends Controller
     /**
      * Show the AvoRed Login Form to the User.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function loginForm()
     {

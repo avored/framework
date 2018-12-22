@@ -30,12 +30,12 @@ class ProductRequest extends Request
 
         if (isset($product) && $product->type == 'VARIABLE_PRODUCT') {
             $rule['name'] = 'required|max:255';
-            $rule ['price'] = 'required|max:14|regex:/^-?\\d*(\\.\\d+)?$/';
+            $rule['price'] = 'required|max:14|regex:/^-?\\d*(\\.\\d+)?$/';
             $rule['sku'] = 'required|max:255';
             $rule['qty'] = 'required';
         } else {
             $rule['name'] = 'required|max:255';
-            $rule ['price'] = 'required|max:14|regex:/^-?\\d*(\\.\\d+)?$/';
+            $rule['price'] = 'required|max:14|regex:/^-?\\d*(\\.\\d+)?$/';
             $rule['sku'] = 'required|max:255';
             //$rule['page_title'] = "max:255";
             //$rule['page_description'] = "max:255";
@@ -47,7 +47,6 @@ class ProductRequest extends Request
 
             //@todo category validation
             if (strtolower($this->method()) == 'put' || strtolower($this->method()) == 'patch') {
-
                 //$product = Product::find($this->route('product'));
                 //$rule['slug'] = "required|max:255|alpha_dash|unique:products,slug," . $product->id;
             }

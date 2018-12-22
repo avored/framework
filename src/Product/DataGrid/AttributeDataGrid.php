@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Product\DataGrid;
 
 use AvoRed\Framework\DataGrid\Facade as DataGrid;
-use AvoRed\Framework\Models\Database\Attribute;
 
 class AttributeDataGrid
 {
@@ -17,14 +16,11 @@ class AttributeDataGrid
                 ->column('name', ['label' => 'Name', 'sortable' => true])
                 ->column('identifier', ['sortable' => true])
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='".route('admin.attribute.edit', $model->id)."' >Edit</a>";
+                    return "<a href='" . route('admin.attribute.edit', $model->id) . "' >Edit</a>";
                 })->linkColumn('show', [], function ($model) {
-                    return "<a href='".route('admin.attribute.show', $model->id)."' >Show</a>";
+                    return "<a href='" . route('admin.attribute.show', $model->id) . "' >Show</a>";
                 });
 
         $this->dataGrid = $dataGrid;
     }
-
-
-   
 }

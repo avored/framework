@@ -32,16 +32,23 @@ class Manager
      * Add Permission into Collection.
      *
      * @param string $key
+     * @param callable $callable
      * @return \AvoRed\Framework\Permission\Manager
      */
-    public function add($key)
+    public function add($key, $callable = null)
     {
-        $permissionGroup = new PermissionGroup();
+        if (null !== $callable) {
+            $group = new PermissionGroup($callable);
+            $group->key($key);
 
-        $permissionGroup->key($key);
-        $this->permissions->put($key, $permissionGroup);
+            $this->permissions->put($key, $group);
+        } else {
+            $group = new PermissionGroup();
 
-        return $permissionGroup;
+            $group->key($key);
+            $this->permissions->put($key, $group);
+        }
+        return $group;
     }
 
     /**

@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::currency.create') }}
+                    {{ __('avored-framework::system.site-currency.create') }}
                 </div>
                 <div class="card-body">
 
@@ -17,7 +17,7 @@
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
-                                {{ __('avored-framework::currency.create') }}
+                                {{ __('avored-framework::system.site-currency.create') }}
                             </button>
                             <a href="{{ route('admin.site-currency.index') }}" class="btn">
                                 {{ __('avored-framework::lang.cancel') }}

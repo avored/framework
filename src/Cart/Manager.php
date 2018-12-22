@@ -8,6 +8,7 @@ use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
 use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 
 class Manager
 {
@@ -16,7 +17,7 @@ class Manager
      *
      * @var \Illuminate\Session\SessionManager
      */
-    public $session;
+    public $sessionManager;
 
     /**
      * AvoRed Cart Construct.
@@ -25,7 +26,7 @@ class Manager
      */
     public function __construct(SessionManager $manager)
     {
-        $this->session = $manager;
+        $this->sessionManager = $manager;
     }
 
     /**
@@ -39,32 +40,36 @@ class Manager
     public function add($slug, $qty, $attribute = null): Manager
     {
         $cartProducts = $this->getSession();
-        $product    = Product::whereSlug($slug)->first();
-        $price      = $product->price;
+        $product = Product::whereSlug($slug)->first();
+        $price = $product->price;
         $attributes = null;
 
         if (null !== $attribute && count($attribute)) {
-            foreach ($attribute as $attributeId => $variationId) {
-                $variableProduct    = Product::find($variationId);
-                $attributeModel     = Attribute::find($attributeId);
+
+            foreach ($attribute as $attributeId => $attributeValueId) {
+                if ('variation_id' == $attributeId) {
+                    continue;
+                }
+                $variableProduct = Product::find($attribute['variation_id']);
+                $attributeModel = Attribute::find($attributeId);
 
                 $productAttributeIntValModel = ProductAttributeIntegerValue::
-                                                        whereAttributeId($attributeId)
-                                                        ->whereProductId($variableProduct->id)
-                                                        ->first();
+                    whereAttributeId($attributeId)
+                    ->whereProductId($variableProduct->id)
+                    ->first();
+
                 $optionModel = $attributeModel
-                                    ->AttributeDropdownOptions()
-                                    ->whereId($productAttributeIntValModel->value)
-                                    ->first();
+                    ->AttributeDropdownOptions()
+                    ->whereId($productAttributeIntValModel->value)
+                    ->first();
 
-
-                $price              = $variableProduct->price;
+                $price = $variableProduct->price;
                 $attributes[] = [
-                                'attribute_id' => $attributeId,
-                                'variation_id' => $variationId,
-                                'attribute_dropdown_option_id' => $optionModel->id,
-                                'variation_display_text' => $attributeModel->name. ": " . $optionModel->display_text
-                            ];
+                    'attribute_id' => $attributeId,
+                    'variation_id' => $variableProduct->id,
+                    'attribute_dropdown_option_id' => $optionModel->id,
+                    'variation_display_text' => $attributeModel->name . ': ' . $optionModel->display_text
+                ];
             }
         }
 
@@ -79,7 +84,7 @@ class Manager
 
         $cartProducts->put($slug, $cartProduct);
 
-        $this->session->put($this->getSessionKey(), $cartProducts);
+        $this->sessionManager->put($this->getSessionKey(), $cartProducts);
 
         return $this;
     }
@@ -97,17 +102,29 @@ class Manager
         $cartProducts = $this->getSession();
         $cartProduct = $cartProducts->get($slug);
         $cartQty = $cartProduct ? $cartProduct->qty() : 0;
-
-        $checkQty = $qty +  $cartQty;
+        $checkQty = $qty;
+        
         $product = Product::whereSlug($slug)->first();
+        if ($product->hasVariation()) {
 
-        $productQty = $product->qty;
+            $findVaritationId = false;
+            foreach ($attribute['attributes'] as $attributeId => $attributeInfo) {
+                if (false === $findVaritationId && (isset($attributeInfo['variation_id']))) {
+                    $variationId = $attributeInfo['variation_id'];
+                }
+
+            }
+            $product = Product::find($variationId);
+        }
+       
+        $productQty = $product->qty; 
         if ($productQty >= $checkQty) {
             return true;
         }
 
         return false;
     }
+
     /**
      * Update the Cart Product Qty by Slug.
      *
@@ -125,7 +142,7 @@ class Manager
             throw new \Exception("Cart Product doesn't Exist");
         }
         $cartProduct->qty($qty);
-        $cartProduct->lineTotal($qty * $cartProduct->price());
+        $cartProduct->lineTotal($qty * ($cartProduct->price() + $cartProduct->tax()));
 
         return $this;
     }
@@ -134,21 +151,20 @@ class Manager
      * Update the Cart Product Qty by Slug.
      *
      * @param string    $slug
-     * @param float     $amount
+     * @param float     $taxAmount
      * @return \AvoRed\Framework\Cart\Manager $this
      */
-    public function updateProductTax($slug, $amount): Manager
+    public function updateProductTax($slug, $taxAmount): Manager
     {
         $cartProducts = $this->getSession();
-
         $cartProduct = $cartProducts->get($slug);
 
         if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
         }
-        $cartProduct->tax($amount);
 
-        $cartProduct->lineTotal($cartProduct->qty() * $cartProduct->price() + $amount);
+        $cartProduct->tax($taxAmount);
+        $cartProduct->lineTotal($cartProduct->qty() * ($cartProduct->price() + $taxAmount));
 
         return $this;
     }
@@ -160,21 +176,19 @@ class Manager
      */
     public function clear()
     {
-        $session = $this->getSessionKey();
-        $this->session->forget($session);
+        $this->sessionManager->forget($this->getSessionKey());
     }
 
     /**
      * Remove an Item from Cart Products by Slug.
      *
      * @param string $slug
-     * @return void
+     * @return self $this
      */
     public function destroy($slug):Manager
     {
         $cartProducts = $this->getSession();
-
-        $cartProduct = $cartProducts->pull($slug);
+        $cartProducts->pull($slug);
 
         return $this;
     }
@@ -182,16 +196,14 @@ class Manager
     /**
      * Set/Get Cart has Tax.
      * @param null|boolean $flag
-     * @return $this|boolean
+     * @return $this|boolean $hasTax
      */
     public function hasTax($flag = null)
     {
         if (null === $flag) {
-            return $this->session->get('hasTax');
+            return $this->sessionManager->get('hasTax');
         }
-
-        $this->session->put('hasTax', $flag);
-
+        $this->sessionManager->put('hasTax', $flag);
         return $this;
     }
 
@@ -204,37 +216,47 @@ class Manager
     {
         $sessionKey = $this->getSessionKey();
 
-        return $this->session->has($sessionKey) ? $this->session->get($sessionKey) : new Collection;
+        return $this->sessionManager->has($sessionKey) ? $this->sessionManager->get($sessionKey) : new Collection;
     }
 
     /**
      * Get the Current Cart Total
      *
-     * @return float $total
+     * @return double $total
      */
-    public function total()
+    public function total($formatted = true)
     {
         $total = 0.00;
         $cartProducts = $this->getSession();
+
         foreach ($cartProducts as $product) {
             $total += $product->lineTotal();
+        }
+
+        if ($formatted == true) {
+            $symbol = Session::get('currency_symbol');
+            return $symbol . number_format($total, 2);
         }
 
         return $total;
     }
 
-
     /**
      * Get the Current Cart Tax Total
      *
-     * @return float $taxTotal
+     * @return double $taxTotal
      */
-    public function taxTotal()
+    public function taxTotal($formatted = true)
     {
         $taxTotal = 0.00;
         $cartProducts = $this->getSession();
         foreach ($cartProducts as $product) {
             $taxTotal += $product->tax();
+        }
+
+        if ($formatted == true) {
+            $symbol = Session::get('currency_symbol');
+            return  $symbol . number_format($taxTotal, 2);
         }
 
         return $taxTotal;

@@ -22,11 +22,25 @@ class PermissionGroup implements PermissionContracts
      */
     protected $key;
 
-    public function __construct()
+    /**
+     * Construct for a permission group
+     * @param callable $callable
+     * @return void
+     */
+    public function __construct($callable = null)
     {
         $this->permissionList = Collection::make([]);
+        if (null !== $callable) {
+            $callable($this);
+        }
     }
 
+    /**
+     * Specify a label for permission group
+     *
+     * @param string $label
+     * @return mixed $this|$label
+     */
     public function label($label = null)
     {
         if (null !== $label) {
@@ -38,6 +52,12 @@ class PermissionGroup implements PermissionContracts
         return $this->label;
     }
 
+    /**
+     * Add an Unique key to a group of permission
+     *
+     * @param string $key
+     * @return mixed $key|$this
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -49,12 +69,27 @@ class PermissionGroup implements PermissionContracts
         return $this->key;
     }
 
-    public function addPermission($key = null)
+    /**
+     * Add Permission to a group
+     *
+     * @param string $key
+     * @param callable $callable
+     * @return \AvoRed\Framework\Permission\Permission $permission
+     *
+     */
+    public function addPermission($key, $callable = null)
     {
-        $permission = new Permission();
+        if (null !== $callable) {
+            $permission = new Permission($callable);
+            $permission->key($key);
 
-        $permission->key($key);
-        $this->permissionList->put($key, $permission);
+            $this->permissionList->put($key, $permission);
+        } else {
+            $permission = new Permission();
+
+            $permission->key($key);
+            $this->permissionList->put($key, $permission);
+        }
 
         return $permission;
     }

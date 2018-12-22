@@ -4,6 +4,16 @@ namespace AvoRed\Framework\Api\Resources\Attribute;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ *
+ * Class \AvoRed\Framework\Api\Resources\AttributeAttributeResource
+ * @property int id
+ * @property string name
+ * @property string identifier
+ * @property array attributeDropdownOptions
+ * @property string created_at
+ * @property string updated_at
+ */
 class AttributeResource extends JsonResource
 {
     /**
@@ -30,10 +40,10 @@ class AttributeResource extends JsonResource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function with($request){
-
+    public function with($request)
+    {
         return [
-          'status'=>'success'
+            'status' => 'success'
         ];
     }
 }

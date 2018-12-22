@@ -1,18 +1,16 @@
 <?php
 
-if(!isset($values)) {
+if (!isset($values)) {
     $values = $values;
 }
 
-if(isset($attributes)) {
+if (isset($attributes)) {
     $attributes['name'] = $name;
-    $attributes['type'] = "text";
-    if(!isset($attributes['id'])) {
+    if (!isset($attributes['id'])) {
         $attributes['id'] = $name;
     }
 
 } else {
-    $attributes['type'] = "text";
     $attributes['class'] = 'form-control select2';
     $attributes['id'] = $name;
     $attributes['name'] = $name;
@@ -20,7 +18,7 @@ if(isset($attributes)) {
 }
 $attrString = "";
 
-foreach($attributes as $attrKey => $attrValue) {
+foreach ($attributes as $attrKey => $attrValue) {
     $attrString .= "{$attrKey}=\"{$attrValue}\"";
 }
 

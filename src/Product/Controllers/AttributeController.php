@@ -13,9 +13,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class AttributeController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\AttributeRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\AttributeRepository
+     */
     protected $repository;
 
     public function __construct(AttributeInterface $repository)
@@ -55,7 +55,7 @@ class AttributeController extends Controller
     public function store(AttributeRequest $request)
     {
         $attribute = $this->repository->create($request->all());
-        $this->_saveDropdownOptions($attribute, $request);
+        $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
     }
@@ -74,7 +74,7 @@ class AttributeController extends Controller
     {
         $attribute->update($request->all());
 
-        $this->_saveDropdownOptions($attribute, $request);
+        $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
     }
@@ -108,14 +108,14 @@ class AttributeController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getElementHtml(Request $request)
     {
         $attributes = $this->repository->findMany($request->get('attribute_id'));
 
         $tmpString = '__RANDOM__STRING__';
-        $view = view('avored-framework::product.get-element')
+        $view = view('avored-framework::product.attribute.get-element')
             ->with('attributes', $attributes)
             ->with('tmpString', $tmpString);
 
@@ -129,17 +129,15 @@ class AttributeController extends Controller
      * @param \AvoRed\Framework\Product\Requests\AttributeRequest $request
      * @return void
      */
-    private function _saveDropdownOptions($attribute, $request)
+    protected function saveDropdownOptions($attribute, $request)
     {
-        if (null !== $request->get('dropdown-options')) {
-            if (null != $attribute->attributeDropdownOptions()->get() &&
-                $attribute->attributeDropdownOptions()->get()->count() >= 0
-                ) {
+        if (null !== $request->get('dropdown_options')) {
+            if ($attribute->attributeDropdownOptions()->get() != null && $attribute->attributeDropdownOptions()->get()->count() >= 0) {
                 $attribute->attributeDropdownOptions()->delete();
             }
 
-            foreach ($request->get('dropdown-options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__') {
+            foreach ($request->get('dropdown_options') as $key => $val) {
+                if ($key == '__RANDOM_STRING__' || empty($val['display_text'])) {
                     continue;
                 }
 
@@ -150,7 +148,7 @@ class AttributeController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Attribute $attribute
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */

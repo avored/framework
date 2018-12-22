@@ -29,7 +29,8 @@ class SiteCurrencyController extends Controller
     {
         $siteCurrencyGrid = new SiteCurrencyDataGrid($this->repository->query());
 
-        return view('avored-framework::system.site-currency.index')->with('dataGrid', $siteCurrencyGrid->dataGrid);
+        return view('avored-framework::system.site-currency.index')
+            ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
@@ -99,7 +100,6 @@ class SiteCurrencyController extends Controller
         $siteCurreny->delete();
         return redirect()->route('admin.site-currency.index');
     }
-
 
     /**
      * Display a listing of the resource.

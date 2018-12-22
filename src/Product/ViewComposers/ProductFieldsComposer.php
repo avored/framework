@@ -7,8 +7,6 @@ use Illuminate\View\View;
 
 class ProductFieldsComposer
 {
-
-
     /**
      * Bind data to the view.
      *

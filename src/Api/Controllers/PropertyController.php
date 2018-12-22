@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Api\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Models\Database\Property;
-use AvoRed\Framework\Api\Controllers\Controller;
 use AvoRed\Framework\Api\Resources\Property\PropertyResource;
 use AvoRed\Framework\Api\Resources\Property\PropertyCollectionResource;
 use AvoRed\Framework\Product\Requests\PropertyRequest;
@@ -13,7 +12,7 @@ class PropertyController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
-     * 
+     *
      * @return \Illuminate\Http\Resources\CollectsResources
      */
     public function index()
@@ -25,7 +24,7 @@ class PropertyController extends Controller
 
     /**
      * Create an Resource and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function store(PropertyRequest $request)
@@ -35,10 +34,9 @@ class PropertyController extends Controller
         return (new PropertyResource($property));
     }
 
-
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function show(Property $property)
@@ -48,7 +46,7 @@ class PropertyController extends Controller
 
     /**
      * Update and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function update(PropertyRequest $request, Property $property)
@@ -59,8 +57,8 @@ class PropertyController extends Controller
 
     /**
      * Destroy an Record and Return Null Json Response
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Property $property)
     {

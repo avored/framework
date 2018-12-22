@@ -34,6 +34,7 @@ class Breadcrumb implements BreadcrumbContracts
 
     /**
      *  AvoRed BreakCrumb Construct method.
+     * @param callable $callable
      */
     public function __construct($callable)
     {

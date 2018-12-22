@@ -33,7 +33,10 @@ class OrderInvoicedMail extends Mailable
     public function build()
     {
         return $this->view('avored-framework::mail.order-invoiced')
-                    ->attach($this->path, ['as' => 'invoiced.pdf', 'mime' => 'application/pdf']);
-        //->with('order', $this->order);
+            ->attach(
+                $this->path, 
+                ['as' => 'invoiced.pdf', 
+                'mime' => 'application/pdf']
+            );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-$attributes['type'] = 'text';
+$attributes['type'] = 'password';
 $attributes['class'] = 'form-control';
 $attributes['id'] = $name;
 $attributes['name'] = $name;

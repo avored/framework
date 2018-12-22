@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\Cms\ViewComposers;
 
 use Illuminate\View\View;
-use AvoRed\Framework\Menu\Facade as MenuFacade;
+use AvoRed\Framework\Menu\Facades\Menu as MenuFacade;
 use AvoRed\Framework\Models\Contracts\MenuInterface;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 
@@ -20,10 +20,10 @@ class MenuComposer
      */
     protected $categoryRepository;
 
-    public function __construct(MenuInterface $menuRepository, 
-                                CategoryInterface $categoryRepository
-                            )
-    {
+    public function __construct(
+        MenuInterface $menuRepository,
+        CategoryInterface $categoryRepository
+    ) {
         $this->menuRepository = $menuRepository;
         $this->categoryRepository = $categoryRepository;
     }
@@ -38,10 +38,10 @@ class MenuComposer
     {
         $frontMenus = MenuFacade::all();
         $categories = $this->categoryRepository->all();
-        $menus = $this->menuRepository->parentsAll();
-    
+        //$menus = $this->menuRepository->parentsAll();
+
         $view->with('categories', $categories)
-            ->with('frontMenus', $frontMenus)
-            ->with('menus', $menus);
+            ->with('frontMenus', $frontMenus);
+            //->with('menus', $menus);
     }
 }

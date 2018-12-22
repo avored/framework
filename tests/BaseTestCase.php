@@ -5,18 +5,28 @@ use AvoRed\Framework\Provider;
 use AvoRed\Framework\Models\Database\Role;
 use AvoRed\Framework\Models\Database\AdminUser;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
+use Faker\Generator as FakerGenerator;
 
 abstract class BaseTestCase extends OrchestraTestCase
 {
-
-
+    /**
+     * Admin User 
+     * @var \AvoRed\Framework\Models\Database\AdminUser $user
+     */
     protected $user; 
 
     public function setUp()
     {
         parent::setUp();
         $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
+      
+        $this->app->singleton(EloquentFactory::class, function ($app) {
+            $faker = $app->make(FakerGenerator::class);
+            return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
+        });
         $this->setUpDatabase();
+       
     }
     private function resetDatabase()
     {

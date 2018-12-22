@@ -9,64 +9,63 @@ class Product implements CartContracts
     /**
      * Cart Product Name.
      *
-     * @var null|string
+     * @var string
      */
     protected $name;
 
     /**
      * Cart Product Qty.
      *
-     * @var null|int
+     * @var float
      */
     protected $qty;
 
     /**
      * Cart Product Slug.
      *
-     * @var null|string
+     * @var string
      */
     protected $slug;
 
     /**
      * Cart Product Price.
      *
-     * @var null|float
+     * @var float
      */
     protected $price;
 
     /**
      * Cart Product Tax Amount.
      *
-     * @var null|float
+     * @var double
      */
     protected $tax;
-
+    
     /**
-    * Cart Product Attributes.
-    *
-    * @var null|array
-    */
+     * Cart Product Attributes.
+     *
+     * @var array
+     */
     protected $attributes;
 
     /**
      * Cart Product Image.
      *
-     * @var null|string
+     * @var string
      */
     protected $image;
-
 
     /**
      * Cart Product Line Total.
      *
-     * @var null|string
+     * @var double
      */
     protected $lineTotal;
 
     /**
      * Set/Get Cart Product Name.
      *
-     * @param null|string $name
+     * @param string $name
      * @return $this|string
      */
     public function name($name = null)
@@ -82,8 +81,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Qty.
-     * @param null|string $qty
-     * @return $this|string
+     * @param float $qty
+     * @return $this|float
      */
     public function qty($qty = null)
     {
@@ -98,7 +97,7 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Slug.
-     * @param null|string $slug
+     * @param string $slug
      * @return $this|string
      */
     public function slug($slug = null)
@@ -114,7 +113,7 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Price.
-     * @param null|float $price
+     * @param float $price
      * @return $this|float
      */
     public function price($price = null)
@@ -130,8 +129,8 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Tax.
-     * @param null|float $amount
-     * @return $this|float
+     * @param double $amount
+     * @return $this|double
      */
     public function tax($amount = null)
     {
@@ -146,16 +145,16 @@ class Product implements CartContracts
 
     /**
      * Set/Get Cart Product Line Total.
-     * @param null|float $amount
-     * @return $this|float
+     * @param double $lineTotal
+     * @return $this|double
      */
-    public function lineTotal($amount = null)
+    public function lineTotal($lineTotal = null)
     {
-        if (null === $amount) {
+        if (null === $lineTotal) {
             return $this->lineTotal;
         }
 
-        $this->lineTotal = $amount;
+        $this->lineTotal = $lineTotal;
 
         return $this;
     }
@@ -163,7 +162,7 @@ class Product implements CartContracts
     /**
      * Get Cart Product Formatted Price.
      *
-     * @return float
+     * @return double
      */
     public function priceFormat()
     {
@@ -173,11 +172,11 @@ class Product implements CartContracts
     /**
      * Get Cart Product Formatted Price.
      *
-     * @return float
+     * @return double
      */
     public function finalPrice()
     {
-        return number_format($this->price() * $this->qty(), 2);
+        return number_format(($this->price() + $this->tax()) * $this->qty(), 2);
     }
 
     /**
@@ -199,8 +198,8 @@ class Product implements CartContracts
 
     /**
      * To Check if Cart Product Has Attributes.
-     *
-     * @return bool
+     * @param array $attributes
+     * @return self|array
      */
     public function attributes($attributes = null)
     {

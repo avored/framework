@@ -5,9 +5,8 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-        
+         processIsolation="true"
+         stopOnFailure="true"
 >
     <testsuites>
         <testsuite name="AvoRed Framework Tests">
@@ -22,7 +21,7 @@
     </filter>
 
     <!--logging>
-        <log type="coverage-html" target="../../public/cov/framework" 
+        <log type="coverage-html" target="../../../public/cov/framework" 
              lowUpperBound="50" highLowerBound="80"/>
     </logging-->
 </phpunit>  

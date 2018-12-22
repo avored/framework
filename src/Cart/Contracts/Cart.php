@@ -6,19 +6,19 @@ interface Cart
 {
     /**
      * Get/Set Cart Product Name.
-     * @return null|string
+     * @return string|\AvoRed\Framework\Cart\Product
      */
     public function name();
 
     /**
      * Get/Set Cart Product Qty.
-     * @return null|string
+     * @return string|\AvoRed\Framework\Cart\Product
      */
     public function qty();
 
     /**
      * Get/Set Cart Product Price.
-     * @return null|string
+     * @return string|\AvoRed\Framework\Cart\Product
      */
     public function price();
 }

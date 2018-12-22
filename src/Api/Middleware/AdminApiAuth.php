@@ -25,7 +25,7 @@ class AdminApiAuth
         }
 
         $user = Auth::user();
-        if (isset($user->language) && ! empty($user->language)) {
+        if (isset($user->language) && !empty($user->language)) {
             App::setLocale($user->language);
         }
 
