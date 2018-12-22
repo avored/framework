@@ -98,7 +98,7 @@ class SiteCurrencyController extends Controller
     public function destroy($id)
     {
         $default = (new Configuration)->getValue('general_site_currency');
-        if($default === $id) {
+        if($default == $id) {
             return redirect()->back()->with('errorNotificationText', ' You can not delete the default language!');
         }
 

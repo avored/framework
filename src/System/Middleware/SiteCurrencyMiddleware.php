@@ -56,8 +56,8 @@ class SiteCurrencyMiddleware
     {
         // Remove session from user if current currency do not exist
         if(null !== Session::get('currency_code')) {
-            $model = $this->curRep->findByCode(Session::get('currency_code'));
-            if(!$model) {
+            $currency = $this->curRep->findByCode(Session::get('currency_code'));
+            if(is_null($currency)) {
                 Session::remove('currency_code');
                 Session::remove('currency_symbol');
             }
