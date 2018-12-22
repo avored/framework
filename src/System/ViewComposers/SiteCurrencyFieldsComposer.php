@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\User\ViewComposers;
+namespace AvoRed\Framework\System\ViewComposers;
 
 use Illuminate\View\View;
 use AvoRed\Framework\Models\Database\Country;

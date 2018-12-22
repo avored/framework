@@ -4,7 +4,7 @@ namespace AvoRed\Framework\System\Controllers;
 
 use AvoRed\Framework\System\DataGrid\RoleDataGrid;
 use AvoRed\Framework\Models\Database\Role as Model;
-use AvoRed\Framework\User\Requests\RoleRequst;
+use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Models\Database\Permission;
 use AvoRed\Framework\Models\Contracts\RoleInterface;
 use AvoRed\Framework\Models\Database\Role;
@@ -47,11 +47,11 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \AvoRed\Framework\User\Requests\RoleRequst $request
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequst $request)
+    public function store(RoleRequest $request)
     {
         try {
             $role = $this->repository->create($request->all());
@@ -79,12 +79,12 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \AvoRed\Framework\User\Requests\RoleRequst $request
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
      * @param \AvoRed\Framework\Models\Database\Role $role
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequst $request, Model $role)
+    public function update(RoleRequest $request, Model $role)
     {
         try {
             $role->update($request->all());
@@ -112,7 +112,7 @@ class RoleController extends Controller
     /**
      * Save Role Permission for the Users
      *
-     * @param \AvoRed\Framework\User\Requests\RoleRequst $request
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
      * @param \AvoRed\Framework\Models\Database\Role $rolet
      *
      * @return void
