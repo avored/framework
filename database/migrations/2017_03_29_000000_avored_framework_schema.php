@@ -610,6 +610,14 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');;
         });
 
+        Schema::create('tax_groups', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([

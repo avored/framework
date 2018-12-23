@@ -47,6 +47,8 @@ use AvoRed\Framework\Models\Contracts\OrderReturnRequestInterface;
 use AvoRed\Framework\Models\Repository\OrderReturnRequestRepository;
 use AvoRed\Framework\Models\Contracts\OrderReturnProductInterface;
 use AvoRed\Framework\Models\Repository\OrderReturnProductRepository;
+use AvoRed\Framework\Models\Contracts\TaxGroupInterface;
+use AvoRed\Framework\Models\Repository\TaxGroupRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -84,6 +86,7 @@ class ModelProvider extends ServiceProvider
         StateInterface::class => StateRepository::class,
         UserInterface::class => UserRepository::class,
         UserGroupInterface::class => UserGroupRepository::class,
+        TaxGroupInterface::class => TaxGroupRepository::class,
     ];
 
     /**

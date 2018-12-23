@@ -41,6 +41,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::resource('admin-user', 'System\Controllers\AdminUserController');
     Route::resource('country', 'System\Controllers\CountryController');
     Route::resource('state', 'System\Controllers\StateController');
+    Route::resource('tax-group', 'System\Controllers\TaxGroupController');
 
     Route::post('get-attribute-element', 'Product\Controllers\AttributeController@getElementHtml')
                 ->name('attribute.element');

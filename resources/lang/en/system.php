@@ -9,6 +9,12 @@ return [
     'state-create' => 'Create State',
     'state-update' => 'Update State',
 
+    'tax-group' => [
+        'title' => 'Tax Group',
+        'create' => 'Create Tax Group',
+        'update' => 'Update Tax Group',
+    ],
+
     'site-currency' => [
         'title' => 'Currency',
         'create' => 'Create Currency',
