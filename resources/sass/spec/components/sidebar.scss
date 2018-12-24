@@ -37,6 +37,7 @@
         a {
           .logo {
             background-position: center center;
+            padding: 15px 10px;
             width: $collapsed-size;
           }
         }
@@ -141,6 +142,7 @@
       display: inline-block;
       min-height: calc(#{$header-height} - 1px);
       width: 100%;
+      padding: 15px 10px;
       width: 70px;
     }
 

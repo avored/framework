@@ -20,12 +20,10 @@
         &.header {
             background-color: $primary;
             color: $white;
-           
         } 
         
         .avored-table-cell {
             padding: 0.5em;
-
             a, i {
                 color: $white;
             }
@@ -39,17 +37,14 @@
         .avored-table-row {
             &:hover { 
                 background-color: darken($light, 20%); 
-               
             }
            
             .avored-table-cell {
                 padding: 0.5em;
-
                 a {
                     color:inherit;
                 }
             }
         }
-
     }
 }
