@@ -7,7 +7,6 @@ use AvoRed\Framework\System\DataGrid\TaxGroupDataGrid;
 use AvoRed\Framework\System\Requests\TaxGroupRequest;
 use AvoRed\Framework\Models\Database\TaxGroup;
 
-
 class TaxGroupController extends Controller
 {
     /**

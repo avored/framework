@@ -248,7 +248,7 @@ class ProductController extends Controller
      * @param int $length
      * @return string $randomString
      */
-    public function _getTmpString($length = 6)
+    private function _getTmpString($length = 6)
     {
         $pool = 'abcdefghijklmnopqrstuvwxyz';
 

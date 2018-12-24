@@ -234,6 +234,14 @@ class AdminMenuProvider extends ServiceProvider
                     ->route('admin.tax-group.index');
             }
         );
+        $systemMenu->subMenu(
+            'tax_rate',
+            function (AdminMenu $menu) {
+                $menu->key('tax_rate')
+                    ->label('Tax Rate')
+                    ->route('admin.tax-rate.index');
+            }
+        );
 
         $systemMenu->subMenu(
             'module',
