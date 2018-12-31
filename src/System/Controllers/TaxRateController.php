@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
+use AvoRed\Framework\Models\Contracts\CountryInterface;
 use AvoRed\Framework\Models\Contracts\TaxRateInterface;
 use AvoRed\Framework\System\DataGrid\TaxRateDataGrid;
 use AvoRed\Framework\System\Requests\TaxRateRequest;
@@ -15,9 +16,18 @@ class TaxRateController extends Controller
      */
     protected $repository;
 
-    public function __construct(TaxRateInterface $repository)
-    {
+    /**
+     * Country Repository
+     * @var \AvoRed\Framework\Models\Repository\CountryRepository
+     */
+    protected $countryRepository;
+
+    public function __construct(
+        TaxRateInterface $repository,
+        CountryInterface $countryRepository
+    ) {
         $this->repository = $repository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -42,7 +52,10 @@ class TaxRateController extends Controller
      */
     public function create()
     {
-        return view('avored-framework::system.tax-rate.create');
+        $countryOptions = $this->countryRepository->all()->pluck('name', 'id');
+
+        return view('avored-framework::system.tax-rate.create')
+            ->withCountryOptions($countryOptions);
     }
 
     /**

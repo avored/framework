@@ -44,6 +44,9 @@ Route::middleware(['web', 'admin.auth', 'permission'])
     Route::resource('tax-group', 'System\Controllers\TaxGroupController');
     Route::resource('tax-rate', 'System\Controllers\TaxRateController');
 
+    Route::post('get-state', 'System\Controllers\StateController@getState')
+                ->name('system.get-state');
+
     Route::post('get-attribute-element', 'Product\Controllers\AttributeController@getElementHtml')
                 ->name('attribute.element');
     Route::post('product-attribute-panel', 'Product\Controllers\AttributeController@getAttribute')
