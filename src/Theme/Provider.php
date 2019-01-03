@@ -24,7 +24,6 @@ class Provider extends ServiceProvider
     public function boot()
     {
         $activeTheme = 'avored-default';
-        
         $dbConnectError = false;
 
         try {
@@ -32,10 +31,10 @@ class Provider extends ServiceProvider
         } catch (\Exception $e) {
             $dbConnectError = true;
         }
-        if (false === $dbConnectError && Schema::hasTable('configurations')) {
+    
+        if (false === $dbConnectError) {
             $repository = $this->app->get(ConfigurationInterface::class);
             $activeTheme = $repository->getValueByKey('active_theme_identifier');
-
         }
         $theme = Theme::get($activeTheme);
         $fallBackPath = base_path('themes/avored/default/lang');
@@ -51,9 +50,7 @@ class Provider extends ServiceProvider
     {
         $this->registerTheme();
         $this->app->alias('theme', 'AvoRed\Framework\Theme\Manager');
-
         $this->registerThemeConsoleProvider();
-
         $themes = Theme::all();
     }
 
@@ -64,11 +61,14 @@ class Provider extends ServiceProvider
      */
     protected function registerTheme()
     {
-        $this->app->singleton('theme', function ($app) {
-            $loadDefaultLangPath = base_path('themes/avored/default/lang');
-            $app['path.lang'] = $loadDefaultLangPath;
-            return new Manager($app['files']);
-        });
+        $this->app->singleton(
+            'theme', 
+            function ($app) {
+                $loadDefaultLangPath = base_path('themes/avored/default/lang');
+                $app['path.lang'] = $loadDefaultLangPath;
+                return new Manager($app['files']);
+            }
+        );
     }
 
     /*
