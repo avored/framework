@@ -2,38 +2,37 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Site Currency Details
+            Tax Rate Details
         </div>
 
         <div class="card-body table-bordered">
             <table class="table">
                 <tr>
                     <td>Name</td>
-                    <td>{{ $siteCurrency->name }}</td>
+                    <td>{{ $taxRate->name }}</td>
                 </tr>
-                
                 <tr>
-                    <td>Curreny Code</td>
-                    <td>{{ $siteCurrency->code }}</td>
+                    <td>Description</td>
+                    <td>{{ $taxRate->description }}</td>
                 </tr>
-                
                 <tr>
-                    <td>Conversion Rate</td>
-                    <td>{{ $siteCurrency->conversion_rate }}</td>
+                    <td>Rate</td>
+                    <td>{{ $taxRate->rate }}</td>
                 </tr>
-                
                 <tr>
-                    <td>Status</td>
-                    <td>{{ $siteCurrency->status }}</td>
+                    <td>Rate Type</td>
+                    <td>{{ $taxRate->rate_type }}</td>
                 </tr>
-                
-
-                
+                <tr>
+                    <td>Rate Applied via</td>
+                    <td>{{ $taxRate->applied_with }}</td>
+                </tr>
             </table>
 
             <div class="float-left">
-            
-                <form method="post" action="{{ route('admin.site-currency.destroy', $siteCurrency->id)  }}">
+                
+              
+                <form method="post" action="{{ route('admin.tax-rate.destroy', $taxRate->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
@@ -43,7 +42,7 @@
                                         title: 'Are you sure?',
                                         icon: 'warning',
                                         buttons: true,
-                                        text: 'Once deleted, you will not be able to recover this Site Currency!',
+                                        text: 'Once deleted, you will not be able to recover this tax rate!',
                                     }).then((willDelete) => {
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
@@ -55,7 +54,7 @@
                 </form>
                
             </div>
-            <a class="btn" href="{{ route('admin.site-currency.index') }}">Cancel</a>
+            <a class="btn" href="{{ route('admin.tax-rate.index') }}">Cancel</a>
         </div>
     </div>
 

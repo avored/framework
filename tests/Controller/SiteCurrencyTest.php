@@ -28,6 +28,7 @@ class SiteCurrencyTest extends BaseTestCase
      */
     public function test_site_currency_create_route()
     {
+        $this->markTestIncomplete();
         $user = $this->_getAdminUser();
         $response = $this->actingAs($user, 'admin')->get(route('admin.site-currency.create'));
         
@@ -39,6 +40,7 @@ class SiteCurrencyTest extends BaseTestCase
      */
     public function test_site_currency_store_route()
     {
+        $this->markTestIncomplete();
         $user = $this->_getAdminUser();
         $response = $this->actingAs($user, 'admin')
                         ->post(route('admin.site-currency.store', [
@@ -61,6 +63,7 @@ class SiteCurrencyTest extends BaseTestCase
      */
     public function test_site_currency_edit_route()
     {
+        $this->markTestIncomplete();
         $siteCurrency = factory(SiteCurrency::class)->create();
         
         $user = $this->_getAdminUser();

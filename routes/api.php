@@ -1,5 +1,12 @@
 <?php
 
+
+Route::prefix('api')
+    ->middleware(['api'])
+    ->namespace('AvoRed\Framework\Api\Controllers')
+    ->group(function() {
+        Route::post('login', 'LoginController@token');
+    });
 Route::prefix('api')
     ->middleware(['api', 'admin.api.auth'])
     ->namespace("AvoRed\Framework\Api\Controllers")

@@ -607,8 +607,29 @@ class AvoredFrameworkSchema extends Migration
             $table->string('params')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');;
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
         });
+
+        Schema::create('tax_groups', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('tax_rates', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->float('rate', 10, 6);
+            $table->integer('country_id')->unsigned();
+            $table->integer('state_id')->unsigned()->nullable()->default(null);
+            $table->integer('postcode')->nullable()->default(null);
+            $table->enum('rate_type', ['PERCENTAGE', 'FIXED'])->default('PERCENTAGE');
+            $table->enum('applied_with', ['SHIPPING', 'BILLING', 'STORE'])->default('SHIPPING');
+            $table->timestamps();
+        });
+
 
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);

@@ -30,8 +30,10 @@ class ProductController extends Controller
      */
     protected $downRepository;
 
-    public function __construct(ProductInterface $repository, ProductDownloadableUrlInterface $downRep)
-    {
+    public function __construct(
+        ProductInterface $repository, 
+        ProductDownloadableUrlInterface $downRep
+    ) {
         $this->repository = $repository;
         $this->downRepository = $downRep;
     }
@@ -246,7 +248,7 @@ class ProductController extends Controller
      * @param int $length
      * @return string $randomString
      */
-    public function _getTmpString($length = 6)
+    private function _getTmpString($length = 6)
     {
         $pool = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -263,5 +265,18 @@ class ProductController extends Controller
     {
         return view('avored-framework::product.show')
                 ->with('product', $product);
+    }
+
+    /**
+     * Export all the products to CSV File 
+     *
+     * @param \AvoRed\Framework\Models\Database\Product $product
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $products = $this->repository->all();
+        
+        dd($products);
     }
 }

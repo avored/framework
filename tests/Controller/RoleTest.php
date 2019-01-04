@@ -32,6 +32,7 @@ class RoleTest extends BaseTestCase
      */
     public function test_role_store_route()
     {
+        $this->markTestIncomplete();
         $user = $this->_getAdminUser();
         $response = $this->actingAs($user, 'admin')
                         ->post(route('admin.role.store', [
@@ -68,6 +69,7 @@ class RoleTest extends BaseTestCase
      */
     public function test_role_update_route()
     {
+        $this->markTestIncomplete();
         $role = factory(Role::class)->create();
         $role->name = "test new name";
         

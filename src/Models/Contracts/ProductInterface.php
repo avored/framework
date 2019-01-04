@@ -26,4 +26,11 @@ interface ProductInterface
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query();
+
+    /**
+     * Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function all();
 }

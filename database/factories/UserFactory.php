@@ -9,7 +9,6 @@ $factory->define(AvoRed\Framework\Models\Database\User::class, function (Faker $
         'email' => $faker->email,
         'password' => bcrypt($faker->phoneNumber),
         'phone' => $faker->phoneNumber,
-        'status' => 'LIVE'
-        
+        'status' => 'LIVE'      
     ];
 });

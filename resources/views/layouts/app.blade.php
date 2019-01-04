@@ -31,6 +31,7 @@
       @include("avored-framework::layouts.nav")
       <main class='main-content bgc-grey-100'>
         <div id='mainContent'>
+          @include("avored-framework::layouts.notifications")
           <div class="masonry-sizer col-md-6"></div>
           <h4 class="c-grey-900 mT-10 mB-30">@yield('page-header')</h4>
             @yield('content')

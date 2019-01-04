@@ -7,6 +7,7 @@ use AvoRed\Framework\System\Requests\StateRequest;
 use AvoRed\Framework\Models\Database\State;
 use AvoRed\Framework\Models\Contracts\StateInterface;
 use AvoRed\Framework\Models\Contracts\CountryInterface;
+use Illuminate\Http\Request;
 
 class StateController extends Controller
 {
@@ -70,8 +71,8 @@ class StateController extends Controller
     {
         $countryOptions = $this->_getCountryOptions();
         return view('avored-framework::system.state.edit')
-                    ->with('model', $state)
-                    ->with('countryOptions', $countryOptions);
+            ->with('model', $state)
+            ->with('countryOptions', $countryOptions);
         ;
     }
 
@@ -120,5 +121,15 @@ class StateController extends Controller
     {
         $countryRepository = app(CountryInterface::class);
         return $countryRepository->options();
+    }
+
+    /**
+     * Get the State based on Country Id 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Response\JsonResponse
+     */
+    public function getState(Request $request)
+    {
+        return $request->all();
     }
 }

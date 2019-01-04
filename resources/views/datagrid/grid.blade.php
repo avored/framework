@@ -84,5 +84,8 @@
 </table>
 
 <div class="row justify-content-end">
-    {!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->links('pagination::bootstrap-4') !!}
+    <div class="col-12">
+        {!! $dataGrid->data->appends(Request::except($dataGrid->data->getPageName()))->links('pagination::bootstrap-4') !!}
+    </div>
+
 </div>

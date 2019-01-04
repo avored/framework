@@ -2,26 +2,26 @@
 
 @section('content')
 
-    <div id=admin-admin-user-page class="row">
+    <div id=admin-tax-rate-page class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('avored-framework::shop.order-status-update') }}
+                    {{ __('avored-framework::system.tax-rate.update') }}
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.order-status.update', $model->id) }}" 
+                    <form action="{{ route('admin.tax-rate.update', $model->id) }}" 
                       
                         method="post">
                         @csrf()
                         @method('put')
 
-                        @include('avored-framework::product.order-status._fields')
+                        @include('avored-framework::system.tax-rate._fields')
 
-                        <div class="form-group">
+                        <div class="form-rate">
                             <button class="btn btn-primary" type="submit">
-                                {{ __('avored-framework::shop.order-status-update') }}
+                                {{ __('avored-framework::system.tax-rate.update') }}
                             </button>
-                            <a href="{{ route('admin.order-status.index') }}" class="btn">
+                            <a href="{{ route('admin.tax-rate.index') }}" class="btn">
                                 {{ __('avored-framework::lang.cancel') }}
                             </a>
                         </div>
@@ -38,7 +38,7 @@
 <script>
 
  var app = new Vue({
-        el: '#admin-admin-user-page',
+        el: '#admin-admin-state-page',
         data : {
             model: {},
             autofocus:true,
