@@ -32,7 +32,7 @@ class Provider extends ServiceProvider
             $dbConnectError = true;
         }
     
-        if (false === $dbConnectError) {
+        if (false === $dbConnectError && Schema::hasTable('configurations')) {
             $repository = $this->app->get(ConfigurationInterface::class);
             $activeTheme = $repository->getValueByKey('active_theme_identifier');
         }
