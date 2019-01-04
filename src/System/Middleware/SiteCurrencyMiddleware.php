@@ -75,6 +75,9 @@ class SiteCurrencyMiddleware
 
             $currencyCode = $siteCurrencyModel->code;
             $currencySymbol = $siteCurrencyModel->symbol;
+        } else {
+            $siteCurrencyModel = $this->curRep->findByCode($currencyCode);
+            $currencySymbol = $siteCurrencyModel->symbol;
         }
 
         $sessionCode = Session::get('currency_code', $currencyCode);
