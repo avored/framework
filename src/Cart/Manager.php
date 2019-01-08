@@ -220,7 +220,7 @@ class Manager
 
         if ($formatted == true) {
             $symbol = Session::get('currency_symbol');
-            return $symbol . number_format($total, 2);
+            return $symbol . number_format($total, 2, ',', '.');
         }
 
         return $total;

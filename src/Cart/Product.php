@@ -56,7 +56,7 @@ class Product implements CartContracts
      * @var double
      */
     protected $tax;
-    
+
     /**
     * Cart Product Attributes.
     *
@@ -243,7 +243,7 @@ class Product implements CartContracts
      *
      * @param mixed $model
      */
-    public function model($model)
+    public function model($model = null)
     {
         if (null === $model)
             return $this->model;

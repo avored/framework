@@ -138,6 +138,7 @@
                                 <tr>
                                     <th scope="col">{{  __('avored-framework::orders.history-action') }}</th>
                                     <th scope="col">{{  __('avored-framework::orders.history-updated-at') }}</th>
+                                    <th scope="col">Dados</th>
                                 </tr>
                             </thead>
                             @foreach($order->history as $orderHistory)
@@ -145,6 +146,7 @@
                                     <tr>
                                         <td>O status do pedido foi alterado para <strong>{{ $orderHistory->orderStatus->name }}</strong></td>
                                         <td>{{ $orderHistory->updated_at->format('d/m/Y H:i:s') }} - {!! $orderHistory->updated_at->diffForHumans() !!} </td>
+                                        <td>{!! $orderHistory->transaction_data !!}</td>
                                     </tr>
                                 </tbody>
                                 @endforeach
