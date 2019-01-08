@@ -95,7 +95,7 @@ class Payment extends PaymentEcommerce implements PaymentContracts
             'amount' => $totalCents,
             'currency' => $currencyCode,
             'source' => $request->get('stripeToken'), // obtained with Stripe.js
-            'description' => 'AvoRed E commerce Payment',
+            'description' => 'Stripe Pagamento LeadStore - e-Commerce',
         ]);
 
         return $response;

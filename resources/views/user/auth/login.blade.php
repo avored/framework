@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html lang="pt-BR" style="height: 100%;">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@
             <div class="offset-1 col-md-10">
             <div class="card">
 
-                <div class="card-header bg-primary text-white">
+                <div class="card-header text-white" style="background-color: #7328c6">
                     Área Restrita
                 </div>
                 <div class="card-body" >
@@ -37,18 +37,18 @@
                     <form method="post" action="{{ route('admin.login') }}" >
                         @csrf
 
-                        <avored-form-input 
+                        <avored-form-input
                             field-name="email"
-                            label="{{ __('avored-framework::lang.user.email-label') }}" 
+                            label="{{ __('avored-framework::lang.user.email-label') }}"
                             error-text="{!! $errors->first('email') !!}"
                             v-on:change="changeModelValue"
                             autofocus="autofocus"
                                 >
                         </avored-form-input>
 
-                        <avored-form-input 
+                        <avored-form-input
                             field-name="password"
-                            label="Password" 
+                            label="Password"
                             field-type="password"
                             error-text="{!! $errors->first('password') !!}"
                             v-on:change="changeModelValue"
@@ -71,8 +71,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6" style="border-left:1px solid;height:100vh;background-color:brown">
-            
+        <div class="col-6" style="border-left:1px solid;height:100vh;background-color:#7328c6">
+
         </div>
     </div>
 </div>

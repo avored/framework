@@ -16,7 +16,7 @@ class Provider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
-        
+
     /**
      * Boot the Provider
      *
@@ -111,7 +111,7 @@ class Provider extends ServiceProvider
             });
 
         $userGroup = AdminConfigurationFacade::add('users')
-            ->label('Users');
+            ->label('Usuários');
 
         $userGroup->addConfiguration('user_default_country')
             ->label('País Padrão')
@@ -132,7 +132,7 @@ class Provider extends ServiceProvider
             });
 
         $shippingGroup = AdminConfigurationFacade::add('shipping')
-            ->label('Shipping');
+            ->label('Método de Entregas');
 
         $shippingGroup->addConfiguration('shipping_free_shipping_enabled')
             ->label('Ativar Frete Grátis?')
@@ -147,7 +147,7 @@ class Provider extends ServiceProvider
             ->label('Payment');
 
         $paymentGroup->addConfiguration('payment_stripe_enabled')
-            ->label('Payment Stripe Enabled')
+            ->label('Ativar Pagamento Stripe')
             ->type('select')
             ->name('payment_stripe_enabled')
             ->options(function () {

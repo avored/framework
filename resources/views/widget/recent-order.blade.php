@@ -6,14 +6,14 @@
         <div class="card-body">
             @if(null === $recentOrderData)
                 <p class="text-center">
-                    Sorry There is no Order Data
+                    Não há registros de pedidos
                 </p>
             @else
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>User</th>
-                            <th>Products</th>
+                            <th>Cliente</th>
+                            <th>Produtos</th>
                             <th>Total</th>
                         </tr>
                         <tr>
@@ -25,7 +25,7 @@
                 </div>
 
             @endif
-            
+
         </div>
     </div>
 </div>

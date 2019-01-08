@@ -8,8 +8,8 @@ return [
     'other-data' => 'Resumo do Pedido',
 
     'change-status' => 'Alterar status',
-    'add-track-code-helper' => 'The customer will use this track code to track their order on shipping company website.',
-    'change-status-helper' => 'The customer will receive a e-mail when you change the status.',
+    'add-track-code-helper' => 'O cliente utilizará este código para rastrear o pedido.',
+    'change-status-helper' => 'O cliente receberá um e-mail quando o status for atualizado.',
     'send-invoice' => 'Enviar Fatura',
 
     'add-track-code' => 'Adicionar Código de Rastreio',

@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="main-title-wrap">
             <div class='h2'>
-                {{  __('avored-framework::orders.order-details') }} (#{{ $order->id }}) 
+                {{  __('avored-framework::orders.order-details') }} (#{{ $order->id }})
 
                 @if($order->orderStatus->name === "Delivered")
                 <small><span class="badge badge-success">{{ $order->orderStatus->name }}</span></small>
@@ -15,9 +15,9 @@
 
                 <div class="float-right">
                     <button type="button" data-toggle="modal" data-target="#changeModal" class="btn btn-dark">{{  __('avored-framework::orders.change-status') }}</button>
-                    <button type="button" 
-                            data-toggle="modal" 
-                            data-target="#add-track-code-model" 
+                    <button type="button"
+                            data-toggle="modal"
+                            data-target="#add-track-code-model"
                             class="btn btn-dark">
                         {{  __('avored-framework::orders.add-track-code') }}
                         </button>
@@ -26,8 +26,8 @@
 
                 </div>
             </div>
-            
-           
+
+
 
             <div class="clearfix"></div>
                 <div class="mt-3 card">
@@ -119,11 +119,11 @@
                     <div class="card-body">
                         <table class="table">
                             <tr>
-                                <th>Shipping Option</th>
+                                <th>Opção de Frete</th>
                                 <td><span class="badge badge-info"> {{ $order->shipping_option }} </span></td>
                             </tr>
                             <tr>
-                                <th>Payment Option</th>
+                                <th>Método de Pagamento</th>
                                 <td>{{ $order->payment_option }}</td>
                             </tr>
                         </table>
@@ -143,10 +143,10 @@
                             @foreach($order->history as $orderHistory)
                                 <tbody>
                                     <tr>
-                                        <td>This Order status has changed to {{ $orderHistory->orderStatus->name }}</td>
-                                        <td>{{ $orderHistory->updated_at }}</td>
+                                        <td>O status do pedido foi alterado para <strong>{{ $orderHistory->orderStatus->name }}</strong></td>
+                                        <td>{{ $orderHistory->updated_at->format('d/m/Y H:i:s') }} - {!! $orderHistory->updated_at->diffForHumans() !!} </td>
                                     </tr>
-                                </tbody>                            
+                                </tbody>
                                 @endforeach
                             </table>
                         </div>

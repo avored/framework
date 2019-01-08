@@ -11,33 +11,33 @@
                     <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $siteCurrency->name }}</td>
                 </tr>
-                
+
                 <tr>
-                    <td>Curreny Code</td>
-                    <td>{{ $siteCurrency->curreny_code }}</td>
+                    <td>Código da Moeda</td>
+                    <td>{{ $siteCurrency->code }}</td>
                 </tr>
-                
+
                 <tr>
-                    <td>Conversion Rate</td>
+                    <td>Taxa de Conversão</td>
                     <td>{{ $siteCurrency->conversion_rate }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>Status</td>
                     <td>{{ $siteCurrency->status }}</td>
                 </tr>
-                
 
-                
+
+
             </table>
 
             <div class="float-left">
-            
+
                 <form method="post" action="{{ route('admin.site-currency.destroy', $siteCurrency->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
-                        onClick="event.preventDefault(); 
+                        onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
                                         title: 'Are you sure?',
@@ -48,12 +48,12 @@
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
                                         }
-                                    });"    
+                                    });"
                         class="btn btn-danger" >
                         Destroy
                     </button>
                 </form>
-               
+
             </div>
             <a class="btn" href="{{ route('admin.site-currency.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>

@@ -86,8 +86,7 @@ $style = [
                                 <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                     <!-- Greeting -->
                                     <h1 style="{{ $style['header-1'] }}">
-                                        Your Order Status at {{ config('app.name') }} has chanced
-                                        to {{ $orderStatusTitle }} stage.
+                                        O seu pedido em <strong>{!! config('app.name') !!}</strong> foi atualizado para: <strong>{!! $orderStatusTitle !!}</strong>
                                     </h1>
 
                                     <!-- Intro -->
@@ -97,15 +96,14 @@ $style = [
                                            cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center">
-
-                                                <p> To check your order status at </p>
+                                                <p>Acesse sua conta e acompanhe o seu pedido</p>
 
                                                 <p>
                                                     <a href="{{ route('my-account.home')}}"
                                                        style="{{ $fontFamily }} {{ $style['button'] }} {{ $style['button--blue'] }}"
                                                        class="button"
                                                        target="_blank">
-                                                        My Account
+                                                        Minha conta
                                                     </a>
                                                 </p>
                                             </td>
@@ -115,7 +113,7 @@ $style = [
 
                                     <!-- Salutation -->
                                     <p style="{{ $style['paragraph'] }}">
-                                        Regards,<br>{{ config('app.name') }}
+                                        Atenciosamente, <br>{{ config('app.name') }}
                                     </p>
 
 
@@ -125,24 +123,10 @@ $style = [
                     </td>
                 </tr>
 
-                <!-- Footer -->
-                <tr>
-                    <td>
-                        <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0"
-                               cellspacing="0">
-                            <tr>
-                                <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
-                                    <p style="{{ $style['paragraph-sub'] }}">
-                                        &copy; {{ date('Y') }}
-                                        <a style="{{ $style['anchor'] }}" href="{{ url('/') }}"
-                                           target="_blank">{{ config('app.name') }}</a>.
-                                        All rights reserved.
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+
+
+                 @include("avored-framework::mail.partials.footer")
+
             </table>
         </td>
     </tr>
