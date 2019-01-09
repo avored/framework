@@ -28,14 +28,14 @@ return [
         'login-card-title' => 'Admin Login',
         'email-label' => 'E-mail',
     ],
-    
+
     'admin-login-forget-password-link' => 'Esqueceu sua senha?',
     'admin-login-button-title' => 'Login',
     'admin-reset-button-title' => 'Enviar link de recuperação de senha',
     'admin-password-label' => 'Senha',
     'admin-confirm-password-label' => 'Confirmar Senha',
 
-    'admin-dashboard-monthly-revenue-title' => 'Ganhos Mensais',
+    'admin-dashboard-monthly-revenue-title' => 'Ganhos Líquidos do Mês',
     'admin-dashboard-total-user-title' => 'Total Usuários',
     'admin-dashboard-total-order-title' => 'Total Pedidos',
     'admin-dashboard-recent-order-title' => 'Pedido Recente',

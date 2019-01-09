@@ -126,8 +126,14 @@ class Manager
         if (null === $cartProduct) {
             throw new \Exception("Cart Product doesn't Exist");
         }
-        $cartProduct->qty($qty);
-        $cartProduct->lineTotal($qty * ($cartProduct->price() + $cartProduct->tax()));
+
+        if ($this->canAddToCart($slug, $qty)) {
+            $this->destroy($slug);
+            $this->add($slug, $qty);
+        }
+        else {
+            throw new \Exception('Quantidade máxima!');
+        }
 
         return $this;
     }
