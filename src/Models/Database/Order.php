@@ -12,7 +12,8 @@ class Order extends BaseModel
         'payment_option',
         'order_status_id',
         'currency_code',
-        'track_code'
+        'track_code',
+        'shipping_cost',
     ];
 
     /**
