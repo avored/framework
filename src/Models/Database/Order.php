@@ -2,8 +2,12 @@
 
 namespace AvoRed\Framework\Models\Database;
 
+use AvoRed\Framework\Models\Database\Traits\OrderProduct;
+
 class Order extends BaseModel
 {
+    use OrderProduct;
+
     protected $fillable = [
         'shipping_address_id',
         'billing_address_id',
