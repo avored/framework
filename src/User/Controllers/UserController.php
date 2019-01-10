@@ -58,7 +58,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->repository->create($request->all());
-
+        $this->_syncUserGroups($user, $request->get('user_group_id'));
         return redirect()->route('admin.user.index');
     }
 
@@ -72,7 +72,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('avored-framework::user.user.edit')
-                    ->with('model', $user);
+            ->with('model', $user);
     }
 
     /**
@@ -115,8 +115,8 @@ class UserController extends Controller
         $userOrders = $orderRepository->query()->whereUserId($user->id);
         $dataGrid = new UserOrderDataGrid($userOrders);
         return view('avored-framework::user.user.show')
-                ->with('user', $user)
-                ->with('userOrderDataGrid', $dataGrid->dataGrid);
+            ->with('user', $user)
+            ->with('userOrderDataGrid', $dataGrid->dataGrid);
     }
 
     /**
@@ -128,7 +128,7 @@ class UserController extends Controller
     public function changePasswordGet(User $user)
     {
         return view('avored-framework::user.user.change-password')
-                ->with('user', $user);
+            ->with('user', $user);
     }
 
     /**

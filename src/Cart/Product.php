@@ -193,7 +193,7 @@ class Product implements CartContracts
      */
     public function priceFormat()
     {
-        return number_format($this->price(), 2);
+        return number_format($this->price(), 2, ',', '.');
     }
 
     /**
@@ -203,7 +203,7 @@ class Product implements CartContracts
      */
     public function finalPrice()
     {
-        return number_format(($this->price() + $this->tax()) * $this->qty(), 2);
+        return number_format(($this->price() + $this->tax()) * $this->qty(), 2, ',', '.');
     }
 
     /**
