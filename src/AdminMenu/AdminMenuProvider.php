@@ -90,7 +90,7 @@ class AdminMenuProvider extends ServiceProvider
 
         $contentMenu = AdminMenuFacade::get('content');
         $contentMenu->subMenu('page', function (AdminMenu $menu) {
-            $menu->key('page')->label('Paǵinas')->route('admin.page.index');
+            $menu->key('page')->label('Páginas')->route('admin.page.index');
         });
 
         $contentMenu->subMenu('menu', function (AdminMenu $menu) {
@@ -151,7 +151,7 @@ class AdminMenuProvider extends ServiceProvider
         });
 
         $systemMenu->subMenu('module', function (AdminMenu $menu) {
-            $menu->key('module')->label('Modules')->route('admin.module.index');
+            $menu->key('module')->label('Módulos do Sistema')->route('admin.module.index');
         });
 
         $systemMenu->subMenu('admin-user', function (AdminMenu $menu) {

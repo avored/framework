@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="col-md-6">
-                        <div class="h4">Categories List</div>
+                        <div class="h4">Lista de Categorias</div>
                         <ul class="left-menu list-group ">
 
                             @foreach($categories as $category)
@@ -53,17 +53,17 @@
                     <ul id='menu-nav-list' class="nav nav-tabs nav-fill">
                         @foreach($menuGroups as $menuGroup)
                         <li class="nav-item ">
-                           
+
                             @if ($loop === 0 && $group->name == $menuGroup->name)
-                                @php 
+                                @php
                                     $class = 'active';
                                 @endphp
-                            @else 
-                                @php 
+                            @else
+                                @php
                                     $class = '';
                                 @endphp
                             @endif
-                            <a class="nav-link bg-primary text-white {{ $class }}" 
+                            <a class="nav-link bg-primary text-white {{ $class }}"
                                 href="{{ route('admin.menu.index',['group_id' => $menuGroup->id]) }}">
                                 {{ $menuGroup->name }}
                             </a>
@@ -76,8 +76,8 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <?php 
-                        
+                        <?php
+
                         ?>
                         @if($group->id > 0):
                         <div class="tab-pane border fade active show" id="{{ $group->identifier }}">
@@ -85,17 +85,17 @@
                                 <form action="{{ route('admin.menu.store') }}" class="mt-3" method="post">
 
                                     <div class="form-group">
-                                        <label>Menu Name</label>
+                                        <label>Nome do Menu</label>
                                         <input type="text" name="name" value="{{ $group->name }}" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Menu Identifier</label>
+                                        <label>Identificador do Menu</label>
                                         <input type="text" name="identifier" value="{{ $group->identifier }}" class="form-control" />
                                     </div>
 
                                     @php
                                         $menus = $group->menus;
-                                        
+
                                     @endphp
                                     <div class="display-menu-tree">
                                        <ul data-identifier="{{ $group->identifier }}" class="dropable-menu-tree">
@@ -103,12 +103,12 @@
                                             @include('avored-framework::cms.menu.menu-tree', ['menus' => $menus])
                                        </ul>
                                     </div>
-                                
+
                                     @csrf
                                     <input type="hidden" name="menu_json" class="menu-json" value=""/>
                                     <input type="hidden" name="menu_group_id" value="{{ $group->id }}"/>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Save Menu</button>
+                                        <button type="submit" class="btn btn-primary">Salvar Menu</button>
                                     </div>
                                 </form>
                             </div>
@@ -126,19 +126,19 @@
                                         <label>Menu Identifier</label>
                                         <input type="text" name="identifier" value="" class="form-control" />
                                     </div>
-                                  
+
                                     <div class="display-menu-tree">
                                        <ul data-identifier="add-new-group" class="dropable-menu-tree">
                                            <li></li>
                                             @include('avored-framework::cms.menu.menu-tree', ['menus' => []])
                                        </ul>
                                     </div>
-                                
+
                                     @csrf
                                     <input type="hidden" name="menu_json" class="menu-json" value=""/>
                                     <input type="hidden" name="menu_group_id" value=""/>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Save Menu</button>
+                                        <button type="submit" class="btn btn-primary">Salvar Menu</button>
                                     </div>
                                 </form>
                             </div>
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-               
+
             </div>
         </div>
     </div>
