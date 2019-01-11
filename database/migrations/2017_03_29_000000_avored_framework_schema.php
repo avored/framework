@@ -8,6 +8,7 @@ use AvoRed\Framework\Models\Database\Country;
 use AvoRed\Framework\Models\Database\SiteCurrency;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Models\Database\MenuGroup;
+use AvoRed\Framework\Models\Database\Menu;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -605,6 +606,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('name')->nullable()->default(null);
             $table->string('route')->nullable()->default(null);
             $table->string('params')->nullable()->default(null);
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
 
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
@@ -673,7 +675,78 @@ class AvoredFrameworkSchema extends Migration
             'configuration_key' => 'general_site_description',
             'configuration_value' => 'AvoRed Laravel Ecommerce
         ']);
+
+        $accountMenuGroup = MenuGroup::create([
+            'name' => 'My Account',
+            'identifier' => 'my-account'
+        ]);
+
+        Menu::create([
+            'name' => 'Account Overview',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.home',
+        ]);
+        Menu::create([
+            'name' => 'Edit Account',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.edit',
+        ]);
+        Menu::create([
+            'name' => 'Upload Image',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.upload-image',
+        ]);
+        Menu::create([
+            'name' => 'My Orders',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.order.list',
+        ]);
+        Menu::create([
+            'name' => 'My Addresses',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.address.index',
+        ]);
+        Menu::create([
+            'name' => 'My Wishlist',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.wishlist.list',
+        ]);
+        Menu::create([
+            'name' => 'Change Password',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.change-password',
+        ]);
+        Menu::create([
+            'name' => 'Logout',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'logout',
+        ]);
         
+        $menuGroup = MenuGroup::create([
+            'name' => 'Main Menu',
+            'identifier' => 'main-menu',
+            'is_default' => 1
+        ]);
+
+        
+        Menu::create([
+            'name' => 'My Account',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'my-account.home',
+            'sort_order' => 400
+        ]);
+        Menu::create([
+            'name' => 'Cart',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'cart.view',
+            'sort_order' => 500
+        ]);
+        Menu::create([
+            'name' => 'Checkout',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'checkout.index',
+            'sort_order' => 600
+        ]);
     }
 
     /**
