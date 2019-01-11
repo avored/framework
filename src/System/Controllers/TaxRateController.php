@@ -75,13 +75,16 @@ class TaxRateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \AvoRed\Framework\Models\Database\State $state
+     * @param \AvoRed\Framework\Models\Database\TaxRate $taxRate
      * @return \Illuminate\Http\Response
      */
     public function edit(TaxRate $taxRate)
     {
+        $countryOptions = $this->countryRepository->all()->pluck('name', 'id');
+
         return view('avored-framework::system.tax-rate.edit')
-            ->with('model', $taxRate);
+            ->with('model', $taxRate)
+            ->withCountryOptions($countryOptions);
         ;
     }
 
