@@ -49,6 +49,7 @@ class OrderResource extends JsonResource
             'products' => new OrderProductCollectionResource($products),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'shipping_cost' => $this->shipping_cost
         ];
     }
 

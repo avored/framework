@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::with(['orderStatus'])->latest()->paginate(10);
 
         return new OrderCollectionResource($orders);
     }
@@ -25,8 +25,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(Order $order)
+    public function show($id)
     {
+        $order = Order::find($id);
         return new OrderResource($order);
     }
 }

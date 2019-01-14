@@ -47,6 +47,8 @@ class LocalFile
             $sizeNamePath = str_replace($baseName, $sizeName . '-' . $baseName, $dbPath);
 
             $this->$objectVarName = asset('storage/' . $sizeNamePath);
+            $objectOriginal = $sizeName . 'Original';
+            $this->$objectOriginal = 'storage/' . $sizeNamePath;
         }
     }
 

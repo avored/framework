@@ -3,8 +3,8 @@
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Image\LocalFile;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,9 +16,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'phone',
-        'company_name', 'image_path', 'status',
-        'language', 'activation_token', 'tax_no'
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'phone',
+        'company_name',
+        'image_path',
+        'status',
+        'language',
+        'activation_token',
+        'tax_no',
+        'user_type',
+        'document',
+        'rg'
     ];
 
     /**
@@ -41,16 +52,6 @@ class User extends Authenticatable
     }
 
     /**
-     * One User has Many Address attached with it.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMAny
-     */
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
-    }
-
-    /**
      * One User has Many User Group attached with it.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMAny
@@ -65,6 +66,16 @@ class User extends Authenticatable
         $address = $this->addresses()->where('type', '=', 'SHIPPING')->first();
 
         return $address;
+    }
+
+    /**
+     * One User has Many Address attached with it.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMAny
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 
     public function getBillingAddress()

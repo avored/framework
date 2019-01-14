@@ -24,4 +24,9 @@ trait OrderProduct
 
         return $total;
     }
+
+    public function getTotalOrderValueAttribute()
+    {
+        return $this->calculateTotalProducts();
+    }
 }

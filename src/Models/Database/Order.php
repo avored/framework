@@ -20,6 +20,12 @@ class Order extends BaseModel
         'shipping_cost',
     ];
 
+    protected $append = [
+        'total_order_value',
+        'shipping_address',
+        'billing_address',
+    ];
+
     /**
      * Order Return Request can have many comments.
      *

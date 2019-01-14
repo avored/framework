@@ -12,6 +12,11 @@ class LeadstoreCustomSchema extends Migration
         Schema::table('orders', function($table) {
            $table->decimal('shipping_cost', 10, 2)->nullable();
         });
+        Schema::table('users', function($table) {
+           $table->enum('user_type', ['PF', 'PJ']);
+           $table->string('document')->nullable();
+           $table->string('rg')->nullable();
+        });
         /*
         Schema::create('order_lines', function(Blueprint $table) {
             $table->increments('id');
@@ -28,6 +33,11 @@ class LeadstoreCustomSchema extends Migration
         Schema::table('orders', function($table) {
             $table->dropColumn(['shipping_cost']);
         });
+
+        Schema::table('users', function($table) {
+            $table->dropColumn(['user_type', 'document', 'rg']);
+        });
+
     }
 
 }
