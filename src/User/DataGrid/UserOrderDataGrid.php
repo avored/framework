@@ -14,10 +14,11 @@ class UserOrderDataGrid
 
         $dataGrid->model($model)
                 ->column('id', ['sortable' => true])
-                ->column('payment_option', ['label' => 'Payment Options'])
-                ->column('shipping_option', ['label' => 'Shipping Options'])
-                ->linkColumn('show', [], function ($model) {
-                    return "<a href='" . route('admin.order.view', $model->id) . "' >Show Details</a>";
+                ->column('payment_option', ['label' => 'Opção Pagamento'])
+                ->column('shipping_option', ['label' => 'Opção de Frete'])
+                ->column('total_order_value', ['label' => 'Total do Pedido'])
+                ->linkColumn('visualizar', [], function ($model) {
+                    return "<a href='" . route('admin.order.view', $model->id) . "' >Visualizar</a>";
                 });
 
         $this->dataGrid = $dataGrid;

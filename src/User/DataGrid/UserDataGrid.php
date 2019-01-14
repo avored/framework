@@ -14,13 +14,14 @@ class UserDataGrid
 
         $dataGrid->model($model)
                 ->column('id', ['sortable' => true])
-                ->column('first_name', ['label' => 'First Name'])
-                ->column('last_name', ['label' => 'Last Name'])
+                ->column('document', ['label' => 'Documento'])
+                ->column('first_name', ['label' => 'Nome'])
+                ->column('last_name', ['label' => 'Sobrenome'])
                 ->column('email', ['label' => 'Email'])
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='" . route('admin.user.edit', $model->id) . "' >Edit</a>";
+                    return "<a href='" . route('admin.user.edit', $model->id) . "' >Editar</a>";
                 })->linkColumn('show', [], function ($model) {
-                    return "<a href='" . route('admin.user.show', $model->id) . "' >Show</a>";
+                    return "<a href='" . route('admin.user.show', $model->id) . "' >Visualizar</a>";
                 });
 
         $this->dataGrid = $dataGrid;

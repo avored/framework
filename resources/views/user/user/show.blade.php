@@ -11,9 +11,9 @@
                     <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $user->first_name }}</td>
                 </tr>
-                
+
                 <tr>
-                    <td>Last</td>
+                    <td>Sobrenome</td>
                     <td>{{ $user->last_name }}</td>
                 </tr>
                 <tr>
@@ -21,54 +21,56 @@
                     <td>{{ $user->email }}</td>
                 </tr>
                 <tr>
-                    <td>Phone</td>
+                    <td>Telefone</td>
                     <td>{{ $user->phone }}</td>
                 </tr>
                 <tr>
-                    <td>Company Name</td>
+                    <td>Empresa</td>
                     <td>{{ $user->company_name }}</td>
                 </tr>
+                @if($user->image_path)
+                    <tr>
+                        <td>Foto</td>
+                        <td>
+                            <img src="{{ $user->image_path->smallUrl }}"
+                            class="img-fluid img"
+                            />
+
+                        </td>
+                    </tr>
+                @endif
                 <tr>
-                    <td>Image</td>
-                    <td>
-                        <img src="{{ $user->image_path->smallUrl }}" 
-                        class="img-fluid img"
-                        />
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>Language</td>
+                    <td>Idioma</td>
                     <td>{{ $user->language }}</td>
                 </tr>
                 <tr>
                     <td>Tax No</td>
                     <td>{{ $user->tax_no }}</td>
                 </tr>
-                
+
             </table>
 
-            
+
             <div class="row">
                 <div class="col-12">
-                    <div class="h4">User Orders</div>
+                    <div class="h4">Pedidos</div>
                     <div class="user-orders-datagrid">
                         {!! DataGrid::render($userOrderDataGrid) !!}
                     </div>
                 </div>
             </div>
-                
+
             <div class="float-left">
-            
+
                 <a class="btn btn-warning" href="{{ route('admin.user.change-password', $user->id) }}">
-                    Chnage Password
+                    Alterar Senha
                 </a>
 
                 <form method="post" class="d-inline" action="{{ route('admin.user.destroy', $user->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
-                        onClick="event.preventDefault(); 
+                        onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
                                         title: 'Are you sure?',
@@ -79,12 +81,12 @@
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
                                         }
-                                    });"    
+                                    });"
                         class="btn btn-danger" >
-                        Destroy
+                        Excluir
                     </button>
                 </form>
-               
+
             </div>
             <a class="btn" href="{{ route('admin.user.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>
