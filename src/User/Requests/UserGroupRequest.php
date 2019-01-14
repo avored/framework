@@ -15,6 +15,7 @@ class UserGroupRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +25,7 @@ class UserGroupRequest extends FormRequest
     {
         $validation['name'] = 'required|max:255';
         $validation['is_default'] = 'max:255';
-       
+
         return $validation;
     }
 }

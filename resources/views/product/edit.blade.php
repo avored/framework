@@ -133,10 +133,6 @@
                 </button>
             </div>
 
-        <?php 
-        
-        //dd($model);
-        ?>
         </form>
 </div>
 @endsection

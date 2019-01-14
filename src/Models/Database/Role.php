@@ -6,17 +6,17 @@ class Role extends BaseModel
 {
     protected $fillable = ['name', 'description'];
 
-
-    public static function options($empty = true) {
-
+    public static function options($empty = true)
+    {
         $model = new static();
 
         $options = $model->all()->pluck('name', 'id');
-        if(true === $empty) {
+        if (true === $empty) {
             $options->prepend('Please Select', null);
         }
         return $options;
     }
+
     /**
      * Role can be assigned to many users.
      */

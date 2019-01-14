@@ -58,6 +58,27 @@ class ProductTest extends BaseTestCase
 
     }
 
+    /** @test */
+    public function testProductEditRoute() 
+    {
+        $product = factory(Product::class)->create();
+        $user = $this->_getAdminUser();
+
+        $response = $this->actingAs($user, 'admin')->get(route('admin.product.edit', $product->id));
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function testProductDeleteRoute() 
+    {
+        $product = factory(Product::class)->create();
+        $user = $this->_getAdminUser();
+        
+        $response = $this->actingAs($user, 'admin')->delete(route('admin.product.destroy', $product->id));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('admin.product.index'));
+    }
+
     private function _getBasicDummyData($updateData = null)
     {
         $data['name'] = 'product test name';

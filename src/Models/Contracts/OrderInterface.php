@@ -13,16 +13,16 @@ interface OrderInterface
     public function find($id);
 
     /**
-    * Order Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Order Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query();
 
     /**
-    * All Orders Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * All Orders Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 }

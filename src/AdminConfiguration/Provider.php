@@ -16,11 +16,15 @@ class Provider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
-
+        
+    /**
+     * Boot the Provider
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->registerAdminConfiguration();
-        
     }
 
     /**
@@ -31,7 +35,10 @@ class Provider extends ServiceProvider
     public function register()
     {
         $this->registerManager();
-        $this->app->singleton('adminconfiguration', \AvoRed\Framework\AdminConfiguration\Manager::class);
+        $this->app->singleton(
+            'adminconfiguration', 
+            \AvoRed\Framework\AdminConfiguration\Manager::class
+        );
     }
 
     /**
@@ -41,9 +48,12 @@ class Provider extends ServiceProvider
      */
     protected function registerManager()
     {
-        $this->app->singleton('adminconfiguration', function () {
-            new Manager();
-        });
+        $this->app->singleton(
+            'adminconfiguration', 
+            function () {
+                new Manager();
+            }
+        );
     }
 
     /**
@@ -56,9 +66,8 @@ class Provider extends ServiceProvider
         return ['adminconfiguration', 'AvoRed\Framework\AdminConfiguration\Manager'];
     }
 
-        
     /**
-     * Register the Menus.
+     * Register the Admin Configuration.
      *
      * @return void
      */
@@ -93,19 +102,22 @@ class Provider extends ServiceProvider
             ->label('Term & Condition Page')
             ->type('select')
             ->name('general_term_condition_page')
-            ->options(function () {
-                $options = Page::all()->pluck('name', 'id');
-                return $options;
-            });
+            ->options(
+                function () {
+                    $options = Page::all()->pluck('name', 'id');
+                    return $options;
+                }
+            );
 
         $configurationGroup->addConfiguration('general_home_page')
             ->label('Home Page')
             ->type('select')
             ->name('general_home_page')
-            ->options(function () {
-                $options = Page::all()->pluck('name', 'id');
-                return $options;
-            });
+            ->options(
+                function () {
+                    return Page::all()->pluck('name', 'id');
+                }
+            );
 
         $userGroup = AdminConfigurationFacade::add('users')
             ->label('Users');
@@ -114,19 +126,21 @@ class Provider extends ServiceProvider
             ->label('User Default Country')
             ->type('select')
             ->name('user_default_country')
-            ->options(function () {
-                $options = Country::all()->pluck('name', 'id');
-                return $options;
-            });
+            ->options(
+                function () {
+                    return Country::all()->pluck('name', 'id');
+                }
+            );
 
         $userGroup->addConfiguration('user_activation_required')
             ->label('User Activation Required')
             ->type('select')
             ->name('user_activation_required')
-            ->options(function () {
-                $options = [0 => 'No', 1 => 'Yes'];
-                return $options;
-            });
+            ->options(
+                function () {
+                    return [0 => 'No', 1 => 'Yes'];
+                }
+            );
 
         $shippingGroup = AdminConfigurationFacade::add('shipping')
             ->label('Shipping');
@@ -135,10 +149,11 @@ class Provider extends ServiceProvider
             ->label('Is Free Shipping Enabled')
             ->type('select')
             ->name('shipping_free_shipping_enabled')
-            ->options(function () {
-                $options = [1 => 'Yes', 0 => 'No'];
-                return $options;
-            });
+            ->options(
+                function () {
+                    return [1 => 'Yes', 0 => 'No'];
+                }
+            );
 
         $paymentGroup = AdminConfigurationFacade::add('payment')
             ->label('Payment');
@@ -147,10 +162,11 @@ class Provider extends ServiceProvider
             ->label('Payment Stripe Enabled')
             ->type('select')
             ->name('payment_stripe_enabled')
-            ->options(function () {
-                $options = [0 => 'No', 1 => 'Yes'];
-                return $options;
-            });
+            ->options(
+                function () {
+                    return [0 => 'No', 1 => 'Yes'];
+                }
+            );
 
         $paymentGroup->addConfiguration('payment_stripe_publishable_key')
             ->label('Payment Stripe Publishable Key')
@@ -169,10 +185,11 @@ class Provider extends ServiceProvider
             ->label('Is Tax Enabled')
             ->type('select')
             ->name('tax_enabled')
-            ->options(function () {
-                $options = [1 => 'Yes', 0 => 'No'];
-                return $options;
-            });
+            ->options(
+                function () {
+                    return [1 => 'Yes', 0 => 'No'];
+                }
+            );
 
         $taxGroup->addConfiguration('tax_percentage')
             ->label('Tax Percentage')
@@ -183,10 +200,10 @@ class Provider extends ServiceProvider
             ->label('Tax Default Country')
             ->type('select')
             ->name('tax_default_country')
-            ->options(function () {
-                $options = $options = Country::all()->pluck('name', 'id');
-                return $options;
-            });
+            ->options(
+                function () {
+                    return $options = Country::all()->pluck('name', 'id');
+                }
+            );
     }
-
 }

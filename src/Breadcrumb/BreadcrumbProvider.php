@@ -37,7 +37,7 @@ class BreadcrumbProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $this->app->singleton('breadcrumb', function ($app) {
+        $this->app->singleton('breadcrumb', function () {
             return new Builder();
         });
     }
@@ -52,7 +52,7 @@ class BreadcrumbProvider extends ServiceProvider
         return ['breadcrumb', 'AvoRed\Framework\Breadcrumb\Builder'];
     }
 
-     /**
+    /**
      * Register the Menus.
      *
      * @return void
@@ -136,7 +136,7 @@ class BreadcrumbProvider extends ServiceProvider
             $breadcrumb->label('Order')
                 ->parent('admin.dashboard');
         });
-        
+
         BreadcrumbFacade::make('admin.order.view', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('View')
             ->parent('admin.dashboard')
@@ -184,7 +184,7 @@ class BreadcrumbProvider extends ServiceProvider
             $breadcrumb->label('Show')
                 ->parent('admin.dashboard')
                 ->parent('admin.attribute.index');
-            });
+        });
         BreadcrumbFacade::make('admin.property.index', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Property')
                 ->parent('admin.dashboard');
@@ -199,7 +199,7 @@ class BreadcrumbProvider extends ServiceProvider
             $breadcrumb->label('Edit')
                 ->parent('admin.dashboard')
                 ->parent('admin.property.index');
-            });
+        });
         BreadcrumbFacade::make('admin.property.show', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Create')
             ->parent('admin.dashboard')
@@ -246,7 +246,7 @@ class BreadcrumbProvider extends ServiceProvider
             $breadcrumb->label('Show')
                 ->parent('admin.dashboard')
                 ->parent('admin.user-group.index');
-            });
+        });
         BreadcrumbFacade::make('admin.admin-user.index', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Admin User')
                 ->parent('admin.dashboard');
@@ -291,7 +291,6 @@ class BreadcrumbProvider extends ServiceProvider
                 ->parent('admin.dashboard')
                 ->parent('admin.role.index');
         });
-
 
         BreadcrumbFacade::make('admin.configuration', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Configuration')
@@ -383,34 +382,5 @@ class BreadcrumbProvider extends ServiceProvider
                 ->parent('admin.dashboard')
                 ->parent('admin.theme.index');
         });
-
-
-
-
-
-
-
-
-        
-
-        
-
-
-        
-
-
-
-
-        
-       
-
-        
-
-        
-
-
-        
-
-        
     }
 }

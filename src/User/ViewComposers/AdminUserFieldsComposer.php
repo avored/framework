@@ -7,7 +7,6 @@ use Illuminate\View\View;
 
 class AdminUserFieldsComposer
 {
-
     /**
      * Bind data to the view.
      *

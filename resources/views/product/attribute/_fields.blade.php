@@ -45,7 +45,7 @@ if (isset($model) && $model->attributeDropdownOptions->count() > 0) {
                     <label>{{ __('avored-framework::attribute.display-text') }}</label>
                     <span class="input-group">
                         <input class="form-control"
-                               name="dropdown-options[{{ $dropdownOptionModel->id }}][display_text]"
+                               name="dropdown_options[{{ $dropdownOptionModel->id }}][display_text]"
                                value="{{ $dropdownOptionModel->display_text }}"/>
 
                         @if ($loop->last)
@@ -78,7 +78,7 @@ if (isset($model) && $model->attributeDropdownOptions->count() > 0) {
                         </label>
                         <div class="input-group">
                             <input class="form-control" id="display-text-input-group-{{ $randomString }}"
-                                   name="dropdown-options[{{ $randomString }}][display_text]"/>
+                                   name="dropdown_options[{{ $randomString }}][display_text]"/>
                             <div class="input-group-append">
                                 <button class="btn btn-primary add-field">Add</button>
                             </div>
@@ -101,7 +101,7 @@ if (isset($model) && $model->attributeDropdownOptions->count() > 0) {
 
                 <div class="input-group">
                     <input class="form-control"
-                           name="dropdown-options[__RANDOM_STRING__][display_text]"/>
+                           name="dropdown_options[__RANDOM_STRING__][display_text]"/>
                     <div class="input-group-append">
                         <button class="btn btn-primary add-field">Add</button>
                     </div>

@@ -31,7 +31,10 @@
 
             <div class="clearfix"></div>
                 <div class="mt-3 card">
-                    <div class="card-header text-white bg-secondary"><span class="fa fa-user"></span> {{  __('avored-framework::orders.customer-data') }}</div>
+                    <div class="card-header text-white bg-secondary">
+                        <span class="fa fa-user"></span>
+                        {{  __('avored-framework::orders.customer-data') }}
+                    </div>
 
                     <div class="card-body">
                         <div class="row">
@@ -82,11 +85,14 @@
                             </thead>
                             <tbody>
                             @foreach($order->products as $product)
+                                @php
+                                    $productInfo = json_decode($product->getRelationValue('pivot')->product_info);
+                                @endphp
                                 <tr>
                                     <td>
-                                        {{ $product->name }}
+                                        {{ $productInfo->name }}
 
-                                        @if($product->type == "VARIATION")
+                                        @if($productInfo->type == "VARIATION")
                                             @foreach($order->orderProductVariation as $orderProductVariation)
                                                 <p>
                                                     {{ $orderProductVariation->attribute->name }}

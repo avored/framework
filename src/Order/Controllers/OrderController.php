@@ -20,9 +20,9 @@ use AvoRed\Framework\System\Controllers\Controller;
 class OrderController extends Controller
 {
     /**
-    *
-    * @var \AvoRed\Framework\Models\Repository\OrderRepository
-    */
+     *
+     * @var \AvoRed\Framework\Models\Repository\OrderRepository
+     */
     protected $repository;
 
     public function __construct(OrderInterface $repository)
@@ -56,7 +56,7 @@ class OrderController extends Controller
 
     /**
      * Send an Order Invioced PDF to User
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Order $order
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -79,14 +79,14 @@ class OrderController extends Controller
 
     /**
      * Edit the Order Status View
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Order $order
      * @return \Illuminate\Http\Response
      */
     public function editStatus(Model $order)
     {
         $orderStatus = OrderStatus::all()->pluck('name', 'id');
-        
+
         $view = view('avored-framework::order.view')
             ->with('order', $order)
             ->with('orderStatus', $orderStatus)
@@ -97,7 +97,7 @@ class OrderController extends Controller
 
     /**
      * Change the Order Status
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Order $order
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -116,17 +116,17 @@ class OrderController extends Controller
 
         return redirect()->route('admin.order.index');
     }
+
     /**
      * Change the Order Status
-     * 
+     *
      * @param \AvoRed\Framework\Models\Database\Order $order
      * @param \AvoRed\Framework\Order\Request\UpdateTrackCodeRequest $request
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateTrackCode(Model $order, UpdateTrackCodeRequest $request)
     {
-       
         $order->update(['track_code' => $request->track_code]);
 
         //Mail::to($userEmail)->send(new UpdateOrderStatusMail($orderStatusTitle));

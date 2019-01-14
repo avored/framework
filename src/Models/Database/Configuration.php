@@ -21,7 +21,7 @@ class Configuration extends BaseModel
         return $model->getValue($key);
     }
 
-    public static  function setConfiguration($key, $value)
+    public static function setConfiguration($key, $value)
     {
         $model = new static;
         $row = $model->where('configuration_key', '=', $key)->first();

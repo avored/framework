@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Api\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use AvoRed\Framework\Api\Controllers\Controller;
 use AvoRed\Framework\Models\Database\User;
 use AvoRed\Framework\Api\Resources\User\UserCollectionResource;
 use AvoRed\Framework\Api\Resources\User\UserResource;
@@ -12,7 +10,7 @@ class UserController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
-     * 
+     *
      * @return \Illuminate\Http\Resources\CollectsResources
      */
     public function index()
@@ -24,7 +22,7 @@ class UserController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function show(User $user)

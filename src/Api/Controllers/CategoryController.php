@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Api\Controllers;
 use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Product\Requests\CategoryRequest;
-use AvoRed\Framework\Api\Controllers\Controller;
 use AvoRed\Framework\Api\Resources\Category\CategoryResource;
 use AvoRed\Framework\Api\Resources\Category\CategoryCollectionResource;
 
@@ -13,7 +12,7 @@ class CategoryController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
-     * 
+     *
      * @return \Illuminate\Http\Resources\CollectsResources
      */
     public function index()
@@ -25,7 +24,7 @@ class CategoryController extends Controller
 
     /**
      * Create an Resource and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function store(CategoryRequest $request)
@@ -37,16 +36,17 @@ class CategoryController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function show(Category $category)
     {
         return new CategoryResource($category);
     }
+
     /**
      * Update and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function update(CategoryRequest $request, Category $category)
@@ -57,8 +57,8 @@ class CategoryController extends Controller
 
     /**
      * Destroy an Record and Return Null Json Response
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Category $category)
     {

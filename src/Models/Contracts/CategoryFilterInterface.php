@@ -13,18 +13,18 @@ interface CategoryFilterInterface
     public function find($id);
 
     /**
-    * Category Filter Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Category Filter Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query();
 
     /**
-    * Save Categoy Filter
-    * @param integer $categoryId
-    * @param integer $filterId
-    * @param string $type
-    * @return \AvoRed\Framework\Models\Database\CategoryFilter
-    */
+     * Save Categoy Filter
+     * @param integer $categoryId
+     * @param integer $filterId
+     * @param string $type
+     * @return \AvoRed\Framework\Models\Database\CategoryFilter
+     */
     public function saveFilter($categoryId, $filterId, $type);
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Api\Resources\Attribute;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -17,5 +18,4 @@ class AttributeDropdownOptionCollectionResource extends ResourceCollection
             'data' => $this->collection,
         ];
     }
-
 }

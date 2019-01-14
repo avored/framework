@@ -26,11 +26,11 @@ class CategoryRepository implements CategoryInterface
     }
 
     /**
-    * Find an Category by given key which returns Category Model
-    *
-    * @param string $key
-    * @return \AvoRed\Framework\Models\Database\Category
-    */
+     * Find an Category by given key which returns Category Model
+     *
+     * @param string $key
+     * @return \AvoRed\Framework\Models\Database\Category
+     */
     public function findByKey($key)
     {
         return Category::whereSlug($key)->first();
@@ -86,7 +86,7 @@ class CategoryRepository implements CategoryInterface
     */
     public function getCategoryProductWithFilter($categoryId, $filters = [])
     {
-        $prefix = config('database.connections.mysql.prefix');
+        $prefix = env('DB_TABLE_PREFIX', 'avored_');
 
         $propetryInnerJoinFlag = false;
         $attributeInnerJoinFlag = false;

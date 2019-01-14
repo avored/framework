@@ -21,14 +21,18 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
 
-    'admin-login-card-title' => 'AvoRed Admin Login',
+    'user' => [
+        'login-card-title' => 'AvoRed Admin Login',
+        'email-label' => 'Email Address',
+    ],
+    
     'admin-login-forget-password-link' => 'Forgot your Password?',
     'admin-login-button-title' => 'Login',
     'admin-reset-button-title' => 'Send Password Reset Link',
     'admin-password-label' => 'Password',
     'admin-confirm-password-label' => 'Confirm Password',
-    'admin-email-label' => 'Email Address',
 
+    'admin-dashboard-monthly-revenue-title' => 'Monthly Revenue',
     'admin-dashboard-total-user-title' => 'Total User',
     'admin-dashboard-total-order-title' => 'Total Orders',
     'admin-dashboard-recent-order-title' => 'Recent Order',
@@ -37,6 +41,7 @@ return [
     'category.index.create' => 'Create Category',
 
     'product.index.title' => 'Product List',
+    'products' => 'Products',
     'product.create.text' => 'Create Product',
 
     'address.configuration.title' => 'Address Configuration List',

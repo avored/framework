@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Api\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Models\Database\Attribute;
-use AvoRed\Framework\Api\Controllers\Controller;
 use AvoRed\Framework\Api\Resources\Attribute\AttributeResource;
 use AvoRed\Framework\Api\Resources\Attribute\AttributeCollectionResource;
 use AvoRed\Framework\Product\Requests\AttributeRequest;
@@ -13,7 +12,7 @@ class AttributeController extends Controller
 {
     /**
      * Return upto 10 Record for an Resource in Json Formate
-     * 
+     *
      * @return \Illuminate\Http\Resources\CollectsResources
      */
     public function index()
@@ -25,7 +24,7 @@ class AttributeController extends Controller
 
     /**
      * Create an Resource and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function store(AttributeRequest $request)
@@ -37,7 +36,7 @@ class AttributeController extends Controller
 
     /**
      * Find a Record and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function show(Attribute $attribute)
@@ -47,7 +46,7 @@ class AttributeController extends Controller
 
     /**
      * Update and Returns a Json Resrouce for that Record
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function update(AttributeRequest $request, Attribute $attribute)
@@ -58,10 +57,10 @@ class AttributeController extends Controller
 
     /**
      * Destroy an Record and Return Null Json Response
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-        public function destroy(Attribute $attribute)
+    public function destroy(Attribute $attribute)
     {
         $attribute->delete();
         return JsonResponse::create(null, 204);

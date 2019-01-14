@@ -21,9 +21,16 @@ interface ProductInterface
     public function findBySlug($slug);
 
     /**
-    * Product Query Builder
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function query();
+
+    /**
+     * Product Query Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function all();
 }

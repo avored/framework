@@ -14,7 +14,7 @@
                 
                 <tr>
                     <td>Curreny Code</td>
-                    <td>{{ $siteCurrency->curreny_code }}</td>
+                    <td>{{ $siteCurrency->code }}</td>
                 </tr>
                 
                 <tr>

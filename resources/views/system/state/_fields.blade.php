@@ -14,7 +14,7 @@
 <avored-form-input 
     field-name="code"
     label="Code" 
-    field-value="{!! $model->code ?? "" !!}" 
+    field-value="{!! $model->code ?? '' !!}" 
     error-text="{!! $errors->first('code') !!}"
     v-on:change="changeModelValue"
         >
@@ -24,9 +24,9 @@
 <avored-form-select 
     field-name="country_id"
     label="Country" 
-    field-value="{!! $model->country_id ?? "" !!}" 
+    field-value="{!! $model->country_id ?? '' !!}" 
     error-text="{!! $errors->first('country_id') !!}"
     v-on:change="changeModelValue"
-    field-options='{!! $countryOptions !!}'
+    field-options="{{ $countryOptions }}"
         >
 </avored-form-select>

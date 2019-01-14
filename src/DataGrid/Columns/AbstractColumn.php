@@ -16,7 +16,7 @@ abstract class AbstractColumn implements ColumnContract
      * Column Class.
      * @var null|string
      */
-    protected $class = "col";
+    protected $class = 'col';
 
     /**
      * Column Label.

@@ -9,15 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use AvoRed\Framework\Models\Database\Product;
-use AvoRed\Framework\Image\Facade as Image;
+use AvoRed\Framework\Image\Facades\Image;
 use AvoRed\Framework\Product\Requests\ProductRequest;
 use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
-use AvoRed\Framework\Models\Database\ProductDownloadableUrl;
-use AvoRed\Framework\Models\Repository\ProductDownloadableUrlRepository;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\System\Controllers\Controller;
-
 
 class ProductController extends Controller
 {
@@ -33,13 +30,13 @@ class ProductController extends Controller
      */
     protected $downRepository;
 
-    public function __construct(ProductInterface $repository, ProductDownloadableUrlInterface $downRep)
-    {
-        $this->repository       = $repository;
-        $this->downRepository   = $downRep;
+    public function __construct(
+        ProductInterface $repository, 
+        ProductDownloadableUrlInterface $downRep
+    ) {
+        $this->repository = $repository;
+        $this->downRepository = $downRep;
     }
-
-    
 
     /**
      * Display a listing of the resource.
@@ -121,7 +118,6 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        //dd($request->all());
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
@@ -142,7 +138,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-
         return redirect()->route('admin.product.index');
     }
 
@@ -161,8 +156,7 @@ class ProductController extends Controller
         $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
 
         $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-
-        $image = Image::upload($image, $checkDirectory);
+        $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
 
         $tmp = $this->_getTmpString();
 
@@ -182,21 +176,22 @@ class ProductController extends Controller
     {
         $path = $request->get('path');
 
-        $path = 'uploads/catalog/images/e/0/v/1382542458778.jpeg';
         $fileName = pathinfo($path, PATHINFO_BASENAME);
         $relativeDir = pathinfo($path, PATHINFO_DIRNAME);
 
         $sizes = config('avored-framework.image.sizes');
         foreach ($sizes as $sizeName => $widthHeight) {
             $imagePath = $relativeDir . DIRECTORY_SEPARATOR . $sizeName . '-' . $fileName;
-            if (File::exists($imagePath)) {
+
+            if (File::exists(storage_path('app/public/' . $imagePath))) {
                 File::delete(storage_path('app/public/' . $imagePath));
             }
         }
 
-        if (File::exists($path)) {
+        if (File::exists(storage_path('app/public/' . $path))) {
             File::delete(storage_path('app/public/' . $path));
         }
+
         return JsonResponse::create(['success' => true]);
     }
 
@@ -210,12 +205,12 @@ class ProductController extends Controller
     public function downloadMainToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path("app/public" . DIRECTORY_SEPARATOR. $downloadableUrl->main_path);
+        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->main_path);
 
         return response()->download($path);
     }
 
-     /**
+    /**
      * Products Downloadable Main Media Download.
      *
      * @param string $token
@@ -225,7 +220,7 @@ class ProductController extends Controller
     public function downloadDemoToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path("app/public" . DIRECTORY_SEPARATOR. $downloadableUrl->demo_path);
+        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->demo_path);
 
         return response()->download($path);
     }
@@ -252,14 +247,13 @@ class ProductController extends Controller
      * @param int $length
      * @return string $randomString
      */
-    public function _getTmpString($length = 6)
+    private function _getTmpString($length = 6)
     {
         $pool = 'abcdefghijklmnopqrstuvwxyz';
 
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
 
-    
     /**
      * return random string only lower and without digits.
      *
@@ -268,10 +262,20 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        
         return view('avored-framework::product.show')
                 ->with('product', $product);
     }
 
-
+    /**
+     * Export all the products to CSV File 
+     *
+     * @param \AvoRed\Framework\Models\Database\Product $product
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $products = $this->repository->all();
+        
+        dd($products);
+    }
 }

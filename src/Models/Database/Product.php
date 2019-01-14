@@ -12,12 +12,11 @@ use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
-use AvoRed\Framework\Models\Contracts\PropertyInterface;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
 
 class Product extends BaseModel
 {
-    public static $VARIATION_TYPE = 'VARIATION';
+    const VARIATION_TYPE = 'VARIATION';
 
     protected $fillable = ['type', 'name', 'slug', 'sku',
         'description', 'status', 'in_stock', 'track_stock', 'price', 'cost_price',
@@ -44,9 +43,38 @@ class Product extends BaseModel
         return $collections;
     }
 
+    /**
+     * Get the Product Variation Product Json Data
+     * @return array $jsonData
+     */
+    public function getProductVariationJsonData()
+    {
+        $jsonData = [];
+        $lists = ProductAttributeIntegerValue::whereIn(
+            'product_id',
+            $this->productVariations->pluck('variation_id')
+        )->get();
+        
+        foreach ($lists as $list) {
+            $variationModel = self::find($list->product_id);
+            if (array_has($jsonData, $list->product_id)) {
+                $data = array_get($jsonData, $list->product_id);
+                $data[$list->attribute_id] = [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]
+                ];
+                $jsonData[$list->product_id] = $data;
+            } else {
+                $jsonData[$list->product_id] = [$list->attribute_id => [
+                    $list->value => ['qty' => $variationModel->qty, 'price' => $variationModel->price]]
+                ];
+            }
+        }
+        return $jsonData;
+    }
+
     public function hasVariation()
     {
-        if ($this->type == self::$VARIATION_TYPE) {
+        if ($this->type == self::VARIATION_TYPE) {
             return true;
         }
 
@@ -79,7 +107,7 @@ class Product extends BaseModel
 
     /**
      * Get the Price for the Product
-     * 
+     *
      * @param float $val
      * @return float $price
      */
@@ -187,10 +215,10 @@ class Product extends BaseModel
 
             if (null === $downModel) {
                 $downModel = ProductDownloadableUrl::create([
-                                        'token' => $token,
-                                        'product_id' => $this->id,
-                                        'main_path' => $dbPath
-                                        ]);
+                    'token' => $token,
+                    'product_id' => $this->id,
+                    'main_path' => $dbPath
+                ]);
             } else {
                 $downModel->update(['main_path' => $dbPath]);
             }
@@ -207,7 +235,7 @@ class Product extends BaseModel
         }
     }
 
-     /**
+    /**
      * Save Product Attributes
      *
      * @param array $data
@@ -221,13 +249,10 @@ class Product extends BaseModel
             foreach ($properties as $key => $property) {
                 foreach ($property as $propertyId => $propertyValue) {
                     $propertyModel = Property::findorfail($propertyId);
-
-                    //dd($propertyModel->attachProduct($this));
                     $propertyModel->attachProduct($this)
                                     ->fill(['value' => $propertyValue])
                                     ->save();
-                    $syncProperty[] = $propertyId;  
-                
+                    $syncProperty[] = $propertyId;
                 }
                 $this->properties()->sync($syncProperty);
             }
@@ -257,8 +282,6 @@ class Product extends BaseModel
 
             $listOfOptions = $this->combinations($optionsArray);
 
-           
-
             foreach ($listOfOptions as $option) {
                 $variationProductData = $this->getVariationProductDataGivenOptions($option);
                 $variableProduct = self::create($variationProductData);
@@ -286,8 +309,8 @@ class Product extends BaseModel
                 }
 
                 ProductVariation::create(['product_id' => $this->id,
-                                        'variation_id' => $variableProduct->id
-                                        ]);
+                    'variation_id' => $variableProduct->id
+                ]);
             }
         }
     }
@@ -300,8 +323,6 @@ class Product extends BaseModel
      */
     public function getVariationProductDataGivenOptions($options)
     {
-
-        
         $data['name'] = $this->name;
 
         if (is_array($options)) {
@@ -322,17 +343,16 @@ class Product extends BaseModel
         $data['qty'] = $this->qty;
         $data['price'] = $this->price;
 
-       
         return $data;
     }
 
     /**
-    * Make all combination based on attributes array
-    *
-    * @param array $arrays
-    * @param integer $i
-    * @return array $result
-    */
+     * Make all combination based on attributes array
+     *
+     * @param array $arrays
+     * @param integer $i
+     * @return array $result
+     */
     public function combinations($arrays, $i = 0)
     {
         if (!isset($arrays[$i])) {
@@ -349,8 +369,7 @@ class Product extends BaseModel
         foreach ($arrays[$i] as $v) {
             foreach ($tmp as $t) {
                 $result[] = is_array($t) ?
-                    array_merge([$v], $t) :
-                    [$v, $t];
+                    array_merge([$v], $t) : [$v, $t];
             }
         }
 
@@ -394,7 +413,6 @@ class Product extends BaseModel
         $defaultPath = '/img/default-product.jpg';
         $image = $this->images()->where('is_main_image', '=', 1)->first();
 
-        
         if (null === $image) {
             return new LocalFile($defaultPath);
         }
@@ -549,7 +567,7 @@ class Product extends BaseModel
      * Product has many Categories.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     * 
+     *
      */
     public function properties()
     {
@@ -675,5 +693,4 @@ class Product extends BaseModel
     {
         return $this->hasOne(ProductDownloadableUrl::class);
     }
-
 }

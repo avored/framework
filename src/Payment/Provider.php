@@ -59,7 +59,6 @@ class Provider extends ServiceProvider
         return ['payment', 'AvoRed\Framework\Payment\Manager'];
     }
 
-
     /**
      * Registering Payment Option for the App.
      *

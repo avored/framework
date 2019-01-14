@@ -17,11 +17,10 @@ class OrderStatusDataGrid
                 ->column('name', function (TextColumn $column) {
                     $column->identifier('name')
                             ->label('Name')
-                            ->sortable(true)
-                            ;
+                            ->sortable(true);
                 })
-                ->linkColumn('is_default',['label' => 'Is Default'],function($model) {
-                    return ($model->is_default == 1) ? "Yes" : "No";
+                ->linkColumn('is_default', ['label' => 'Is Default'], function ($model) {
+                    return ($model->is_default == 1) ? 'Yes' : 'No';
                 })
                 ->linkColumn('edit', [], function ($model) {
                     return "<a href='" . route('admin.order-status.edit', $model->id) . "' >Edit</a>";

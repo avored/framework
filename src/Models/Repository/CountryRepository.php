@@ -20,10 +20,10 @@ class CountryRepository implements CountryInterface
     }
 
     /**
-    * Get all Country
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get all Country
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return Country::all();
@@ -59,20 +59,18 @@ class CountryRepository implements CountryInterface
         return Country::create($data);
     }
 
-
     /**
      * Get All Country Options for Dropdown Field
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function options() 
+    public function options()
     {
         $countries = $this->all();
         $options = Collection::make();
-        foreach($countries as $country) {
-            $options->push(['name' => $country->name,'id' => $country->id]);
-
-        } 
+        foreach ($countries as $country) {
+            $options->push(['name' => $country->name, 'id' => $country->id]);
+        }
         return $options;
     }
 }

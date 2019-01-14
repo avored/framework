@@ -51,7 +51,7 @@ class Manager
             while ($iterator->valid()) {
                 if (($iterator->getDepth() > 1) &&
                     $iterator->isFile() &&
-                    ($iterator->getFilename() == 'register.yaml')) {
+                    ($iterator->getFilename() == 'register.yml')) {
                     $filePath = $iterator->getPathname();
                     $moduleRegisterContent = File::get($filePath);
                     $data = Yaml::parse($moduleRegisterContent);
@@ -79,7 +79,6 @@ class Manager
                 $iterator->next();
             }
 
-            //dd(app());
             $this->moduleLoaded = true;
         }
 

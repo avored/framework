@@ -4,7 +4,6 @@ namespace AvoRed\Framework;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Models\Database\Product;
 use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
@@ -22,19 +21,19 @@ use Illuminate\Support\Carbon;
 use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
-use AvoRed\Framework\User\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\System\ViewComposers\SiteCurrencyFieldsComposer;
 use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
 {
     protected $providers = [
-        \AvoRed\Framework\AdminMenu\AdminMenuProvider::class,
         \AvoRed\Framework\AdminConfiguration\Provider::class,
+        \AvoRed\Framework\AdminMenu\AdminMenuProvider::class,
         \AvoRed\Framework\Breadcrumb\BreadcrumbProvider::class,
         \AvoRed\Framework\Cart\Provider::class,
         \AvoRed\Framework\DataGrid\Provider::class,
-        \AvoRed\Framework\Image\Provider::class,
-        \AvoRed\Framework\Menu\Provider::class,
+        \AvoRed\Framework\Image\ImageProvider::class,
+        \AvoRed\Framework\Menu\MenuProvider::class,
         \AvoRed\Framework\Models\ModelProvider::class,
         \AvoRed\Framework\Modules\Provider::class,
         \AvoRed\Framework\Payment\Provider::class,
@@ -66,6 +65,7 @@ class Provider extends ServiceProvider
     public function register()
     {
         $this->registerConfigData();
+        $this->registerPackageFactories();
         Passport::ignoreMigrations();
         $this->registerProviders();
     }
@@ -92,37 +92,39 @@ class Provider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'avored-framework');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'avored-framework');
-        //At this stage we don't use these and use avored/framework/database/migration file only
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     public function registerConfigData()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/avored-framework.php', 'avored-framework');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/avored-framework.php',
+            'avored-framework'
+        );
 
         $avoredConfigData = include __DIR__ . '/../config/avored-framework.php';
-
         $fileSystemConfig = $this->app['config']->get('filesystems', []);
         $authConfig = $this->app['config']->get('auth', []);
         $this->app['config']->set(
             'filesystems',
-            array_merge_recursive($avoredConfigData['filesystems'], $fileSystemConfig)
+            array_merge_recursive(
+                $avoredConfigData['filesystems'],
+                $fileSystemConfig
+            )
         );
         $this->app['config']->set(
             'auth',
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
         $authConfig = $this->app['config']->get('auth', []);
-        
     }
 
     public function publishFiles()
     {
-        $this->publishes([
-            __DIR__ . '/../config/avored-framework.php' => config_path('avored-framework.php'),
-        ]);
+        $this->publishes(
+            [__DIR__ . '/../config/avored-framework.php' => config_path('avored-framework.php')]
+        );
     }
 
     /**
@@ -148,16 +150,38 @@ class Provider extends ServiceProvider
      */
     public function registerViewComposerData()
     {
-        View::composer('avored-framework::layouts.left-nav', AdminNavComposer::class);
-        View::composer('avored-framework::user.user._fields', UserFieldsComposer::class);
-        View::composer('avored-framework::system.site-currency._fields', SiteCurrencyFieldsComposer::class);
-        View::composer(['avored-framework::product.category._fields'], CategoryFieldsComposer::class);
-        View::composer(['avored-framework::system.admin-user._fields'], AdminUserFieldsComposer::class);
-        View::composer('avored-framework::cms.page._fields', PageFieldsComposer::class);
-        View::composer('avored-framework::cms.menu.index', MenuComposer::class);
-        View::composer(['avored-framework::product.create',
-                        'avored-framework::product.edit',
-                        ], ProductFieldsComposer::class);
+        View::composer(
+            'avored-framework::layouts.left-nav',
+            AdminNavComposer::class
+        );
+        View::composer(
+            'avored-framework::user.user._fields',
+            UserFieldsComposer::class
+        );
+        View::composer(
+            'avored-framework::system.site-currency._fields',
+            SiteCurrencyFieldsComposer::class
+        );
+        View::composer(
+            'avored-framework::product.category._fields',
+            CategoryFieldsComposer::class
+        );
+        View::composer(
+            'avored-framework::system.admin-user._fields',
+            AdminUserFieldsComposer::class
+        );
+        View::composer(
+            'avored-framework::cms.page._fields',
+            PageFieldsComposer::class
+        );
+        View::composer(
+            'avored-framework::cms.menu.index', 
+            MenuComposer::class
+        );
+        View::composer(
+            ['avored-framework::product.create', 'avored-framework::product.edit'], 
+            ProductFieldsComposer::class
+        );
     }
 
     /*
@@ -170,10 +194,22 @@ class Provider extends ServiceProvider
         Passport::ignoreMigrations();
         Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addDays(15));
-        $this->commands([
-          InstallCommand::class,
-          ClientCommand::class,
-          KeysCommand::class,
-      ]);
+        $this->commands(
+            [InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class]
+        );
+    }
+
+    /**
+     * Register Package Factories Path
+     * @return void
+     */
+    public function registerPackageFactories()
+    {
+        if ('testing' == App::environment()) {
+            $this->app->make('Illuminate\Database\Eloquent\Factory')
+                ->load(__DIR__ . '/../database/factories');
+        }
     }
 }

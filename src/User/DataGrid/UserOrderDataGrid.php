@@ -16,10 +16,9 @@ class UserOrderDataGrid
                 ->column('id', ['sortable' => true])
                 ->column('payment_option', ['label' => 'Payment Options'])
                 ->column('shipping_option', ['label' => 'Shipping Options'])
-                ->linkColumn('show',[] ,function($model) {
+                ->linkColumn('show', [], function ($model) {
                     return "<a href='" . route('admin.order.view', $model->id) . "' >Show Details</a>";
-                })
-               ;
+                });
 
         $this->dataGrid = $dataGrid;
     }

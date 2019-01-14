@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\User\Widget\TotalUserWidget;
 use AvoRed\Framework\Order\Widget\TotalOrderWidget;
 use AvoRed\Framework\Order\Widget\RecentOrderWidget;
+use AvoRed\Framework\Product\Widget\MonthlyRevenueWidget;
 use AvoRed\Framework\Widget\Facade as WidgetFacade;
 
 class WidgetProvider extends ServiceProvider
@@ -55,7 +56,6 @@ class WidgetProvider extends ServiceProvider
         return ['widget', 'AvoRed\Framework\Widget\Manager'];
     }
 
-
     /**
      * Register the Widget.
      *
@@ -65,6 +65,9 @@ class WidgetProvider extends ServiceProvider
     {
         $totalUserWidget = new TotalUserWidget();
         WidgetFacade::make($totalUserWidget->identifier(), $totalUserWidget);
+
+        $monthlyRevenueWidget = new MonthlyRevenueWidget();
+        WidgetFacade::make($monthlyRevenueWidget->identifier(), $monthlyRevenueWidget);
 
         $totalOrderWidget = new TotalOrderWidget();
         WidgetFacade::make($totalOrderWidget->identifier(), $totalOrderWidget);

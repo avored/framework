@@ -16,7 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'phone', 'company_name', 'image_path', 'status', 'language', 'activation_token', 'tax_no'
+        'first_name', 'last_name', 'email', 'password', 'phone',
+        'company_name', 'image_path', 'status',
+        'language', 'activation_token', 'tax_no', 'registered_channel'
     ];
 
     /**
@@ -35,12 +37,12 @@ class User extends Authenticatable
 
     public function getImagePathAttribute()
     {
-        return (empty($this->attributes['image_path'])) ? '' : new LocalFile($this->attributes['image_path']);
+        return new LocalFile($this->attributes['image_path']);
     }
 
     /**
      * One User has Many Address attached with it.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMAny
      */
     public function addresses()
@@ -50,7 +52,7 @@ class User extends Authenticatable
 
     /**
      * One User has Many User Group attached with it.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMAny
      */
     public function userGroups()

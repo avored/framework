@@ -26,7 +26,7 @@ class PropertyRepository implements PropertyInterface
      */
     public function findMany($ids)
     {
-        return Property::whereId($ids)->get();
+        return Property::whereIn('id', $ids)->get();
     }
 
     /**
@@ -41,7 +41,7 @@ class PropertyRepository implements PropertyInterface
 
     /**
      * Create an Property an Return an Property Instance
-     * 
+     *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Property
      */

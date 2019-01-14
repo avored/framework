@@ -1,10 +1,18 @@
-@include('avored-framework::forms.text',['name' => 'name','label' => __('avored-framework::property.name')])
-@include('avored-framework::forms.text',['name' => 'identifier','label' => __('avored-framework::property.identifier')])
+@include('avored-framework::forms.text',['name' => 'name','label' => __('avored-framework::product.name')])
+@include('avored-framework::forms.text',['name' => 'identifier','label' => __('avored-framework::product.identifier')])
 
 
 
 @include('avored-framework::forms.select',['name' => 'use_for_all_products',
-                                            'label' => __('avored-framework::property.use_for_all_products'),
+                                            'label' => __('avored-framework::product.use_for_all_products'),
+                                            'options' => [
+                                                        0 => 'No',
+                                                        1 => 'Yes'
+                                                        ]
+                                        ])
+
+@include('avored-framework::forms.select',['name' => 'is_visible_frontend',
+                                            'label' => __('avored-framework::product.is_visible_frontend'),
                                             'options' => [
                                                         0 => 'No',
                                                         1 => 'Yes'
@@ -13,7 +21,7 @@
 
 
 @include('avored-framework::forms.select',['name' => 'data_type',
-                                            'label' => __('avored-framework::property.data-type'),
+                                            'label' => __('avored-framework::product.data-type'),
                                             'options' => [
                                                         'VARCHAR' => 'Varchar (Max 255)',
                                                         'DECIMAL' => 'Decimal',
@@ -26,7 +34,7 @@
 
 
 @include('avored-framework::forms.select',['name' => 'field_type',
-                                            'label' => __('avored-framework::property.field-type'),
+                                            'label' => __('avored-framework::product.field-type'),
                                             'options' => [
                                                         'TEXT' => 'Text Field',
                                                         'CHECKBOX' => 'Check box',
@@ -37,7 +45,10 @@
                                         ])
 
 
-@include('avored-framework::forms.text',['name' => 'sort_order','label' => __('avored-framework::property.sort-order')])
+@include('avored-framework::forms.text',[
+        'name' => 'sort_order',
+        'label' => __('avored-framework::product.sort-order')
+    ])
 
 
 <?php

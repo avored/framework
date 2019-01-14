@@ -7,6 +7,8 @@ use AvoRed\Framework\Models\Database\OrderStatus;
 use AvoRed\Framework\Models\Database\Country;
 use AvoRed\Framework\Models\Database\SiteCurrency;
 use AvoRed\Framework\Models\Database\Configuration;
+use AvoRed\Framework\Models\Database\MenuGroup;
+use AvoRed\Framework\Models\Database\Menu;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -18,7 +20,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->nullable()->default(null);
             $table->string('name');
@@ -29,7 +31,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_filters', function (Blueprint $table) {
+        Schema::create('category_filters', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned()->nullable()->default(null);
             $table->enum('type', ['ATTRIBUTE', 'PROPERTY'])->nullable()->default(null);
@@ -39,7 +41,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('products', function(Blueprint $table) {
             $table->increments('id');
             $table->enum('type', ['BASIC', 'VARIATION', 'DOWNLOADABLE', 'VARIABLE_PRODUCT'])->default('BASIC');
 
@@ -54,7 +56,6 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('is_taxable')->nullable()->default(null);
             $table->decimal('price', 10, 6)->nullable()->default(null);
             $table->decimal('cost_price', 10, 6)->nullable()->default(null);
-            
 
             $table->float('weight')->nullable()->default(null);
             $table->float('width')->nullable()->default(null);
@@ -66,7 +67,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_product', function (Blueprint $table) {
+        Schema::create('category_product', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -76,7 +77,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
-        Schema::create('product_downloadable_urls', function (Blueprint $table) {
+        Schema::create('product_downloadable_urls', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->string('demo_path')->nullable()->default(null);
@@ -87,7 +88,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('product_images', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->text('path');
@@ -97,10 +98,10 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('order_statuses', function (Blueprint $table) {
+        Schema::create('order_statuses', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyInteger('is_default')->default(false);
+            $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
 
@@ -113,7 +114,7 @@ class AvoredFrameworkSchema extends Migration
             ['name' => 'Canceled', 'is_default' => 0],
         ]);
 
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orders', function(Blueprint $table) {
             $table->increments('id');
 
             $table->string('shipping_option');
@@ -125,43 +126,71 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
         });
 
-        Schema::create('order_histories', function (Blueprint $table) {
+        Schema::create('order_histories', function(Blueprint $table) {
             $table->increments('id');
 
             $table->integer('order_id')->unsigned()->nullable()->default(null);
             $table->integer('order_status_id')->unsigned()->nullable()->default(null);
-        
+
             $table->timestamps();
 
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
             $table->foreign('order_id')->references('id')->on('orders');
         });
 
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_product', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('order_id')->unsigned();
             $table->integer('qty');
             $table->decimal('price', 11, 6);
             $table->decimal('tax_amount', 11, 6);
+            $table->json('product_info')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('order_return_requests', function(Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('order_id')->unsigned()->nullable()->default(null);
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            $table->enum('status', ['PENDING', 'IN_PROGRESSS', 'APPROVED', 'REJECTED'])->nullable()->default(null);
+            $table->text('comment')->nullable()->default(null);
+
+            $table->timestamps();
+        });
+
+        Schema::create('order_return_products', function(Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('order_return_request_id')->unsigned()->nullable()->default(null);
+            $table->foreign('order_return_request_id')->references('id')->on('order_return_requests')->onDelete('cascade');
+
+            $table->integer('product_id')->unsigned()->nullable()->default(null);
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            $table->integer('qty');
+            $table->text('reason')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('properties', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('identifier')->unique();
             $table->enum('data_type', ['INTEGER', 'DECIMAL', 'DATETIME', 'VARCHAR', 'BOOLEAN', 'TEXT'])->nullable()->default(null);
             $table->enum('field_type', ['TEXT', 'TEXTAREA', 'CKEDITOR', 'SELECT', 'FILE', 'DATETIME', 'CHECKBOX', 'RADIO', 'SWITCH']);
             $table->tinyInteger('use_for_all_products')->default(0);
+            $table->tinyInteger('is_visible_frontend')->nullable()->default(1);
             $table->integer('sort_order')->nullable()->default(0);
             $table->timestamps();
         });
 
-        Schema::create('property_dropdown_options', function (Blueprint $table) {
+        Schema::create('property_dropdown_options', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->string('display_text');
@@ -170,11 +199,11 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('properties')->onDelete('cascade');
         });
 
-        Schema::create('product_property', function (Blueprint $table) {
+        Schema::create('product_property', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
-           
+
             $table->timestamps();
 
             $table->foreign('property_id')
@@ -182,7 +211,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')
                 ->references('id')->on('products')->onDelete('cascade');
         });
-        Schema::create('product_property_varchar_values', function (Blueprint $table) {
+        Schema::create('product_property_varchar_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -195,7 +224,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_property_datetime_values', function (Blueprint $table) {
+        Schema::create('product_property_datetime_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -208,7 +237,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_property_integer_values', function (Blueprint $table) {
+        Schema::create('product_property_integer_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -221,7 +250,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_property_decimal_values', function (Blueprint $table) {
+        Schema::create('product_property_decimal_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -234,7 +263,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_property_text_values', function (Blueprint $table) {
+        Schema::create('product_property_text_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -247,7 +276,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_property_boolean_values', function (Blueprint $table) {
+        Schema::create('product_property_boolean_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -260,14 +289,14 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('attributes', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('identifier')->unique();
             $table->timestamps();
         });
 
-        Schema::create('attribute_product', function (Blueprint $table) {
+        Schema::create('attribute_product', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('attribute_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -279,7 +308,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('attribute_dropdown_options', function (Blueprint $table) {
+        Schema::create('attribute_dropdown_options', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('attribute_id')->unsigned();
             $table->string('display_text');
@@ -288,7 +317,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
 
-        Schema::create('product_attribute_integer_values', function (Blueprint $table) {
+        Schema::create('product_attribute_integer_values', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('attribute_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -301,7 +330,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_variations', function (Blueprint $table) {
+        Schema::create('product_variations', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('variation_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -313,7 +342,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('order_product_variations', function (Blueprint $table) {
+        Schema::create('order_product_variations', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -328,33 +357,33 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });
 
-        Schema::create('configurations', function (Blueprint $table) {
+        Schema::create('configurations', function(Blueprint $table) {
             $table->increments('id');
             $table->string('configuration_key')->nullable()->default(null);
             $table->string('configuration_value', 999)->nullable()->default(null);
             $table->timestamps();
         });
 
-        Schema::create('admin_password_resets', function (Blueprint $table) {
+        Schema::create('admin_password_resets', function(Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
         });
 
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::create('password_resets', function(Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
         });
 
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('roles', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
 
-        Schema::create('admin_users', function (Blueprint $table) {
+        Schema::create('admin_users', function(Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('is_super_admin')->nullable()->default(null);
             $table->integer('role_id')->unsigned()->default(null);
@@ -365,35 +394,37 @@ class AvoredFrameworkSchema extends Migration
             $table->string('language')->nullable()->default('en');
             $table->string('image_path')->nullable()->default(null);
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable()->default(null);
+            $table->string('last_name')->nullable()->default(null);
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image_path')->nullable();
             $table->string('company_name')->nullable();
             $table->string('phone')->nullable();
             $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
-            $table->string('activation_token')->nullable()->default(null);
             $table->string('tax_no')->nullable()->default(null);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->enum('registered_channel', ['WEBSITE', 'FACEBOOK', 'TWITTER', 'GOOGLE'])->default('WEBSITE');
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('user_groups', function (Blueprint $table) {
+        Schema::create('user_groups', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
 
-        Schema::create('user_user_group', function (Blueprint $table) {
+        Schema::create('user_user_group', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('user_group_id')->unsigned();
@@ -403,26 +434,28 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('user_group_id')->references('id')->on('user_groups')->onDelete('cascade');
         });
 
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('countries', function(Blueprint $table) {
             $table->increments('id');
             $table->string('code');
             $table->string('name');
             $table->string('phone_code')->nullable()->default(null);
             $table->string('currency_code')->nullable()->default(null);
+            $table->string('currency_symbol')->nullable()->default(null);
             $table->string('lang_code')->nullable()->default(null);
             $table->timestamps();
         });
 
-        Schema::create('site_currencies', function (Blueprint $table) {
+        Schema::create('site_currencies', function(Blueprint $table) {
             $table->increments('id');
             $table->string('code');
+            $table->string('symbol');
             $table->string('name');
             $table->float('conversion_rate');
-            $table->enum('status',['ENABLED','DISABLED'])->nullable()->default(null);
+            $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
             $table->timestamps();
         });
 
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('addresses', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->enum('type', ['SHIPPING', 'BILLING']);
@@ -441,7 +474,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
 
-        Schema::create('oauth_auth_codes', function (Blueprint $table) {
+        Schema::create('oauth_auth_codes', function(Blueprint $table) {
             $table->string('id', 100)->primary();
             $table->integer('user_id');
             $table->integer('client_id');
@@ -450,7 +483,7 @@ class AvoredFrameworkSchema extends Migration
             $table->dateTime('expires_at')->nullable();
         });
 
-        Schema::create('oauth_access_tokens', function (Blueprint $table) {
+        Schema::create('oauth_access_tokens', function(Blueprint $table) {
             $table->string('id', 100)->primary();
             $table->integer('user_id')->index()->nullable();
             $table->integer('client_id');
@@ -461,14 +494,14 @@ class AvoredFrameworkSchema extends Migration
             $table->dateTime('expires_at')->nullable();
         });
 
-        Schema::create('oauth_refresh_tokens', function (Blueprint $table) {
+        Schema::create('oauth_refresh_tokens', function(Blueprint $table) {
             $table->string('id', 100)->primary();
             $table->string('access_token_id', 100)->index();
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
         });
 
-        Schema::create('oauth_clients', function (Blueprint $table) {
+        Schema::create('oauth_clients', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index()->nullable();
             $table->string('name');
@@ -480,13 +513,13 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
+        Schema::create('oauth_personal_access_clients', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->index();
             $table->timestamps();
         });
 
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('pages', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
@@ -496,7 +529,7 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('wishlists', function (Blueprint $table) {
+        Schema::create('wishlists', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -506,13 +539,13 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('permissions', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->timestamps();
         });
 
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create('permission_role', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
@@ -522,7 +555,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('states', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('country_id')->unsigned();
             $table->string('code');
@@ -534,7 +567,7 @@ class AvoredFrameworkSchema extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('orders', function(Blueprint $table) {
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->integer('billing_address_id')->unsigned()->nullable();
@@ -545,47 +578,80 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('billing_address_id')->references('id')->on('addresses');
         });
 
-        
-        $path = __DIR__ .'/../../assets/countries.json';
+        $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
-        foreach ($json as $code => $country) {
-            
-            Country::create(['code' => strtolower($code), 
-                            'name' => $country['name'],
-                            'phone_code' => $country['phone'],
-                            'currency_code' => $country['currency'],
-                            'lang_code' => (isset($country['languages'][0]) && $country['languages']) ?? null,
-                            ]);
+        foreach ($json as $country) {
+            Country::create([
+                'code' => strtolower(array_get($country, 'alpha2Code')),
+                'name' => array_get($country, 'name'),
+                'phone_code' => array_get($country, 'callingCodes.0'),
+                'currency_code' => array_get($country, 'currencies.0.code'),
+                'currency_symbol' => array_get($country, 'currencies.0.symbol'),
+                'lang_code' => array_get($country, 'languages.0.name'),
+            ]);
         }
 
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('menu_groups', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('identifier')->nullable()->default(null);
+            $table->tinyInteger('is_default')->nullable()->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('menus', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('menu_group_id')->unsigned();
             $table->integer('parent_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('route')->nullable()->default(null);
             $table->string('params')->nullable()->default(null);
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
 
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
+        });
+
+        Schema::create('tax_groups', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::create('tax_rates', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->float('rate', 10, 6);
+            $table->integer('country_id')->unsigned();
+            $table->integer('state_id')->unsigned()->nullable()->default(null);
+            $table->integer('postcode')->nullable()->default(null);
+            $table->enum('rate_type', ['PERCENTAGE', 'FIXED'])->default('PERCENTAGE');
+            $table->enum('applied_with', ['SHIPPING', 'BILLING', 'STORE'])->default('SHIPPING');
+            $table->timestamps();
+        });
+
 
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
-            'name'              => 'NZ Dollars',
-            'code'              => 'NZD',
-            'conversion_rate'   => 1,
-            'status'            => 'ENABLED'
+            'name' => 'NZ Dollars',
+            'code' => 'NZD',
+            'symbol' => '$',
+            'conversion_rate' => 1,
+            'status' => 'ENABLED'
         ]);
 
         Configuration::create([
             'configuration_key' => 'general_site_currency',
             'configuration_value' => $siteCurrency->id,
-            ]);
+        ]);
 
         Configuration::create([
             'configuration_key' => 'tax_default_country',
             'configuration_value' => $countryModel->id,
-            ]);
+        ]);
 
         Configuration::create([
             'configuration_key' => 'tax_enabled',
@@ -598,17 +664,89 @@ class AvoredFrameworkSchema extends Migration
         ]);
 
         Configuration::create([
-            'configuration_key' => 'general_site_title', 
+            'configuration_key' => 'general_site_title',
             'configuration_value' => 'AvoRed an Laravel Ecommerce'
         ]);
         Configuration::create([
             'configuration_key' => 'general_site_description',
-            'configuration_value' => 'AvoRed is a free open-source e-commerce application development platform written in PHP based on Laravel. Its an ingenuous and modular e-commerce that is easily customizable according to your needs, with a modern responsive mobile friendly interface as default'            
+            'configuration_value' => 'AvoRed is a free open-source e-commerce application development platform written in PHP based on Laravel. Its an ingenuous and modular e-commerce that is easily customizable according to your needs, with a modern responsive mobile friendly interface as default'
         ]);
         Configuration::create([
-            'configuration_key' => 'general_site_description', 
+            'configuration_key' => 'general_site_description',
             'configuration_value' => 'AvoRed Laravel Ecommerce
         ']);
+
+        $accountMenuGroup = MenuGroup::create([
+            'name' => 'My Account',
+            'identifier' => 'my-account'
+        ]);
+
+        Menu::create([
+            'name' => 'Account Overview',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.home',
+        ]);
+        Menu::create([
+            'name' => 'Edit Account',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.edit',
+        ]);
+        Menu::create([
+            'name' => 'Upload Image',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.upload-image',
+        ]);
+        Menu::create([
+            'name' => 'My Orders',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.order.list',
+        ]);
+        Menu::create([
+            'name' => 'My Addresses',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.address.index',
+        ]);
+        Menu::create([
+            'name' => 'My Wishlist',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.wishlist.list',
+        ]);
+        Menu::create([
+            'name' => 'Change Password',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'my-account.change-password',
+        ]);
+        Menu::create([
+            'name' => 'Logout',
+            'menu_group_id' => $accountMenuGroup->id,
+            'route' => 'logout',
+        ]);
+        
+        $menuGroup = MenuGroup::create([
+            'name' => 'Main Menu',
+            'identifier' => 'main-menu',
+            'is_default' => 1
+        ]);
+
+        
+        Menu::create([
+            'name' => 'My Account',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'my-account.home',
+            'sort_order' => 400
+        ]);
+        Menu::create([
+            'name' => 'Cart',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'cart.view',
+            'sort_order' => 500
+        ]);
+        Menu::create([
+            'name' => 'Checkout',
+            'menu_group_id' => $menuGroup->id,
+            'route' => 'checkout.index',
+            'sort_order' => 600
+        ]);
     }
 
     /**
@@ -645,7 +783,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('product_order');
         Schema::dropIfExists('orders');
-
 
         Schema::dropIfExists('oauth_personal_access_clients');
         Schema::dropIfExists('oauth_clients');

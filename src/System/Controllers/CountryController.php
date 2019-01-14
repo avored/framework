@@ -3,20 +3,15 @@
 namespace AvoRed\Framework\System\Controllers;
 
 use AvoRed\Framework\System\DataGrid\CountryDataGrid;
-use AvoRed\Framework\Image\Facade as Image;
-use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Models\Database\Country;
-use AvoRed\Framework\Models\Database\AdminUser;
 use AvoRed\Framework\System\Requests\CountryRequest;
 use AvoRed\Framework\Models\Contracts\CountryInterface;
 use Illuminate\Support\Collection;
 
 class CountryController extends Controller
 {
-
-
     /**
-     * 
+     *
      * @param \Illuminate\Support\Collection $isActiveOptions
      */
     protected $isActiveOptions;
@@ -29,7 +24,7 @@ class CountryController extends Controller
     public function __construct(CountryInterface $repository)
     {
         $this->repository = $repository;
-        $this->isActiveOptions = Collection::make([['id' => 0,'name' => 'No'],['id' => 1,'name' => 'Yes']]);
+        $this->isActiveOptions = Collection::make([['id' => 0, 'name' => 'No'], ['id' => 1, 'name' => 'Yes']]);
     }
 
     /**
@@ -39,8 +34,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        
-        $dataGrid = new CountryDataGrid($this->repository->query()->orderBy('id','desc'));
+        $dataGrid = new CountryDataGrid($this->repository->query()->orderBy('id', 'desc'));
 
         return view('avored-framework::system.country.index')->with('dataGrid', $dataGrid->dataGrid);
     }
@@ -108,7 +102,6 @@ class CountryController extends Controller
         $country->delete();
         return redirect()->route('admin.country.index');
     }
-
 
     /**
      * Display a listing of the resource.

@@ -5,13 +5,13 @@
 
         <div class="col-12">
             <div class="h1 float-left">
-                {{  __('avored-framework::module.module-list') }}
+                {{  __('avored-framework::system.module-list') }}
             </div>
         
             <div class="float-right">
                 <a href="{{ route('admin.module.create') }}"
                    class="btn btn-primary">
-                    {{  __('avored-framework::module.module-upload') }}
+                    {{  __('avored-framework::system.module-upload') }}
                 </a>
             </div>
         </div>

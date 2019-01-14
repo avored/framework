@@ -8,32 +8,32 @@ use AvoRed\Framework\Models\Database\ProductDownloadableUrl;
 class ProductDownloadableUrlRepository implements ProductDownloadableUrlInterface
 {
     /**
-      * Find an Downloadable Product by given Id which returns ProductDownloadableUrl Model
-      *
-      * @param integer $id
-      * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
-      */
+     * Find an Downloadable Product by given Id which returns ProductDownloadableUrl Model
+     *
+     * @param integer $id
+     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+     */
     public function find($id)
     {
         return ProductDownloadableUrl::find($id);
     }
 
     /**
-    * Find an Category by given token which returns Category Model
-    *
-    * @param string $token
-    * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
-    */
+     * Find an Category by given token which returns Category Model
+     *
+     * @param string $token
+     * @return \AvoRed\Framework\Models\Database\ProductDownloadableUrl
+     */
     public function findByToken($token)
     {
         return ProductDownloadableUrl::whereToken($token)->first();
     }
 
     /**
-    * Get an All  which returns Eloquent Collection
-    *
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+     * Get an All  which returns Eloquent Collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
         return ProductDownloadableUrl::all();

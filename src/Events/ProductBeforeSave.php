@@ -10,7 +10,6 @@ class ProductBeforeSave
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-
     /**
      * Product Before Save Post Data from Form
      *

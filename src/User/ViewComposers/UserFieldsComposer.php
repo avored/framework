@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\User\ViewComposers;
 
 use Illuminate\View\View;
-use AvoRed\Framework\AdminMenu\Facade as AdminMenu;
 use AvoRed\Framework\Models\Contracts\UserGroupInterface;
 
 class UserFieldsComposer
@@ -17,7 +16,7 @@ class UserFieldsComposer
     public function compose(View $view)
     {
         $userGroupRepository = app(UserGroupInterface::class);
-        $userGroupOptions = $userGroupRepository->all()->pluck('name','id');
+        $userGroupOptions = $userGroupRepository->all()->pluck('name', 'id');
         $view->with('userGroupOptions', $userGroupOptions);
     }
 }

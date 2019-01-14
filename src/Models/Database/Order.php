@@ -15,9 +15,18 @@ class Order extends BaseModel
         'track_code'
     ];
 
+    /**
+     * Order Return Request can have many comments.
+     *
+     */
+    public function comments()
+    {
+        return $this->morphToMany(OrderReturnComment::class, 'commentable');
+    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price', 'qty', 'tax_amount');
+        return $this->belongsToMany(Product::class)->withPivot('price', 'qty', 'tax_amount', 'product_info');
     }
 
     public function history()

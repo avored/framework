@@ -51,10 +51,10 @@ class AdminMakeCommand extends Command
     public function handle()
     {
         //CREATE AN ADMIN USER
-        $firstName  = $this->ask('What is your First Name:');
-        $lastName   = $this->ask('What is your Last Name:');
-        $email      = $this->ask('What is your Email:');
-        $password   = $this->secret('What is your password:');
+        $firstName = $this->ask('What is your First Name:');
+        $lastName = $this->ask('What is your Last Name:');
+        $email = $this->ask('What is your Email:');
+        $password = $this->secret('What is your password:');
 
         $role = Role::create(['name' => 'administrator', 'description' => 'Administrator Role has all access']);
 
@@ -67,10 +67,10 @@ class AdminMakeCommand extends Command
             'role_id' => $role->id,
         ]);
 
-        $request            = $this->laravel->make('request');
-        $clientRepository   = new ClientRepository;
+        $request = $this->laravel->make('request');
+        $clientRepository = new ClientRepository;
         $clientRepository->createPasswordGrantClient($adminUser->id, $adminUser->full_name, $request->getUriForPath('/'));
 
-        $this->info('AvoRed Ecommerce Administraotr Account Created Successfully!');
+        $this->info('AvoRed Ecommerce Administrator Account Created Successfully!');
     }
 }

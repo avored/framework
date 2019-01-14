@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\User\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

@@ -33,6 +33,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
      */
     protected $key;
 
+    /**
+     * Get/Set Label for admin configuration
+     *
+     * @return mixed $label|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
+     */
     public function label($label = null)
     {
         if (null !== $label) {
@@ -44,6 +49,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->label;
     }
 
+    /**
+     * Get/Set Key for admin configuration
+     *
+     * @return mixed $key|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
+     */
     public function key($key = null)
     {
         if (null !== $key) {
@@ -55,6 +65,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->key;
     }
 
+    /**
+     * Get/Set name for admin configuration
+     *
+     * @return mixed $name|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
+     */
     public function name($name = null)
     {
         if (null !== $name) {
@@ -66,6 +81,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this->name;
     }
 
+    /**
+     * Get/Set type for admin configuration
+     *
+     * @return mixed $type|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
+     */
     public function type($type = null)
     {
         if (null === $type) {
@@ -77,6 +97,11 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
         return $this;
     }
 
+    /**
+     * Get/Set option for admin configuration
+     *
+     * @return mixed $options|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
+     */
     public function options($callable = null)
     {
         if (null === $callable) {

@@ -1,36 +1,57 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-inverse  bg-light">
-
-        <ul class="nav navbar-nav mr-5 ml-auto">
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#"
-                   id="navbarDropdown"
-                   data-toggle="dropdown">
-                    <i class="fas fa-user-circle"></i>
-                    {{ Auth::guard('admin')->user()->first_name . " " .  Auth::guard('admin')->user()->last_name }}
+<div class="header navbar">
+    <div class="header-container">
+        <ul class="nav-left">
+            <li>
+                <a id='sidebar-toggle' class="sidebar-toggle" href="#">
+                    <i class="ti-menu"></i>
                 </a>
-                <div class="dropdown-menu">
-
-                    <a class="dropdown-item"
-                       href="{{ route('admin.admin-user.detail') }}">
-                        <i class="fas fa-user-circle"></i>
-                        My Account
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item"
-                       href="{{ route('admin.logout') }}">
-
-                        <i class="fas fa-sign-out-alt"></i>
-                        Logout
-                    </a>
-                </div>
             </li>
-
+            <li class="search-box">
+                <a class="search-toggle no-pdd-right" href="#">
+                    <i class="search-icon ti-search pdd-right-10"></i>
+                    <i class="search-icon-close ti-close pdd-right-10"></i>
+                </a>
+            </li>
+            <li class="search-input">
+                <input class="form-control" type="text" placeholder="Search...">
+            </li>
         </ul>
-    </nav>
-
-</header>
+        <ul class="nav-right">
+            
+            <li>
+                <a target="_blank" href="{{ asset('') }}">
+                    Visit Site <i class="ti-new-window"></i>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+                    <div class="peer mR-10">
+                        <img class="w-2r bdrs-50p" src="{{ auth()->user()->avatar }}" alt="">
+                    </div>
+                    <div class="peer">
+                        <span class="fsz-sm c-grey-900">
+                            {{ Auth::guard('admin')->user()->full_name }}</span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu fsz-sm">
+                    <li>
+                        <a href="{{ route('admin.admin-user.detail') }}"
+                            class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                            <i class="ti-settings mR-10"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="{{ route('admin.logout') }}"
+                        class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                            <i class="ti-power-off mR-10"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
 

@@ -6,6 +6,7 @@ use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\System\DataGrid\SiteCurrencyDataGrid;
 use AvoRed\Framework\System\Requests\SiteCurrencyRequest;
 use AvoRed\Framework\Models\Database\SiteCurrency;
+use AvoRed\Framework\Models\Database\Configuration;
 
 class SiteCurrencyController extends Controller
 {
@@ -30,7 +31,7 @@ class SiteCurrencyController extends Controller
         $siteCurrencyGrid = new SiteCurrencyDataGrid($this->repository->query());
 
         return view('avored-framework::system.site-currency.index')
-                    ->with('dataGrid', $siteCurrencyGrid->dataGrid);
+            ->with('dataGrid', $siteCurrencyGrid->dataGrid);
     }
 
     /**
@@ -96,11 +97,15 @@ class SiteCurrencyController extends Controller
      */
     public function destroy($id)
     {
+        $default = (new Configuration)->getValue('general_site_currency');
+        if($default == $id) {
+            return redirect()->back()->with('errorNotificationText', ' You can not delete the default language!');
+        }
+
         $siteCurreny = $this->repository->find($id);
         $siteCurreny->delete();
         return redirect()->route('admin.site-currency.index');
     }
-
 
     /**
      * Display a listing of the resource.
