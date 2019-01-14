@@ -86,7 +86,7 @@ class CategoryRepository implements CategoryInterface
     */
     public function getCategoryProductWithFilter($categoryId, $filters = [])
     {
-        $prefix = config('database.connections.mysql.prefix');
+        $prefix = env('DB_TABLE_PREFIX', 'avored_');
 
         $propetryInnerJoinFlag = false;
         $attributeInnerJoinFlag = false;
