@@ -1,0 +1,29 @@
+.card {
+  border-radius: 0;
+  border: 0;
+  -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card.card-statistics .highlight-icon {
+  font-size: 3.125rem; }
+
+.card.card-statistics p {
+  margin-bottom: 0.25rem; }
+
+.card.card-statistics .bg {
+  overflow: inherit; }
