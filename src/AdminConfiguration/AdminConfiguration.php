@@ -5,12 +5,18 @@ namespace AvoRed\Framework\AdminConfiguration;
 use AvoRed\Framework\AdminConfiguration\Contracts\AdminConfiguration as AdminConfigurationContracts;
 use AvoRed\Framework\AdminConfiguration\Contracts\DropdownFieldContract;
 
-class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldContract
+class AdminConfiguration implements 
+    AdminConfigurationContracts,
+    DropdownFieldContract
 {
     /**
      * @var string $label
      */
     protected $label;
+    /**
+     * @var bool $useLabelAsKey
+     */
+    protected $useLabelAsKey;
 
     /**
      * @var string $name
@@ -36,16 +42,22 @@ class AdminConfiguration implements AdminConfigurationContracts, DropdownFieldCo
     /**
      * Get/Set Label for admin configuration
      *
+     * @param string $label
+     * @param bool $useLabelAsKey
      * @return mixed $label|\AvoRed\Framework\AdminConfiguration\AdminConfiguration
      */
-    public function label($label = null)
+    public function label($label = null, $useLabelAsKey = true)
     {
         if (null !== $label) {
             $this->label = $label;
+            $this->useLabelAsKey = $useLabelAsKey;
 
             return $this;
         }
 
+        if ($this->useLabelAsKey) {
+            return __($this->label);
+        }
         return $this->label;
     }
 

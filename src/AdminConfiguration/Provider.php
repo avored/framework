@@ -74,32 +74,32 @@ class Provider extends ServiceProvider
     protected function registerAdminConfiguration()
     {
         $configurationGroup = AdminConfigurationFacade::add('general')
-            ->label('General');
+            ->label('avored-framework::system.configuration.general_title');
 
         $configurationGroup->addConfiguration('general_site_title')
-            ->label('Default Site Title')
+            ->label('avored-framework::system.configuration.default_site_title')
             ->type('text')
             ->name('general_site_title');
 
         $configurationGroup->addConfiguration('general_site_description')
-            ->label('Default Site Description')
+            ->label('avored-framework::system.configuration.default_site_description')
             ->type('text')
             ->name('general_site_description');
 
         $siteCurrencyRepository = new SiteCurrencyRepository;
         $configurationGroup->addConfiguration('general_site_currency')
-            ->label('Default Site Currency')
+            ->label('avored-framework::system.configuration.default_site_currency')
             ->type('select')
             ->name('general_site_currency')
             ->options($siteCurrencyRepository);
 
         $configurationGroup->addConfiguration('general_administrator_email')
-            ->label('Administrator Email')
+            ->label('avored-framework::system.configuration.administrator_email')
             ->type('text')
             ->name('general_administrator_email');
 
         $configurationGroup->addConfiguration('general_term_condition_page')
-            ->label('Term & Condition Page')
+            ->label('avored-framework::system.configuration.term_condition_page')
             ->type('select')
             ->name('general_term_condition_page')
             ->options(
@@ -110,7 +110,7 @@ class Provider extends ServiceProvider
             );
 
         $configurationGroup->addConfiguration('general_home_page')
-            ->label('Home Page')
+            ->label('avored-framework::system.configuration.home_page')
             ->type('select')
             ->name('general_home_page')
             ->options(
@@ -120,10 +120,10 @@ class Provider extends ServiceProvider
             );
 
         $userGroup = AdminConfigurationFacade::add('users')
-            ->label('Users');
+            ->label('avored-framework::system.configuration.user_title');
 
         $userGroup->addConfiguration('user_default_country')
-            ->label('User Default Country')
+            ->label('avored-framework::system.configuration.user_default_country')
             ->type('select')
             ->name('user_default_country')
             ->options(
@@ -133,7 +133,7 @@ class Provider extends ServiceProvider
             );
 
         $userGroup->addConfiguration('user_activation_required')
-            ->label('User Activation Required')
+            ->label('avored-framework::system.configuration.user_activation_required')
             ->type('select')
             ->name('user_activation_required')
             ->options(
@@ -143,10 +143,10 @@ class Provider extends ServiceProvider
             );
 
         $shippingGroup = AdminConfigurationFacade::add('shipping')
-            ->label('Shipping');
+            ->label('avored-framework::system.configuration.shipping_title');
 
         $shippingGroup->addConfiguration('shipping_free_shipping_enabled')
-            ->label('Is Free Shipping Enabled')
+            ->label('avored-framework::system.configuration.is_free_shipping_enabled')
             ->type('select')
             ->name('shipping_free_shipping_enabled')
             ->options(
@@ -156,10 +156,10 @@ class Provider extends ServiceProvider
             );
 
         $paymentGroup = AdminConfigurationFacade::add('payment')
-            ->label('Payment');
+            ->label('avored-framework::system.configuration.payment_title');
 
         $paymentGroup->addConfiguration('payment_stripe_enabled')
-            ->label('Payment Stripe Enabled')
+            ->label('avored-framework::system.configuration.payment_stripe_enabled')
             ->type('select')
             ->name('payment_stripe_enabled')
             ->options(
@@ -169,20 +169,20 @@ class Provider extends ServiceProvider
             );
 
         $paymentGroup->addConfiguration('payment_stripe_publishable_key')
-            ->label('Payment Stripe Publishable Key')
+            ->label('avored-framework::system.configuration.payment_stripe_publishable_key')
             ->type('text')
             ->name('payment_stripe_publishable_key');
 
         $paymentGroup->addConfiguration('avored_stripe_secret_key')
-            ->label('Payment Stripe Secret Key')
+            ->label('avored-framework::system.configuration.payment_stripe_secret_key')
             ->type('text')
             ->name('avored_stripe_secret_key');
 
         $taxGroup = AdminConfigurationFacade::add('tax')
-            ->label('Tax');
+            ->label('avored-framework::system.configuration.tax_title');
 
         $taxGroup->addConfiguration('tax_enabled')
-            ->label('Is Tax Enabled')
+            ->label('avored-framework::system.configuration.is_tax_enabled')
             ->type('select')
             ->name('tax_enabled')
             ->options(
@@ -192,12 +192,12 @@ class Provider extends ServiceProvider
             );
 
         $taxGroup->addConfiguration('tax_percentage')
-            ->label('Tax Percentage')
+            ->label('avored-framework::system.configuration.tax_percentage')
             ->type('text')
             ->name('tax_percentage');
 
         $taxGroup->addConfiguration('tax_default_country')
-            ->label('Tax Default Country')
+            ->label('avored-framework::system.configuration.tax_default_country')
             ->type('select')
             ->name('tax_default_country')
             ->options(
