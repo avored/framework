@@ -59,14 +59,20 @@ class BreadcrumbProvider extends ServiceProvider
      */
     protected function registerBreadcrumb()
     {
-        BreadcrumbFacade::make('admin.dashboard', function (Breadcrumb $breadcrumb) {
-            $breadcrumb->label('Dashboard');
-        });
+        BreadcrumbFacade::make(
+            'admin.dashboard',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Dashboard');
+            }
+        );
 
-        BreadcrumbFacade::make('admin.page.index', function (Breadcrumb $breadcrumb) {
-            $breadcrumb->label('Page')
-                ->parent('admin.dashboard');
-        });
+        BreadcrumbFacade::make(
+            'admin.page.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Page')
+                    ->parent('admin.dashboard');
+            }
+        );
 
         BreadcrumbFacade::make('admin.page.create', function (Breadcrumb $breadcrumb) {
             $breadcrumb->label('Create')
