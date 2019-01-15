@@ -10,6 +10,10 @@ class AdminMenu implements AdminMenuContracts
      * @var string
      */
     protected $label;
+    /**
+     * @var bool
+     */
+    protected $useLabelAsKey;
 
     /**
      * @var string
@@ -45,16 +49,21 @@ class AdminMenu implements AdminMenuContracts
      * Get/Set Admin Menu Label.
      *
      * @param null|string $label
+     * @param bool $useLabelAsKey
      * @return mixed \AvoRed\Framework\AdminMenu\AdminMenu|string $label
      */
-    public function label($label = null)
+    public function label($label = null, $useLabelAsKey = true)
     {
         if (null !== $label) {
             $this->label = $label;
+            $this->useLabelAsKey = $useLabelAsKey;
 
             return $this;
         }
 
+        if ($this->useLabelAsKey) {
+            return __($this->label);
+        }
         return $this->label;
     }
 

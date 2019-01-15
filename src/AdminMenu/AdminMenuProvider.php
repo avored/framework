@@ -65,7 +65,10 @@ class AdminMenuProvider extends ServiceProvider
         AdminMenuFacade::add(
             'shop',
             function (AdminMenu $shopMenu) {
-                $shopMenu->label('Catalog')->route('#')->icon('ti-shopping-cart');
+                $shopMenu
+                    ->label('avored-framework::system.admin_menu.catalog')
+                    ->route('#')
+                    ->icon('ti-shopping-cart');
             }
         );
 
@@ -74,7 +77,7 @@ class AdminMenuProvider extends ServiceProvider
             'category',
             function (AdminMenu $menu) {
                 $menu->key('category')
-                    ->label('Categories')
+                    ->label('avored-framework::system.admin_menu.categories')
                     ->route('admin.category.index');
             }
         );
@@ -83,7 +86,7 @@ class AdminMenuProvider extends ServiceProvider
             'product',
             function (AdminMenu $menu) {
                 $menu->key('category')
-                    ->label('Products')
+                    ->label('avored-framework::system.admin_menu.products')
                     ->route('admin.product.index');
             }
         );
@@ -92,7 +95,7 @@ class AdminMenuProvider extends ServiceProvider
             'attribute',
             function (AdminMenu $menu) {
                 $menu->key('attribute')
-                    ->label('Products Attributes')
+                    ->label('avored-framework::system.admin_menu.products_attributes')
                     ->route('admin.attribute.index');
             }
         );
@@ -101,7 +104,7 @@ class AdminMenuProvider extends ServiceProvider
             'property',
             function (AdminMenu $menu) {
                 $menu->key('property')
-                    ->label('Property')
+                    ->label('avored-framework::system.admin_menu.property')
                     ->route('admin.property.index');
             }
         );
@@ -109,7 +112,9 @@ class AdminMenuProvider extends ServiceProvider
         AdminMenuFacade::add(
             'content', 
             function (AdminMenu $menu) {
-                $menu->label('Content')->route('#')->icon('ti-files');
+                $menu->label('avored-framework::system.admin_menu.content')
+                    ->route('#')
+                    ->icon('ti-files');
             }
         );
 
@@ -117,21 +122,27 @@ class AdminMenuProvider extends ServiceProvider
         $contentMenu->subMenu(
             'page',
             function (AdminMenu $menu) {
-                $menu->key('page')->label('Pages')->route('admin.page.index');
+                $menu->key('page')
+                    ->label('avored-framework::system.admin_menu.pages')
+                    ->route('admin.page.index');
             }
         );
 
         $contentMenu->subMenu(
             'menu', 
             function (AdminMenu $menu) {
-                $menu->key('menu')->label('Menu')->route('admin.menu.index');
+                $menu->key('menu')
+                    ->label('avored-framework::system.admin_menu.menu')
+                    ->route('admin.menu.index');
             }
         );
 
         AdminMenuFacade::add(
             'user',
             function (AdminMenu $menu) {
-                $menu->label('Customers')->route('#')->icon('ti-user');
+                $menu->label('avored-framework::system.admin_menu.customers')
+                    ->route('#')
+                    ->icon('ti-user');
             }
         );
 
@@ -140,14 +151,16 @@ class AdminMenuProvider extends ServiceProvider
         $userMenu->subMenu(
             'user',
             function (AdminMenu $menu) {
-                $menu->key('user')->label('Overview')->route('admin.user.index');
+                $menu->key('user')
+                    ->label('avored-framework::system.admin_menu.overview')
+                    ->route('admin.user.index');
             }
         );
         $userMenu->subMenu(
             'user_group', 
             function (AdminMenu $menu) {
                 $menu->key('user_group')
-                    ->label('Customers Groups')
+                    ->label('avored-framework::system.admin_menu.customers_groups')
                     ->route('admin.user-group.index');
             }
         );
@@ -155,7 +168,9 @@ class AdminMenuProvider extends ServiceProvider
         AdminMenuFacade::add(
             'orders',
             function (AdminMenu $menu) {
-                $menu->label('Orders')->route('#')->icon('ti-truck');
+                $menu->label('avored-framework::system.admin_menu.orders')
+                    ->route('#')
+                    ->icon('ti-truck');
             }
         );
 
@@ -163,14 +178,16 @@ class AdminMenuProvider extends ServiceProvider
         $orderMenu->subMenu(
             'order',
             function (AdminMenu $menu) {
-                $menu->key('order')->label('Overview')->route('admin.order.index');
+                $menu->key('order')
+                    ->label('avored-framework::system.admin_menu.overview')
+                    ->route('admin.order.index');
             }
         );
         $orderMenu->subMenu(
             'order_return_request',
             function (AdminMenu $menu) {
                 $menu->key('order_return_request')
-                    ->label('Order Return Request')
+                    ->label('avored-framework::system.admin_menu.order_return_request')
                     ->route('admin.order-return-request.index');
             }
         );
@@ -178,7 +195,7 @@ class AdminMenuProvider extends ServiceProvider
         $orderMenu->subMenu(
             'order_status', function (AdminMenu $menu) {
                 $menu->key('order')
-                    ->label('Order Status')
+                    ->label('avored-framework::system.admin_menu.order_status')
                     ->route('admin.order-status.index');
             }
         );
@@ -186,7 +203,9 @@ class AdminMenuProvider extends ServiceProvider
         AdminMenuFacade::add(
             'system',
             function (AdminMenu $systemMenu) {
-                $systemMenu->label('Settings')->route('#')->icon('ti-settings');
+                $systemMenu->label('avored-framework::system.admin_menu.settings')
+                    ->route('#')
+                    ->icon('ti-settings');
             }
         );
 
@@ -196,7 +215,7 @@ class AdminMenuProvider extends ServiceProvider
             'configuration',
             function (AdminMenu $menu) {
                 $menu->key('configuration')
-                    ->label('Configuration')
+                    ->label('avored-framework::system.admin_menu.configuration')
                     ->route('admin.configuration')
                     ->icon('ti-settings');
             }
@@ -206,7 +225,7 @@ class AdminMenuProvider extends ServiceProvider
             'site_currency_setup',
             function (AdminMenu $menu) {
                 $menu->key('site_currency_setup')
-                    ->label('Currencies')
+                    ->label('avored-framework::system.admin_menu.currencies')
                     ->route('admin.site-currency.index');
             }
         );
@@ -215,7 +234,7 @@ class AdminMenuProvider extends ServiceProvider
             'country',
             function (AdminMenu $menu) {
                 $menu->key('country')
-                    ->label('Country')
+                    ->label('avored-framework::system.admin_menu.country')
                     ->route('admin.country.index');
             }
         );
@@ -223,14 +242,16 @@ class AdminMenuProvider extends ServiceProvider
         $systemMenu->subMenu(
             'state',
             function (AdminMenu $menu) {
-                $menu->key('state')->label('State')->route('admin.state.index');
+                $menu->key('state')
+                    ->label('avored-framework::system.admin_menu.state')
+                    ->route('admin.state.index');
             }
         );
         $systemMenu->subMenu(
             'tax_group',
             function (AdminMenu $menu) {
                 $menu->key('tax_group')
-                    ->label('Tax Group')
+                    ->label('avored-framework::system.admin_menu.tax_group')
                     ->route('admin.tax-group.index');
             }
         );
@@ -238,7 +259,7 @@ class AdminMenuProvider extends ServiceProvider
             'tax_rate',
             function (AdminMenu $menu) {
                 $menu->key('tax_rate')
-                    ->label('Tax Rate')
+                    ->label('avored-framework::system.admin_menu.tax_rate')
                     ->route('admin.tax-rate.index');
             }
         );
@@ -246,7 +267,9 @@ class AdminMenuProvider extends ServiceProvider
         $systemMenu->subMenu(
             'module',
             function (AdminMenu $menu) {
-                $menu->key('module')->label('Modules')->route('admin.module.index');
+                $menu->key('module')
+                    ->label('avored-framework::system.admin_menu.modules')
+                    ->route('admin.module.index');
             }
         );
 
@@ -254,7 +277,7 @@ class AdminMenuProvider extends ServiceProvider
             'admin-user',
             function (AdminMenu $menu) {
                 $menu->key('admin-user')
-                    ->label('Staff')
+                    ->label('avored-framework::system.admin_menu.staff')
                     ->route('admin.admin-user.index');
             }
         );
@@ -263,7 +286,7 @@ class AdminMenuProvider extends ServiceProvider
             'role',
             function (AdminMenu $menu) {
                 $menu->key('role')
-                    ->label('Roles/Permissions')
+                    ->label('avored-framework::system.admin_menu.roles_permissions')
                     ->route('admin.role.index');
             }
         );
@@ -271,7 +294,9 @@ class AdminMenuProvider extends ServiceProvider
         $systemMenu->subMenu(
             'themes', 
             function (AdminMenu $menu) {
-                $menu->key('themes')->label('Themes')->route('admin.theme.index');
+                $menu->key('themes')
+                    ->label('avored-framework::system.admin_menu.themes')
+                    ->route('admin.theme.index');
             }
         );
     }
