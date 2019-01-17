@@ -4,10 +4,28 @@ namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends BaseModel
 {
+
+    use Sluggable;
+
     protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function products()
     {

@@ -13,9 +13,13 @@ use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
 use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class Product extends BaseModel
 {
+    use Sluggable;
+
     public static $VARIATION_TYPE = 'VARIATION';
 
     protected $fillable = ['type', 'name', 'slug', 'sku',
@@ -23,6 +27,21 @@ class Product extends BaseModel
         'qty', 'is_taxable', 'meta_title', 'meta_description',
         'weight', 'width', 'height', 'length',
     ];
+
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     /**
      * @var \Illuminate\Database\Eloquent\Collection
