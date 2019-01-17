@@ -61,15 +61,16 @@ class ProductRepository implements ProductInterface
      * @param $request
      * @return bool
      */
-    public function uploadImage($request)
+    public function uploadImage($request, $imageUpload = null)
     {
         try {
-            $image = $request->image;
+            if (null === $imageUpload)
+                $imageUpload = $request->image;
             $tmpPath = str_split(strtolower(str_random(3)));
             $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
 
-            $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-            $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
+            $dbPath = $checkDirectory . '/' . $imageUpload->getClientOriginalName();
+            $image = Image::upload($imageUpload, $checkDirectory)->makeSizes()->get();
 
             return $image;
         }

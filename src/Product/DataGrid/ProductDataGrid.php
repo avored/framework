@@ -14,6 +14,7 @@ class ProductDataGrid
 
         $dataGrid->model($model)
             ->column('id', ['sortable' => true])
+            ->column('sku', ['sortable' => true])
             ->linkColumn('image', [], function ($model) {
                 return "<img src='" . $model->image->smallUrl . "' style='max-height: 50px;' />";
             })->column('name')
