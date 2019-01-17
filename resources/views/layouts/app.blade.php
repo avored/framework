@@ -13,6 +13,7 @@
     <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet">
 
     @yield('css')
+    @stack('styles')
 
     <script>
         window.Laravel = <?php
