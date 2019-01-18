@@ -105,10 +105,7 @@ class Property extends BaseModel
      */
     public function getProductValueModel($productId)
     {
-        $dataType = ucfirst(strtolower($this->data_type));
-
-        $method = 'productProperty' . $dataType . 'Value';
-
+        $method = $this->getPropertyDataTable();
         $productPropertyModel = $this
                                         ->$method()
                                         ->whereProductId($productId)
@@ -126,6 +123,24 @@ class Property extends BaseModel
         }
 
         return $valueModel;
+    }
+
+    /**
+     * Return data relationship
+     * @return string
+     */
+    public function getPropertyDataTable()
+    {
+        $dataType = ucfirst(strtolower($this->data_type));
+        $method = 'productProperty' . $dataType . 'Value';
+        return $method;
+    }
+
+    public function getProductRelationship()
+    {
+        $dataType = ucfirst(strtolower($this->data_type));
+        $method = 'product' . $dataType . 'Properties';
+        return $method;
     }
 
     /**
