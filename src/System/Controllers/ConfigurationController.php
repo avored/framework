@@ -58,6 +58,6 @@ class ConfigurationController extends Controller
             }
         }
         return redirect()->route('admin.configuration')
-            ->with('notificationText', 'All Configuration saved!');
+            ->with('notificationText', 'Configurações salvas com sucesso!');
     }
 }
