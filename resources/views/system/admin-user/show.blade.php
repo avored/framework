@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header">
             Account Details
-            
+
         </div>
 
         <div class="card-body table-bordered">
@@ -31,7 +31,7 @@
             </table>
 
             <div class="float-left">
-                
+
                 @if($user->is_super_admin === 1)
                 <button class="btn btn-danger" disabled >
                     Destroy
@@ -41,10 +41,10 @@
                     @csrf()
                     @method('delete')
                     <button
-                        onClick="event.preventDefault(); 
+                        onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
-                                        title: 'Are you sure?',
+                                        title: '{{ __('avored-framework::lang.are-you-sure') }}',
                                         icon: 'warning',
                                         buttons: true,
                                         text: 'Once deleted, you will not be able to recover this AdminUser!',
@@ -52,7 +52,7 @@
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
                                         }
-                                    });"    
+                                    });"
                         class="btn btn-danger" >
                         Destroy
                     </button>

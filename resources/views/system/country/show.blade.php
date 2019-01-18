@@ -30,16 +30,16 @@
             </table>
 
             <div class="float-left">
-                
-              
+
+
                 <form method="post" action="{{ route('admin.country.destroy', $country->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
-                        onClick="event.preventDefault(); 
+                        onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
-                                        title: 'Are you sure?',
+                                        title: '{{ __('avored-framework::lang.are-you-sure') }}',
                                         icon: 'warning',
                                         buttons: true,
                                         text: 'Once deleted, you will not be able to recover this Country!',
@@ -47,12 +47,12 @@
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
                                         }
-                                    });"    
+                                    });"
                         class="btn btn-danger" >
                         Destroy
                     </button>
                 </form>
-               
+
             </div>
             <a class="btn" href="{{ route('admin.country.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>

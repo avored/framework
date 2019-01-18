@@ -25,7 +25,7 @@ return [
         'login-card-title' => 'AvoRed Admin Login',
         'email-label' => 'Email Address',
     ],
-    
+
     'admin-login-forget-password-link' => 'Forgot your Password?',
     'admin-login-button-title' => 'Login',
     'admin-reset-button-title' => 'Send Password Reset Link',
@@ -45,6 +45,10 @@ return [
     'product.create.text' => 'Create Product',
 
     'address.configuration.title' => 'Address Configuration List',
+
+
+    'are-you-sure' => 'Are you sure?',
+
 
     'cancel' => 'Cancel',
     'name' => 'Name',

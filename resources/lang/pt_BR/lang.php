@@ -49,6 +49,8 @@ return [
 
     'address.configuration.title' => 'Lista de Configuração de Endereço',
 
+    'are-you-sure' => 'Você tem certeza?',
+
     'cancel' => 'Cancelar',
     'name' => 'Nome',
     'price' => 'Preço',

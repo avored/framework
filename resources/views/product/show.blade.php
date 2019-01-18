@@ -11,12 +11,12 @@
                     <td>{{ __('avored-framework::lang.name') }}</td>
                     <td>{{ $product->name }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>Slug</td>
                     <td>{{ $product->slug }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>SKU</td>
                     <td>{{ $product->sku }}</td>
@@ -36,17 +36,17 @@
                     <td>{{ __('avored-framework::lang.price') }}</td>
                     <td>{{ $product->price }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>Status</td>
                     <td>{{ $product->status }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>{{ __('avored-framework::lang.qty') }}</td>
                     <td>{{ $product->qty }}</td>
                 </tr>
-                
+
                 <tr>
                     <td>In Stock</td>
                     <td>{{ ($product->in_stock) ? __('avored-framework::lang.enabled') : __('avored-framework::lang.disabled') }}</td>
@@ -55,7 +55,7 @@
                     <td>Track Stock</td>
                     <td>{{ ($product->track_stock) ? __('avored-framework::lang.enabled') : __('avored-framework::lang.disabled') }}</td>
                 </tr>
-                
+
 
                 <tr>
                     <td>Wight</td>
@@ -79,19 +79,19 @@
                     <td>Length</td>
                     <td>{{ $product->length }}</td>
                 </tr>
-              
+
             </table>
 
             <div class="float-left">
-            
+
                 <form method="post" action="{{ route('admin.product.destroy', $product->id)  }}">
                     @csrf()
                     @method('delete')
                     <button
-                        onClick="event.preventDefault(); 
+                        onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
-                                        title: 'Are you sure?',
+                                        title: '{{ __('avored-framework::lang.are-you-sure') }}',
                                         icon: 'warning',
                                         buttons: true,
                                         text: 'Once deleted, you will not be able to recover this Product!',
@@ -99,12 +99,12 @@
                                         if (willDelete) {
                                             jQuery(this).parents('form:first').submit();
                                         }
-                                    });"    
+                                    });"
                         class="btn btn-danger" >
                         Destroy
                     </button>
                 </form>
-               
+
             </div>
             <a class="btn" href="{{ route('admin.product.index') }}">{{ __('avored-framework::lang.cancel') }}</a>
         </div>

@@ -40,7 +40,7 @@
                         onClick="event.preventDefault();
                                     swal({
                                         dangerMode: true,
-                                        title: 'Are you sure?',
+                                        title: '{{ __('avored-framework::lang.are-you-sure') }}',
                                         icon: 'warning',
                                         buttons: true,
                                         text: 'Once deleted, you will not be able to recover this Site Currency!',
