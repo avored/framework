@@ -86,77 +86,53 @@ class CategoryRepository implements CategoryInterface
     */
     public function getCategoryProductWithFilter($categoryId, $filters = [])
     {
-        $prefix = config('database.connections.mysql.prefix');
 
-        $propetryInnerJoinFlag = false;
-        $attributeInnerJoinFlag = false;
+        $category = Category::find($categoryId);
 
-        $sql = "Select p.id
-                FROM {$prefix}products as p 
-                INNER JOIN {$prefix}category_product as cp on p.id = cp.product_id ";
+        // Products
+        $productIds = $category->products->pluck('id');
+        $products = Product::whereIn('id', $category->products->pluck('id'));
 
-        foreach ($filters as $type => $filterArray) {
-            if ('property' == $type) {
-                foreach ($filterArray as $identifier => $value) {
+        // Filters
+        $methodFilters = array();
+
+        // Filters
+        foreach ($filters as $type => $filterArray)
+        {
+            if ($type == 'property')
+            {
+                foreach ($filterArray as $identifier => $value)
+                {
                     $property = Property::whereIdentifier($identifier)->first();
-
-                    if ('INTEGER' == $property->data_type) {
-                        if (false === $propetryInnerJoinFlag) {
-                            $propetryInnerJoinFlag = true;
-                            $sql .= "INNER JOIN {$prefix}product_property_integer_values as ppiv ON p.id = ppiv.product_id ";
-                        }
-                    }
-                }
-            }
-
-            if ('attribute' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $attribute = Attribute::whereIdentifier($identifier)->first();
-                    if (false === $attributeInnerJoinFlag) {
-                        $attributeInnerJoinFlag = true;
-                        $sql .= "INNER JOIN {$prefix}product_attribute_integer_values as paiv ON p.id = paiv.product_id ";
+                    if ($property) {
+                        $relationshipMethod = $property->getProductRelationship();
+                        $methodFilters[$relationshipMethod][] = [$property->id => $value];
                     }
                 }
             }
         }
 
-        $sql .= "WHERE p.type != 'VARIABLE_PRODUCT' AND  cp.category_id = ? ";
-
-        foreach ($filters as $type => $filterArray) {
-            if ('property' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $property = Property::whereIdentifier($identifier)->first();
-
-                    if ('INTEGER' == $property->data_type) {
-                        $sql .= "AND ppiv.property_id = {$property->id} AND ppiv.value={$value} ";
-                    }
+        // Filters
+        foreach ($methodFilters as $method => $values)
+        {
+            $callback = function($q) use ($values) {
+                $wheres = array();
+                foreach($values as $value) {
+                    $propertyId = key($value);
+                    $value = $value[$propertyId];
+                    $wheres[] =  "(property_id = {$propertyId} and value = '{$value}')";
                 }
-            }
-        }
-
-        foreach ($filters as $type => $filterArray) {
-            if ('attribute' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $attribute = Attribute::whereIdentifier($identifier)->first();
-                    $sql .= "AND paiv.attribute_id = {$attribute->id} AND paiv.value={$value} ";
+                if (count($wheres)) {
+                    $q->whereRaw(implode(" OR ", $wheres));
                 }
-            }
+            };
+            $products = $products->whereHas($method, $callback)
+                ->with([$method => $callback]);
         }
 
-        $products = DB::select($sql, [$categoryId]);
-        $collect = Collection::make([]);
+        // TODO: ADD VARIATION ON SEARCH
 
-        foreach ($products as $productArray) {
-            $product = Product::find($productArray->id);
-
-            if ($product->type == 'VARIABLE_PRODUCT') {
-                $collect->push(($product->getVariableMainProduct()));
-            } else {
-                $collect->push(Product::find($productArray->id));
-            }
-        }
-
-        return $collect;
+        return $products->get();
     }
 
     /*
