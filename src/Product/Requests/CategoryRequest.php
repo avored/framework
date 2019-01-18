@@ -25,12 +25,12 @@ class CategoryRequest extends Request
     {
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
-        if ($this->getMethod() == 'POST') {
-            $validationRule['slug'] = 'required|max:255|alpha_dash|unique:categories';
+        /*if ($this->getMethod() == 'POST') {
+            $validationRule['slug'] = 'max:255|alpha_dash|unique:categories';
         }
         if ($this->getMethod() == 'PUT') {
-            $validationRule['slug'] = 'required|max:255|alpha_dash';
-        }
+            $validationRule['slug'] = 'max:255|alpha_dash';
+        }*/
 
         return $validationRule;
     }

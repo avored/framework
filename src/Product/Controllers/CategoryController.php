@@ -29,8 +29,15 @@ class CategoryController extends Controller
     public function index()
     {
         $categoryGrid = new CategoryDataGrid($this->repository->query());
+        $parentCategories = $this->repository->query()
+            ->with(['children'])
+            ->orderBy('name', 'ASC')
+            ->whereNull('parent_id')->get();
 
-        return view('avored-framework::product.category.index')->with('dataGrid', $categoryGrid->dataGrid);
+        return view('avored-framework::product.category.index', [
+            'dataGrid' => $categoryGrid->dataGrid,
+            'parentCategories' => $parentCategories
+        ]);
     }
 
     /**

@@ -27,9 +27,9 @@ class CategoryDataGrid
                             ->canFilter(true);
                 })
                 ->linkColumn('edit', [], function ($model) {
-                    return "<a href='" . route('admin.category.edit', $model->id) . "' >Edit</a>";
+                    return "<a href='" . route('admin.category.edit', $model->id) . "' >Editar</a>";
                 })->linkColumn('show', [], function ($model) {
-                    return "<a href='" . route('admin.category.show', $model->id) . "' >Show</a>";
+                    return "<a href='" . route('admin.category.show', $model->id) . "' >Visualizar</a>";
                 });
 
         $this->dataGrid = $dataGrid;

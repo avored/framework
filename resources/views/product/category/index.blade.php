@@ -19,4 +19,32 @@
             {!! DataGrid::render($dataGrid) !!}
         </div>
     </div>
-@stop
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title mb-0">
+                Exibição das Categorias
+            </h3>
+        </div>
+        <div class="card-body">
+            <ul>
+                @foreach($parentCategories as $category)
+                    <li>
+                        {!! $category->name !!}
+                        @php
+                            $children = $category->children;
+                        @endphp
+                        @if (count($children))
+                            <ul>
+                                @foreach($children as $childCat)
+                                    <li>{!! $childCat->name !!}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+@endsection
