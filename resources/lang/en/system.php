@@ -54,6 +54,7 @@ return [
         'home_page' => 'Home Page',
         'user_default_country' => 'User Default Country',
         'user_activation_required' => 'User Activation Required',
+        'user_delete_request_text' => 'User Delete Account Request Text',
         'is_free_shipping_enabled' => 'Is Free Shipping Enabled',
         'payment_stripe_enabled' => 'Payment Stripe Enabled',
         'payment_stripe_publishable_key' => 'Payment Stripe Publishable Key',

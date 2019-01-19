@@ -619,6 +619,18 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create(
+            'user_delete_requests',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned();
+                $table->string('name')->nullable()->default(null);
+                $table->timestamp('due_date')->nullable()->default(null);
+                $table->enum('stauts', ['PENDING','IN_PROGRESS','FINISHED'])->nullable()->default(null);
+                $table->timestamps();
+            }
+        );
+
         Schema::create('tax_rates', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
