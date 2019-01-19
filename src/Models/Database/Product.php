@@ -78,18 +78,6 @@ class Product extends BaseModel
     public static function boot()
     {
         parent::boot();
-
-        // registering a callback to be executed upon the creation of an activity AR
-        static::creating(function ($model) {
-            // produce a slug based on the activity title
-            $slug = Str::slug($model->name);
-
-            // check to see if any other slugs exist that are the same & count them
-            $count = static::where('slug', '=', $slug)->count();
-
-            // if other slugs exist that are the same, append the count to the slug
-            $model->slug = $count ? "{$slug}-{$count}" : $slug;
-        });
     }
 
     /**
