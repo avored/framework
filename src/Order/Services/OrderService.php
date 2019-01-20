@@ -119,10 +119,15 @@ class OrderService
 
         //dd($this->findAddress($billingData));
 
-        if (isset($billingData['id']) && $billingData['id'] > 0) {
+        if (!empty($this->findAddress($billingData))) {
+            $address = $this->findAddress($billingData);
+        }
+        else if (isset($billingData['id']) && $billingData['id'] > 0) {
             $address = Address::findorfail($billingData['id']);
             //$address->update($shippingData);
-        } else {
+        }
+
+        else {
             $address = Address::create($billingData);
         }
 
