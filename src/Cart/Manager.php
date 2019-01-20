@@ -218,7 +218,7 @@ class Manager
     public function total($formatted = true)
     {
         $total = 0.00;
-        $cartProducts = $this->getSession();
+        $cartProducts = $this->all();
 
         foreach ($cartProducts as $product) {
             $total += $product->lineTotal();
@@ -240,7 +240,7 @@ class Manager
     public function taxTotal($formatted = true)
     {
         $taxTotal = 0.00;
-        $cartProducts = $this->getSession();
+        $cartProducts = $this->all();
         foreach ($cartProducts as $product) {
             $taxTotal += $product->tax();
         }
@@ -270,7 +270,14 @@ class Manager
      */
     public function all()
     {
-        return $this->getSession();
+        $session = $this->getSession();
+        $collect = new Collection;
+        foreach ($session as $value) {
+            if (!is_int($value)) {
+                $collect->push($value);
+            }
+        }
+        return $collect;
     }
 
     /**
