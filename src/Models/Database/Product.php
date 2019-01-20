@@ -598,6 +598,17 @@ class Product extends BaseModel
     }
 
 
+    public function getPercentageDiscountAttribute()
+    {
+        $regularPrice = $this->regular_price;
+        $salePrice = $this->price;
+        if ($regularPrice && $salePrice) {
+            return (($regularPrice - $salePrice)*100) / $regularPrice;
+        }
+        return 0;
+    }
+
+
     /**
      * Product has many Categories.
      *

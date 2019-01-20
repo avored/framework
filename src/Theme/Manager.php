@@ -75,11 +75,10 @@ class Manager
                     $data = Yaml::parse($themeRegisterContent);
 
                     $assetFolderName = isset($data['asset_folder_name']) ? $data['asset_folder_name'] : 'assets';
-                    $langFolderName = isset($data['lang_folder_name']) ? $data['lang_folder_name'] : 'lang';
 
                     $data['view_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . 'views';
                     $data['asset_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $assetFolderName;
-                    $data['lang_path'] = $iterator->getPath() . DIRECTORY_SEPARATOR . $langFolderName;
+                    $data['lang_path'] = base_path('resources/lang');
 
                     $this->themeList->put($data['identifier'], $data);
                 }
@@ -168,9 +167,9 @@ class Manager
     protected function publishDirectory($from, $to)
     {
         $this->moveManagedFiles(new MountManager([
-            'from' => new Flysystem(new LocalAdapter($from)),
-            'to' => new Flysystem(new LocalAdapter($to)),
-        ]));
+                                                     'from' => new Flysystem(new LocalAdapter($from)),
+                                                     'to' => new Flysystem(new LocalAdapter($to)),
+                                                 ]));
     }
 
     /**

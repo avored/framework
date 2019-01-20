@@ -37,7 +37,7 @@ class Provider extends ServiceProvider
             $activeTheme = $repository->getValueByKey('active_theme_identifier');
         }
         $theme = Theme::get($activeTheme);
-        $fallBackPath = base_path('themes/avored/default/lang');
+        $fallBackPath = base_path('resources/lang');
         $this->app['lang.path'] = array_get($theme, 'lang_path');
     }
 
@@ -64,7 +64,7 @@ class Provider extends ServiceProvider
         $this->app->singleton(
             'theme',
             function ($app) {
-                $loadDefaultLangPath = base_path('themes/avored/default/lang');
+                $loadDefaultLangPath = base_path('resources/lang');
                 $app['path.lang'] = $loadDefaultLangPath;
                 return new Manager($app['files']);
             }
