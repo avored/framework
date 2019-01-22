@@ -2,15 +2,14 @@
 
 namespace AvoRed\Framework\Models\Repository;
 
-use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use AvoRed\Framework\Models\Database\Property;
-use AvoRed\Framework\Models\Database\Attribute;
+use AvoRed\Framework\Models\Database\Category;
 use AvoRed\Framework\Models\Database\Product;
+use AvoRed\Framework\Models\Database\Property;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -18,6 +17,7 @@ class CategoryRepository implements CategoryInterface
      * Find an Category by given Id
      *
      * @param $id
+     *
      * @return \AvoRed\Framework\Models\Database\Category
      */
     public function find($id)
@@ -29,6 +29,7 @@ class CategoryRepository implements CategoryInterface
      * Find an Category by given key which returns Category Model
      *
      * @param string $key
+     *
      * @return \AvoRed\Framework\Models\Database\Category
      */
     public function findByKey($key)
@@ -94,15 +95,12 @@ class CategoryRepository implements CategoryInterface
         $products = Product::whereIn('id', $category->products->pluck('id'));
 
         // Filters
-        $methodFilters = array();
+        $methodFilters = [];
 
         // Filters
-        foreach ($filters as $type => $filterArray)
-        {
-            if ($type == 'property')
-            {
-                foreach ($filterArray as $identifier => $value)
-                {
+        foreach ($filters as $type => $filterArray) {
+            if ($type == 'property') {
+                foreach ($filterArray as $identifier => $value) {
                     $property = Property::whereIdentifier($identifier)->first();
                     if ($property) {
                         $relationshipMethod = $property->getProductRelationship();
@@ -113,14 +111,13 @@ class CategoryRepository implements CategoryInterface
         }
 
         // Filters
-        foreach ($methodFilters as $method => $values)
-        {
-            $callback = function($q) use ($values) {
-                $wheres = array();
-                foreach($values as $value) {
+        foreach ($methodFilters as $method => $values) {
+            $callback = function ($q) use ($values) {
+                $wheres = [];
+                foreach ($values as $value) {
                     $propertyId = key($value);
                     $value = $value[$propertyId];
-                    $wheres[] =  "(property_id = {$propertyId} and value = '{$value}')";
+                    $wheres[] = "(property_id = {$propertyId} and value = '{$value}')";
                 }
                 if (count($wheres)) {
                     $q->whereRaw(implode(" OR ", $wheres));
@@ -129,6 +126,28 @@ class CategoryRepository implements CategoryInterface
             $products = $products->whereHas($method, $callback)
                 ->with([$method => $callback]);
         }
+
+
+        if (isset($filters['orderby'])) {
+            $order = $filters['orderby'];
+            if (in_array($order, ['name', 'price', 'price-desc'])) {
+                switch ($order) {
+                    case 'name':
+                        $products->orderBy('name', 'ASC');
+                        break;
+                    case 'price':
+                        $products->orderBy('price', 'ASC');
+                        break;
+                    case 'price-desc':
+                        $products->orderBy('price', 'DESC');
+                        break;
+                    default:
+                        $products->latest();
+                        break;
+                }
+            }
+        }
+
 
         // TODO: ADD VARIATION ON SEARCH
 
