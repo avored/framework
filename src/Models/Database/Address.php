@@ -18,6 +18,8 @@ class Address extends BaseModel
         'last_name',
         'address1',
         'address2',
+        'address_number',
+        'address_complement',
         'postcode',
         'city',
         'state',
