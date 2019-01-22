@@ -38,8 +38,7 @@
 	},
 	"autoload" : {
 		"classmap": [
-            "database/factories",
-			"database/seeds"
+            "database/factories"
         ],
 		"psr-4" : {
 			"AvoRed\\Framework\\" : "src/"
