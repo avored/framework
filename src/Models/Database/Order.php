@@ -18,12 +18,19 @@ class Order extends BaseModel
         'currency_code',
         'track_code',
         'shipping_cost',
+        'billing_data',
+        'shipping_data'
     ];
 
     protected $append = [
         'total_order_value',
         'shipping_address',
         'billing_address',
+    ];
+
+    protected $casts = [
+        'billing_data' => 'array',
+        'shipping_data' => 'array',
     ];
 
     /**
