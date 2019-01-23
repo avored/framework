@@ -666,6 +666,7 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::dropIfExists('category_filters');
         Schema::dropIfExists('order_product_variations');
         Schema::dropIfExists('product_variations');
         Schema::dropIfExists('product_attribute_integer_values');
