@@ -634,26 +634,93 @@ class AvoredFrameworkSchema extends Migration
 
         Configuration::create([
             'configuration_key' => 'tax_enabled',
-            'configuration_value' => 1,
+            'configuration_value' => 0,
         ]);
 
         Configuration::create([
             'configuration_key' => 'tax_percentage',
-            'configuration_value' => 15,
+            'configuration_value' => 0,
         ]);
 
         Configuration::create([
             'configuration_key' => 'general_site_title',
-            'configuration_value' => 'AvoRed an Laravel Ecommerce'
+            'configuration_value' => 'LeadStore - Loja Virtual'
         ]);
         Configuration::create([
             'configuration_key' => 'general_site_description',
-            'configuration_value' => 'AvoRed is a free open-source e-commerce application development platform written in PHP based on Laravel. Its an ingenuous and modular e-commerce that is easily customizable according to your needs, with a modern responsive mobile friendly interface as default'
+            'configuration_value' => 'Breve descrição do site'
         ]);
-        Configuration::create([
-            'configuration_key' => 'general_site_description',
-            'configuration_value' => 'AvoRed Laravel Ecommerce
-        ']);
+
+
+        $accountMenuGroup = MenuGroup::create([
+                                                  'name' => 'Minha conta',
+                                                  'identifier' => 'my-account'
+                                              ]);
+        Menu::create([
+                         'name' => 'Meus dados',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.home',
+                     ]);
+        Menu::create([
+                         'name' => 'Atualizar Dados',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.edit',
+                     ]);
+//        Menu::create([
+//                         'name' => 'Upload Image',
+//                         'menu_group_id' => $accountMenuGroup->id,
+//                         'route' => 'my-account.upload-image',
+//                     ]);
+        Menu::create([
+                         'name' => 'Pedidos',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.order.list',
+                     ]);
+        Menu::create([
+                         'name' => 'Endereços',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.address.index',
+                     ]);
+        Menu::create([
+                         'name' => 'Lista de Desejos',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.wishlist.list',
+                     ]);
+        Menu::create([
+                         'name' => 'Alterar Senha',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'my-account.change-password',
+                     ]);
+        Menu::create([
+                         'name' => 'Logout',
+                         'menu_group_id' => $accountMenuGroup->id,
+                         'route' => 'logout',
+                     ]);
+
+        $menuGroup = MenuGroup::create([
+                                           'name' => 'Main Menu',
+                                           'identifier' => 'main-menu',
+                                           'is_default' => 1
+                                       ]);
+
+        Menu::create([
+                         'name' => 'Minha Conta',
+                         'menu_group_id' => $menuGroup->id,
+                         'route' => 'my-account.home',
+                         'sort_order' => 400
+                     ]);
+        Menu::create([
+                         'name' => 'Carrinho',
+                         'menu_group_id' => $menuGroup->id,
+                         'route' => 'cart.view',
+                         'sort_order' => 500
+                     ]);
+        Menu::create([
+                         'name' => 'Checkout',
+                         'menu_group_id' => $menuGroup->id,
+                         'route' => 'checkout.index',
+                         'sort_order' => 600
+                     ]);
 
     }
 
