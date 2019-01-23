@@ -8,6 +8,7 @@ use AvoRed\Framework\Models\Database\Country;
 use AvoRed\Framework\Models\Database\SiteCurrency;
 use AvoRed\Framework\Models\Database\Configuration;
 use AvoRed\Framework\Models\Database\MenuGroup;
+use AvoRed\Framework\Models\Database\Menu;
 
 class AvoredFrameworkSchema extends Migration
 {
