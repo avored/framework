@@ -25,7 +25,6 @@ trait ShippingUtils
         $length = [];
         $weight = [];
 
-
         foreach ($products as $product) {
             $productModel = $product['model'];
             $productQty = $product['qty'];
@@ -50,6 +49,8 @@ trait ShippingUtils
                 $count++;
             }
         }
+
+        dump($height);
 
         return [
             'height' => array_values($height),
