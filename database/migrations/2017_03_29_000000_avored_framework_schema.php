@@ -723,6 +723,42 @@ class AvoredFrameworkSchema extends Migration
                          'sort_order' => 600
                      ]);
 
+        $termPage = Page::create(
+            ['name' => 'Termos & Condições',
+             'slug' => 'term-condition',
+             'content' => 'Texto sobre os termos e condições.',
+             'meta_title' => 'Termos & Condições']
+        );
+        // Páginas Padroes
+        $paginas = [
+            'sobre-nos' => 'Sobre Nós',
+            'parceiros' => 'Parceiros',
+            'politica-de-privacidade' => 'Política de Privacidade',
+            'como-comprar' => 'Como Comprar',
+            'prazo-de-entrega' => 'Prazo de Entrega',
+            'troca-e-devolucoes' => 'Troca e Devoluções',
+            'garantia' => 'Garantia',
+            'pagamentos' => 'Pagamentos'
+        ];
+
+        foreach ($paginas as $slug => $title) {
+            Page::create(
+                ['name' => $title,
+                 'slug' => $slug,
+                 'content' => 'Aqui vai o conteúdo da página. Acesse a adminsitração e altere.',
+                 'meta_title' => $title]
+            );
+        }
+
+
+        Configuration::create(
+            ['configuration_key' => 'general_term_condition_page',
+             'configuration_value' => $termPage->id]
+        );
+
+
+
+
     }
 
     /**
