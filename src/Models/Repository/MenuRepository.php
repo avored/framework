@@ -77,6 +77,9 @@ class MenuRepository implements MenuInterface
     public function truncateAndCreateMenus($menuGroup, $menus)
     {
         $menuGroup->menus()->delete();
+        if (!count($menus)) {
+            return;
+        }
         foreach ($menus as $menu) {
             $this->_saveMenu($menuGroup, $menu);
         }
