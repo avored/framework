@@ -666,6 +666,17 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::dropIfExists('order_return_products');
+        Schema::dropIfExists('order_return_requests');
+        Schema::dropIfExists('product_downloadable_urls');
+        Schema::dropIfExists('product_property');
+        Schema::dropIfExists('site_currencies');
+        Schema::dropIfExists('menu_groups');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('order_histories');
+        Schema::dropIfExists('user_user_group');
+        Schema::dropIfExists('user_groups');
+
         Schema::dropIfExists('category_filters');
         Schema::dropIfExists('order_product_variations');
         Schema::dropIfExists('product_variations');
@@ -690,6 +701,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('categories');
 
         Schema::dropIfExists('attributes');
+
 
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('product_order');
