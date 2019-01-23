@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use AvoRed\Framework\Image\LocalFile;
+use AvoRed\Framework\Models\Contracts\SiteCurrencyInterface;
+use AvoRed\Framework\Models\Database\ProductImage;
+use AvoRed\Framework\Events\ProductBeforeSave;
+use AvoRed\Framework\Events\ProductAfterSave;
+use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
+use AvoRed\Framework\Models\Database\ProductDownloadableUrl;
+use AvoRed\Framework\Models\Database\AttributeDropdownOption;
+use AvoRed\Framework\Models\Database\ProductVariation;
+use AvoRed\Framework\Models\Contracts\CategoryFilterInterface;
+use AvoRed\Framework\Models\Database\Property;
+use AvoRed\Framework\Models\Database\ProductAttributeIntegerValue;
+
 
 trait ProductAttribute
 {
