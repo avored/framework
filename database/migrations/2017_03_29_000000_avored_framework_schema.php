@@ -704,7 +704,7 @@ class AvoredFrameworkSchema extends Migration
 
 
         Schema::dropIfExists('order_statuses');
-        Schema::dropIfExists('product_order');
+        Schema::dropIfExists('order_product');
         Schema::dropIfExists('orders');
 
         Schema::dropIfExists('oauth_personal_access_clients');
