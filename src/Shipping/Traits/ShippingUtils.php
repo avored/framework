@@ -28,6 +28,7 @@ trait ShippingUtils
         foreach ($products as $product) {
             $productModel = $product['model'];
             $productQty = $product['qty'];
+
             if ($productQty > 0 && $productModel->needsShipping()) {
                 list($_height, $_width, $_length, $_weight) = $this->getProductAttributes($productModel);
 
@@ -50,7 +51,6 @@ trait ShippingUtils
             }
         }
 
-        dump($height);
 
         return [
             'height' => array_values($height),
