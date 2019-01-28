@@ -35,4 +35,10 @@ return [
     'user-role' => 'Role',
     
     'file' => 'Profile Image',
+
+    'user-delete-request' => [
+        'title' => 'User Delete Requested',
+        
+    ],
+
 ];

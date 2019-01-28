@@ -54,7 +54,7 @@ return [
         'home_page' => 'Home Page',
         'user_default_country' => 'User Default Country',
         'user_activation_required' => 'User Activation Required',
-        'user_delete_request_text' => 'User Delete Account Request Text',
+        'user_delete_request_days' => 'How many days you will destroy user account after request?',
         'is_free_shipping_enabled' => 'Is Free Shipping Enabled',
         'payment_stripe_enabled' => 'Payment Stripe Enabled',
         'payment_stripe_publishable_key' => 'Payment Stripe Publishable Key',
@@ -62,6 +62,7 @@ return [
         'is_tax_enabled' => 'Is Tax Enabled',
         'tax_percentage' => 'Tax Percentage',
         'tax_default_country' => 'Tax Default Country',
+        
     ],
 
     'admin_menu' => [
@@ -91,5 +92,6 @@ return [
         'staff' => 'Staff',
         'roles_permissions' => 'Roles/Permissions',
         'themes' => 'Themes',
+        'user_delete_request' => 'User Delete Request'
     ]
 ];

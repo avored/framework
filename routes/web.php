@@ -146,4 +146,13 @@ Route::middleware(['web', 'admin.auth', 'permission'])
         'user/{user}/change-password',
         'User\Controllers\UserController@changePasswordUpdate'
     )->name('user.change-password.update');
+
+    Route::get(
+        'user-delete-request',
+        'User\Controllers\UserDeleteRequestController@index'
+    )->name('user-delete-request.index');
+    Route::get(
+        'user-delete-request/{id}',
+        'User\Controllers\UserDeleteRequestController@destroy'
+    )->name('user-delete-request.destroy');
 });

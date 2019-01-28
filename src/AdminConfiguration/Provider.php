@@ -142,10 +142,10 @@ class Provider extends ServiceProvider
                 }
             );
 
-        $userGroup->addConfiguration('user_delete_request_text')
-            ->label('avored-framework::system.configuration.user_delete_request_text')
+        $userGroup->addConfiguration('user_delete_request_days')
+            ->label('avored-framework::system.configuration.user_delete_request_days')
             ->type('text')
-            ->name('user_delete_request_text');
+            ->name('user_delete_request_days');
 
         $shippingGroup = AdminConfigurationFacade::add('shipping')
             ->label('avored-framework::system.configuration.shipping_title');

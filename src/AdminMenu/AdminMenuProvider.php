@@ -165,6 +165,16 @@ class AdminMenuProvider extends ServiceProvider
             }
         );
 
+        $userMenu->subMenu(
+            'user_delete_request',
+            function (AdminMenu $menu) {
+                $menu->key('user_delete_request')
+                    ->label('avored-framework::system.admin_menu.user_delete_request')
+                    ->route('admin.user-delete-request.index')
+                    ->icon('ti-users');
+            }
+        );
+
         AdminMenuFacade::add(
             'orders',
             function (AdminMenu $menu) {
@@ -210,7 +220,6 @@ class AdminMenuProvider extends ServiceProvider
         );
 
         $systemMenu = AdminMenuFacade::get('system');
-
         $systemMenu->subMenu(
             'configuration',
             function (AdminMenu $menu) {

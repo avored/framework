@@ -409,12 +409,15 @@ class AvoredFrameworkSchema extends Migration
             $table->string('image_path')->nullable();
             $table->string('company_name')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
+            $table->enum('status', ['GUEST', 'LIVE', 'DELETE_IN_PROGRESS'])->default('LIVE');
             $table->string('tax_no')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('delete_due_date')->nullable()->default(null);
             $table->enum('registered_channel', ['WEBSITE', 'FACEBOOK', 'TWITTER', 'GOOGLE'])->default('WEBSITE');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+                
         });
 
         Schema::create('user_groups', function(Blueprint $table) {
@@ -618,18 +621,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('description')->nullable()->default(null);
             $table->timestamps();
         });
-
-        Schema::create(
-            'user_delete_requests',
-            function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('user_id')->unsigned();
-                $table->string('name')->nullable()->default(null);
-                $table->timestamp('due_date')->nullable()->default(null);
-                $table->enum('stauts', ['PENDING','IN_PROGRESS','FINISHED'])->nullable()->default(null);
-                $table->timestamps();
-            }
-        );
 
         Schema::create('tax_rates', function(Blueprint $table) {
             $table->increments('id');
