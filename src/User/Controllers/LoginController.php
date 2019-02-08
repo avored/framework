@@ -52,9 +52,9 @@ class LoginController extends Controller
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        throw ValidationException::withMessages([
-            $this->username() => [trans('avored-framework::lang.failed')],
-        ]);
+        throw ValidationException::withMessages(
+            [$this->username() => [trans('avored-framework::lang.failed')]]
+        );
     }
 
     public function logout(Request $request)
