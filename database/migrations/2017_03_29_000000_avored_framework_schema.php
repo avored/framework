@@ -635,6 +635,13 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('languages', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
 
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);

@@ -231,6 +231,16 @@ class AdminMenuProvider extends ServiceProvider
         );
 
         $systemMenu->subMenu(
+            'language',
+            function (AdminMenu $menu) {
+                $menu->key('language')
+                    ->label('avored-framework::system.admin_menu.language')
+                    ->route('admin.language.index')
+                    ->icon('ti-settings');
+            }
+        );
+
+        $systemMenu->subMenu(
             'site_currency_setup',
             function (AdminMenu $menu) {
                 $menu->key('site_currency_setup')

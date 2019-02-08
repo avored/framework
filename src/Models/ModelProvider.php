@@ -39,6 +39,8 @@ use AvoRed\Framework\Models\Contracts\UserGroupInterface;
 use AvoRed\Framework\Models\Repository\UserGroupRepository;
 use AvoRed\Framework\Models\Contracts\CountryInterface;
 use AvoRed\Framework\Models\Repository\CountryRepository;
+use AvoRed\Framework\Models\Contracts\LanguageInterface;
+use AvoRed\Framework\Models\Repository\LanguageRepository;
 use AvoRed\Framework\Models\Contracts\StateInterface;
 use AvoRed\Framework\Models\Repository\StateRepository;
 use AvoRed\Framework\Models\Contracts\OrderStatusInterface;
@@ -72,6 +74,7 @@ class ModelProvider extends ServiceProvider
         CategoryFilterInterface::class => CategoryFilterRepository::class,
         ConfigurationInterface::class => ConfigurationRepository::class,
         CountryInterface::class => CountryRepository::class,
+        LanguageInterface::class => LanguageRepository::class,
         MenuInterface::class => MenuRepository::class,
         MenuGroupInterface::class => MenuGroupRepository::class,
         OrderInterface::class => OrderRepository::class,

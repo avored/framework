@@ -29,6 +29,7 @@ Route::middleware(['web', 'admin.auth', 'permission'])
                 ->name('dashboard');
 
     Route::resource('page', 'Cms\Controllers\PageController');
+    Route::resource('language', 'System\Controllers\LanguageController');
     Route::resource('user-group', 'User\Controllers\UserGroupController');
     Route::resource('user', 'User\Controllers\UserController');
     Route::resource('attribute', 'Product\Controllers\AttributeController');

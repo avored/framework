@@ -19,6 +19,18 @@ return [
         'create' => 'Create Tax Rate',
         'update' => 'Update Tax Rate',
     ],
+    'language' => [
+        'title' => 'Language',
+        'create' => 'Create Language',
+        'update' => 'Update Language',
+        'name' => 'Name',
+        'code' => 'Code',
+        'is_default' => 'Is Default',
+        'no' => 'No',
+        'yes' => 'Yes',
+        'delete_warning' => 'Once deleted, you will not be able to recover this Language!',
+        'delete_title' => 'Are you sure?'
+    ],
 
     'site-currency' => [
         'title' => 'Currency',
@@ -92,6 +104,7 @@ return [
         'staff' => 'Staff',
         'roles_permissions' => 'Roles/Permissions',
         'themes' => 'Themes',
-        'user_delete_request' => 'User Delete Request'
+        'user_delete_request' => 'User Delete Request',
+        'language' => 'Language',
     ]
 ];
