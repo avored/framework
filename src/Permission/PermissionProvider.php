@@ -60,11 +60,11 @@ class PermissionProvider extends ServiceProvider
     protected function registerPermissions()
     {
         $group = PermissionFacade::add(
-                'page',
-                function (PermissionGroup $group) {
-                    $group->label('avored-framework::permission.page.title');
-                }
-            );
+            'page',
+            function (PermissionGroup $group) {
+                $group->label('avored-framework::permission.page.title');
+            }
+        );
         $group->addPermission(
             'admin-page-list',
             function (Permission $permission) {
@@ -80,40 +80,46 @@ class PermissionProvider extends ServiceProvider
             }
         );
         $group->addPermission(
-            'admin-page-update', function (Permission $permission) {
-            $permission->label('avored-framework::permission.page.edit')
+            'admin-page-update', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.page.edit')
                     ->routes('admin.page.edit,admin.page.update');
             }
         );
         $group->addPermission(
-            'admin-page-destroy', function (Permission $permission) {
-            $permission->label('avored-framework::permission.page.destroy')
+            'admin-page-destroy', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.page.destroy')
                     ->routes('admin.page.destroy');
             }
         );
         $group->addPermission(
-            'admin-page-show', function (Permission $permission) {
-            $permission->label('avored-framework::permission.page.show')
+            'admin-page-show', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.page.show')
                     ->routes('admin.page.show');
             }
         );
 
         $group = PermissionFacade::add(
-            'menu', function (PermissionGroup $group) {
-            $group->label('avored-framework::permission.menu.title');
+            'menu', 
+            function (PermissionGroup $group) {
+                $group->label('avored-framework::permission.menu.title');
             }
         );
 
         $group->addPermission(
-            'admin-menu-list', function (Permission $permission) {
-            $permission->label('avored-framework::permission.menu.front')
+            'admin-menu-list', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.menu.front')
                     ->routes('admin.menu.index');
             }
         );
 
         $group->addPermission(
-            'admin-menu-store', function (Permission $permission) {
-            $permission->label('avored-framework::permission.menu.save')
+            'admin-menu-store', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.menu.save')
                     ->routes('admin.menu.store');
             }
         );
@@ -125,36 +131,38 @@ class PermissionProvider extends ServiceProvider
             }
         );
         $group->addPermission(
-            'admin-category-list', function (Permission $permission) {
-            $permission->label('avored-framework::permission.category.list')
+            'admin-category-list', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.category.list')
                     ->routes('admin.category.index');
-        });
+            }
+        );
         $group->addPermission(
             'admin-category-create', 
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.category.create')
-                        ->routes('admin.category.create,admin.category.store');
+                    ->routes('admin.category.create,admin.category.store');
             }
         );
         $group->addPermission(
             'admin-category-update',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.category.edit')
-                        ->routes('admin.category.edit,admin.category.update');
+                    ->routes('admin.category.edit,admin.category.update');
             }
         );
         $group->addPermission(
             'admin-category-destroy',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.category.destroy')
-                        ->routes('admin.category.destroy');
+                    ->routes('admin.category.destroy');
             }
         );
         $group->addPermission(
             'admin-category-show',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.category.show')
-                        ->routes('admin.category.show');
+                    ->routes('admin.category.show');
             }
         );
 
@@ -169,35 +177,35 @@ class PermissionProvider extends ServiceProvider
             'admin-product-list',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.product.list')
-                        ->routes('admin.product.index');
+                    ->routes('admin.product.index');
             }
         );
         $group->addPermission(
             'admin-product-create',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.product.create')
-                        ->routes('admin.product.create,admin.product.store');
+                    ->routes('admin.product.create,admin.product.store');
             }
         );
         $group->addPermission(
             'admin-product-update',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.product.edit')
-                        ->routes('admin.product.edit,admin.product.update');
+                    ->routes('admin.product.edit,admin.product.update');
             }
         );
         $group->addPermission(
             'admin-product-destroy',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.product.destroy')
-                        ->routes('admin.product.destroy');
+                    ->routes('admin.product.destroy');
             }
         );
         $group->addPermission(
             'admin-product-show',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.product.show')
-                        ->routes('admin.product.show');
+                    ->routes('admin.product.show');
             }
         );
 
@@ -212,7 +220,7 @@ class PermissionProvider extends ServiceProvider
             'admin-order-list',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.order.list')
-                        ->routes('admin.order.index');
+                    ->routes('admin.order.index');
             }
         );
 
@@ -220,14 +228,14 @@ class PermissionProvider extends ServiceProvider
             'admin-order-view',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.order.view')
-                        ->routes('admin.order.view');
+                    ->routes('admin.order.view');
             }
         );
         $group->addPermission(
             'admin-order-send-invoice-email',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.order.sent_invoice_by_mail')
-                        ->routes('admin.order.send-email-invoice');
+                    ->routes('admin.order.send-email-invoice');
             }
         );
         $group->addPermission(
@@ -248,7 +256,7 @@ class PermissionProvider extends ServiceProvider
             'admin-order-status-list',
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.order_status.list')
-                        ->routes('admin.order-status.index');
+                    ->routes('admin.order-status.index');
             }
         );
         $group->addPermission(
@@ -389,7 +397,7 @@ class PermissionProvider extends ServiceProvider
         $group->addPermission(
             'admin-user-update',
             function (Permission $permission) {
-                $permission->label('avored-framework::permission.user.update')
+                $permission->label('avored-framework::permission.user.edit')
                     ->routes('admin.user.edit,admin.user.update');
             }
         );
@@ -400,8 +408,10 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.user.destroy');
             }
         );
-        $group->addPermission('admin-user-show', function (Permission $permission) {
-            $permission->label('avored-framework::permission.user.show')
+        $group->addPermission(
+            'admin-user-show', 
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.user.show')
                     ->routes('admin.user.show');
             }
         );
@@ -439,8 +449,8 @@ class PermissionProvider extends ServiceProvider
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.user_group.destroy')
                     ->routes('admin.user-group.destroy');
-        }
-                    );
+            }
+        );
         $group->addPermission(
             'admin-user-group-show',
             function (Permission $permission) {
@@ -461,8 +471,8 @@ class PermissionProvider extends ServiceProvider
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.admin_user.list')
                     ->routes('admin.admin-user.index');
-        }
-                    );
+            }
+        );
         $group->addPermission(
             'admin-admin-user-create',
             function (Permission $permission) {
@@ -624,7 +634,7 @@ class PermissionProvider extends ServiceProvider
         $group->addPermission(
             'admin-country-update',
             function (Permission $permission) {
-                $permission->label('avored-framework::permission.country.update')
+                $permission->label('avored-framework::permission.country.edit')
                     ->routes('admin.country.edit,admin.country.update');
             }
         );
@@ -640,6 +650,48 @@ class PermissionProvider extends ServiceProvider
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.country.show')
                     ->routes('admin.country.show');
+            }
+        );
+        $group = PermissionFacade::add(
+            'language', 
+            function (PermissionGroup $group) {
+                $group->label('avored-framework::permission.language.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-language-list',
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.language.list')
+                    ->routes('admin.language.index');
+            }
+        );
+        $group->addPermission(
+            'admin-language-create',
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.language.create')
+                    ->routes('admin.language.create,admin.language.store');
+            }
+        );
+        $group->addPermission(
+            'admin-language-update',
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.language.edit')
+                    ->routes('admin.language.edit,admin.language.update');
+            }
+        );
+        $group->addPermission(
+            'admin-language-destroy',
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.language.destroy')
+                    ->routes('admin.language.destroy');
+            }
+        );
+        $group->addPermission(
+            'admin-language-show',
+            function (Permission $permission) {
+                $permission->label('avored-framework::permission.language.show')
+                    ->routes('admin.language.show');
             }
         );
 

@@ -17,6 +17,14 @@ return [
         'destroy' => 'Destroy Category',
         'show' => 'Show Category'
     ],
+    'language' => [
+        'title' => 'Language Permissions',
+        'list' => 'Language List',
+        'create' => 'Create/Store Language',
+        'edit' => 'Edit/Update Language',
+        'destroy' => 'Destroy Language',
+        'show' => 'Show Language'
+    ],
     'product' => [
         'title' => 'Product Permissions',
         'list' => 'Product List',
