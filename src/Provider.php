@@ -22,6 +22,7 @@ use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
 use AvoRed\Framework\System\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\System\ViewComposers\GlobalComposer;
 use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
@@ -150,6 +151,14 @@ class Provider extends ServiceProvider
      */
     public function registerViewComposerData()
     {
+        View::composer(
+            'avored-framework::*',
+            GlobalComposer::class
+        );
+        View::composer(
+            'avored-framework::layouts.left-nav',
+            AdminNavComposer::class
+        );
         View::composer(
             'avored-framework::layouts.left-nav',
             AdminNavComposer::class

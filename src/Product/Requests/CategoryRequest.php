@@ -23,6 +23,7 @@ class CategoryRequest extends Request
      */
     public function rules()
     {
+        dd($this->request);
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
         if ($this->getMethod() == 'POST') {

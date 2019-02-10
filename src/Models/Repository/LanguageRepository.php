@@ -66,11 +66,26 @@ class LanguageRepository implements LanguageInterface
      */
     public function options()
     {
-        $countries = $this->all();
-        $options = Collection::make();
-        foreach ($countries as $Language) {
-            $options->push(['name' => $Language->name, 'id' => $Language->id]);
-        }
-        return $options;
+        return $this->all()->pluck('name', 'id');
+    }
+
+    /**
+     * Get Default Language for the Store
+     *
+     * @return \AvoRed\Framework\Models\Language
+     */
+    public function getDefault()
+    {
+        return Language::whereIsDefault(1)->first();
+    }
+
+    /**
+     * Get Addtional Languages for the store
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAdditionalLanguages()
+    {
+        return Language::whereIsDefault(0)->get();
     }
 }

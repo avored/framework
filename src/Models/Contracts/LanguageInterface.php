@@ -47,4 +47,18 @@ interface LanguageInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function options();
+
+    /**
+     * Get Default Language for the store
+     *
+     * @return \AvoRed\Framework\Models\Language
+     */
+    public function getDefault();
+
+    /**
+     * Get Addtional Languages for the store
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAdditionalLanguages();
 }
