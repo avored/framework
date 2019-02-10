@@ -4,24 +4,10 @@ namespace AvoRed\Framework\System\ViewComposers;
 
 use Illuminate\View\View;
 use AvoRed\Framework\Models\Contracts\LanguageInterface;
+use Illuminate\Support\Facades\Session;
 
 class GlobalComposer
 {
-
-    /**
-     * Language Repository
-     * @var \AvoRed\Framework\Models\Repository\LanguageRepository
-     */
-    protected $languageRepository;
-
-    /**
-     * Global Composer Construct to setup Language Repository
-     * @var \AvoRed\Framework\Models\Contracts\LanguageInterface $repository
-     */
-    public function __construct(LanguageInterface $repository)
-    {
-        $this->languageRepository = $repository;
-    }
     /**
      * Bind data to the view.
      *
@@ -30,9 +16,11 @@ class GlobalComposer
      */
     public function compose(View $view)
     {
-        $additionalLanguages = $this->languageRepository->getAdditionalLanguages();
-        $defaultLanguage = $this->languageRepository->getDefault();
-        $isMultiLanguage = $additionalLanguages->count() > 0 ? true : false;
+        if (Session::has('multi_language_enabled')) {
+            $additionalLanguages = Session::get('additionalLanguages');
+            $defaultLanguage = Session::get('defaultLanguage');
+            $isMultiLanguage = Session::get('isMultiLanguage');
+        }
 
         $view->withAdditionalLanguages($additionalLanguages)
             ->withIsMutliLanguage($isMultiLanguage)

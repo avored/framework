@@ -8,6 +8,7 @@ use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\User\Middleware\Permission;
+use AvoRed\Framework\System\Middleware\LanguageMiddleware;
 use AvoRed\Framework\System\Middleware\SiteCurrencyMiddleware;
 use AvoRed\Framework\User\ViewComposers\AdminUserFieldsComposer;
 use AvoRed\Framework\System\ViewComposers\AdminNavComposer;
@@ -140,6 +141,7 @@ class Provider extends ServiceProvider
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
         $router->aliasMiddleware('permission', Permission::class);
 
+        $router->aliasMiddleware('language', LanguageMiddleware::class);
         $router->aliasMiddleware('currency', SiteCurrencyMiddleware::class);
         $router->aliasMiddleware('admin.api.auth', AdminApiAuth::class);
     }
