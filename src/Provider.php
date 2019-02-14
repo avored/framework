@@ -174,7 +174,7 @@ class Provider extends ServiceProvider
             SiteCurrencyFieldsComposer::class
         );
         View::composer(
-            'avored-framework::product.category._fields',
+            ['avored-framework::product.category.create', 'avored-framework::product.category.edit'],
             CategoryFieldsComposer::class
         );
         View::composer(

@@ -49,6 +49,7 @@ class LanguageMiddleware
             Session::put('isMultiLanguage', false);
             Session::put('multi_language_enabled', false);
         }
+
         return $next($request);
     }
 }

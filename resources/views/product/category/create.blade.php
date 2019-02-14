@@ -55,10 +55,10 @@
                                                 class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
                                                 id="slug" />
                                                 @if ($errors->has('slug'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('slug') }}</strong>
-                                                </span>
-                                            @endif
+                                                    <span class='invalid-feedback'>
+                                                        <strong>{{ $errors->first('slug') }}</strong>
+                                                    </span>
+                                                @endif
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +120,30 @@
                                 @endforeach
                                     
                                 </div>  
+                            </div>
+
+                            <hr/>
+
+                            <div class="col-md-12 border-top pt-3">
+                                <div class="form-group">
+                                    <label>
+                                        {{ __('avored-framework::product.category.parent') }}
+                                    </label>
+                                    <select 
+                                        name="default_language[parent_id]"
+                                        class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
+                                        id="parent_id"
+                                        >
+                                        @foreach ($categoryOptions as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('parent_id'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('parent_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         @endif

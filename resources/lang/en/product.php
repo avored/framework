@@ -19,6 +19,7 @@ return [
         'seo' => 'Category SEO Details',
         'name' => 'Category Name',
         'slug' => 'Category Slug',
+        'parent' => 'Parent Category',
         'meta_title' => 'Category Meta Title',
         'meta_description' => 'Category Meta Description'
     ]

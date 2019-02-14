@@ -2,7 +2,7 @@
 
 $baseAdminUrl = config('avored-framework.admin_url');
 
-Route::middleware(['web'])
+Route::middleware(['web', 'language'])
     ->prefix($baseAdminUrl)
     ->name('admin.')
     ->namespace('AvoRed\Framework')
