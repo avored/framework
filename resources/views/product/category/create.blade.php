@@ -37,11 +37,11 @@
                                             </label>
                                             <input type="text"
                                                 name="default_language[name]"
-                                                class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                                class="form-control {{ $errors->has('default_language.name') ? ' is-invalid' : '' }}"
                                                 id="name" />
-                                                @if ($errors->has('name'))
+                                                @if ($errors->has('default_language.name'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong>{{ $errors->first('default_language.name') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -52,11 +52,11 @@
                                             </label>
                                             <input type="text"
                                                 name="default_language[slug]"
-                                                class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
+                                                class="form-control {{ $errors->has('default_language.slug') ? ' is-invalid' : '' }}"
                                                 id="slug" />
-                                                @if ($errors->has('slug'))
+                                                @if ($errors->has('default_language.slug'))
                                                     <span class='invalid-feedback'>
-                                                        <strong>{{ $errors->first('slug') }}</strong>
+                                                        <strong>{{ $errors->first('default_language.slug') }}</strong>
                                                     </span>
                                                 @endif
                                         </div>
@@ -90,12 +90,12 @@
                                                 {{ __('avored-framework::product.category.name') }}
                                             </label>
                                             <input type="text"
-                                                name="{{ $additionalLanguage->id }}[name]"
-                                                class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                                name="additional_languages[{{ $additionalLanguage->id }}][name]"
+                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.name') ? ' is-invalid' : '' }}"
                                                 id="name" />
-                                                @if ($errors->has('name'))
+                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.name'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.name') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -105,12 +105,12 @@
                                                 {{ __('avored-framework::product.category.slug') }}
                                             </label>
                                             <input type="text"
-                                                name="{{ $additionalLanguage->id }}[slug]"
-                                                class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
+                                                name="additional_languages[{{ $additionalLanguage->id }}][slug]"
+                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.slug') ? ' is-invalid' : '' }}"
                                                 id="slug" />
-                                                @if ($errors->has('slug'))
+                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.slug'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('slug') }}</strong>
+                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.slug') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -131,16 +131,16 @@
                                     </label>
                                     <select 
                                         name="default_language[parent_id]"
-                                        class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
+                                        class="form-control {{ $errors->has('default_language.parent_id') ? ' is-invalid' : '' }}"
                                         id="parent_id"
                                         >
                                         @foreach ($categoryOptions as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('parent_id'))
+                                    @if ($errors->has('default_language.parent_id'))
                                         <span class='invalid-feedback'>
-                                            <strong>{{ $errors->first('parent_id') }}</strong>
+                                            <strong>{{ $errors->first('default_language.parent_id') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -155,7 +155,7 @@
                     <div class="card-header">{{ __('avored-framework::product.category.seo') }}</div>
                     <div class="card-body">
                         
-                         @if ($isMutliLanguage)
+                        @if ($isMutliLanguage)
                         <div class="row">
                             <div class="col-md-6">
                             <ul class="nav nav-tabs">
@@ -178,11 +178,11 @@
                                             </label>
                                             <input type="text"
                                                 name="default_language[meta_title]"
-                                                class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
+                                                class="form-control {{ $errors->has('default_language.meta_title') ? ' is-invalid' : '' }}"
                                                 id="meta_title" />
-                                                @if ($errors->has('meta_title'))
+                                                @if ($errors->has('default_language.meta_title'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('meta_title') }}</strong>
+                                                    <strong>{{ $errors->first('default_language.meta_title') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -193,11 +193,11 @@
                                             </label>
                                             <input type="text"
                                                 name="default_language[meta_description]"
-                                                class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
+                                                class="form-control {{ $errors->has('default_language.meta_description') ? ' is-invalid' : '' }}"
                                                 id="meta_description" />
-                                                @if ($errors->has('meta_description'))
+                                                @if ($errors->has('default_language.meta_description'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('meta_description') }}</strong>
+                                                    <strong>{{ $errors->first('default_language.meta_description') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -231,12 +231,12 @@
                                                 {{ __('avored-framework::product.category.meta_title') }}
                                             </label>
                                             <input type="text"
-                                                name="{{ $additionalLanguage->id }}[meta_title]"
-                                                class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
+                                                name="additional_languages[{{ $additionalLanguage->id }}][meta_title]"
+                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.meta_title') ? ' is-invalid' : '' }}"
                                                 id="meta_title" />
-                                                @if ($errors->has('meta_title'))
+                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.meta_title'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('meta_title') }}</strong>
+                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.meta_title') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -246,12 +246,12 @@
                                                 {{ __('avored-framework::product.category.meta_description') }}
                                             </label>
                                             <input type="text"
-                                                name="{{ $additionalLanguage->id }}[meta_description]"
-                                                class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
+                                                name="additional_languages[{{ $additionalLanguage->id }}][meta_description]"
+                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.meta_description') ? ' is-invalid' : '' }}"
                                                 id="meta_description" />
-                                                @if ($errors->has('meta_description'))
+                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.meta_description'))
                                                 <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('meta_description') }}</strong>
+                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.meta_description') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
