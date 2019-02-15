@@ -20,6 +20,14 @@ class AvoredFrameworkSchema extends Migration
      */
     public function up()
     {
+        Schema::create('languages', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
+
         Schema::create('categories', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->nullable()->default(null);
@@ -29,6 +37,21 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
 
             $table->timestamps();
+        });
+
+        Schema::create('category_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('category_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+
+            $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
         Schema::create('category_filters', function(Blueprint $table) {
@@ -635,14 +658,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('languages', function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->nullable()->default(null);
-            $table->string('code')->nullable()->default(null);
-            $table->tinyInteger('is_default')->default(0);
-            $table->timestamps();
-        });
-
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
@@ -786,6 +801,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('product_prices');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('category_translations');
         Schema::dropIfExists('categories');
 
         Schema::dropIfExists('attributes');
@@ -815,5 +831,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
+        Schema::dropIfExists('languages');
     }
 }

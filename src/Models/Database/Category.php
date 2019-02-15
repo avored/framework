@@ -9,9 +9,25 @@ class Category extends BaseModel
 {
     protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
 
+    /**
+     * Category Model Attribute which can be translated
+     * @var array $translatedAttributes 
+     */
+    protected $translatedAttributes = ['name', 'slug', 'meta_title', 'meta_description'];
+
+
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Category Model has many translation values 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function translations()
+    {
+        return $this->hasMany(CategoryTranslation::class);
     }
 
     public static function getCategoryOptions()
@@ -20,6 +36,23 @@ class Category extends BaseModel
         $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
 
         return $options;
+    }
+
+    /**
+     * Get the Name for the Category
+     * @return string $name
+     */
+    public function getTranslation($attribute, $languageId = null)
+    {
+        if (null === $languageId) {
+            return $this->$attribute;
+        } else {
+            $translatedModel = $this->translations()->whereLanguageId($languageId)->first();
+            if (null === $translatedModel || !isset($translatedModel->$attribute)) {
+                return '';
+            }
+            return $translatedModel->$attribute;
+        }
     }
 
     public function getParentNameAttribute()

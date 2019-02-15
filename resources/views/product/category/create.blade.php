@@ -5,7 +5,9 @@
 <div id="admin-category-create-page">
     <div class="row">
         <div class="col-12">
-            <div class="h1 mt-1">Create Category</div>
+            <div class="h1 mt-1">
+                {{ __('avored-framework::product.category.create_title') }}
+            </div>
 
             <form method="post" action="{{ route('admin.category.store') }}">
                 @csrf
@@ -268,8 +270,12 @@
                     </div>
                 </div>
 
-                <button type="submit"  class="btn btn-primary category-save-button">Create Category</button>
-                <a href="{{ route('admin.category.index') }}" class="btn btn-default">Cancel</a>
+                <button type="submit"  class="btn btn-primary category-save-button">
+                    {{ __('avored-framework::product.category.create_button') }}
+                </button>
+                <a href="{{ route('admin.category.index') }}" class="btn btn-default">
+                    {{ __('avored-framework::lang.cancel') }}
+                </a>
             </form>
         </div>
     </div>

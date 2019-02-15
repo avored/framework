@@ -2,6 +2,9 @@
 
 namespace AvoRed\Framework\Models\Contracts;
 
+use AvoRed\Framework\Models\Database\Category;
+
+
 interface CategoryInterface
 {
     /**
@@ -43,12 +46,21 @@ interface CategoryInterface
     public function query();
 
     /**
-     * Create an Category
+     * Create a Category
      *
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Category
      */
     public function create($data);
+
+    /**
+     * Update a Category
+     *
+     * @param \AvoRed\Framework\Models\Database\Category $category
+     * @param array $data
+     * @return \AvoRed\Framework\Models\Database\Category
+     */
+    public function update(Category $category, array $data): Category;
 
     /**
      * Get an Category Options for Vue Components

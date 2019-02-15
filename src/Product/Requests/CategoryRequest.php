@@ -30,7 +30,7 @@ class CategoryRequest extends Request
 
             $validationRule['default_language.name'] = 'required|max:255';
             if ($this->getMethod() == 'POST') {
-                $validationRule['default_language.slug'] = 'required|max:255|alpha_dash|unique:categories';
+                $validationRule['default_language.slug'] = 'required|max:255|alpha_dash|unique:categories,slug';
             }
             if ($this->getMethod() == 'PUT') {
                 $validationRule['default_language.slug'] = 'required|max:255|alpha_dash';
@@ -41,7 +41,7 @@ class CategoryRequest extends Request
                
                 $validationRule['additional_languages.' . $language->id . '.name'] = 'required|max:255';
                 if ($this->getMethod() == 'POST') {
-                    $validationRule['additional_languages.' . $language->id . '.slug'] = 'required|max:255|alpha_dash|unique:categories';
+                    $validationRule['additional_languages.' . $language->id . '.slug'] = 'required|max:255|alpha_dash|unique:categories,slug';
                 }
                 if ($this->getMethod() == 'PUT') {
                     $validationRule['additional_languages.' . $language->id . '.slug'] = 'required|max:255|alpha_dash';
@@ -52,7 +52,7 @@ class CategoryRequest extends Request
 
             $validationRule['name'] = 'required|max:255';
             if ($this->getMethod() == 'POST') {
-                $validationRule['slug'] = 'required|max:255|alpha_dash|unique:categories';
+                $validationRule['slug'] = 'required|max:255|alpha_dash|unique:categories,slug';
             }
             if ($this->getMethod() == 'PUT') {
                 $validationRule['slug'] = 'required|max:255|alpha_dash';

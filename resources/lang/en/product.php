@@ -21,6 +21,11 @@ return [
         'slug' => 'Category Slug',
         'parent' => 'Parent Category',
         'meta_title' => 'Category Meta Title',
-        'meta_description' => 'Category Meta Description'
+        'meta_description' => 'Category Meta Description',
+        'create_title' => 'Create Category',
+        'create_button' => 'Create Category',
+        'edit_title' => 'Edit Category',
+        'edit_button' => 'Edit Category',
+    
     ]
 ];

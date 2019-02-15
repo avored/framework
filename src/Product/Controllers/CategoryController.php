@@ -30,7 +30,8 @@ class CategoryController extends Controller
     {
         $categoryGrid = new CategoryDataGrid($this->repository->query());
 
-        return view('avored-framework::product.category.index')->with('dataGrid', $categoryGrid->dataGrid);
+        return view('avored-framework::product.category.index')
+            ->with('dataGrid', $categoryGrid->dataGrid);
     }
 
     /**
@@ -51,7 +52,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {
+    {   
         $this->repository->create($request->all());
 
         return redirect()->route('admin.category.index');
@@ -65,7 +66,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('avored-framework::product.category.edit')->with('model', $category);
+        return view('avored-framework::product.category.edit')
+            ->with('category', $category);
     }
 
     /**
@@ -77,8 +79,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
-
+        $this->repository->update($category, $request->all());
+        
         return redirect()->route('admin.category.index');
     }
 
