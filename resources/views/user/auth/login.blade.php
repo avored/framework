@@ -15,7 +15,7 @@
 </head>
 <body >
 <div id="app">
-    <login-fields inline-template>
+    <login-page inline-template>
     <div class="row justify-content-center align-items-center" style="height: 100vh;" >
         <div class="col-6">
             <div class="offset-1 col-md-10">
@@ -81,7 +81,7 @@
             
         </div>
     </div>
-    </login-fields>
+    </login-page>
 </div>
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('vendor/avored-admin/js/vue.js') }}"></script>

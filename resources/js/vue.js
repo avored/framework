@@ -35,9 +35,7 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-Vue.component('login-fields', require('../components/user/auth/LoginFields.vue'));
-//Vue.component('avored-form-select', require('../components/forms/avored-form-select.vue'));
-//Vue.component('avored-form-textarea', require('../components/forms/avored-form-textarea.vue'));
+Vue.component('login-page', require('../components/user/auth/LoginPage.vue'));
 
 //require('./bootstrap');
 
