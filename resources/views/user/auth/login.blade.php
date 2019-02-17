@@ -11,19 +11,11 @@
     <title>AvoRed Admin Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('vendor/avored-admin/css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php
-        echo json_encode([
-                'csrfToken' => csrf_token(),
-        ]);
-        ?>
-    </script>
+    <link href="{{ asset('vendor/avored-admin/css/vue.css') }}" rel="stylesheet">
 </head>
 <body >
-<div id="login-page" class="container-fluid">
+<div id="app">
+    <login-fields inline-template>
     <div class="row justify-content-center align-items-center" style="height: 100vh;" >
         <div class="col-6">
             <div class="offset-1 col-md-10">
@@ -37,27 +29,41 @@
                     <form method="post" action="{{ route('admin.login') }}" >
                         @csrf
 
-                        <avored-form-input 
-                            field-name="email"
-                            label="{{ __('avored-framework::lang.user.email-label') }}" 
-                            error-text="{!! $errors->first('email') !!}"
-                            v-on:change="changeModelValue"
-                            autofocus="autofocus"
-                                >
-                        </avored-form-input>
-
-                        <avored-form-input 
-                            field-name="password"
-                            label="Password" 
-                            field-type="password"
-                            error-text="{!! $errors->first('password') !!}"
-                            v-on:change="changeModelValue"
-                                >
-                        </avored-form-input>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="text"
+                                name="email"
+                                autofocus="true"
+                                v-model="email"
+                                class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                id="email" />
+                                @if ($errors->has('email'))
+                                <span class='invalid-feedback'>
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
 
                         <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password"
+                                name="password"
+                                v-model="password"
+                                class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                id="password" />
+                                @if ($errors->has('password'))
+                                <span class='invalid-feedback'>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-group">
 
-                            <button type="submit" :disabled='isLoginDisbled'  class="btn btn-primary">
+                            <button
+                                type="submit"
+                                :disabled='isLoginDisbled'
+                                class="btn btn-primary"
+                            >
                                 {{ __('avored-framework::lang.admin-login-button-title') }}
                             </button>
 
@@ -75,33 +81,9 @@
             
         </div>
     </div>
+    </login-fields>
 </div>
 <!-- Scripts -->
-<script type="text/javascript" src="{{ asset('vendor/avored-admin/js/app.js') }}"></script>
-
-<script >
-    var app = new Vue({
-        el: '#login-page',
-        data : {
-            email: '',
-            password: '',
-            autofocus:true
-        },
-        computed: {
-            isLoginDisbled: function() {
-                if(this.email != "" && this.password != "") {
-                    return false;
-                }
-                return true;
-            }
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this[fieldName] = val;
-            }
-        }
-    });
-</script>
-
+<script type="text/javascript" src="{{ asset('vendor/avored-admin/js/vue.js') }}"></script>
 </body>
 </html>
