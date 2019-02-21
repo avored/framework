@@ -8,68 +8,84 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AvoRed Admin Login</title>
+    <title>AvoRed Admin Password Reset</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('vendor/avored-admin/css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php
-        echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]);
-        ?>
-    </script>
+    <link href="{{ asset('vendor/avored-admin/css/vue.css') }}" rel="stylesheet">
 </head>
 <body >
-<div id="admin-password-reset-page" class="container-fluid">
+
+<div id="app" class="container-fluid">
+<set-new-password-page inline-template>
     <div class="row justify-content-center align-items-center" style="height: 100vh;" >
         <div class="col-6">
             <div class="offset-1 col-10">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">Reset Password</div>
+                    <div class="card-header bg-primary text-white">
+                        {{ __('avored-framework::user.auth.reset_password') }}
+                    </div>
 
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <div class="col-md-12">
-                            <form class="form-horizontal" role="form" method="POST"
-                                action="{{ route('admin.password.email.post') }}">
+                            <form method="POST"
+                                action="{{ route('admin.password.reset.post') }}">
                                 @csrf
 
-                                <avored-form-input 
-                                    field-name="email"
-                                    label="{{ __('avored-framework::lang.admin-email-label') }}" 
-                                    error-text="{!! $errors->first('email') !!}"
-                                    v-on:change="changeModelValue"
-                                    autofocus="autofocus"
-                                        >
-                                </avored-form-input>
+                                <input type="hidden" name="token" value="{{ $token }}" />
 
-                                <avored-form-input 
-                                    field-name="password"
-                                    field-type="password"
-                                    label="{{ __('avored-framework::lang.admin-password-label') }}" 
-                                    error-text="{!! $errors->first('password') !!}"
-                                    v-on:change="changeModelValue"
-                                    
-                                        >
-                                </avored-form-input>
-                                
-                                <avored-form-input 
-                                    field-name="password_confirmation"
-                                    field-type="password"
-                                    label="{{ __('avored-framework::lang.admin-confirm-password-label') }}" 
-                                    error-text="{!! $errors->first('password_confirmation') !!}"
-                                    v-on:change="changeModelValue"
-                                    
-                                        >
-                                </avored-form-input>
+                                <div class="form-group">
+                                    <label for="email">{{ __('avored-framework::user.auth.email') }}</label>
+                                    <input type="text"
+                                        name="email"
+                                        v-model="email"
+                                        class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        id="email" />
+                                        @if ($errors->has('email'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="password">{{ __('avored-framework::user.auth.password') }}</label>
+                                    <input type="password"
+                                        name="password"
+                                        v-model="password"
+                                        class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                        id="password" />
+                                        @if ($errors->has('password'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password_confirmation">
+                                        {{ __('avored-framework::user.auth.password_confirm') }}
+                                    </label>
+                                    <input type="password"
+                                        name="password_confirmation"
+                                        v-model="confirm_password"
+                                        class="form-control {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
+                                        id="password_confirmation" />
+                                        @if ($errors->has('password_confirmation'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
 
 
                                 <div class="form-group">
-                                    <button :disabled='isLoginDisbled' type="submit" class="btn btn-primary">
-                                        Reset Password
+                                    <button :disabled='isSubmitDisbled' type="submit" class="btn btn-primary">
+                                        {{ __('avored-framework::user.auth.reset_password') }}
                                     </button>
 
                                 </div>
@@ -83,37 +99,9 @@
             
         </div>
     </div>
+</set-new-password-page>
 </div>
-<script type="text/javascript" src="{{ asset('vendor/avored-admin/js/app.js') }}"></script>
-<script>
-    var app = new Vue({
-        el: '#admin-password-reset-page',
-        data : {
-            email: '',
-            password: '',
-            password_confirmation: ''
-        
-        },
-        computed: {
-            isLoginDisbled: function() {
+<script type="text/javascript" src="{{ asset('vendor/avored-admin/js/vue.js') }}"></script>
 
-                if(this.email != "" && 
-                    this.password != "" && 
-                    this.password_confirmation != "" && 
-                    this.password == this.password_confirmation)  {
-                    return false;
-                }
-                return true;
-
-            }
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this[fieldName] = val;
-               
-            }
-        }
-    });
-</script>
 </body>
 </html>

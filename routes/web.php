@@ -16,7 +16,7 @@ Route::middleware(['web', 'language'])
         Route::post('password/email', 'User\Controllers\ForgotPasswordController@sendResetLinkEmail')->name('password.email.post');
 
         Route::get('password/reset', 'User\Controllers\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-        Route::post('password/reset', 'User\Controllers\ResetPasswordController@reset')->name('password.reset.token');
+        Route::post('password/reset', 'User\Controllers\ResetPasswordController@reset')->name('password.reset.post');
     });
 
 Route::middleware(['web', 'admin.auth', 'permission', 'language'])

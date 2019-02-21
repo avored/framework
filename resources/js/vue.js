@@ -36,6 +36,8 @@ if (token) {
 }
 
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue'));
+Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue'));
+Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue'));
 
 //require('./bootstrap');
 
