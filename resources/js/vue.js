@@ -51,16 +51,13 @@ Vue.component('set-new-password-page', require('../components/user/auth/SetNewPa
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-     el: '#app',
+    el: '#app',
+    data: {
+        toggleSideBarData: false
+    },
     methods: {
         toggleSidebar() {
-            // we did this because class is set to body element which is outside the #app 
-            let bodyElement = document.getElementsByClassName("app")[0];
-            if (bodyElement.classList.contains('is-collapsed')) {
-                bodyElement.classList.remove('is-collapsed');
-            } else {
-                bodyElement.classList.add('is-collapsed');
-            }
+            this.toggleSideBarData = !this.toggleSideBarData;
         }
      }
 });
