@@ -23,8 +23,8 @@
 
 </head>
 
-<body class="app">
-    <div>
+<body  class="app">
+    <div id="app">
       @include("avored-framework::layouts.left-nav")
 
     <div class="page-container">
@@ -42,7 +42,12 @@
     </div>
   </div>
 
+  @if (request()->get('only') == 'vue') 
+  <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
+  @else
   <script src="{{ url('vendor/avored-admin/js/app.js') }}"></script>
+  <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
+  @endif
   @stack('scripts')
 </body>
 </html>

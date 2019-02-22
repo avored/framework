@@ -45,11 +45,6 @@
 
 @push('scripts')
     <script>
-        $(function () {
-
-
-        });
-
         function allowDrop(ev) {
 
             ev.preventDefault();

@@ -35,6 +35,7 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue'));
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue'));
 Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue'));
 Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue'));
@@ -50,5 +51,16 @@ Vue.component('set-new-password-page', require('../components/user/auth/SetNewPa
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-     el: '#app'
+     el: '#app',
+    methods: {
+        toggleSidebar() {
+            // we did this because class is set to body element which is outside the #app 
+            let bodyElement = document.getElementsByClassName("app")[0];
+            if (bodyElement.classList.contains('is-collapsed')) {
+                bodyElement.classList.remove('is-collapsed');
+            } else {
+                bodyElement.classList.add('is-collapsed');
+            }
+        }
+     }
 });
