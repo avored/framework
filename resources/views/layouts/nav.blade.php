@@ -23,8 +23,9 @@
                     Visit Site <i class="ti-new-window"></i>
                 </a>
             </li>
-            <li class="dropdown">
-                <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+            <li  :class="{ show: displayProfileHeaderMenu, 'dropdown' : true }">
+                <a href="" @click.prevent="clickOnProfileHeaderLink" data-toggle="dropdown" 
+                class="dropdown-toggle no-after peers fxw-nw ai-c lh-1">
                     <div class="peer mR-10">
                         <img class="w-2r bdrs-50p" src="{{ auth()->user()->avatar }}" alt="">
                     </div>

@@ -49,15 +49,18 @@ Vue.component('set-new-password-page', require('../components/user/auth/SetNewPa
  */
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
 const app = new Vue({
     el: '#app',
     data: {
-        toggleSideBarData: false
+        toggleSideBarData: false,
+        displayProfileHeaderMenu: false
     },
     methods: {
         toggleSidebar() {
             this.toggleSideBarData = !this.toggleSideBarData;
+        },
+        clickOnProfileHeaderLink() {
+            this.displayProfileHeaderMenu = !this.displayProfileHeaderMenu;        
         }
      }
 });
