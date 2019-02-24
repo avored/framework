@@ -1,44 +1,31 @@
-@extends('avored-framework::layouts.app')
-
-
-@section('content')
-    <div class="row">
-        <div class="col-12">
-
-
-            <div class="card">
-                <div class="card-header">
-                    {{ __("avored-framework::lang.product.create.text") }}
+<!-- Modal -->
+<div class="modal fade" id="CreateProductModal" tabindex="-1" role="dialog" aria-labelledby="CreateProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form id="product-save-form" action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateProductModalLabel">{{ __('avored-framework::product.create.product') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="card-body">
-                    <form
-                            id="product-save-form"
-                            action="{{ route('admin.product.store') }}"
-                            method="post"
-                            enctype="multipart/form-data">
+                <div class="modal-body">
+                @include("avored-framework::forms.text", ['name'=> 'name', 'label' => __('avored-framework::product.name')])
+                @include("avored-framework::forms.select",
+                    ['name'=> 'type', 'label' => 'Type',
+                        'options' => [ 
+                            'BASIC' => __('avored-framework::product.types.basic'),
+                            'DOWNLOADABLE' => __('avored-framework::product.types.digital'),
+                            'VARIATION' => __('avored-framework::product.types.variation')
+                            ]
+                        ])
 
-                        @csrf
-
-                        @include("avored-framework::forms.text",['name'=> 'name','label' => 'Name'])
-                        @include("avored-framework::forms.select",['name'=> 'type','label' => 'Type',
-                                                                    'options' => ['BASIC' => 'Basic Product',
-                                                                                    'VARIATION' => 'Variable Product',
-                                                                                    'DOWNLOADABLE' => 'Downloadable Product'
-                                                                                ]
-                                                                    ])
-
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Create & Continue</button>
-                            <button type="button"
-                                    onclick="location='{{ route('admin.product.index') }}'"
-
-                                    class="btn">Cancel
-                            </button>
-                        </div>
-                    </form>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">{{ __('avored-framework::product.create.save') }}</button>
+                </div>
+            </form>
         </div>
     </div>
-@endsection
+</div>

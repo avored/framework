@@ -100,7 +100,7 @@
                                             jQuery(this).parents('form:first').submit();
                                         }
                                     });"    
-                        class="btn btn-danger" >
+                        class="btn btn-danger">
                         Destroy
                     </button>
                 </form>

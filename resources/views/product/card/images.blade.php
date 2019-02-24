@@ -1,59 +1,49 @@
+<div class="row" id="product-save-accordion" data-children=".product-card">
+    <div class="col-12">
+        <div class="card product-card">
+            <div class="card-body">
+                <div class="product-image-list mt-3 row">
+                    @if(isset($model) && $model->images()->get()->count() > 0)
+                        @foreach($model->images()->get() as $image)
+                        <div class="image-preview col-md-3">
+                            <div class="actual-image-thumbnail">
+                                <img class="img-thumbnail img-tag img-responsive" data-path="{{ $image->path->relativePath }}" src="{{ ($image->path->smallUrl) }}"/>
+                                <input type="hidden" name="image[{{ $image->id }}][path]" value="{{ str_replace('storage/', '', $image->path->relativePath) }}"/>
+                                @if($image->is_main_image)
+                                    <input type="hidden" class="is_main_image_hidden_field" name="image[{{ $image->id }}][is_main_image]" value="1"/>
+                                @else
+                                    <input type="hidden" class="is_main_image_hidden_field" name="image[{{ $image->id }}][is_main_image]" value="0"/>
+                                @endif
+                            </div>
 
-<input type="file" class="product-image-element form-control" data-token="{{ csrf_token() }}"
-        >
-
-<div class="product-image-list mt-3 row">
-
-    @if(isset($model) && $model->images()->get()->count() > 0)
-        @foreach($model->images()->get() as $image)
-        
-          
-            <div class="image-preview col-md-3">
-                <div class="actual-image-thumbnail">
-                    <img class="img-thumbnail img-tag img-responsive"
-                        data-path="{{ $image->path->relativePath }}"
-                        src="{{ ($image->path->smallUrl) }}"/>
-                    <input type="hidden" 
-                            name="image[{{ $image->id }}][path]" 
-                            value="{{ str_replace('storage/', '', $image->path->relativePath) }}"/>
-                    @if($image->is_main_image)
-                        <input type="hidden" class="is_main_image_hidden_field"
-                               name="image[{{ $image->id }}][is_main_image]" value="1"/>
-                    @else
-                        <input type="hidden" class="is_main_image_hidden_field"
-                               name="image[{{ $image->id }}][is_main_image]" value="0"/>
+                            <div class="image-info">
+                                <div class="image-title">{{ $image->path->name() }}</div>
+                                <div class="actions">
+                                    <div class="action-buttons">
+                                        <button type="button" class="btn is_main_image_button {{ $image->is_main_image === 1 ? "active" : "" }} selected-icon" title="Select as Main Image">
+                                            <i class="{{ ($image->is_main_image == 1) ? "text-info" : "" }} ti-check-box"></i>
+                                        </button>
+                                        <button type="button" class="destroy-image btn btn-xs btn-default" title="Remove file">
+                                            <i class="ti-trash text-danger"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                     @endif
                 </div>
-                <div class="image-info">
-                    <div class="image-title">
-                        {{ $image->path->name() }}
-                    </div>
-                    <div class="actions">
-                        <div class="action-buttons">
-
-                            <button type="button"
-                                    class="btn is_main_image_button 
-                                            {{ $image->is_main_image === 1 ? "active" : "" }} 
-                                            selected-icon"
-                                    title="Select as Main Image">
-                                <i class="{{ ($image->is_main_image == 1) ? "text-info" : "" }} ti-check-box"></i>
-                            </button>
-                            <button type="button" 
-                                    class="destroy-image btn btn-xs btn-default" 
-                                    title="Remove file">
-                                <i class="ti-trash text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
+                <div class="custom-file">
+                    <input type="file" class="product-image-element custom-file-input" id="customFile" data-token="{{ csrf_token() }}">
+                    <label class="custom-file-label" for="customFile">{{  __('avored-framework::product.upload_image') }}</label>
                 </div>
-
             </div>
-        @endforeach
-    @endif
+        </div>
+    </div>
 </div>
+
 @push('styles')
 <style>
-
     .image-preview {
         position: relative;
         display: table;

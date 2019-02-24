@@ -1,29 +1,25 @@
 <div class="row">
     <div class="col-6">
-        @include('avored-framework::forms.text',['name' => 'name','label' => 'Name'])
+        @include('avored-framework::forms.text',['name' => 'name', 'label' => 'Name'])
     </div>
     <div class="col-6">
         @if(!isset($productCategories))
             <?php $productCategories = []; ?>
         @endif
 
-        @include('avored-framework::forms.select2',['name' => 'category_id[]',
-                                                'label' => 'Category',
-                                                'attributes' => ['class' => 'form-control select2',
-                                                                'id' => 'category_id',
-                                                                'multiple' => true,
-                                                                ],
-                                                'options' => $categoryOptions,
-                                                'values' => $productCategories])
-
-
+        @include('avored-framework::forms.select2',[
+            'name' => 'category_id[]',
+            'label' => 'Category',
+            'attributes' => ['class' => 'form-control select2', 'id' => 'category_id', 'multiple' => true],
+            'options' => $categoryOptions,
+            'values' => $productCategories])
     </div>
 </div>
 
 
 <div class="row">
     <div class="col-6">
-        @include('avored-framework::forms.text',['name' => 'slug','label' => 'Slug'])
+       
     </div>
     <div class="col-6">
         @include('avored-framework::forms.text',['name' => 'sku','label' => 'Sku'])
