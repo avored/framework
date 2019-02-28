@@ -46,7 +46,7 @@
                         </span>
                         <span class="float-right">
                             <a href="" @click.prevent="toggleCard('basic')">
-                                <i class="ti-arrow-circle-down"></i>
+                                <i :class="{ 'ti-arrow-circle-down': cardBody.basic, 'ti-arrow-circle-up': !cardBody.basic}"></i>
                             </a>
                         </span>
                     </div>
@@ -124,7 +124,7 @@
                         </span>
                         <span class="float-right">
                             <a href="" @click.prevent="toggleCard('seo')">
-                                <i class="ti-arrow-circle-down"></i>
+                                <i :class="{ 'ti-arrow-circle-down': cardBody.seo, 'ti-arrow-circle-up': !cardBody.seo}"></i>
                             </a>
                         </span>
                     </div>
