@@ -23,7 +23,6 @@ try {
 //window.SimpleMDE = require('simplemde');
 
 
-
 window.Vue = require('vue');
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -31,14 +30,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 let token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue'));
-Vue.component('login-page', require('../components/user/auth/LoginPage.vue'));
-Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue'));
-Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue'));
+Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue').default);
+Vue.component('login-page', require('../components/user/auth/LoginPage.vue').default);
+Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue').default);
+Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue').default);
+Vue.component('category-field-page', require('../components/product/category/CategoryFieldPage.vue').default);
 
 //require('./bootstrap');
 
@@ -52,7 +50,7 @@ Vue.component('set-new-password-page', require('../components/user/auth/SetNewPa
 const app = new Vue({
     el: '#app',
     data: {
-        toggleSideBarData: false,
+        toggleSideBarData: true,
         displayProfileHeaderMenu: false
     },
     methods: {

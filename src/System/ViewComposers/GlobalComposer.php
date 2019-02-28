@@ -20,10 +20,12 @@ class GlobalComposer
             $additionalLanguages = Session::get('additionalLanguages');
             $defaultLanguage = Session::get('defaultLanguage');
             $isMultiLanguage = Session::get('isMultiLanguage');
+            $languages = Session::get('languages');
         }
 
         $view->withAdditionalLanguages($additionalLanguages)
             ->withIsMutliLanguage($isMultiLanguage)
-            ->withDefaultLanguage($defaultLanguage);
+            ->withDefaultLanguage($defaultLanguage)
+            ->withLanguages($languages);
     }
 }
