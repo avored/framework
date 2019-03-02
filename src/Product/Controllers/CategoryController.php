@@ -7,6 +7,7 @@ use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 use AvoRed\Framework\Product\DataGrid\CategoryDataGrid;
 use AvoRed\Framework\System\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -62,12 +63,23 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \AvoRed\Framework\Models\Database\Category $category
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category, Request $request)
     {
-        return view('avored-framework::product.category.edit')
-            ->with('category', $category);
+        $view = view('avored-framework::product.category.edit');
+        $view->with('model', $category);
+
+        if (!empty($request->language_id)) {
+            $categoryTranslation = $this->repository
+                ->findTranslated($category, $request->language_id);
+           
+            $view->with('category', $categoryTranslation);
+        } else {
+            $view->with('category', $category);
+        }
+        return  $view;
     }
 
     /**

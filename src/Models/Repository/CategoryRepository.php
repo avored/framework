@@ -13,6 +13,7 @@ use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
 use AvoRed\Framework\Models\Database\CategoryTranslation;
 use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\Language;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -25,6 +26,19 @@ class CategoryRepository implements CategoryInterface
     public function find($id)
     {
         return Category::find($id);
+    }
+
+    /**
+     * Find an Translated Category by given CategoryModel and Language Id
+     * @param \AvoRed\Framework\Models\Database\Category $id
+     * @param integer $languageId
+     * @return \AvoRed\Framework\Models\Database\CategoryTranslation
+     */
+    public function findTranslated($category, $languageId)
+    {
+        return CategoryTranslation::whereCategoryId($category->id)
+            ->whereLanguageId($languageId)
+            ->first();
     }
 
     /**
@@ -77,23 +91,14 @@ class CategoryRepository implements CategoryInterface
     public function create($data)
     {
         if (Session::has('multi_language_enabled')) {
-            $additionalLanguages = Session::get('additionalLanguages');
-            $defaultLanguage = Session::get('defaultLanguage');
-            $isMultiLanguage = Session::get('isMultiLanguage');
+            $languageId = $data['language_id'];
+            $languaModel = Language::find($languageId);
 
-            $defaultLanguageData = $data['default_language'];
-
-            $defaultCategory = Category::create($defaultLanguageData);
-
-            $additionalLanguageData = $data['additional_languages'];
-            foreach ($additionalLanguageData as $languageId => $additionalCategoryData) {
-                $additionalCategoryData['language_id'] = $languageId;
-                $additionalCategoryData['category_id'] = $defaultCategory->id;
-
-                CategoryTranslation::create($additionalCategoryData);
+            if ($languaModel->is_default) {
+                return Category::create($data);
+            } else {
+                return CategoryTranslation::create($data);
             }
-
-            return $defaultCategory;
         } else {
             return Category::create($data);
         }
@@ -106,36 +111,21 @@ class CategoryRepository implements CategoryInterface
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Categoy
      */
-    public function update(Category $category, array $data): Category
+    public function update(Category $category, array $data)
     {
         if (Session::has('multi_language_enabled')) {
-            $additionalLanguages = Session::get('additionalLanguages');
-            $defaultLanguage = Session::get('defaultLanguage');
-            $isMultiLanguage = Session::get('isMultiLanguage');
-            $defaultLanguageData = $data['default_language'];
+            $languageId = $data['language_id'];
+            $languaModel = Language::find($languageId);
 
-            $category->update($defaultLanguageData);
-
-            $additionalLanguageData = $data['additional_languages'];
-            foreach ($additionalLanguageData as $languageId => $additionalCategoryData) {
-
-                $existingRecord = CategoryTranslation::whereLanguageId($languageId)
-                    ->whereCategoryId($category->id)->first();
-
-                if (null === $existingRecord) {
-                    $additionalCategoryData['language_id'] = $languageId;
-                    $additionalCategoryData['category_id'] = $category->id;
-    
-                    CategoryTranslation::create($additionalCategoryData);
-                } else {
-                    $existingRecord->update($additionalCategoryData);
-                }
+            if ($languaModel->is_default) {
+                return Category::create($data);
+            } else {
+                return CategoryTranslation::create(
+                    array_merge($data, ['category_id' => $category->id])
+                );
             }
-
-            return $category;
         } else {
-            $category->update($data);
-            return $category;
+            return Category::create($data);
         }
     }
 

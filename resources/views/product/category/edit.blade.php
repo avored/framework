@@ -1,292 +1,200 @@
 @extends('avored-framework::layouts.app')
 
+@section('page-header')
+    <div class="h1 mt-1">
+        {{ __('avored-framework::product.category.edit_title') }}
+    </div>
+@endsection
 
 @section('content')
-<div id="admin-category-create-page">
+<category-field-page category="{{ json_encode($category) }}" inline-template>
+
     <div class="row">
         <div class="col-12">
-            <div class="h1 mt-1">
-                {{ __('avored-framework::product.category.edit_title') }}
-            </div>
+            <form method="post" action="{{ route('admin.category.update', $model->id) }}">
 
-            <form method="post" action="{{ route('admin.category.update', $category->id) }}">
-                @csrf
                 @method('put')
+                <div class="card">
+                    <div class="card-body">
+                        <div class="peer float-left">
+                            <a href="#" 
+                                :class="{ 'bg-primary text-white' : openAllCard ,'px-4 py-2 mr-3 rounded-pill' : true }"
+                                @click.prevent="openAllCardLink"
+                            >
+                                Category All
+                            </a>
+
+                            <a href="#"
+                                @click.prevent="toggleCard('basic')"
+                                :class="{ 'bg-primary text-white' :linkTitle.basic,'px-4 py-2 mr-3 bg-default rounded-pill' : true }"
+                            >
+                                Basic Info
+                            </a>
+
+                            <a href="#"
+                                @click.prevent="toggleCard('seo')"
+                                :class="{ 'bg-primary text-white' :linkTitle.seo,'px-4 py-2 bg-default rounded-pill' : true }"
+                            >
+                            SEO
+                            </a>
+                        </div>
+
+                        <div class="float-right">
+                            <div class="form-group-sm text-small">
+                                <select
+                                    name="language"
+                                    @input="changeLanguage"
+                                    class="form-control {{ $errors->has('language') ? ' is-invalid' : '' }}"
+                                    id="language"
+                                >
+                                    @foreach ($languages as $language)
+                                        <option
+                                            data-url="{{ route('admin.category.edit', ['category' => $model->id ,'language_id' => $language->id]) }}"
+                                            value="{{ $language->id }}">{{ $language->name }}</option>
+                                    @endforeach
+                                </select>
+                                    @if ($errors->has('language'))
+                                    <span class='invalid-feedback'>
+                                        <strong>{{ $errors->first('language') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="card mt-3 mb-3">
                     <div class="card-header">
-                        {{ __('avored-framework::product.category.basic_info') }}
+                        <span class="float-left">
+                            {{ __('avored-framework::product.category.basic_info') }}
+                        </span>
+                        <span class="float-right">
+                            <a href="" @click.prevent="toggleCard('basic')">
+                                <i :class="{ 'ti-arrow-circle-down': cardBody.basic, 'ti-arrow-circle-up': !cardBody.basic}"></i>
+                            </a>
+                        </span>
                     </div>
-                    <div class="card-body">
-                        @if ($isMutliLanguage)
+                    <div :class="{ 'd-none': !cardBody.basic, 'card-body' : true }">
+                        @csrf()
                         <div class="row">
-                            <div class="col-md-6">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a data-toggle="tab" 
-                                        href="#default-language-{{ $defaultLanguage->id }}" 
-                                        class="nav-link active" href="#">
-                                        {{ $defaultLanguage->name }}
-                                    </a>
-                                </li>
-                            </ul>
-                                <div class="tab-content">
-                                    <div
-                                        class="tab-pane fade active show" 
-                                        id="addtional-language-{{ $defaultLanguage->id }}" 
-                                        role="tabpanel">
-                                        <div class="form-group">
-                                            <label for="name">
-                                                {{ __('avored-framework::product.category.name') }}
-                                            </label>
-                                            <input type="text"
-                                                name="default_language[name]"
-                                                value="{{ $category->name }}"
-                                                class="form-control {{ $errors->has('default_language.name') ? ' is-invalid' : '' }}"
-                                                id="name" />
-                                                @if ($errors->has('default_language.name'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('default_language.name') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="slug">
-                                                {{ __('avored-framework::product.category.slug') }}
-                                            </label>
-                                            <input type="text"
-                                                name="default_language[slug]"
-                                                value="{{ $category->slug }}"
-                                                class="form-control {{ $errors->has('default_language.slug') ? ' is-invalid' : '' }}"
-                                                id="slug" />
-                                                @if ($errors->has('default_language.slug'))
-                                                    <span class='invalid-feedback'>
-                                                        <strong>{{ $errors->first('default_language.slug') }}</strong>
-                                                    </span>
-                                                @endif
-                                        </div>
-                                    </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">{{ __('avored-framework::product.category.name') }}</label>
+                                    <input type="text"
+                                        name="name"
+                                        v-model="name"
+                                        :autofocus="true"
+                                        class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                        id="name" />
+                                        @if ($errors->has('name'))
+                                            <span class='invalid-feedback'>
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <ul class="nav nav-tabs">
-                                    @foreach ($additionalLanguages as $additionalLanguage)
-                                        <li class="nav-item">
-                                            <a data-toggle="tab" 
-                                                href="#addtional-language-basic-{{ $additionalLanguage->id }}" 
-                                                class="nav-link {{ $loop->index == 0 ? 'active' : '' }} " href="#">
-                                                {{ $additionalLanguage->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-
-                                <div class="tab-content">
-                                @foreach ($additionalLanguages as $additionalLanguage)
-                                    <div 
-                                        class="tab-pane fade {{ $loop->index == 0 ? 'active show' : '' }}" 
-                                        id="addtional-language-basic-{{ $additionalLanguage->id }}" 
-                                        role="tabpanel"
-                                    >
-
-                                         <div class="form-group">
-                                            <label for="name">
-                                                {{ __('avored-framework::product.category.name') }}
-                                            </label>
-                                            <input type="text"
-                                                name="additional_languages[{{ $additionalLanguage->id }}][name]"
-                                                value="{{ $category->getTranslation('name', $additionalLanguage->id) }}"
-                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.name') ? ' is-invalid' : '' }}"
-                                                id="name" />
-                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.name'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.name') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="slug">
-                                                {{ __('avored-framework::product.category.slug') }}
-                                            </label>
-                                            <input type="text"
-                                                name="additional_languages[{{ $additionalLanguage->id }}][slug]"
-                                                value="{{ $category->getTranslation('slug', $additionalLanguage->id) }}"
-                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.slug') ? ' is-invalid' : '' }}"
-                                                id="slug" />
-                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.slug'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.slug') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                          
-                                    </div>
-                                    
-                                @endforeach
-                                    
-                                </div>  
-                            </div>
-
-                            <hr/>
-
-                            <div class="col-md-12 border-top pt-3">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label>
+                                    <label for="slug">
+                                        {{ __('avored-framework::product.category.slug') }}
+                                    </label>
+                                    <input type="text"
+                                        name="slug"
+                                        v-model="slug"
+                                        class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
+                                        id="slug" />
+                                        @if ($errors->has('slug'))
+                                            <span class='invalid-feedback'>
+                                                <strong>{{ $errors->first('slug') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="parent_id">
                                         {{ __('avored-framework::product.category.parent') }}
                                     </label>
-                                    <select 
-                                        name="default_language[parent_id]"
-                                        class="form-control {{ $errors->has('default_language.parent_id') ? ' is-invalid' : '' }}"
+                                    <select
+                                        name="parent_id"
+                                        class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
                                         id="parent_id"
-                                        >
+                                    >
+                                
                                         @foreach ($categoryOptions as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('default_language.parent_id'))
+                                        @if ($errors->has('parent_id'))
                                         <span class='invalid-feedback'>
-                                            <strong>{{ $errors->first('default_language.parent_id') }}</strong>
+                                            <strong>{{ $errors->first('parent_id') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
                         </div>
-                        @endif
-
                     </div>
                 </div>
-
                 <div class="card mt-3 mb-3">
-                    <div class="card-header">{{ __('avored-framework::product.category.seo') }}</div>
-                    <div class="card-body">
-                        
-                        @if ($isMutliLanguage)
-                        <div class="row">
-                            <div class="col-md-6">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a data-toggle="tab" 
-                                        href="#default-language-{{ $defaultLanguage->id }}" 
-                                        class="nav-link active" href="#">
-                                        {{ $defaultLanguage->name }}
-                                    </a>
-                                </li>
-                            </ul>
-                                <div class="tab-content">
-                                    <div
-                                        class="tab-pane fade active show" 
-                                        id="addtional-language-{{ $defaultLanguage->id }}" 
-                                        role="tabpanel">
-                                        <div class="form-group">
-                                            <label for="name">
-                                                {{ __('avored-framework::product.category.meta_title') }}
-                                            </label>
-                                            <input type="text"
-                                                name="default_language[meta_title]"
-                                                value="{{ $category->meta_title }}"
-                                                class="form-control {{ $errors->has('default_language.meta_title') ? ' is-invalid' : '' }}"
-                                                id="meta_title" />
-                                                @if ($errors->has('default_language.meta_title'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('default_language.meta_title') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="meta_description">
-                                                {{ __('avored-framework::product.category.meta_description') }}
-                                            </label>
-                                            <input type="text"
-                                                name="default_language[meta_description]"
-                                                value="{{ $category->meta_description }}"
-                                                class="form-control {{ $errors->has('default_language.meta_description') ? ' is-invalid' : '' }}"
-                                                id="meta_description" />
-                                                @if ($errors->has('default_language.meta_description'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('default_language.meta_description') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <ul class="nav nav-tabs">
-                                    @foreach ($additionalLanguages as $additionalLanguage)
-                                        <li class="nav-item">
-                                            <a data-toggle="tab" 
-                                                href="#addtional-language-seo-{{ $additionalLanguage->id }}" 
-                                                class="nav-link {{ $loop->index == 0 ? 'active' : '' }} " href="#">
-                                                {{ $additionalLanguage->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-
-                                <div class="tab-content">
-                                @foreach ($additionalLanguages as $additionalLanguage)
-                                    <div 
-                                        class="tab-pane fade {{ $loop->index == 0 ? 'active show' : '' }}" 
-                                        id="addtional-language-seo-{{ $additionalLanguage->id }}" 
-                                        role="tabpanel"
-                                    >
-
-                                         <div class="form-group">
-                                            <label for="meta_title">
-                                                {{ __('avored-framework::product.category.meta_title') }}
-                                            </label>
-                                            <input type="text"
-                                                name="additional_languages[{{ $additionalLanguage->id }}][meta_title]"
-                                                value="{{ $category->getTranslation('meta_title', $additionalLanguage->id) }}"
-                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.meta_title') ? ' is-invalid' : '' }}"
-                                                id="meta_title" />
-                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.meta_title'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.meta_title') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="meta_description">
-                                                {{ __('avored-framework::product.category.meta_description') }}
-                                            </label>
-                                            <input type="text"
-                                                name="additional_languages[{{ $additionalLanguage->id }}][meta_description]"
-                                                value="{{ $category->getTranslation('meta_description', $additionalLanguage->id) }}"
-                                                class="form-control {{ $errors->has('additional_languages.' . $additionalLanguage->id . '.meta_description') ? ' is-invalid' : '' }}"
-                                                id="meta_description" />
-                                                @if ($errors->has('additional_languages.' . $additionalLanguage->id . '.meta_description'))
-                                                <span class='invalid-feedback'>
-                                                    <strong>{{ $errors->first('additional_languages.' . $additionalLanguage->id . '.meta_description') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                          
-                                    </div>
-                                    
-                                @endforeach
-                                    
-                                </div>  
-                            </div>
+                    <div class="card-header">
+                    
+                        <span class="float-left">
+                            {{ __('avored-framework::product.category.seo') }}
+                        </span>
+                        <span class="float-right">
+                            <a href="" @click.prevent="toggleCard('seo')">
+                                <i :class="{ 'ti-arrow-circle-down': cardBody.seo, 'ti-arrow-circle-up': !cardBody.seo}"></i>
+                            </a>
+                        </span>
+                    </div>
+                    <div :class="{ 'd-none': !cardBody.seo, 'card-body' : true }">
+                        <div class="form-group">
+                            <label for="meta_title">
+                                {{ __('avored-framework::product.category.meta_title') }}
+                            </label>
+                            <input type="text"
+                                name="meta_title"
+                                v-model="meta_title"
+                                class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
+                                id="meta_title" />
+                                @if ($errors->has('meta_title'))
+                                <span class='invalid-feedback'>
+                                    <strong>{{ $errors->first('meta_title') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        @endif
-
+                        <div class="form-group">
+                            <label for="meta_description">
+                                {{ __('avored-framework::product.category.meta_description') }}
+                            </label>
+                            <input type="text"
+                                name="meta_description"
+                                v-model="meta_description"
+                                class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
+                                id="meta_description" />
+                                @if ($errors->has('meta_description'))
+                                <span class='invalid-feedback'>
+                                    <strong>{{ $errors->first('meta_description') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="language_id" value="{{ request()->get('language_id', $defaultLanguage->id) }}" />
                 <button type="submit"  class="btn btn-primary category-save-button">
                     {{ __('avored-framework::product.category.edit_button') }}
                 </button>
+
                 <a href="{{ route('admin.category.index') }}" class="btn btn-default">
                     {{ __('avored-framework::lang.cancel') }}
                 </a>
             </form>
         </div>
     </div>
-</div>
+</category-field-page>
 @endsection

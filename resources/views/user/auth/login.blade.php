@@ -33,7 +33,7 @@
                             <label for="email">Email Address</label>
                             <input type="text"
                                 name="email"
-                                autofocus="true"
+                                :autofocus="true"
                                 v-model="email"
                                 class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                 id="email" />

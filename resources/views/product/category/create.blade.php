@@ -7,15 +7,14 @@
 @endsection
 
 @section('content')
-<category-field-page inline-template>
+<category-field-page category="{}" inline-template>
 
     <div class="row">
         <div class="col-12">
             <form method="post" action="{{ route('admin.category.store') }}">
-
                 <div class="card">
                     <div class="card-body">
-                        <div class="peer">
+                        <div class="peer float-left">
                             <a href="#" 
                                 :class="{ 'bg-primary text-white' : openAllCard ,'px-4 py-2 mr-3 rounded-pill' : true }"
                                 @click.prevent="openAllCardLink"
@@ -36,6 +35,32 @@
                             >
                             SEO
                             </a>
+                        </div>
+
+                        <div class="float-right">
+                            <div class="form-group-sm text-small">
+                                <select
+                                    name="language"
+                                    @input="changeLanguage"
+                                    class="form-control {{ $errors->has('language') ? ' is-invalid' : '' }}"
+                                    id="language"
+                                >
+                                    @foreach ($languages as $language)
+                                        @if ($language->is_default == 0)
+                                            @continue
+                                        @endif
+                                        <option
+                                            data-url="{{ route('admin.category.create', ['language_id' => $language->id]) }}"
+                                            value="{{ $language->id }}">{{ $language->name }}</option>
+                                    @endforeach
+                                </select>
+                                    @if ($errors->has('language'))
+                                    <span class='invalid-feedback'>
+                                        <strong>{{ $errors->first('language') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -135,6 +160,7 @@
                             </label>
                             <input type="text"
                                 name="meta_title"
+                                v-model="meta_title"
                                 class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
                                 id="meta_title" />
                                 @if ($errors->has('meta_title'))
@@ -149,6 +175,7 @@
                             </label>
                             <input type="text"
                                 name="meta_description"
+                                v-model="meta_description"
                                 class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
                                 id="meta_description" />
                                 @if ($errors->has('meta_description'))
@@ -159,7 +186,7 @@
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="language_id" value="{{ request()->get('language_id', $defaultLanguage->id) }}" />
                 <button type="submit"  class="btn btn-primary category-save-button">Create Category</button>
 
                 <a href="{{ route('admin.category.index') }}" class="btn btn-default">Cancel</a>

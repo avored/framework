@@ -17,14 +17,13 @@ class GlobalComposer
     public function compose(View $view)
     {
         if (Session::has('multi_language_enabled')) {
-            $additionalLanguages = Session::get('additionalLanguages');
-            $defaultLanguage = Session::get('defaultLanguage');
-            $isMultiLanguage = Session::get('isMultiLanguage');
             $languages = Session::get('languages');
+            $defaultLanguage = Session::get('default_language');
         }
 
-        $view->withAdditionalLanguages($additionalLanguages)
-            ->withIsMutliLanguage($isMultiLanguage)
+        $view
+            //->withAdditionalLanguages($additionalLanguages)
+            //->withIsMutliLanguage($isMultiLanguage)
             ->withDefaultLanguage($defaultLanguage)
             ->withLanguages($languages);
     }

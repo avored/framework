@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\Models\Contracts;
 
 use AvoRed\Framework\Models\Database\Category;
-
+use AvoRed\Framework\Models\Database\CategoryTranslation;
 
 interface CategoryInterface
 {
@@ -14,6 +14,13 @@ interface CategoryInterface
      * @return \AvoRed\Framework\Models\Database\Category
      */
     public function find($id);
+    /**
+     * Find an Translated Category by given CategoryModel and Language Id
+     * @param \AvoRed\Framework\Models\Database\Category $id
+     * @param integer $languageId
+     * @return \AvoRed\Framework\Models\Database\CategoryTranslation
+     */
+    public function findTranslated($category, $languageId);
 
     /**
      * Find an Category by given key which returns Category Model
@@ -60,7 +67,7 @@ interface CategoryInterface
      * @param array $data
      * @return \AvoRed\Framework\Models\Database\Category
      */
-    public function update(Category $category, array $data): Category;
+    public function update(Category $category, array $data);
 
     /**
      * Get an Category Options for Vue Components

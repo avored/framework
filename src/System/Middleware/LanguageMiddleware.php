@@ -36,22 +36,15 @@ class LanguageMiddleware
     public function handle($request, Closure $next)
     {
         if (Session::has('multi_language_enabled')) {
-            $additionalLanguages = $this->repository->getAdditionalLanguages();
-            $defaultLanguage = $this->repository->getDefault();
-            $isMultiLanguage = $additionalLanguages->count() > 0 ? true : false;
             $languages = $this->repository->all();
-
-            Session::put('additionalLanguages', $additionalLanguages);
-            Session::put('defaultLanguage', $defaultLanguage);
-            Session::put('isMultiLanguage', $isMultiLanguage);
+            $defaultLanguage = $this->repository->getDefault();
             Session::put('multi_language_enabled', true);
             Session::put('languages', $languages);
+            Session::put('default_language', $defaultLanguage);
         } else {
-            Session::put('additionalLanguages', []);
-            Session::put('defaultLanguage', null);
-            Session::put('isMultiLanguage', false);
             Session::put('languages', Collection::make([]));
             Session::put('multi_language_enabled', false);
+            Session::put('default_language', false);
         }
 
         return $next($request);
