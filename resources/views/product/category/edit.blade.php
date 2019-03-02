@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-<category-field-page category="{{ json_encode($category) }}" inline-template>
+<category-field-page category="{{ json_encode($category->getTranslation()) }}" inline-template>
 
     <div class="row">
         <div class="col-12">
-            <form method="post" action="{{ route('admin.category.update', $model->id) }}">
+            <form method="post" action="{{ route('admin.category.update', $category->id) }}">
 
                 @method('put')
                 <div class="card">
@@ -21,21 +21,21 @@
                                 :class="{ 'bg-primary text-white' : openAllCard ,'px-4 py-2 mr-3 rounded-pill' : true }"
                                 @click.prevent="openAllCardLink"
                             >
-                                Category All
+                                {{ __('avored-framework::product.category.category_all') }}
                             </a>
 
                             <a href="#"
                                 @click.prevent="toggleCard('basic')"
                                 :class="{ 'bg-primary text-white' :linkTitle.basic,'px-4 py-2 mr-3 bg-default rounded-pill' : true }"
                             >
-                                Basic Info
+                                {{ __('avored-framework::product.category.basic_info') }}
                             </a>
 
                             <a href="#"
                                 @click.prevent="toggleCard('seo')"
                                 :class="{ 'bg-primary text-white' :linkTitle.seo,'px-4 py-2 bg-default rounded-pill' : true }"
                             >
-                            SEO
+                                {{ __('avored-framework::product.category.seo') }}
                             </a>
                         </div>
 
@@ -49,8 +49,11 @@
                                 >
                                     @foreach ($languages as $language)
                                         <option
-                                            data-url="{{ route('admin.category.edit', ['category' => $model->id ,'language_id' => $language->id]) }}"
-                                            value="{{ $language->id }}">{{ $language->name }}</option>
+                                            data-url="{{ route('admin.category.edit', ['category' => $category->id ,'language_id' => $language->id]) }}"
+                                            value="{{ $language->id }}"
+                                        >
+                                            {{ $language->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                     @if ($errors->has('language'))
@@ -126,8 +129,14 @@
                                         id="parent_id"
                                     >
                                 
-                                        @foreach ($categoryOptions as $category)
-                                            <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                        @foreach ($categoryOptions as $option)
+                                            <option
+                                                @if ($option->id == $category->id)
+                                                    selected
+                                                @endif
+                                                value="{{ $option->id }}" >
+                                                {{ $option->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                         @if ($errors->has('parent_id'))

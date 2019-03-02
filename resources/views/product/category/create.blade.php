@@ -19,21 +19,21 @@
                                 :class="{ 'bg-primary text-white' : openAllCard ,'px-4 py-2 mr-3 rounded-pill' : true }"
                                 @click.prevent="openAllCardLink"
                             >
-                                Category All
+                                {{ __('avored-framework::product.category.category_all') }}
                             </a>
 
                             <a href="#"
                                 @click.prevent="toggleCard('basic')"
                                 :class="{ 'bg-primary text-white' :linkTitle.basic,'px-4 py-2 mr-3 bg-default rounded-pill' : true }"
                             >
-                                Basic Info
+                                {{ __('avored-framework::product.category.basic_info') }}
                             </a>
 
                             <a href="#"
                                 @click.prevent="toggleCard('seo')"
                                 :class="{ 'bg-primary text-white' :linkTitle.seo,'px-4 py-2 bg-default rounded-pill' : true }"
                             >
-                            SEO
+                                {{ __('avored-framework::product.category.seo') }}
                             </a>
                         </div>
 

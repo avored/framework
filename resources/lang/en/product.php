@@ -26,6 +26,7 @@ return [
         'create_button' => 'Create Category',
         'edit_title' => 'Edit Category',
         'edit_button' => 'Edit Category',
+        'category_all' => 'Category All',
     
     ]
 ];

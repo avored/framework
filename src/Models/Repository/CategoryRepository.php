@@ -14,6 +14,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use AvoRed\Framework\Models\Database\CategoryTranslation;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\Models\Database\Language;
+use Illuminate\Support\Arr;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -116,16 +117,17 @@ class CategoryRepository implements CategoryInterface
         if (Session::has('multi_language_enabled')) {
             $languageId = $data['language_id'];
             $languaModel = Language::find($languageId);
-
+            
             if ($languaModel->is_default) {
-                return Category::create($data);
+                return $category->update($data);
             } else {
+                $category->update(Arr::only($data, ['parent_id']));
                 return CategoryTranslation::create(
                     array_merge($data, ['category_id' => $category->id])
                 );
             }
         } else {
-            return Category::create($data);
+            return $category->update($data);
         }
     }
 

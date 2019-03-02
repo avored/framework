@@ -30,29 +30,26 @@ class Category extends BaseModel
         return $this->hasMany(CategoryTranslation::class);
     }
 
+    /**
+     * Category Model Get Translation Model and return the value
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function getTranslation($languageId = null)
+    {
+        $languageId = request()->get('language_id');
+        if (null === $languageId) {
+            return $this;
+        } else {
+            return $this->translations()->whereLanguageId($languageId)->first();
+        }  
+    }
+
     public static function getCategoryOptions()
     {
         $model = new static;
         $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
 
         return $options;
-    }
-
-    /**
-     * Get the Name for the Category
-     * @return string $name
-     */
-    public function getTranslation($attribute, $languageId = null)
-    {
-        if (null === $languageId) {
-            return $this->$attribute;
-        } else {
-            $translatedModel = $this->translations()->whereLanguageId($languageId)->first();
-            if (null === $translatedModel || !isset($translatedModel->$attribute)) {
-                return '';
-            }
-            return $translatedModel->$attribute;
-        }
     }
 
     public function getParentNameAttribute()

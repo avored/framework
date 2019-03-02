@@ -68,18 +68,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category, Request $request)
     {
-        $view = view('avored-framework::product.category.edit');
-        $view->with('model', $category);
-
-        if (!empty($request->language_id)) {
-            $categoryTranslation = $this->repository
-                ->findTranslated($category, $request->language_id);
-           
-            $view->with('category', $categoryTranslation);
-        } else {
-            $view->with('category', $category);
-        }
-        return  $view;
+        return view('avored-framework::product.category.edit')
+            ->withCategory($category);
     }
 
     /**
@@ -121,6 +111,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('avored-framework::product.category.show')->with('category', $category);
+        return view('avored-framework::product.category.show')
+            ->with('category', $category);
     }
 }
