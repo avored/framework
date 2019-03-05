@@ -29,10 +29,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categories = $this->repository->all();
         $categoryGrid = new CategoryDataGrid($this->repository->query());
 
         return view('avored-framework::product.category.index')
-            ->with('dataGrid', $categoryGrid->dataGrid);
+            ->with('dataGrid', $categoryGrid->dataGrid)
+            ->with('categories', $categories);
     }
 
     /**
