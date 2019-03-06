@@ -18,7 +18,7 @@
     <div class="card">
         <div class="card-body">
             <datagrid
-                columns='[{"key":"Id"},{"key":"Name"}]'
+                columns='[{"key":"id"},{"key":"name"}]'
                 data="{{ $categories }}"
             >
             </datagrid>
