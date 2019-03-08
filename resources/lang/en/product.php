@@ -27,6 +27,7 @@ return [
         'edit_title' => 'Edit Category',
         'edit_button' => 'Edit Category',
         'category_all' => 'Category All',
+        'title' => 'Category List'
     
     ]
 ];

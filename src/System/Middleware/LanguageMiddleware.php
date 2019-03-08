@@ -13,15 +13,15 @@ class LanguageMiddleware
      *
      * @var \AvoRed\Framework\Models\Repository\LanguageRepository
      */
-    protected $repository;
+    protected $languageRepository;
 
     /**
      * Construct to setup Repository
      *
      */
-    public function __construct(LanguageInterface $repository)
+    public function __construct(LanguageInterface $languageRepository)
     {
-        $this->repository = $repository;
+        $this->languageRepository = $languageRepository;
     }
 
     /**
@@ -35,18 +35,19 @@ class LanguageMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Session::has('multi_language_enabled')) {
-            $languages = $this->repository->all();
-            $defaultLanguage = $this->repository->getDefault();
-            Session::put('multi_language_enabled', true);
+        if (!Session::has('language_setup')) {
+            $languages = $this->languageRepository->all();
+            $defaultLanguage = $this->languageRepository->getDefault();
             Session::put('languages', $languages);
             Session::put('default_language', $defaultLanguage);
-        } else {
-            Session::put('languages', Collection::make([]));
-            Session::put('multi_language_enabled', false);
-            Session::put('default_language', false);
+            
+            if ($languages->count() > 1) {
+                Session::put('multi_language_enabled', true);   
+            } else {
+                Session::put('multi_language_enabled', false);
+            }
+            Session::put('language_setup', true);
         }
-
         return $next($request);
     }
 }

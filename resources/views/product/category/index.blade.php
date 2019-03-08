@@ -2,7 +2,7 @@
 
 @section('page-header')
     <div class="h1">
-        {{ __('avored-framework::lang.category.index.title') }}
+        {{ __('avored-framework::product.category.title') }}
         
         <a style="" href="{{ route('admin.category.create') }}" class="btn btn-primary float-right">
             {{ __('avored-framework::lang.category.index.create') }}
