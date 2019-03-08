@@ -7,6 +7,7 @@ use AvoRed\Framework\Theme\Facade as Theme;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use AvoRed\Framework\Models\Contracts\ConfigurationInterface;
+use AvoRed\Framework\Models\Database\Language;
 
 class InstallCommand extends Command
 {
@@ -97,6 +98,13 @@ class InstallCommand extends Command
                 ['configuration_key' => 'avored_tax_class_percentage_of_tax',
                 'configuration_value' => 15]
             );
+
+            Language::create(
+                ['name' => 'English',
+                'code' => 'en',
+                'is_default' => 1]
+            );
+
             $this->info('AvoRed Install Successfully!');
     }
 
