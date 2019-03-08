@@ -27,7 +27,7 @@ abstract class BaseTestCase extends OrchestraTestCase
             $faker = $app->make(FakerGenerator::class);
             return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
         });
-        //$this->setUpDatabase();
+        $this->setUpDatabase();
         Notification::fake();
        
     }
