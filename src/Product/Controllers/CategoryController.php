@@ -7,6 +7,7 @@ use AvoRed\Framework\Product\Requests\CategoryRequest;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
 use AvoRed\Framework\Product\DataGrid\CategoryDataGrid;
 use AvoRed\Framework\System\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -28,9 +29,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categories = $this->repository->all();
         $categoryGrid = new CategoryDataGrid($this->repository->query());
 
-        return view('avored-framework::product.category.index')->with('dataGrid', $categoryGrid->dataGrid);
+        return view('avored-framework::product.category.index')
+            ->with('dataGrid', $categoryGrid->dataGrid)
+            ->with('categories', $categories);
     }
 
     /**
@@ -51,7 +55,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {
+    {   
         $this->repository->create($request->all());
 
         return redirect()->route('admin.category.index');
@@ -61,11 +65,13 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \AvoRed\Framework\Models\Database\Category $category
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category, Request $request)
     {
-        return view('avored-framework::product.category.edit')->with('model', $category);
+        return view('avored-framework::product.category.edit')
+            ->withCategory($category);
     }
 
     /**
@@ -77,8 +83,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
-
+        $this->repository->update($category, $request->all());
+        
         return redirect()->route('admin.category.index');
     }
 
@@ -107,6 +113,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('avored-framework::product.category.show')->with('category', $category);
+        return view('avored-framework::product.category.show')
+            ->with('category', $category);
     }
 }

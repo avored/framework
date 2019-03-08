@@ -13,7 +13,7 @@
 				
 				</button>
 				<div class="dropdown-menu extra-product-link" aria-labelledby="btnGroupDrop1">
-				<a class="dropdown-item" href="#">Import Product</a>
+				<!--a class="dropdown-item" href="#">Import Product</a-->
 				<a class="dropdown-item" href="{{ route('admin.product.export') }}">Export Product</a>
 				</div>
 			</div>

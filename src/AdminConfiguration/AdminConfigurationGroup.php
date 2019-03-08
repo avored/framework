@@ -10,6 +10,10 @@ class AdminConfigurationGroup
      * @var string $label
      */
     protected $label;
+    /**
+     * @var bool $useLabelAsKey
+     */
+    protected $useLabelAsKey;
 
     /**
      * @var \Illuminate\Support\Collection $groupList
@@ -30,18 +34,24 @@ class AdminConfigurationGroup
      * Get/Set Label for Admin Configuration Group
      *
      * @param string|null $label
+     * @param bool $useLabelAsKey
      * @return string|self $label|$this
      */
-    public function label($label = null)
+    public function label($label = null, $useLabelAsKey = true)
     {
         if (null !== $label) {
             $this->label = $label;
+            $this->useLabelAsKey = $useLabelAsKey;
 
             return $this;
         }
 
+        if ($this->useLabelAsKey) {
+            return __($this->label);
+        }
         return $this->label;
     }
+
 
     /**
      * Get/Set Key for Admin Configuration Group

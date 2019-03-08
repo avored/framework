@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-3">
     <div class="col-12">
         @if(session()->has('errorNotificationText'))
             <div class="alert alert-danger alert-dismissible" role="alert">

@@ -5,10 +5,11 @@ namespace AvoRed\Framework\Models\Database;
 use AvoRed\Framework\Image\LocalFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +18,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'phone',
-        'company_name', 'image_path', 'status',
+        'company_name', 'image_path', 'status', 'delete_due_date',
         'language', 'activation_token', 'tax_no', 'registered_channel'
+    ];
+    /**
+     * The attributes that are casted as a Carbon date.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'delete_due_date', 'email_verified_at', 'created_at', 'updated_at'
     ];
 
     /**

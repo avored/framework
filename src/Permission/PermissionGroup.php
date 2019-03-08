@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Permission;
 
 use Illuminate\Support\Collection;
 use AvoRed\Framework\Permission\Contracts\Permission as PermissionContracts;
+use Illuminate\Support\Facades\Lang;
 
 class PermissionGroup implements PermissionContracts
 {
@@ -49,6 +50,9 @@ class PermissionGroup implements PermissionContracts
             return $this;
         }
 
+        if (Lang::has($this->label)) {
+            return __($this->label);
+        }
         return $this->label;
     }
 

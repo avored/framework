@@ -3,6 +3,7 @@
 return [
 
     
+
     'admin-user-list' => 'Admin User List',
     'admin-user-create' => 'Create Admin User',
     'admin-user-update' => 'Update Admin User',
@@ -35,4 +36,17 @@ return [
     'user-role' => 'Role',
     
     'file' => 'Profile Image',
+
+    'user-delete-request' => [
+        'title' => 'User Delete Requested',
+    ],
+
+    'auth' => [
+        'email' => 'Email Address',
+        'password' => 'Password',
+        'password_confirm' => 'Password Confirmation',
+        'reset_password' => 'Reset Password',
+        'reset_password_link' => 'Reset Password Link'
+    ]
+
 ];

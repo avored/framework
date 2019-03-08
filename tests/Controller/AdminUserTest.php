@@ -4,9 +4,13 @@ namespace AvoRed\Framework\Tests\Controller;
 
 use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\Models\Database\AdminUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdminUserTest extends BaseTestCase
 {
+    //use DatabaseTransactions;
+    use RefreshDatabase;
     /**
      * Test to check if admin user index route is working
      *

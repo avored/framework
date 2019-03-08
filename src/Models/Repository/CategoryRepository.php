@@ -11,6 +11,10 @@ use AvoRed\Framework\Models\Database\Property;
 use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Database\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
+use AvoRed\Framework\Models\Database\CategoryTranslation;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\Language;
+use Illuminate\Support\Arr;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -26,7 +30,21 @@ class CategoryRepository implements CategoryInterface
     }
 
     /**
+     * Find an Translated Category by given CategoryModel and Language Id
+     * @param \AvoRed\Framework\Models\Database\Category $id
+     * @param integer $languageId
+     * @return \AvoRed\Framework\Models\Database\CategoryTranslation
+     */
+    public function findTranslated($category, $languageId)
+    {
+        return CategoryTranslation::whereCategoryId($category->id)
+            ->whereLanguageId($languageId)
+            ->first();
+    }
+
+    /**
      * Find an Category by given key which returns Category Model
+     * @todo rename this method with findBySlug
      *
      * @param string $key
      * @return \AvoRed\Framework\Models\Database\Category
@@ -67,13 +85,50 @@ class CategoryRepository implements CategoryInterface
     }
 
     /**
-     * Find an Category Query
+     * Create a Category
      *
-     * @return \AvoRed\Framework\Models\Database\Attribute
+     * @return \AvoRed\Framework\Models\Database\Categoy
      */
     public function create($data)
     {
-        return Category::create($data);
+        if (Session::has('multi_language_enabled')) {
+            $languageId = $data['language_id'];
+            $languaModel = Language::find($languageId);
+
+            if ($languaModel->is_default) {
+                return Category::create($data);
+            } else {
+                return CategoryTranslation::create($data);
+            }
+        } else {
+            return Category::create($data);
+        }
+    }
+
+    /**
+     * Update a Category
+     *
+     * @param \AvoRed\Framework\Models\Database\Categoy $category
+     * @param array $data
+     * @return \AvoRed\Framework\Models\Database\Categoy
+     */
+    public function update(Category $category, array $data)
+    {
+        if (Session::has('multi_language_enabled')) {
+            $languageId = $data['language_id'];
+            $languaModel = Language::find($languageId);
+            
+            if ($languaModel->is_default) {
+                return $category->update($data);
+            } else {
+                $category->update(Arr::only($data, ['parent_id']));
+                return CategoryTranslation::create(
+                    array_merge($data, ['category_id' => $category->id])
+                );
+            }
+        } else {
+            return $category->update($data);
+        }
     }
 
     /*

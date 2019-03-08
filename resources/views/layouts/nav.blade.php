@@ -2,19 +2,19 @@
     <div class="header-container">
         <ul class="nav-left">
             <li>
-                <a id='sidebar-toggle' class="sidebar-toggle" href="#">
+                <a id='sidebar-toggle' class="sidebar-toggle" @click.prevent="toggleSidebar" href="">
                     <i class="ti-menu"></i>
                 </a>
             </li>
-            <li class="search-box">
+            <!--li class="search-box">
                 <a class="search-toggle no-pdd-right" href="#">
                     <i class="search-icon ti-search pdd-right-10"></i>
                     <i class="search-icon-close ti-close pdd-right-10"></i>
                 </a>
             </li>
-            <li class="search-input">
+            <li-- class="search-input">
                 <input class="form-control" type="text" placeholder="Search...">
-            </li>
+            </li-->
         </ul>
         <ul class="nav-right">
             
@@ -23,8 +23,9 @@
                     Visit Site <i class="ti-new-window"></i>
                 </a>
             </li>
-            <li class="dropdown">
-                <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+            <li  :class="{ show: displayProfileHeaderMenu, 'dropdown' : true }">
+                <a href="" @click.prevent="clickOnProfileHeaderLink" data-toggle="dropdown" 
+                class="dropdown-toggle no-after peers fxw-nw ai-c lh-1">
                     <div class="peer mR-10">
                         <img class="w-2r bdrs-50p" src="{{ auth()->user()->avatar }}" alt="">
                     </div>

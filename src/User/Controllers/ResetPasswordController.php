@@ -62,8 +62,6 @@ class ResetPasswordController extends Controller
     public function showResetForm(Request $request, $token = null)
     {
         return view('avored-framework::user.auth.passwords.reset')
-                            ->with(
-                                ['token' => $token, 'email' => $request->email]
-                            );
+            ->with(['token' => $token, 'email' => $request->email]);
     }
 }

@@ -9,9 +9,39 @@ class Category extends BaseModel
 {
     protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
 
+    /**
+     * Category Model Attribute which can be translated
+     * @var array $translatedAttributes 
+     */
+    protected $translatedAttributes = ['name', 'slug', 'meta_title', 'meta_description'];
+
+
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Category Model has many translation values 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function translations()
+    {
+        return $this->hasMany(CategoryTranslation::class);
+    }
+
+    /**
+     * Category Model Get Translation Model and return the value
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function getTranslation($languageId = null)
+    {
+        $languageId = request()->get('language_id');
+        if (null === $languageId) {
+            return $this;
+        } else {
+            return $this->translations()->whereLanguageId($languageId)->first();
+        }  
     }
 
     public static function getCategoryOptions()

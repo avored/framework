@@ -20,7 +20,9 @@
 
                 <div class="peer">
                     <div class="mobile-toggle sidebar-toggle">
-                        <a href="" class="td-n"><i class="ti-arrow-circle-left"></i></a>
+                        <a href="" @click.prevent="toggleSidebar" class="td-n">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -37,19 +39,25 @@
                 @foreach($adminMenus as $key => $menu)
                     @if(null !== $menu->subMenu() && count($menu->subMenu()) > 0)
                         <?php $subMenu = $menu->subMenu(); ?>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder"> <i class="c-white-500 {{ $menu->icon() }}"></i></span>
-                                <span class="title"> {{ $menu->label() }}</span>
-                                <span class="arrow"> <i class="ti-angle-right"></i></span>
-                            </a>
+                        <sidebar-dropdown inline-template>
+                            <li :class="{ open: menuActive, 'nav-item dropdown' : true}" >
+                                <a
+                                    class="dropdown-toggle"
+                                    @click.prevent="dropdownSidebarNav"
+                                    href="javascript:void(0);"
+                                >
+                                    <span class="icon-holder"> <i class="c-white-500 {{ $menu->icon() }}"></i></span>
+                                    <span class="title"> {{ $menu->label() }}</span>
+                                    <span class="arrow"> <i class="ti-angle-right"></i></span>
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                @foreach($subMenu as $subKey => $subMenuObj)
-                                    <li><a class='sidebar-link' href="{{ route($subMenuObj->route()) }}">{{ $subMenuObj->label() }}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
+                                <ul class="dropdown-menu">
+                                    @foreach($subMenu as $subKey => $subMenuObj)
+                                        <li><a class='sidebar-link' href="{{ route($subMenuObj->route()) }}">{{ $subMenuObj->label() }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        </sidebar-dropdown>
                     @else
                         <li class="nav-item mT-30 active">
                             <a class="sidebar-link" href="index.html">

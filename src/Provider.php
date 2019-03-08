@@ -8,6 +8,7 @@ use AvoRed\Framework\Api\Middleware\AdminApiAuth;
 use AvoRed\Framework\User\Middleware\AdminAuth;
 use AvoRed\Framework\User\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\User\Middleware\Permission;
+use AvoRed\Framework\System\Middleware\LanguageMiddleware;
 use AvoRed\Framework\System\Middleware\SiteCurrencyMiddleware;
 use AvoRed\Framework\User\ViewComposers\AdminUserFieldsComposer;
 use AvoRed\Framework\System\ViewComposers\AdminNavComposer;
@@ -22,6 +23,7 @@ use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\KeysCommand;
 use AvoRed\Framework\System\ViewComposers\SiteCurrencyFieldsComposer;
+use AvoRed\Framework\System\ViewComposers\GlobalComposer;
 use AvoRed\Framework\Cms\ViewComposers\MenuComposer;
 
 class Provider extends ServiceProvider
@@ -139,6 +141,7 @@ class Provider extends ServiceProvider
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
         $router->aliasMiddleware('permission', Permission::class);
 
+        $router->aliasMiddleware('language', LanguageMiddleware::class);
         $router->aliasMiddleware('currency', SiteCurrencyMiddleware::class);
         $router->aliasMiddleware('admin.api.auth', AdminApiAuth::class);
     }
@@ -150,6 +153,14 @@ class Provider extends ServiceProvider
      */
     public function registerViewComposerData()
     {
+        View::composer(
+            'avored-framework::*',
+            GlobalComposer::class
+        );
+        View::composer(
+            'avored-framework::layouts.left-nav',
+            AdminNavComposer::class
+        );
         View::composer(
             'avored-framework::layouts.left-nav',
             AdminNavComposer::class
@@ -163,7 +174,7 @@ class Provider extends ServiceProvider
             SiteCurrencyFieldsComposer::class
         );
         View::composer(
-            'avored-framework::product.category._fields',
+            ['avored-framework::product.category.create', 'avored-framework::product.category.edit'],
             CategoryFieldsComposer::class
         );
         View::composer(

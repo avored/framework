@@ -20,6 +20,14 @@ class AvoredFrameworkSchema extends Migration
      */
     public function up()
     {
+        Schema::create('languages', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
+
         Schema::create('categories', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->nullable()->default(null);
@@ -29,6 +37,21 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
 
             $table->timestamps();
+        });
+
+        Schema::create('category_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('category_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+
+            $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
         Schema::create('category_filters', function(Blueprint $table) {
@@ -409,12 +432,15 @@ class AvoredFrameworkSchema extends Migration
             $table->string('image_path')->nullable();
             $table->string('company_name')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('status', ['GUEST', 'LIVE'])->default('LIVE');
+            $table->enum('status', ['GUEST', 'LIVE', 'DELETE_IN_PROGRESS'])->default('LIVE');
             $table->string('tax_no')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('delete_due_date')->nullable()->default(null);
             $table->enum('registered_channel', ['WEBSITE', 'FACEBOOK', 'TWITTER', 'GOOGLE'])->default('WEBSITE');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+                
         });
 
         Schema::create('user_groups', function(Blueprint $table) {
@@ -632,7 +658,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
@@ -776,6 +801,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('product_prices');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('category_translations');
         Schema::dropIfExists('categories');
 
         Schema::dropIfExists('attributes');
@@ -805,5 +831,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
+        Schema::dropIfExists('languages');
     }
 }

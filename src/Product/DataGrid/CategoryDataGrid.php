@@ -14,23 +14,35 @@ class CategoryDataGrid
         $dataGrid = DataGrid::make('admin_category_controller');
 
         $dataGrid->model($model)
-                ->column('name', function (TextColumn $column) {
+            ->column(
+                'name',
+                function (TextColumn $column) {
                     $column->identifier('name')
-                            ->label('Name')
-                            ->sortable(true)
-                            ->canFilter(true);
-                })
-                ->column('slug', function (TextColumn $column) {
+                        ->label('Name')
+                        ->sortable(true)
+                        ->canFilter(false);
+                }
+            )->column(
+                'slug',
+                function (TextColumn $column) {
                     $column->identifier('slug')
-                            ->label('Slug')
-                            ->sortable(true)
-                            ->canFilter(true);
-                })
-                ->linkColumn('edit', [], function ($model) {
+                        ->label('Slug')
+                        ->sortable(true)
+                        ->canFilter(false);
+                }
+            )->linkColumn(
+                'edit',
+                [],
+                function ($model) {
                     return "<a href='" . route('admin.category.edit', $model->id) . "' >Edit</a>";
-                })->linkColumn('show', [], function ($model) {
+                }
+            )->linkColumn(
+                'show',
+                [],
+                function ($model) {
                     return "<a href='" . route('admin.category.show', $model->id) . "' >Show</a>";
-                });
+                }
+            );
 
         $this->dataGrid = $dataGrid;
     }

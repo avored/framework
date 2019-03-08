@@ -1,31 +1,31 @@
-<div class="widget">
-    <div class="card mb-3 d-block" style="cursor: move;">
-        <div class="card-header">
-            <h5 class="card-title text-center">{{ __('avored-framework::lang.admin-dashboard-recent-order-title') }}</h5>
-        </div>
-        <div class="card-body">
-            @if(null === $recentOrderData)
-                <p class="text-center">
-                    Sorry There is no Order Data
-                </p>
-            @else
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+<div class="card">
+    <div class="card-header bg-white">{{ __('avored-framework::lang.admin-dashboard-recent-order-title') }}</div>
+    <div class="card-body">
+        @if(null === $recentOrderData)
+            <p class="text-center">Sorry There is no Order Data</p>
+        @else
+            <div class="table-responsive">
+                <table class="table table-bordeblue table-bordered">
+                    <thead class="thead-light">
                         <tr>
-                            <th>User</th>
-                            <th>Products</th>
-                            <th>Total</th>
+                            <th class="text-center">{{ __('avored-framework::customer.title') }}</th>
+                            <th class="text-center">{{ __('avored-framework::orders.products') }}</th>
+                            <th class="text-center">{{ __('avored-framework::orders.total') }}</th>
+                            <th class="text-center">{{ __('avored-framework::orders.status') }}</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td>{{ $recentOrderData['user'] }}</td>
-                            <td>{{ $recentOrderData['product_count'] }}</td>
-                            <td>{{ $recentOrderData['total_amount'] }}</td>
+                            <td class="text-center">
+                                <a href="{{Route('admin.order.view', $recentOrderData['order_id'])}}">{{ $recentOrderData['user'] }}</a>
+                            </td>
+                            <td class="text-center">{{ $recentOrderData['product_count'] }}</td>
+                            <td class="text-center">{{ $recentOrderData['total_amount'] }}</td>
+                            <td class="text-center">{{ $recentOrderData['status'] }}</td>
                         </tr>
-                    </table>
-                </div>
-
-            @endif
-            
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 </div>

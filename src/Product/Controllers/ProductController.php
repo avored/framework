@@ -15,6 +15,7 @@ use AvoRed\Framework\Product\DataGrid\ProductDataGrid;
 use AvoRed\Framework\Models\Contracts\ProductInterface;
 use AvoRed\Framework\Models\Contracts\ProductDownloadableUrlInterface;
 use AvoRed\Framework\System\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -268,14 +269,38 @@ class ProductController extends Controller
 
     /**
      * Export all the products to CSV File 
-     *
+     * @todo add column title 
+     * 
      * @param \AvoRed\Framework\Models\Database\Product $product
      * @return \Illuminate\Http\Response
      */
     public function export()
     {
         $products = $this->repository->all();
+        $fileName = strtolower(str_random()) . '.csv';
+        $dirPath = storage_path('app/public/catalog');
+        $this->directory($dirPath);
+       
+        $file = fopen($dirPath . '/' . $fileName, 'w');
+        foreach ($products as $product) {
+            fputcsv($file, $product->toArray());
+        }
+        fclose($file);
         
-        dd($products);
+        return response()->download($dirPath . '/' . $fileName);
+    }
+
+    /**
+     * Create Directories if not exists.
+     *
+     * @var string $path
+     * @return self $this
+     */
+    public function directory($path)
+    {
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0775, true, true);
+        }
+        return $this;
     }
 }

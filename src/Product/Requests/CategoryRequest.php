@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\Product\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as Request;
@@ -15,7 +14,6 @@ class CategoryRequest extends Request
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +29,6 @@ class CategoryRequest extends Request
         if ($this->getMethod() == 'PUT') {
             $validationRule['slug'] = 'required|max:255|alpha_dash';
         }
-
         return $validationRule;
     }
 }

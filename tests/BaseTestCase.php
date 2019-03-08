@@ -7,6 +7,7 @@ use AvoRed\Framework\Models\Database\AdminUser;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Faker\Generator as FakerGenerator;
+use Illuminate\Support\Facades\Notification;
 
 abstract class BaseTestCase extends OrchestraTestCase
 {
@@ -20,12 +21,14 @@ abstract class BaseTestCase extends OrchestraTestCase
     {
         parent::setUp();
         $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
-      
+        $this->app['config']->set('app.url', env('APP_URL'));
+
         $this->app->singleton(EloquentFactory::class, function ($app) {
             $faker = $app->make(FakerGenerator::class);
             return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
         });
         $this->setUpDatabase();
+        Notification::fake();
        
     }
     private function resetDatabase()

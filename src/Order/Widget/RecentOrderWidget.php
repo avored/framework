@@ -85,9 +85,12 @@ class RecentOrderWidget implements WidgetContract
                 $totalAmount = $product->getRelationValue('pivot')->qty * $product->getRelationValue('pivot')->price;
             }
 
+            $recentOrder['order_id'] = $latestOrder->id;
             $recentOrder['user'] = $latestOrder->user->fullName;
+            $recentOrder['customer_id'] = $latestOrder->user->id;
             $recentOrder['product_count'] = $latestOrder->products->count();
             $recentOrder['total_amount'] = $totalAmount;
+            $recentOrder['status'] = $latestOrder->orderStatus->name;
         }
 
         return ['recentOrderData' => $recentOrder];

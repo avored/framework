@@ -100,8 +100,8 @@ class DataGrid
     }
 
     /**
-     *
-     *
+     * Page Name method is used in the event if we want to customize the page request param
+     * It is important in the event of multiple datagrid on same page.
      * @param null|string $pageName
      */
     public function pageName($pageName = null)

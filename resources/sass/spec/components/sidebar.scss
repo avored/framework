@@ -13,7 +13,7 @@
 // ---------------------------------------------------------
 
 .sidebar {
-  background-color: $red;
+  background-color: #b8452c;
   bottom: 0;
   overflow: hidden;
   position: fixed;
@@ -252,11 +252,11 @@
 
       &:hover,
       &:focus {
-        color: $default-dark;
+        color: #cccccc;
         text-decoration: none;
 
         .icon-holder {
-          color: $default-dark;
+          color: $white;
         }
       }
     }
@@ -283,8 +283,7 @@
 
               &:hover,
               &:focus {
-                background-color: transparent;
-                color: $default-dark;
+                color: #cccccc;
               }
             }
 
