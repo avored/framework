@@ -1,39 +1,57 @@
 
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+        name="name"
+        :autofocus="true"
+        v-model="modelData.name"
+        class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+        id="name" />
+        @if ($errors->has('name'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('name') }}</strong>
+        </span>
+    @endif
+</div>
 
+<div class="form-group">
+    <label for="code">Code</label>
+    <input type="text"
+        name="code"
+        v-model="modelData.code"
+        class="form-control {{ $errors->has('code') ? ' is-invalid' : '' }}"
+        id="code" />
+        @if ($errors->has('code'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('code') }}</strong>
+        </span>
+    @endif
+</div>
 
-<avored-form-input 
-    field-name="name"
-    label="Name" 
-    field-value="{!! $model->name ?? "" !!}" 
-    error-text="{!! $errors->first('name') !!}"
-    v-on:change="changeModelValue"
-    autofocus="autofocus"
-        >
-</avored-form-input>
+<div class="form-group">
+    <label for="phone_code">Phone Code</label>
+    <input type="text"
+        name="phone_code"
+        v-model="modelData.phone_code"
+        class="form-control {{ $errors->has('phone_code') ? ' is-invalid' : '' }}"
+        id="phone_code" />
+        @if ($errors->has('phone_code'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('phone_code') }}</strong>
+        </span>
+    @endif
+</div>
 
-<avored-form-input 
-    field-name="code"
-    label="Code" 
-    field-value="{!! $model->code ?? "" !!}" 
-    error-text="{!! $errors->first('code') !!}"
-    v-on:change="changeModelValue"
-        >
-</avored-form-input>
-
-<avored-form-input 
-    field-name="phone_code"
-    label="Phone Code" 
-    field-value="{!! $model->phone_code ?? "" !!}" 
-    error-text="{!! $errors->first('phone_code') !!}"
-    v-on:change="changeModelValue"
-        >
-</avored-form-input>
-
-<avored-form-input 
-    field-name="lang_code"
-    label="Language Code" 
-    field-value="{!! $model->lang_code ?? "" !!}" 
-    error-text="{!! $errors->first('lang_code') !!}"
-    v-on:change="changeModelValue"
-        >
-</avored-form-input>
+<div class="form-group">
+    <label for="lang_code">Language Code</label>
+    <input type="text"
+        name="lang_code"
+        v-model="modelData.lang_code"
+        class="form-control {{ $errors->has('lang_code') ? ' is-invalid' : '' }}"
+        id="lang_code" />
+        @if ($errors->has('lang_code'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('lang_code') }}</strong>
+        </span>
+    @endif
+</div>

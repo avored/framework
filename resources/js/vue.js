@@ -36,12 +36,22 @@ if (token) {
 
 Vue.component('datagrid', require('../components/datagrid/DataGrid.vue').default);
 Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue').default);
+
+
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue').default);
 Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue').default);
 Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue').default);
+Vue.component('admin-user-field-page', require('../components/user/admin-user/AdminUserFieldPage.vue').default);
+
+Vue.component('country-field-page', require('../components/system/country/CountryFieldPage.vue').default);
+Vue.component('state-field-page', require('../components/system/state/StateFieldPage.vue').default);
+Vue.component('site-currency-field-page', require('../components/system/site-currency/SiteCurrencyFieldPage.vue').default);
+
 Vue.component('category-field-page', require('../components/product/category/CategoryFieldPage.vue').default);
+Vue.component('attribute-field-page', require('../components/product/attribute/AttributeFieldPage.vue').default);
 
 Vue.component('cms-page-field-page', require('../components/cms/page/CmsPageFieldPage.vue').default);
+Vue.component('order-status-field-page', require('../components/order/order-status/OrderStatusFieldPage.vue').default);
 
 //require('./bootstrap');
 

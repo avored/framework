@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div id="admin-state-page" class="row">
+    <div  class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -13,7 +13,11 @@
                     <form action="{{ route('admin.state.store') }}" method="post">
                         @csrf
 
-                        @include('avored-framework::system.state._fields')
+                        <state-field-page inline-template>
+                            <div>
+                                @include('avored-framework::system.state._fields')
+                            </div>
+                        </state-field-page>
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
@@ -31,28 +35,3 @@
         </div>
     </div>
 @endsection
-
-
-@push('scripts')
-
-<script>
-
- var app = new Vue({
-        el: '#admin-state-page',
-        data : {
-            model: {},
-            autofocus:true,
-            disabled: false
-           
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this.model[fieldName] = val;
-            }
-        }
-    });
-
-</script>
-
-
-@endpush

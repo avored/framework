@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div id=admin-admin-user-page class="row">
+    <div  class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -14,9 +14,13 @@
                         method="post">
                         @csrf()
                         @method('put')
-
-                        @include('avored-framework::system.country._fields')
-
+                        
+                        <country-field-page inline-template :model="{{ $model }}">
+                            <div>
+                                @include('avored-framework::system.country._fields')
+                            </div>
+                        </country-field-page>
+                        
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
                                 {{ __('avored-framework::user.country-update') }}
@@ -32,26 +36,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-
-<script>
-
- var app = new Vue({
-        el: '#admin-admin-user-page',
-        data : {
-            model: {},
-            autofocus:true,
-            disabled: true
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this.model[fieldName] = val;
-            }
-        }
-    });
-
-</script>
-
-
-@endpush

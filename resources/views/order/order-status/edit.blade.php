@@ -2,16 +2,16 @@
 
 @section('content')
 
-    <div id=admin-admin-user-page class="row">
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     {{ __('avored-framework::shop.order-status-update') }}
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.order-status.update', $model->id) }}" 
-                      
-                        method="post">
+                    <form action="{{ route('admin.order-status.update', $model->id) }}" method="post">
+                        <order-status-field-page inline-template :model="{{ $model }}">
+                            <div>
                         @csrf()
                         @method('put')
 
@@ -25,6 +25,8 @@
                                 {{ __('avored-framework::lang.cancel') }}
                             </a>
                         </div>
+                        </div>
+                        </order-status-field-page>
 
                     </form>
                 </div>
@@ -32,26 +34,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-
-<script>
-
- var app = new Vue({
-        el: '#admin-admin-user-page',
-        data : {
-            model: {},
-            autofocus:true,
-            disabled: true
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this.model[fieldName] = val;
-            }
-        }
-    });
-
-</script>
-
-
-@endpush
