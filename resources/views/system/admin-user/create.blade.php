@@ -12,8 +12,11 @@
 
                     <form action="{{ route('admin.admin-user.store') }}" method="post">
                         @csrf
-
-                        @include('avored-framework::system.admin-user._fields')
+                        <admin-user-field-page inline-template>
+                            <div>
+                                @include('avored-framework::system.admin-user._fields')
+                            </div>
+                        </admin-user-field-page>
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">

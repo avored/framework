@@ -1,95 +1,70 @@
-
-<avored-form-input 
-    field-name="name"
-    label="{{ __('avored-framework::attribute.name') }}" 
-    field-value="{!! $model->name ?? "" !!}" 
-    error-text="{!! $errors->first('name') !!}"
-    v-on:change="changeModelValue"
-    autofocus="autofocus"
-        >
-</avored-form-input>
-
-
-
-<avored-form-input 
-    field-name="slug"
-    label="{{ __('Slug') }}" 
-    field-value="{!! $model->slug ?? "" !!}" 
-    error-text="{!! $errors->first('slug') !!}"
-    v-on:change="changeModelValue"
-   
-        >
-</avored-form-input>
-@php
-    $content = (isset($model)) ? $model->getContent() : "";
-@endphp
 <div class="form-group">
-    <label for="content">Content</label>
-    <textarea id="content" name="content"
-              class="summernote form-control"
-    >{{ $content }}</textarea>
-</div>
+                                    <label for="name">Name</label>
+                                    <input type="text"
+                                        name="name"
+                                        v-model="pageData.name"
+                                        class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                        id="name" />
+                                        @if ($errors->has('name'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
 
-<avored-form-input 
-    field-name="meta_title"
-    label="{{ __('Meta Title') }}" 
-    field-value="{!! $model->meta_title ?? "" !!}" 
-    error-text="{!! $errors->first('meta_title') !!}"
-    v-on:change="changeModelValue"
-   
-        >
-</avored-form-input>
-
-<avored-form-input 
-    field-name="meta_description"
-    label="{{ __('Meta Description') }}" 
-    field-value="{!! $model->meta_description ?? "" !!}" 
-    error-text="{!! $errors->first('meta_description') !!}"
-    v-on:change="changeModelValue"
-   
-        >
-</avored-form-input>
+                                <div class="form-group">
+                                    <label for="slug">Slug</label>
+                                    <input type="text"
+                                        name="slug"
+                                        v-model="slug"
+                                        class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
+                                        id="slug" />
+                                        @if ($errors->has('slug'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('slug') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
 
 
-<div class="modal" id="widget-list-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Widget Selection</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('avored-framework::forms.select',
-                            ['name' => 'widget_list',
-                            'label' => 'Widget List',
-                            'options' => $widgetOptions
-                            ])
-            </div>
-            <div class="modal-footer">
-                <button type="button" 
-                        id="widget-insert-button" 
-                        data-dismiss="modal" 
-                        class="btn btn-primary">
-                    Insert Widget
-                </button>
-                <button type="button"   
-                    id="widget-close-button" 
-                    data-dismiss="modal"
-                     class="btn btn-default">    
-                     Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+                                @php
+                                    $content = (isset($model)) ? $model->getContent() : "";
+                                @endphp
+                                <div class="form-group">
+                                    <label for="content">Content</label>
+                                    <textarea
+                                        id="content"
+                                        name="content"
+                                        v-model="pageData.content"
+                                        class="summernote form-control"
+                                    >{{ $content }}</textarea>
+                                </div>
 
-@push('scripts')
-    <script>
-        jQuery(document).ready(function() {
-          
-            
-        });
-    </script>
-@endpush
+                                <div class="form-group">
+                                    <label for="meta_title">Meta Title</label>
+                                    <input type="text"
+                                        name="meta_title"
+                                        v-model="pageData.meta_title"
+                                        class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
+                                        id="meta_title" />
+                                        @if ($errors->has('meta_title'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('meta_title') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="meta_description">Meta Description</label>
+                                    <input type="text"
+                                        name="meta_description"
+                                        v-model="pageData.meta_description"
+                                        class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
+                                        id="meta_description" />
+                                        @if ($errors->has('meta_description'))
+                                        <span class='invalid-feedback'>
+                                            <strong>{{ $errors->first('meta_description') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>

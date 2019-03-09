@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div id="admin-site-currency-page" class="row">
+    <div  class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -15,7 +15,11 @@
                         @csrf()
                         @method('put')
 
-                        @include('avored-framework::system.site-currency._fields')
+                        <site-currency-field-page inline-template :model="{{ $model }}">
+                            <div>
+                                @include('avored-framework::system.site-currency._fields')
+                            </div>
+                        </site-currency-field-page>
 
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">
@@ -32,26 +36,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-
-<script>
-
- var app = new Vue({
-        el: '#admin-site-currency-page',
-        data : {
-            model: {},
-            autofocus:true,
-            disabled: true
-        },
-        methods: {
-            changeModelValue: function(val,fieldName) {
-                this.model[fieldName] = val;
-            }
-        }
-    });
-
-</script>
-
-
-@endpush

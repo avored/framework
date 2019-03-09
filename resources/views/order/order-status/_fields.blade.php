@@ -1,24 +1,36 @@
 
 
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+        name="name"
+        v-model="modelData.name"
+        :autofocus="true"
+        class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+        id="name" />
+        @if ($errors->has('name'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('name') }}</strong>
+        </span>
+    @endif
+</div>
 
-<avored-form-input 
-    field-name="name"
-    label="Name" 
-    field-value="{!! $model->name ?? "" !!}" 
-    error-text="{!! $errors->first('name') !!}"
-    v-on:change="changeModelValue"
-    autofocus="autofocus"
-        >
-</avored-form-input>
 
-<avored-form-select 
-    field-name="is_default"
-    label="Is Default" 
-    field-value="{!! $model->is_default ?? "" !!}" 
-    error-text="{!! $errors->first('is_default') !!}"
-    v-on:change="changeModelValue"
-    field-options='{!! $isDefaultOptions !!}'
-    autofocus="autofocus"
-        >
-</avored-form-select>
-
+<div class="form-group">
+    <label for="is_default">Is Default</label>
+    <select
+        v-model="modelData.is_default"
+        name="is_default"
+        class="form-control {{ $errors->has('is_default') ? ' is-invalid' : '' }}"
+        id="is_default"
+    >
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+       
+    </select>
+        @if ($errors->has('is_default'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('is_default') }}</strong>
+        </span>
+    @endif
+</div>

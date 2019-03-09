@@ -1,23 +1,33 @@
 
-<avored-form-input 
-    field-name="name"
-    label="{{ __('avored-framework::attribute.name') }}" 
-    field-value="{!! $model->name ?? "" !!}" 
-    error-text="{!! $errors->first('name') !!}"
-    v-on:change="changeModelValue"
-    autofocus="autofocus"
-        >
-</avored-form-input>
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+        name="name"
+        :autofocus="true"
+        v-model="modelData.name"
+        class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
+        id="name" />
+        @if ($errors->has('name'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('name') }}</strong>
+        </span>
+    @endif
+</div>
 
-<avored-form-input 
-    field-name="identifier"
-    label="{{ __('avored-framework::attribute.identifier') }}" 
-    field-value="{!! $model->identifier ?? "" !!}" 
-    error-text="{!! $errors->first('identifier') !!}"
-    v-on:change="changeModelValue"
-        >
-</avored-form-input>
 
+<div class="form-group">
+    <label for="identifier">Identifier</label>
+    <input type="text"
+        name="identifier"
+        v-model="identifier"
+        class="form-control {{ $errors->has('identifier') ? ' is-invalid' : '' }}"
+        id="identifier" />
+        @if ($errors->has('identifier'))
+        <span class='invalid-feedback'>
+            <strong>{{ $errors->first('identifier') }}</strong>
+        </span>
+    @endif
+</div>
 
 <?php
 

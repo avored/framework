@@ -8,6 +8,10 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Faker\Generator as FakerGenerator;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\Language;
+use AvoRed\Framework\System\Middleware\LanguageMiddleware;
+use AvoRed\Framework\Models\Contracts\LanguageInterface;
 
 abstract class BaseTestCase extends OrchestraTestCase
 {
@@ -15,7 +19,13 @@ abstract class BaseTestCase extends OrchestraTestCase
      * Admin User 
      * @var \AvoRed\Framework\Models\Database\AdminUser $user
      */
-    protected $user; 
+    protected $user;
+
+    /**
+     * Default Language for the Framework
+     * @var \AvoRed\Framework\Models\Database\Language
+     */
+    protected $defaultLanguage; 
 
     public function setUp()
     {
@@ -36,6 +46,17 @@ abstract class BaseTestCase extends OrchestraTestCase
         $this->artisan('migrate:fresh', [
             '--database' => 'sqlite',
         ]);
+
+        Language::create(
+            ['name' => 'English',
+            'code' => 'en',
+            'is_default' => 1]
+        );
+
+        $middleware = new LanguageMiddleware(app(LanguageInterface::class));
+
+        $response = $middleware->handle(request(), function () {});
+        $this->defaultLanguage = Session::get('default_language');
     }
     protected function getPackageProviders($app)
     {
@@ -90,16 +111,22 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     protected function _getAdminUser()
     {
-        if (null === $this->user) {
-            $role = Role::create(['name' => 'Administrator', 'description' => 'Administrator']);
-            $this->user = AdminUser::create(['role_id' => $role->id,
-                                            'is_super_admin' => 1,
-                                            'first_name' => 'Purvesh',
-                                            'last_name' => 'Patel',
-                                            'email' => 'admin@admin.com',
-                                            'password' => bcrypt('admin123')
-                                        ]);
+        if (null === $this->user) {    
+            $this->user = factory(AdminUser::class)->create(['is_super_admin' => 1]);
         }
         return $this->user;
+    }
+
+    /**
+     * Set Admin User for UnitTest
+     *
+     * @return self
+     */
+    protected function adminuser()
+    {
+        if (null === $this->user) {    
+            $this->user = factory(AdminUser::class)->create(['is_super_admin' => 1]);
+        }
+        return $this;
     }
 }

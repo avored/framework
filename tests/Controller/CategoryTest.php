@@ -4,46 +4,92 @@ namespace AvoRed\Framework\Tests\Controller;
 
 use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\Models\Contracts\CategoryInterface;
+use AvoRed\Framework\Models\Database\Language;
+use AvoRed\Framework\Models\Database\Category;
 
 class CategoryTest extends BaseTestCase
 {
-    /**
-     * Test to check if category resource route is working
-     *
-     * @return void
-     */
-    public function testCategoryRosourceRouteTest()
+    
+    /** @test */
+    public function admin_category_index_route()
     {
-        $user = $this->_getAdminUser();
-        $response = $this->actingAs($user, 'admin')->get(route('admin.category.index'));
-        $response->assertStatus(200);
-        $response->assertSee('Category List');
+        $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->get(route('admin.category.index'))
+            ->assertStatus(200)
+            ->assertSee(__('avored-framework::product.category.title'));
+    }
 
-        $response = $this->get(route('admin.category.create'));
-        $response->assertStatus(200);
-        $response->assertSee('Create Category');
+    /** @test */
+    public function admin_category_create_route()
+    {
+        $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->get(route('admin.category.create'))
+            ->assertStatus(200)
+            ->assertSee(__('avored-framework::product.category.create_title'));  
+    }
 
-        $data['name'] = 'category name test';
-        $data['slug'] = 'test-category-slug';
+    /** @test */
+    public function admin_category_store_route()
+    {
+        $category = factory(Category::class)->make();
 
-        $response = $this->post(route('admin.category.store'), $data);
-        $response->assertRedirect(route('admin.category.index'));
+        $data = array_merge(['language_id' => $this->defaultLanguage->id], $category->toArray());
+        $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->post(route('admin.category.store', $data))
+            ->assertRedirect(route('admin.category.index'));
+        $this->assertDatabaseHas($category->getTable(), ['name' => $category->name]);
+       
+    }
 
-        $categoryRepository = app()->get(CategoryInterface::class);
+    /** @test */
+    public function admin_category_edit_route()
+    {
+        $category = factory(Category::class)->create();
+        $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->get(route('admin.category.edit', $category->id))
+            ->assertStatus(200)
+            ->assertSee(__('avored-framework::product.category.edit_title'));
+    }
 
-        $categoryModel = $categoryRepository->findByKey('test-category-slug');
+    /** @test */
+    public function admin_category_update_route()
+    {
+        $category = factory(Category::class)->create();
+        $category->name = 'test new name';
+        $data = array_merge(['language_id' => $this->defaultLanguage->id], $category->toArray());
 
-        $response = $this->get(route('admin.category.edit', $categoryModel->id));
-        $response->assertStatus(200);
+        $res = $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->put(route('admin.category.update', $category->id), $data)
+            ->assertRedirect(route('admin.category.index'));
+            ;
+       
+        $this->assertDatabaseHas($category->getTable(), ['name' => 'test new name']);
+       
+    }
 
-        $updateData['name'] = 'updated category name test';
-        $updateData['slug'] = 'test-category-slug';
-
-        $response = $this->put(route('admin.category.update', $categoryModel->id), $updateData);
-
-        $response->assertRedirect(route('admin.category.index'));
-
-        $this->delete(route('admin.category.destroy', $categoryModel->id));
-        $response->assertRedirect(route('admin.category.index'));
+    /** @test */
+    public function admin_category_destroy_route()
+    {
+        $category = factory(Category::class)->create();
+        
+        $res = $this
+            ->adminuser()
+            ->actingAs($this->user, 'admin')
+            ->delete(route('admin.category.destroy', $category->id))
+            ->assertRedirect(route('admin.category.index'));
+            ;
+       
+        $this->assertDatabaseMissing($category->getTable(), ['id' => $category->id]);
+       
     }
 }
