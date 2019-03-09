@@ -32,12 +32,16 @@ if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 }
 
+
+
 Vue.component('datagrid', require('../components/datagrid/DataGrid.vue').default);
 Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue').default);
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue').default);
 Vue.component('password-reset-page', require('../components/user/auth/PasswordResetPage.vue').default);
 Vue.component('set-new-password-page', require('../components/user/auth/SetNewPasswordPage.vue').default);
 Vue.component('category-field-page', require('../components/product/category/CategoryFieldPage.vue').default);
+
+Vue.component('cms-page-field-page', require('../components/cms/page/CmsPageFieldPage.vue').default);
 
 //require('./bootstrap');
 
