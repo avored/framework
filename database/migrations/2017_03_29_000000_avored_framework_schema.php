@@ -39,21 +39,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_translations', function(Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('category_id')->nullable()->default(null);
-            $table->unsignedInteger('language_id')->nullable()->default(null);
-            $table->string('name');
-            $table->string('slug');
-            $table->string('meta_title')->nullable()->default(null);
-            $table->string('meta_description')->nullable()->default(null);
-
-            $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-        });
-
         Schema::create('category_filters', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned()->nullable()->default(null);
@@ -656,6 +641,47 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('rate_type', ['PERCENTAGE', 'FIXED'])->default('PERCENTAGE');
             $table->enum('applied_with', ['SHIPPING', 'BILLING', 'STORE'])->default('SHIPPING');
             $table->timestamps();
+        });
+
+
+        Schema::create('category_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('category_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+
+            $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
+        Schema::create('attribute_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('attribute_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name');
+            $table->timestamps();
+
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
+        Schema::create('attribute_dropdown_option_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('attribute_dropdown_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('display_text');
+            $table->timestamps();
+
+            $table->foreign('attribute_dropdown_id')
+                ->references('id')
+                ->on('attribute_dropdown_options')
+                ->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
         $countryModel = Country::whereCode('nz')->first();

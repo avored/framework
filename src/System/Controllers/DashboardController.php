@@ -4,8 +4,6 @@ namespace AvoRed\Framework\System\Controllers;
 
 use AvoRed\Framework\Models\Contracts\OrderInterface;
 use AvoRed\Framework\Models\Contracts\UserInterface;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 
 class DashboardController extends Controller
 {

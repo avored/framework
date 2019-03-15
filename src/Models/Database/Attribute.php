@@ -20,6 +20,15 @@ class Attribute extends BaseModel
     {
         return $this->hasMany(AttributeDropdownOption::class);
     }
+    /**
+     * The attributes has Many Dropdown Options.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributeTranslations()
+    {
+        return $this->hasMany(AttributeTranslation::class);
+    }
 
     /**
      * The attributes has Many Products.

@@ -14,6 +14,9 @@ export default {
         sanitizeName(name) {
             return name.toLowerCase().replace(/[^A-Za-z0-9?!]/,'').replace(/\s*$/g, '').replace(/\s+/g, '-');
         },
+        changeLanguage(event) {
+            window.location = event.target.selectedOptions[0].getAttribute('data-url');
+        },
         clickDuplicate() {
             this.displayTextFields.forEach(element => {
                 element.buttonLabel = "Remove";
