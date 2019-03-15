@@ -1,9 +1,13 @@
 <script>
 
 import isNil from 'lodash/isNil';
+import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
 export default {
     props: ['page'],
+    components: {
+      markdownEditor
+    },
     data() {
         return {
           pageData: {}
@@ -25,6 +29,5 @@ export default {
             this.pageData = this.page;
         }
     }
-
 }
 </script>

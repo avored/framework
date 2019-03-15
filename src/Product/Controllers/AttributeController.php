@@ -67,7 +67,8 @@ class AttributeController extends Controller
      */
     public function edit(Attribute $attribute)
     {
-        return view('avored-framework::product.attribute.edit')->with('model', $attribute);
+        return view('avored-framework::product.attribute.edit')
+            ->with('attribute', $attribute);
     }
 
     public function update(AttributeRequest $request, Attribute $attribute)

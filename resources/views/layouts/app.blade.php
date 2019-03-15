@@ -45,12 +45,7 @@
     </div>
   </div>
 
-  @if (true || request()->get('with') == 'all') 
-  <script src="{{ url('vendor/avored-admin/js/app.js') }}"></script>
   <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
-  @else
-  <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
-  @endif
   @stack('scripts')
 </body>
 </html>

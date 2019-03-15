@@ -7,6 +7,7 @@ use AvoRed\Framework\Models\Database\Language;
 use AvoRed\Framework\System\Requests\LanguageRequest;
 use AvoRed\Framework\Models\Contracts\LanguageInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 
 class LanguageController extends Controller
 {
@@ -29,9 +30,12 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $dataGrid = new LanguageDataGrid($this->repository->query()->orderBy('id', 'desc'));
+        $dataGrid = new LanguageDataGrid(
+            $this->repository->query()->orderBy('id', 'desc')
+        );
 
-        return view('avored-framework::system.language.index')->with('dataGrid', $dataGrid->dataGrid);
+        return view('avored-framework::system.language.index')
+            ->with('dataGrid', $dataGrid->dataGrid);
     }
 
     /**
@@ -55,6 +59,7 @@ class LanguageController extends Controller
     {
         $this->repository->create($request->all());
 
+        Session::forget('language_setup', false);
         return redirect()->route('admin.language.index');
     }
 
@@ -80,6 +85,7 @@ class LanguageController extends Controller
     public function update(LanguageRequest $request, Language $language)
     {
         $language->update($request->all());
+        Session::forget('language_setup', false);
 
         return redirect()->route('admin.language.index');
     }
