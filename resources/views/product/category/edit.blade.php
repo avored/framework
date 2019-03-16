@@ -7,8 +7,14 @@
 @endsection
 
 @section('content')
-<category-field-page category="{{ json_encode($category->getTranslation()) }}" inline-template>
-
+<?php
+//$category->name;
+//$category->slug; 
+//dd($category->name);
+//dd($category->getAttributes());
+?>
+<category-field-page
+    inline-template>
     <div class="row">
         <div class="col-12">
             <form method="post" action="{{ route('admin.category.update', $category->id) }}">
@@ -85,7 +91,7 @@
                                     <label for="name">{{ __('avored-framework::product.category.name') }}</label>
                                     <input type="text"
                                         name="name"
-                                        v-model="name"
+                                        value="{{ $category->getName() }}"
                                         :autofocus="true"
                                         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
                                         id="name" />
@@ -104,7 +110,7 @@
                                     </label>
                                     <input type="text"
                                         name="slug"
-                                        v-model="slug"
+                                        value="{{ $category->getSlug() }}"
                                         class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
                                         id="slug" />
                                         @if ($errors->has('slug'))
@@ -131,7 +137,7 @@
                                 
                                         @foreach ($categoryOptions as $option)
                                             <option
-                                                @if ($option->id == $category->id)
+                                                @if ($option->id === $category->parent_id)
                                                     selected
                                                 @endif
                                                 value="{{ $option->id }}" >
@@ -168,7 +174,7 @@
                             </label>
                             <input type="text"
                                 name="meta_title"
-                                v-model="meta_title"
+                                value="{{ $category->getMetaTitle() }}"
                                 class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
                                 id="meta_title" />
                                 @if ($errors->has('meta_title'))
@@ -183,7 +189,7 @@
                             </label>
                             <input type="text"
                                 name="meta_description"
-                                v-model="meta_description"
+                                value="{{ $category->getMetaDescription() }}"
                                 class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
                                 id="meta_description" />
                                 @if ($errors->has('meta_description'))

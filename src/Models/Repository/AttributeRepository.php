@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Models\Repository;
 
 use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
+use AvoRed\Framework\Models\Database\AttributeTranslation;
 
 class AttributeRepository implements AttributeInterface
 {
@@ -67,5 +68,31 @@ class AttributeRepository implements AttributeInterface
     public function create($data)
     {
         return Attribute::create($data);
+    }
+
+    /**
+     * Update an attribute
+     *
+     * @param \AvoRed\Framework\Models\Database\Attribute $attribute
+     * @param array $data
+     * @return mixed
+     */
+    public function update(Attribute $attribute, array $data)
+    {
+        if (Session::has('multi_language_enabled')) {
+            $languageId = $data['language_id'];
+            $languaModel = Language::find($languageId);
+            
+            if ($languaModel->is_default) {
+                return $attribute->update($data);
+            } else {
+                $attribute->update(Arr::only($data, ['parent_id']));
+                return AttributeTranslation::create(
+                    array_merge($data, ['attribute_id' => $attribute->id])
+                );
+            }
+        } else {
+            return $attribute->update($data);
+        }
     }
 }

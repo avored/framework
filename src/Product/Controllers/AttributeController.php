@@ -33,7 +33,7 @@ class AttributeController extends Controller
         $attributeGrid = new AttributeDataGrid($this->repository->query());
 
         return view('avored-framework::product.attribute.index')
-                    ->with('dataGrid', $attributeGrid->dataGrid);
+            ->with('dataGrid', $attributeGrid->dataGrid);
     }
 
     /**
@@ -73,8 +73,7 @@ class AttributeController extends Controller
 
     public function update(AttributeRequest $request, Attribute $attribute)
     {
-        $attribute->update($request->all());
-
+        $this->repository->update($attribute, $request->all());
         $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
@@ -133,12 +132,14 @@ class AttributeController extends Controller
     protected function saveDropdownOptions($attribute, $request)
     {
         if (null !== $request->get('dropdown_options')) {
-            if ($attribute->attributeDropdownOptions()->get() != null && $attribute->attributeDropdownOptions()->get()->count() >= 0) {
+            if ($attribute->attributeDropdownOptions()->get() != null 
+                && $attribute->attributeDropdownOptions()->get()->count() >= 0
+            ) {
                 $attribute->attributeDropdownOptions()->delete();
             }
 
             foreach ($request->get('dropdown_options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__' || empty($val['display_text'])) {
+                if (empty($val['display_text'])) {
                     continue;
                 }
 

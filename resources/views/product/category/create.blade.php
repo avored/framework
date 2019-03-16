@@ -7,8 +7,7 @@
 @endsection
 
 @section('content')
-<category-field-page category="{}" inline-template>
-
+<category-field-page inline-template>
     <div class="row">
         <div class="col-12">
             <form method="post" action="{{ route('admin.category.store') }}">
@@ -83,7 +82,6 @@
                                     <label for="name">{{ __('avored-framework::product.category.name') }}</label>
                                     <input type="text"
                                         name="name"
-                                        v-model="name"
                                         :autofocus="true"
                                         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
                                         id="name" />
@@ -102,7 +100,6 @@
                                     </label>
                                     <input type="text"
                                         name="slug"
-                                        v-model="slug"
                                         class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
                                         id="slug" />
                                         @if ($errors->has('slug'))
@@ -126,7 +123,6 @@
                                         class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
                                         id="parent_id"
                                     >
-                                
                                         @foreach ($categoryOptions as $category)
                                             <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                         @endforeach
@@ -160,7 +156,6 @@
                             </label>
                             <input type="text"
                                 name="meta_title"
-                                v-model="meta_title"
                                 class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
                                 id="meta_title" />
                                 @if ($errors->has('meta_title'))
@@ -175,7 +170,6 @@
                             </label>
                             <input type="text"
                                 name="meta_description"
-                                v-model="meta_description"
                                 class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
                                 id="meta_description" />
                                 @if ($errors->has('meta_description'))

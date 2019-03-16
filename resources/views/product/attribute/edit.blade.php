@@ -24,6 +24,9 @@
                                 @foreach ($languages as $language)
                                     <option
                                         data-url="{{ route('admin.attribute.edit', ['category' => $attribute->id ,'language_id' => $language->id]) }}"
+                                        @if ($language->id == request()->get('language_id', $defaultLanguage->id))
+                                        selected
+                                        @endif
                                         value="{{ $language->id }}"
                                     >
                                         {{ $language->name }}
@@ -59,6 +62,8 @@
                                 {{ __('avored-framework::lang.cancel') }}
                         </a>
                     </div>
+                    <input type="hidden" name="language_id" value="{{ request()->get('language_id', $defaultLanguage->id) }}" />
+                
                 </form>
             </div>
         </div>
