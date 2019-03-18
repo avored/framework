@@ -4,7 +4,7 @@
     <input type="text"
         name="name"
         :autofocus="true"
-        v-model="modelData.name"
+        value="{{ isset($attribute) ? $attribute->getName() : '' }}"
         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
         id="name" />
         @if ($errors->has('name'))
@@ -19,7 +19,7 @@
     <label for="identifier">Identifier</label>
     <input type="text"
         name="identifier"
-        v-model="identifier"
+        value="{{ isset($attribute) ? $attribute->getIdentifier() : '' }}"
         class="form-control {{ $errors->has('identifier') ? ' is-invalid' : '' }}"
         id="identifier" />
         @if ($errors->has('identifier'))
@@ -34,30 +34,32 @@
 $pool = 'abcdefghijklmnopqrstuvwxyz';
 
 $randomString = substr(str_shuffle(str_repeat($pool, 6)), 0, 6);
-
-$hiddenClass = '';
 $editMode = false;
 
-if (isset($model) && $model->attributeDropdownOptions->count() > 0) {
+if (isset($attribute) && $attribute->attributeDropdownOptions->count() > 0) {
     $editMode = true;
-    $hiddenClass = '';
 }
 ?>
 
-<div class="dynamic-field {{ $hiddenClass }}">
+<div class="dynamic-field">
     @if($editMode === true)
-        @foreach($model->attributeDropdownOptions as $key => $dropdownOptionModel)
+        @foreach($attribute->attributeDropdownOptions as $key => $dropdownOptionModel)
             <div class="dynamic-field-row">
                 <div class="form-group col-md-12">
                     <label>{{ __('avored-framework::attribute.display-text') }}</label>
                     <span class="input-group">
                         <input class="form-control"
                                name="dropdown_options[{{ $dropdownOptionModel->id }}][display_text]"
-                               value="{{ $dropdownOptionModel->display_text }}"/>
+                               value="{{ $dropdownOptionModel->getDisplayText() }}"/>
 
                         @if ($loop->last)
                             <div class="input-group-append">
-                                <button @click="clickDuplicate" class="btn btn-primary add-field">Add</button>
+                                <button 
+                                    @click="clickDuplicate"
+                                    class="btn btn-primary add-field"
+                                >
+                                    Add
+                                </button>
                             </div>
                         @else
                             <div class="input-group-append">

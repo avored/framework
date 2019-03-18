@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 class AttributeTranslation extends BaseModel
 {
     protected $fillable = [
-        'attribute',
+        'attribute_id',
         'language_id',
-        'name'
+        'name',
+        'identifier'
     ];
 }

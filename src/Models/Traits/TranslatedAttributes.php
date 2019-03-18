@@ -17,10 +17,10 @@ trait TranslatedAttributes
         }
         
         $defaultLanguage = Session::get('default_language');
-        $languageId = request()->get('language_id', 0);
-    
+        $languageId = request()->get('language_id', $defaultLanguage->id);
+
         if (in_array($key, $this->getTranslatedAttributes())
-            && $defaultLanguage->id == $languageId
+            && $defaultLanguage->id != $languageId
         ) {
             $translatedModel = $this->translations()
                 ->whereLanguageId($languageId)

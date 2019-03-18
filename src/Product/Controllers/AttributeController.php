@@ -9,6 +9,8 @@ use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Product\Requests\AttributeRequest;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\System\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\AttributeDropdownOptionTranslation;
 
 class AttributeController extends Controller
 {
@@ -131,6 +133,7 @@ class AttributeController extends Controller
      */
     protected function saveDropdownOptions($attribute, $request)
     {
+        //@todo fixed the bug that during multi language update do not delete existing and crete record
         if (null !== $request->get('dropdown_options')) {
             if ($attribute->attributeDropdownOptions()->get() != null 
                 && $attribute->attributeDropdownOptions()->get()->count() >= 0
@@ -142,8 +145,37 @@ class AttributeController extends Controller
                 if (empty($val['display_text'])) {
                     continue;
                 }
+                $option = $attribute
+                    ->attributeDropdownOptions()
+                    ->create($val);
 
-                $attribute->attributeDropdownOptions()->create($val);
+                $defaultLanguage = Session::get('default_language');
+                $languageId = $request->get('language_id', $defaultLanguage->id);
+        
+                if (in_array(
+                    'display_text',
+                    $option->getTranslatedAttributes()
+                )
+                    && $defaultLanguage->id != $languageId
+                ) {
+                    $translatedModel = $option->translations()
+                        ->whereLanguageId($languageId)
+                        ->first();
+                    if ($translatedModel === null) {
+                        AttributeDropdownOptionTranslation::create(
+                            array_merge(
+                                $val, 
+                                [
+                                    'attribute_dropdown_option_id' => $option->id,
+                                    'language_id' => $languageId
+                                ]
+                            )
+                        );
+                    } else {
+                        $translatedModel->update($val);
+                    }
+                    
+                }
             }
         }
     }

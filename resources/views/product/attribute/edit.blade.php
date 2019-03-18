@@ -46,9 +46,7 @@
                 <form action="{{ route('admin.attribute.update', $attribute->id) }}" method="post">
                     @csrf
                     @method('put')
-                    <?php 
-                    $attribute->attributeDropdownOptions;
-                    ?>
+                    
                     <div>
                         @include('avored-framework::product.attribute._fields')
                     </div>

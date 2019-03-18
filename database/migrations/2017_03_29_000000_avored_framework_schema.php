@@ -663,7 +663,8 @@ class AvoredFrameworkSchema extends Migration
             $table->increments('id');
             $table->unsignedInteger('attribute_id')->nullable()->default(null);
             $table->unsignedInteger('language_id')->nullable()->default(null);
-            $table->string('name');
+            $table->string('name')->nullable()->default(null);
+            $table->string('identifier')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
@@ -672,12 +673,12 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('attribute_dropdown_option_translations', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('attribute_dropdown_id')->nullable()->default(null);
+            $table->unsignedInteger('attribute_dropdown_option_id')->nullable()->default(null);
             $table->unsignedInteger('language_id')->nullable()->default(null);
             $table->string('display_text');
             $table->timestamps();
 
-            $table->foreign('attribute_dropdown_id')
+            $table->foreign('attribute_dropdown_option_id', 'adt')
                 ->references('id')
                 ->on('attribute_dropdown_options')
                 ->onDelete('cascade');

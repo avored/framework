@@ -3,10 +3,9 @@
 import { isNil, shuffle, slice, join } from 'lodash';
 
 export default {
-    props: ['model'],
+    props: ['name'],
     data() {
         return {
-          modelData: {},
           displayTextFields: []
         }
     },
@@ -41,14 +40,6 @@ export default {
             this.modelData.identifier = this.sanitizeName(this.modelData.name ? this.modelData.name : '');
             return   this.modelData.identifier;
         },
-    },
-    mounted() {
-        if (!isNil(this.model)) {
-            this.modelData = this.model;
-        }
-        if (isNil(this.modelData.attribute_dropdown_options)) {
-            this.addDisplayTextField();
-        }
     }
 }
 </script>

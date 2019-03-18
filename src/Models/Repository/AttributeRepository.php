@@ -5,6 +5,8 @@ namespace AvoRed\Framework\Models\Repository;
 use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\Models\Database\AttributeTranslation;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\Language;
 
 class AttributeRepository implements AttributeInterface
 {
@@ -86,10 +88,24 @@ class AttributeRepository implements AttributeInterface
             if ($languaModel->is_default) {
                 return $attribute->update($data);
             } else {
-                $attribute->update(Arr::only($data, ['parent_id']));
-                return AttributeTranslation::create(
-                    array_merge($data, ['attribute_id' => $attribute->id])
-                );
+                
+                $translatedModel = $attribute
+                    ->translations()
+                    ->whereLanguageId($languageId)
+                    ->first();
+                if (null === $translatedModel) {
+                    return AttributeTranslation::create(
+                        array_merge($data, ['attribute_id' => $attribute->id])
+                    );
+                } else {
+                    $translatedModel->update(
+                        $data,
+                        $attribute->getTranslatedAttributes()
+                    );
+
+                    return $translatedModel;
+                }
+
             }
         } else {
             return $attribute->update($data);
