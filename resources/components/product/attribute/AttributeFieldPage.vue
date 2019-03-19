@@ -30,9 +30,9 @@ export default {
         getRandomString() {
             return join(slice(shuffle(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']),0,8), '');
         },
-        addDisplayTextField(index, event) {
+        addDisplayTextField(index = 0, event) {
             
-            if (event.target.getAttribute('data-action') === 'remove') {
+            if (!isNil(event) && event.target.getAttribute('data-action') === 'remove') {
                 this.displayTextFields.splice(index, 1);
             } else {
                 let randomString = this.getRandomString();

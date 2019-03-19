@@ -40,7 +40,7 @@
                     <div class="input-group">
                         <input
                             class="form-control"
-                            :value="displayTextField.value"
+                            v-model="displayTextField.value"
                             :id="displayTextField.id"
                             :name="displayTextField.name"
                         />
