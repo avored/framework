@@ -3,7 +3,7 @@
 import { isNil, shuffle, slice, join } from 'lodash';
 
 export default {
-    props: ['name'],
+    props: ['name', 'dropdownOptions'],
     data() {
         return {
           displayTextFields: []
@@ -16,30 +16,60 @@ export default {
         changeLanguage(event) {
             window.location = event.target.selectedOptions[0].getAttribute('data-url');
         },
-        clickDuplicate() {
-            this.displayTextFields.forEach(element => {
-                element.buttonLabel = "Remove";
-            });
-            this.addDisplayTextField();
+        clickDuplicate(index, event) {
+
+            if (event.target.getAttribute('data-action') !== 'remove') {    
+                this.displayTextFields.forEach(element => {
+                    element.action = "remove";
+                    element.buttonLabel = "Remove";
+                });
+            }
+            
+            this.addDisplayTextField(index, event);
         },
         getRandomString() {
             return join(slice(shuffle(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']),0,8), '');
         },
-        addDisplayTextField() {
-            let randomString = this.getRandomString();
-            this.displayTextFields.push({
-                name: 'dropdown_options['+ randomString +'][display_text]',
-                label: 'Display Text',
-                id: 'display-text-input-group-' + randomString,
-                buttonLabel: 'Add'
-            });
+        addDisplayTextField(index, event) {
+            
+            if (event.target.getAttribute('data-action') === 'remove') {
+                this.displayTextFields.splice(index, 1);
+            } else {
+                let randomString = this.getRandomString();
+                this.displayTextFields.push({
+                    name: 'dropdown_options['+ randomString +'][display_text]',
+                    label: 'Display Text',
+                    id: 'display-text-input-group-' + randomString,
+                    action: 'add',
+                    buttonLabel: 'Add',
+                    value: ''
+                });
+            }
         }
     },
     computed: {
         identifier() {
             this.modelData.identifier = this.sanitizeName(this.modelData.name ? this.modelData.name : '');
-            return   this.modelData.identifier;
+            return this.modelData.identifier;
         },
+    },
+    mounted() {
+        if (!isNil(this.dropdownOptions)){
+            this.dropdownOptions.forEach(element => {
+                this.displayTextFields.push(
+                    {
+                        name: 'dropdown_options['+ element.id +'][display_text]',
+                        label: 'Display Text',
+                        action: 'add',
+                        id: 'display-text-input-group-' + element.id,
+                        buttonLabel: 'Add',
+                        value: element.display_text
+                    }
+                );
+            });
+        } else {
+            this.addDisplayTextField();
+        }
     }
 }
 </script>

@@ -7,12 +7,7 @@
 @endsection
 
 @section('content')
-<?php
-//$category->name;
-//$category->slug; 
-//dd($category->name);
-//dd($category->getAttributes());
-?>
+
 <category-field-page
     inline-template>
     <div class="row">
@@ -91,6 +86,9 @@
                                     <label for="name">{{ __('avored-framework::product.category.name') }}</label>
                                     <input type="text"
                                         name="name"
+                                        @if(!$isDefaultLang && !in_array('name', $category->getTranslatedAttributes()))
+                                            disabled
+                                        @endif
                                         value="{{ $category->getName() }}"
                                         :autofocus="true"
                                         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
@@ -102,7 +100,9 @@
                                         @endif
                                 </div>
                             </div>
+                            
 
+                          
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="slug">
@@ -110,6 +110,9 @@
                                     </label>
                                     <input type="text"
                                         name="slug"
+                                        @if(!$isDefaultLang && !in_array('slug', $category->getTranslatedAttributes()))
+                                            disabled
+                                        @endif
                                         value="{{ $category->getSlug() }}"
                                         class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
                                         id="slug" />
@@ -121,37 +124,41 @@
                                     </div>
                                 </div>
                             </div>
-                        
+                            
 
                         <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="parent_id">
-                                        {{ __('avored-framework::product.category.parent') }}
-                                    </label>
-                                    <select
-                                        name="parent_id"
-                                        class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
-                                        id="parent_id"
-                                    >
-                                
-                                        @foreach ($categoryOptions as $option)
-                                            <option
-                                                @if ($option->id === $category->parent_id)
-                                                    selected
-                                                @endif
-                                                value="{{ $option->id }}" >
-                                                {{ $option->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                        @if ($errors->has('parent_id'))
-                                        <span class='invalid-feedback'>
-                                            <strong>{{ $errors->first('parent_id') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="parent_id">
+                                            {{ __('avored-framework::product.category.parent') }}
+                                        </label>
+                                        <select
+                                            name="parent_id"
+                                            @if(!$isDefaultLang && !in_array('parent_id', $category->getTranslatedAttributes()))
+                                                disabled
+                                            @endif
+                                            class="form-control {{ $errors->has('parent_id') ? ' is-invalid' : '' }}"
+                                            id="parent_id"
+                                        >
+                                    
+                                            @foreach ($categoryOptions as $option)
+                                                <option
+                                                    @if ($option->id === $category->parent_id)
+                                                        selected
+                                                    @endif
+                                                    value="{{ $option->id }}" >
+                                                    {{ $option->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                            @if ($errors->has('parent_id'))
+                                            <span class='invalid-feedback'>
+                                                <strong>{{ $errors->first('parent_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -174,6 +181,9 @@
                             </label>
                             <input type="text"
                                 name="meta_title"
+                                @if(!$isDefaultLang && !in_array('meta_title', $category->getTranslatedAttributes()))
+                                    disabled
+                                @endif
                                 value="{{ $category->getMetaTitle() }}"
                                 class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
                                 id="meta_title" />
@@ -189,6 +199,9 @@
                             </label>
                             <input type="text"
                                 name="meta_description"
+                                @if(!$isDefaultLang && !in_array('meta_description', $category->getTranslatedAttributes()))
+                                    disabled
+                                @endif
                                 value="{{ $category->getMetaDescription() }}"
                                 class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
                                 id="meta_description" />

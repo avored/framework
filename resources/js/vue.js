@@ -65,7 +65,7 @@ Vue.component('order-status-field-page', require('../components/order/order-stat
 const app = new Vue({
     el: '#app',
     data: {
-        toggleSideBarData: true,
+        toggleSideBarData: false,
         displayProfileHeaderMenu: false
     },
     methods: {
