@@ -7,6 +7,8 @@ use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\Models\Database\AttributeTranslation;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\Models\Database\Language;
+use AvoRed\Framework\Models\Database\AttributeDropdownOption;
+use AvoRed\Framework\Models\Database\AttributeDropdownOptionTranslation;
 
 class AttributeRepository implements AttributeInterface
 {
@@ -105,10 +107,67 @@ class AttributeRepository implements AttributeInterface
 
                     return $translatedModel;
                 }
-
             }
         } else {
             return $attribute->update($data);
+        }
+    }
+
+    /**
+     * Sync Attribute Dropdown Options
+     * @param \AvoRed\Framework\Models\Database\Attribute $attribute
+     * @param array $data
+     */
+    public function syncDropdownOptions($attribute, $data)
+    {
+        $dropdownOptionsData = $data['dropdown_options'] ?? [];
+
+        if (count($dropdownOptionsData)) {
+            $defaultLanguage = Session::get('default_language');
+            $languageId = $data['language_id'] ?? $defaultLanguage->id;
+
+            if ($defaultLanguage->id != $languageId) {
+                
+                foreach ($dropdownOptionsData as $key => $val) {
+
+                    if (empty($val['display_text'])) {
+                        continue;
+                    }
+                    
+                    if (is_int($key)) {
+                        $optionModel = AttributeDropdownOption::find($key);
+                        
+                        $translatedModel = $optionModel
+                            ->translations()
+                            ->whereLanguageId($languageId)
+                            ->first();
+                        if (null !== $translatedModel) {
+                            $translatedModel->update($val);
+                        } else {
+                            $optionModel
+                                ->translations()
+                                ->create(
+                                    array_merge($val, ['language_id' => $languageId])
+                                );
+                        }
+                    } 
+                }
+            } else {
+                if ($attribute->attributeDropdownOptions()->get() != null 
+                    && $attribute->attributeDropdownOptions()->get()->count() >= 0
+                ) {
+                    $attribute->attributeDropdownOptions()->delete();
+                }
+
+                foreach ($dropdownOptionsData as $key => $val) {
+                    if (empty($val['display_text'])) {
+                        continue;
+                    }
+                    $option = $attribute
+                        ->attributeDropdownOptions()
+                        ->create($val);
+                }
+            }
         }
     }
 }
