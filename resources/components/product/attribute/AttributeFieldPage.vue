@@ -56,13 +56,20 @@ export default {
     mounted() {
         if (!isNil(this.dropdownOptions)){
             this.dropdownOptions.forEach(element => {
+                var label = 'Remove';
+                var action = 'remove';
+
+                if (this.displayTextFields.length + 1 === this.dropdownOptions.length) {
+                    label = "Add";
+                    action = "add"
+                }
                 this.displayTextFields.push(
                     {
                         name: 'dropdown_options['+ element.id +'][display_text]',
                         label: 'Display Text',
-                        action: 'add',
+                        action: action,
                         id: 'display-text-input-group-' + element.id,
-                        buttonLabel: 'Add',
+                        buttonLabel: label,
                         value: element.display_text
                     }
                 );
