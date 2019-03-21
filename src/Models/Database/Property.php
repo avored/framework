@@ -2,8 +2,15 @@
 
 namespace AvoRed\Framework\Models\Database;
 
+use AvoRed\Framework\Models\Traits\TranslatedAttributes;
+
 class Property extends BaseModel
 {
+    use TranslatedAttributes;
+    /**
+     * Mass Assignable Property translation attributes
+     * @var array $fillable
+     */
     protected $fillable = [
         'name',
         'identifier',
@@ -13,6 +20,22 @@ class Property extends BaseModel
         'is_visible_frontend',
         'use_for_all_products'
     ];
+
+    /**
+     * The attributes that are translatable assignable.
+     *
+     * @var array
+     */
+    protected $translatedAttributes = ['name', 'identifier'];
+
+    /**
+     * Attribute Model has many translation values 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function translations()
+    {
+        return $this->hasMany(PropertyTranslation::class);
+    }
 
     /**
      * Get the Select Property Dropdown options collection.

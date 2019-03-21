@@ -685,6 +685,18 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
+        Schema::create('property_translations', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('property_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name')->nullable()->default(null);
+            $table->string('identifier')->unique()->nullable()->default(null);
+            $table->timestamps();
+
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([
@@ -808,13 +820,16 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('order_product_variations');
         Schema::dropIfExists('product_variations');
         Schema::dropIfExists('product_attribute_integer_values');
 
+        Schema::dropIfExists('attribute_dropdown_option_translations');
         Schema::dropIfExists('attribute_dropdown_options');
         Schema::dropIfExists('attribute_product');
 
+        Schema::dropIfExists('product_property');
         Schema::dropIfExists('product_property_boolean_values');
         Schema::dropIfExists('product_property_text_values');
         Schema::dropIfExists('product_property_decimal_values');
@@ -822,20 +837,34 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('product_property_varchar_values');
         Schema::dropIfExists('product_property_datetime_values');
         Schema::dropIfExists('property_dropdown_options');
+
+        Schema::dropIfExists('property_translations');
         Schema::dropIfExists('properties');
 
+        Schema::dropIfExists('category_filters');
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('product_prices');
-        Schema::dropIfExists('products');
+        
         Schema::dropIfExists('category_translations');
-        Schema::dropIfExists('categories');
-
+        
+        Schema::dropIfExists('attribute_translations');
         Schema::dropIfExists('attributes');
+        
+        Schema::dropIfExists('order_return_products');
+        Schema::dropIfExists('order_return_requests');
+        
+        Schema::dropIfExists('product_order');
+        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('order_histories');
+        Schema::dropIfExists('orders');
 
         Schema::dropIfExists('order_statuses');
-        Schema::dropIfExists('product_order');
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('product_downloadable_urls');
+        Schema::dropIfExists('menu_groups');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
 
         Schema::dropIfExists('oauth_personal_access_clients');
         Schema::dropIfExists('oauth_clients');
@@ -846,10 +875,15 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('admin_password_resets');
         Schema::dropIfExists('admin_users');
         Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('user_user_group');
+        Schema::dropIfExists('user_groups');
         Schema::dropIfExists('users');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('configurations');
 
+        Schema::dropIfExists('tax_rates');
+        Schema::dropIfExists('tax_groups');
+        Schema::dropIfExists('site_currencies');
         Schema::dropIfExists('pages');
         Schema::dropIfExists('wishlists');
 
@@ -859,5 +893,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
         Schema::dropIfExists('languages');
+
+        Schema::enableForeignKeyConstraints();
     }
 }
