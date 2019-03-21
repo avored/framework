@@ -48,6 +48,7 @@ Vue.component('state-field-page', require('../components/system/state/StateField
 Vue.component('site-currency-field-page', require('../components/system/site-currency/SiteCurrencyFieldPage.vue').default);
 
 Vue.component('category-field-page', require('../components/product/category/CategoryFieldPage.vue').default);
+Vue.component('property-field-page', require('../components/product/property/PropertyFieldPage.vue').default);
 Vue.component('attribute-field-page', require('../components/product/attribute/AttributeFieldPage.vue').default);
 
 Vue.component('cms-page-field-page', require('../components/cms/page/CmsPageFieldPage.vue').default);

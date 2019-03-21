@@ -160,4 +160,22 @@ class Property extends BaseModel
     {
         return $this->belongsToMany(Product::class);
     }
+
+    /**
+     * Get the name of the Attribute
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name', $translated = true);
+    }
+
+    /**
+     * Get the identifier of the Attribute
+     * @return string $name
+     */
+    public function getIdentifier()
+    {
+        return $this->getAttribute('identifier', $translated = true);
+    }
 }

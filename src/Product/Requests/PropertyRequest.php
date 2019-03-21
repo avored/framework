@@ -26,6 +26,9 @@ class PropertyRequest extends Request
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
         $validationRule['sort_order'] = 'required';
+        $validationRule['is_visible_frontend'] = 'required';
+        $validationRule['use_for_all_products'] = 'required';
+        $validationRule['data_type'] = 'required';
         $validationRule['field_type'] = 'required';
         if ($this->getMethod() == 'POST') {
             $validationRule['identifier'] = 'required|max:255|alpha_dash|unique:properties';

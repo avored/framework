@@ -30,10 +30,12 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $propertyGrid = new PropertyDataGrid($this->repository->query()->orderBy('id', 'desc'));
+        $propertyGrid = new PropertyDataGrid(
+            $this->repository->query()->orderBy('id', 'desc')
+        );
 
         return view('avored-framework::product.property.index')
-                    ->with('dataGrid', $propertyGrid->dataGrid);
+            ->with('dataGrid', $propertyGrid->dataGrid);
     }
 
     /**
@@ -71,7 +73,8 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return view('avored-framework::product.property.edit')->with('model', $property);
+        return view('avored-framework::product.property.edit')
+            ->with('property', $property);
     }
 
     /**
@@ -84,6 +87,7 @@ class PropertyController extends Controller
      */
     public function update(PropertyRequest $request, Property $property)
     {
+        dd($request->all());
         $property->update($request->all());
 
         $this->_saveDropdownOptions($property, $request);

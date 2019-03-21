@@ -44,4 +44,8 @@ return [
         'edit_button' => 'Edit Attribute',
         'attribute_all' => 'Attribute All',
     ],
+
+    'property' => [
+        'edit_title' => 'Edit Property'
+    ]
 ];

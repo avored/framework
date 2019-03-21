@@ -23,7 +23,7 @@
                             >
                                 @foreach ($languages as $language)
                                     <option
-                                        data-url="{{ route('admin.attribute.edit', ['category' => $attribute->id ,'language_id' => $language->id]) }}"
+                                        data-url="{{ route('admin.attribute.edit', ['id' => $attribute->id ,'language_id' => $language->id]) }}"
                                         @if ($language->id == request()->get('language_id', $defaultLanguage->id))
                                         selected
                                         @endif
@@ -33,11 +33,6 @@
                                     </option>
                                 @endforeach
                             </select>
-                                @if ($errors->has('language'))
-                                <span class='invalid-feedback'>
-                                    <strong>{{ $errors->first('language') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
                 @endif
