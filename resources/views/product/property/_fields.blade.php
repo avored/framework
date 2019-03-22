@@ -143,78 +143,32 @@
     @endif
 </div>
 
-
-
-<?php
-
-$pool = 'abcdefghijklmnopqrstuvwxyz';
-
-$randomString = substr(str_shuffle(str_repeat($pool, 6)), 0, 6);
-
-$hiddenClass = "d-none";
-$editMode = false;
-
-
-if (isset($property) && $property->propertyDropdownOptions->count() > 0) {
-    $editMode = true;
-    $hiddenClass = "";
-}
-?>
-
-<div class="dynamic-field mb-4 {{ $hiddenClass }}">
-    @if($editMode === true)
-        @foreach($property->propertyDropdownOptions as $key => $dropdownOptionModel)
-            <div class="dynamic-field-row mt-3">
-                <div class="input-group col-md-12">
-                    <span class="input-group-prepend">
-                        <span class="input-group-text">Display Text</span>
-                    </span>
-                    <input class="form-control"
-                           name="dropdown-options[{{ $dropdownOptionModel->id }}][display_text]"
-                           value="{{ $dropdownOptionModel->display_text }}"/>
-                    @if ($loop->last)
-                        <span class="input-group-append  add-field">
-                            <button class="btn btn-outline-secondary">Add</button>
-                        </span>
-                    @else
-                        <span class="input-group-append  remove-field">
-                            <button class="btn btn-outline-secondary">Remove</button>
-                        </span>
-                    @endif
+<div class="dynamic-field">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="dynamic-field-row">
+                <div class="form-group" v-for="(displayTextField, index) in displayTextFields">
+                    <label class="form-control-label" :for="displayTextField.id">
+                        @{{ displayTextField.label }}
+                    </label>
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            v-model="displayTextField.value"
+                            :id="displayTextField.id"
+                            :name="displayTextField.name"
+                        />
+                        <div class="input-group-append">
+                            <button
+                                type="button"
+                                @click="clickDuplicate(index, $event)"
+                                :data-action="displayTextField.action"
+                                class="btn btn-primary add-field">
+                                @{{ displayTextField.buttonLabel }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    @else
-        <div class="dynamic-field-row mt-3">
-            <div class="input-group col-md-12">
-                <span class="input-group-prepend">
-                    <span class="input-group-text">Display Text</span>
-                </span>
-                <input disabled class="form-control"
-                       name="dropdown-options[{{ $randomString }}][display_text]"/>
-                <span class="input-group-append  add-field"
-                      style='cursor: pointer'>
-                    <button class="btn btn-outline-secondary" type="button">
-                        Add
-                    </button>
-                </span>
-            </div>
-        </div>
-    @endif
-    <div class="dynamic-field-row-template d-none">
-        <div class="dynamic-field-row mt-3">
-            <div class="input-group col-md-12">
-                <span class="input-group-prepend">
-                    <span class="input-group-text">Display Text</span>
-                </span>
-                <input class="form-control"
-                       name="dropdown-options[__RANDOM_STRING__][display_text]"/>
-                <span class="input-group-append  add-field"
-                      style='cursor: pointer'>
-                    <button class="btn btn-outline-secondary">
-                        Add
-                    </button>
-                </span>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row">
-    <attribute-field-page inline-template :dropdown-options="{{ $attribute->attributeDropdownOptions }}">
+    <attribute-field-page inline-template :dropdown-options="{{ $attribute->getDropdownOptions() }}">
     <div class="col-12">
         <div class="card">
             <div class="card-header">

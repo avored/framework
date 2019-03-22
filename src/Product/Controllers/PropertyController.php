@@ -87,9 +87,8 @@ class PropertyController extends Controller
      */
     public function update(PropertyRequest $request, Property $property)
     {
-        dd($request->all());
-        $property->update($request->all());
-
+        $this->repository->update($property, $request->all());
+        
         $this->_saveDropdownOptions($property, $request);
 
         return redirect()->route('admin.property.index');
@@ -97,9 +96,8 @@ class PropertyController extends Controller
 
     /**
      * Remove the specified property from storage.
-     *
+     * 
      * @param \AvoRed\Framework\Models\Database\Property $property
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Property $property)
@@ -113,7 +111,7 @@ class PropertyController extends Controller
      * Get the Element Html in Json Response.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getElementHtml(Request $request)
     {
@@ -121,13 +119,10 @@ class PropertyController extends Controller
 
         $tmpString = str_random();
         $view = view('avored-framework::product.property.get-element')
-                        ->with('properties', $properties)
-                        ->with('tmpString', $tmpString);
-
-                      
-        $json = new JsonResponse(['success' => true, 'content' => $view->render()]);
-
-        return $json;
+            ->with('properties', $properties)
+            ->with('tmpString', $tmpString);
+        
+        return new JsonResponse(['success' => true, 'content' => $view->render()]);
     }
 
     /**
@@ -140,29 +135,7 @@ class PropertyController extends Controller
      */
     private function _saveDropdownOptions($property, $request)
     {
-        if (null !== $request->get('dropdown-options')) {
-            $existingIds = $property->propertyDropdownOptions->keyBy('id');
-            foreach ($request->get('dropdown-options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__') {
-                    continue;
-                }
-
-                if ($existingIds->has($key)) {
-                    $existingIds->pull($key);
-                }
-
-                if (is_int($key)) {
-                    $property->propertyDropdownOptions()->find($key)->update($val);
-                } else {
-                    $property->propertyDropdownOptions()->create($val);
-                }
-            }
-            if ($existingIds->count() > 0) {
-                foreach ($existingIds as $option) {
-                    $option->delete();
-                }
-            }
-        }
+        $this->repository->syncDropdownOptions($property, $request->all());
     }
 
     /**
@@ -172,6 +145,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view('avored-framework::product.property.show')->with('property', $property);
+        return view('avored-framework::product.property.show')
+            ->with('property', $property);
     }
 }

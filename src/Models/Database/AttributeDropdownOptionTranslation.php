@@ -20,14 +20,4 @@ class AttributeDropdownOptionTranslation extends BaseModel
     {
         return $this->belongsTo(AttributeDropdownOption::class);
     }
-
-    /**
-     * The attribute dropdown options has Many Dropdown Option translation.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function attributeDropdownOptionTranslations()
-    {
-        return $this->hasMany(AttributeDropdownOptionTranslation::class);
-    }
 }

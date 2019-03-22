@@ -697,6 +697,21 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
+        Schema::create('property_dropdown_option_translations', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('property_dropdown_option_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('display_text');
+            $table->timestamps();
+
+            $table->foreign('property_dropdown_option_id', 'pdt')
+                ->references('id')
+                ->on('property_dropdown_options')
+                ->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
+
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);
         $siteCurrency = SiteCurrency::create([

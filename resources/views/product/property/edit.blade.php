@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
     
-    <property-field-page inline-template>
+    <property-field-page :dropdown-options="{{ $property->getDropdownOptions() }}" inline-template>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -50,12 +50,10 @@
                                 {{ __('avored-framework::lang.cancel') }}
                             </a>
                         </div>
-
+                        <input type="hidden" name="language_id" value="{{ request()->get('language_id', $defaultLanguage->id) }}" />
                     </form>
-
                 </div>
             </div>
-
         </div>
     </property-field-page>
     </div>

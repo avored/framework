@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Models\Traits\TranslatedAttributes;
+use Illuminate\Support\Collection;
 
 class Attribute extends BaseModel
 {
@@ -77,5 +78,24 @@ class Attribute extends BaseModel
     public function getIdentifier()
     {
         return $this->getAttribute('identifier', $translated = true);
+    }
+
+    /**
+     * Get dropdown options with language transted
+     * @return \Illuminate\Support\Collection $options
+     */
+    public function getDropdownOptions()
+    {
+        $options = Collection::make([]);
+
+        $dropdowns = $this->attributeDropdownOptions;
+        if (null !== $dropdowns && $dropdowns->count() > 0) {
+            foreach ($dropdowns as $dropdown) {
+                $dropdown->display_text = $dropdown->getDisplayText();
+                $options->push($dropdown);
+            }
+        }
+
+        return $options;
     }
 }
