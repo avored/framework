@@ -2,6 +2,9 @@
     <label for="name">Name</label>
     <input type="text"
         name="name"
+        @if(!$isDefaultLang && !in_array('name', $page->getTranslatedAttributes()))
+            disabled
+        @endif
         value="{{ $page->getName() }}"
         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
         id="name" />

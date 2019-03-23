@@ -80,7 +80,7 @@ class PageController extends Controller
      */
     public function update(PageRequest $request, Page $page)
     {
-        $page->update($request->all());
+        $this->repository->update($page, $request->all());
         return redirect()->route('admin.page.index');
     }
 

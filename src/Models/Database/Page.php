@@ -14,11 +14,29 @@ class Page extends BaseModel
      * @var array 
      */
     protected $fillable = ['name', 'slug', 'content', 'meta_title', 'meta_description'];
+
     /**
      * Widget Content Tag
      * @var array 
      */
     protected $contentTags = ['%%%', '%%%'];
+
+
+    /**
+     * Page Model Attribute which can be translated
+     * @var array $translatedAttributes 
+     */
+    protected $translatedAttributes = ['name', 'slug', 'content' ,'meta_title', 'meta_description'];
+
+
+    /**
+     * Page Model has many translation values 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function translations()
+    {
+        return $this->hasMany(PageTranslation::class);
+    }
 
     public function getContentAttribute($content)
     {
@@ -51,9 +69,13 @@ class Page extends BaseModel
         return $options;
     }
 
+    /**
+     * Get the content for this page model
+     * @return string $content
+     */
     public function getContent()
     {
-        return $this->attributes['content'];
+        return $this->getAttribute('content', $translated = true);
     }
     
     /**

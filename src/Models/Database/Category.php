@@ -18,17 +18,6 @@ class Category extends BaseModel
      */
     protected $translatedAttributes = ['name', 'slug', 'meta_title', 'meta_description'];
 
-    /**
-     * Category Model Attribute which can be translated
-     * @var string $translatedForeignKey
-     */
-    protected $translatedForeignKey = 'category_id';
-
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class);
-    }
 
     /**
      * Category Model has many translation values 
@@ -38,6 +27,13 @@ class Category extends BaseModel
     {
         return $this->hasMany(CategoryTranslation::class);
     }
+
+    
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
 
     /**
      * Category Model Get Translation Model and return the value

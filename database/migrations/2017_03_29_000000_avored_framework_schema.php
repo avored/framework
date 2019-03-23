@@ -711,6 +711,21 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
+        Schema::create('page_translations', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('page_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->unique()->nullable()->default(null);
+            $table->text('content')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
 
         $countryModel = Country::whereCode('nz')->first();
         $countryModel->update(['is_active' => 1]);

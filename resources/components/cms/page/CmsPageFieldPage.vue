@@ -14,7 +14,9 @@ export default {
         }
     },
     methods: {
-       
+       changeLanguage(event) {
+            window.location = event.target.selectedOptions[0].getAttribute('data-url');
+        },
     },
     computed: {
        
