@@ -15,7 +15,7 @@
                         @csrf()
                         @method('put')
 
-                        <state-field-page inline-template :model="{{ $model }}">
+                        <state-field-page inline-template>
                             <div>
                                 @include('avored-framework::system.state._fields')
                             </div>

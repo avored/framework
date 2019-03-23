@@ -29,8 +29,8 @@ class PageController extends Controller
     public function index()
     {
         $pageGrid = new PageDataGrid($this->repository->query());
-
-        return view('avored-framework::cms.page.index')->with('dataGrid', $pageGrid->dataGrid);
+        return view('avored-framework::cms.page.index')
+            ->with('dataGrid', $pageGrid->dataGrid);
     }
 
     /**
@@ -67,7 +67,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         return view('avored-framework::cms.page.edit')
-            ->with('model', $page);
+            ->with('page', $page);
     }
 
     /**

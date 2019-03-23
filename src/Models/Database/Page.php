@@ -3,11 +3,21 @@
 namespace AvoRed\Framework\Models\Database;
 
 use AvoRed\Framework\Widget\Facade as Widget;
+use AvoRed\Framework\Models\Traits\TranslatedAttributes;
 
 class Page extends BaseModel
 {
-    protected $fillable = ['name', 'slug', 'content', 'meta_title', 'meta_description'];
+    use TranslatedAttributes;
 
+    /**
+     * Mass Assignable Page Model Attributes
+     * @var array 
+     */
+    protected $fillable = ['name', 'slug', 'content', 'meta_title', 'meta_description'];
+    /**
+     * Widget Content Tag
+     * @var array 
+     */
     protected $contentTags = ['%%%', '%%%'];
 
     public function getContentAttribute($content)
@@ -17,11 +27,10 @@ class Page extends BaseModel
         $callback = function ($matches) {
             $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
             $widget = Widget::get($matches[2]);
-
+            
             if (method_exists($widget, 'render')) {
                 $widgetContent = $widget->render();
             } else {
-                //IF method Doesn't Exist it means they uninstall the Widget or module.
                 $widgetContent = '';
             }
 
@@ -45,5 +54,39 @@ class Page extends BaseModel
     public function getContent()
     {
         return $this->attributes['content'];
+    }
+    
+    /**
+     * Get Name of this Page Model
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name', $translated = true);
+    }
+
+    /**
+     * Get slug of this Page Model
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->getAttribute('slug', $translated = true);
+    }
+    /**
+     * Get Meta title of this Page Model
+     * @return string $metaTitle
+     */
+    public function getMetaTitle()
+    {
+        return $this->getAttribute('meta_title', $translated = true);
+    }
+    /**
+     * Get Meta Description of this Page Model
+     * @return string $metaDescription
+     */
+    public function getMetaDescription()
+    {
+        return $this->getAttribute('meta_description', $translated = true);
     }
 }

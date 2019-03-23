@@ -2,7 +2,7 @@
     <label for="name">Name</label>
     <input type="text"
         name="name"
-        v-model="pageData.name"
+        value="{{ $page->getName() }}"
         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
         id="name" />
         @if ($errors->has('name'))
@@ -16,7 +16,7 @@
     <label for="slug">Slug</label>
     <input type="text"
         name="slug"
-        v-model="slug"
+        value="{{ $page->getSlug() }}"
         class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
         id="slug" />
         @if ($errors->has('slug'))
@@ -26,13 +26,13 @@
     @endif
 </div>
 
-<markdown-editor v-model="pageData.content" ref="markdownEditor"></markdown-editor>
+<markdown-editor name="content" value="{{ $page->getContent() }}" ref="markdownEditor"></markdown-editor>
 
 <div class="form-group">
     <label for="meta_title">Meta Title</label>
     <input type="text"
         name="meta_title"
-        v-model="pageData.meta_title"
+        value="{{ $page->getMetaTitle() }}"
         class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
         id="meta_title" />
         @if ($errors->has('meta_title'))
@@ -47,7 +47,7 @@
     <label for="meta_description">Meta Description</label>
     <input type="text"
         name="meta_description"
-        v-model="pageData.meta_description"
+         value="{{ $page->getMetaDescription() }}"
         class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
         id="meta_description" />
         @if ($errors->has('meta_description'))

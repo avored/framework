@@ -8,10 +8,10 @@
                 <div class="card-header">Edit Page</div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.page.update', $model->id) }}" method="post">
+                    <form action="{{ route('admin.page.update', $page->id) }}" method="post">
                         @csrf
                         @method('put')
-                        <cms-page-field-page :page="{{ $model }}" inline-template>
+                        <cms-page-field-page inline-template>
                                 <div>
                                     @include('avored-framework::cms.page._fields')                     
                                 </div>
