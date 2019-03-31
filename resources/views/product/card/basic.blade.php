@@ -7,15 +7,11 @@
             <?php $productCategories = []; ?>
         @endif
 
-        @include('avored-framework::forms.select2',['name' => 'category_id[]',
-                                                'label' => 'Category',
-                                                'attributes' => ['class' => 'form-control select2',
-                                                                'id' => 'category_id',
-                                                                'multiple' => true,
-                                                                ],
-                                                'options' => $categoryOptions,
-                                                'values' => $productCategories])
-
+        <div class="form-group">
+            <label>Category</label>
+            <v-select multiple label="name" v-model="category_id" :options="{{ $categoryOptions }}"></v-select>
+            <input type="hidden" v-model="category_id" name="category_id" />
+        </div>
 
     </div>
 </div>

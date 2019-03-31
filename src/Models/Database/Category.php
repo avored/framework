@@ -52,6 +52,8 @@ class Category extends BaseModel
     public static function getCategoryOptions()
     {
         $model = new static;
+
+        return $model->all();
         $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
 
         return $options;

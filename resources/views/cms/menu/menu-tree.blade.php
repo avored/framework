@@ -1,5 +1,8 @@
 @foreach($menus as $menu)
+    
     <li class="list-group-item mb-2"
+        v-for="menu in menus"
+        :key="menu.id"
         data-route="{{ $menu->route }}"
         data-params="{{ $menu->params }}"
         data-name="{{ $menu->name }}"
@@ -7,8 +10,8 @@
         <i class="ti-menu-alt"></i>
         <a href="#" data-p="">{{ $menu->name }}</a>
         <span class="float-right">
-                <a href="#" class="destroy-menu"><i class="ti-trash"></i> </a>
-            </span>
+            <a href="#" v-on:click="destroyMenuFromList" class="destroy-menu"><i class="ti-trash"></i> </a>
+        </span>
 
         @php
             $children = $menu->children();
@@ -23,5 +26,5 @@
         @endif
 
     </li>
-
+   
 @endforeach

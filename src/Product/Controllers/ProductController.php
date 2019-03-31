@@ -47,10 +47,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productsBuilder = $this->repository->query()->where('type', '!=', 'VARIABLE_PRODUCT')->orderBy('id', 'desc');
+        $productsBuilder = $this
+            ->repository
+            ->query()
+            ->where('type', '!=', 'VARIABLE_PRODUCT')
+            ->orderBy('id', 'desc');
+
         $productGrid = new ProductDataGrid($productsBuilder);
 
-        return view('avored-framework::product.index')->with('dataGrid', $productGrid->dataGrid);
+        return view('avored-framework::product.index')
+            ->with('dataGrid', $productGrid->dataGrid);
     }
 
     /**
@@ -119,6 +125,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        dd($request->all());
         try {
             //$product = ProductModel::findorfail($id);
             $product->saveProduct($request->all());
@@ -157,7 +164,10 @@ class ProductController extends Controller
         $checkDirectory = 'uploads/catalog/images/' . implode('/', $tmpPath);
 
         $dbPath = $checkDirectory . '/' . $image->getClientOriginalName();
-        $image = Image::upload($request->file('image'), $checkDirectory)->makeSizes()->get();
+        $image = Image::upload(
+            $request->file('image'),
+            $checkDirectory
+        )->makeSizes()->get();
 
         $tmp = $this->_getTmpString();
 
@@ -182,7 +192,7 @@ class ProductController extends Controller
 
         $sizes = config('avored-framework.image.sizes');
         foreach ($sizes as $sizeName => $widthHeight) {
-            $imagePath = $relativeDir . DIRECTORY_SEPARATOR . $sizeName . '-' . $fileName;
+            $imagePath = $relativeDir.DIRECTORY_SEPARATOR.$sizeName.'-'.$fileName;
 
             if (File::exists(storage_path('app/public/' . $imagePath))) {
                 File::delete(storage_path('app/public/' . $imagePath));
@@ -206,7 +216,9 @@ class ProductController extends Controller
     public function downloadMainToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->main_path);
+        $path = storage_path(
+            'app/public'.DIRECTORY_SEPARATOR.$downloadableUrl->main_path
+        );
 
         return response()->download($path);
     }
@@ -221,7 +233,9 @@ class ProductController extends Controller
     public function downloadDemoToken($token)
     {
         $downloadableUrl = $this->downRepository->findByToken($token);
-        $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->demo_path);
+        $path = storage_path(
+            'app/public' . DIRECTORY_SEPARATOR . $downloadableUrl->demo_path
+        );
 
         return response()->download($path);
     }
@@ -239,7 +253,11 @@ class ProductController extends Controller
         $view = view('avored-framework::product.variation-modal')
                             ->with('model', $product);
 
-        return new JsonResponse(['success' => true, 'content' => $view->render(), 'modalId' => '#variation-modal-' . $product->id]);
+        return new JsonResponse(
+            ['success' => true,
+            'content' => $view->render(),
+            'modalId' => '#variation-modal-' . $product->id]
+        );
     }
 
     /**

@@ -26,8 +26,7 @@ class MenuController extends Controller
     public function __construct(
         MenuGroupInterface $menuGroupRepository,
         MenuInterface $repository
-    )
-    {
+    ) {
         $this->menuGroupRepository = $menuGroupRepository;
         $this->repository = $repository;
     }
@@ -46,16 +45,19 @@ class MenuController extends Controller
         } elseif ($request->get('group_id') > 0) {
             $menuGroup = $this->menuGroupRepository->find($request->get('group_id'));
         } else {
-            $menuGroup = $this->menuGroupRepository->query()->whereIsDefault(1)->first();
+            $menuGroup = $this->menuGroupRepository
+                ->query()
+                ->whereIsDefault(1)
+                ->first();
         }
 
-        if(null === $menuGroup) {
+        if (null === $menuGroup) {
             $menuGroup = new MenuGroup;
         }
 
         return view('avored-framework::cms.menu.index')
-                    ->withMenuGroups($menuGroups)
-                    ->withGroup($menuGroup);
+            ->withMenuGroups($menuGroups)
+            ->withGroup($menuGroup);
     }
 
     /**
@@ -66,7 +68,8 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        $menuGroup = $this->menuGroupRepository->find($request->get('menu_group_id'));
+        $menuGroup = $this->menuGroupRepository
+            ->find($request->get('menu_group_id'));
         if (null === $menuGroup) {
             $menuGroup = $this->menuGroupRepository->create($request->all());
         } else {
@@ -78,6 +81,6 @@ class MenuController extends Controller
         $this->repository->truncateAndCreateMenus($menuGroup, $menuArray);
 
         return redirect()->route('admin.menu.index')
-                        ->with('notificationText', 'Menu Save Successfully!!');
+            ->with('notificationText', 'Menu Save Successfully!!');
     }
 }

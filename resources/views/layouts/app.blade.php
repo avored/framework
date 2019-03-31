@@ -46,6 +46,7 @@
   </div>
 
   <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
+  
   @stack('scripts')
 </body>
 </html>
