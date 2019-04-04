@@ -9,8 +9,24 @@
 
         <div class="form-group">
             <label>Category</label>
-            <v-select multiple label="name" v-model="category_id" :options="{{ $categoryOptions }}"></v-select>
-            <input type="hidden" v-model="category_id" name="category_id" />
+            <multiselect
+                v-model="category_multiselect_values"
+                @select="categorySelected"
+                label="name"
+                :searchable="true"
+                track-by="id" 
+                :close-on-select="true" :clear-on-select="true" :preserve-search="false"
+                :multiple="true"
+                :options="{{ $categoryOptions }}"
+            >
+                <template slot="tag" slot-scope="{ option }">
+                    <span class="multiselect__tag">
+                        @{{ option.name }}
+                    </span>
+                </template>
+            </multiselect>
+            <input type="hidden" name="category_id[]" v-model="category_id" />
+            
         </div>
 
     </div>
@@ -26,8 +42,7 @@
     </div>
 </div>
 
-@include('avored-framework::forms.textarea',['name' => 'description','label' => 'Description',
-                                            'attributes' => ['class' => 'summernote','id' => 'description']])
+<markdown-editor value="{{ (isset($product)) ? $product->description : '' }}" name="description"></markdown-editor>
 
 <div class="row">
     @if($model->type == "VARIATION")
@@ -88,11 +103,5 @@
         @include('avored-framework::forms.text',['name' => 'length','label' => 'Length'])
     </div>
 
-
 </div>
 @endif
-@push('scripts')
-    <script>
-        var simplemde = new SimpleMDE({ element: document.getElementById("description") });
-    </script>
-@endpush
