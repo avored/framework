@@ -36,6 +36,7 @@ if (token) {
 
 Vue.component('datagrid', require('../components/datagrid/DataGrid.vue').default);
 Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue').default);
+Vue.component('accordion-card', require('../components/layout/AccordionCard.vue').default);
 
 
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue').default);

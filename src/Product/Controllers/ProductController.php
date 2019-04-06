@@ -99,6 +99,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $product->categories;
         $attributes = Collection::make([]);
 
         $properties = Property::all()->pluck('name', 'id');
@@ -109,6 +110,7 @@ class ProductController extends Controller
         }
 
         return view('avored-framework::product.edit')
+            ->with('product', $product)
             ->with('model', $product)
             ->with('propertyOptions', $properties)
             ->with('usedForAllProductProperties', $usedForAllProductProperties)

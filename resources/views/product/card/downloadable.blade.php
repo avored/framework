@@ -1,9 +1,9 @@
 
 @include('avored-framework::forms.file',['name' => 'downloadable[demo_product]','label' => 'Demo Product (If any)'])
 
-@if(isset($model) && isset($model->downloadable) && $model->downloadable->demo_path != "")
+@if(isset($product) && isset($product->downloadable) && $product->downloadable->demo_path != "")
         
-<a href="{{ route('admin.product.download.demo.media', $model->downloadable->token) }}"
+<a href="{{ route('admin.product.download.demo.media', $product->downloadable->token) }}"
            class="download-main-media-link" 
     >
         Download Demo Media
@@ -14,11 +14,11 @@
 
 @include('avored-framework::forms.file',['name' => 'downloadable[main_product]','label' => 'Main Product'])
 
-@if(isset($model) && isset($model->downloadable) && $model->downloadable != "")
+@if(isset($product) && isset($product->downloadable) && $product->downloadable != "")
 
     
     
-    <a href="{{ route('admin.product.download.main.media', $model->downloadable->token) }}"
+    <a href="{{ route('admin.product.download.main.media', $product->downloadable->token) }}"
            class="download-main-media-link" 
     >
         Download Main Media

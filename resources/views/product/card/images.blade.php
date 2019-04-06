@@ -4,8 +4,8 @@
 
 <div class="product-image-list mt-3 row">
 
-    @if(isset($model) && $model->images()->get()->count() > 0)
-        @foreach($model->images()->get() as $image)
+    @if(isset($product) && $product->images()->get()->count() > 0)
+        @foreach($product->images()->get() as $image)
         
           
             <div class="image-preview col-md-3">
