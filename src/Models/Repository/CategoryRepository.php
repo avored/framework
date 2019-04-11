@@ -122,9 +122,24 @@ class CategoryRepository implements CategoryInterface
                 return $category->update($data);
             } else {
                 $category->update(Arr::only($data, ['parent_id']));
-                return CategoryTranslation::create(
-                    array_merge($data, ['category_id' => $category->id])
-                );
+
+                $translatedModel = $category
+                    ->translations()
+                    ->whereLanguageId($languageId)
+                    ->first();
+                if (null === $translatedModel) {
+                    return CategoryTranslation::create(
+                        array_merge($data, ['category_id' => $category->id])
+                    );
+                } else {
+                    $translatedModel->update(
+                        $data,
+                        $category->getTranslatedAttributes()
+                    );
+
+                    return $translatedModel;
+                }
+
             }
         } else {
             return $category->update($data);

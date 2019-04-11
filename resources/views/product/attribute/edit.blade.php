@@ -1,39 +1,66 @@
 @extends('avored-framework::layouts.app')
 
+@section('page-header')
+    {{ __('avored-framework::product.attribute.edit_title') }}
+@stop
+
 @section('content')
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">{{ __('avored-framework::attribute.edit') }}</div>
-                <div class="card-body">
-
-                    <form action="{{ route('admin.attribute.update', $model->id) }}" method="post">
-                        @csrf
-                        @method('put')
-
-                        <attribute-field-page inline-template :model="{{ $model }}">
-                                <div>
-                                    @include('avored-framework::product.attribute._fields')
-                                </div>
-                            </attribute-field-page>
-                        
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">
-                                {{ __('avored-framework::attribute.edit') }}
-                            </button>
-                            <a href="{{ route('admin.attribute.index') }}" 
-                                    class="btn">
-                                    {{ __('avored-framework::lang.cancel') }}
-                            </a>
+<div class="row">
+    <attribute-field-page inline-template :dropdown-options="{{ $attribute->getDropdownOptions() }}">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                {{ __('avored-framework::product.attribute.basic_info') }}
+                @if (Session::get('multi_language_enabled'))
+                
+                    <div class="float-right ">
+                        <div class="form-group-sm text-small">
+                            <select
+                                name="language"
+                                @input="changeLanguage"
+                                class="form-control {{ $errors->has('language') ? ' is-invalid' : '' }}"
+                                id="language"
+                            >
+                                @foreach ($languages as $language)
+                                    <option
+                                        data-url="{{ route('admin.attribute.edit', ['id' => $attribute->id ,'language_id' => $language->id]) }}"
+                                        @if ($language->id == request()->get('language_id', $defaultLanguage->id))
+                                        selected
+                                        @endif
+                                        value="{{ $language->id }}"
+                                    >
+                                        {{ $language->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-
-                    </form>
-
-                </div>
+                    </div>
+                @endif
             </div>
-
+            <div class="card-body">
+                <form action="{{ route('admin.attribute.update', $attribute->id) }}" method="post">
+                    @csrf
+                    @method('put')
+                    
+                    <div>
+                        @include('avored-framework::product.attribute._fields')
+                    </div>
+                                   
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">
+                            {{ __('avored-framework::attribute.edit') }}
+                        </button>
+                        <a href="{{ route('admin.attribute.index') }}" 
+                                class="btn">
+                                {{ __('avored-framework::lang.cancel') }}
+                        </a>
+                    </div>
+                    <input type="hidden" name="language_id" value="{{ request()->get('language_id', $defaultLanguage->id) }}" />
+                
+                </form>
+            </div>
         </div>
     </div>
-
+    </attribute-field-page>
+</div>
 @endsection

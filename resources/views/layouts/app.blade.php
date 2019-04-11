@@ -10,6 +10,7 @@
 
     <!-- Styles -->
     <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     
     @yield('css')
 
@@ -45,12 +46,8 @@
     </div>
   </div>
 
-  @if (true || request()->get('with') == 'all') 
-  <script src="{{ url('vendor/avored-admin/js/app.js') }}"></script>
   <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
-  @else
-  <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
-  @endif
+  
   @stack('scripts')
 </body>
 </html>

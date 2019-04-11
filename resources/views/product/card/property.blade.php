@@ -1,5 +1,5 @@
 @php
-    $productProperties = $model->getPropertiesAll();
+    $productProperties = $product->getPropertiesAll();
 @endphp
 <div class="row">
     <div class="col-12">

@@ -9,6 +9,8 @@ use AvoRed\Framework\Models\Database\Attribute;
 use AvoRed\Framework\Product\Requests\AttributeRequest;
 use AvoRed\Framework\Models\Contracts\AttributeInterface;
 use AvoRed\Framework\System\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use AvoRed\Framework\Models\Database\AttributeDropdownOptionTranslation;
 
 class AttributeController extends Controller
 {
@@ -16,11 +18,11 @@ class AttributeController extends Controller
      *
      * @var \AvoRed\Framework\Models\Repository\AttributeRepository
      */
-    protected $repository;
+    protected $attributeRepository;
 
-    public function __construct(AttributeInterface $repository)
+    public function __construct(AttributeInterface $attributeRepository)
     {
-        $this->repository = $repository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
@@ -30,10 +32,10 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributeGrid = new AttributeDataGrid($this->repository->query());
+        $attributeGrid = new AttributeDataGrid($this->attributeRepository->query());
 
         return view('avored-framework::product.attribute.index')
-                    ->with('dataGrid', $attributeGrid->dataGrid);
+            ->with('dataGrid', $attributeGrid->dataGrid);
     }
 
     /**
@@ -54,7 +56,7 @@ class AttributeController extends Controller
      */
     public function store(AttributeRequest $request)
     {
-        $attribute = $this->repository->create($request->all());
+        $attribute = $this->attributeRepository->create($request->all());
         $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
@@ -67,13 +69,13 @@ class AttributeController extends Controller
      */
     public function edit(Attribute $attribute)
     {
-        return view('avored-framework::product.attribute.edit')->with('model', $attribute);
+        return view('avored-framework::product.attribute.edit')
+            ->with('attribute', $attribute);
     }
 
     public function update(AttributeRequest $request, Attribute $attribute)
     {
-        $attribute->update($request->all());
-
+        $this->attributeRepository->update($attribute, $request->all());
         $this->saveDropdownOptions($attribute, $request);
 
         return redirect()->route('admin.attribute.index');
@@ -97,7 +99,7 @@ class AttributeController extends Controller
      */
     public function getAttribute(Request $request)
     {
-        $attribute = $this->repository->find($request->get('id'));
+        $attribute = $this->attributeRepository->find($request->get('id'));
 
         return view('avored-framework::product.attribute-card-values')
             ->with('attribute', $attribute);
@@ -112,7 +114,8 @@ class AttributeController extends Controller
      */
     public function getElementHtml(Request $request)
     {
-        $attributes = $this->repository->findMany($request->get('attribute_id'));
+        $attributes = $this->attributeRepository
+            ->findMany($request->get('attribute_id'));
 
         $tmpString = '__RANDOM__STRING__';
         $view = view('avored-framework::product.attribute.get-element')
@@ -131,19 +134,7 @@ class AttributeController extends Controller
      */
     protected function saveDropdownOptions($attribute, $request)
     {
-        if (null !== $request->get('dropdown_options')) {
-            if ($attribute->attributeDropdownOptions()->get() != null && $attribute->attributeDropdownOptions()->get()->count() >= 0) {
-                $attribute->attributeDropdownOptions()->delete();
-            }
-
-            foreach ($request->get('dropdown_options') as $key => $val) {
-                if ($key == '__RANDOM_STRING__' || empty($val['display_text'])) {
-                    continue;
-                }
-
-                $attribute->attributeDropdownOptions()->create($val);
-            }
-        }
+        $this->attributeRepository->syncDropdownOptions($attribute, $request->all());
     }
 
     /**

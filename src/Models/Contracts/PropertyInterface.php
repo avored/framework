@@ -34,4 +34,12 @@ interface PropertyInterface
      * @return \AvoRed\Framework\Models\Database\Property
      */
     public function create($data);
+    /**
+     * Update Product Property 
+     *
+     * @param array $data
+     * @param \AvoRed\Framework\Models\Database\Property
+     * @return \AvoRed\Framework\Models\Database\Property
+     */
+    public function update($property, $data);
 }

@@ -2,8 +2,16 @@
 
 namespace AvoRed\Framework\Models\Database;
 
+use AvoRed\Framework\Models\Traits\TranslatedAttributes;
+use Illuminate\Support\Collection;
+
 class Property extends BaseModel
 {
+    use TranslatedAttributes;
+    /**
+     * Mass Assignable Property translation attributes
+     * @var array $fillable
+     */
     protected $fillable = [
         'name',
         'identifier',
@@ -13,6 +21,22 @@ class Property extends BaseModel
         'is_visible_frontend',
         'use_for_all_products'
     ];
+
+    /**
+     * The attributes that are translatable assignable.
+     *
+     * @var array
+     */
+    protected $translatedAttributes = ['name', 'identifier'];
+
+    /**
+     * Attribute Model has many translation values 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function translations()
+    {
+        return $this->hasMany(PropertyTranslation::class);
+    }
 
     /**
      * Get the Select Property Dropdown options collection.
@@ -136,5 +160,42 @@ class Property extends BaseModel
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Get the name of the Attribute
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name', $translated = true);
+    }
+
+    /**
+     * Get the identifier of the Attribute
+     * @return string $name
+     */
+    public function getIdentifier()
+    {
+        return $this->getAttribute('identifier', $translated = true);
+    }
+
+    /**
+     * Get dropdown options with language transted
+     * @return \Illuminate\Support\Collection $options
+     */
+    public function getDropdownOptions()
+    {
+        $options = Collection::make([]);
+
+        $dropdowns = $this->propertyDropdownOptions;
+        if (null !== $dropdowns && $dropdowns->count() > 0) {
+            foreach ($dropdowns as $dropdown) {
+                $dropdown->display_text = $dropdown->getDisplayText();
+                $options->push($dropdown);
+            }
+        }
+
+        return $options;
     }
 }

@@ -1,30 +1,27 @@
 <script>
 
 import isNil from 'lodash/isNil';
+import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
 export default {
     props: ['page'],
+    components: {
+      markdownEditor
+    },
     data() {
         return {
-          pageData: {}
+         
         }
     },
     methods: {
-        sanitizeName: function(name) {
-            return name.toLowerCase().replace(/\s*$/g, '').replace(/\s+/g, '-');
+       changeLanguage(event) {
+            window.location = event.target.selectedOptions[0].getAttribute('data-url');
         },
     },
     computed: {
-        slug() {
-            this.pageData.slug = this.sanitizeName(this.pageData.name ? this.pageData.name : '');
-            return  this.pageData.slug;
-        },
+       
     },
     mounted() {
-        if (!isNil(this.page)) {
-            this.pageData = this.page;
-        }
     }
-
 }
 </script>

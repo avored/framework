@@ -19,12 +19,11 @@ class GlobalComposer
         if (Session::has('multi_language_enabled')) {
             $languages = Session::get('languages');
             $defaultLanguage = Session::get('default_language');
+            $langId = request()->get('language_id', $defaultLanguage->id);
+            $isDefaultLang = ($defaultLanguage->id == $langId) ? true : false;
         }
-
-        $view
-            //->withAdditionalLanguages($additionalLanguages)
-            //->withIsMutliLanguage($isMultiLanguage)
-            ->withDefaultLanguage($defaultLanguage)
-            ->withLanguages($languages);
+        $view->withDefaultLanguage($defaultLanguage)
+            ->withLanguages($languages)
+            ->withIsDefaultLang($isDefaultLang);
     }
 }

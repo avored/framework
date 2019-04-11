@@ -36,6 +36,7 @@ if (token) {
 
 Vue.component('datagrid', require('../components/datagrid/DataGrid.vue').default);
 Vue.component('sidebar-dropdown', require('../components/layout/SideBarDropdown.vue').default);
+Vue.component('accordion-card', require('../components/layout/AccordionCard.vue').default);
 
 
 Vue.component('login-page', require('../components/user/auth/LoginPage.vue').default);
@@ -47,9 +48,12 @@ Vue.component('country-field-page', require('../components/system/country/Countr
 Vue.component('state-field-page', require('../components/system/state/StateFieldPage.vue').default);
 Vue.component('site-currency-field-page', require('../components/system/site-currency/SiteCurrencyFieldPage.vue').default);
 
-Vue.component('category-field-page', require('../components/product/category/CategoryFieldPage.vue').default);
-Vue.component('attribute-field-page', require('../components/product/attribute/AttributeFieldPage.vue').default);
+Vue.component('product-field-page', require('../components/catalog/product/ProductFieldPage.vue').default);
+Vue.component('category-field-page', require('../components/catalog/category/CategoryFieldPage.vue').default);
+Vue.component('property-field-page', require('../components/catalog/property/PropertyFieldPage.vue').default);
+Vue.component('attribute-field-page', require('../components/catalog/attribute/AttributeFieldPage.vue').default);
 
+Vue.component('cms-menu-tree', require('../components/cms/menu/MenuTree.vue').default);
 Vue.component('cms-page-field-page', require('../components/cms/page/CmsPageFieldPage.vue').default);
 Vue.component('order-status-field-page', require('../components/order/order-status/OrderStatusFieldPage.vue').default);
 
@@ -65,7 +69,7 @@ Vue.component('order-status-field-page', require('../components/order/order-stat
 const app = new Vue({
     el: '#app',
     data: {
-        toggleSideBarData: true,
+        toggleSideBarData: false,
         displayProfileHeaderMenu: false
     },
     methods: {

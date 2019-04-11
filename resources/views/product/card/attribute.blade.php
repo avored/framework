@@ -1,6 +1,6 @@
 @php
-    $productVariations = $model->attribute;
-    $attributeOptions = $model->getAttributeOptions();
+    $productVariations = $product->attribute;
+    $attributeOptions = $product->getAttributeOptions();
 @endphp
 <div class="row">
     <div class="col-12">
@@ -21,7 +21,7 @@
                 </select>
 
                 <div class="input-group-append">
-                    <button data-token="{{ csrf_token() }}" data-product-id="{{ $model->id }}"
+                    <button data-token="{{ csrf_token() }}" data-product-id="{{ $product->id }}"
                             class="btn btn-warning use-selected-attribute"
                             type="button">Use Selected
                     </button>
@@ -31,7 +31,7 @@
 
             <div class="product-variation-card-wrapper row"></div>
 
-            @if(null != $model->productVariations)
+            @if(null != $product->productVariations)
 
                 <table class="table table-bordered">
                     <thead>
@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach($model->productVariations as $variation)
+                    @foreach($product->productVariations as $variation)
                         <tr>
                             <th scope="row">{{ $variation->variationProduct->id }}</th>
                             <td>{{ $variation->variationProduct->name }}</td>

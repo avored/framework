@@ -4,9 +4,12 @@ namespace AvoRed\Framework\Models\Database;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use AvoRed\Framework\Models\Traits\TranslatedAttributes;
 
 class Category extends BaseModel
 {
+    use TranslatedAttributes;
+    
     protected $fillable = ['parent_id', 'name', 'slug', 'meta_title', 'meta_description'];
 
     /**
@@ -16,11 +19,6 @@ class Category extends BaseModel
     protected $translatedAttributes = ['name', 'slug', 'meta_title', 'meta_description'];
 
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class);
-    }
-
     /**
      * Category Model has many translation values 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -29,6 +27,13 @@ class Category extends BaseModel
     {
         return $this->hasMany(CategoryTranslation::class);
     }
+
+    
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
 
     /**
      * Category Model Get Translation Model and return the value
@@ -47,6 +52,8 @@ class Category extends BaseModel
     public static function getCategoryOptions()
     {
         $model = new static;
+
+        return $model->all();//->pluck('name','id');
         $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
 
         return $options;
@@ -74,143 +81,37 @@ class Category extends BaseModel
         return $this->hasMany(CategoryFilter::class);
     }
 
-    /*
-    * Return Products of Category with Filters
-    *
-    *
-    * @param array   $filters
-
-    public function getCategoryProductWithFilter($filters = [])
-    {
-        $prefix = config('database.connections.mysql.prefix');
-
-        $propetryInnerJoinFlag = false;
-        $attributeInnerJoinFlag = false;
-
-        $sql = "Select p.id
-                FROM {$prefix}products as p
-                INNER JOIN {$prefix}category_product as cp on p.id = cp.product_id ";
-
-        foreach ($filters as $type => $filterArray) {
-            if ('property' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $property = Property::whereIdentifier($identifier)->first();
-
-                    if ('INTEGER' == $property->data_type) {
-                        if (false === $propetryInnerJoinFlag) {
-                            $propetryInnerJoinFlag = true;
-                            $sql .= "INNER JOIN {$prefix}product_property_integer_values as ppiv ON p.id = ppiv.product_id ";
-                        }
-                    }
-                }
-            }
-
-            if ('attribute' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $attribute = Attribute::whereIdentifier($identifier)->first();
-                    if (false === $attributeInnerJoinFlag) {
-                        $attributeInnerJoinFlag = true;
-                        $sql .= "INNER JOIN {$prefix}product_attribute_integer_values as paiv ON p.id = paiv.product_id ";
-                    }
-                }
-            }
-        }
-
-        $sql .= "WHERE p.type != 'VARIABLE_PRODUCT' AND  cp.category_id = ? ";
-
-        foreach ($filters as $type => $filterArray) {
-            if ('property' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $property = Property::whereIdentifier($identifier)->first();
-
-                    if ('INTEGER' == $property->data_type) {
-                        $sql .= "AND ppiv.property_id = {$property->id} AND ppiv.value={$value} ";
-                    }
-                }
-            }
-        }
-
-        foreach ($filters as $type => $filterArray) {
-            if ('attribute' == $type) {
-                foreach ($filterArray as $identifier => $value) {
-                    $attribute = Attribute::whereIdentifier($identifier)->first();
-                    $sql .= "AND paiv.attribute_id = {$attribute->id} AND paiv.value={$value} ";
-                }
-            }
-        }
-
-        $products = DB::select($sql, [$this->id]);
-        $collect = Collection::make([]);
-
-        foreach ($products as $productArray) {
-            $product = Product::find($productArray->id);
-
-            if ($product->type == 'VARIABLE_PRODUCT') {
-                $collect->push(($product->getVariableMainProduct()));
-            } else {
-                $collect->push(Product::find($productArray->id));
-            }
-        }
-
-        return $collect;
-    }
+    /**
+     * Get the Category Name
+     * @return string $name
      */
-
-    /*
-     public function getFilters()
+    public function getName()
     {
-        $attrs = Collection::make([]);
-        $productIds = Collection::make([]);
-        $collections = Collection::make([]);
-
-        $products = $this->products;
-
-        foreach ($products as $product) {
-            foreach ($product->productVariations as $variation) {
-                $productIds->push($variation->variation_id);
-            }
-            $productIds->push($product->id);
-        }
-        $intAttributes = ProductAttributeIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
-        foreach ($intAttributes as $attrValue) {
-            $attrs->push(['model' => Attribute::find($attrValue->attribute_id), 'type' => 'ATTRIBUTE']);
-        }
-
-        $intAttributes = ProductPropertyIntegerValue::whereIn('product_id', $productIds)->get()->unique('attribute_id');
-        foreach ($intAttributes as $attrValue) {
-            $attrs->push(['model' => Property::find($attrValue->property_id), 'type' => 'PROPERTY']);
-        }
-
-        return $attrs;
+        return $this->getAttribute('name', $translated = true);
     }
 
-    public function getAllCategories()
+    /**
+     * Get the Category Slug
+     * @return string $slug
+     */
+    public function getSlug()
     {
-        $data = [];
-
-        $rootCategories = $this->where('parent_id', '=', null)->orWhere('parent_id', '=', 0)->get();
-        $data = $this->list_categories($rootCategories);
-
-        return $data;
+        return $this->getAttribute('slug', $translated = true);
     }
-
-    public function getChilds($id)
+    /**
+     * Get the Category Meta Title
+     * @return string $metaTitle
+     */
+    public function getMetaTitle()
     {
-        return $this->where('parent_id', '=', $id)->get();
+        return $this->getAttribute('meta_title', $translated = true);
     }
-
-    public function list_categories($categories)
+    /**
+     * Get the Category Meta Description
+     * @return string $meta_description
+     */
+    public function getMetaDescription()
     {
-        $data = [];
-
-        foreach ($categories as $category) {
-            $data[] = [
-                'object' => $category,
-                'children' => $this->list_categories($category->children),
-            ];
-        }
-
-        return $data;
+        return $this->getAttribute('meta_description', $translated = true);
     }
-    */
 }

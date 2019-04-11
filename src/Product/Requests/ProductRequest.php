@@ -24,6 +24,7 @@ class ProductRequest extends Request
      */
     public function rules()
     {
+        dd($this->request->all());
         if ($this->request->get('product_id', null) !== null) {
             $product = Product::findorfail($this->request->get('product_id'));
         }
