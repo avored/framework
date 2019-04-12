@@ -102,7 +102,7 @@ class ProductController extends Controller
         $product->categories;
         $attributes = Collection::make([]);
 
-        $properties = Property::all()->pluck('name', 'id');
+        $properties = Property::all();
         $usedForAllProductProperties = Property::whereUseForAllProducts(1)->get();
 
         if ($product->type == 'VARIATION') {

@@ -4,26 +4,31 @@
 <div class="row">
     <div class="col-12">
         <div id="add-property" class="input-group">
-            <select name="product_property[]"
-                    multiple="true"
-                    class="select2 form-control modal-product-property-select"
-                    style="width: 88%">
-                @foreach($propertyOptions as $propertyId => $propertyName)
-                    <option
-                            @if($productProperties->contains('property_id',$propertyId))
-                            selected
-                            @endif
-
-                            value="{{ $propertyId }}">
-                        {{ $propertyName }}
-                    </option>
-                @endforeach
-            </select>
-
-
-            <div class="input-group-append">
+            <multiselect
+                v-model="properties"
+                @select="propertySelected"
+                label="name"
+                class="input-group-control form-control multiselect"
+                :searchable="true"
+                track-by="id" 
+                :close-on-select="true"
+                :clear-on-select="true"
+                :preserve-search="false"
+                :multiple="true"
+                :options="{{ $propertyOptions }}"
+            >
+                <template slot="tag" slot-scope="{ option }">
+                    <span class="multiselect__tag">
+                        @{{ option.name }}
+                    </span>
+                </template>
+            </multiselect>
+            <div v-for="property in property_id">
+                <input type="hidden" name="product_property[]" v-model="property.value" />
+            </div>
+            <div  class="input-group-append">
                 <button type="button"
-                        data-token="{{ csrf_token() }}"
+                        data-token="{ csrf_token() }}"
                         class="btn btn-warning modal-use-selected">
                     Use Selected
                 </button>
@@ -143,42 +148,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    <script>
-
-        $(function () {
-            jQuery('.modal-use-selected').on('click', function (e) {
-
-                var token = jQuery(this).attr('data-token');
-                var element = jQuery(this).parents('#add-property:first').find('.modal-product-property-select');
-
-                var data = {_token: token, property_id: element.val()};
-
-
-                jQuery.ajax({
-                    url: '{{ route('admin.property.element') }}',
-                    data: data,
-                    dataType: 'json',
-                    method: 'post',
-                    success: function (response) {
-
-                        if (response.success == true) {
-
-                            //jQuery('#add-property').modal('hide');
-                            jQuery('.property-content-wrapper').html(response.content);
-
-                            jQuery('.datetime').flatpickr({
-                                altInput: true,
-                                altFormat: "d-m-Y",
-                                dateFormat: "Y-m-d",
-                            });
-
-
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-@endpush

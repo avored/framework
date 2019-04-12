@@ -15,6 +15,13 @@ img {
     max-width: 100%;
 }
 
+
+.input-group-control {
+    .multiselect__tags {
+        border: none;
+    }
+}
+
 .menu-btn {
     padding: 10px 15px;
     border: none;

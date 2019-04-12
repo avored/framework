@@ -20,3 +20,8 @@ $font-family-sans-serif: "Poppins", sans-serif;
 @import 'vendor/themify-icons';
 
 /* poppins-regular - latin */
+.input-group-control {
+    .multiselect__tags {
+        border: none;
+    }
+}
