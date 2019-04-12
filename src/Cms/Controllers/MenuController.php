@@ -76,7 +76,7 @@ class MenuController extends Controller
             $menuGroup->update($request->all());
         }
         $menuJson = $request->get('menu_json');
-        $menuArray = json_decode($menuJson);
+        $menuArray = json_decode($menuJson, true);
         
         $this->repository->truncateAndCreateMenus($menuGroup, $menuArray);
 

@@ -19,15 +19,14 @@
                                 <draggable
                                     class="left-menu list-group"
                                     group="avored-drag-only"
-                                    :list="categories"
-                                    
+                                    :list="categories" 
                                 >
                                     <li
                                         class="list-group-item"
                                         v-for="(element, index) in categories"
                                         :key="index + '-cateroy'"
                                     >
-                                    @{{ element.name }} @{{ index }}
+                                    @{{ element.name }}
                                     </li>
                                 </draggable>
                            
@@ -46,7 +45,7 @@
                                         v-for="(element, index) in frontMenus"
                                         :key="index + '-front-menu'"
                                     >
-                                    @{{ element.name }} @{{ index }}
+                                        @{{ element.name }}
                                     </li>
                                 </draggable>
                            
@@ -69,19 +68,24 @@
                                                     v-for="(element, index) in menus"
                                                     :key="index + '-menu'"
                                                 >
-                                                @{{ element.name }} @{{ index }}
+                                                <span>@{{ element.name }}</span>
+                                                <a 
+                                                    v-on:click="removeMenu(index)" 
+                                                    class="float-right"><i class="ti-trash"></i></a>
                                                 </li>
                                             </draggable>
                                         </ul>
                                         </div>
-                                    
-                                        @csrf
-                                        <input type="hidden" name="menu_json" v-model="menuJson" />
-                                        <input type="hidden" name="menu_group_id" value="{{ $group->id }}"/>
-                                        <div class="form-group">
+                                        <form method="post" action="{{ route('admin.menu.store') }}">
+                                        
+                                            @csrf
+                                            <input type="hidden" name="menu_json" v-model="menuJson" />
+                                            <input type="hidden" name="menu_group_id" value="{{ $group->id }}"/>
+                                            <div class="form-group">
 
-                                            <button type="submit" class="btn btn-primary">Save Menu</button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary">Save Menu</button>
+                                            </div>
+                                        </form>
                                     </form>
                                 </div>
                             </div>

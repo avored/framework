@@ -24,9 +24,9 @@ class MenuRequest extends Request
     public function rules()
     {
         $validationRule = [];
-        $validationRule['name'] = 'required|max:255';
+        //$validationRule['name'] = 'required|max:255';
         if (null === $this->request->get('menu_group_id')) {
-            $validationRule['identifier'] = 'required|unique:menu_groups';
+            //$validationRule['identifier'] = 'required|unique:menu_groups';
         }
         return $validationRule;
     }

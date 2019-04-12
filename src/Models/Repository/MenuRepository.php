@@ -82,22 +82,21 @@ class MenuRepository implements MenuInterface
         }
     }
 
-    private function _saveMenu($menuGroup, $menus, $parentId = null)
+    private function _saveMenu($menuGroup, $menu, $parentId = null)
     {
-        foreach ($menus as $menu) {
-            if (isset($menu->name)) {
-                $menuModel = $this->create([
-                    'menu_group_id' => $menuGroup->id,
-                    'name' => $menu->name,
-                    'route' => $menu->route,
-                    'params' => $menu->params,
-                    'parent_id' => $parentId
-                ]);
-            }
-
-            if (isset($menu->children) && count($menu->children[0]) > 0) {
-                $this->_saveMenu($menuGroup, $menu->children[0], $menuModel->id);
-            }
+        if (isset($menu['name'])) {
+            $menuModel = $this->create(
+                ['menu_group_id' => $menuGroup->id,
+                'name' => $menu['name'],
+                'route' => $menu['route'],
+                'params' => $menu['params'],
+                'parent_id' => $parentId]
+            );
         }
+
+        if (isset($menu['children']) && count($menu['children'][0]) > 0) {
+            $this->_saveMenu($menuGroup, $menu['children'][0], $menuModel->id);
+        }
+        
     }
 }
