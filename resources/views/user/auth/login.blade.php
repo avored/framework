@@ -38,10 +38,10 @@
                                 class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                 id="email" />
                                 @if ($errors->has('email'))
-                                <span class='invalid-feedback'>
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
+                                    <span class='invalid-feedback'>
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                         </div>
 
                         <div class="form-group">
