@@ -23,7 +23,9 @@
                 label="name"
                 :searchable="true"
                 track-by="id" 
-                :close-on-select="true" :clear-on-select="true" :preserve-search="false"
+                :close-on-select="true"
+                :clear-on-select="true"
+                :preserve-search="false"
                 :multiple="true"
                 :options="{{ $categoryOptions }}"
             >

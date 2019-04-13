@@ -21,6 +21,9 @@ export default {
        destroyMenuFromList(index) {
            console.log(this.menuData.splice(index, 1));
        },
+       removeMenu(index) {
+           this.menus.splice(index, 1);
+       },
        addMenuElement(element) {
             window.x = element;
             let menu = {
@@ -29,7 +32,6 @@ export default {
                 route: element.item.getAttribute('data-route'),
                 params: element.item.getAttribute('data-params')
             }
-            //this.menuData.splice(element.newIndex, 0, menu);
        }
     },
     computed: {

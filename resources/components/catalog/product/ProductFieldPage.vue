@@ -14,6 +14,8 @@ export default {
         return {
             category_id: [],
             categories: [],
+            property_id: [],
+            properties: [],
             cards: {
                 basic: true,
                 images: false,
@@ -34,6 +36,10 @@ export default {
         },
         categorySelected(value) {
             this.category_id.push({ value: value.id});
+        },
+        propertySelected(value) {
+            console.log(value);
+            this.property_id.push({ value: value.id});
         }
     },
     computed: {
