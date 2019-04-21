@@ -1,7 +1,7 @@
 <a-layout-sider  :trigger="null" collapsible v-model="collapsed">
     <div class="logo"></div>
 
-    <a-menu theme="dark"  :defaultSelectedKeys="['1']" mode="inline">
+    <a-menu theme="dark"  :default-selected-keys="['1']" mode="inline">
         <a-menu-item key="1">
             <a-icon type="user"></a-icon>
             <span>Catalog</span>

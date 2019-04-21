@@ -22,6 +22,9 @@ Route::middleware(['web'])
             ->name('login');
         Route::post('login', 'System\Controllers\LoginController@login')
             ->name('login.post');
+
+        Route::post('logout', 'System\Controllers\LoginController@logout')
+            ->name('logout');
         
         Route::get('password/reset', 'System\Controllers\ForgetPasswordController@showLinkRequestForm')
             ->name('password.reset');
