@@ -1,53 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'AvoRed Ecommerce') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ url('vendor/avored-admin/css/app.css') }}" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <title>@yield('meta_title', 'AvoRed E commerce')</title>
+
+    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
     
-    @yield('css')
-
-    <script>
-        window.Laravel = <?php
-        echo json_encode([
-                'csrfToken' => csrf_token(),
-        ]);
-        ?>
-    </script>    
-
+    <!-- Styles -->
+    <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
 </head>
-
 <body>
     <div id="app">
-      <div :class="{ 'is-collapsed': toggleSideBarData, 'app' : true }">
-      @include("avored-framework::layouts.left-nav")
-      <div class="page-container">
-        @include("avored-framework::layouts.nav")
-        <main class='main-content bgc-grey-100'>
-          <div id='mainContent'>
-            @include("avored-framework::layouts.notifications")
-            <div class="masonry-sizer col-md-6"></div>
-              <h4 class="c-grey-900 mT-10 mB-30">
-                @yield('page-header')
-              </h4>
-              @yield('content')
-          </div>
-        </main>
+        <avored-layout inline-template >
+            <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+                @include('avored::partials.sidebar')
+                <a-layout>
+               
+                    @include('avored::partials.header')
+                    <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '1280px' }">
+                        @yield('content')
+                    </a-layout-content>
 
-        @include("avored-framework::layouts.footer")
-      </div>
+                    @include('avored::partials.footer')
+                </a-layout>
+           
+            </a-layout>
+        </avored-layout>
     </div>
-  </div>
-
-  <script src="{{ url('vendor/avored-admin/js/vue.js') }}"></script>
-  
-  @stack('scripts')
+    @stack('scripts')
 </body>
 </html>

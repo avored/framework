@@ -15,18 +15,38 @@ use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 class Manager
 {
+    /**
+     * existing module list
+     * @var array $moduleList
+     */
     public $moduleList;
 
+    /**
+     * existing files list
+     * @var array $files
+     */
     public $files;
 
+    /**
+     * Flag for is Module is loaded or not
+     * @var bool $moduleLoaded
+     */
     public $moduleLoaded = false;
 
+    /**
+     * Construct for the module manager
+     * @param \Illuminate\Filesystem\Filesystem $fileSystem
+     */
     public function __construct(Filesystem $files)
     {
         $this->files = $files;
         $this->moduleList = Collection::make([]);
     }
 
+    /**
+     * Get all the moduleList Collection
+     * @return \Illuminate\Support\Collection $moduleList
+     */
     public function all()
     {
         if ($this->moduleLoaded === false) {
@@ -36,6 +56,10 @@ class Manager
         return $this->moduleList;
     }
 
+    /**
+     * Scan Module Path and load into a moduleList Collection
+     * @return self $this
+     */
     protected function loadModules()
     {
         $modulePath = base_path('modules');
@@ -56,8 +80,8 @@ class Manager
                     $moduleRegisterContent = File::get($filePath);
                     $data = Yaml::parse($moduleRegisterContent);
 
+                    //dd($data);
                     $module = new Module();
-
                     $module->namespace($data['namespace']);
                     $module->identifier($data['identifier']);
                     $module->name($data['name']);
@@ -85,6 +109,12 @@ class Manager
         return $this;
     }
 
+    /**
+     * Put Module Info to a collection
+     * @param string $identifier
+     * @param array $moduleInfo
+     * @return self $this
+     */
     public function put($identifier, $moduleInfo)
     {
         $this->moduleList->put($identifier, $moduleInfo);
@@ -92,6 +122,11 @@ class Manager
         return $this;
     }
 
+    /**
+     * Get Module by identifier
+     * @param string $identifier
+     * @return array $moduleInfo
+     */
     public function get($identifier)
     {
         if ($this->moduleLoaded === false) {
@@ -101,11 +136,11 @@ class Manager
         return $this->moduleList->pull($identifier);
     }
 
-    public function getService()
-    {
-        return $this->service;
-    }
-
+    /**
+     * Get Module by Path
+     * @param string $path
+     * @return array $moduleInfo
+     */
     public function getByPath($path)
     {
         foreach ($this->moduleList as $module => $moduleInfo) {
@@ -121,6 +156,12 @@ class Manager
         return $actualModule;
     }
 
+    /**
+     * Publish an item to given path from passed path
+     * @param string $from
+     * @param string $to
+     * @return bool
+     */
     public function publishItem($from, $to)
     {
         if ($this->files->isDirectory($from)) {
@@ -143,8 +184,6 @@ class Manager
             'from' => new Flysystem(new LocalAdapter($from)),
             'to' => new Flysystem(new LocalAdapter($to)),
         ]));
-
-        //$this->status($from, $to, 'Directory');
     }
 
     /**
@@ -162,6 +201,11 @@ class Manager
         }
     }
 
+    /**
+     * Slash the given path
+     * @param string $path
+     * @return string $slashPath
+     */
     public function pathSlashFix($path)
     {
         return (DIRECTORY_SEPARATOR === '\\') ? str_replace('/', '\\', $path) : str_replace('\\', '/', $path);

@@ -2,11 +2,8 @@
 
 namespace AvoRed\Framework\Support\Console;
 
-use AvoRed\Framework\Models\Database\Role;
-use AvoRed\Framework\Models\Database\AdminUser;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
-use Laravel\Passport\ClientRepository;
+use AvoRed\Framework\Database\Models\AdminUser;
 
 class AdminMakeCommand extends Command
 {
@@ -16,33 +13,14 @@ class AdminMakeCommand extends Command
      * @var string
      */
     protected $name = 'avored:admin:make';
-
-    /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
+    
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create an Admininistrator Account for AvoRed Admin';
-
-    /**
-     * Create a new controller creator command instance.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @return void
-     */
-    public function __construct(Filesystem $files)
-    {
-        parent::__construct();
-        $this->files = $files;
-    }
-
+    protected $description = 'Create an Admin User for  AvoRed e commerce';
+    
     /**
      * Execute the console command.
      *
@@ -50,27 +28,17 @@ class AdminMakeCommand extends Command
      */
     public function handle()
     {
-        //CREATE AN ADMIN USER
-        $firstName = $this->ask('What is your First Name:');
-        $lastName = $this->ask('What is your Last Name:');
-        $email = $this->ask('What is your Email:');
-        $password = $this->secret('What is your password:');
+        $data['first_name'] = $this->ask('What is your First Name?');
+        $data['last_name'] = $this->ask('What is your last Name?');
+        $data['email'] = $this->ask('What is your Email Address?');
+        $data['password'] = $this->secret('What is your Password?');
+        $data['confirm_password'] = $this->secret('Confirm your password again?');
 
-        $role = Role::create(['name' => 'administrator', 'description' => 'Administrator Role has all access']);
+        $data['role_id'] = 1;
+        $data['is_super_admin'] = 1;
 
-        $adminUser = AdminUser::create([
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'email' => $email,
-            'password' => bcrypt($password),
-            'is_super_admin' => 1,
-            'role_id' => $role->id,
-        ]);
+        $user = AdminUser::create($data);
 
-        $request = $this->laravel->make('request');
-        $clientRepository = new ClientRepository;
-        $clientRepository->createPasswordGrantClient($adminUser->id, $adminUser->full_name, $request->getUriForPath('/'));
-
-        $this->info('AvoRed Ecommerce Administrator Account Created Successfully!');
+        $this->info('Admin User created Successfully!');
     }
 }

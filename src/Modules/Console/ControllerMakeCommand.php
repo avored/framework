@@ -91,6 +91,13 @@ class ControllerMakeCommand extends Command
         }
     }
 
+    /**
+     * Get Controller Path
+     * @param string $vendor
+     * @param string $name
+     * @param string $controllerName
+     * @return string $controllerPath
+     */
     protected function getControllerPath($vendor, $name, $controllerName)
     {
         return base_path('modules/' . $vendor . '/' . $name . '/' . 'src/Http/Controllers/' . $controllerName . '.php');
