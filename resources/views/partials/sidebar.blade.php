@@ -1,5 +1,5 @@
 <a-layout-sider  :trigger="null" collapsible v-model="collapsed">
-    <div class="logo"></div>
+    <div class="logo">AvoRed</div>
 
     <a-menu theme="dark"  :default-selected-keys="['1']" mode="inline">
         <a-menu-item key="1">

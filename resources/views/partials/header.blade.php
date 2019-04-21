@@ -1,7 +1,7 @@
 <a-layout-header style="background: #fff; padding: 0">
     
 
-    <a-menu style="float:left" mode="horizontal">
+    <a-menu class="float-left" mode="horizontal">
         <a-menu-item>
             <a-icon 
                 class="trigger" 
@@ -10,7 +10,7 @@
             </a-icon>
         </a-menu-item>
     </a-menu>
-    <a-menu :default-selected-keys="[null]" style="float:right;line-height:64px;margin-right:10px;" mode="horizontal">
+    <a-menu class="header-nav"  mode="horizontal">
         <a-sub-menu key="header-account">
             <span slot="title">
                 <a-avatar
