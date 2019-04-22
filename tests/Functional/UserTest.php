@@ -1,0 +1,18 @@
+<?php
+
+namespace AvoRed\Framework\Tests\Controllers;
+
+use AvoRed\Framework\Tests\BaseTestCase;
+use AvoRed\Framework\System\Controllers\LoginController;
+
+/** @runInSeparateProcess */
+class UserTest extends BaseTestCase
+{
+    /* @runInSeparateProcess */
+    public function testRedirectPathForLoginController()
+    {
+        $loginController = app(LoginController::class);
+        $adminPath = config('avored.admin_url');
+        $this->assertEquals($loginController->redirectPath(), $adminPath);
+    }
+}

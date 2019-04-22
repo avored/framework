@@ -21,7 +21,7 @@
                 {{ Auth::guard('admin')->user()->full_name }}
             </span>
             <a-menu-item key="1">
-                <a href="{{ route('logout') }}"
+                <a href="{{ route('admin.logout') }}"
                     onclick="event.preventDefault();
                         document.getElementById('admin-logout-form').submit();">
                 <a-icon type="logout"></a-icon>

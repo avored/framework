@@ -30,10 +30,16 @@
                                     @submit="handleSubmit"
                                 >
                                     @csrf()
-                                    <a-form-item label="{{ __('avored::system.email') }}">
+                                    <a-form-item
+                                        @if ($errors->has('email'))
+                                            validate-status="error"
+                                            help="{{ $errors->first('email') }}"
+                                        @endif
+                                        label="{{ __('avored::system.email') }}">
                                     <a-input
                                         :auto-focus="true"
                                         name="email"
+                                        
                                         v-decorator="[
                                         'email',
                                         {rules: 
@@ -46,7 +52,13 @@
                                         ]"
                                     />
                                     </a-form-item>
-                                    <a-form-item label="{{ __('avored::system.password') }}">
+                                    
+                                    <a-form-item 
+                                        @if ($errors->has('password'))
+                                            validate-status="error"
+                                            help="{{ $errors->first('password') }}"
+                                        @endif
+                                        label="{{ __('avored::system.password') }}">
                                         <a-input
                                             name="password"
                                             type="password"

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends BaseController
 {
@@ -61,7 +62,7 @@ class LoginController extends BaseController
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages(
-            [$this->username() => [trans('avored::lang.failed')]]
+            [$this->username() => [trans('avored::system.failed')]]
         );
     }
 
@@ -71,7 +72,7 @@ class LoginController extends BaseController
      */
     public function redirectPath()
     {
-        return  config('avored.admin_url');
+        return config('avored.admin_url');
     }
 
     /**
@@ -83,6 +84,7 @@ class LoginController extends BaseController
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
+        
         return redirect()->route('admin.login');
     }
 }

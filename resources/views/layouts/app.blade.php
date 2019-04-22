@@ -9,8 +9,6 @@
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
-    
     <!-- Styles -->
     <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
 </head>
@@ -32,6 +30,7 @@
             </a-layout>
         </avored-layout>
     </div>
+    <script src="{{ asset('avored-admin/js/app.js') }}"></script>
     @stack('scripts')
 </body>
 </html>
