@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\App;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Console\AdminMakeCommand;
+use Illuminate\Support\Facades\View;
+use AvoRed\Framework\System\ViewComposers\LayoutComposer;
 
 class AvoRedProvider extends ServiceProvider
 {
@@ -23,7 +25,7 @@ class AvoRedProvider extends ServiceProvider
         //\AvoRed\Framework\Cart\Provider::class,
         //\AvoRed\Framework\DataGrid\Provider::class,
         //\AvoRed\Framework\Image\ImageProvider::class,
-        //\AvoRed\Framework\Menu\MenuProvider::class,
+        \AvoRed\Framework\Support\Providers\MenuProvider::class,
         //\AvoRed\Framework\Models\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
         //\AvoRed\Framework\Payment\Provider::class,
@@ -55,6 +57,7 @@ class AvoRedProvider extends ServiceProvider
         $this->registerConfigData();
         $this->registerRoutePath();
         $this->registerMiddleware();
+        $this->registerViewComposerData();
         $this->registerConsoleCommands();
         $this->registerMigrationPath();
         $this->registerViewPath();
@@ -167,5 +170,14 @@ class AvoRedProvider extends ServiceProvider
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
         $authConfig = $this->app['config']->get('auth', []);
+    }
+
+    /**
+     * Registering Class Based View Composer.
+     * @return void
+     */
+    public function registerViewComposerData()
+    {
+        View::composer('avored::layouts.app', LayoutComposer::class);
     }
 }

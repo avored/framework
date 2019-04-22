@@ -38,4 +38,6 @@ Route::middleware(['web', 'admin.auth'])
     ->name('admin.')
     ->group(function () {
         Route::get('', 'System\Controllers\DashboardController@index')->name('dashboard');
+
+        Route::resource('category', 'Catalog\Controllers\CategoryController');
     });

@@ -4,7 +4,7 @@
     <a-menu class="float-left" mode="horizontal">
         <a-menu-item>
             <a-icon 
-                class="trigger" 
+                class="trigger header-trigger" 
                 :type="collapsed ? 'menu-unfold' : 'menu-fold'" 
                 @click="()=> collapsed = !collapsed">
             </a-icon>
