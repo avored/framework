@@ -26,7 +26,7 @@ class AvoRedProvider extends ServiceProvider
         //\AvoRed\Framework\DataGrid\Provider::class,
         //\AvoRed\Framework\Image\ImageProvider::class,
         \AvoRed\Framework\Support\Providers\MenuProvider::class,
-        //\AvoRed\Framework\Models\ModelProvider::class,
+        \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
         //\AvoRed\Framework\Payment\Provider::class,
         //\AvoRed\Framework\Permission\PermissionProvider::class,

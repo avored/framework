@@ -4,9 +4,36 @@ namespace AvoRed\Framework\Support\Console;
 
 use Illuminate\Console\Command;
 use AvoRed\Framework\Database\Models\AdminUser;
+use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 
 class AdminMakeCommand extends Command
 {
+    /**
+     * Role Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     */
+    protected $roleRepository;
+     
+    /**
+     * AdminUser Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
+     */
+    protected $adminUserRepository;
+
+    /**
+     * Construct for the AvoRed install command
+     * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     */
+    public function __construct(
+        RoleModelInterface $roleRepository,
+        AdminUserModelInterface $adminUserRepository
+    ) {
+        $this->roleRepository = $roleRepository;
+        $this->adminUserRepository = $adminUserRepository;
+        parent::__construct();
+    }
+
     /**
      * The console command name.
      *
@@ -34,10 +61,11 @@ class AdminMakeCommand extends Command
         $data['password'] = $this->secret('What is your Password?');
         $data['confirm_password'] = $this->secret('Confirm your password again?');
 
-        $data['role_id'] = 1;
+        $role = $this->roleRepository->findAdminRole();
+        $data['role_id'] = $role->id;
         $data['is_super_admin'] = 1;
 
-        $user = AdminUser::create($data);
+        $user = $this->adminUserRepository->create($data);
 
         $this->info('Admin User created Successfully!');
     }

@@ -20,6 +20,14 @@ class AvoredFrameworkSchema extends Migration
      */
     public function up()
     {
+        Schema::create('languages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
+
         Schema::create('admin_password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
@@ -49,6 +57,29 @@ class AvoredFrameworkSchema extends Migration
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
+
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->nullable()->default(null);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('category_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('category_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
     }
 
     /**
@@ -60,8 +91,15 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('admin_password_resets');
+        Schema::dropIfExists('category_translations');
+        Schema::dropIfExists('categories');
+        
         Schema::dropIfExists('admin_users');
+        Schema::dropIfExists('admin_password_resets');
+
+        Schema::dropIfExists('roles');
+
+        Schema::dropIfExists('languages');
         
         Schema::enableForeignKeyConstraints();
     }

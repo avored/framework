@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Role extends Model
 {
+    /**
+     * Admin Role name Constatnt
+     */
+    const ADMIN = 'Administrator';
+    
      /**
      * The attributes that are mass assignable.
      * @var array
