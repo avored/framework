@@ -10,14 +10,7 @@ export default {
   methods: {
     handleSubmit (e) {  
       this.loginForm.validateFields((err, values) => {
-        if (!err) {
-            //axios.post()  
-            console.log('Received values of form: ', values);
-            console.log(window.x = this.loginForm);
-            console.log(window.y = e);
-            //e.submit();
-            //console.log(this.loginPost);
-        } else {
+        if (err) {
           e.preventDefault();
         }
       });

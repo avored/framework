@@ -1,7 +1,11 @@
 <a-layout-sider  :trigger="null" collapsible v-model="collapsed">
     <div class="logo">AvoRed</div>
 
-    <a-menu theme="dark"  :default-selected-keys="['category']" :default-open-keys="['catalog']"  mode="inline">
+    <a-menu 
+        theme="dark"
+        :default-selected-keys="[]"
+        :default-open-keys="[]"
+        mode="inline">
     @foreach ($adminMenus as $key => $adminMenu)
         @if ($adminMenu->hasSubmenu())
             <a-sub-menu key="{{ $key }}">

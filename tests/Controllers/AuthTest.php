@@ -36,7 +36,7 @@ class AuthTest extends BaseTestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-   /* @runInSeparateProcess */
+    /* @runInSeparateProcess */
     public function testAdminLoginPostRoute()
     {
         $password = 'phpunittest';
@@ -46,7 +46,7 @@ class AuthTest extends BaseTestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-   /* @runInSeparateProcess */
+    /* @runInSeparateProcess */
     public function testAdminLoginPostRouteFailed()
     {
         $password = 'phpunittest';

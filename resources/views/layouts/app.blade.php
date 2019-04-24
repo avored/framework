@@ -18,9 +18,15 @@
             <a-layout id="avored-admin-layout" style="min-height: 100vh">
                 @include('avored::partials.sidebar')
                 <a-layout>
-               
+
                     @include('avored::partials.header')
-                    <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '1280px' }">
+
+                    @include('avored::partials.breadcrumb')
+                    
+                    
+                    <h1 class="mt-1 ml-1 mb-0">@yield('page_title')</h1>
+                    
+                    <a-layout-content class="mh-1 ph-1 pt-1 bg-white">
                         @yield('content')
                     </a-layout-content>
 

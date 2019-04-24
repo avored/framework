@@ -4,17 +4,31 @@
 @link-color: #dc281e;
 
 @import '~ant-design-vue/dist/antd.less';
+@import 'helper/margin';
+@import 'helper/padding';
+
 .header-avtar .anticon {
     margin-right: 0px;
 }
-.h-100 {
-    height: 100vh;
-}
+
 .bg-primary {
     background-color: @primary-color;
 }
+
+.h-100 {
+    height: 100vh;
+}
 .float-left {
     float: left;
+}
+.float-right {
+    float: right;
+}
+.bg-white {
+    background-color: #fff;
+}
+.breadcrumb {
+    margin: 1.2rem 1.3rem 0px;
 }
 .header-nav {
     float:right;

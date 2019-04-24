@@ -40,4 +40,5 @@ Route::middleware(['web', 'admin.auth'])
         Route::get('', 'System\Controllers\DashboardController@index')->name('dashboard');
 
         Route::resource('category', 'Catalog\Controllers\CategoryController');
+        Route::resource('role', 'System\Controllers\RoleController');
     });

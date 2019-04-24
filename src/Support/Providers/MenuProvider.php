@@ -75,5 +75,18 @@ class MenuProvider extends ServiceProvider
                 ->label('Category')
                 ->route('admin.category.index');
         });
+
+        Menu::admin()->make('system', function (MenuItem $menu) {
+            $menu->label('System')
+                ->icon('setting')
+                ->route('#');
+        });
+
+        $systemMenu = Menu::admin()->get('system');
+        $systemMenu->subMenu('role', function (MenuItem $menu) {
+            $menu->key('role')
+                ->label('Role')
+                ->route('admin.role.index');
+        });
     }
 }

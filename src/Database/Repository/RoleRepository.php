@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class RoleRepository implements RoleModelInterface
 {
@@ -25,5 +26,14 @@ class RoleRepository implements RoleModelInterface
     public function findAdminRole(): Role
     {
         return Role::whereName(Role::ADMIN)->first();
+    }
+
+    /**
+     * find roles for the users
+     * @return \Illuminate\Database\Eloquent\Collection $roles
+     */
+    public function all() : Collection
+    {
+        return Role::all();
     }
 }

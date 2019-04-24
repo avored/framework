@@ -26,9 +26,13 @@ import Antd from 'ant-design-vue'
 
 Vue.use(Antd);
 
-Vue.component('avored-layout', require('../components/system/Layout.vue').default);
+Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
+Vue.component('role-create', require('../components/system/role/RoleCreate.vue').default);
+Vue.component('role-edit', require('../components/system/role/RoleEdit.vue').default);
 
+Vue.component('avored-layout', require('../components/system/Layout.vue').default);
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,4 +42,10 @@ Vue.component('login-fields', require('../components/system/LoginFields.vue').de
 
 const app = new Vue({
     el: '#app'
+});
+
+app.$notification.config({
+    placement: 'bottomRight',
+    bottom: '50px',
+    duration: 1.5,
 });

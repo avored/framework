@@ -26,5 +26,25 @@ return [
     'login-card' => 'AvoRed E commerce Admin Login',
     'login' => 'Login',
     'forget-password' => 'Forgot your password?',
+    'notification' => [
+        'delete' => ':attribute delete successfully!'
+    ],
+    'role' => [
+        'btn_create' => 'Create',
+        'save' => 'Save',
+        'cancel' => 'Cancel',
+        'name' => 'Name',
+        'description' => 'Description',
+        'index' => [
+            'title' => 'Role List'
+        ],
+        'create' => [
+            'title' => 'Role Create'
+        ],
+        'edit' => [
+            'title' => 'Role Edit'
+        ],
+        
+    ]
 
 ];
