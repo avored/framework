@@ -4,7 +4,7 @@ use AvoRed\Framework\Database\Models\Role;
 
 $factory->define(Role::class, function (Faker $faker) {
     return [
-        'name' => $faker->text(rand(5, 10)),
+        'name' => $faker->word,
         'description' => $faker->text(rand(50, 60))
     ];
 });

@@ -4,6 +4,10 @@
     AvoRed E commerce Admin Dashboard
 @endsection
 
+@section('page_title')
+    Dashboard
+@endsection
+
 @section('content')
 <a-row type="flex" justify="center">
     <a-col :span="24">

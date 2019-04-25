@@ -1,6 +1,4 @@
-<a-layout-header style="background: #fff; padding: 0">
-    
-
+<a-layout-header class="bg-white p-0">
     <a-menu class="float-left" mode="horizontal">
         <a-menu-item>
             <a-icon 
