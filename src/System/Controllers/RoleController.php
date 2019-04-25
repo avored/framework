@@ -55,7 +55,8 @@ class RoleController extends Controller
     {
         $this->roleRepository->create($request->all());
 
-        return redirect()->route('admin.role.index');
+        return redirect()->route('admin.role.index')
+            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Role']));
     }
 
     /**
@@ -89,7 +90,8 @@ class RoleController extends Controller
     {
         $role->update($request->all());
 
-        return redirect()->route('admin.role.index');
+        return redirect()->route('admin.role.index')
+            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Role']));
     }
 
     /**

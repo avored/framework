@@ -27,6 +27,8 @@ return [
     'login' => 'Login',
     'forget-password' => 'Forgot your password?',
     'notification' => [
+        'store' => ':attribute Created successfully!',
+        'updated' => ':attribute Updated successfully!',
         'delete' => ':attribute delete successfully!'
     ],
     'role' => [

@@ -21,6 +21,7 @@
 
                     @include('avored::partials.header')
 
+                    @include('avored::partials.flash')
                     @include('avored::partials.breadcrumb')
                     
                     

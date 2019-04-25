@@ -31,6 +31,7 @@ Vue.component('role-create', require('../components/system/role/RoleCreate.vue')
 Vue.component('role-edit', require('../components/system/role/RoleEdit.vue').default);
 
 Vue.component('avored-layout', require('../components/system/Layout.vue').default);
+Vue.component('avored-flash', require('../components/system/Flash.vue').default);
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default);
 
 
@@ -42,10 +43,4 @@ Vue.component('login-fields', require('../components/system/LoginFields.vue').de
 
 const app = new Vue({
     el: '#app'
-});
-
-app.$notification.config({
-    placement: 'bottomRight',
-    bottom: '50px',
-    duration: 1.5,
 });

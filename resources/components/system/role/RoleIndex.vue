@@ -44,7 +44,7 @@ export default {
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
-                            app.$notification.success({
+                            app.$notification.error({
                                 key: 'role.delete.success',
                                 message: response.data.message,
                             });
