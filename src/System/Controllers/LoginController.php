@@ -1,101 +1,82 @@
 <?php
-
 namespace AvoRed\Framework\System\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use AvoRed\Framework\Database\Models\AdminUser;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
-use AvoRed\Framework\Database\Models\Language;
-use AvoRed\Framework\System\Requests\LanguageRequest;
+use Illuminate\Validation\ValidationException;
 
-class LanguageController extends Controller
+class LoginController extends BaseController
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+    use AuthenticatesUsers, AuthorizesRequests;
     /**
-     * Language Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     * Create a new controller instance.
+     * @return void
      */
-    protected $languageRepository;
+    public function __construct()
+    {
+        $this->middleware('admin.guest')->except('logout');
+    }
+    /**
+     * Show the AvoRed Login Form to the User.
+     * @return \Illuminate\View\View
+     */
+    public function loginForm()
+    {
+        return view('avored::system.login.form');
+    }
+    /**
+     * Using an Admin Guard for the Admin Auth.
+     * @return \Illuminate\Auth\SessionGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
     
     /**
-     * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     * Get the failed login response instance.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws ValidationException
      */
-    public function __construct(
-        LanguageModelInterface $languageRepository
-    ) {
-        $this->languageRepository = $languageRepository;
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages(
+            [$this->username() => [trans('avored::system.failed')]]
+        );
     }
     /**
-     * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * Redirect Path after login and logout.
+     * @return string
      */
-    public function index()
+    public function redirectPath()
     {
-        $languages = $this->languageRepository->all();
+        return config('avored.admin_url');
+    }
+    /**
+     * Redirect Path after login and logout.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
         
-        return view('avored::system.language.index')
-            ->with('languages', $languages);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('avored::system.language.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\System\Requests\LanguageRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(LanguageRequest $request)
-    {
-        $this->languageRepository->create($request->all());
-
-        return redirect()->route('admin.language.index')
-            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Language']));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Language $language
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Language $language)
-    {
-        return view('avored::system.language.edit')
-            ->with('language', $language);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param \AvoRed\Framework\System\Requests\LanguageRequest $request
-     * @param \AvoRed\Framework\Database\Models\Language  $language
-     * @return \Illuminate\Http\Response
-     */
-    public function update(LanguageRequest $request, Language $language)
-    {
-        $language->update($request->all());
-
-        return redirect()->route('admin.language.index')
-            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Language']));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Language  $language
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Language $language)
-    {
-        $language->delete();
-
-        return [
-            'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Language'])
-        ];
+        return redirect()->route('admin.login');
     }
 }
