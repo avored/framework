@@ -9,6 +9,8 @@ use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Repository\RoleRepository;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
+use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
+use AvoRed\Framework\Database\Repository\LanguageRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -23,8 +25,9 @@ class ModelProvider extends ServiceProvider
      * @var array $models
      */
     protected $models = [
-        RoleModelInterface::class => RoleRepository::class,
         AdminUserModelInterface::class => AdminUserRepository::class,
+        LanguageModelInterface::class => LanguageRepository::class,
+        RoleModelInterface::class => RoleRepository::class,
     ];
     /**
      * Register the service provider.
@@ -46,5 +49,4 @@ class ModelProvider extends ServiceProvider
             $this->app->bind($interface, $repository);
         }
     }
-
 }

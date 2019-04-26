@@ -26,6 +26,10 @@ import Antd from 'ant-design-vue'
 
 Vue.use(Antd);
 
+Vue.component('language-index', require('../components/system/language/LanguageIndex.vue').default);
+Vue.component('language-create', require('../components/system/language/LanguageCreate.vue').default);
+Vue.component('language-edit', require('../components/system/language/LanguageEdit.vue').default);
+
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
 Vue.component('role-create', require('../components/system/role/RoleCreate.vue').default);
 Vue.component('role-edit', require('../components/system/role/RoleEdit.vue').default);

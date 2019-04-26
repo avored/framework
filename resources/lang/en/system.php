@@ -31,10 +31,25 @@ return [
         'updated' => ':attribute Updated successfully!',
         'delete' => ':attribute delete successfully!'
     ],
+    'btn_create' => 'Create',
+    'btn_save' => 'Save',
+    'btn_cancel' => 'Cancel',
+
+    'language' => [
+        'name' => 'Name',
+        'code' => 'Code',
+        'is_default' => 'Is Default',
+        'index' => [
+            'title' => 'Language List'
+        ],
+        'create' => [
+            'title' => 'Language Create'
+        ],
+        'edit' => [
+            'title' => 'Language Edit'
+        ],
+    ],
     'role' => [
-        'btn_create' => 'Create',
-        'save' => 'Save',
-        'cancel' => 'Cancel',
         'name' => 'Name',
         'description' => 'Description',
         'index' => [
@@ -46,7 +61,6 @@ return [
         'edit' => [
             'title' => 'Role Edit'
         ],
-        
-    ]
+    ],
 
 ];

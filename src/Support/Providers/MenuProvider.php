@@ -83,6 +83,11 @@ class MenuProvider extends ServiceProvider
         });
 
         $systemMenu = Menu::admin()->get('system');
+        $systemMenu->subMenu('language', function (MenuItem $menu) {
+            $menu->key('language')
+                ->label('Language')
+                ->route('admin.language.index');
+        });
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')
                 ->label('Role')

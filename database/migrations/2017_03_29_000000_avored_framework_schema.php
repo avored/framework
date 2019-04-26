@@ -24,7 +24,7 @@ class AvoredFrameworkSchema extends Migration
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->string('code')->nullable()->default(null);
-            $table->tinyInteger('is_default')->default(0);
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
 
