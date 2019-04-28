@@ -2,14 +2,15 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-//use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\ClientRepository;
 
 class AdminUser extends Authenticatable
 {
-    use Notifiable; //, HasApiTokens;
+    use HasApiTokens, Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -42,7 +43,7 @@ class AdminUser extends Authenticatable
      * Get the full name for the Admin User
      * @return string $fullName
      */
-    public function getFullNameAttribute()
+    public function getNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
@@ -51,33 +52,25 @@ class AdminUser extends Authenticatable
      * @param string $password
      * @return void
      */
-    public function setPasswordAttribute($val)
+    public function setPasrdAttribute($val)
     {
         $this->attributes['password'] = bcrypt($val);
     }
 
     /**
-     * Role is belongs to a User
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo $role
+     * Get the Passport Client for User and If it doesnot exist then create a new one
+     * @return \Laravel\Passport\Client $client
      */
-    public function role()
+    public function getPassportClient()
     {
-        return $this->belongsTo(Role::class);
-    }
-
-    /**
-     * Is user has permission to given route name
-     * @return bool
-     */
-    public function hasPermission($routeName)
-    {
-        if ($this->is_super_admin) {
-            return true;
+        $client = $this->clients->first();
+        if (null === $client) {
+            $clientRepository = app(ClientRepository::class);
+            
+            $redirectUri = route('home'); // Setup Env Variable for Graphql Admin
+            $client = $clientRepository->createPasswordGrantClient($this->id, $this->name, $redirectUri);
         }
-        $role = $this->role;
-        if ($role->permissions->pluck('name')->contains($routeName) == false) {
-            return false;
-        }
-        return true;
+        
+        return $client;
     }
 }

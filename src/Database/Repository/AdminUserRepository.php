@@ -16,4 +16,14 @@ class AdminUserRepository implements AdminUserModelInterface
     {
         return AdminUser::create($data);
     }
+
+    /**
+     * Find AdminUser by given Email in database
+     * @param string $email
+     * @return \AvoRed\Framework\Database\Models\AdminUser $adminUser
+     */
+    public function findByEmail(string $email) : AdminUser
+    {
+        return AdminUser::whereEmail($email)->first();
+    }
 }

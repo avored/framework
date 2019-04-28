@@ -10,6 +10,7 @@ use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Console\AdminMakeCommand;
 use Illuminate\Support\Facades\View;
 use AvoRed\Framework\System\ViewComposers\LayoutComposer;
+use Laravel\Passport\Passport;
 
 class AvoRedProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AvoRedProvider extends ServiceProvider
         //\AvoRed\Framework\Cart\Provider::class,
         //\AvoRed\Framework\DataGrid\Provider::class,
         //\AvoRed\Framework\Image\ImageProvider::class,
+        \AvoRed\Framework\Support\Providers\GraphqlProvider::class,
         \AvoRed\Framework\Support\Providers\MenuProvider::class,
         \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
@@ -45,15 +47,6 @@ class AvoRedProvider extends ServiceProvider
     public function register()
     {
         $this->registerProviders();
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
         $this->registerConfigData();
         $this->registerRoutePath();
         $this->registerMiddleware();
@@ -61,8 +54,16 @@ class AvoRedProvider extends ServiceProvider
         $this->registerConsoleCommands();
         $this->registerMigrationPath();
         $this->registerViewPath();
+    }
+
+    /**
+     * Bootstrap services.
+     * @return void
+     */
+    public function boot()
+    {
         $this->registerTranslationPath();
-        $this->registerProviders();
+        //$this->registerProviders();
     }
 
     /**
@@ -169,7 +170,8 @@ class AvoRedProvider extends ServiceProvider
             'auth',
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
-        $authConfig = $this->app['config']->get('auth', []);
+        // $graphqlConfig = $this->app['config']->get('graphql.schemas', []);
+        // dd($graphqlConfig);
     }
 
     /**
