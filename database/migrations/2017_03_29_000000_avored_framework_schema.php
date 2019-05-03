@@ -60,7 +60,6 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->nullable()->default(null);
             $table->string('name');
             $table->string('slug');
             $table->string('meta_title')->nullable()->default(null);

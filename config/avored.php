@@ -62,7 +62,9 @@ return [
             'default' => [
                 'query' => [
                     // 'example_query' => ExampleQuery::class,
-                    'user_info' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class
+                    'user_info' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class,
+                    'admin_menus' => AvoRed\Framework\GraphQL\Query\System\Layout\AdminMenuQuery::class,
+                    'all_category' => AvoRed\Framework\GraphQL\Query\Catalog\Category\AllQuery::class,
                 ],
                 'mutation' => [
                     //'userInfo' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class
@@ -84,6 +86,8 @@ return [
         'types' => [
             'token' => \AvoRed\Framework\GraphQL\Type\Auth\TokenType::class,
             'adminUserType' => \AvoRed\Framework\GraphQL\Type\System\AdminUserType::class,
+            'adminMenuType' => \AvoRed\Framework\GraphQL\Type\System\Layout\AdminMenuType::class,
+            'category_type' => \AvoRed\Framework\GraphQL\Type\Catalog\CategoryType::class,
         ],
     ],
 ];

@@ -11,6 +11,8 @@ use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 use AvoRed\Framework\Database\Repository\LanguageRepository;
+use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Repository\CategoryRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -28,6 +30,7 @@ class ModelProvider extends ServiceProvider
         AdminUserModelInterface::class => AdminUserRepository::class,
         LanguageModelInterface::class => LanguageRepository::class,
         RoleModelInterface::class => RoleRepository::class,
+        CategoryModelInterface::class => CategoryRepository::class,
     ];
     /**
      * Register the service provider.
