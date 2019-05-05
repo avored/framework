@@ -9,10 +9,10 @@ use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 
-class AllQuery extends Query
+class FetchQuery extends Query
 {
     /**
-     * Category Repository for the All Category Query
+     * Category Repository for the Category Query
      * @var \AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
      */
     protected $categoryRepository;
@@ -22,7 +22,7 @@ class AllQuery extends Query
      * @var array $attributes
      */
     protected $attributes = [
-        'name' => 'CategoryAllQuery',
+        'name' => 'CategoryFetchQuery',
         'description' => 'A query'
     ];
     
@@ -43,7 +43,7 @@ class AllQuery extends Query
      */
     public function type()
     {
-        return Type::listOf(GraphQL::type('category_type'));
+        return GraphQL::type('category_type');
     }
 
     /**
@@ -53,7 +53,10 @@ class AllQuery extends Query
     public function args()
     {
         return [
-
+            'id' => [
+                'name' => 'id',
+                'type' => Type::nonNull(Type::int()),
+            ]
         ];
     }
 
@@ -67,6 +70,6 @@ class AllQuery extends Query
      */
     public function resolve($root, $args, SelectFields $fields, ResolveInfo $info)
     {
-        return $this->categoryRepository->all();
+        return $this->categoryRepository->find($args['id']);
     }
 }

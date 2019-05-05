@@ -19,6 +19,26 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
+     * Find Category Resource into a database
+     * @param int $id
+     * @return \AvoRed\Framework\Database\Models\Category $category
+     */
+    public function find(int $id): Category
+    {
+        return Category::find($id);
+    }
+
+    /**
+     * Delete Category Resource from a database
+     * @param int $id
+     * @return \AvoRed\Framework\Database\Models\Category $category
+     */
+    public function delete(int $id): bool
+    {
+        return Category::destroy($id);
+    }
+
+    /**
      * Get all the categories from the connected database
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */

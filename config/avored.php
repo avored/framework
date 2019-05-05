@@ -62,12 +62,15 @@ return [
             'default' => [
                 'query' => [
                     // 'example_query' => ExampleQuery::class,
-                    'user_info' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class,
+                    'userInfo' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class,
                     'admin_menus' => AvoRed\Framework\GraphQL\Query\System\Layout\AdminMenuQuery::class,
-                    'all_category' => AvoRed\Framework\GraphQL\Query\Catalog\Category\AllQuery::class,
+                    'allCategory' => AvoRed\Framework\GraphQL\Query\Catalog\Category\AllQuery::class,
+                    'fetchCategory' => AvoRed\Framework\GraphQL\Query\Catalog\Category\FetchQuery::class,
                 ],
                 'mutation' => [
-                    //'userInfo' => AvoRed\Framework\GraphQL\Query\System\Auth\UserInfoQuery::class
+                    'createCategory' => AvoRed\Framework\GraphQL\Mutation\Catalog\Category\Create::class,
+                    'updateCategory' => AvoRed\Framework\GraphQL\Mutation\Catalog\Category\Update::class,
+                    'deleteCategory' => AvoRed\Framework\GraphQL\Mutation\Catalog\Category\Delete::class,
                 ],
                 'middleware' => ['auth:admin_api'],
                 'method' => ['get', 'post'],

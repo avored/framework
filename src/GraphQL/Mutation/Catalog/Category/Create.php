@@ -1,15 +1,23 @@
 <?php
 
-namespace AvoRed\Framework\GraphQL\Query\Catalog\Category;
+namespace AvoRed\Framework\GraphQL\Mutation\Catalog\Category;
 
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Mutation;
 use Rebing\GraphQL\Support\SelectFields;
-use Rebing\GraphQL\Support\Query;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Laravel\Passport\TokenRepository;
+use Laravel\Passport\Client;
+use Zend\Diactoros\ServerRequest;
+use function GuzzleHttp\json_decode;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 
-class AllQuery extends Query
+class Create extends Mutation
 {
     /**
      * Category Repository for the All Category Query
@@ -22,10 +30,10 @@ class AllQuery extends Query
      * @var array $attributes
      */
     protected $attributes = [
-        'name' => 'CategoryAllQuery',
-        'description' => 'A query'
+        'name' => 'CreateCategoryMutation',
+        'description' => 'A mutation'
     ];
-    
+
     /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
@@ -35,7 +43,6 @@ class AllQuery extends Query
     ) {
         $this->categoryRepository = $categoryRepository;
     }
-   
 
     /**
      * Type that these query expected as output
@@ -43,9 +50,10 @@ class AllQuery extends Query
      */
     public function type()
     {
-        return Type::listOf(GraphQL::type('category_type'));
+        return GraphQL::type('category_type');
     }
 
+   
     /**
      * Argument that can be passed to use this graphql query
      * @var return array
@@ -53,7 +61,22 @@ class AllQuery extends Query
     public function args()
     {
         return [
-
+            'name' => [
+                'name' => 'name',
+                'type' => Type::nonNull(Type::string()),
+            ],
+            'slug' => [
+                'name' => 'slug',
+                'type' => Type::nonNull(Type::string()),
+            ],
+            'meta_title' => [
+                'name' => 'meta_title',
+                'type' => Type::string(),
+            ],
+            'meta_description' => [
+                'name' => 'meta_description',
+                'type' => Type::string(),
+            ],
         ];
     }
 
@@ -67,6 +90,8 @@ class AllQuery extends Query
      */
     public function resolve($root, $args, SelectFields $fields, ResolveInfo $info)
     {
-        return $this->categoryRepository->all();
+        $category = $this->categoryRepository->create($args);
+        
+        return $category;
     }
 }
