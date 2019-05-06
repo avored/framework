@@ -51,6 +51,10 @@ class Login extends Mutation
         if (null !== $client && $client instanceof Client) {
             $serverRequest = $this->createRequest($client, $user->id, $args, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
+            $responseData = json_decode($reponse->content());
+            if (isset($responseData->error) && $responseData->error == 'invalid_credentials') {
+                abort(401);
+            }
             return json_decode($reponse->content());
         }
         
