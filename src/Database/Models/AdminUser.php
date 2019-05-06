@@ -43,7 +43,7 @@ class AdminUser extends Authenticatable
      * Get the full name for the Admin User
      * @return string $fullName
      */
-    public function getNameAttribute()
+    public function getFullNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }

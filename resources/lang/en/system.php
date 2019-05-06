@@ -63,4 +63,16 @@ return [
         ],
     ],
 
+
+    'header' => [
+        'logout' => 'Logout'
+    ],
+    'admin_menus' => [
+        'catalog' => 'Catalog',
+        'category' => 'Category',
+        'system' => 'System',
+        'language' => 'Language',
+        'role' => 'Role',
+    ]
+
 ];

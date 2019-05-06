@@ -23,7 +23,7 @@
                     onclick="event.preventDefault();
                         document.getElementById('admin-logout-form').submit();">
                 <a-icon type="logout"></a-icon>
-                <span>Logout</span>
+                <span>{{ __('avored::system.header.logout') }}</span>
                 </a>
             </a-menu-item>
         </a-sub-menu>

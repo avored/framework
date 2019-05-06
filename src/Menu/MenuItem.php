@@ -54,7 +54,7 @@ class MenuItem implements MenuInterface
             $this->label = $label;
             return $this;
         }
-        return $this->label;
+        return trans($this->label);
     }
 
     /**

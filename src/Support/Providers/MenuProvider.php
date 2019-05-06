@@ -64,7 +64,7 @@ class MenuProvider extends ServiceProvider
     public function registerAdminMenu()
     {
         Menu::admin()->make('catalog', function (MenuItem $menu) {
-            $menu->label('Catalog')
+            $menu->label('avored::system.admin_menus.catalog')
                 ->icon('project')
                 ->route('#');
         });
@@ -72,12 +72,12 @@ class MenuProvider extends ServiceProvider
         $catalogMenu = Menu::admin()->get('catalog');
         $catalogMenu->subMenu('category', function (MenuItem $menu) {
             $menu->key('category')
-                ->label('Category')
+                ->label('avored::system.admin_menus.category')
                 ->route('admin.category.index');
         });
 
         Menu::admin()->make('system', function (MenuItem $menu) {
-            $menu->label('System')
+            $menu->label('avored::system.admin_menus.system')
                 ->icon('setting')
                 ->route('#');
         });
@@ -85,12 +85,12 @@ class MenuProvider extends ServiceProvider
         $systemMenu = Menu::admin()->get('system');
         $systemMenu->subMenu('language', function (MenuItem $menu) {
             $menu->key('language')
-                ->label('Language')
+                ->label('avored::system.admin_menus.language')
                 ->route('admin.language.index');
         });
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')
-                ->label('Role')
+                ->label('avored::system.admin_menus.role')
                 ->route('admin.role.index');
         });
     }

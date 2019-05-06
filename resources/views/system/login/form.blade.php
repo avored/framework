@@ -39,11 +39,10 @@
                                     <a-input
                                         :auto-focus="true"
                                         name="email"
-                                        
                                         v-decorator="[
                                         'email',
-                                        {rules: 
-                                            [
+                                        {
+                                            rules: [
                                                 {   required: true, 
                                                     message: '{{ __('avored::validation.required', ['attribute' => 'email']) }}' 
                                                 }
@@ -72,6 +71,7 @@
                                     <a-form-item>
                                         <a-button
                                             type="primary"
+                                            :loading="loadingSubmitBtn"
                                             html-type="submit"
                                         >
                                             {{ __('avored::system.login') }}
