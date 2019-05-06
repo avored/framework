@@ -9,6 +9,7 @@ use Faker\Generator as FakerGenerator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\AvoRedProvider;
+use Rebing\GraphQL\GraphQLServiceProvider;
 
 //use AvoRed\Framework\Models\Database\Language;
 //use AvoRed\Framework\System\Middleware\LanguageMiddleware;
@@ -67,6 +68,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
+            GraphQLServiceProvider::class,
             AvoRedProvider::class,
         ];
     }
@@ -111,6 +113,7 @@ abstract class BaseTestCase extends OrchestraTestCase
             //'Image' => 'AvoRed\\Framework\\Image\\Facade',
             'Menu' => \AvoRed\Framework\Support\Facades\Menu::class,
             'Module' => \AvoRed\Framework\Support\Facades\Module::class,
+            'GraphQL' => \Rebing\GraphQL\Support\Facades\GraphQL::class,
             //'Payment' => 'AvoRed\\Framework\\Payment\\Facade',
             //'Permission' => 'AvoRed\\Framework\\Permission\\Facade',
             //'Shipping' => 'AvoRed\\Framework\\Shipping\\Facade',
