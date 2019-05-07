@@ -5,7 +5,7 @@
         @if(!$isDefaultLang && !in_array('name', $page->getTranslatedAttributes()))
             disabled
         @endif
-        value="{{ $page->getName() }}"
+        value="{{ (isset($page)) ? $page->getName() : '' }}"
         class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
         id="name" />
         @if ($errors->has('name'))
@@ -19,7 +19,7 @@
     <label for="slug">Slug</label>
     <input type="text"
         name="slug"
-        value="{{ $page->getSlug() }}"
+        value="{{ (isset($page)) ? $page->getSlug() : '' }}"
         class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
         id="slug" />
         @if ($errors->has('slug'))
@@ -29,13 +29,16 @@
     @endif
 </div>
 
-<markdown-editor name="content" value="{{ $page->getContent() }}" ref="markdownEditor"></markdown-editor>
+<markdown-editor 
+    name="content"
+    value="{{ (isset($page)) ?  $page->getContent() : '' }}"
+    ref="markdownEditor"></markdown-editor>
 
 <div class="form-group">
     <label for="meta_title">Meta Title</label>
     <input type="text"
         name="meta_title"
-        value="{{ $page->getMetaTitle() }}"
+        value="{{ (isset($page)) ? $page->getMetaTitle() : '' }}"
         class="form-control {{ $errors->has('meta_title') ? ' is-invalid' : '' }}"
         id="meta_title" />
         @if ($errors->has('meta_title'))
@@ -50,7 +53,7 @@
     <label for="meta_description">Meta Description</label>
     <input type="text"
         name="meta_description"
-         value="{{ $page->getMetaDescription() }}"
+         value="{{ isset($page)) ? $page->getMetaDescription() : '' }}"
         class="form-control {{ $errors->has('meta_description') ? ' is-invalid' : '' }}"
         id="meta_description" />
         @if ($errors->has('meta_description'))
