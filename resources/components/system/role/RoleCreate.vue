@@ -5,7 +5,8 @@ export default {
   props: ['role', 'baseUrl'],
   data () {
     return {
-        roleForm: this.$form.createForm(this)
+        roleForm: this.$form.createForm(this),
+        userPermissionList: {},
     };
   },
   methods: {
@@ -18,7 +19,14 @@ export default {
       },
       cancelRole() {
           window.location = this.baseUrl + '/role';
-      }
+      },
+      onUserPermissionSwitchChange(checked) {
+        if (checked) {
+          this.is_default = 1;
+        } else {
+          this.is_default = 0;
+        }
+      },
   }
 };
 </script>

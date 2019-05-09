@@ -5,8 +5,10 @@ namespace AvoRed\Framework\System\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\System\Requests\RoleRequest;
+use AvoRed\Framework\Support\Facades\Permission;
 
 class RoleController extends Controller
 {
@@ -15,15 +17,23 @@ class RoleController extends Controller
      * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
+
+    /**
+     * Permission Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\PermissionRepository $permissionRepository
+     */
+    protected $permissionRepository;
     
     /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     public function __construct(
-        RoleModelInterface $roleRepository
+        RoleModelInterface $roleRepository,
+        PermissionModelInterface $permissionRepository
     ) {
         $this->roleRepository = $roleRepository;
+        $this->permissionRepository = $permissionRepository;
     }
     /**
      * Display a listing of the resource.
@@ -43,7 +53,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('avored::system.role.create');
+        $permissions = Permission::all();
+        return view('avored::system.role.create')
+            ->with('permissions', $permissions);
     }
 
     /**
@@ -76,8 +88,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $permissions = Permission::all();
         return view('avored::system.role.edit')
-            ->with('role', $role);
+            ->with('role', $role)
+            ->with('permissions', $permissions);
     }
 
     /**
@@ -89,7 +103,8 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->all());
-
+        $this->saveRolePermissions($request, $role);
+        
         return redirect()->route('admin.role.index')
             ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Role']));
     }
@@ -107,5 +122,35 @@ class RoleController extends Controller
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Role'])
         ];
+    }
+
+
+    /**
+     * Save Role Permission for the Users
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
+     * @param \AvoRed\Framework\Models\Database\Role $rolet
+     *
+     * @return void
+     */
+    private function saveRolePermissions($request, $role)
+    {
+        $permissionIds = [];
+        
+        if (count($request->get('permissions')) > 0) {
+            foreach ($request->get('permissions') as $key => $value) {
+                if ($value != 1) {
+                    continue;
+                }
+                $permissions = explode(',', $key);
+                foreach ($permissions as $permissionName) {
+                    if (null === ($permissionModel = $this->permissionRepository->findByName($permissionName))) {
+                        $permissionModel = $this->permissionRepository->create(['name' => $permissionName]);
+                    }
+                    $permissionIds[] = $permissionModel->id;
+                }
+            }
+        }
+        $ids = array_unique($permissionIds);
+        $role->permissions()->sync($ids);
     }
 }

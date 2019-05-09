@@ -79,6 +79,21 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
+
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('permission_role', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('permission_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->timestamps();
+            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
     }
 
     /**
@@ -89,6 +104,9 @@ class AvoredFrameworkSchema extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('permissions');
 
         Schema::dropIfExists('category_translations');
         Schema::dropIfExists('categories');

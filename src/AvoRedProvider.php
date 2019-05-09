@@ -30,6 +30,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\MenuProvider::class,
         \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
+        \AvoRed\Framework\Support\Providers\PermissionProvider::class,
         //\AvoRed\Framework\Payment\Provider::class,
         //\AvoRed\Framework\Permission\PermissionProvider::class,
         //\AvoRed\Framework\Shipping\Provider::class,

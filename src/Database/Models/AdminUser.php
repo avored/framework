@@ -73,4 +73,38 @@ class AdminUser extends Authenticatable
         
         return $client;
     }
+
+    /**
+     * To check if user has permission to access the given route name
+     * @return bool
+     */
+    public function hasPermission($routeName)
+    {
+        if ($this->is_super_admin) {
+            return true;
+        }
+        $role = $this->role;
+        if ($role->permissions->pluck('name')->contains($routeName) == false) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * To check if user has permission to access the given route name
+     * @return \Illuminate\Database\Eloquent\Collection $permissions
+     */
+    public function permissions()
+    {
+        dd($this->role->permissions);
+    }
+
+    /**
+     *
+     *
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

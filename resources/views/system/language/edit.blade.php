@@ -79,7 +79,7 @@
                         @if ($language->is_default == 1)
                             default-checked
                         @endif 
-                        v-on:change="onChange">
+                        v-on:change="isLanguageDefaultSwitchChange">
                     </a-switch>
                 </a-form-item>
                 <input type="hidden" v-model="is_default" name="is_default"  />

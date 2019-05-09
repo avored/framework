@@ -10,18 +10,18 @@ export default {
   },
   methods: {
       handleSubmit() {
-        this.languageForm.validateFields((err, values) => {
-        if (err) {
-          e.preventDefault();
-        }
-      });
+          this.languageForm.validateFields((err, values) => {
+              if (err) {
+                e.preventDefault();
+              }
+          });
       },
-       onChange(checked) {
-        if (checked) {
-          this.is_default = 1;
-        } else {
-          this.is_default = 0;
-        }
+      isLanguageDefaultSwitchChange(checked) {
+          if (checked) {
+            this.is_default = 1;
+          } else {
+            this.is_default = 0;
+          }
       },
       cancelLanguage() {
           window.location = this.baseUrl + '/language';

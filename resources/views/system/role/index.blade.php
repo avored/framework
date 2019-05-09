@@ -15,7 +15,7 @@
             href="{{ route('admin.role.create') }}"
             class="ant-btn ant-btn-primary">
             <a-icon type="plus"></a-icon>
-            {{ __('avored::system.role.btn_create') }}
+            {{ __('avored::system.btn.create') }}
         </a>
     </a-col>
 </a-row>

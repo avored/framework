@@ -1,6 +1,8 @@
 <?php
 namespace AvoRed\Framework\System\Controllers;
 
+use AvoRed\Framework\Support\Facades\Permission;
+
 class DashboardController
 {
     /**
