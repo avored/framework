@@ -65,8 +65,9 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $this->roleRepository->create($request->all());
-
+        $role = $this->roleRepository->create($request->all());
+        $this->saveRolePermissions($request, $role);
+        
         return redirect()->route('admin.role.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Role']));
     }

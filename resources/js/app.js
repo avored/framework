@@ -35,8 +35,7 @@ Vue.component('category-create', require('../components/catalog/category/Create.
 Vue.component('category-edit', require('../components/catalog/category/Edit.vue').default);
 
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
-Vue.component('role-create', require('../components/system/role/RoleCreate.vue').default);
-Vue.component('role-edit', require('../components/system/role/RoleEdit.vue').default);
+Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default);
 
 Vue.component('avored-layout', require('../components/system/Layout.vue').default);
 Vue.component('avored-flash', require('../components/system/Flash.vue').default);
