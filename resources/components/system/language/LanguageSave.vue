@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil';
 
 export default {
   props: ['language', 'baseUrl'],
@@ -25,6 +26,11 @@ export default {
       },
       cancelLanguage() {
           window.location = this.baseUrl + '/language';
+      }
+  },
+  mounted() {
+      if (!isNil(this.language)) {
+          this.is_default = this.language.is_default;
       }
   }
 };

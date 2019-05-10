@@ -27,12 +27,10 @@ import Antd from 'ant-design-vue'
 Vue.use(Antd);
 
 Vue.component('language-index', require('../components/system/language/LanguageIndex.vue').default);
-Vue.component('language-create', require('../components/system/language/LanguageCreate.vue').default);
-Vue.component('language-edit', require('../components/system/language/LanguageEdit.vue').default);
+Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
 
-Vue.component('category-table', require('../components/catalog/category/Index.vue').default);
-Vue.component('category-create', require('../components/catalog/category/Create.vue').default);
-Vue.component('category-edit', require('../components/catalog/category/Edit.vue').default);
+Vue.component('category-table', require('../components/catalog/category/CategoryIndex.vue').default);
+Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default);
 
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
 Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default);

@@ -1,6 +1,7 @@
 <script>
+
 export default {
-  props: ['baseUrl'],
+  props: ['category', 'baseUrl'],
   data () {
     return {
         categoryForm: this.$form.createForm(this),
@@ -8,13 +9,13 @@ export default {
   },
   methods: {
       handleSubmit() {
-        this.categoryForm.validateFields((err, values) => {
-        if (err) {
-          e.preventDefault();
-        }
-      });
+          this.categoryForm.validateFields((err, values) => {
+            if (err) {
+              e.preventDefault();
+            }
+          });
       },
-      cancelLanguage() {
+      cancelCategory() {
           window.location = this.baseUrl + '/category';
       }
   }
