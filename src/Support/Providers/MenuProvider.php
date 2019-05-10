@@ -76,6 +76,23 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.category.index');
         });
 
+        
+
+        Menu::admin()->make('cms', function (MenuItem $menu) {
+            $menu->label('avored::system.admin_menus.cms')
+                ->icon('solution')
+                ->route('#');
+        });
+        $cmsMenu = Menu::admin()->get('cms');
+        $cmsMenu->subMenu('page', function (MenuItem $menu) {
+            $menu->key('page')
+                ->label('avored::system.admin_menus.page')
+                ->route('admin.page.index');
+        });
+
+
+
+
         Menu::admin()->make('system', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.system')
                 ->icon('setting')

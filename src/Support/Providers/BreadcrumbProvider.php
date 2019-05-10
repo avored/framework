@@ -150,6 +150,32 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.language.index');
             }
         );
+
+        BreadcrumbFacade::make(
+            'admin.page.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.page.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.page.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.page.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.page.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.page.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.page.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.page.index');
+            }
+        );
         
         // BreadcrumbFacade::make(
         //     'admin.category.show',

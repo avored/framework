@@ -41,5 +41,6 @@ Route::middleware(['web', 'admin.auth'])
 
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('language', 'System\Controllers\LanguageController');
+        Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('role', 'System\Controllers\RoleController');
     });

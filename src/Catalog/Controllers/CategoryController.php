@@ -59,7 +59,7 @@ class CategoryController
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Category $language
+     * @param \AvoRed\Framework\Database\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)

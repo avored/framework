@@ -15,6 +15,8 @@ use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
+use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Database\Repository\PageRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -34,6 +36,7 @@ class ModelProvider extends ServiceProvider
         RoleModelInterface::class => RoleRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
+        PageModelInterface::class => PageRepository::class,
     ];
     /**
      * Register the service provider.

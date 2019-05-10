@@ -70,9 +70,12 @@ return [
     ],
     'admin_menus' => [
         'catalog' => 'Catalog',
-        'category' => 'Category',
-        'system' => 'System',
+        'cms' => 'CMS',
+        
         'language' => 'Language',
+        'category' => 'Category',
+        'page' => 'Page',
+        'system' => 'System',
         'role' => 'Role',
     ],
     'permissions' => [
@@ -227,15 +230,20 @@ return [
             'edit' => 'Edit Category',
             'create' => 'Create Category',
         ],
-        'role' => [
-            'index' => 'Role',
-            'edit' => 'Edit Role',
-            'create' => 'Create Role',
-        ],
         'language' => [
             'index' => 'Language',
             'edit' => 'Edit Language',
             'create' => 'Create Language',
+        ],
+        'page' => [
+            'index' => 'Page',
+            'edit' => 'Edit Page',
+            'create' => 'Create Page',
+        ],
+        'role' => [
+            'index' => 'Role',
+            'edit' => 'Edit Role',
+            'create' => 'Create Role',
         ],
     ]
 

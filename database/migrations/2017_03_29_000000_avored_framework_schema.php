@@ -60,8 +60,8 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('slug');
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
@@ -71,8 +71,8 @@ class AvoredFrameworkSchema extends Migration
             $table->increments('id');
             $table->unsignedInteger('category_id')->nullable()->default(null);
             $table->unsignedInteger('language_id')->nullable()->default(null);
-            $table->string('name');
-            $table->string('slug');
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
@@ -91,8 +91,34 @@ class AvoredFrameworkSchema extends Migration
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->timestamps();
+            
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
+
+        Schema::create('pages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
+            $table->text('content')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('page_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('page_id')->nullable()->default(null);
+            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
+            $table->text('content')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 

@@ -23,14 +23,19 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 import Antd from 'ant-design-vue'
+import VueQuillEditor from 'vue-quill-editor'
 
 Vue.use(Antd);
+Vue.use(VueQuillEditor);
 
 Vue.component('language-index', require('../components/system/language/LanguageIndex.vue').default);
 Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
 
 Vue.component('category-table', require('../components/catalog/category/CategoryIndex.vue').default);
 Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default);
+
+Vue.component('page-table', require('../components/cms/page/PageIndex.vue').default);
+Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);
 
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
 Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default);
