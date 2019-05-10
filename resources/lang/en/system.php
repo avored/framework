@@ -218,6 +218,25 @@ return [
             'front' => 'Front Menu Index',
             'save' => 'Save Front Menu',
         ],
+    ],
+
+    'breadcrumb' => [
+        'dashboard' => 'Dashboard',
+        'category' => [
+            'index' => 'Category',
+            'edit' => 'Edit Category',
+            'create' => 'Create Category',
+        ],
+        'role' => [
+            'index' => 'Role',
+            'edit' => 'Edit Role',
+            'create' => 'Create Role',
+        ],
+        'language' => [
+            'index' => 'Language',
+            'edit' => 'Edit Language',
+            'create' => 'Create Language',
+        ],
     ]
 
 ];
