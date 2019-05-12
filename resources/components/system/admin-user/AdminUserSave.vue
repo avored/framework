@@ -1,5 +1,6 @@
 <script>
 import isNil from 'lodash/isNil';
+import isEmpty from 'lodash/isEmpty';
 
 export default {
   props: ['adminUser', 'baseUrl', 'token'],
@@ -49,7 +50,7 @@ export default {
             this.is_super_admin = this.adminUser.is_super_admin;
             this.language = this.adminUser.language;
             this.role_id = this.adminUser.role_id;
-            if (isNil(this.adminUser.image_path)) {
+            if (!isEmpty(this.adminUser.image_path)) {
                 this.userImageList.push({
                     uid: this.adminUser.id,
                     name: this.adminUser.image_path_name,
