@@ -202,8 +202,10 @@
             ]
         }
         ]"
-    >
-        <a-select-option value="1">Administrator</a-select-option>
+    >   
+        @foreach ($roleOptions as $roleId => $roleName)
+            <a-select-option value="{{ $roleId }}">{{ $roleName }}</a-select-option>
+        @endforeach
     </a-select>
 </a-form-item>
 <input type="hidden" v-model="role_id" name="role_id"  />

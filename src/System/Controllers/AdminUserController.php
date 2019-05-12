@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\System\Requests\AdminUserImageRequest;
 use AvoRed\Framework\System\Requests\AdminUserRequest;
+use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 
 class AdminUserController extends Controller
 {
@@ -16,15 +17,23 @@ class AdminUserController extends Controller
      * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
      */
     protected $adminUserRepository;
+
+    /**
+     * Role Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     */
+    protected $roleRepository;
     
     /**
      * Construct for the AvoRed User Controller
-     * @param \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
+     * @param \AvoRed\Framework\Database\Repository\RoleRepository $adminUserRepository
      */
     public function __construct(
-        AdminUserModelInterface $adminUserRepository
+        AdminUserModelInterface $adminUserRepository,
+        RoleModelInterface $roleRepository
     ) {
         $this->adminUserRepository = $adminUserRepository;
+        $this->roleRepository = $roleRepository;
     }
     /**
      * Display a listing of the resource.
@@ -44,7 +53,9 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('avored::system.admin-user.create');
+        $roleOptions = $this->roleRepository->options();
+        return view('avored::system.admin-user.create')
+            ->with('roleOptions', $roleOptions);
     }
 
     /**
@@ -69,8 +80,10 @@ class AdminUserController extends Controller
      */
     public function edit(AdminUser $adminUser)
     {
+        $roleOptions = $this->roleRepository->options();
         return view('avored::system.admin-user.edit')
-            ->with('adminUser', $adminUser);
+            ->with('adminUser', $adminUser)
+            ->with('roleOptions', $roleOptions);
     }
 
     /**

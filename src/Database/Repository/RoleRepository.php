@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 class RoleRepository implements RoleModelInterface
 {
@@ -35,5 +36,14 @@ class RoleRepository implements RoleModelInterface
     public function all() : Collection
     {
         return Role::all();
+    }
+
+    /**
+     * get role options to use as dropdown options
+     * @return \Illuminate\Support\Collection $roles
+     */
+    public function options() : SupportCollection
+    {
+        return Role::all()->pluck('name', 'id');
     }
 }
