@@ -40,6 +40,10 @@ Vue.component('page-save', require('../components/cms/page/PageSave.vue').defaul
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
 Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default);
 
+Vue.component('admin-user-table', require('../components/system/admin-user/AdminUserIndex.vue').default);
+Vue.component('admin-user-save', require('../components/system/admin-user/AdminUserSave.vue').default);
+
+
 Vue.component('avored-layout', require('../components/system/Layout.vue').default);
 Vue.component('avored-flash', require('../components/system/Flash.vue').default);
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default);

@@ -39,6 +39,11 @@ Route::middleware(['web', 'admin.auth'])
     ->group(function () {
         Route::get('', 'System\Controllers\DashboardController@index')->name('dashboard');
 
+        Route::get('configuration', 'System\Controllers\ConfigurationController@index')->name('configuration.index');
+        
+        Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
+            ->name('admin-user-image-upload');
+        Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('page', 'Cms\Controllers\PageController');

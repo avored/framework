@@ -17,7 +17,7 @@ class LanguageController extends Controller
     protected $languageRepository;
     
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed language controller
      * @param \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
      */
     public function __construct(

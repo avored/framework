@@ -90,9 +90,6 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.page.index');
         });
 
-
-
-
         Menu::admin()->make('system', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.system')
                 ->icon('setting')
@@ -100,15 +97,28 @@ class MenuProvider extends ServiceProvider
         });
 
         $systemMenu = Menu::admin()->get('system');
-        $systemMenu->subMenu('language', function (MenuItem $menu) {
-            $menu->key('language')
-                ->label('avored::system.admin_menus.language')
-                ->route('admin.language.index');
+       
+        $systemMenu->subMenu('configuration', function (MenuItem $menu) {
+            $menu->key('configuration')
+                ->label('avored::system.admin_menus.configuration')
+                ->route('admin.configuration.index');
         });
+
+        $systemMenu->subMenu('admin-user', function (MenuItem $menu) {
+            $menu->key('admin-user')
+                ->label('avored::system.admin_menus.admin-user')
+                ->route('admin.admin-user.index');
+        });
+
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')
                 ->label('avored::system.admin_menus.role')
                 ->route('admin.role.index');
+        });
+        $systemMenu->subMenu('language', function (MenuItem $menu) {
+            $menu->key('language')
+                ->label('avored::system.admin_menus.language')
+                ->route('admin.language.index');
         });
     }
 }

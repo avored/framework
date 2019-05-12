@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Database\Contracts;
 
 use AvoRed\Framework\Database\Models\AdminUser;
+use Illuminate\Database\Eloquent\Collection;
 
 interface AdminUserModelInterface
 {
@@ -19,4 +20,10 @@ interface AdminUserModelInterface
      * @return \AvoRed\Framework\Database\Models\AdminUser $adminUser
      */
     public function findByEmail(string $email) : AdminUser;
+
+    /**
+     * Get all the admin users from the connected database
+     * @return \Illuminate\Database\Eloquent\Collection $adminUsers
+     */
+    public function all() : Collection;
 }

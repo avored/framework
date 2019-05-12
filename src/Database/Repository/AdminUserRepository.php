@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdminUserRepository implements AdminUserModelInterface
 {
@@ -25,5 +26,14 @@ class AdminUserRepository implements AdminUserModelInterface
     public function findByEmail(string $email) : AdminUser
     {
         return AdminUser::whereEmail($email)->first();
+    }
+
+    /**
+     * Get all the admin users from the connected database
+     * @return \Illuminate\Database\Eloquent\Collection $adminUsers
+     */
+    public function all() : Collection
+    {
+        return AdminUser::all();
     }
 }

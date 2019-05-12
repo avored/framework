@@ -25,7 +25,7 @@ class RoleController extends Controller
     protected $permissionRepository;
     
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed role controller
      * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     public function __construct(

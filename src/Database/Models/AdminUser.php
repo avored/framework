@@ -19,13 +19,21 @@ class AdminUser extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'role_id', 'is_super_admin', 'image_path',
     ];
+
     /**
-     * The attributes that should be hidden for arrays.
-     *
+     * The attributes that should be hidden for arrays
      * @var array
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays
+     * @var array
+     */
+    protected $appends = [
+        'image_path_url', 'image_path_name',
     ];
     
     /**
@@ -46,6 +54,24 @@ class AdminUser extends Authenticatable
     public function getFullNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+    /**
+     * Get the full name for the Admin User
+     * @return string $fullName
+     */
+    public function getImagePathUrlAttribute()
+    {
+        return asset('storage/' . $this->attributes['image_path']);
+    }
+
+    /**
+     * Get the full name for the Admin User
+     * @return string $fullName
+     */
+    public function getImagePathNameAttribute()
+    {
+        return basename($this->image_path);
     }
     /**
      * Set User Password for the Admin User

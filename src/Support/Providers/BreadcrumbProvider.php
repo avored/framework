@@ -176,6 +176,14 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.page.index');
             }
         );
+
+        BreadcrumbFacade::make(
+            'admin.configuration.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.configuration')
+                    ->parent('admin.dashboard');
+            }
+        );
         
         // BreadcrumbFacade::make(
         //     'admin.category.show',

@@ -29,12 +29,33 @@ return [
     'notification' => [
         'store' => ':attribute Created successfully!',
         'updated' => ':attribute Updated successfully!',
-        'delete' => ':attribute delete successfully!'
+        'delete' => ':attribute delete successfully!',
+        'upload' => ':attribute successfully uploaded!',
     ],
     'btn' => [
         'save' => 'Save',
         'cancel' => 'Cancel',
         'create' => 'Create'
+    ],
+    'admin-user' => [
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
+        'is_super_admin' => 'Is Administrator?',
+        'email' => 'Email Address',
+        'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
+        'role_id' => 'Role',
+        'language' => 'Language',
+        'image_file' => 'Admin User Profile Image',
+        'index' => [
+            'title' => 'Admin User List'
+        ],
+        'create' => [
+            'title' => 'Admin User Create'
+        ],
+        'edit' => [
+            'title' => 'Admin User Edit'
+        ],
     ],
     'language' => [
         'name' => 'Name',
@@ -63,8 +84,6 @@ return [
             'title' => 'Role Edit'
         ],
     ],
-
-
     'header' => [
         'logout' => 'Logout'
     ],
@@ -72,11 +91,13 @@ return [
         'catalog' => 'Catalog',
         'cms' => 'CMS',
         
-        'language' => 'Language',
         'category' => 'Category',
+        'configuration' => 'Configuration',
+        'language' => 'Language',
         'page' => 'Page',
         'system' => 'System',
         'role' => 'Role',
+        'admin-user' => 'Staff',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
@@ -225,10 +246,16 @@ return [
 
     'breadcrumb' => [
         'dashboard' => 'Dashboard',
+        'configuration' => 'Configuration',
         'category' => [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'admin-user' => [
+            'index' => 'AdminUser',
+            'edit' => 'Edit AdminUser',
+            'create' => 'Create AdminUser',
         ],
         'language' => [
             'index' => 'Language',
