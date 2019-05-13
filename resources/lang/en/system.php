@@ -31,6 +31,7 @@ return [
         'updated' => ':attribute Updated successfully!',
         'delete' => ':attribute delete successfully!',
         'upload' => ':attribute successfully uploaded!',
+        'save' => ':attribute save successfully!',
     ],
     'btn' => [
         'save' => 'Save',
@@ -84,20 +85,31 @@ return [
             'title' => 'Role Edit'
         ],
     ],
+
+    'configuration' => [
+        'title' => 'Configuration',
+        'nav' => [
+            'basic_setting' => 'Basic Settings'
+        ],
+        'basic' => [
+            'site_name' => 'Site Name'
+        ]
+    ],
     'header' => [
         'logout' => 'Logout'
     ],
     'admin_menus' => [
+        'admin-user' => 'Staff',
         'catalog' => 'Catalog',
-        'cms' => 'CMS',
-        
         'category' => 'Category',
+        'cms' => 'CMS',
         'configuration' => 'Configuration',
         'language' => 'Language',
+        'order' => 'Order',
+        'order-status' => 'Order Status',
         'page' => 'Page',
-        'system' => 'System',
         'role' => 'Role',
-        'admin-user' => 'Staff',
+        'system' => 'System',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',

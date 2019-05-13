@@ -65,7 +65,7 @@ class MenuProvider extends ServiceProvider
     {
         Menu::admin()->make('catalog', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.catalog')
-                ->icon('project')
+                ->icon('shop')
                 ->route('#');
         });
 
@@ -75,8 +75,6 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.category')
                 ->route('admin.category.index');
         });
-
-        
 
         Menu::admin()->make('cms', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.cms')
@@ -88,6 +86,18 @@ class MenuProvider extends ServiceProvider
             $menu->key('page')
                 ->label('avored::system.admin_menus.page')
                 ->route('admin.page.index');
+        });
+
+        Menu::admin()->make('order', function (MenuItem $menu) {
+            $menu->label('avored::system.admin_menus.order')
+                ->icon('gold')
+                ->route('#');
+        });
+        $cmsMenu = Menu::admin()->get('order');
+        $cmsMenu->subMenu('order-status', function (MenuItem $menu) {
+            $menu->key('order-status')
+                ->label('avored::system.admin_menus.order-status')
+                ->route('admin.order-status.index');
         });
 
         Menu::admin()->make('system', function (MenuItem $menu) {

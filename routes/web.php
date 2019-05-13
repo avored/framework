@@ -37,15 +37,20 @@ Route::middleware(['web', 'admin.auth'])
     ->namespace('AvoRed\\Framework')
     ->name('admin.')
     ->group(function () {
-        Route::get('', 'System\Controllers\DashboardController@index')->name('dashboard');
+        Route::get('', 'System\Controllers\DashboardController@index')
+            ->name('dashboard');
 
-        Route::get('configuration', 'System\Controllers\ConfigurationController@index')->name('configuration.index');
+        Route::get('configuration', 'System\Controllers\ConfigurationController@index')
+            ->name('configuration.index');
+        Route::post('configuration', 'System\Controllers\ConfigurationController@store')
+            ->name('configuration.store');
         
         Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
             ->name('admin-user-image-upload');
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('language', 'System\Controllers\LanguageController');
+        Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('role', 'System\Controllers\RoleController');
     });

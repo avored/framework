@@ -17,6 +17,8 @@ use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Repository\PageRepository;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -32,11 +34,12 @@ class ModelProvider extends ServiceProvider
      */
     protected $models = [
         AdminUserModelInterface::class => AdminUserRepository::class,
-        LanguageModelInterface::class => LanguageRepository::class,
-        RoleModelInterface::class => RoleRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
+        ConfigurationModelInterface::class => ConfigurationRepository::class,
+        LanguageModelInterface::class => LanguageRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
+        RoleModelInterface::class => RoleRepository::class,
     ];
     /**
      * Register the service provider.

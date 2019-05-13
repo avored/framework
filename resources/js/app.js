@@ -34,6 +34,8 @@ Vue.component('language-save', require('../components/system/language/LanguageSa
 Vue.component('category-table', require('../components/catalog/category/CategoryIndex.vue').default);
 Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default);
 
+Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default);
+
 Vue.component('page-table', require('../components/cms/page/PageIndex.vue').default);
 Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);
 

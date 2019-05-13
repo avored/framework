@@ -21,7 +21,7 @@ class AvoredFrameworkSchema extends Migration
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->string('code')->nullable()->default(null);
             $table->boolean('is_default')->default(false);
@@ -35,16 +35,16 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
 
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->tinyInteger('is_super_admin')->nullable()->default(null);
-            $table->integer('role_id')->unsigned()->default(null);
+            $table->bigInteger('role_id')->unsigned()->default(null);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
@@ -59,7 +59,7 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
             $table->string('meta_title')->nullable()->default(null);
@@ -68,9 +68,9 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('category_translations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('category_id')->nullable()->default(null);
-            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('category_id')->nullable()->default(null);
+            $table->unsignedBigInteger('language_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
             $table->string('meta_title')->nullable()->default(null);
@@ -81,15 +81,15 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('permissions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
         });
 
         Schema::create('permission_role', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('permission_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('permission_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
             $table->timestamps();
             
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
@@ -97,7 +97,7 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('pages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
             $table->text('content')->nullable()->default(null);
@@ -107,9 +107,9 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('page_translations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('page_id')->nullable()->default(null);
-            $table->unsignedInteger('language_id')->nullable()->default(null);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('page_id')->nullable()->default(null);
+            $table->unsignedBigInteger('language_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
             $table->text('content')->nullable()->default(null);
@@ -119,6 +119,13 @@ class AvoredFrameworkSchema extends Migration
 
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+        });
+
+        Schema::create('configurations', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('code')->nullable()->default(null);
+            $table->text('value')->nullable()->default(null);
+            $table->timestamps();
         });
     }
 
