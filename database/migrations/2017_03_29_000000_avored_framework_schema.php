@@ -127,6 +127,13 @@ class AvoredFrameworkSchema extends Migration
             $table->text('value')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::create('order_statuses', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**

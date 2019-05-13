@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | AvoRed E commerce Package System Language Representation
+    | AvoRed E commerce Package Catalog Language Representation
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons

@@ -46,7 +46,7 @@ class PageController
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\System\Requests\PageRequest $request
+     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(PageRequest $request)
@@ -70,7 +70,7 @@ class PageController
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\System\Requests\PageRequest $request
+     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
      * @param \AvoRed\Framework\Database\Models\Page  $page
      * @return \Illuminate\Http\Response
      */

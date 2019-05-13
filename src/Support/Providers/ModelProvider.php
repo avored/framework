@@ -19,6 +19,8 @@ use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Repository\PageRepository;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use AvoRed\Framework\Database\Repository\OrderStatusRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -40,6 +42,7 @@ class ModelProvider extends ServiceProvider
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
         RoleModelInterface::class => RoleRepository::class,
+        OrderStatusModelInterface::class => OrderStatusRepository::class,
     ];
     /**
      * Register the service provider.

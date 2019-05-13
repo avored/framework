@@ -39,6 +39,9 @@ Vue.component('configuration-save', require('../components/system/configuration/
 Vue.component('page-table', require('../components/cms/page/PageIndex.vue').default);
 Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);
 
+Vue.component('order-status-table', require('../components/order/order-status/OrderStatusIndex.vue').default);
+Vue.component('order-status-save', require('../components/order/order-status/OrderStatusSave.vue').default);
+
 Vue.component('role-index', require('../components/system/role/RoleIndex.vue').default);
 Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default);
 

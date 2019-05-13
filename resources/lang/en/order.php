@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | AvoRed E commerce Package CMS Language Representation
+    | AvoRed E commerce Package Order Language Representation
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -13,20 +13,18 @@ return [
     |
     */
 
-    'page' => [
+    'order-status' => [
         'name' => 'Name',
-        'slug' => 'Slug',
-        'meta_title' => 'Meta Title',
-        'meta_description' => 'Meta Description',
-        'content' => 'Content',
+        'title' => 'Order Status',
+        'is_default' => 'Is Default',
         'index' => [
-            'title' => 'Page List'
+            'title' => 'Order Status List'
         ],
         'create' => [
-            'title' => 'Page Create'
+            'title' => 'Order Status Create'
         ],
         'edit' => [
-            'title' => 'Page Edit'
+            'title' => 'Order Status Edit'
         ],
     ],
     
