@@ -134,6 +134,41 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('countries', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->string('phone_code')->nullable()->default(null);
+            $table->string('currency_code')->nullable()->default(null);
+            $table->string('currency_symbol')->nullable()->default(null);
+            $table->string('lang_code')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('states', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('country_id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('country_id')
+                ->references('id')->on('countries')
+                ->onDelete('cascade');
+        });
+
+        $path = __DIR__ . '/../../assets/countries.json';
+        $json = json_decode(file_get_contents($path), true);
+        foreach ($json as $country) {
+            Country::create([
+                'code' => strtolower(array_get($country, 'alpha2Code')),
+                'name' => array_get($country, 'name'),
+                'phone_code' => array_get($country, 'callingCodes.0'),
+                'currency_code' => array_get($country, 'currencies.0.code'),
+                'currency_symbol' => array_get($country, 'currencies.0.symbol'),
+                'lang_code' => array_get($country, 'languages.0.name'),
+            ]);
+        }
     }
 
     /**
@@ -144,6 +179,11 @@ class AvoredFrameworkSchema extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('states');
+        Schema::dropIfExists('countries');
+        Schema::dropIfExists('configurations');
+        Schema::dropIfExists('order_statuses');
 
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');

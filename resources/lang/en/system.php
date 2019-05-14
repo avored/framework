@@ -85,6 +85,21 @@ return [
             'title' => 'Role Edit'
         ],
     ],
+    'state' => [
+        'name' => 'Name',
+        'code' => 'Code',
+        'country_id' => 'Country',
+        'title' => 'State',
+        'index' => [
+            'title' => 'State List'
+        ],
+        'create' => [
+            'title' => 'State Create'
+        ],
+        'edit' => [
+            'title' => 'State Edit'
+        ],
+    ],
 
     'configuration' => [
         'title' => 'Configuration',
@@ -110,6 +125,7 @@ return [
         'page' => 'Page',
         'role' => 'Role',
         'system' => 'System',
+        'state' => 'State',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',

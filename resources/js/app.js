@@ -28,8 +28,11 @@ import VueQuillEditor from 'vue-quill-editor'
 Vue.use(Antd);
 Vue.use(VueQuillEditor);
 
-Vue.component('language-index', require('../components/system/language/LanguageIndex.vue').default);
+Vue.component('language-table', require('../components/system/language/LanguageIndex.vue').default);
 Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
+
+Vue.component('state-table', require('../components/system/state/StateIndex.vue').default);
+Vue.component('state-save', require('../components/system/state/StateSave.vue').default);
 
 Vue.component('category-table', require('../components/catalog/category/CategoryIndex.vue').default);
 Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default);

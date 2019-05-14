@@ -47,10 +47,12 @@ Route::middleware(['web', 'admin.auth'])
         
         Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
             ->name('admin-user-image-upload');
+
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('role', 'System\Controllers\RoleController');
+        Route::resource('state', 'System\Controllers\StateController');
     });

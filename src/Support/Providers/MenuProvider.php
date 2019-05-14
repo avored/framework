@@ -120,6 +120,12 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.admin-user.index');
         });
 
+        $systemMenu->subMenu('state', function (MenuItem $menu) {
+            $menu->key('state')
+                ->label('avored::system.admin_menus.state')
+                ->route('admin.state.index');
+        });
+
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')
                 ->label('avored::system.admin_menus.role')

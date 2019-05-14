@@ -24,7 +24,7 @@ const columns = [
 
 
 export default {
-  props: ['languages', 'baseUrl'],
+  props: ['states', 'baseUrl'],
   data () {
     return {
         columns
@@ -32,26 +32,26 @@ export default {
   },
   methods: {
       getData() {
-          return this.languages;
+          return this.states;
       },
       getEditUrl(record) {
-          return this.baseUrl + '/language/' + record.id + '/edit';
+          return this.baseUrl + '/state/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/language/' + record.id;
+          return this.baseUrl + '/state/' + record.id;
       },
-      deleteLanguage(record) {
-        var url = this.baseUrl  + '/language/' + record.id;
+      deleteState(record) {
+        var url = this.baseUrl  + '/state/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' languages?',
+            title: 'Do you Want to delete ' + record.name + ' state?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'language.delete.success',
+                                key: 'state.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -59,7 +59,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'language.delete.error',
+                            key: 'state.delete.error',
                             message: errors.message
                         });
                     });
