@@ -50,6 +50,7 @@ Route::middleware(['web', 'admin.auth'])
 
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
+        Route::resource('currency', 'System\Controllers\CurrencyController');
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');

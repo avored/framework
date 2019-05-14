@@ -34,6 +34,9 @@ Vue.component('language-save', require('../components/system/language/LanguageSa
 Vue.component('state-table', require('../components/system/state/StateIndex.vue').default);
 Vue.component('state-save', require('../components/system/state/StateSave.vue').default);
 
+Vue.component('currency-table', require('../components/system/currency/CurrencyIndex.vue').default);
+Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default);
+
 Vue.component('category-table', require('../components/catalog/category/CategoryIndex.vue').default);
 Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default);
 

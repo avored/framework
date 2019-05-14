@@ -120,6 +120,11 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.admin-user.index');
         });
 
+        $systemMenu->subMenu('currency', function (MenuItem $menu) {
+            $menu->key('currency')
+                ->label('avored::system.admin_menus.currency')
+                ->route('admin.currency.index');
+        });
         $systemMenu->subMenu('state', function (MenuItem $menu) {
             $menu->key('state')
                 ->label('avored::system.admin_menus.state')

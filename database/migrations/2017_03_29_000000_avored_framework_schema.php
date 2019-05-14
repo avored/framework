@@ -3,12 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use AvoRed\Framework\Models\Database\OrderStatus;
-use AvoRed\Framework\Models\Database\Country;
-use AvoRed\Framework\Models\Database\SiteCurrency;
-use AvoRed\Framework\Models\Database\Configuration;
-use AvoRed\Framework\Models\Database\MenuGroup;
-use AvoRed\Framework\Models\Database\Menu;
+use AvoRed\Framework\Database\Models\Country;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -157,6 +152,16 @@ class AvoredFrameworkSchema extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::create('currencies', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->string('symbol')->nullable()->default(null);
+            $table->float('conversation_rate');
+            $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
+            $table->timestamps();
+        });
+        
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -180,6 +185,7 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::dropIfExists('currencies');
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
         Schema::dropIfExists('configurations');

@@ -85,6 +85,25 @@ return [
             'title' => 'Role Edit'
         ],
     ],
+    
+    'currency' => [
+        'name' => 'Name',
+        'code' => 'Code',
+        'status' => 'Status',
+        'conversation_rate' => 'Conversation Rate',
+        'symbol' => 'Symbol',
+        'title' => 'Currency',
+        'index' => [
+            'title' => 'Currency List'
+        ],
+        'create' => [
+            'title' => 'Currency Create'
+        ],
+        'edit' => [
+            'title' => 'Currency Edit'
+        ],
+    ],
+    
     'state' => [
         'name' => 'Name',
         'code' => 'Code',
@@ -117,6 +136,7 @@ return [
         'admin-user' => 'Staff',
         'catalog' => 'Catalog',
         'category' => 'Category',
+        'currency' => 'Currency',
         'cms' => 'CMS',
         'configuration' => 'Configuration',
         'language' => 'Language',
