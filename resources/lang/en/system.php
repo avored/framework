@@ -234,7 +234,7 @@ return [
             'view' => 'View Configuration',
             'edit' => 'Store/Update Configuration',
         ],
-        'site_currency' => [
+        'currency' => [
             'title' => 'Site Currency Permissions',
             'list' => 'Site Currency List',
             'create' => 'Create/Store Site Currency',

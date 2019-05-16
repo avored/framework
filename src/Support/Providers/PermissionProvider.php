@@ -217,6 +217,78 @@ class PermissionProvider extends ServiceProvider
             }
         );
 
+        $group = PermissionFacade::add(
+            'state',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.state.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-state-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.state.list')
+                    ->routes('admin.state.index');
+            }
+        );
+        $group->addPermission(
+            'admin-state-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.state.create')
+                    ->routes('admin.state.create,admin.state.store');
+            }
+        );
+        $group->addPermission(
+            'admin-state-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.state.edit')
+                    ->routes('admin.state.edit,admin.state.update');
+            }
+        );
+        $group->addPermission(
+            'admin-state-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.state.destroy')
+                    ->routes('admin.state.destroy');
+            }
+        );
+
+        $group = PermissionFacade::add(
+            'currency',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.currency.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-currency-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.list')
+                    ->routes('admin.currency.index');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.create')
+                    ->routes('admin.currency.create,admin.currency.store');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.edit')
+                    ->routes('admin.currency.edit,admin.currency.update');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.destroy')
+                    ->routes('admin.currency.destroy');
+            }
+        );
+
         /*
         $group = PermissionFacade::add(
             'page',
@@ -851,49 +923,6 @@ class PermissionProvider extends ServiceProvider
             function (Permission $permission) {
                 $permission->label('avored-framework::permission.language.show')
                     ->routes('admin.language.show');
-            }
-        );
-
-        $group = PermissionFacade::add(
-            'state',
-            function (PermissionGroup $group) {
-                $group->label('avored-framework::permission.state.title');
-            }
-        );
-
-        $group->addPermission(
-            'admin-state-list',
-            function (Permission $permission) {
-                $permission->label('avored-framework::permission.state.list')
-                    ->routes('admin.state.index');
-            }
-        );
-        $group->addPermission(
-            'admin-state-create',
-            function (Permission $permission) {
-                $permission->label('avored-framework::permission.state.create')
-                    ->routes('admin.state.create,admin.state.store');
-            }
-        );
-        $group->addPermission(
-            'admin-state-update',
-            function (Permission $permission) {
-                $permission->label('avored-framework::permission.state.edit')
-                    ->routes('admin.state.edit,admin.state.update');
-            }
-        );
-        $group->addPermission(
-            'admin-site-currency-destroy',
-            function (Permission $permission) {
-                $permission->label('avored-framework::permission.state.destroy')
-                    ->routes('admin.state.destroy');
-            }
-        );
-        $group->addPermission(
-            'admin-site-currency-show',
-            function (Permission $permission) {
-                $permission->label('avored-framework::permission.state.show')
-                    ->routes('admin.state.show');
             }
         );
 
