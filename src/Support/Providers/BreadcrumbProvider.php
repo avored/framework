@@ -152,6 +152,133 @@ class BreadcrumbProvider extends ServiceProvider
         );
 
         BreadcrumbFacade::make(
+            'admin.property.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.property.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.property.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.property.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.property.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.property.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.property.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.property.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.order-status.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.order-status.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.order-status.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.order-status.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.order-status.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.order-status.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.order-status.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.order-status.index');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.status.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.status.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.status.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.status.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.status.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.status.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.status.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.status.index');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.admin-user.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.admin-user.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.admin-user.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.admin-user.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.admin-user.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.admin-user.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.admin-user.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.admin-user.index');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.currency.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.currency.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.currency.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.currency.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.currency.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.currency.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.currency.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.currency.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
             'admin.page.index',
             function (Breadcrumb $breadcrumb) {
                 $breadcrumb->label('avored::system.breadcrumb.page.index')

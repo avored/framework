@@ -143,6 +143,7 @@ return [
         'order' => 'Order',
         'order-status' => 'Order Status',
         'page' => 'Page',
+        'property' => 'Product Property',
         'role' => 'Role',
         'system' => 'System',
         'state' => 'State',
@@ -299,6 +300,26 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'property' => [
+            'index' => 'Property',
+            'edit' => 'Edit Property',
+            'create' => 'Create Property',
+        ],
+        'order-status' => [
+            'index' => 'Status',
+            'edit' => 'Edit Status',
+            'create' => 'Create Status',
+        ],
+        'currency' => [
+            'index' => 'Currency',
+            'edit' => 'Edit Currency',
+            'create' => 'Create Currency',
+        ],
+        'state' => [
+            'index' => 'State',
+            'edit' => 'Edit State',
+            'create' => 'Create State',
         ],
         'admin-user' => [
             'index' => 'AdminUser',

@@ -46,7 +46,7 @@ class CategoryController
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\System\Requests\CategoryRequest $request
+     * @param \AvoRed\Framework\Catalog\Requests\CategoryRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -54,7 +54,10 @@ class CategoryController
         $this->categoryRepository->create($request->all());
 
         return redirect()->route('admin.category.index')
-            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Category']));
+            ->with('successNotification', __(
+                'avored::system.notification.store',
+                ['attribute' => __('avored::catalog.category.title')]
+            ));
     }
 
     /**
@@ -70,7 +73,7 @@ class CategoryController
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\System\Requests\CategoryRequest $request
+     * @param \AvoRed\Framework\Catalog\Requests\CategoryRequest $request
      * @param \AvoRed\Framework\Database\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
@@ -79,7 +82,10 @@ class CategoryController
         $category->update($request->all());
 
         return redirect()->route('admin.category.index')
-            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Category']));
+            ->with('successNotification', __(
+                'avored::system.notification.updated',
+                ['attribute' => __('avored::catalog.category.title')]
+            ));
     }
 
     /**
@@ -93,7 +99,10 @@ class CategoryController
 
         return [
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Category'])
+            'message' => __(
+                'avored::system.notification.delete',
+                ['attribute' => __('avored::catalog.category.title')]
+            )
         ];
     }
 }

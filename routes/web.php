@@ -54,6 +54,7 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
+        Route::resource('property', 'Catalog\Controllers\PropertyController');
         Route::resource('role', 'System\Controllers\RoleController');
         Route::resource('state', 'System\Controllers\StateController');
     });

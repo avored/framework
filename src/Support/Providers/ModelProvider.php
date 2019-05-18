@@ -27,6 +27,8 @@ use AvoRed\Framework\Database\Contracts\CountryModelInterface;
 use AvoRed\Framework\Database\Repository\CountryRepository;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Repository\CurrencyRepository;
+use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
+use AvoRed\Framework\Database\Repository\PropertyRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -44,14 +46,15 @@ class ModelProvider extends ServiceProvider
         AdminUserModelInterface::class => AdminUserRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
         ConfigurationModelInterface::class => ConfigurationRepository::class,
-        LanguageModelInterface::class => LanguageRepository::class,
-        PermissionModelInterface::class => PermissionRepository::class,
-        PageModelInterface::class => PageRepository::class,
-        RoleModelInterface::class => RoleRepository::class,
-        OrderStatusModelInterface::class => OrderStatusRepository::class,
-        StateModelInterface::class => StateRepository::class,
         CountryModelInterface::class => CountryRepository::class,
         CurrencyModelInterface::class => CurrencyRepository::class,
+        LanguageModelInterface::class => LanguageRepository::class,
+        OrderStatusModelInterface::class => OrderStatusRepository::class,
+        PermissionModelInterface::class => PermissionRepository::class,
+        PageModelInterface::class => PageRepository::class,
+        PropertyModelInterface::class => PropertyRepository::class,
+        RoleModelInterface::class => RoleRepository::class,
+        StateModelInterface::class => StateRepository::class,
     ];
     /**
      * Register the service provider.

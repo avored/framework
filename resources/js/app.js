@@ -31,6 +31,9 @@ Vue.use(VueQuillEditor);
 Vue.component('language-table', require('../components/system/language/LanguageIndex.vue').default);
 Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
 
+Vue.component('property-table', require('../components/catalog/property/PropertyIndex.vue').default);
+Vue.component('property-save', require('../components/catalog/property/PropertySave.vue').default);
+
 Vue.component('state-table', require('../components/system/state/StateIndex.vue').default);
 Vue.component('state-save', require('../components/system/state/StateSave.vue').default);
 
