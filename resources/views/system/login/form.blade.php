@@ -84,8 +84,14 @@
                     </a-col>
                
                     <a-col :span="12">
-                        <div class="h-100 bg-primary">
-                        </div>
+                     <a-row type="flex" align="middle" class="h-100 text-center">
+                      <a-col :span="24">
+                            <img 
+                                class="height-100"
+                                src="{{ asset('avored-admin/images/avored_admin_login.svg')}}" 
+                                width="55%" alt="AvoRed Admin Login" />
+                        </a-col>
+                        </a-row>
                     </a-col>
                 </a-row>
             </div>

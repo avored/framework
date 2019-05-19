@@ -80,6 +80,11 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.property')
                 ->route('admin.property.index');
         });
+        $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
+            $menu->key('attribute')
+                ->label('avored::system.admin_menus.attribute')
+                ->route('admin.attribute.index');
+        });
 
         Menu::admin()->make('cms', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.cms')

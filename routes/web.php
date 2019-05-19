@@ -49,6 +49,7 @@ Route::middleware(['web', 'admin.auth'])
             ->name('admin-user-image-upload');
 
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
+        Route::resource('attribute', 'Catalog\Controllers\AttributeController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('currency', 'System\Controllers\CurrencyController');
         Route::resource('language', 'System\Controllers\LanguageController');

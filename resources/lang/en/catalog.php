@@ -49,6 +49,21 @@ return [
             'title' => 'Property Edit'
         ],
     ],
+    'attribute' => [
+        'title' => 'Attribute',
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'dropdown_options' => 'Dropdown Options',
+        'index' => [
+            'title' => 'Attribute List'
+        ],
+        'create' => [
+            'title' => 'Attribute Create'
+        ],
+        'edit' => [
+            'title' => 'Attribute Edit'
+        ],
+    ],
     
 
 ];

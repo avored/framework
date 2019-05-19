@@ -20,6 +20,10 @@ class Property extends Model
         'sort_order'
     ];
 
+    /**
+     * Appended attribute for the model
+     * @var $appends
+     */
     protected $appends =  ['dropdown'];
 
     /**

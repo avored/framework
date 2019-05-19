@@ -134,6 +134,7 @@ return [
     ],
     'admin_menus' => [
         'admin-user' => 'Staff',
+        'attribute' => 'Attribute',
         'catalog' => 'Catalog',
         'category' => 'Category',
         'currency' => 'Currency',
@@ -300,6 +301,11 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'attribute' => [
+            'index' => 'Attribute',
+            'edit' => 'Edit Attribute',
+            'create' => 'Create Attribute',
         ],
         'property' => [
             'index' => 'Property',

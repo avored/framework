@@ -29,6 +29,8 @@ use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Repository\CurrencyRepository;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
+use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use AvoRed\Framework\Database\Repository\AttributeRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -44,6 +46,7 @@ class ModelProvider extends ServiceProvider
      */
     protected $models = [
         AdminUserModelInterface::class => AdminUserRepository::class,
+        AttributeModelInterface::class => AttributeRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
         ConfigurationModelInterface::class => ConfigurationRepository::class,
         CountryModelInterface::class => CountryRepository::class,

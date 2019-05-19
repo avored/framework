@@ -181,6 +181,21 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('property_id')
                 ->references('id')->on('properties')->onDelete('cascade');
         });
+
+        Schema::create('attributes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->timestamps();
+        });
+        Schema::create('attribute_dropdown_options', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->string('display_text');
+            $table->timestamps();
+            $table->foreign('attribute_id')
+                ->references('id')->on('attributes')->onDelete('cascade');
+        });
         
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
