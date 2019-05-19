@@ -11,7 +11,7 @@ class LanguageRepository implements LanguageModelInterface
     /**
      * Create Language Resource into a database
      * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Language $role
+     * @return \AvoRed\Framework\Database\Models\Language $language
      */
     public function create(array $data): Language
     {
@@ -19,8 +19,8 @@ class LanguageRepository implements LanguageModelInterface
     }
 
     /**
-     * find roles for the users
-     * @return \Illuminate\Database\Eloquent\Collection $roles
+     * get all languages available for this store
+     * @return \Illuminate\Database\Eloquent\Collection $languages
      */
     public function all() : Collection
     {

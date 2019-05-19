@@ -324,6 +324,41 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.attribute.destroy');
             }
         );
+        $group = PermissionFacade::add(
+            'user-group',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.user-group.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-user-group-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.user-group.list')
+                    ->routes('admin.user-group.index');
+            }
+        );
+        $group->addPermission(
+            'admin-user-group-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.user-group.create')
+                    ->routes('admin.user-group.create,admin.user-group.store');
+            }
+        );
+        $group->addPermission(
+            'admin-user-group-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.user-group.edit')
+                    ->routes('admin.user-group.edit,admin.user-group.update');
+            }
+        );
+        $group->addPermission(
+            'admin-user-group-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.user-group.destroy')
+                    ->routes('admin.user-group.destroy');
+            }
+        );
         
 
         Blade::if(

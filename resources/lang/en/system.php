@@ -148,6 +148,8 @@ return [
         'role' => 'Role',
         'system' => 'System',
         'state' => 'State',
+        'user' => 'User',
+        'user_group' => 'User Group',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
@@ -301,6 +303,11 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'user-group' => [
+            'index' => 'User Group',
+            'edit' => 'Edit User Group',
+            'create' => 'Create User Group',
         ],
         'attribute' => [
             'index' => 'Attribute',

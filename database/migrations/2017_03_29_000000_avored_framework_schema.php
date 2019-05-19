@@ -196,6 +196,13 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_id')
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
+
+        Schema::create('user_groups', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->tinyInteger('is_default')->default(0);
+            $table->timestamps();
+        });
         
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);

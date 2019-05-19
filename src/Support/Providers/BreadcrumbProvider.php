@@ -328,6 +328,31 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.attribute.index');
             }
         );
+        BreadcrumbFacade::make(
+            'admin.user-group.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.user-group.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.user-group.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.user-group.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.user-group.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.user-group.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.user-group.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.user-group.index');
+            }
+        );
 
         BreadcrumbFacade::make(
             'admin.configuration.index',

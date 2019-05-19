@@ -31,6 +31,9 @@ Vue.use(VueQuillEditor);
 Vue.component('language-table', require('../components/system/language/LanguageIndex.vue').default);
 Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
 
+Vue.component('user-group-table', require('../components/user/user-group/UserGroupIndex.vue').default);
+Vue.component('user-group-save', require('../components/user/user-group/UserGroupSave.vue').default);
+
 Vue.component('attribute-table', require('../components/catalog/attribute/AttributeIndex.vue').default);
 Vue.component('attribute-save', require('../components/catalog/attribute/AttributeSave.vue').default);
 

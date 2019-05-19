@@ -31,6 +31,8 @@ use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
+use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Database\Repository\UserGroupRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -58,6 +60,7 @@ class ModelProvider extends ServiceProvider
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,
         StateModelInterface::class => StateRepository::class,
+        UserGroupModelInterface::class => UserGroupRepository::class,
     ];
     /**
      * Register the service provider.

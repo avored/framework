@@ -103,13 +103,27 @@ class MenuProvider extends ServiceProvider
                 ->icon('gold')
                 ->route('#');
         });
-        $cmsMenu = Menu::admin()->get('order');
-        $cmsMenu->subMenu('order-status', function (MenuItem $menu) {
+        $orderMenu = Menu::admin()->get('order');
+        $orderMenu->subMenu('order-status', function (MenuItem $menu) {
             $menu->key('order-status')
                 ->label('avored::system.admin_menus.order-status')
                 ->route('admin.order-status.index');
         });
 
+        
+        Menu::admin()->make('user', function (MenuItem $menu) {
+            $menu->label('avored::system.admin_menus.user')
+            ->icon('user')
+            ->route('#');
+        });
+        
+        $userGroupMenu = Menu::admin()->get('user');
+        $userGroupMenu->subMenu('user_group', function (MenuItem $menu) {
+            $menu->key('user_group')
+                ->label('avored::system.admin_menus.user_group')
+                ->route('admin.user-group.index');
+        });
+        
         Menu::admin()->make('system', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.system')
                 ->icon('setting')
@@ -117,7 +131,7 @@ class MenuProvider extends ServiceProvider
         });
 
         $systemMenu = Menu::admin()->get('system');
-       
+
         $systemMenu->subMenu('configuration', function (MenuItem $menu) {
             $menu->key('configuration')
                 ->label('avored::system.admin_menus.configuration')

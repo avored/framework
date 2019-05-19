@@ -57,5 +57,6 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');
         Route::resource('role', 'System\Controllers\RoleController');
+        Route::resource('user-group', 'User\Controllers\UserGroupController');
         Route::resource('state', 'System\Controllers\StateController');
     });
