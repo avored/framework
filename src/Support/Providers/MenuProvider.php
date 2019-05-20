@@ -149,6 +149,11 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.tax-group')
                 ->route('admin.tax-group.index');
         });
+        $systemMenu->subMenu('tax-rate', function (MenuItem $menu) {
+            $menu->key('tax-rate')
+                ->label('avored::system.admin_menus.tax-rate')
+                ->route('admin.tax-rate.index');
+        });
 
         $systemMenu->subMenu('currency', function (MenuItem $menu) {
             $menu->key('currency')

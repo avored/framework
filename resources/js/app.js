@@ -37,6 +37,9 @@ Vue.component('user-group-save', require('../components/user/user-group/UserGrou
 Vue.component('tax-group-table', require('../components/system/tax-group/TaxGroupIndex.vue').default);
 Vue.component('tax-group-save', require('../components/system/tax-group/TaxGroupSave.vue').default);
 
+Vue.component('tax-rate-table', require('../components/system/tax-rate/TaxRateIndex.vue').default);
+Vue.component('tax-rate-save', require('../components/system/tax-rate/TaxRateSave.vue').default);
+
 Vue.component('attribute-table', require('../components/catalog/attribute/AttributeIndex.vue').default);
 Vue.component('attribute-save', require('../components/catalog/attribute/AttributeSave.vue').default);
 

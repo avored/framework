@@ -378,6 +378,31 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.user-group.index');
             }
         );
+        BreadcrumbFacade::make(
+            'admin.tax-rate.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.tax-rate.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.tax-rate.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.tax-rate.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.tax-rate.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.tax-rate.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.tax-rate.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.tax-rate.index');
+            }
+        );
 
         BreadcrumbFacade::make(
             'admin.configuration.index',

@@ -30,7 +30,6 @@
     label="{{ __('avored::system.tax-group.description') }}"
 >
     <a-input
-        :auto-focus="true"
         name="description"
         v-decorator="[
         'description',

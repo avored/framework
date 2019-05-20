@@ -133,6 +133,24 @@ return [
             'title' => 'Tax Group Edit'
         ],
     ],
+    'tax-rate' => [
+        'name' => 'Name',
+        'description' => 'Description',
+        'rate' => 'Tax Rate',
+        'country_id' => 'Country',
+        'postcode' => 'Postcode',
+        'rate_type' => 'Tax rate type',
+        'title' => 'Tax Rate',
+        'index' => [
+            'title' => 'Tax Rate List'
+        ],
+        'create' => [
+            'title' => 'Tax Rate Create'
+        ],
+        'edit' => [
+            'title' => 'Tax Rate Edit'
+        ],
+    ],
 
     'configuration' => [
         'title' => 'Configuration',
@@ -165,6 +183,7 @@ return [
         'user' => 'User',
         'user-group' => 'User Group',
         'tax-group' => 'Tax Group',
+        'tax-rate' => 'Tax Rate',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
@@ -183,6 +202,14 @@ return [
             'edit' => 'Edit/Update Category',
             'destroy' => 'Destroy Category',
             'show' => 'Show Category'
+        ],
+        'tax-rate' => [
+            'title' => 'Tax Rate Permissions',
+            'list' => 'Tax Rate List',
+            'create' => 'Create/Store Tax Rate',
+            'edit' => 'Edit/Update Tax Rate',
+            'destroy' => 'Destroy Tax Rate',
+            'show' => 'Show Tax Rate'
         ],
         'language' => [
             'title' => 'Language Permissions',
@@ -323,6 +350,11 @@ return [
             'index' => 'Tax Group',
             'edit' => 'Edit Tax Group',
             'create' => 'Create Tax Group',
+        ],
+        'tax-rate' => [
+            'index' => 'Tax Rate',
+            'edit' => 'Edit Tax Rate',
+            'create' => 'Create Tax Rate',
         ],
         'user-group' => [
             'index' => 'User Group',

@@ -60,4 +60,5 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('state', 'System\Controllers\StateController');
         Route::resource('user-group', 'User\Controllers\UserGroupController');
         Route::resource('tax-group', 'System\Controllers\TaxGroupController');
+        Route::resource('tax-rate', 'System\Controllers\TaxRateController');
     });
