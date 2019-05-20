@@ -9,8 +9,7 @@ return [
     'symlink_storage_folder' => 'storage',
     'cart' => ['session_key' => 'cart_products'],
     'model' => [
-        'user' => App\User::class,
-        'address' => AvoRed\Framework\Models\Database\Address::class,
+        'user' => App\User::class
     ],
    
     'filesystems' => [

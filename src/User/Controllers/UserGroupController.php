@@ -8,13 +8,13 @@ use AvoRed\Framework\User\Requests\UserGroupRequest;
 class UserGroupController
 {
     /**
-     * UserGroup Repository for the Install Command
+     * UserGroup Repository for controller
      * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
      */
     protected $userGroupRepository;
     
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed user group controller
      * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
      */
     public function __construct(

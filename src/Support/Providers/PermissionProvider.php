@@ -359,6 +359,41 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.user-group.destroy');
             }
         );
+        $group = PermissionFacade::add(
+            'tax-group',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.tax-group.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-tax-group-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.tax-group.list')
+                    ->routes('admin.tax-group.index');
+            }
+        );
+        $group->addPermission(
+            'admin-tax-group-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.tax-group.create')
+                    ->routes('admin.tax-group.create,admin.tax-group.store');
+            }
+        );
+        $group->addPermission(
+            'admin-tax-group-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.tax-group.edit')
+                    ->routes('admin.tax-group.edit,admin.tax-group.update');
+            }
+        );
+        $group->addPermission(
+            'admin-tax-group-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.tax-group.destroy')
+                    ->routes('admin.user-group.destroy');
+            }
+        );
         
 
         Blade::if(

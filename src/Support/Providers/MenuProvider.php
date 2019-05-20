@@ -120,7 +120,7 @@ class MenuProvider extends ServiceProvider
         $userGroupMenu = Menu::admin()->get('user');
         $userGroupMenu->subMenu('user_group', function (MenuItem $menu) {
             $menu->key('user_group')
-                ->label('avored::system.admin_menus.user_group')
+                ->label('avored::system.admin_menus.user-group')
                 ->route('admin.user-group.index');
         });
         
@@ -142,6 +142,12 @@ class MenuProvider extends ServiceProvider
             $menu->key('admin-user')
                 ->label('avored::system.admin_menus.admin-user')
                 ->route('admin.admin-user.index');
+        });
+
+        $systemMenu->subMenu('tax-group', function (MenuItem $menu) {
+            $menu->key('tax-group')
+                ->label('avored::system.admin_menus.tax-group')
+                ->route('admin.tax-group.index');
         });
 
         $systemMenu->subMenu('currency', function (MenuItem $menu) {

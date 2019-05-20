@@ -203,6 +203,24 @@ class AvoredFrameworkSchema extends Migration
             $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('tax_groups', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('tax_rates', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->float('rate', 10, 6);
+            $table->unsignedBigInteger('country_id');
+            $table->integer('postcode')->nullable()->default(null);
+            $table->enum('rate_type', ['PERCENTAGE', 'FIXED'])->default('PERCENTAGE');
+            $table->timestamps();
+        });
         
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);

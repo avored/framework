@@ -119,6 +119,20 @@ return [
             'title' => 'State Edit'
         ],
     ],
+    'tax-group' => [
+        'name' => 'Name',
+        'description' => 'Description',
+        'title' => 'Tax Group',
+        'index' => [
+            'title' => 'Tax Group List'
+        ],
+        'create' => [
+            'title' => 'Tax Group Create'
+        ],
+        'edit' => [
+            'title' => 'Tax Group Edit'
+        ],
+    ],
 
     'configuration' => [
         'title' => 'Configuration',
@@ -149,7 +163,8 @@ return [
         'system' => 'System',
         'state' => 'State',
         'user' => 'User',
-        'user_group' => 'User Group',
+        'user-group' => 'User Group',
+        'tax-group' => 'Tax Group',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
@@ -303,6 +318,11 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'tax-group' => [
+            'index' => 'Tax Group',
+            'edit' => 'Edit Tax Group',
+            'create' => 'Create Tax Group',
         ],
         'user-group' => [
             'index' => 'User Group',

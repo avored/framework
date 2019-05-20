@@ -33,6 +33,8 @@ use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use AvoRed\Framework\Database\Repository\UserGroupRepository;
+use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
+use AvoRed\Framework\Database\Repository\TaxGroupRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -61,6 +63,7 @@ class ModelProvider extends ServiceProvider
         RoleModelInterface::class => RoleRepository::class,
         StateModelInterface::class => StateRepository::class,
         UserGroupModelInterface::class => UserGroupRepository::class,
+        TaxGroupModelInterface::class => TaxGroupRepository::class,
     ];
     /**
      * Register the service provider.
