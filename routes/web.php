@@ -45,6 +45,11 @@ Route::middleware(['web', 'admin.auth'])
         Route::post('configuration', 'System\Controllers\ConfigurationController@store')
             ->name('configuration.store');
         
+        Route::get('menu', 'Cms\Controllers\MenuController@index')
+            ->name('menu.index');
+        Route::post('menu', 'Cms\Controllers\MenuController@store')
+            ->name('menu.store');
+        
         Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
             ->name('admin-user-image-upload');
 

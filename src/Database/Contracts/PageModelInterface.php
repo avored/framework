@@ -30,7 +30,7 @@ interface PageModelInterface
 
     /**
      * Get All Page from the database
-     * @return \Illuminate\Database\Eloquent\Collection $categories
+     * @return \Illuminate\Database\Eloquent\Collection $pages
      */
     public function all() : Collection;
 }

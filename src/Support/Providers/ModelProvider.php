@@ -17,6 +17,8 @@ use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Repository\PageRepository;
+use AvoRed\Framework\Database\Contracts\MenuModelInterface;
+use AvoRed\Framework\Database\Repository\MenuRepository;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
@@ -61,6 +63,7 @@ class ModelProvider extends ServiceProvider
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
+        MenuModelInterface::class => MenuRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,
         StateModelInterface::class => StateRepository::class,

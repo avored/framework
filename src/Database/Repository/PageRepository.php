@@ -40,7 +40,7 @@ class PageRepository implements PageModelInterface
 
     /**
      * Get all the categories from the connected database
-     * @return \Illuminate\Database\Eloquent\Collection $categories
+     * @return \Illuminate\Database\Eloquent\Collection $pages
      */
     public function all() : Collection
     {

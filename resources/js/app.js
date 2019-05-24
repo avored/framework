@@ -57,6 +57,9 @@ Vue.component('category-save', require('../components/catalog/category/CategoryS
 
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default);
 
+Vue.component('menu-save', require('../components/cms/menu/MenuSave.vue').default);
+
+
 Vue.component('page-table', require('../components/cms/page/PageIndex.vue').default);
 Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);
 

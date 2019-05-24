@@ -29,6 +29,12 @@ return [
             'title' => 'Page Edit'
         ],
     ],
+    'menu' => [
+        'title' => 'Frontend Menus',
+        'create' => [
+            'title' => 'Frontend Menus'
+        ]
+    ],
     
 
 ];

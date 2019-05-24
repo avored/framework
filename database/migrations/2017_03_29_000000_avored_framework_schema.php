@@ -222,6 +222,25 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
         
+        Schema::create('menu_groups', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('identifier')->nullable()->default(null);
+            $table->tinyInteger('is_default')->nullable()->default(0);
+            $table->timestamps();
+        });
+        Schema::create('menus', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('menu_group_id');
+            $table->integer('parent_id')->nullable()->default(null);
+            $table->string('name')->nullable()->default(null);
+            $table->string('route')->nullable()->default(null);
+            $table->string('params')->nullable()->default(null);
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
+        });
+
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -244,6 +263,16 @@ class AvoredFrameworkSchema extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('tax_rates');
+        Schema::dropIfExists('tax_groups');
+        Schema::dropIfExists('user_groups');
+
+        Schema::dropIfExists('property_dropdown_options');
+        Schema::dropIfExists('properties');
+
+        Schema::dropIfExists('attribute_dropdown_options');
+        Schema::dropIfExists('attributes');
 
         Schema::dropIfExists('currencies');
         Schema::dropIfExists('states');

@@ -171,6 +171,7 @@ return [
         'category' => 'Category',
         'currency' => 'Currency',
         'cms' => 'CMS',
+        'menu' => 'Menu',
         'configuration' => 'Configuration',
         'language' => 'Language',
         'order' => 'Order',
