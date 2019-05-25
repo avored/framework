@@ -15,7 +15,7 @@ export default {
         status: 0,
         track_stock: 0,
         is_taxable: 0,
-        categories: 0
+        categories: []
     };
   },
   methods: {
@@ -38,6 +38,7 @@ export default {
           }
       },
       handleCategoryChange(val) {
+           
             this.categories = val;
       },
       handleTrackStockChange(val) {

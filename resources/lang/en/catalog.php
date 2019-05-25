@@ -40,6 +40,7 @@ return [
         'weight' => 'Weight',
         'height' => 'Height',
         'length' => 'Length',
+        'category' => 'Category',
         'price' => 'Price',
         'cost_price' => 'Cost Price',
         'width' => 'Width',

@@ -51,7 +51,9 @@
     </a-col>
 
 </a-row>
-
+<?php 
+//dd();
+?>
 <a-row type="flex" :gutter="15">
     <a-col :span="12">
         <a-form-item
@@ -62,10 +64,11 @@
             label="{{ __('avored::catalog.product.category') }}">
 
             <a-select
-                multiple-select
+                mode="multiple"
                 @change="handleCategoryChange"
                 v-decorator="[
                 'category',
+                {{ ($product->categories !== null && count($product->categories) > 0) ? "{'initialValue': [\"". implode('","', $product->categories->pluck('id')->toArray()) . "\"]}," : "" }}
                 {rules:
                     [
                         {   required: true, 
@@ -80,7 +83,9 @@
                 @endforeach
             </a-select>
         </a-form-item>
-        <input name="type" v-model="categories" type="hidden" />
+        <span v-for="(category, index) in categories">
+            <input name="category[]" :value="category" type="hidden" />
+        </span>
     </a-col>
      <a-col :span="12">
         <a-form-item

@@ -96,6 +96,7 @@ class ProductController
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->all());
+        $this->saveProductCategory($product, $request);
         
         return redirect()->route('admin.product.index')
             ->with('successNotification', __(
@@ -120,5 +121,18 @@ class ProductController
                 ['attribute' => __('avored::catalog.product.title')]
             )
         ];
+    }
+
+    /**
+     * Save Product Category
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    public function saveProductCategory($product, $request)
+    {
+        if ($request->get('category') !== null && count($request->get('category')) > 0) {
+            $product->categories()->sync($request->get('category'));
+        }
     }
 }
