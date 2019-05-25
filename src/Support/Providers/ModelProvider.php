@@ -33,6 +33,8 @@ use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
+use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use AvoRed\Framework\Database\Repository\ProductRepository;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use AvoRed\Framework\Database\Repository\UserGroupRepository;
 use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
@@ -63,6 +65,7 @@ class ModelProvider extends ServiceProvider
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
+        ProductModelInterface::class => ProductRepository::class,
         MenuModelInterface::class => MenuRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,

@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Contracts;
 
 use AvoRed\Framework\Database\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 interface CategoryModelInterface
 {
@@ -33,4 +34,10 @@ interface CategoryModelInterface
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function all() : Collection;
+
+    /**
+     * Get All Category from the database
+     * @return \Illuminate\Support\Collection $categoryOptions
+     */
+    public function options() : SupportCollection;
 }

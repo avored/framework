@@ -29,6 +29,36 @@ return [
             'title' => 'Category Edit'
         ],
     ],
+    'product' => [
+        'title' => 'Product',
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'status' => 'Status',
+        'qty' => 'Qty',
+        'is_taxable' => 'Is Taxable',
+        'track_stock' => 'Track Stock',
+        'weight' => 'Weight',
+        'height' => 'Height',
+        'length' => 'Length',
+        'price' => 'Price',
+        'cost_price' => 'Cost Price',
+        'width' => 'Width',
+        'type' => 'Product Type',
+        'sku' => 'SKU',
+        'barcode' => 'Barcode',
+        'description' => 'Description',
+        'meta_title' => 'Meta Title',
+        'meta_description' => 'Meta Description',
+        'index' => [
+            'title' => 'Product List'
+        ],
+        'create' => [
+            'title' => 'Product Create'
+        ],
+        'edit' => [
+            'title' => 'Product Edit'
+        ],
+    ],
     'property' => [
         'title' => 'Property',
         'name' => 'Name',

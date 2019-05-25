@@ -61,6 +61,7 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');
+        Route::resource('product', 'Catalog\Controllers\ProductController');
         Route::resource('role', 'System\Controllers\RoleController');
         Route::resource('state', 'System\Controllers\StateController');
         Route::resource('user-group', 'User\Controllers\UserGroupController');

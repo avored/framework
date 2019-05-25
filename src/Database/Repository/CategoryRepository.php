@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -45,5 +46,14 @@ class CategoryRepository implements CategoryModelInterface
     public function all() : Collection
     {
         return Category::all();
+    }
+
+    /**
+     * Get all the categories options to use in dropdown
+     * @return \Illuminate\Database\Eloquent\Collection $categoryOptions
+     */
+    public function options() : SupportCollection
+    {
+        return Category::all()->pluck('name', 'id');
     }
 }

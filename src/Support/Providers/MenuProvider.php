@@ -70,6 +70,11 @@ class MenuProvider extends ServiceProvider
         });
 
         $catalogMenu = Menu::admin()->get('catalog');
+        $catalogMenu->subMenu('product', function (MenuItem $menu) {
+            $menu->key('product')
+                ->label('avored::system.admin_menus.product')
+                ->route('admin.product.index');
+        });
         $catalogMenu->subMenu('category', function (MenuItem $menu) {
             $menu->key('category')
                 ->label('avored::system.admin_menus.category')

@@ -241,6 +241,39 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
         });
 
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->enum('type', ['BASIC', 'VARIATION', 'DOWNLOADABLE', 'VARIABLE_PRODUCT'])->default('BASIC');
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
+            $table->string('sku')->nullable()->default(null);
+            $table->string('barcode')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
+            $table->tinyInteger('status')->nullable()->default(null);
+            $table->tinyInteger('in_stock')->nullable()->default(null);
+            $table->tinyInteger('track_stock')->nullable()->default(null);
+            $table->decimal('qty', 10, 6)->nullable();
+            $table->tinyInteger('is_taxable')->nullable()->default(null);
+            $table->decimal('price', 10, 6)->nullable()->default(null);
+            $table->decimal('cost_price', 10, 6)->nullable()->default(null);
+            $table->float('weight')->nullable()->default(null);
+            $table->float('width')->nullable()->default(null);
+            $table->float('height')->nullable()->default(null);
+            $table->float('length')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        Schema::create('category_product', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        });
+
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -253,6 +286,8 @@ class AvoredFrameworkSchema extends Migration
                 'lang_code' => array_get($country, 'languages.0.name'),
             ]);
         }
+
+
     }
 
     /**

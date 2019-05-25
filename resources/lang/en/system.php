@@ -177,6 +177,7 @@ return [
         'order' => 'Order',
         'order-status' => 'Order Status',
         'page' => 'Page',
+        'product' => 'Product',
         'property' => 'Product Property',
         'role' => 'Role',
         'system' => 'System',

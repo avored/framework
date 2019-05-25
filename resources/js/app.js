@@ -46,6 +46,9 @@ Vue.component('attribute-save', require('../components/catalog/attribute/Attribu
 Vue.component('property-table', require('../components/catalog/property/PropertyIndex.vue').default);
 Vue.component('property-save', require('../components/catalog/property/PropertySave.vue').default);
 
+Vue.component('product-table', require('../components/catalog/product/ProductIndex.vue').default);
+Vue.component('product-save', require('../components/catalog/product/ProductSave.vue').default);
+
 Vue.component('state-table', require('../components/system/state/StateIndex.vue').default);
 Vue.component('state-save', require('../components/system/state/StateSave.vue').default);
 
