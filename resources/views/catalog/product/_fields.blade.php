@@ -1,5 +1,7 @@
+<a-card title="{{ __('avored::catalog.product.basic_card_title') }}">
  <a-row :gutter="15" type="flex">
     <a-col :span="12">
+    
         <a-form-item
             @if ($errors->has('name'))
                 validate-status="error"
@@ -466,3 +468,34 @@
         ]"
     ></a-input>
 </a-form-item>
+</a-card>
+
+<a-card class="mt-1 mb-1" title="{{ __('avored::catalog.product.property_card_title') }}">
+    @foreach ($properties as $property)
+        @switch($property->field_type)
+            @case('SELECT')
+                <a-form-item label="{{ $property->name }}">
+                    <a-select
+                        v-on:change="handlePropertyChange({{ $property->id }}, $event)"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                            @foreach ($property->dropdownOptions as $dropdownOption)
+                                <a-select-option value="{{ $dropdownOption->id }}">
+                                {{ $dropdownOption->display_text }}
+                            </a-select-option>
+                        @endforeach
+                    </a-select>
+                </a-form-item>
+                <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
+            @break
+        @endswitch
+    @endforeach    
+</a-card>

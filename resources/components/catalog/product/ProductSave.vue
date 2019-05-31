@@ -15,7 +15,8 @@ export default {
         status: 0,
         track_stock: 0,
         is_taxable: 0,
-        categories: []
+        categories: [],
+        property: {},
     };
   },
   methods: {
@@ -23,9 +24,11 @@ export default {
         this.productForm.validateFields((err, values) => {
           if (err !== null) {
               e.preventDefault();
-            }
-              
+          }    
           });
+      },
+      handlePropertyChange(id, val) {
+        this.property[id] = val;
       },
       handleTypeChange(val) {
         this.type = val;

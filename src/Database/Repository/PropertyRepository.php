@@ -46,4 +46,13 @@ class PropertyRepository implements PropertyModelInterface
     {
         return Property::all();
     }
+
+    /**
+     * Get all the properties from the connected database which is used in all products
+     * @return \Illuminate\Database\Eloquent\Collection $properties
+     */
+    public function allPropertyToUseInProduct() : Collection
+    {
+        return Property::whereUseForAllProducts(1)->get();
+    }
 }

@@ -30,6 +30,8 @@ return [
         ],
     ],
     'product' => [
+        'basic_card_title' => 'Basic Information',
+        'property_card_title' => 'Product Property',
         'title' => 'Product',
         'name' => 'Name',
         'slug' => 'Slug',

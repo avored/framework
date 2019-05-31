@@ -5,6 +5,7 @@ use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 
 class ProductController
 {
@@ -15,10 +16,16 @@ class ProductController
     protected $productRepository;
 
     /**
-     * Category Repository for the Category Controller
+     * Category Repository for the Product Controller
      * @var \AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
      */
     protected $categoryRepository;
+
+    /**
+     * Property Repository for the Product Controller
+     * @var \AvoRed\Framework\Database\Repository\PropertyRepository $propertyRepository
+     */
+    protected $propertyRepository;
     
     /**
      * Construct for the AvoRed install command
@@ -26,10 +33,12 @@ class ProductController
      */
     public function __construct(
         ProductModelInterface $productRepository,
-        CategoryModelInterface $categoryRepository
+        CategoryModelInterface $categoryRepository,
+        PropertyModelInterface $propertyRepository
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->propertyRepository = $propertyRepository;
     }
 
     /**
@@ -80,11 +89,13 @@ class ProductController
     {
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
+        $properties = $this->propertyRepository->allPropertyToUseInProduct();
 
         return view('avored::catalog.product.edit')
             ->with('product', $product)
             ->with('categoryOptions', $categoryOptions)
-            ->with('typeOptions', $typeOptions);
+            ->with('typeOptions', $typeOptions)
+            ->with('properties', $properties);
     }
 
     /**
@@ -95,6 +106,7 @@ class ProductController
      */
     public function update(ProductRequest $request, Product $product)
     {
+        dd($request->all());
         $product->update($request->all());
         $this->saveProductCategory($product, $request);
         

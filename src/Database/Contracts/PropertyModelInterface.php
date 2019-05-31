@@ -33,4 +33,10 @@ interface PropertyModelInterface
      * @return \Illuminate\Database\Eloquent\Collection $properties
      */
     public function all() : Collection;
+
+    /**
+     * Get All Property from the database
+     * @return \Illuminate\Database\Eloquent\Collection $properties
+     */
+    public function allPropertyToUseInProduct(): Collection;
 }
