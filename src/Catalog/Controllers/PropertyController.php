@@ -126,7 +126,13 @@ class PropertyController
      */
     public function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
     {
-        if ($request->get('field_type') === 'SELECT' && count($request->get('dropdown_option')) > 0) {
+        if (!($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
+            $property->dropdownOptions()->delete();
+        }
+        if (($request->get('field_type') === 'RADIO' ||
+            $request->get('field_type') === 'SELECT') &&
+            count($request->get('dropdown_option')) > 0
+        ) {
             foreach ($request->get('dropdown_option') as $key => $option) {
                 if (empty($option)) {
                     continue;

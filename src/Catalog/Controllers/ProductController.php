@@ -106,7 +106,6 @@ class ProductController
      */
     public function update(ProductRequest $request, Product $product)
     {
-        dd($request->all());
         $product->update($request->all());
         $this->saveProductCategory($product, $request);
         

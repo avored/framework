@@ -1,5 +1,6 @@
 <script>
 import isNil from 'lodash/isNil';
+import isObject from 'lodash/isObject';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
@@ -28,7 +29,13 @@ export default {
           });
       },
       handlePropertyChange(id, val) {
-        this.property[id] = val;
+        let propertyValue = ''
+        propertyValue = val
+
+        if (isObject(val)) {
+          propertyValue = val.target.value
+        }
+        this.property[id] = propertyValue;
       },
       handleTypeChange(val) {
         this.type = val;

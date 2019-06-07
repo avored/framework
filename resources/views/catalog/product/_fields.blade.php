@@ -270,29 +270,6 @@
     </a-col>
 </a-row>
 
-
-<a-form-item
-    @if ($errors->has('weight'))
-        validate-status="error"
-        help="{{ $errors->first('weight') }}"
-    @endif
-    label="{{ __('avored::catalog.product.weight') }}">
-    <a-input
-        name="weight"
-        v-decorator="[
-        'weight',
-        {{ ($product->weight !== '') ? "{'initialValue': '" . $product->weight . "'}," : "" }}
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Weight']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
-
 <a-row :gutter="15" type="flex">
     <a-col :span="12">
         <a-form-item
@@ -348,7 +325,7 @@
 
 
 <a-row :gutter="15" type="flex">
-    <a-col :span="8">
+    <a-col :span="6">
         <a-form-item
             @if ($errors->has('length'))
                 validate-status="error"
@@ -373,7 +350,7 @@
     </a-col>
 
 
-    <a-col :span="8">
+    <a-col :span="6">
         <a-form-item
             @if ($errors->has('width'))
                 validate-status="error"
@@ -397,7 +374,7 @@
 
         </a-form-item>
     </a-col>
-    <a-col :span="8">
+    <a-col :span="6">
         <a-form-item
             @if ($errors->has('height'))
                 validate-status="error"
@@ -421,6 +398,29 @@
 
         </a-form-item>
     </a-col>
+    <a-col :span="6">
+        <a-form-item
+        @if ($errors->has('weight'))
+            validate-status="error"
+            help="{{ $errors->first('weight') }}"
+        @endif
+        label="{{ __('avored::catalog.product.weight') }}">
+        <a-input
+            name="weight"
+            v-decorator="[
+            'weight',
+            {{ ($product->weight !== '') ? "{'initialValue': '" . $product->weight . "'}," : "" }}
+            {rules: 
+                [
+                    {   required: true, 
+                        message: '{{ __('avored::validation.required', ['attribute' => 'Weight']) }}' 
+                    }
+                ]
+            }
+            ]"
+        ></a-input>
+    </a-col>
+</a-form-item>
 
 </a-row>
 
@@ -493,6 +493,105 @@
                             </a-select-option>
                         @endforeach
                     </a-select>
+                </a-form-item>
+                <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
+            @break
+
+            @case('TEXT')
+                <a-form-item label="{{ $property->name }}">
+                    <a-input
+                        name="property[{{ $property->id }}]"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                           
+                    </a-select>
+                </a-form-item>
+            @break
+
+            @case('TEXTAREA')
+                <a-form-item label="{{ $property->name }}">
+                    <a-textarea
+                        :rows="4"
+                        name="property[{{ $property->id }}]"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                           
+                    </a-select>
+                </a-form-item>
+            @break
+
+            @case('DATETIME')
+                <a-form-item label="{{ $property->name }}">
+                    <a-date-picker
+                        :show-time="true"
+                        format="DD-MM-YYYY HH:mm:ss"
+                        v-on:change="handlePropertyChange({{ $property->id }}, $event)"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                    </a-date-picker>
+                </a-form-item>
+                <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
+            @break
+
+            @case('SWITCH')
+                <a-form-item label="{{ $property->name }}">
+                    <a-switch
+                        v-on:change="handlePropertyChange({{ $property->id }}, $event)"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                    </a-switch>
+                </a-form-item>
+                <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
+            @break
+
+            @case('RADIO')
+                <a-form-item label="{{ $property->name }}">
+                    <a-radio-group
+                        v-on:change="handlePropertyChange({{ $property->id }}, $event)"
+                        :options="{{ $property->getDropdownOptions() }}"
+                        v-decorator="[
+                        'property[{{ $property->id }}]',
+                        {rules:
+                            [
+                                {   required: true, 
+                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                                    }
+                                ]
+                            }
+                            ]">
+                    </a-switch>
                 </a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
             @break

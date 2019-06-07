@@ -24,7 +24,7 @@ export default {
       },
       fieldTypeChange(val) {
           this.field_type = val;
-          if (val === 'SELECT') {
+          if (val === 'SELECT' || val === 'RADIO') {
               this.dropdownOptions.push(this.randomString());
           } else {
             this.dropdownOptions = [];
@@ -78,7 +78,7 @@ export default {
           this.data_type = this.property.data_type;
           this.field_type = this.property.field_type;
           
-          if (this.property.dropdown_options.length > 0) {
+          if (!isNil(this.property.dropdown_options) && this.property.dropdown_options.length > 0) {
               this.property.dropdown_options.forEach(element => {
                 this.dropdownOptions.push(element.id);
                 this.propertyForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });

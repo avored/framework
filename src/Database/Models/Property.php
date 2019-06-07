@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 class Property extends Model
 {
@@ -51,7 +52,6 @@ class Property extends Model
         'FILE' => 'File',
         'DATETIME' => 'Date Time',
         'RADIO' => 'Radio',
-        'CHECKBOX' => 'Checkbox',
         'SWITCH' => 'Switch'
     ];
 
@@ -70,10 +70,30 @@ class Property extends Model
      */
     public function getDropdownAttribute()
     {
-        if ($this->field_type === 'SELECT') {
+        if ($this->field_type === 'SELECT' || $this->field_type === 'RADIO') {
             return $this->dropdownOptions;
         }
 
         return null;
+    }
+
+    /**
+     * Get the Dropdown Options for Select
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getDropdownOptions(): SupportCollection
+    {
+        $data = Collection::make([]);
+
+        if ($this->dropdownOptions !== null && count($this->dropdownOptions) > 0) {
+            foreach ($this->dropdownOptions as $dropdown) {
+                $data->push([
+                    'label' => $dropdown->display_text,
+                    'value' => $dropdown->id
+                ]);
+            }
+        }
+
+        return $data;
     }
 }
