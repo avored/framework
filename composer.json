@@ -51,7 +51,7 @@
 	"extra" : {
 		"laravel" : {
 			"providers" : [
-				"AvoRed\\Framework\\Provider"
+				"AvoRed\\Framework\\AvoRedProvider"
 			],
 			"aliases" : {
 				"AdminMenu" : "AvoRed\\Framework\\AdminMenu\\Facade",
