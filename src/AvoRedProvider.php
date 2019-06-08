@@ -194,5 +194,9 @@ class AvoRedProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/avored.php' => config_path('avored.php')
         ], 'avored-config');
+
+        $this->publishes([
+            __DIR__.'/../assets/avored-admin' => public_path('avored-admin')
+        ], 'avored-public');
     }
 }
