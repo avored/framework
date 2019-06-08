@@ -187,84 +187,6 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('properties')->onDelete('cascade');
         });
 
-        Schema::create('product_property', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        
-        Schema::create('product_property_varchar_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->string('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        Schema::create('product_property_datetime_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->timestamp('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        Schema::create('product_property_integer_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        Schema::create('product_property_decimal_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->decimal('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        Schema::create('product_property_text_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->text('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-        Schema::create('product_property_boolean_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('product_id');
-            $table->tinyInteger('value')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('property_id')
-                ->references('id')->on('properties')->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')->on('products')->onDelete('cascade');
-        });
-
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -348,6 +270,84 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('product_property', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        
+        Schema::create('product_property_varchar_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->string('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        Schema::create('product_property_datetime_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamp('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        Schema::create('product_property_integer_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        Schema::create('product_property_decimal_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->decimal('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        Schema::create('product_property_text_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->text('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+        Schema::create('product_property_boolean_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('product_id');
+            $table->tinyInteger('value')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')->onDelete('cascade');
+        });
+
         Schema::create('category_product', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
@@ -369,8 +369,6 @@ class AvoredFrameworkSchema extends Migration
                 'lang_code' => array_get($country, 'languages.0.name'),
             ]);
         }
-
-
     }
 
     /**
@@ -381,6 +379,15 @@ class AvoredFrameworkSchema extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('product_property_boolean_values');
+        Schema::dropIfExists('product_property_text_values');
+        Schema::dropIfExists('product_property_decimal_values');
+        Schema::dropIfExists('product_property_integer_values');
+        Schema::dropIfExists('product_property_datetime_values');
+        Schema::dropIfExists('product_property_varchar_values');
+
+        Schema::dropIfExists('product_property');
 
         Schema::dropIfExists('tax_rates');
         Schema::dropIfExists('tax_groups');
