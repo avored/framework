@@ -65,7 +65,7 @@ class AvoRedProvider extends ServiceProvider
     public function boot()
     {
         $this->registerTranslationPath();
-        //$this->registerProviders();
+        $this->setupPublishFiles();
     }
 
     /**
@@ -183,5 +183,16 @@ class AvoRedProvider extends ServiceProvider
     public function registerViewComposerData()
     {
         View::composer('avored::layouts.app', LayoutComposer::class);
+    }
+
+   /**
+    * Set up the file which can be published to use the package
+    * @return void
+    */
+    public function setupPublishFiles()
+    {
+        $this->publishes([
+            __DIR__.'/../config/avored.php' => config_path('avored.php')
+        ], 'avored-config');
     }
 }
