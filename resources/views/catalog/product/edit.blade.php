@@ -13,7 +13,9 @@
     <a-col :span="24">
         <product-save
             base-url="{{ asset(config('avored.admin_url')) }}"
-            :product="{{ $product }}" inline-template>
+            :product="{{ $product }}"
+            :product-properties="{{ $product->properties }}"
+            inline-template>
         <div>
             <a-form 
                 :form="productForm"

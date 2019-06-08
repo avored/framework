@@ -281,15 +281,15 @@
             <a-input
                 name="price"
                 v-decorator="[
-                'price',
-                {{ ($product->price !== '') ? "{'initialValue': '" . $product->price . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Price']) }}' 
-                        }
-                    ]
-                }
+                    'price',
+                    {{ ($product->price !== '') ? "{'initialValue': '" . $product->price . "'}," : "" }}
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Price']) }}' 
+                            }
+                        ]
+                    }
                 ]"
             ></a-input>
         </a-form-item>
@@ -306,15 +306,15 @@
             <a-input
                 name="cost_price"
                 v-decorator="[
-                'cost_price',
-                {{ ($product->cost_price !== '') ? "{'initialValue': '" . $product->cost_price . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Cost Price']) }}' 
-                        }
-                    ]
-                }
+                    'cost_price',
+                    {{ ($product->cost_price !== '') ? "{'initialValue': '" . $product->cost_price . "'}," : "" }}
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Cost Price']) }}' 
+                            }
+                        ]
+                    }
                 ]"
             ></a-input>
 
@@ -335,15 +335,15 @@
             <a-input
                 name="length"
                 v-decorator="[
-                'length',
-                {{ ($product->length !== '') ? "{'initialValue': '" . $product->length . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Length']) }}' 
-                        }
-                    ]
-                }
+                    'length',
+                    {{ ($product->length !== '') ? "{'initialValue': '" . $product->length . "'}," : "" }}
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Length']) }}' 
+                            }
+                        ]
+                    }
                 ]"
             ></a-input>
         </a-form-item>
@@ -360,15 +360,15 @@
             <a-input
                 name="width"
                 v-decorator="[
-                'width',
-                {{ ($product->width !== '') ? "{'initialValue': '" . $product->width . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Width']) }}' 
-                        }
-                    ]
-                }
+                    'width',
+                    {{ ($product->width !== '') ? "{'initialValue': '" . $product->width . "'}," : "" }}
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Width']) }}' 
+                            }
+                        ]
+                    }
                 ]"
             ></a-input>
 
@@ -384,15 +384,15 @@
             <a-input
                 name="height"
                 v-decorator="[
-                'height',
-                {{ ($product->height !== '') ? "{'initialValue': '" . $product->height . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Height']) }}' 
-                        }
-                    ]
-                }
+                    'height',
+                    {{ ($product->height !== '') ? "{'initialValue': '" . $product->height . "'}," : "" }}
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Height']) }}' 
+                            }
+                        ]
+                    }
                 ]"
             ></a-input>
 
@@ -408,15 +408,15 @@
         <a-input
             name="weight"
             v-decorator="[
-            'weight',
-            {{ ($product->weight !== '') ? "{'initialValue': '" . $product->weight . "'}," : "" }}
-            {rules: 
-                [
-                    {   required: true, 
-                        message: '{{ __('avored::validation.required', ['attribute' => 'Weight']) }}' 
-                    }
-                ]
-            }
+                'weight',
+                {{ ($product->weight !== '') ? "{'initialValue': '" . $product->weight . "'}," : "" }}
+                {rules: 
+                    [
+                        {   required: true, 
+                            message: '{{ __('avored::validation.required', ['attribute' => 'Weight']) }}' 
+                        }
+                    ]
+                }
             ]"
         ></a-input>
     </a-col>
@@ -434,15 +434,15 @@
     <a-input
         name="meta_title"
         v-decorator="[
-        'meta_title',
-        {'initialValue': '{{ $product->meta_title ?? '' }}'},
-        {rules: 
-            [
-                {   required: false, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Meta Title']) }}' 
-                }
-            ]
-        }
+            'meta_title',
+            {'initialValue': '{{ $product->meta_title ?? '' }}'},
+            {rules: 
+                [
+                    {   required: false, 
+                        message: '{{ __('avored::validation.required', ['attribute' => 'Meta Title']) }}' 
+                    }
+                ]
+            }
         ]"
     ></a-input>
 </a-form-item>
@@ -456,15 +456,15 @@
     <a-input
         name="meta_description"
         v-decorator="[
-        'meta_description',
-        {'initialValue': '{{ $product->meta_description ?? '' }}'},
-        {rules: 
-            [
-                {   required: false, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'meta_description']) }}' 
-                }
-            ]
-        }
+            'meta_description',
+            {'initialValue': '{{ $product->meta_description ?? '' }}'},
+            {rules: 
+                [
+                    {   required: false, 
+                        message: '{{ __('avored::validation.required', ['attribute' => 'meta_description']) }}' 
+                    }
+                ]
+            }
         ]"
     ></a-input>
 </a-form-item>
@@ -478,15 +478,15 @@
                     <a-select
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                             @foreach ($property->dropdownOptions as $dropdownOption)
                                 <a-select-option value="{{ $dropdownOption->id }}">
                                 {{ $dropdownOption->display_text }}
@@ -502,15 +502,15 @@
                     <a-input
                         name="property[{{ $property->id }}]"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                            
                     </a-select>
                 </a-form-item>
@@ -522,15 +522,15 @@
                         :rows="4"
                         name="property[{{ $property->id }}]"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                            
                     </a-select>
                 </a-form-item>
@@ -543,17 +543,17 @@
                         format="DD-MM-YYYY HH:mm:ss"
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                     </a-date-picker>
-                </a-form-item>
+                <v /a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
             @break
 
@@ -562,15 +562,15 @@
                     <a-switch
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                     </a-switch>
                 </a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
@@ -582,15 +582,16 @@
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         :options="{{ $property->getDropdownOptions() }}"
                         v-decorator="[
-                        'property[{{ $property->id }}]',
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
+                            'property[{{ $property->id }}]',
+                            {'initialValue': {{ $property->property_value}}}, 
+                            {rules:
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => $property->name]) }}' 
                                     }
                                 ]
                             }
-                            ]">
+                        ]">
                     </a-switch>
                 </a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />

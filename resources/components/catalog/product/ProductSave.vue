@@ -4,7 +4,7 @@ import isObject from 'lodash/isObject';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
-  props: ['product', 'baseUrl'],
+  props: ['product', 'baseUrl', 'productProperties'],
   components: {
     'quil-editor': quillEditor,
   },
@@ -73,6 +73,11 @@ export default {
     if (!isNil(this.product)) {
       this.type = this.product.type
       this.description = this.product.description
+      
+      this.productProperties.forEach(record => {
+        this.property[record.id] = record.property_value
+      });
+
     }
   }
 };

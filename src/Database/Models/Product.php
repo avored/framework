@@ -50,4 +50,13 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    /**
+     * Belongs to Many Properties
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class);
+    }
 }

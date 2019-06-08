@@ -6,6 +6,7 @@ use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
+use Illuminate\Support\Collection;
 
 class ProductController
 {
@@ -108,6 +109,7 @@ class ProductController
     {
         $product->update($request->all());
         $this->saveProductCategory($product, $request);
+        $this->saveProductProperty($product, $request);
         
         return redirect()->route('admin.product.index')
             ->with('successNotification', __(
@@ -144,6 +146,50 @@ class ProductController
     {
         if ($request->get('category') !== null && count($request->get('category')) > 0) {
             $product->categories()->sync($request->get('category'));
+        }
+    }
+
+    /**
+     * Save Product Property
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    public function saveProductProperty($product, $request)
+    {
+        $propertyIds = Collection::make([]);
+        if ($request->get('property') !== null && count($request->get('property')) > 0) {
+            foreach ($request->get('property') as $propertyId => $propertyValue) {
+                $propertyModel = $this->propertyRepository->find($propertyId);
+                $propertyIds->push($propertyId);
+                switch ($propertyModel->field_type) {
+                    case 'SELECT':
+                    case 'RADIO':
+                        $propertyModel->saveIntegerProperty($product, $propertyValue);
+                        break;
+
+                    case 'SWITCH':
+                        $propertyModel->saveBooleanProperty($product, $propertyValue);
+                        break;
+
+                    case 'DATETIME':
+                        $propertyModel->saveDatetimeProperty()($product, $propertyValue);
+                        break;
+
+                    case 'TEXT':
+                        $propertyModel->saveVarcharProperty($product, $propertyValue);
+                        break;
+
+                    case 'TEXTAREA':
+                        $propertyModel->saveTextProperty($product, $propertyValue);
+                        break;
+
+                    default:
+                        throw new \Exception('there is an error while saving an product properties');
+                }
+            }
+
+            $product->properties()->sync($propertyIds);
         }
     }
 }
