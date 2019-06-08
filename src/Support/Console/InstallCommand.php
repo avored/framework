@@ -48,7 +48,12 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->call('migrate:fresh');
+        $absolutePath = __DIR__ .'/../../../database/migrations';
+        $basePath = base_path();
+        
+        $relativePath = str_replace($basePath . '/', '', $absolutePath);
+
+        $this->call('migrate', ['--path' => $relativePath]);
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
         $this->info('AvoRed Install Successfully!');
