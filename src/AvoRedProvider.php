@@ -14,36 +14,22 @@ use Laravel\Passport\Passport;
 
 class AvoRedProvider extends ServiceProvider
 {
-
     /**
      * Providers List for the Framework
      * @var array $providers
      */
     protected $providers = [
-        //\AvoRed\Framework\AdminConfiguration\Provider::class,
-        //\AvoRed\Framework\AdminMenu\AdminMenuProvider::class,
-        //\AvoRed\Framework\Breadcrumb\BreadcrumbProvider::class,
-        //\AvoRed\Framework\Cart\Provider::class,
-        //\AvoRed\Framework\DataGrid\Provider::class,
-        //\AvoRed\Framework\Image\ImageProvider::class,
         \AvoRed\Framework\Support\Providers\BreadcrumbProvider::class,
-        \AvoRed\Framework\Support\Providers\GraphqlProvider::class,
+        // \AvoRed\Framework\Support\Providers\GraphqlProvider::class,
         \AvoRed\Framework\Support\Providers\MenuProvider::class,
         \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
         \AvoRed\Framework\Support\Providers\PermissionProvider::class,
-        //\AvoRed\Framework\Payment\Provider::class,
-        //\AvoRed\Framework\Permission\PermissionProvider::class,
-        //\AvoRed\Framework\Shipping\Provider::class,
-        //\AvoRed\Framework\Tabs\Provider::class,
-        //\AvoRed\Framework\Theme\Provider::class,
-        //\AvoRed\Framework\Widget\WidgetProvider::class,
     ];
 
 
     /**
      * Register services.
-     *
      * @return void
      */
     public function register()
@@ -70,7 +56,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Register Route Path.
-     *
      * @return void
      */
     public function registerRoutePath()
@@ -80,7 +65,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Register Console Commands.
-     *
      * @return void
      */
     public function registerConsoleCommands()
@@ -91,7 +75,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Register Migration Path.
-     *
      * @return void
      */
     public function registerMigrationPath()
@@ -101,7 +84,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Register View Path.
-     *
      * @return void
      */
     public function registerViewPath()
@@ -111,7 +93,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Register Translation Path.
-     *
      * @return void
      */
     public function registerTranslationPath()
@@ -120,9 +101,7 @@ class AvoRedProvider extends ServiceProvider
     }
 
     /**
-     * Registering AvoRed E commerce Services
-     * e.g Admin Menu.
-     *
+     * Registering AvoRed E commerce Service Provider
      * @return void
      */
     protected function registerProviders()
@@ -134,7 +113,6 @@ class AvoRedProvider extends ServiceProvider
 
     /**
      * Registering AvoRed E commerce Middleware.
-     *
      * @return void
      */
     protected function registerMiddleware()
@@ -142,10 +120,6 @@ class AvoRedProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->aliasMiddleware('admin.auth', AdminAuth::class);
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
-        //$router->aliasMiddleware('permission', Permission::class);
-        //$router->aliasMiddleware('language', LanguageMiddleware::class);
-        //$router->aliasMiddleware('currency', SiteCurrencyMiddleware::class);
-        //$router->aliasMiddleware('admin.api.auth', AdminApiAuth::class);
     }
 
     /**
@@ -172,8 +146,6 @@ class AvoRedProvider extends ServiceProvider
             'auth',
             array_merge_recursive($avoredConfigData['auth'], $authConfig)
         );
-        // $graphqlConfig = $this->app['config']->get('graphql.schemas', []);
-        // dd($graphqlConfig);
     }
 
     /**
