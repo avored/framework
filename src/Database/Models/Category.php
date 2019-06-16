@@ -13,11 +13,11 @@ class Category extends Model
     protected $fillable = ['name', 'slug', 'meta_title', 'meta_description'];
 
     /**
-     * Has many products
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Category belongs to many products
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 }

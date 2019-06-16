@@ -19,6 +19,16 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
+     * Find a Product by given slug
+     * @param string $slug
+     * @return \AvoRed\Framework\Database\Models\Product $product
+     */
+    public function findBySlug(string $slug): Product
+    {
+        return Product::whereSlug($slug)->first();
+    }
+
+    /**
      * Get all the products from the connected database
      * @return \Illuminate\Database\Eloquent\Collection $products
      */

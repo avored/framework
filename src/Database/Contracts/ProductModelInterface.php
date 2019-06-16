@@ -19,4 +19,11 @@ interface ProductModelInterface
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
     public function all() : Collection;
+
+    /**
+     * Find a Product by given slug
+     * @param string $slug
+     * @return \AvoRed\Framework\Database\Models\Product $product
+     */
+    public function findBySlug(string $slug): Product;
 }
