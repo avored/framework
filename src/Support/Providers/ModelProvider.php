@@ -41,6 +41,10 @@ use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
 use AvoRed\Framework\Database\Repository\TaxGroupRepository;
 use AvoRed\Framework\Database\Contracts\TaxRateModelInterface;
 use AvoRed\Framework\Database\Repository\TaxRateRepository;
+use AvoRed\Framework\Database\Contracts\AddressModelInterface;
+use AvoRed\Framework\Database\Repository\AddressRepository;
+use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Repository\OrderRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -55,6 +59,7 @@ class ModelProvider extends ServiceProvider
      * @var array $models
      */
     protected $models = [
+        AddressModelInterface::class => AddressRepository::class,
         AdminUserModelInterface::class => AdminUserRepository::class,
         AttributeModelInterface::class => AttributeRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
@@ -62,6 +67,7 @@ class ModelProvider extends ServiceProvider
         CountryModelInterface::class => CountryRepository::class,
         CurrencyModelInterface::class => CurrencyRepository::class,
         LanguageModelInterface::class => LanguageRepository::class,
+        OrderModelInterface::class => OrderRepository::class,
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
