@@ -21,6 +21,12 @@ interface CategoryModelInterface
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
     public function find(int $id) : Category;
+    /**
+     * Find Category Resource into a database
+     * @param string $id
+     * @return \AvoRed\Framework\Database\Models\Category $category
+     */
+    public function findBySlug(string $slug) : Category;
 
     /**
      * Delete Category Resource from a database

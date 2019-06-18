@@ -56,15 +56,29 @@ class Manager
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
         } else {
-            $product = $this->productRepository->findBySlug($slug);
-            $cartProduct = new CartProduct;
-            $cartProduct->name($product->name)
-                ->slug($product->slug);
+            $cartProduct = $this->createCartProductFromSlug($slug);
+            $cartProduct->qty($qty);
             
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
         }
         return $this;
+    }
+
+    /**
+     * Create Cart Product From slug.
+     * @param string $slug
+     * @return \AvoRed\Framework\Cart\CartProduct $cartProduct
+     */
+    public function createCartProductFromSlug(string $slug): CartProduct
+    {
+        $product = $this->productRepository->findBySlug($slug);
+        $cartProduct = new CartProduct;
+        $cartProduct->name($product->name)
+            ->slug($product->slug)
+            ->price($product->price);
+
+        return $cartProduct;
     }
 
     /**
@@ -117,6 +131,22 @@ class Manager
     {
         return $this->getSession();
     }
+    
+    /**
+     * Get the List of All the Current Session Cart Products.
+     * @return float $cartTotal
+     */
+    public function total(): float
+    {
+        $products =  $this->all();
+        $total = 0;
+        foreach ($products as $product) {
+            $total += $product->total();
+        }
+
+        return $total;
+    }
+
     /**
      * Get the Total Number of Products into the Cart.
      * @return int $count

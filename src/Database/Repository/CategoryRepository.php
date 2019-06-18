@@ -30,6 +30,16 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
+     * Find Category Resource into a database
+     * @param string $slug
+     * @return \AvoRed\Framework\Database\Models\Category $category
+     */
+    public function findBySlug(string $slug): Category
+    {
+        return Category::whereSlug($slug)->first();
+    }
+
+    /**
      * Delete Category Resource from a database
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Category $category

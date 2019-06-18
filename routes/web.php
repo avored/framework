@@ -25,14 +25,9 @@ Route::middleware(['web'])
 
         Route::post('logout', 'System\Controllers\LoginController@logout')
             ->name('logout');
-        
-        //Route::get('password/reset', 'System\Controllers\ForgetPasswordController@showLinkRequestForm')
-        //    ->name('password.reset');
     });
 
-
 Route::middleware(['web', 'admin.auth'])
-//Route::middleware(['web'])
     ->prefix($baseAdminUrl)
     ->namespace('AvoRed\\Framework')
     ->name('admin.')

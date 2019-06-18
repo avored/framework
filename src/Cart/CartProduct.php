@@ -26,6 +26,14 @@ class CartProduct implements CartProductInterface
     protected $qty;
 
     /**
+     * Cart Product Price
+     * @var int $price
+     */
+    protected $price;
+
+    
+
+    /**
      * Set/Get Cart Product Name
      * @param mixed $name
      * @return mixed $name
@@ -68,5 +76,29 @@ class CartProduct implements CartProductInterface
             $this->qty = $qty;
             return $this;
         }
+    }
+
+    /**
+     * Set/Get Cart Product Price
+     * @param mixed $price
+     * @return mixed $price
+     */
+    public function price($price = null)
+    {
+        if ($price === null) {
+            return $this->price;
+        } else {
+            $this->price = $price;
+            return $this;
+        }
+    }
+
+    /**
+     * Get Cart Product Totla
+     * @return float $total
+     */
+    public function total(): float
+    {
+        return $this->qty * $this->price;
     }
 }
