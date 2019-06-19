@@ -22,6 +22,13 @@ interface OrderStatusModelInterface
     public function find(int $id) : OrderStatus;
 
     /**
+     * Find Default OrderStatus Resource into a database
+     * @param int $id
+     * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
+     */
+    public function findDefault() : OrderStatus;
+
+    /**
      * Delete OrderStatus Resource from a database
      * @param int $id
      * @return bool

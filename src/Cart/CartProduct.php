@@ -99,6 +99,6 @@ class CartProduct implements CartProductInterface
      */
     public function total(): float
     {
-        return $this->qty * $this->price;
+        return $this->qty() * $this->price();
     }
 }

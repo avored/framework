@@ -29,6 +29,16 @@ class OrderStatusRepository implements OrderStatusModelInterface
     }
 
     /**
+     * Find OrderStatus Resource into a database
+     * @param int $id
+     * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
+     */
+    public function findDefault(): OrderStatus
+    {
+        return OrderStatus::whereIsDefault(1)->first();
+    }
+
+    /**
      * Delete OrderStatus Resource from a database
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
