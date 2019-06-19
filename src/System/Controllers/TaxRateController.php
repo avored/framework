@@ -1,0 +1,127 @@
+<?php
+namespace AvoRed\Framework\System\Controllers;
+
+use AvoRed\Framework\Database\Contracts\TaxRateModelInterface;
+use AvoRed\Framework\Database\Models\TaxRate;
+use AvoRed\Framework\System\Requests\TaxRateRequest;
+use AvoRed\Framework\Database\Contracts\CountryModelInterface;
+
+class TaxRateController
+{
+    /**
+     * TaxRate Repository for Controller
+     * @var \AvoRed\Framework\Database\Repository\TaxRateRepository $taxRateRepository
+     */
+    protected $taxRateRepository;
+
+    /**
+     * Country Repository for the State Controller
+     * @var \AvoRed\Framework\Database\Repository\CountryRepository $countryRepository
+     */
+    protected $countryRepository;
+    
+    /**
+     * Construct for the AvoRed tax rate controller
+     * @param \AvoRed\Framework\Database\Repository\TaxRateRepository $taxRateRepository
+     */
+    public function __construct(
+        TaxRateModelInterface $taxRateRepository,
+        CountryModelInterface $countryRepository
+    ) {
+        $this->taxRateRepository = $taxRateRepository;
+        $this->countryRepository = $countryRepository;
+    }
+
+    /**
+     * Show Dashboard of an AvoRed Admin
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $taxRates = $this->taxRateRepository->all();
+
+        return view('avored::system.tax-rate.index')
+            ->with('taxRates', $taxRates);
+    }
+
+     /**
+     * Show the form for creating a new resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $typeOptions = TaxRate::RATE_TYPE_OPTIONS;
+        $countryOptions = $this->countryRepository->options();
+
+        return view('avored::system.tax-rate.create')
+            ->with('typeOptions', $typeOptions)
+            ->with('countryOptions', $countryOptions);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param \AvoRed\Framework\Cms\Requests\TaxRateRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(TaxRateRequest $request)
+    {
+        $this->taxRateRepository->create($request->all());
+
+        return redirect()->route('admin.tax-rate.index')
+            ->with('successNotification', __(
+                'avored::system.notification.store',
+                ['attribute' => __('avored::system.tax-rate.title')]
+            ));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param \AvoRed\Framework\Database\Models\TaxRate $taxRate
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(TaxRate $taxRate)
+    {
+        $typeOptions = TaxRate::RATE_TYPE_OPTIONS;
+        $countryOptions = $this->countryRepository->options();
+
+        return view('avored::system.tax-rate.edit')
+            ->with('taxRate', $taxRate)
+            ->with('typeOptions', $typeOptions)
+            ->with('countryOptions', $countryOptions);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param \AvoRed\Framework\Cms\Requests\TaxRateRequest $request
+     * @param \AvoRed\Framework\Database\Models\TaxRate  $taxRate
+     * @return \Illuminate\Http\Response
+     */
+    public function update(TaxRateRequest $request, TaxRate $taxRate)
+    {
+        $taxRate->update($request->all());
+
+        return redirect()->route('admin.tax-rate.index')
+            ->with('successNotification', __(
+                'avored::system.notification.updated',
+                ['attribute' => __('avored::system.tax-rate.title')]
+            ));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param \AvoRed\Framework\Database\Models\TaxRate  $taxRate
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(TaxRate $taxRate)
+    {
+        $taxRate->delete();
+
+        return [
+            'success' => true,
+            'message' => __(
+                'avored::system.notification.delete',
+                ['attribute' => __('avored::system.tax-rate.title')]
+            )
+        ];
+    }
+}
