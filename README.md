@@ -14,7 +14,7 @@ Once these finished then you have to run few command to finished up and then you
 Publish the AvoRed E commerce framework config 
 file and assets(JS/CSS and Images).
 
-    php artisan vendor:publish --provider=AvoRed\Framework\AvoRedServiceProvider
+    php artisan vendor:publish --provider="AvoRed\Framework\AvoRedProvider"
 
 
 Once the all the file is publish then we run below command to install the required database tables.
