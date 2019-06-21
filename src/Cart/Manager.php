@@ -76,7 +76,8 @@ class Manager
         $cartProduct = new CartProduct;
         $cartProduct->name($product->name)
             ->slug($product->slug)
-            ->price($product->price);
+            ->price($product->price)
+            ->image($product->image);
 
         return $cartProduct;
     }
