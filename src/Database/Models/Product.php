@@ -52,6 +52,15 @@ class Product extends Model
     }
 
     /**
+     * Belongs to Many Product Images
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    /**
      * Belongs to Many Properties
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

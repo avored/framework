@@ -45,6 +45,8 @@ use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Repository\AddressRepository;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Repository\OrderRepository;
+use AvoRed\Framework\Database\Contracts\ProductImageModelInterface;
+use AvoRed\Framework\Database\Repository\ProductImageRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -72,6 +74,7 @@ class ModelProvider extends ServiceProvider
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
         ProductModelInterface::class => ProductRepository::class,
+        ProductImageModelInterface::class => ProductImageRepository::class,
         MenuModelInterface::class => MenuRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,

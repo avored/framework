@@ -25,9 +25,18 @@
             >
                 @csrf
                 @method('put')
-                @include('avored::catalog.product._fields')
+
+                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="basic">
+                    <a-tab-pane tab="{{ __('Basic Info') }}" key="basic">
+                        @include('avored::catalog.product._fields')
+                    </a-tab-pane>
+                    <a-tab-pane tab="{{ __('Product Images') }}" key="images" force-render>
+                        @include('avored::catalog.product.cards.images')
+                    </a-tab-pane>
+                </a-tabs>
                 
-                <a-form-item>
+                
+                <a-form-item class="mt-1">
                     <a-button
                         type="primary"
                         html-type="submit"

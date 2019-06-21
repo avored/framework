@@ -2,6 +2,7 @@
 import isNil from 'lodash/isNil';
 import isObject from 'lodash/isObject';
 import { quillEditor } from 'vue-quill-editor';
+import axios from 'axios'
 
 export default {
   props: ['product', 'baseUrl', 'productProperties'],
@@ -18,6 +19,7 @@ export default {
         is_taxable: 0,
         categories: [],
         property: {},
+        productImages: [],
     };
   },
   methods: {
@@ -67,15 +69,33 @@ export default {
       },
       cancelProduct() {
           window.location = this.baseUrl + '/product';
+      },
+      uploadFileChange(file) {
+        if (file.file.status == 'done') {
+          this.productImages.push(file.file.response.image);
+        }
+      },
+      deleteImage(id) {
+        let deleteImageUrl = this.baseUrl + '/product-image/' + id;
+        let app = this;
+        let imageId = id;
+        axios.delete(deleteImageUrl).then(function (result) {
+          if (result.data.success) {
+            const index = app.productImages.findIndex(image => image.id === imageId);
+            app.productImages.splice(index, 1);
+          }
+        });
       }
   },
   mounted() {
     if (!isNil(this.product)) {
       this.type = this.product.type
       this.description = this.product.description
-      
       this.productProperties.forEach(record => {
         this.property[record.id] = record.property_value
+      });
+      this.product.images.forEach(record => {
+        this.productImages.push(record)
       });
 
     }

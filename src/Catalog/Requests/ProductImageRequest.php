@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Catalog\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class ProductImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,6 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         $rules = [];
-        $rules['name'] = 'required|max:255';
-        $rules['slug'] = 'required|max:255';
-        $rules['is_main_image'] = 'required';
-        
-        if (strtolower($this->method()) == 'post') {
-            $rules['type'] = 'required';
-        }
         
         return $rules;
     }
