@@ -51,6 +51,7 @@
 			],
 			"aliases" : {
 				"Breadcrumb" : "AvoRed\\Framework\\Support\\Facades\\Breadcrumb",
+				"Cart" : "AvoRed\\Framework\\Support\\Facades\\Cart",
 				"Menu" : "AvoRed\\Framework\\Support\\Facades\\Menu",
 				"Module" : "AvoRed\\Framework\\Support\\Facades\\Module",
 				"Permission" : "AvoRed\\Framework\\Support\\Facades\\Permission"
