@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\Modules\Console;
 
 use Illuminate\Console\Command;
-use AvoRed\Framework\Modules\Facade as Module;
+use AvoRed\Framework\Support\Facades\Module;
 use Illuminate\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -56,10 +56,7 @@ class ModuleInstallCommand extends Command
         $this->call('vendor:publish', ['--provider' => $provider]);
         $path = $module->basePath() . DIRECTORY_SEPARATOR . 'database/migrations';
         $this->migrator->run($path);
-
-        foreach ($this->migrator->getNotes() as $note) {
-            $this->output->writeln($note);
-        }
+        
         $this->info('Module:' . $module->name() . ' has been installed successfully.');
     }
 

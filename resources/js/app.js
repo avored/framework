@@ -62,7 +62,6 @@ Vue.component('configuration-save', require('../components/system/configuration/
 
 Vue.component('menu-save', require('../components/cms/menu/MenuSave.vue').default);
 
-
 Vue.component('page-table', require('../components/cms/page/PageIndex.vue').default);
 Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);
 
@@ -74,7 +73,6 @@ Vue.component('system-role-save', require('../components/system/role/RoleSave.vu
 
 Vue.component('admin-user-table', require('../components/system/admin-user/AdminUserIndex.vue').default);
 Vue.component('admin-user-save', require('../components/system/admin-user/AdminUserSave.vue').default);
-
 
 Vue.component('avored-layout', require('../components/system/Layout.vue').default);
 Vue.component('avored-flash', require('../components/system/Flash.vue').default);
