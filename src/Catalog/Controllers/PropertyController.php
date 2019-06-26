@@ -30,7 +30,7 @@ class PropertyController
     public function index()
     {
         $properties = $this->propertyRepository->all();
-
+        
         return view('avored::catalog.property.index')
             ->with('properties', $properties);
     }

@@ -26,10 +26,13 @@ class ProductRequest extends FormRequest
         $rules = [];
         $rules['name'] = 'required|max:255';
         $rules['slug'] = 'required|max:255';
-        $rules['is_main_image'] = 'required';
         
         if (strtolower($this->method()) == 'post') {
             $rules['type'] = 'required';
+        }
+        
+        if (strtolower($this->method()) == 'put') {
+            $rules['is_main_image'] = 'required';
         }
         
         return $rules;

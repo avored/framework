@@ -20,7 +20,7 @@
     </a-col>
 </a-row>
 <a-row type="flex" justify="center">
-    <a-col :span="24">        
+    <a-col :span="24">
         <property-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
             <a-table :columns="columns" row-key="id" :data-source="{{ $properties }}">
                 <span slot="action" slot-scope="text, record">
