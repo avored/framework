@@ -46,4 +46,14 @@ class AddressRepository implements AddressModelInterface
     {
         return Address::all();
     }
+
+     /**
+     * Get All Addresses from Database via User Id
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Collection $addresses
+     */
+    public function getByUserId(int $userId) : Collection
+    {
+        return Address::whereUserId($userId)->get();
+    }
 }
