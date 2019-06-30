@@ -4,10 +4,13 @@ namespace AvoRed\Framework\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Module extends Facade
+/**
+ * @method \AvoRed\Framework\Payment\all all()
+ */
+class Payment extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'module';
+        return 'payment';
     }
 }

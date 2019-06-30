@@ -54,7 +54,9 @@
 				"Cart" : "AvoRed\\Framework\\Support\\Facades\\Cart",
 				"Menu" : "AvoRed\\Framework\\Support\\Facades\\Menu",
 				"Module" : "AvoRed\\Framework\\Support\\Facades\\Module",
-				"Permission" : "AvoRed\\Framework\\Support\\Facades\\Permission"
+				"Permission" : "AvoRed\\Framework\\Support\\Facades\\Permission",
+				"Payment" : "AvoRed\\Framework\\Support\\Facades\\Payment",
+				"Shipping" : "AvoRed\\Framework\\Support\\Facades\\Shipping"
 			}
 		}
 	},

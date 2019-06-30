@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Support\Facades;
 
-use Illuminate\Support\Facades\Facade as LaravelFacade;
+use Illuminate\Support\Facades\Facade;
 
 /**
  *
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade as LaravelFacade;
  * @method \AvoRed\Framework\Breadcrumb\Builer render($routeName)
  * @method \AvoRed\Framework\Breadcrumb\Builer get($key)
  */
-class Breadcrumb extends LaravelFacade
+class Breadcrumb extends Facade
 {
     protected static function getFacadeAccessor()
     {
