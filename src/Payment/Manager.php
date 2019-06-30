@@ -17,6 +17,7 @@ class Manager
     {
         $this->collection = Collection::make([]);
     }
+    
     /**
      * Get all the Payment Options Collection
      * @return \Illuminate\Support\Collection
@@ -24,5 +25,14 @@ class Manager
     public function all(): Collection
     {
         return $this->collection;
+    }
+
+    /**
+     * Put Payment class to an collection Collection
+     * @return void
+     */
+    public function put($payment)
+    {
+        $this->collection->push($payment);
     }
 }

@@ -25,4 +25,13 @@ class Manager
     {
         return $this->collection;
     }
+
+    /**
+     * Put Shipping class to an collection Collection
+     * @return void
+     */
+    public function put($shipping)
+    {
+        $this->collection->push($shipping);
+    }
 }
