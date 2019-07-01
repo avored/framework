@@ -117,6 +117,11 @@ class MenuProvider extends ServiceProvider
                 ->route('#');
         });
         $orderMenu = Menu::admin()->get('order');
+        $orderMenu->subMenu('order', function (MenuItem $menu) {
+            $menu->key('order')
+                ->label('avored::system.admin_menus.order')
+                ->route('admin.order.index');
+        });
         $orderMenu->subMenu('order-status', function (MenuItem $menu) {
             $menu->key('order-status')
                 ->label('avored::system.admin_menus.order-status')

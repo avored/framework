@@ -63,6 +63,7 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('currency', 'System\Controllers\CurrencyController');
         Route::resource('language', 'System\Controllers\LanguageController');
+        Route::resource('order', 'Order\Controllers\OrderController')->only(['index']);
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');

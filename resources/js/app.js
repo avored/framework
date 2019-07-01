@@ -28,6 +28,8 @@ import VueQuillEditor from 'vue-quill-editor'
 Vue.use(Antd);
 Vue.use(VueQuillEditor);
 
+Vue.component('order-table', require('../components/order/order/OrderTable.vue').default);
+
 Vue.component('language-table', require('../components/system/language/LanguageIndex.vue').default);
 Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default);
 
