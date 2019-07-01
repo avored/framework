@@ -2,8 +2,9 @@
 namespace AvoRed\Framework\Order\Controllers;
 
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Models\Order;
-use AvoRed\Framework\Order\Requests\OrderRequest;
+use AvoRed\Framework\Order\Requests\OrderChangeStatusRequest;
 
 class OrderController
 {
@@ -14,13 +15,21 @@ class OrderController
     protected $orderRepository;
     
     /**
+     * Order Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\OrderStatusRepository $orderStatusRepository
+     */
+    protected $orderStatusRepository;
+    
+    /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Repository\OrderRepository $orderRepository
      */
     public function __construct(
-        OrderModelInterface $orderRepository
+        OrderModelInterface $orderRepository,
+        OrderStatusModelInterface $orderStatusRepository
     ) {
         $this->orderRepository = $orderRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
     }
 
     /**
@@ -30,78 +39,28 @@ class OrderController
     public function index()
     {
         $orders = $this->orderRepository->all();
+        $orderStatuses = $this->orderStatusRepository->all();
 
         return view('avored::order.order.index')
+            ->with('orderStatuses', $orderStatuses)
             ->with('orders', $orders);
-    }
-
-     /**
-     * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('avored::order.order.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\Order\Requests\OrderRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(OrderRequest $request)
-    {
-        $this->orderRepository->create($request->all());
-
-        return redirect()->route('admin.order.index')
-            ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::order.order.title')]
-            ));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Order $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        return view('avored::order.order.edit')
-            ->with('order', $order);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Order\Requests\OrderRequest $request
-     * @param \AvoRed\Framework\Database\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(OrderRequest $request, Order $order)
-    {
-        $order->update($request->all());
-
-        return redirect()->route('admin.order.index')
-            ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::order.order.title')]
-            ));
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param \AvoRed\Framework\Order\Requests\OrderChangeStatusRequest  $request
      * @param \AvoRed\Framework\Database\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function changeStatus(OrderChangeStatusRequest $request, Order $order)
     {
-        $order->delete();
+        $order->update($request->all());
 
         return [
             'success' => true,
             'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::order.order.title')]
+                'avored::system.notification.updated',
+                ['attribute' => __('avored::order.order.index.title')]
             )
         ];
     }

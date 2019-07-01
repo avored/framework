@@ -57,6 +57,10 @@ Route::middleware(['web', 'admin.auth'])
             'Catalog\Controllers\ProductController@destroyImage'
         )->name('product.image.destroy');
 
+        Route::post(
+            'order-change-status/{order}',
+            'Order\Controllers\OrderController@changeStatus'
+        )->name('order.change-status');
 
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('attribute', 'Catalog\Controllers\AttributeController');

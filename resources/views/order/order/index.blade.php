@@ -14,10 +14,23 @@
         <order-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
             <a-table :columns="columns" row-key="id" :data-source="{{ $orders }}">
                 <span slot="action" slot-scope="text, record">
-                    @todo
-                    <!-- a :href="getShowUrl(record)">
-                        <a-icon type="edit"></a-icon>
-                    </!-- -->
+                    <a-popconfirm
+                        ok-text="ChangeStatus"
+                        @confirm="onChangeStatus(record)">
+                        <template slot="title">
+                            {{ __('Please Select:') }}
+                            <a-select :style="{width: '150px'}" @change="changeStatusDropdown">
+                                @foreach ($orderStatuses as $orderStatus)                                
+                                    <a-select-option value="{{ $orderStatus->id }}">{{ $orderStatus->name }}</a-select-option>
+                                @endforeach
+                            </a-select>
+                            <input type="hidden" v-model="changeStatusId" />
+                        </template>
+
+                        <a href="javascript:;">
+                            {{ __('Change Status') }}
+                        </a>
+                    </a-popconfirm>
                 </span>
             </a-table>
         </order-table>
