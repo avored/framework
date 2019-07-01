@@ -29,6 +29,16 @@ class OrderRepository implements OrderModelInterface
     }
 
     /**
+     * Find Orders of a given user Id
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Collection $userOrders
+     */
+    public function findByUserId(int $id) : Collection
+    {
+        return Order::whereUserId($id)->get();
+    }
+
+    /**
      * Delete Order Resource from a database
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Order $order

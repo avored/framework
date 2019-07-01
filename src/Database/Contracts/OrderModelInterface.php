@@ -22,6 +22,13 @@ interface OrderModelInterface
     public function find(int $id) : Order;
 
     /**
+     * Find Orders of a given user Id
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Collection $userOrders
+     */
+    public function findByUserId(int $id) : Collection;
+
+    /**
      * Delete Order Resource from a database
      * @param int $id
      * @return bool
