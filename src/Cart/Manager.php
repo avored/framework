@@ -135,6 +135,26 @@ class Manager
     
     /**
      * Get the List of All the Current Session Cart Products.
+     * @return \Illuminate\Support\Collection
+     */
+    public function toArray()
+    {
+        $products = $this->all();
+        $items = Collection::make([]);
+        foreach ($products as $product) {
+            $items->push([
+                'slug' => $product->slug(),
+                'image' => $product->image(),
+                'price' => $product->price(),
+                'qty' => $product->qty(),
+                'name' => $product->name()
+            ]);
+        }
+        return $items;
+    }
+    
+    /**
+     * Get the List of All the Current Session Cart Products.
      * @return float $cartTotal
      */
     public function total($format = true)
