@@ -3,14 +3,14 @@
 namespace AvoRed\Framework;
 
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Support\Console\InstallCommand;
 use Illuminate\Support\Facades\App;
-use AvoRed\Framework\Support\Middleware\AdminAuth;
-use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
-use AvoRed\Framework\Support\Console\AdminMakeCommand;
 use Illuminate\Support\Facades\View;
 use AvoRed\Framework\System\ViewComposers\LayoutComposer;
-use Laravel\Passport\Passport;
+use AvoRed\Framework\Support\Console\InstallCommand;
+use AvoRed\Framework\Support\Console\AdminMakeCommand;
+use AvoRed\Framework\Support\Middleware\AdminAuth;
+use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
+use AvoRed\Framework\Support\Middleware\AvoRedCore;
 
 class AvoRedProvider extends ServiceProvider
 {
@@ -122,6 +122,7 @@ class AvoRedProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->aliasMiddleware('admin.auth', AdminAuth::class);
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
+        $router->aliasMiddleware('avored', AvoRedCore::class);
     }
 
     /**
