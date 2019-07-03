@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Support\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use Illuminate\Support\Facades\Session;
 
 class AvoRedCore
 {
@@ -29,18 +30,20 @@ class AvoRedCore
      */
     public function handle($request, Closure $next)
     {
-        $currencies = $this->getActiveCurrencies();
+        $this->setDefaultCurrency();
 
-        //dd($currencies);
         return $next($request);
     }
 
     /**
-     *
-     *
+     * Set the Default Currency for the Application
+     * @return void
      */
-    public function getActiveCurrencies()
+    public function setDefaultCurrency()
     {
-        $currencies = $this->currencyRepository->all();
+        if (!Session::has('default_currency')) {
+            $currency = $this->currencyRepository->all()->first();
+            Session::put('default_currency', $currency);
+        }
     }
 }
