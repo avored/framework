@@ -1,8 +1,9 @@
-<a-layout-sider  :trigger="null" collapsible v-model="collapsed">
-    <div class="logo">AvoRed</div>
-
+<a-layout-sider :style="{background: '#fff'}" :trigger="null" collapsible v-model="collapsed">
+    <a href="{{ route('admin.dashboard') }}">
+        <div class="logo">AvoRed</div>
+    </a>
     <a-menu 
-        theme="dark"
+        theme="light"
         :default-selected-keys="[]"
         :default-open-keys="[]"
         mode="inline">

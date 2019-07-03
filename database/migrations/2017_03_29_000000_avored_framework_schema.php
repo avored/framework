@@ -382,7 +382,7 @@ class AvoredFrameworkSchema extends Migration
             $table->unsignedBigInteger('country_id')->nullable()->default(null);
             $table->string('phone')->nullable()->default(null);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     
@@ -398,7 +398,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('track_code')->nullable()->default(null);
             $table->timestamps();
     
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('shipping_address_id')->references('id')->on('addresses');
             $table->foreign('billing_address_id')->references('id')->on('addresses');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');

@@ -14,7 +14,7 @@ class ModuleInstallCommand extends Command
      *
      * @var string
      */
-    protected $name = 'avored:module:install';
+    protected $signature = 'avored:module:install {identifier}';
 
     /**
      * The filesystem instance.
@@ -80,17 +80,5 @@ class ModuleInstallCommand extends Command
     protected function getIdentifierInput()
     {
         return trim($this->argument('identifier'));
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['identifier', InputArgument::REQUIRED, 'The Identifier of the Module']
-        ];
     }
 }

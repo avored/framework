@@ -8,7 +8,7 @@
             </a-icon>
         </a-menu-item>
     </a-menu>
-    <a-menu class="header-nav"  mode="horizontal">
+    <a-menu class="header-nav" mode="horizontal">
         <a-sub-menu key="header-account">
             <span slot="title">
                 <a-avatar
