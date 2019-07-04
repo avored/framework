@@ -15,7 +15,7 @@ class AvoRedCore
     
     /**
      * AvoRed Core Middleware Construct
-     * @param \AvoRed\Framework\Database\Repository\CurrencyRepository
+     * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      */
     public function __construct(CurrencyModelInterface $currencyRepository)
     {

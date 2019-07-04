@@ -25,7 +25,8 @@ class InstallCommand extends Command
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
+     * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      */
     public function __construct(
         RoleModelInterface $roleRepository,

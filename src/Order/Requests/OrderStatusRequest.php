@@ -23,6 +23,7 @@ class OrderStatusRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [];
         $rules['name'] = 'required|max:255';
         
         return $rules;

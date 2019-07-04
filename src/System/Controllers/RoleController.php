@@ -148,10 +148,10 @@ class RoleController extends Controller
                     if (null === ($permissionModel = $this->permissionRepository->findByName($permissionName))) {
                         $permissionModel = $this->permissionRepository->create(['name' => $permissionName]);
                     }
-                    $permissionIds[] = $permissionModel->id;
+                    $permissionIds->push($permissionModel->id);
                 }
             }
-            $ids = array_unique($permissionIds);
+            $ids = $permissionIds->unique();
             $role->permissions()->sync($ids);
         }
     }

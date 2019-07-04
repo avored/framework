@@ -2,14 +2,11 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Passport\ClientRepository;
 
 class AdminUser extends Authenticatable
 {
-    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -80,23 +77,6 @@ class AdminUser extends Authenticatable
     public function setPasrdAttribute($val)
     {
         $this->attributes['password'] = bcrypt($val);
-    }
-
-    /**
-     * Get the Passport Client for User and If it doesnot exist then create a new one
-     * @return \Laravel\Passport\Client $client
-     */
-    public function getPassportClient()
-    {
-        $client = $this->clients->first();
-        if (null === $client) {
-            $clientRepository = app(ClientRepository::class);
-            
-            $redirectUri = route('home'); // Setup Env Variable for Graphql Admin
-            $client = $clientRepository->createPasswordGrantClient($this->id, $this->name, $redirectUri);
-        }
-        
-        return $client;
     }
 
     /**

@@ -62,7 +62,6 @@ class Manager
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
         }
-        return true;
     }
 
     /**
@@ -155,7 +154,7 @@ class Manager
     
     /**
      * Get the List of All the Current Session Cart Products.
-     * @return float $cartTotal
+     * @return mixed $cartTotal
      */
     public function total($format = true)
     {
