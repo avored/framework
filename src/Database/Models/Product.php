@@ -52,6 +52,28 @@ class Product extends Model
     }
 
     /**
+     * Belongs to Many Product Images
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+    /**
+     * Get Main Image Url
+     * @return string $mainImageUrl
+     */
+    public function getMainImageUrlAttribute(): string
+    {
+        $defaultImage = 'https://placehold.it/250x250';
+        $image = $this->images()->whereIsMainImage(true)->first();
+        if ($image === null) {
+            return $defaultImage;
+        }
+        return asset('storage/' . $image->path);
+    }
+
+    /**
      * Belongs to Many Properties
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

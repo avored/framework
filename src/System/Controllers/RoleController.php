@@ -9,6 +9,7 @@ use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Support\Facades\Permission;
+use Illuminate\Support\Collection;
 
 class RoleController extends Controller
 {
@@ -135,9 +136,9 @@ class RoleController extends Controller
      */
     private function saveRolePermissions($request, $role)
     {
-        $permissionIds = [];
+        $permissionIds = Collection::make([]);
         
-        if (count($request->get('permissions')) > 0) {
+        if ($request->get('permissions') !== null && count($request->get('permissions')) > 0) {
             foreach ($request->get('permissions') as $key => $value) {
                 if ($value != 1) {
                     continue;
@@ -150,8 +151,8 @@ class RoleController extends Controller
                     $permissionIds[] = $permissionModel->id;
                 }
             }
+            $ids = array_unique($permissionIds);
+            $role->permissions()->sync($ids);
         }
-        $ids = array_unique($permissionIds);
-        $role->permissions()->sync($ids);
     }
 }

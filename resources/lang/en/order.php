@@ -27,6 +27,11 @@ return [
             'title' => 'Order Status Edit'
         ],
     ],
+    'order' => [
+        'index' => [
+            'title' => 'Order'
+        ]
+    ],
     
 
 ];

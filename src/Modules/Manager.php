@@ -80,7 +80,6 @@ class Manager
                     $moduleRegisterContent = File::get($filePath);
                     $data = Yaml::parse($moduleRegisterContent);
 
-                    //dd($data);
                     $module = new Module();
                     $module->namespace($data['namespace']);
                     $module->identifier($data['identifier']);
@@ -91,7 +90,7 @@ class Manager
                     $module->publishedTags($data['published_tags'] ?? []);
 
                     $composerLoader = require base_path('vendor/autoload.php');
-                    if (strtolower($module->status()) == 'enabled') {
+                    if (strtolower($module->status()) == 'active') {
                         $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
                         $composerLoader->addPsr4($module->namespace(), $path);
                         $moduleProvider = $module->namespace() . 'Module';
@@ -173,7 +172,6 @@ class Manager
 
     /**
      * Publish the directory to the given directory.
-     *
      * @param  string $from
      * @param  string $to
      * @return void
@@ -188,7 +186,6 @@ class Manager
 
     /**
      * Move all the files in the given MountManager.
-     *
      * @param  \League\Flysystem\MountManager $manager
      * @return void
      */

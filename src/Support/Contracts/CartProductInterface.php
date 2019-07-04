@@ -11,6 +11,12 @@ interface CartProductInterface
     public function name();
 
     /**
+     * Get/Set CartProduct image.
+     * @return mixed $image|$this
+     */
+    public function image();
+
+    /**
      * Get/Set CartProduct Slug.
      * @return mixed $slug|$this
      */

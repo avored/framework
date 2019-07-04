@@ -62,7 +62,7 @@ class Manager
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
         }
-        return $this;
+        return true;
     }
 
     /**
@@ -76,7 +76,8 @@ class Manager
         $cartProduct = new CartProduct;
         $cartProduct->name($product->name)
             ->slug($product->slug)
-            ->price($product->price);
+            ->price($product->price)
+            ->image($product->main_image_url);
 
         return $cartProduct;
     }
@@ -134,9 +135,29 @@ class Manager
     
     /**
      * Get the List of All the Current Session Cart Products.
+     * @return \Illuminate\Support\Collection
+     */
+    public function toArray()
+    {
+        $products = $this->all();
+        $items = Collection::make([]);
+        foreach ($products as $product) {
+            $items->push([
+                'slug' => $product->slug(),
+                'image' => $product->image(),
+                'price' => $product->price(),
+                'qty' => $product->qty(),
+                'name' => $product->name()
+            ]);
+        }
+        return $items;
+    }
+    
+    /**
+     * Get the List of All the Current Session Cart Products.
      * @return float $cartTotal
      */
-    public function total(): float
+    public function total($format = true)
     {
         $products =  $this->all();
         $total = 0;
@@ -144,6 +165,9 @@ class Manager
             $total += $product->total();
         }
 
+        if ($format === true) {
+            return number_format($total, 2);
+        }
         return $total;
     }
 

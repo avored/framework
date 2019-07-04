@@ -30,8 +30,12 @@ class CartProduct implements CartProductInterface
      * @var int $price
      */
     protected $price;
-
     
+    /**
+     * Cart Product Image
+     * @var int $image
+     */
+    protected $image;
 
     /**
      * Set/Get Cart Product Name
@@ -44,6 +48,21 @@ class CartProduct implements CartProductInterface
             return $this->name;
         } else {
             $this->name = $name;
+            return $this;
+        }
+    }
+
+    /**
+     * Set/Get Cart Product Image
+     * @param mixed $image
+     * @return mixed $image
+     */
+    public function image($image = null)
+    {
+        if ($image === null) {
+            return $this->image;
+        } else {
+            $this->image = $image;
             return $this;
         }
     }

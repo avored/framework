@@ -4,10 +4,13 @@ namespace AvoRed\Framework\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Module extends Facade
+/**
+ * @method \AvoRed\Framework\Shipping\all all()
+ */
+class Shipping extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'module';
+        return 'shipping';
     }
 }

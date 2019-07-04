@@ -65,6 +65,7 @@ class Property extends Model
             return $this->dropdownOptions;
         }
 
+        
         return null;
     }
 
@@ -98,23 +99,23 @@ class Property extends Model
         switch ($this->field_type) {
             case 'SELECT':
             case 'RADIO':
-                $val = $this->integerValues->first()->value;
+                $val = $this->integerValues->first()->value ?? null;
                 break;
 
             case 'SWITCH':
-                $this->booleanValues->first()->value;
+                $this->booleanValues->first()->value ?? null;
                 break;
 
             case 'DATETIME':
-                $this->datetimeValues->first()->value;
+                $this->datetimeValues->first()->value ?? null;
                 break;
 
             case 'TEXT':
-                $this->varcharValues->first()->value;
+                $this->varcharValues->first()->value ?? null;
                 break;
 
             case 'TEXTAREA':
-                $this->textValues->first()->value;
+                $this->textValues->first()->value ?? null;
                 break;
 
             default:

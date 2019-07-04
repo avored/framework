@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
+<a-row type="flex">
     <a-col :span="24">
         <property-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div>

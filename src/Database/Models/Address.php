@@ -24,4 +24,18 @@ class Address extends Model
         'country_id',
         'phone'
     ];
+
+    const TYPEOPTIONS = [
+        'SHIPPING' => 'Shipping Address',
+        'BILLING' => 'Billing Address',
+    ];
+
+    /**
+     * Address Belongs to a Country Model
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

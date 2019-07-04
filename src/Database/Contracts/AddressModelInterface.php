@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Contracts;
 
 use AvoRed\Framework\Database\Models\Address;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 interface AddressModelInterface
 {
@@ -20,6 +21,13 @@ interface AddressModelInterface
      * @return \AvoRed\Framework\Database\Models\Address $address
      */
     public function find(int $id) : Address;
+
+    /**
+     * Get All Addresses from Database via User Id
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Collection $addresses
+     */
+    public function getByUserId(int $userId) : Collection;
 
     /**
      * Delete Address Resource from a database

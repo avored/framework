@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Support\Facades;
 
-use Illuminate\Support\Facades\Facade as LaravelFacade;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method \AvoRed\Framework\Menu\Builer make($key, callable  $callable)
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade as LaravelFacade;
  * @method \AvoRed\Framework\Menu\Builer all()
  */
 
-class Menu extends LaravelFacade
+class Menu extends Facade
 {
     protected static function getFacadeAccessor()
     {

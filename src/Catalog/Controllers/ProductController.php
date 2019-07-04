@@ -7,6 +7,9 @@ use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use Illuminate\Support\Collection;
+use AvoRed\Framework\Catalog\Requests\ProductImageRequest;
+use AvoRed\Framework\Database\Models\ProductImage;
+use Illuminate\Support\Facades\File;
 
 class ProductController
 {
@@ -88,6 +91,8 @@ class ProductController
      */
     public function edit(Product $product)
     {
+        $product->images;
+
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
@@ -109,6 +114,7 @@ class ProductController
     {
         $product->update($request->all());
         $this->saveProductCategory($product, $request);
+        $this->saveProductImages($product, $request);
         $this->saveProductProperty($product, $request);
         
         return redirect()->route('admin.product.index')
@@ -142,7 +148,7 @@ class ProductController
      * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
      * @return void
      */
-    public function saveProductCategory($product, $request)
+    public function saveProductCategory(Product $product, $request)
     {
         if ($request->get('category') !== null && count($request->get('category')) > 0) {
             $product->categories()->sync($request->get('category'));
@@ -190,6 +196,65 @@ class ProductController
             }
 
             $product->properties()->sync($propertyIds);
+        }
+    }
+
+    /**
+     * Upload Product Images
+     * @param \AvoRed\Framework\Catalog\Requests\ProductImageRequest $request
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return json
+     */
+    public function upload(ProductImageRequest $request, Product $product)
+    {
+        $image = $request->file('file');
+        $dbPath = $image->storePublicly('uploads/catalog/' . $product->id, 'public');
+
+        if ($product->images === null || $product->images->count() === 0) {
+            $imageModel = $product->images()->create(
+                ['path' => $dbPath,
+                'is_main_image' => 1]
+            );
+        } else {
+            $imageModel = $product->images()->create(['path' => $dbPath]);
+        }
+        return ['image' => $imageModel];
+    }
+
+    /**
+     * Destroy Product Images
+     * @param \AvoRed\Framework\Database\Models\ProductImage $productImage
+     * @return json
+     */
+    public function destroyImage(ProductImage $productImage)
+    {
+        $filePath = storage_path('app/public/' . $productImage->path);
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+        }
+        $productImage->delete();
+        return ['success' => true];
+    }
+
+    /**
+     * Upload Product Image Meta Data
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    public function saveProductImages(Product $product, $request)
+    {
+        $images = $request->get('images');
+        $isMainImage = $request->get('is_main_image');
+        foreach ($images as $id => $data) {
+            $imageModel = $product->images()->find($id);
+            $imageModel->alt_text = $data['alt_text'] ?? '';
+            if ($isMainImage == $imageModel->id) {
+                $imageModel->is_main_image = 1;
+            } else {
+                $imageModel->is_main_image = 0;
+            }
+            $imageModel->save();
         }
     }
 }

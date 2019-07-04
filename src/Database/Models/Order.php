@@ -20,4 +20,42 @@ class Order extends Model
         'billing_address_id',
         'track_code'
     ];
+
+    /**
+     * Order Status
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderStatus::class);
+    }
+
+    /**
+     * Order Status
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        $userClass = config('avored.model.user');
+
+        return $this->belongsTo($userClass);
+    }
+
+    /**
+     * Order Shipping Address
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function shippingAddress()
+    {
+        return $this->belongsTo(Address::class, 'shipping_address_id');
+    }
+
+    /**
+     * Order Billing Address
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function billingAddress()
+    {
+        return $this->belongsTo(Address::class, 'billing_address_id');
+    }
 }

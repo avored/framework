@@ -48,11 +48,26 @@ Route::middleware(['web', 'admin.auth'])
         Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
             ->name('admin-user-image-upload');
 
+        Route::post(
+            'product-image/{product}/upload',
+            'Catalog\Controllers\ProductController@upload'
+        )->name('product.image.upload');
+        Route::delete(
+            'product-image/{productImage}',
+            'Catalog\Controllers\ProductController@destroyImage'
+        )->name('product.image.destroy');
+
+        Route::post(
+            'order-change-status/{order}',
+            'Order\Controllers\OrderController@changeStatus'
+        )->name('order.change-status');
+
         Route::resource('admin-user', 'System\Controllers\AdminUserController');
         Route::resource('attribute', 'Catalog\Controllers\AttributeController');
         Route::resource('category', 'Catalog\Controllers\CategoryController');
         Route::resource('currency', 'System\Controllers\CurrencyController');
         Route::resource('language', 'System\Controllers\LanguageController');
+        Route::resource('order', 'Order\Controllers\OrderController')->only(['index']);
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');

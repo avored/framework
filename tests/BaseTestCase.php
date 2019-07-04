@@ -9,11 +9,6 @@ use Faker\Generator as FakerGenerator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use AvoRed\Framework\AvoRedProvider;
-use Rebing\GraphQL\GraphQLServiceProvider;
-
-//use AvoRed\Framework\Models\Database\Language;
-//use AvoRed\Framework\System\Middleware\LanguageMiddleware;
-//use AvoRed\Framework\Models\Contracts\LanguageInterface;
 
 abstract class BaseTestCase extends OrchestraTestCase
 {
@@ -68,7 +63,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            GraphQLServiceProvider::class,
+            //GraphQLServiceProvider::class,
             AvoRedProvider::class,
         ];
     }
@@ -107,17 +102,15 @@ abstract class BaseTestCase extends OrchestraTestCase
         return [
             //'AdminMenu' => 'AvoRed\\Framework\\AdminMenu\\Facade',
             //'AdminConfiguration' => 'AvoRed\\Framework\\AdminConfiguration\\Facade',
-            //'Cart' => 'AvoRed\\Framework\\Cart\\Facade',
             //'DataGrid' => 'AvoRed\\Framework\\DataGrid\\Facade',
             //'Image' => 'AvoRed\\Framework\\Image\\Facade',
             'Breadcrumb' => \AvoRed\Framework\Support\Facades\Breadcrumb::class,
             'Menu' => \AvoRed\Framework\Support\Facades\Menu::class,
             'Module' => \AvoRed\Framework\Support\Facades\Module::class,
             'Permission' => \AvoRed\Framework\Support\Facades\Permission::class,
-            'GraphQL' => \Rebing\GraphQL\Support\Facades\GraphQL::class,
-            //'Payment' => 'AvoRed\\Framework\\Payment\\Facade',
-            //'Permission' => 'AvoRed\\Framework\\Permission\\Facade',
-            //'Shipping' => 'AvoRed\\Framework\\Shipping\\Facade',
+            "Cart" => AvoRed\Framework\Support\Facades\Cart::class,
+            "Payment" => AvoRed\Framework\Support\Facades\Payment::class,
+            "Shipping" => AvoRed\Framework\Support\Facades\Shipping::class
             //'Tabs' => 'AvoRed\\Framework\\Tabs\\Facade',
             //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
             //'Widget' => 'AvoRed\\Framework\\Widget\\Facade'

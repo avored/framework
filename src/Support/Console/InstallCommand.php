@@ -7,6 +7,7 @@ use AvoRed\Framework\Database\Repository\RoleRepository;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
+use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 
 class InstallCommand extends Command
 {
@@ -15,15 +16,23 @@ class InstallCommand extends Command
      * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
+
+    /**
+     * Currency Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository $currencyRepository
+     */
+    protected $currencyRepository;
     
     /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     public function __construct(
-        RoleModelInterface $roleRepository
+        RoleModelInterface $roleRepository,
+        CurrencyModelInterface $currencyRepository
     ) {
         $this->roleRepository = $roleRepository;
+        $this->currencyRepository = $currencyRepository;
         parent::__construct();
     }
 
@@ -53,9 +62,29 @@ class InstallCommand extends Command
         
         $relativePath = str_replace($basePath . '/', '', $absolutePath);
 
-        $this->call('migrate', ['--path' => $relativePath]);
+        $this->call('migrate:fresh', ['--path' => $relativePath]);
+        $this->call('migrate');
+        $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
+        $currencyData = $this->getCurrencyData();
+        $this->currencyRepository->create($currencyData);
+        $this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
+    }
+
+    /**
+     * Get the Default currency data
+     * @return array $currencyData
+     */
+    public function getCurrencyData()
+    {
+        return [
+            'name' => 'US Dollar',
+            'code' => 'usd',
+            'symbol' => '$',
+            'conversation_rate' => 1,
+            'status' => 'ENABLED'
+        ];
     }
 }

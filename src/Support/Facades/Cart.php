@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Support\Facades;
 
-use Illuminate\Support\Facades\Facade as LaravelFacade;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * Cart Manager
  * @method \AvoRed\Framework\Cart\Manager add($slug)
  */
-class Cart extends LaravelFacade
+class Cart extends Facade
 {
     protected static function getFacadeAccessor()
     {
