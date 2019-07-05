@@ -203,7 +203,7 @@ class Manager
      * @param string $path
      * @return string $slashPath
      */
-    public function pathSlashFix($path)
+    protected function pathSlashFix($path)
     {
         return (DIRECTORY_SEPARATOR === '\\') ? str_replace('/', '\\', $path) : str_replace('\\', '/', $path);
     }

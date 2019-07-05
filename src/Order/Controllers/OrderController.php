@@ -22,7 +22,7 @@ class OrderController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\OrderRepository $orderRepository
+     * @param \AvoRed\Framework\Database\Contracts\OrderModelInterface $orderRepository
      */
     public function __construct(
         OrderModelInterface $orderRepository,
@@ -50,7 +50,7 @@ class OrderController
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Order\Requests\OrderChangeStatusRequest  $request
      * @param \AvoRed\Framework\Database\Models\Order  $order
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function changeStatus(OrderChangeStatusRequest $request, Order $order)
     {

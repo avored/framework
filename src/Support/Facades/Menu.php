@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Facade;
  * @method \AvoRed\Framework\Menu\Builer get($key)
  * @method \AvoRed\Framework\Menu\Builer all()
  */
-
 class Menu extends Facade
 {
     protected static function getFacadeAccessor()

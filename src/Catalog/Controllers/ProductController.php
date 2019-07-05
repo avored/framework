@@ -203,7 +203,7 @@ class ProductController
      * Upload Product Images
      * @param \AvoRed\Framework\Catalog\Requests\ProductImageRequest $request
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @return json
+     * @return \Illuminate\Http\JsonResponse
      */
     public function upload(ProductImageRequest $request, Product $product)
     {
@@ -218,13 +218,13 @@ class ProductController
         } else {
             $imageModel = $product->images()->create(['path' => $dbPath]);
         }
-        return ['image' => $imageModel];
+        return response()->json(['image' => $imageModel]);
     }
 
     /**
      * Destroy Product Images
      * @param \AvoRed\Framework\Database\Models\ProductImage $productImage
-     * @return json
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroyImage(ProductImage $productImage)
     {
@@ -233,7 +233,7 @@ class ProductController
             File::delete($filePath);
         }
         $productImage->delete();
-        return ['success' => true];
+        return response()->json(['success' => true]);
     }
 
     /**

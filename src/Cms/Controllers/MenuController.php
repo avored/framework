@@ -22,7 +22,8 @@ class MenuController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\MenuRepository $menuRepository
+     * @param \AvoRed\Framework\Database\Contracts\MenuModelInterface $menuRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
      */
     public function __construct(
         MenuModelInterface $menuRepository,
@@ -39,7 +40,6 @@ class MenuController
     public function index()
     {
         $categories = $this->categoryRepository->all();
-        //$categories = $this->setCategoriesUrl();
         
         return view('avored::cms.menu.create')
             ->with('categories', $categories);
@@ -78,9 +78,9 @@ class MenuController
      */
     public function setCategoriesUrl($categories)
     {
-        
+        //@todo
         foreach ($categories as $category) {
-            $url = route();
+            $url = route('admin.category');
             $category->url = $url;
         }
 
