@@ -69,5 +69,10 @@ class TabProvider extends ServiceProvider
                 ->label('Images')
                 ->view('avored::catalog.product.cards.images');
         });
+        Tab::put('catalog.product', function (TabItem $tab) {
+            $tab->key('catalog.product.property')
+                ->label('Property')
+                ->view('avored::catalog.product.cards.property');
+        });
     }
 }

@@ -52,6 +52,8 @@ return [
         'description' => 'Description',
         'meta_title' => 'Meta Title',
         'meta_description' => 'Meta Description',
+        'image_title' => 'Product Images',
+        'upload_btn' => 'Upload',
         'index' => [
             'title' => 'Product List'
         ],

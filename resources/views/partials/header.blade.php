@@ -1,4 +1,4 @@
-<a-layout-header class="bg-white p-0">
+<a-layout-header class="bg-white z-1 p-0">
     <a-menu class="float-left" mode="horizontal">
         <a-menu-item>
             <a-icon 
