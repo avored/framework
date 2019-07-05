@@ -27,6 +27,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\PaymentProvider::class,
         \AvoRed\Framework\Support\Providers\PermissionProvider::class,
         \AvoRed\Framework\Support\Providers\ShippingProvider::class,
+        \AvoRed\Framework\Support\Providers\TabProvider::class,
     ];
 
 

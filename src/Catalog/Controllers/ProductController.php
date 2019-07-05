@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use AvoRed\Framework\Catalog\Requests\ProductImageRequest;
 use AvoRed\Framework\Database\Models\ProductImage;
 use Illuminate\Support\Facades\File;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class ProductController
 {
@@ -91,8 +92,9 @@ class ProductController
      */
     public function edit(Product $product)
     {
+        $tabs = Tab::get('catalog.product');
+        
         $product->images;
-
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
@@ -101,7 +103,8 @@ class ProductController
             ->with('product', $product)
             ->with('categoryOptions', $categoryOptions)
             ->with('typeOptions', $typeOptions)
-            ->with('properties', $properties);
+            ->with('properties', $properties)
+            ->with('tabs', $tabs);
     }
 
     /**

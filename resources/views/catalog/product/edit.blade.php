@@ -26,13 +26,15 @@
                 @csrf
                 @method('put')
 
-                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="basic">
-                    <a-tab-pane tab="{{ __('Basic Info') }}" key="basic">
-                        @include('avored::catalog.product._fields')
-                    </a-tab-pane>
-                    <a-tab-pane tab="{{ __('Product Images') }}" key="images" force-render>
-                        @include('avored::catalog.product.cards.images')
-                    </a-tab-pane>
+                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="catalog.product.basic">
+                    @foreach ($tabs as $tab)
+                        <a-tab-pane tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+                        </a-tab-pane>
+                    @endforeach
                 </a-tabs>
                 
                 
