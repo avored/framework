@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Cms\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest as Request;
 
-class MenuRequest extends FormRequest
+class MenuRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

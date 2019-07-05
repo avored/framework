@@ -1,0 +1,22 @@
+$primary: brown;
+
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/poppins-v6-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Poppins Regular'), local('Poppins-Regular'),
+         url('../../fonts/poppins-v6-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../fonts/poppins-v6-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../fonts/poppins-v6-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('../../fonts/poppins-v6-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../../fonts/poppins-v6-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+}
+$font-family-sans-serif: "Poppins", sans-serif;
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+@import '~simplemde/dist/simplemde.min.css';
+@import 'vendor/themify-icons';
+
+/* poppins-regular - latin */
