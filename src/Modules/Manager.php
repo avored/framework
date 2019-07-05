@@ -124,7 +124,7 @@ class Manager
     /**
      * Get Module by identifier
      * @param string $identifier
-     * @return array $moduleInfo
+     * @return \AvoRed\Framework\Modules\Module $module
      */
     public function get($identifier)
     {
@@ -138,7 +138,7 @@ class Manager
     /**
      * Get Module by Path
      * @param string $path
-     * @return array $moduleInfo
+     * @return \AvoRed\Framework\Modules\Module $module
      */
     public function getByPath($path)
     {
@@ -159,7 +159,7 @@ class Manager
      * Publish an item to given path from passed path
      * @param string $from
      * @param string $to
-     * @return bool
+     * @return mixed
      */
     public function publishItem($from, $to)
     {
