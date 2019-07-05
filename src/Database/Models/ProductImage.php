@@ -19,7 +19,7 @@ class ProductImage extends Model
 
     /**
      * Belongs to Many Product
-     * @return \Illuminate\Database\Eloquent\Relations\HasOn
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function product()
     {
