@@ -1,6 +1,8 @@
 # Core package for avored shopping cart
 AvoRed Framework contains the core features for the AvoRed E commerce for Laravel. It is the base behind the AvoRed an Laravel Ecommerce.
 
+[![Coverage Status](https://coveralls.io/repos/github/avored/framework/badge.svg?branch=master)](https://coveralls.io/github/avored/framework?branch=master)
+
 #### Installation
 AvoRed E commerce framework provided as a composer package so it make installation of the avored is much easier as
 
