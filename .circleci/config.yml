@@ -13,6 +13,6 @@ jobs:
           command: composer install
       - run:
           name: "Run tests"
-          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          command: phpdbg -d memory_limit=512M -qrr vendor/bin/phpunit --coverage-html build/coverage-report
       - store_artifacts:
           path:  build/coverage-report
