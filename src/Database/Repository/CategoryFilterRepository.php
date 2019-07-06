@@ -30,6 +30,16 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     }
 
     /**
+     * Find CategoryFilters by given category id
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Collection $categoryFilters
+     */
+    public function findByCategoryId(int $id) : Collection
+    {
+        return CategoryFilter::whereCategoryId($id)->get();
+    }
+
+    /**
      * Delete CategoryFilter Resource from a database
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\CategoryFilter $category

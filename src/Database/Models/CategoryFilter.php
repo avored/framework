@@ -32,4 +32,17 @@ class CategoryFilter extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * CategoryFilter belongs to one category
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function getFilterAttribute()
+    {
+        if (self::PROPERTY_FILTER_TYPE === $this->type) {
+            return Property::find($this->filter_id);
+        } else {
+            return Attribute::find($this->filter_id);
+        }
+    }
 }
