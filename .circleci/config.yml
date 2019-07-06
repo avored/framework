@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     branches:
@@ -16,3 +18,5 @@ jobs:
           command: phpdbg -d memory_limit=512M -qrr vendor/bin/phpunit --coverage-html build/coverage-report
       - store_artifacts:
           path:  build/coverage-report
+      - codecov/upload:
+          file: build/coverage-report
