@@ -20,8 +20,7 @@
             <a-input 
                 placeholder="Image alt text"
                 :default-value="item.alt_text"
-                :name="'images[' + item.id +'][alt_text]'"
-                 />
+                :name="'images[' + item.id +'][alt_text]'"/>
         </a-col>
         <a-col :span="6"> 
             <input type="radio"

@@ -174,6 +174,7 @@ class AvoredFrameworkSchema extends Migration
                 ['TEXT', 'TEXTAREA', 'CKEDITOR', 'SELECT', 'FILE', 'DATETIME', 'RADIO', 'SWITCH']
             );
             $table->tinyInteger('use_for_all_products')->default(0);
+            $table->tinyInteger('use_for_category_filter')->default(0);
             $table->tinyInteger('is_visible_frontend')->nullable()->default(1);
             $table->integer('sort_order')->nullable()->default(0);
             $table->timestamps();
@@ -417,6 +418,16 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
         });
 
+        Schema::create('category_filters', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('filter_id');
+            $table->enum('type', ['ATTRIBUTE', 'PROPERTY']);
+
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->timestamps();
+        });
+
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -440,6 +451,7 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::dropIfExists('category_filters');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('order_product');
         Schema::dropIfExists('orders');

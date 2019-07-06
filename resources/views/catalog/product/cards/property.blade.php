@@ -1,13 +1,18 @@
 <a-card class="mt-1 mb-1" title="{{ __('avored::catalog.product.property_card_title') }}">
     @foreach ($properties as $property)
+        @php
+            $productPropertyValue = $property->getPropertyValueByProductId($product->id);
+        @endphp
+
         @switch($property->field_type)
             @case('SELECT')
+            
                 <a-form-item label="{{ $property->name }}">
                     <a-select
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         v-decorator="[
                             'property[{{ $property->id }}]',
-                            {{ isset($property) ? "{'initialValue': " . $property->id . "}," : "" }}
+                            {{ isset($property) ? "{'initialValue': " . $productPropertyValue->value . "}," : "" }}
                             {rules:
                                 [
                                     {   required: true, 

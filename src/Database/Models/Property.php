@@ -18,6 +18,7 @@ class Property extends Model
         'field_type',
         'use_for_all_products',
         'is_visible_frontend',
+        'use_for_category_filter',
         'sort_order'
     ];
 
@@ -25,7 +26,7 @@ class Property extends Model
      * Appended attribute for the model
      * @var array $appends
      */
-    protected $appends =  ['dropdown', 'property_value'];
+    protected $appends =  ['dropdown'];
 
     /**
      * The available data types for the product property.
@@ -88,34 +89,34 @@ class Property extends Model
 
         return $data;
     }
-
+    
     /**
      * Get the Property Value based on its fields type
      * @return mixed $value
      */
-    public function getPropertyValueAttribute()
+    public function getPropertyValueByProductId(int $productId)
     {
         $val = null;
         switch ($this->field_type) {
             case 'SELECT':
             case 'RADIO':
-                $val = $this->integerValues->first()->value ?? null;
+                $val = $this->integerValues()->whereProductId($productId)->first() ?? null;
                 break;
 
             case 'SWITCH':
-                $this->booleanValues->first()->value ?? null;
+                $this->booleanValues()->whereProductId($productId)->first() ?? null;
                 break;
 
             case 'DATETIME':
-                $this->datetimeValues->first()->value ?? null;
+                $this->datetimeValues()->whereProductId($productId)->first() ?? null;
                 break;
 
             case 'TEXT':
-                $this->varcharValues->first()->value ?? null;
+                $this->varcharValues()->whereProductId($productId)->first() ?? null;
                 break;
 
             case 'TEXTAREA':
-                $this->textValues->first()->value ?? null;
+                $this->textValues()->whereProductId($productId)->first() ?? null;
                 break;
 
             default:
@@ -245,7 +246,6 @@ class Property extends Model
             );
         }
     }
-
 
     /**
      * Property has many dropdown options

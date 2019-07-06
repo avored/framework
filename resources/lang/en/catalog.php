@@ -71,6 +71,7 @@ return [
         'data_type' => 'Data Type',
         'field_type' => 'Field Type',
         'use_for_all_products' => 'Use for all products',
+        'use_for_category_filter' => 'Use for category filter',
         'is_visible_frontend' => 'Is visible in Frontend',
         'sort_order' => 'Sort Order',
         'dropdown_options' => 'Dropdown Options',

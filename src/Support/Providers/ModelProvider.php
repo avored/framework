@@ -13,6 +13,8 @@ use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 use AvoRed\Framework\Database\Repository\LanguageRepository;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
+use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
+use AvoRed\Framework\Database\Repository\CategoryFilterRepository;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
@@ -65,6 +67,7 @@ class ModelProvider extends ServiceProvider
         AdminUserModelInterface::class => AdminUserRepository::class,
         AttributeModelInterface::class => AttributeRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
+        CategoryFilterModelInterface::class => CategoryFilterRepository::class,
         ConfigurationModelInterface::class => ConfigurationRepository::class,
         CountryModelInterface::class => CountryRepository::class,
         CurrencyModelInterface::class => CurrencyRepository::class,

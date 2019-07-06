@@ -92,7 +92,7 @@ export default {
       this.type = this.product.type
       this.description = this.product.description
       this.productProperties.forEach(record => {
-        this.property[record.id] = record.property_value
+        this.property[record.id] = record.product_value.value
       });
       this.product.images.forEach(record => {
         this.productImages.push(record)

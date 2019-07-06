@@ -81,4 +81,19 @@ class Product extends Model
     {
         return $this->belongsToMany(Property::class);
     }
+
+    /**
+     * Get to Many Properties
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getProperties()
+    {
+        $properties = $this->properties;
+
+        foreach ($properties as $property) {
+            $property->product_value = $property->getPropertyValueByProductId($this->id);
+        }
+
+        return $properties;
+    }
 }

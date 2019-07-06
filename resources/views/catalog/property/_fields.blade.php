@@ -80,14 +80,26 @@
         validate-status="error"
         help="{{ $errors->first('use_for_all_products') }}"
     @endif
-    label="{{ __('avored::catalog.property.use_for_all_products') }}"
->
+    label="{{ __('avored::catalog.property.use_for_all_products') }}">
     <a-switch
         {{ (isset($property) && $property->use_for_all_products) ? 'default-checked' : '' }}
         v-on:change="useForAllProductSwitchChange"
     ></a-switch>
 </a-form-item>
 <input type="hidden" name="use_for_all_products" v-model="use_for_all_products" />
+
+<a-form-item
+    @if ($errors->has('use_for_category_filter'))
+        validate-status="error"
+        help="{{ $errors->first('use_for_category_filter') }}"
+    @endif
+    label="{{ __('avored::catalog.property.use_for_category_filter') }}">
+    <a-switch
+        {{ (isset($property) && $property->use_for_category_filter) ? 'default-checked' : '' }}
+        v-on:change="useForCategoryFilterSwitchChange"
+    ></a-switch>
+</a-form-item>
+<input type="hidden" name="use_for_category_filter" v-model="use_for_category_filter" />
 
 <a-form-item
     @if ($errors->has('is_visible_frontend'))

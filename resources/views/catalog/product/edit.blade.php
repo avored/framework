@@ -14,7 +14,7 @@
         <product-save
             base-url="{{ asset(config('avored.admin_url')) }}"
             :product="{{ $product }}"
-            :product-properties="{{ $product->properties }}"
+            :product-properties="{{ $product->getProperties() }}"
             inline-template>
         <div>
             <a-form 
@@ -28,7 +28,7 @@
 
                 <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="catalog.product.basic">
                     @foreach ($tabs as $tab)
-                        <a-tab-pane tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                        <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
                             @php
                                 $path = $tab->view();
                             @endphp
