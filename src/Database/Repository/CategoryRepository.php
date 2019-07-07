@@ -100,11 +100,12 @@ class CategoryRepository implements CategoryModelInterface
      */
     private function filterProperties($builder, $paramSuffix, $values, $index)
     {
+        $property = Property::whereSlug($paramSuffix)->first();
         
-        $builder->whereHas('properties', function ($query) use ($paramSuffix) {
-            $query->whereSlug($paramSuffix);
-        })->whereHas('productPropertyIntegerValues', function ($query) use ($values) {
-            $query->whereIn('value', $values);
+        $builder->whereHas('productPropertyIntegerValues', function ($query) use ($property, $values) {
+            $query
+                ->wherePropertyId($property->id)
+                ->whereIn('value', $values);
         });
         
         return $builder;
