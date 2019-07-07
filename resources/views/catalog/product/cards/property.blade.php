@@ -12,7 +12,7 @@
                         v-on:change="handlePropertyChange({{ $property->id }}, $event)"
                         v-decorator="[
                             'property[{{ $property->id }}]',
-                            {{ isset($property) ? "{'initialValue': " . $productPropertyValue->value . "}," : "" }}
+                            {{ (isset($property) && isset($productPropertyValue->value)) ? "{'initialValue': " . $productPropertyValue->value . "}," : "" }}
                             {rules:
                                 [
                                     {   required: true, 

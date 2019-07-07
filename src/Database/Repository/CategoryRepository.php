@@ -6,6 +6,10 @@ use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Database\Models\Property;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -40,6 +44,26 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
+     * Get All Category from the database
+     * @return \Illuminate\Database\Eloquent\Collection $categories
+     */
+    public function getCategoryProducts(Request $request) : Collection
+    {
+        $builder = Product::whereHas('categories', function ($query) {
+            $query->whereSlug('avored');
+        });
+        
+        foreach ($request->except(['slug', '_token']) as $key => $values) {
+            list ($filterType , $paramSuffix) = $this->splitParam($key);
+            
+            if ($filterType === 'PROPERTY') {
+                $builder = $this->filterProperties($builder, $paramSuffix, $values);
+            }
+        }
+        
+        return $builder->get();
+    }
+    /**
      * Delete Category Resource from a database
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Category $category
@@ -65,5 +89,41 @@ class CategoryRepository implements CategoryModelInterface
     public function options() : SupportCollection
     {
         return Category::all()->pluck('name', 'id');
+    }
+
+    /**
+     * filter properties via builder
+     * @return \Illuminate\Database\Eloquent\Builder $builder
+     */
+    private function filterProperties($builder, $paramSuffix, $values)
+    {
+        $builder->whereHas('properties', function ($query) use ($paramSuffix, $values) {
+            $property = Property::whereSlug($paramSuffix)->first();
+
+            if ($property->data_type === Property::PROPERTY_DATATYPES['INTEGER']) {
+                $query->whereSlug($paramSuffix)
+                    ->whereHas('integerValues', function ($query) use ($values) {
+                        $query->orWhereIn('value', $values);
+                    });
+            }
+        });
+
+        return $builder;
+    }
+
+    /**
+     * Split the param and find out which type and etc
+     * @return array
+     */
+    private function splitParam($key)
+    {
+        $paramPrefix = substr($key, 0, 4);
+        $paramSuffix = substr($key, 4);
+        if ($paramPrefix === 'p___') {
+            $filterType = 'PROPERTY';
+        } elseif ($paramPrefix === 'a___') {
+            $filterType = 'ATTRIBUTE';
+        }
+        return [$filterType, $paramSuffix];
     }
 }

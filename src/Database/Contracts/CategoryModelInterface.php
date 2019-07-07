@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Contracts;
 use AvoRed\Framework\Database\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Http\Request;
 
 interface CategoryModelInterface
 {
@@ -35,6 +36,11 @@ interface CategoryModelInterface
      */
     public function delete(int $id) : bool;
 
+    /**
+     * Get All Category from the database
+     * @return \Illuminate\Database\Eloquent\Collection $categories
+     */
+    public function getCategoryProducts(Request $request) : Collection;
     /**
      * Get All Category from the database
      * @return \Illuminate\Database\Eloquent\Collection $categories

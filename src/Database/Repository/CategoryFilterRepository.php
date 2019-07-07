@@ -6,6 +6,7 @@ use AvoRed\Framework\Database\Models\CategoryFilter;
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
+use AvoRed\Framework\Database\Models\Category;
 
 class CategoryFilterRepository implements CategoryFilterModelInterface
 {
@@ -36,7 +37,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
      */
     public function findByCategoryId(int $id) : Collection
     {
-        return CategoryFilter::whereCategoryId($id)->get();
+        return CategoryFilter::whereCategoryId($id)->get()->unique('filter_id');
     }
 
     /**
