@@ -52,13 +52,16 @@ class CategoryRepository implements CategoryModelInterface
         $builder = Product::whereHas('categories', function ($query) {
             $query->whereSlug('avored');
         });
-        
+
+
+        $i = 0;
         foreach ($request->except(['slug', '_token']) as $key => $values) {
             list ($filterType , $paramSuffix) = $this->splitParam($key);
-            
+           
             if ($filterType === 'PROPERTY') {
-                $builder = $this->filterProperties($builder, $paramSuffix, $values);
+                $builder = $this->filterProperties($builder, $paramSuffix, $values, $i);
             }
+            $i++;
         }
         
         return $builder->get();
@@ -95,19 +98,15 @@ class CategoryRepository implements CategoryModelInterface
      * filter properties via builder
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */
-    private function filterProperties($builder, $paramSuffix, $values)
+    private function filterProperties($builder, $paramSuffix, $values, $index)
     {
-        $builder->whereHas('properties', function ($query) use ($paramSuffix, $values) {
-            $property = Property::whereSlug($paramSuffix)->first();
-
-            if ($property->data_type === Property::PROPERTY_DATATYPES['INTEGER']) {
-                $query->whereSlug($paramSuffix)
-                    ->whereHas('integerValues', function ($query) use ($values) {
-                        $query->orWhereIn('value', $values);
-                    });
-            }
+        
+        $builder->whereHas('properties', function ($query) use ($paramSuffix) {
+            $query->whereSlug($paramSuffix);
+        })->whereHas('productPropertyIntegerValues', function ($query) use ($values) {
+            $query->whereIn('value', $values);
         });
-
+        
         return $builder;
     }
 

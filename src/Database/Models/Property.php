@@ -134,7 +134,7 @@ class Property extends Model
      */
     public function saveIntegerProperty(Product $product, int $value)
     {
-        $intModel = $this->integerValues->first();
+        $intModel = $this->integerValues()->whereProductId($product->id)->first();
 
         if ($intModel !== null) {
             $intModel->update(['value' => $value]);
@@ -154,7 +154,7 @@ class Property extends Model
      */
     public function saveVarcharProperty(Product $product, string $value)
     {
-        $model = $this->varcharValues->first();
+        $model = $this->varcharValues()->whereProductId($product->id)->first();
 
         if ($model !== null) {
             $model->update(['value' => $value]);
@@ -174,7 +174,7 @@ class Property extends Model
      */
     public function saveTextProperty(Product $product, string $value)
     {
-        $model = $this->textValues->first();
+        $model = $this->textValues()->whereProductId($product->id)->first();
 
         if ($model !== null) {
             $model->update(['value' => $value]);
@@ -194,7 +194,7 @@ class Property extends Model
      */
     public function saveBooleanProperty(Product $product, string $value)
     {
-        $model = $this->booleanValues->first();
+        $model = $this->booleanValues()->whereProductId($product->id)->first();
 
         if ($model !== null) {
             $model->update(['value' => $value]);
@@ -214,7 +214,7 @@ class Property extends Model
      */
     public function saveDatetimeProperty(Product $product, string $value)
     {
-        $model = $this->datetimeValues->first();
+        $model = $this->datetimeValues()->whereProductId($product->id)->first();
 
         if ($model !== null) {
             $model->update(['value' => $value]);
@@ -235,7 +235,7 @@ class Property extends Model
      */
     public function saveDecimalProperty(Product $product, float $value)
     {
-        $model = $this->decimalValues->first();
+        $model = $this->decimalValues()->whereProductId($product->id)->first();
 
         if ($model !== null) {
             $model->update(['value' => $value]);
