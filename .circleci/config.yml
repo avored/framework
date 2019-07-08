@@ -4,6 +4,7 @@ jobs:
     branches:
       only:
         - dev
+        - master
     docker:
       - image: circleci/php:7-fpm-browsers-legacy
     steps:
