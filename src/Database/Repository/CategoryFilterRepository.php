@@ -43,7 +43,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     /**
      * Delete CategoryFilter Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\CategoryFilter $category
+     * @return bool
      */
     public function delete(int $id): bool
     {

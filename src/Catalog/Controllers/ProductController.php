@@ -43,7 +43,10 @@ class ProductController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\ProductRepository $productRepository
+     * @param \AvoRed\Framework\Database\Contracts\ProductRepository $productRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryRepository $categoryRepository
+     * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryFilterRepository $categoryFilterRepository
      */
     public function __construct(
         ProductModelInterface $productRepository,
@@ -59,7 +62,7 @@ class ProductController
 
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
@@ -99,7 +102,7 @@ class ProductController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function edit(Product $product)
     {
@@ -122,7 +125,7 @@ class ProductController
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
      * @param \AvoRed\Framework\Database\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductRequest $request, Product $product)
     {
@@ -141,7 +144,7 @@ class ProductController
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {
@@ -280,7 +283,8 @@ class ProductController
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @return void
      */
-    private function attachePropertyWithCategories(Property $property, Product $product) {
+    private function attachePropertyWithCategories(Property $property, Product $product)
+    {
         if ($product->categories !== null && $product->categories->count() > 0) {
             foreach ($product->categories as $category) {
                 $data = [

@@ -35,7 +35,7 @@ class CategoryFilter extends Model
 
     /**
      * CategoryFilter belongs to one category
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return mixed $filterModel
      */
     public function getFilterAttribute()
     {

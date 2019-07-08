@@ -29,7 +29,7 @@ class TabItem
 
     /**
      * Get/Set Tab Label.
-     * @return \AvoRed\Framework\Tab\Tab|string
+     * @return mixed
      */
     public function label($label = null)
     {
@@ -42,7 +42,7 @@ class TabItem
 
     /**
      * Get/Set Tab View.
-     * @return \AvoRed\Framework\Tab\Tab|string
+     * @return mixed
      */
     public function view($view = null)
     {
@@ -55,7 +55,7 @@ class TabItem
 
     /**
      * Get/Set Tab Identifier.
-     * @return \AvoRed\Framework\Tab\Tab|string
+     * @return mixed
      */
     public function key($key = null)
     {
