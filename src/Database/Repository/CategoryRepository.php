@@ -117,8 +117,10 @@ class CategoryRepository implements CategoryModelInterface
      */
     private function splitParam($key)
     {
+        $filterType = '';
         $paramPrefix = substr($key, 0, 4);
         $paramSuffix = substr($key, 4);
+        
         if ($paramPrefix === 'p___') {
             $filterType = 'PROPERTY';
         } elseif ($paramPrefix === 'a___') {

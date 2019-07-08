@@ -43,10 +43,10 @@ class ProductController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Contracts\ProductRepository $productRepository
-     * @param \AvoRed\Framework\Database\Contracts\CategoryRepository $categoryRepository
+     * @param \AvoRed\Framework\Database\Contracts\ProductModelInterface $productRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
      * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
-     * @param \AvoRed\Framework\Database\Contracts\CategoryFilterRepository $categoryFilterRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface $categoryFilterRepository
      */
     public function __construct(
         ProductModelInterface $productRepository,
@@ -134,7 +134,8 @@ class ProductController
         $this->saveProductImages($product, $request);
         $this->saveProductProperty($product, $request);
         
-        return redirect()->route('admin.product.index')
+        return redirect()
+            ->route('admin.product.index')
             ->with('successNotification', __(
                 'avored::system.notification.updated',
                 ['attribute' => __('avored::catalog.product.title')]
