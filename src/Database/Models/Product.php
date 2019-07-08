@@ -81,4 +81,69 @@ class Product extends Model
     {
         return $this->belongsToMany(Property::class);
     }
+
+    /**
+     * Product has many Product Interger Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyIntegerValues()
+    {
+        return $this->hasMany(ProductPropertyIntegerValue::class);
+    }
+
+    /**
+     * Product has many Product Varchar Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyVarcharValues()
+    {
+        return $this->hasMany(ProductPropertyVarcharValue::class);
+    }
+    /**
+     * Product has many Product Decimal Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyDecimalValues()
+    {
+        return $this->hasMany(ProductPropertyDecimalValue::class);
+    }
+    /**
+     * Product has many Product Text Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyTextValues()
+    {
+        return $this->hasMany(ProductPropertyTextValue::class);
+    }
+    /**
+     * Product has many Product Boolean Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyBooleanValues()
+    {
+        return $this->hasMany(ProductPropertyBooleanValue::class);
+    }
+    /**
+     * Product has many Product Date Time Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productPropertyDatetimeValues()
+    {
+        return $this->hasMany(ProductPropertyDatetimeValue::class);
+    }
+
+    /**
+     * Get to Many Properties
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getProperties()
+    {
+        $properties = $this->properties;
+
+        foreach ($properties as $property) {
+            $property->product_value = $property->getPropertyValueByProductId($this->id);
+        }
+
+        return $properties;
+    }
 }

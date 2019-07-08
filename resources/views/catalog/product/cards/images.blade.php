@@ -1,4 +1,4 @@
-<h1>Images</h1>
+<h1>{{ __('avored::catalog.product.image_title') }}</h1>
 
 <a-upload
     action="{{ route('admin.product.image.upload', $product->id) }}"
@@ -7,7 +7,7 @@
     @change="uploadFileChange"
 >
     <a-button>
-        <a-icon type="upload"></a-icon> upload
+        <a-icon type="upload"></a-icon> {{ __('avored::catalog.product.upload_btn') }}
     </a-button>
 </a-upload>
 
@@ -20,8 +20,7 @@
             <a-input 
                 placeholder="Image alt text"
                 :default-value="item.alt_text"
-                :name="'images[' + item.id +'][alt_text]'"
-                 />
+                :name="'images[' + item.id +'][alt_text]'"/>
         </a-col>
         <a-col :span="6"> 
             <input type="radio"

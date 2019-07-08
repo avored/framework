@@ -10,6 +10,10 @@ use Illuminate\Support\Collection;
 use AvoRed\Framework\Catalog\Requests\ProductImageRequest;
 use AvoRed\Framework\Database\Models\ProductImage;
 use Illuminate\Support\Facades\File;
+use AvoRed\Framework\Support\Facades\Tab;
+use AvoRed\Framework\Database\Models\Property;
+use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
+use AvoRed\Framework\Database\Models\CategoryFilter;
 
 class ProductController
 {
@@ -18,6 +22,12 @@ class ProductController
      * @var \AvoRed\Framework\Database\Repository\ProductRepository $productRepository
      */
     protected $productRepository;
+
+    /**
+     * CategoryFilter Repository for the Product Controller
+     * @var \AvoRed\Framework\Database\Repository\CategoryFilterRepository $categoryFilterRepository
+     */
+    protected $categoryFilterRepository;
 
     /**
      * Category Repository for the Product Controller
@@ -33,21 +43,26 @@ class ProductController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\ProductRepository $productRepository
+     * @param \AvoRed\Framework\Database\Contracts\ProductModelInterface $productRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
+     * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface $categoryFilterRepository
      */
     public function __construct(
         ProductModelInterface $productRepository,
         CategoryModelInterface $categoryRepository,
-        PropertyModelInterface $propertyRepository
+        PropertyModelInterface $propertyRepository,
+        CategoryFilterModelInterface $categoryFilterRepository
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->propertyRepository = $propertyRepository;
+        $this->categoryFilterRepository = $categoryFilterRepository;
     }
 
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
@@ -87,12 +102,13 @@ class ProductController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function edit(Product $product)
     {
+        $tabs = Tab::get('catalog.product');
+        
         $product->images;
-
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
@@ -101,14 +117,15 @@ class ProductController
             ->with('product', $product)
             ->with('categoryOptions', $categoryOptions)
             ->with('typeOptions', $typeOptions)
-            ->with('properties', $properties);
+            ->with('properties', $properties)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
      * @param \AvoRed\Framework\Database\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductRequest $request, Product $product)
     {
@@ -117,7 +134,8 @@ class ProductController
         $this->saveProductImages($product, $request);
         $this->saveProductProperty($product, $request);
         
-        return redirect()->route('admin.product.index')
+        return redirect()
+            ->route('admin.product.index')
             ->with('successNotification', __(
                 'avored::system.notification.updated',
                 ['attribute' => __('avored::catalog.product.title')]
@@ -127,7 +145,7 @@ class ProductController
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {
@@ -140,63 +158,6 @@ class ProductController
                 ['attribute' => __('avored::catalog.product.title')]
             )
         ];
-    }
-
-    /**
-     * Save Product Category
-     * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
-     * @return void
-     */
-    public function saveProductCategory(Product $product, $request)
-    {
-        if ($request->get('category') !== null && count($request->get('category')) > 0) {
-            $product->categories()->sync($request->get('category'));
-        }
-    }
-
-    /**
-     * Save Product Property
-     * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
-     * @return void
-     */
-    public function saveProductProperty($product, $request)
-    {
-        $propertyIds = Collection::make([]);
-        if ($request->get('property') !== null && count($request->get('property')) > 0) {
-            foreach ($request->get('property') as $propertyId => $propertyValue) {
-                $propertyModel = $this->propertyRepository->find($propertyId);
-                $propertyIds->push($propertyId);
-                switch ($propertyModel->field_type) {
-                    case 'SELECT':
-                    case 'RADIO':
-                        $propertyModel->saveIntegerProperty($product, $propertyValue);
-                        break;
-
-                    case 'SWITCH':
-                        $propertyModel->saveBooleanProperty($product, $propertyValue);
-                        break;
-
-                    case 'DATETIME':
-                        $propertyModel->saveDatetimeProperty()($product, $propertyValue);
-                        break;
-
-                    case 'TEXT':
-                        $propertyModel->saveVarcharProperty($product, $propertyValue);
-                        break;
-
-                    case 'TEXTAREA':
-                        $propertyModel->saveTextProperty($product, $propertyValue);
-                        break;
-
-                    default:
-                        throw new \Exception('there is an error while saving an product properties');
-                }
-            }
-
-            $product->properties()->sync($propertyIds);
-        }
     }
 
     /**
@@ -235,6 +196,65 @@ class ProductController
         $productImage->delete();
         return response()->json(['success' => true]);
     }
+    
+    /**
+     * Save Product Category
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    private function saveProductCategory(Product $product, $request)
+    {
+        if ($request->get('category') !== null && count($request->get('category')) > 0) {
+            $product->categories()->sync($request->get('category'));
+        }
+    }
+
+    /**
+     * Save Product Property
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    private function saveProductProperty($product, $request)
+    {
+        $propertyIds = Collection::make([]);
+        if ($request->get('property') !== null && count($request->get('property')) > 0) {
+            foreach ($request->get('property') as $propertyId => $propertyValue) {
+                $propertyModel = $this->propertyRepository->find($propertyId);
+                $propertyIds->push($propertyId);
+                $this->attachePropertyWithCategories($propertyModel, $product);
+               
+                switch ($propertyModel->field_type) {
+                    case 'SELECT':
+                    case 'RADIO':
+                        $propertyModel->saveIntegerProperty($product, $propertyValue);
+                        break;
+
+                    case 'SWITCH':
+                        $propertyModel->saveBooleanProperty($product, $propertyValue);
+                        break;
+
+                    case 'DATETIME':
+                        $propertyModel->saveDatetimeProperty()($product, $propertyValue);
+                        break;
+
+                    case 'TEXT':
+                        $propertyModel->saveVarcharProperty($product, $propertyValue);
+                        break;
+
+                    case 'TEXTAREA':
+                        $propertyModel->saveTextProperty($product, $propertyValue);
+                        break;
+
+                    default:
+                        throw new \Exception('there is an error while saving an product properties');
+                }
+            }
+
+            $product->properties()->sync($propertyIds);
+        }
+    }
 
     /**
      * Upload Product Image Meta Data
@@ -242,7 +262,7 @@ class ProductController
      * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
      * @return void
      */
-    public function saveProductImages(Product $product, $request)
+    private function saveProductImages(Product $product, $request)
     {
         $images = $request->get('images');
         $isMainImage = $request->get('is_main_image');
@@ -255,6 +275,26 @@ class ProductController
                 $imageModel->is_main_image = 0;
             }
             $imageModel->save();
+        }
+    }
+
+    /**
+     * Attach Given Property Model to a Product Categories
+     * @param \AvoRed\Framework\Database\Models\Property $property
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return void
+     */
+    private function attachePropertyWithCategories(Property $property, Product $product)
+    {
+        if ($product->categories !== null && $product->categories->count() > 0) {
+            foreach ($product->categories as $category) {
+                $data = [
+                    'category_id' => $category->id,
+                    'filter_id' => $property->id,
+                    'type' => CategoryFilter::PROPERTY_FILTER_TYPE
+                ];
+                $this->categoryFilterRepository->create($data);
+            }
         }
     }
 }

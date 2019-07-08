@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - dev
+        - master
+    docker:
+      - image: circleci/php:7-fpm-browsers-legacy
+    steps:
+      - checkout
+      - run:
+          name: "install composer dependency"
+          command: composer install
+      - run:
+          name: "Run tests"
+          command: phpdbg -d memory_limit=512M -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report

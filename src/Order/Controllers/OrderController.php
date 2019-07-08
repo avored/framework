@@ -56,12 +56,12 @@ class OrderController
     {
         $order->update($request->all());
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __(
                 'avored::system.notification.updated',
                 ['attribute' => __('avored::order.order.index.title')]
             )
-        ];
+        ]);
     }
 }

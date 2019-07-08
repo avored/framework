@@ -8,6 +8,7 @@ export default {
     return {
         propertyForm: this.$form.createForm(this),
         use_for_all_products: 0,
+        use_for_category_filter: 0,
         is_visible_frontend: 0,
         data_type: '',
         field_type: '',
@@ -38,6 +39,13 @@ export default {
             this.use_for_all_products = 1;
         } else {
             this.use_for_all_products = 0;
+        }
+      },
+      useForCategoryFilterSwitchChange(val) {
+        if (val) {
+            this.use_for_category_filter = 1;
+        } else {
+            this.use_for_category_filter = 0;
         }
       },
       isVisibleInFrontendSwitchChange(val) {
