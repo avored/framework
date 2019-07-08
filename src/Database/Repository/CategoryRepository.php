@@ -53,15 +53,12 @@ class CategoryRepository implements CategoryModelInterface
             $query->whereSlug('avored');
         });
 
-
-        $i = 0;
         foreach ($request->except(['slug', '_token']) as $key => $values) {
             list ($filterType , $paramSuffix) = $this->splitParam($key);
            
             if ($filterType === 'PROPERTY') {
-                $builder = $this->filterProperties($builder, $paramSuffix, $values, $i);
+                $builder = $this->filterProperties($builder, $paramSuffix, $values);
             }
-            $i++;
         }
         
         return $builder->get();
@@ -98,7 +95,7 @@ class CategoryRepository implements CategoryModelInterface
      * filter properties via builder
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */
-    private function filterProperties($builder, $paramSuffix, $values, $index)
+    private function filterProperties($builder, $paramSuffix, $values)
     {
         $property = Property::whereSlug($paramSuffix)->first();
         
