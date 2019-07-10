@@ -3,6 +3,7 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class ConfigurationController
 {
@@ -28,7 +29,10 @@ class ConfigurationController
      */
     public function index()
     {
+        $tabs = Tab::get('system.configuration');
+
         return view('avored::system.configuration.index')
+            ->with('tabs', $tabs)
             ->with('repository', $this->configurationRepository);
     }
 

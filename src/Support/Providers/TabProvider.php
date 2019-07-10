@@ -61,18 +61,39 @@ class TabProvider extends ServiceProvider
     {
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.info')
-                ->label('Basic Info')
+                ->label('avored::system.tab.basic_info')
                 ->view('avored::catalog.product._fields');
         });
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.image')
-                ->label('Images')
+                ->label('avored::system.tab.images')
                 ->view('avored::catalog.product.cards.images');
         });
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.property')
-                ->label('Property')
+                ->label('avored::system.tab.property')
                 ->view('avored::catalog.product.cards.property');
+        });
+
+        Tab::put('system.configuration', function (TabItem $tab) {
+            $tab->key('system.configuration.basic')
+                ->label('avored::system.tab.basic_configuration')
+                ->view('avored::system.configuration.cards.basic');
+        });
+        Tab::put('system.configuration', function (TabItem $tab) {
+            $tab->key('system.configuration.user')
+                ->label('avored::system.tab.user_configuration')
+                ->view('avored::system.configuration.cards.user');
+        });
+        Tab::put('system.configuration', function (TabItem $tab) {
+            $tab->key('system.configuration.shipping')
+                ->label('avored::system.tab.shipping_configuration')
+                ->view('avored::system.configuration.cards.shipping');
+        });
+        Tab::put('system.configuration', function (TabItem $tab) {
+            $tab->key('system.configuration.payment')
+                ->label('avored::system.tab.payment_configuration')
+                ->view('avored::system.configuration.cards.payment');
         });
     }
 }
