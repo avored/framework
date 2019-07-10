@@ -49,8 +49,8 @@ class CategoryRepository implements CategoryModelInterface
      */
     public function getCategoryProducts(Request $request) : Collection
     {
-        $builder = Product::whereHas('categories', function ($query) {
-            $query->whereSlug('avored');
+        $builder = Product::whereHas('categories', function ($query) use ($request) {
+            $query->whereSlug($request->get('slug'));
         });
 
         foreach ($request->except(['slug', '_token']) as $key => $values) {
