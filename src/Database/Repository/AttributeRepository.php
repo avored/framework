@@ -31,9 +31,9 @@ class AttributeRepository implements AttributeModelInterface
     /**
      * Delete Attribute Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Attribute::destroy($id);
     }

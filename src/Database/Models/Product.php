@@ -133,6 +133,16 @@ class Product extends Model
     }
 
     /**
+     * Create Product Variation and Store it into DB
+     * @param \Illiminate\Http\Request $request
+     * @return mixed
+     */
+    public function createProductVariation($request)
+    {
+        dd($request->all());
+    }
+
+    /**
      * Get to Many Properties
      * @return \Illuminate\Database\Eloquent\Collection
      */

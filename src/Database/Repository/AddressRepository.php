@@ -31,9 +31,9 @@ class AddressRepository implements AddressModelInterface
     /**
      * Delete Address Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Address $address
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Address::destroy($id);
     }

@@ -32,9 +32,9 @@ interface CategoryModelInterface
     /**
      * Delete Category Resource from a database
      * @param int $id
-     * @return bool
+     * @return int
      */
-    public function delete(int $id) : bool;
+    public function delete(int $id) : int;
 
     /**
      * Get All Category from the database

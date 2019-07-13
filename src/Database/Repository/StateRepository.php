@@ -31,9 +31,9 @@ class StateRepository implements StateModelInterface
     /**
      * Delete State Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\State $state
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return State::destroy($id);
     }

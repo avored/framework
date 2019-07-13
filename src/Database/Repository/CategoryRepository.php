@@ -66,9 +66,9 @@ class CategoryRepository implements CategoryModelInterface
     /**
      * Delete Category Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Category $category
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Category::destroy($id);
     }

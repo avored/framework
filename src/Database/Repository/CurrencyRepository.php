@@ -31,9 +31,9 @@ class CurrencyRepository implements CurrencyModelInterface
     /**
      * Delete Currency Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Currency $currency
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Currency::destroy($id);
     }

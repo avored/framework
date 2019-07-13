@@ -74,6 +74,11 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.property')
                 ->view('avored::catalog.product.cards.property');
         });
+        Tab::put('catalog.product', function (TabItem $tab) {
+            $tab->key('catalog.product.attribute')
+                ->label('avored::system.tab.attribute')
+                ->view('avored::catalog.product.cards.attribute');
+        });
 
         Tab::put('system.configuration', function (TabItem $tab) {
             $tab->key('system.configuration.basic')
