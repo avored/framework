@@ -49,6 +49,10 @@ Route::middleware(['web', 'admin.auth'])
             ->name('admin-user-image-upload');
 
         Route::post(
+            'variation/{product}/create-variation',
+            'Catalog\Controllers\ProductController@createVariation'
+        )->name('product.create.variation');
+        Route::post(
             'product-image/{product}/upload',
             'Catalog\Controllers\ProductController@upload'
         )->name('product.image.upload');

@@ -22,15 +22,9 @@ class Breadcrumb implements BreadcrumbInterface
 
     /**
      * Breadcrumb Route Parents.
-     *  @var string
+     * @var \Illuminate\Support\Collection
      */
     public $parents = null;
-
-    /**
-     * Breadcrumb Callable.
-     *  @var callable
-     */
-    protected $callable = null;
 
     /**
      *  AvoRed BreakCrumb Construct method.
@@ -38,7 +32,6 @@ class Breadcrumb implements BreadcrumbInterface
      */
     public function __construct($callable)
     {
-        $this->callback = $callable;
         $this->parents = new Collection();
 
         $callable($this);

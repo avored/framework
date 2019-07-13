@@ -42,6 +42,7 @@ return [
         'basic_info' => 'Basic Info',
         'images' => 'Images',
         'property' => 'Property',
+        'attribute' => 'Attribute',
         'basic_configuration' => 'Basic Settings',
         'user_configuration' => 'User Settings',
         'payment_configuration' => 'Payment Settings',

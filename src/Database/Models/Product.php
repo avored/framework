@@ -107,6 +107,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyDecimalValue::class);
     }
+   
     /**
      * Product has many Product Text Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -115,6 +116,16 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyTextValue::class);
     }
+
+    /**
+     * Product has many Product Text Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class);
+    }
+
     /**
      * Product has many Product Boolean Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -123,6 +134,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyBooleanValue::class);
     }
+    
     /**
      * Product has many Product Date Time Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -130,16 +142,6 @@ class Product extends Model
     public function productPropertyDatetimeValues()
     {
         return $this->hasMany(ProductPropertyDatetimeValue::class);
-    }
-
-    /**
-     * Create Product Variation and Store it into DB
-     * @param \Illiminate\Http\Request $request
-     * @return mixed
-     */
-    public function createProductVariation($request)
-    {
-        dd($request->all());
     }
 
     /**

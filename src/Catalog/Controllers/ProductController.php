@@ -14,6 +14,9 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use AvoRed\Framework\Database\Models\CategoryFilter;
+use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ProductController
 {
@@ -40,6 +43,12 @@ class ProductController
      * @var \AvoRed\Framework\Database\Repository\PropertyRepository $propertyRepository
      */
     protected $propertyRepository;
+
+    /**
+     * Attribute Repository for the Product Controller
+     * @var \AvoRed\Framework\Database\Repository\AttributeRepository $attributeRepository
+     */
+    protected $attributeRepository;
     
     /**
      * Construct for the AvoRed install command
@@ -47,17 +56,20 @@ class ProductController
      * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
      * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
      * @param \AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface $categoryFilterRepository
+     * @param \AvoRed\Framework\Database\Contracts\AttributeModelInterface $attributeRepository
      */
     public function __construct(
         ProductModelInterface $productRepository,
         CategoryModelInterface $categoryRepository,
         PropertyModelInterface $propertyRepository,
-        CategoryFilterModelInterface $categoryFilterRepository
+        CategoryFilterModelInterface $categoryFilterRepository,
+        AttributeModelInterface $attributeRepository
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->propertyRepository = $propertyRepository;
         $this->categoryFilterRepository = $categoryFilterRepository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
@@ -112,12 +124,14 @@ class ProductController
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
+        $attributes = $this->attributeRepository->all();
 
         return view('avored::catalog.product.edit')
             ->with('product', $product)
             ->with('categoryOptions', $categoryOptions)
             ->with('typeOptions', $typeOptions)
             ->with('properties', $properties)
+            ->with('attributes', $attributes)
             ->with('tabs', $tabs);
     }
 
@@ -180,6 +194,19 @@ class ProductController
             $imageModel = $product->images()->create(['path' => $dbPath]);
         }
         return response()->json(['image' => $imageModel]);
+    }
+
+    /**
+     * Create Product Variation based on given Attributes
+     * @param \Illuminate\Http\Request $request
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createVariation(Request $request, Product $product)
+    {
+        $this->createProductVariation($product, $request);
+       
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -296,5 +323,72 @@ class ProductController
                 $this->categoryFilterRepository->create($data);
             }
         }
+    }
+
+    /**
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    private function createProductVariation($product, $request)
+    {
+        $variations = $this->getVariationsCollection($product, $request);
+
+        //Store Product Attribute Values
+        //Create Variable Profile
+        // Store PRoduct and Variation Product IdS
+
+        dd($variations);
+    }
+
+    /**
+     * Get the Attribute Model from Request
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \Illuminate\Http\Request $request
+     * @return array $variations
+     */
+    private function getVariationsCollection($product, $request)
+    {
+        $attributeOptions = Collection::make([]);
+        $variations = Collection::make([]);
+        if ($request->get('attributes') !== null && count($request->get('attributes')) > 0) {
+            foreach ($request->get('attributes') as $attributeId) {
+                $attributeModel = $this->attributeRepository->find($attributeId);
+                $attributeOptions->push($attributeModel->dropdownOptions->pluck('id'));
+            }
+            $product->attributes()->sync($request->get('attributes'));
+        }
+
+        return $this->makeCombinations($attributeOptions->toArray());
+    }
+
+    /**
+     * Generate all the possible combinations among a set of nested arrays.
+     *
+     * @param array $data  The entrypoint array container.
+     * @param array $all   The final container (used internally).
+     * @param array $group The sub container (used internally).
+     * @param mixed $val   The value to append (used internally).
+     * @param int   $i     The key index (used internally).
+     */
+    private function makeCombinations(array $data, array &$all = array(), array $group = array(), $value = null, $i = 0)
+    {
+        $keys = array_keys($data);
+
+        if (isset($value) === true) {
+            array_push($group, $value);
+        }
+
+        if ($i >= count($data)) {
+            array_push($all, $group);
+        } else {
+            $currentKey     = $keys[$i];
+            $currentElement = $data[$currentKey];
+            foreach ($currentElement as $val) {
+                $this->makeCombinations($data, $all, $group, $val, $i + 1);
+            }
+        }
+
+        return $all;
     }
 }

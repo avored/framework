@@ -428,6 +428,38 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('attribute_product', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('product_id');
+
+            $table->foreign('attribute_id')->references('id')->on('attributes');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->timestamps();
+        });
+
+        Schema::create('attribute_product_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('attribute_dropdown_option_id');
+
+            $table->foreign('attribute_id')->references('id')->on('attributes');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
+            $table->timestamps();
+        });
+
+        Schema::create('product_variations', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('variation_id');
+            $table->unsignedBigInteger('product_id');
+
+            $table->foreign('variation_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->timestamps();
+        });
+
         $path = __DIR__ . '/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -451,6 +483,10 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+
+        Schema::dropIfExists('attribute_product');
+        Schema::dropIfExists('attribute_product_values');
+        Schema::dropIfExists('product_variations');
         Schema::dropIfExists('category_filters');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('order_product');

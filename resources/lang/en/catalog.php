@@ -30,8 +30,10 @@ return [
         ],
     ],
     'product' => [
+        'variation_title' => 'Product Variations',
         'basic_card_title' => 'Basic Information',
         'property_card_title' => 'Product Property',
+        'attribute_card_title' => 'Attribute',
         'title' => 'Product',
         'name' => 'Name',
         'slug' => 'Slug',
@@ -54,6 +56,7 @@ return [
         'meta_description' => 'Meta Description',
         'image_title' => 'Product Images',
         'upload_btn' => 'Upload',
+        'variation_btn' => 'Make Variation',
         'index' => [
             'title' => 'Product List'
         ],

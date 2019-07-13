@@ -4,6 +4,55 @@ import isObject from 'lodash/isObject';
 import { quillEditor } from 'vue-quill-editor';
 import axios from 'axios'
 
+const columns = [{
+  dataIndex: 'name',
+  key: 'name',
+  title: 'Name'
+}, {
+  title: 'Price',
+  dataIndex: 'price',
+  key: 'price',
+}, {
+  title: 'Qty',
+  dataIndex: 'qty',
+  key: 'qty',
+}, {
+  title: 'Attributes',
+  key: 'attributes',
+  dataIndex: 'attributes',
+  scopedSlots: { customRender: 'attributes' },
+}, {
+  title: 'Action',
+  key: 'action',
+  scopedSlots: { customRender: 'action' },
+}];
+
+const variationData = [
+  {
+  key: '1',
+  name: 'Product 1',
+  price: 32,
+  qty: 3,
+  attributes: ['color', 'size'],
+  },
+  {
+  key: '2',
+  name: 'Product 2',
+  price: 32,
+  qty: 3,
+  attributes: ['color', 'size'],
+  },
+  {
+  key: '3',
+  name: 'Product 3',
+  price: 32,
+  qty: 3,
+  attributes: ['color', 'size'],
+  },
+];
+
+
+
 export default {
   props: ['product', 'baseUrl', 'productProperties'],
   components: {
@@ -20,6 +69,9 @@ export default {
         categories: [],
         property: {},
         productImages: [],
+        productAttribute: [],
+        columns,
+        variationData
     };
   },
   methods: {
@@ -29,6 +81,22 @@ export default {
               e.preventDefault();
           }    
           });
+      },
+      handleVariationBtnClick(e) {
+        let data = { attributes: this.productAttribute};
+        let url = '/admin/variation/'+ this.product.id +'/create-variation';
+        axios.post(url, data)
+          .then(res => {
+            console.log(res);
+          });
+
+        //@todo make ajax request
+
+      },
+      changeVariation(values) {
+        this.productAttribute = [];
+        let app = this;
+        values.forEach(val => app.productAttribute.push(val));
       },
       handlePropertyChange(id, val) {
         let propertyValue = ''
