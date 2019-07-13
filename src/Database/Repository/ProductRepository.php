@@ -36,4 +36,14 @@ class ProductRepository implements ProductModelInterface
     {
         return Product::all();
     }
+
+      /**
+     * Delete Product Resource from a database
+     * @param int $id
+     * @return int
+     */
+    public function delete(int $id): int
+    {
+        return Product::destroy($id);
+    }
 }

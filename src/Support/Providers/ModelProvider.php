@@ -7,6 +7,8 @@ use AvoRed\Framework\Support\Facades\Module;
 use AvoRed\Framework\Modules\Manager;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Repository\RoleRepository;
+use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
+use AvoRed\Framework\Database\Repository\AttributeProductValueRepository;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
@@ -49,6 +51,10 @@ use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Repository\OrderRepository;
 use AvoRed\Framework\Database\Contracts\ProductImageModelInterface;
 use AvoRed\Framework\Database\Repository\ProductImageRepository;
+use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
+use AvoRed\Framework\Database\Repository\AttributeDropdownOptionRepository;
+use AvoRed\Framework\Database\Contracts\ProductVariationModelInterface;
+use AvoRed\Framework\Database\Repository\ProductVariationRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -66,6 +72,8 @@ class ModelProvider extends ServiceProvider
         AddressModelInterface::class => AddressRepository::class,
         AdminUserModelInterface::class => AdminUserRepository::class,
         AttributeModelInterface::class => AttributeRepository::class,
+        AttributeDropdownOptionModelInterface::class => AttributeDropdownOptionRepository::class,
+        AttributeProductValueModelInterface::class => AttributeProductValueRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
         CategoryFilterModelInterface::class => CategoryFilterRepository::class,
         ConfigurationModelInterface::class => ConfigurationRepository::class,
@@ -77,6 +85,7 @@ class ModelProvider extends ServiceProvider
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
         ProductModelInterface::class => ProductRepository::class,
+        ProductVariationModelInterface::class => ProductVariationRepository::class,
         ProductImageModelInterface::class => ProductImageRepository::class,
         MenuModelInterface::class => MenuRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,

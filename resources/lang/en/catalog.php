@@ -31,6 +31,7 @@ return [
     ],
     'product' => [
         'variation_title' => 'Product Variations',
+        'variation_create_msg' => 'Product Variation Created Successfully!',
         'basic_card_title' => 'Basic Information',
         'property_card_title' => 'Product Property',
         'attribute_card_title' => 'Attribute',

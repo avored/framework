@@ -10,14 +10,14 @@ interface AttributeModelInterface
     /**
      * Create Attribute Resource into a database
      * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
     public function create(array $data) : Attribute;
 
     /**
      * Find Attribute Resource into a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
     public function find(int $id) : Attribute;
 
@@ -30,7 +30,7 @@ interface AttributeModelInterface
 
     /**
      * Get All Attribute from the database
-     * @return \Illuminate\Database\Eloquent\Collection $properties
+     * @return \Illuminate\Database\Eloquent\Collection $attributes
      */
     public function all() : Collection;
 }

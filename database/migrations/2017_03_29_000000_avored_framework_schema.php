@@ -455,7 +455,7 @@ class AvoredFrameworkSchema extends Migration
             $table->unsignedBigInteger('variation_id');
             $table->unsignedBigInteger('product_id');
 
-            $table->foreign('variation_id')->references('id')->on('products');
+            $table->foreign('variation_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });

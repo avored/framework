@@ -85,9 +85,18 @@ export default {
       handleVariationBtnClick(e) {
         let data = { attributes: this.productAttribute};
         let url = '/admin/variation/'+ this.product.id +'/create-variation';
+        var app = this;
         axios.post(url, data)
           .then(res => {
-            console.log(res);
+            if (res.success) {
+              app.$notification.success({
+                  key: 'product.create.variation.success',
+                  message: res.message,
+              });
+            }
+
+            window.location.reload();
+
           });
 
         //@todo make ajax request

@@ -26,4 +26,11 @@ interface ProductModelInterface
      * @return \AvoRed\Framework\Database\Models\Product $product
      */
     public function findBySlug(string $slug): Product;
+
+    /**
+     * Delete Address Resource from a database
+     * @param int $id
+     * @return int
+     */
+    public function delete(int $id) : int;
 }
