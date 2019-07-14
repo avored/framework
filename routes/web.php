@@ -53,6 +53,11 @@ Route::middleware(['web', 'admin.auth'])
             'Catalog\Controllers\ProductController@createVariation'
         )->name('product.create.variation');
         Route::post(
+            'variation/{product}/save-variation',
+            'Catalog\Controllers\ProductController@saveVariation'
+        )->name('product.save.variation');
+
+        Route::post(
             'product-image/{product}/upload',
             'Catalog\Controllers\ProductController@upload'
         )->name('product.image.upload');

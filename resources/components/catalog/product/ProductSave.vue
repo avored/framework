@@ -7,60 +7,33 @@ import axios from 'axios'
 const columns = [{
   dataIndex: 'name',
   key: 'name',
-  title: 'Name'
+  title: 'Name',
+  scopedSlots: { customRender: 'name' },
 }, {
   title: 'Price',
   dataIndex: 'price',
   key: 'price',
+  scopedSlots: { customRender: 'price' },
 }, {
   title: 'Qty',
   dataIndex: 'qty',
   key: 'qty',
-}, {
-  title: 'Attributes',
-  key: 'attributes',
-  dataIndex: 'attributes',
-  scopedSlots: { customRender: 'attributes' },
+  scopedSlots: { customRender: 'qty' },
 }, {
   title: 'Action',
   key: 'action',
   scopedSlots: { customRender: 'action' },
 }];
 
-const variationData = [
-  {
-  key: '1',
-  name: 'Product 1',
-  price: 32,
-  qty: 3,
-  attributes: ['color', 'size'],
-  },
-  {
-  key: '2',
-  name: 'Product 2',
-  price: 32,
-  qty: 3,
-  attributes: ['color', 'size'],
-  },
-  {
-  key: '3',
-  name: 'Product 3',
-  price: 32,
-  qty: 3,
-  attributes: ['color', 'size'],
-  },
-];
-
-
-
 export default {
-  props: ['product', 'baseUrl', 'productProperties'],
+  props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
   components: {
     'quil-editor': quillEditor,
   },
   data () {
     return {
         productForm: this.$form.createForm(this),
+        variationForm: this.$form.createForm(this),
         type: null,
         description: null,
         status: 0,
@@ -69,12 +42,54 @@ export default {
         categories: [],
         property: {},
         productImages: [],
-        productAttribute: [],
         columns,
-        variationData
+        variationModelVisible: false,
+        variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
     };
   },
+  computed: {
+    // a computed getter
+    productAttributeIds: function () {
+      let ids = [];
+
+      this.productAttributes.forEach(element => {
+        ids.push(element.id)
+      });
+
+      return ids;
+    }
+  },
   methods: {
+      clickVariationSave(e) {
+         this.variationForm.validateFields((err, data) => {
+          if (isNil(err)) {
+              let url = '/admin/variation/'+ this.product.id +'/save-variation';
+              var app = this;
+              
+              axios.post(url, data)
+                .then(res => {
+                  if (res.data.success) {
+                    app.$notification.success({
+                        key: 'product.save.variation.success',
+                        message: res.data.message,
+                    });
+                    window.location.reload();
+                  } else {
+                    alert('there is an error')
+                  }
+                })
+            }
+          });
+      },
+      showVariationModel(model) {
+        this.variationModelVisible = true;
+        var variationModel = model.variationModel;
+
+        this.variationFields.forEach(field => {
+          this.variationForm.getFieldDecorator(field, {initialValue: variationModel[field]})
+        });
+        
+      },
       handleSubmit(e) {
         this.productForm.validateFields((err, values) => {
           if (err !== null) {
@@ -93,14 +108,11 @@ export default {
                   key: 'product.create.variation.success',
                   message: res.message,
               });
+              window.location.reload();
+            } else {
+              alert('there is an error')
             }
-
-            window.location.reload();
-
-          });
-
-        //@todo make ajax request
-
+          })
       },
       changeVariation(values) {
         this.productAttribute = [];

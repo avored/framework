@@ -5,9 +5,9 @@
     </div>
     <p>Attribute Content</p>
     <p>
-        <a-select @change="changeVariation" mode="multiple"  placeholder="Please select">
+        <a-select @change="changeVariation" :default-value="productAttributeIds" mode="multiple"  placeholder="Please select">
             @foreach ($attributes as $attribute)
-                <a-select-option value="{{ $attribute->id }}" key="{{ $attribute->id }}">
+                <a-select-option :value="{{ $attribute->id }}" key="{{ $attribute->id }}">
                     {{ $attribute->name }}
                 </a-select-option>
             @endforeach
@@ -21,19 +21,229 @@
 
     <h4>{{ __('avored::catalog.product.variation_title') }}</h4>
 
-     <a-table :columns="columns" :data-source="variationData">
-        <a slot="name" slot-scope="text" href="javascript:;">@{{text}}</a>
-        <span slot="customTitle"><a-icon type="smile-o"></a-icon> Name</span>
-        <span slot="attributes" slot-scope="attributes">
-            <a-tag v-for="attribute in attributes" color="blue" :key="attribute">@{{attribute}}</a-tag>
-        </span>
+     <a-table :columns="columns" row-key="id" :data-source="productVariations">
+        <span slot="name" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.name }}</span>
+        <span slot="price" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.price }}</span>
+        <span slot="qty" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.qty }}</span>
+
         <span slot="action" slot-scope="text, record">
-        <a href="javascript:;">Edit</a>
-        <a-divider type="vertical" />
-        <a href="javascript:;">Delete</a>
-        
+            <a href="javascript:;" @click="showVariationModel(record)">Edit</a>
+            <a-divider type="vertical" />
+            <a href="javascript:;">Delete</a>
         </span>
     </a-table>
 
-    
+<a-modal title="{{__('avored::catalog.product.variation_model_title') }}"
+    v-model="variationModelVisible"
+    ok-text="{{__('avored::catalog.product.variation_save_btn') }}"
+    @ok="clickVariationSave">
+
+        <a-form  :form="variationForm">
+            <a-row type="flex" :gutter="15">
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.name') }}">
+                        <a-input
+                            :auto-focus="true"
+                            name="name"
+                            v-decorator="[
+                            'name',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.slug') }}">
+                        <a-input
+                            name="slug"
+                            v-decorator="[
+                            'slug',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'slug']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+            </a-row>
+            <a-row type="flex" :gutter="15">
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.sku') }}">
+                        <a-input
+                            name="sku"
+                            v-decorator="[
+                            'sku',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'sku']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.barcode') }}">
+                        <a-input
+                            name="barcode"
+                            v-decorator="[
+                            'barcode',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'barcode']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+            </a-row>
+            <a-row type="flex" :gutter="15">
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.qty') }}">
+                        <a-input
+                            name="qty"
+                            v-decorator="[
+                            'qty',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'qty']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="12">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.price') }}">
+                        <a-input
+                            name="price"
+                            v-decorator="[
+                            'price',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'price']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+            </a-row>
+            <a-row type="flex" :gutter="15">
+                <a-col :span="6">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.weight') }}">
+                        <a-input
+                            name="weight"
+                            v-decorator="[
+                            'weight',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'weight']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="6">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.height') }}">
+                        <a-input
+                            name="height"
+                            v-decorator="[
+                            'height',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'height']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="6">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.width') }}">
+                        <a-input
+                            name="width"
+                            v-decorator="[
+                            'width',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'width']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"
+                        ></a-input>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="6">
+                    <a-form-item
+                        label="{{ __('avored::catalog.product.length') }}">
+                        <a-input
+                            name="length"
+                            v-decorator="[
+                            'length',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'length']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"></a-input>
+                    </a-form-item>
+                    <a-form-item>
+                        <a-input
+                            name="id"
+                            type="hidden"
+                            v-decorator="[
+                            'id',
+                            {rules: 
+                                [
+                                    {   required: true, 
+                                        message: '{{ __('avored::validation.required', ['attribute' => 'id']) }}' 
+                                    }
+                                ]
+                            }
+                            ]"></a-input>
+                    </a-form-item>
+
+                </a-col>
+            </a-row>
+        </a-form>
+</a-modal>
+
 </a-card>

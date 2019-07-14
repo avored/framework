@@ -156,7 +156,7 @@ class ProductController
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
         $attributes = $this->attributeRepository->all();
-
+        
         return view('avored::catalog.product.edit')
             ->with('product', $product)
             ->with('categoryOptions', $categoryOptions)
@@ -238,6 +238,20 @@ class ProductController
         $this->makeProductVariation($product, $request);
        
         return response()->json(['success' => true, 'message' => __('avored::catalog.product.variation_create_msg')]);
+    }
+
+    /**
+     * Save Product Variation based on given Attributes
+     * @param \Illuminate\Http\Request $request
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveVariation(Request $request, Product $product)
+    {
+        $productModel = $this->productRepository->find($request->get('id'));
+        $productModel->update($request->all());
+       
+        return response()->json(['success' => true, 'message' => __('avored::catalog.product.variation_save_msg')]);
     }
 
     /**
@@ -407,9 +421,8 @@ class ProductController
             $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $data['name'] .= ' ' . $optionModel->display_text;
         }
-
         $data['sku'] = Str::slug($data['name']);
-
+        $data['slug'] = Str::slug($data['name']);
         $variation = $this->productRepository->create($data);
         $this->productVariationRepository->create(['product_id' => $product->id, 'variation_id' => $variation->id]);
     }

@@ -29,12 +29,31 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
+     * Find a Product by given id
+     * @param int $id
+     * @return \AvoRed\Framework\Database\Models\Product $product
+     */
+    public function find(int $id): Product
+    {
+        return Product::find($id);
+    }
+
+    /**
      * Get all the products from the connected database
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
     public function all() : Collection
     {
         return Product::all();
+    }
+
+    /**
+     * Get all the products from the connected database
+     * @return \Illuminate\Database\Eloquent\Collection $products
+     */
+    public function getAllWithoutVaiation() : Collection
+    {
+        return Product::where('type', '!=', 'VARIATION')->get();
     }
 
       /**

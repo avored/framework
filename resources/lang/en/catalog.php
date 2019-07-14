@@ -32,9 +32,12 @@ return [
     'product' => [
         'variation_title' => 'Product Variations',
         'variation_create_msg' => 'Product Variation Created Successfully!',
+        'variation_save_msg' => 'Product Variation Save Successfully!',
         'basic_card_title' => 'Basic Information',
         'property_card_title' => 'Product Property',
         'attribute_card_title' => 'Attribute',
+        'variation_save_btn' => 'Save Variation',
+        'variation_model_title' => 'Save Variation',
         'title' => 'Product',
         'name' => 'Name',
         'slug' => 'Slug',
