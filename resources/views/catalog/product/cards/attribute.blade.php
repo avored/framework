@@ -29,7 +29,7 @@
         <span slot="action" slot-scope="text, record">
             <a href="javascript:;" @click="showVariationModel(record)">Edit</a>
             <a-divider type="vertical" />
-            <a href="javascript:;">Delete</a>
+            <a href="javascript:;" @click="deleteVariation(record)">Delete</a>
         </span>
     </a-table>
 

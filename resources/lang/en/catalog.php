@@ -33,6 +33,7 @@ return [
         'variation_title' => 'Product Variations',
         'variation_create_msg' => 'Product Variation Created Successfully!',
         'variation_save_msg' => 'Product Variation Save Successfully!',
+        'variation_delete_msg' => 'Product Variation Destroy Successfully!',
         'basic_card_title' => 'Basic Information',
         'property_card_title' => 'Product Property',
         'attribute_card_title' => 'Attribute',

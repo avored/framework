@@ -63,7 +63,7 @@ export default {
       clickVariationSave(e) {
          this.variationForm.validateFields((err, data) => {
           if (isNil(err)) {
-              let url = '/admin/variation/'+ this.product.id +'/save-variation';
+              let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
               var app = this;
               
               axios.post(url, data)
@@ -80,6 +80,23 @@ export default {
                 })
             }
           });
+      },
+      deleteVariation(model) {
+        let url = this.baseUrl + '/variation/' + model.variation_id;
+        var app = this;
+        axios.delete(url)
+          .then(res => {
+            if (res.data.success) {
+              app.$notification.success({
+                  key: 'product.delete.variation.success',
+                  message: res.data.message,
+              });
+              window.location.reload();
+            } else {
+              alert('there is an error')
+            }
+          })
+              
       },
       showVariationModel(model) {
         this.variationModelVisible = true;
@@ -99,7 +116,7 @@ export default {
       },
       handleVariationBtnClick(e) {
         let data = { attributes: this.productAttribute};
-        let url = '/admin/variation/'+ this.product.id +'/create-variation';
+        let url = this.baseUrl + '/variation/'+ this.product.id +'/create-variation';
         var app = this;
         axios.post(url, data)
           .then(res => {

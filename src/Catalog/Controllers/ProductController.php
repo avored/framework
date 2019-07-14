@@ -255,6 +255,18 @@ class ProductController
     }
 
     /**
+     * Delete Product Variation based on given Attributes
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroyVariation(Product $product)
+    {
+        $product->delete();
+       
+        return response()->json(['success' => true, 'message' => __('avored::catalog.product.variation_delete_msg')]);
+    }
+
+    /**
      * Destroy Product Images
      * @param \AvoRed\Framework\Database\Models\ProductImage $productImage
      * @return \Illuminate\Http\JsonResponse

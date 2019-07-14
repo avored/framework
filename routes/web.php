@@ -56,6 +56,10 @@ Route::middleware(['web', 'admin.auth'])
             'variation/{product}/save-variation',
             'Catalog\Controllers\ProductController@saveVariation'
         )->name('product.save.variation');
+        Route::delete(
+            'variation/{product}',
+            'Catalog\Controllers\ProductController@destroyVariation'
+        )->name('product.destroy.variation');
 
         Route::post(
             'product-image/{product}/upload',
