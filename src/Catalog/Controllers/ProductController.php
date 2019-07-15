@@ -21,6 +21,7 @@ use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 use Illuminate\Support\Str;
 use AvoRed\Framework\Database\Contracts\ProductVariationModelInterface;
+use AvoRed\Framework\Database\Models\Attribute;
 
 class ProductController
 {
@@ -364,20 +365,55 @@ class ProductController
 
     /**
      * Attach Given Property Model to a Product Categories
+     * @param \AvoRed\Framework\Database\Models\Attribute $attribute
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return void
+     */
+    private function attacheAttributeWithCategories(Attribute $attribute, Product $product)
+    {
+        if ($product->categories !== null && $product->categories->count() > 0) {
+            foreach ($product->categories as $category) {
+                $categoryFilterFlag = $this->categoryFilterRepository->isCategoryFilterModelExist(
+                    $category->id,
+                    $attribute->id,
+                    CategoryFilter::ATTRIBUTE_FILTER_TYPE
+                );
+                if (!$categoryFilterFlag) {
+                    $data = [
+                        'category_id' => $category->id,
+                        'filter_id' => $attribute->id,
+                        'type' => CategoryFilter::ATTRIBUTE_FILTER_TYPE
+                    ];
+                    $this->categoryFilterRepository->create($data);
+                }
+            }
+        }
+    }
+
+    /**
+     * Attach Given Property Model to a Product Categories
      * @param \AvoRed\Framework\Database\Models\Property $property
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @return void
      */
     private function attachePropertyWithCategories(Property $property, Product $product)
     {
+        
         if ($product->categories !== null && $product->categories->count() > 0) {
             foreach ($product->categories as $category) {
-                $data = [
-                    'category_id' => $category->id,
-                    'filter_id' => $property->id,
-                    'type' => CategoryFilter::PROPERTY_FILTER_TYPE
-                ];
-                $this->categoryFilterRepository->create($data);
+                $categoryFilterFlag = $this->categoryFilterRepository->isCategoryFilterModelExist(
+                    $category->id,
+                    $property->id,
+                    CategoryFilter::PROPERTY_FILTER_TYPE
+                );
+                if (!$categoryFilterFlag) {
+                    $data = [
+                        'category_id' => $category->id,
+                        'filter_id' => $property->id,
+                        'type' => CategoryFilter::PROPERTY_FILTER_TYPE
+                    ];
+                    $this->categoryFilterRepository->create($data);
+                }
             }
         }
     }
@@ -447,11 +483,13 @@ class ProductController
      */
     private function getVariationsCollection($product, $request)
     {
+      
         $attributeOptions = Collection::make([]);
         $variations = Collection::make([]);
         if ($request->get('attributes') !== null && count($request->get('attributes')) > 0) {
             foreach ($request->get('attributes') as $attributeId) {
                 $attributeModel = $this->attributeRepository->find($attributeId);
+                $this->attacheAttributeWithCategories($attributeModel, $product);
                 $optionIds = $attributeModel->dropdownOptions->pluck('id');
                 $attributeOptions->push($optionIds);
                 $this->saveAttributeProductValue($product, $attributeId, $optionIds);

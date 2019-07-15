@@ -29,6 +29,26 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     {
         return CategoryFilter::find($id);
     }
+    
+    /**
+     * Find Category filter by given category and filter and type
+     * @param int $cateogryId
+     * @param int $filterId
+     * @param string $type
+     * @return mixex $categoryFilter
+     */
+    public function isCategoryFilterModelExist(int $categoryId, int $filterId, $type)
+    {
+        $model =  CategoryFilter::whereCategoryId($categoryId)
+            ->whereFilterId($filterId)
+            ->whereType($type)->first();
+
+        if ($model !== null) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Find CategoryFilters by given category id

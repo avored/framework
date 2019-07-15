@@ -5,7 +5,7 @@
     </div>
     <p>Attribute Content</p>
     <p>
-        <a-select @change="changeVariation" :default-value="productAttributeIds" mode="multiple"  placeholder="Please select">
+        <a-select @change="changeVariation" :default-value="attributeIds" mode="multiple"  placeholder="Please select">
             @foreach ($attributes as $attribute)
                 <a-select-option :value="{{ $attribute->id }}" key="{{ $attribute->id }}">
                     {{ $attribute->name }}

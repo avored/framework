@@ -42,22 +42,11 @@ export default {
         categories: [],
         property: {},
         productImages: [],
+        attributeIds: [],
         columns,
         variationModelVisible: false,
         variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
     };
-  },
-  computed: {
-    // a computed getter
-    productAttributeIds: function () {
-      let ids = [];
-
-      this.productAttributes.forEach(element => {
-        ids.push(element.id)
-      });
-
-      return ids;
-    }
   },
   methods: {
       clickVariationSave(e) {
@@ -115,15 +104,16 @@ export default {
           });
       },
       handleVariationBtnClick(e) {
-        let data = { attributes: this.productAttribute};
+        let data = { attributes: this.attributeIds};
         let url = this.baseUrl + '/variation/'+ this.product.id +'/create-variation';
         var app = this;
+       
         axios.post(url, data)
           .then(res => {
-            if (res.success) {
+            if (res.data.success) {
               app.$notification.success({
                   key: 'product.create.variation.success',
-                  message: res.message,
+                  message: res.data.message,
               });
               window.location.reload();
             } else {
@@ -132,9 +122,10 @@ export default {
           })
       },
       changeVariation(values) {
-        this.productAttribute = [];
-        let app = this;
-        values.forEach(val => app.productAttribute.push(val));
+        var app = this;
+        values.forEach(val => {
+          app.attributeIds.push(val)
+        });
       },
       handlePropertyChange(id, val) {
         let propertyValue = ''
@@ -200,6 +191,11 @@ export default {
       this.productProperties.forEach(record => {
         this.property[record.id] = record.product_value.value
       });
+      
+      this.productAttributes.forEach(record => {
+        this.attributeIds.push(record.id)
+      });
+
       this.product.images.forEach(record => {
         this.productImages.push(record)
       });
