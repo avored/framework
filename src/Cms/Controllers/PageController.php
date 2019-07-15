@@ -25,7 +25,7 @@ class PageController
 
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -37,7 +37,7 @@ class PageController
 
      /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -47,7 +47,7 @@ class PageController
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PageRequest $request)
     {
@@ -60,7 +60,7 @@ class PageController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Page $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Page $page)
     {
@@ -72,7 +72,7 @@ class PageController
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
      * @param \AvoRed\Framework\Database\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PageRequest $request, Page $page)
     {
@@ -85,15 +85,15 @@ class PageController
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Page $page)
     {
         $page->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Page'])
-        ];
+        ]);
     }
 }

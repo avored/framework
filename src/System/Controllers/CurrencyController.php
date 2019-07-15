@@ -36,7 +36,7 @@ class CurrencyController extends Controller
     }
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -48,7 +48,7 @@ class CurrencyController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -63,7 +63,7 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\System\Requests\CurrencyRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CurrencyRequest $request)
     {
@@ -79,7 +79,7 @@ class CurrencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Currency $currency
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Currency $currency)
     {
@@ -96,7 +96,7 @@ class CurrencyController extends Controller
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\System\Requests\CurrencyRequest $request
      * @param \AvoRed\Framework\Database\Models\Currency  $currency
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CurrencyRequest $request, Currency $currency)
     {
@@ -112,15 +112,15 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Currency  $currency
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Currency $currency)
     {
         $currency->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => __('avored::system.currency.title')])
-        ];
+        ]);
     }
 }

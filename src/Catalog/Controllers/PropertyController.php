@@ -25,7 +25,7 @@ class PropertyController
 
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -37,7 +37,7 @@ class PropertyController
 
      /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -52,7 +52,7 @@ class PropertyController
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PropertyRequest $request)
     {
@@ -69,7 +69,7 @@ class PropertyController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Property $property
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Property $property)
     {
@@ -86,7 +86,7 @@ class PropertyController
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
      * @param \AvoRed\Framework\Database\Models\Property  $property
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PropertyRequest $request, Property $property)
     {
@@ -103,19 +103,19 @@ class PropertyController
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Property  $property
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Property $property)
     {
         $property->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::catalog.property.title')]
             )
-        ];
+        ]);
     }
 
     /**
@@ -124,7 +124,7 @@ class PropertyController
      * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
      * @return void
      */
-    public function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
+    private function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
     {
         if (!($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
             $property->dropdownOptions()->delete();

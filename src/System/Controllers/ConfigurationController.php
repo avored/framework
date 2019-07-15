@@ -25,7 +25,7 @@ class ConfigurationController
 
     /**
      * Show Configuration  of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -38,7 +38,7 @@ class ConfigurationController
 
     /**
      * Show Configuration  of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {

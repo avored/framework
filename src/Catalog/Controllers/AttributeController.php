@@ -25,7 +25,7 @@ class AttributeController
 
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -37,18 +37,17 @@ class AttributeController
 
      /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        
         return view('avored::catalog.attribute.create');
     }
 
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AttributeRequest $request)
     {
@@ -65,7 +64,7 @@ class AttributeController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Attribute $attribute
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Attribute $attribute)
     {
@@ -77,7 +76,7 @@ class AttributeController
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
      * @param \AvoRed\Framework\Database\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(AttributeRequest $request, Attribute $attribute)
     {
@@ -94,19 +93,19 @@ class AttributeController
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Attribute $attribute)
     {
         $attribute->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::catalog.attribute.title')]
             )
-        ];
+        ]);
     }
 
     /**
