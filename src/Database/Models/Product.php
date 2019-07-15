@@ -96,6 +96,15 @@ class Product extends Model
      * Product has many Product Interger Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function attributeProductValues()
+    {
+        return $this->hasMany(AttributeProductValue::class);
+    }
+
+    /**
+     * Product has many Product Interger Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productPropertyIntegerValues()
     {
         return $this->hasMany(ProductPropertyIntegerValue::class);

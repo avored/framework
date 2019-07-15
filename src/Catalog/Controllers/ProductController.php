@@ -350,16 +350,18 @@ class ProductController
     private function saveProductImages(Product $product, $request)
     {
         $images = $request->get('images');
-        $isMainImage = $request->get('is_main_image');
-        foreach ($images as $id => $data) {
-            $imageModel = $product->images()->find($id);
-            $imageModel->alt_text = $data['alt_text'] ?? '';
-            if ($isMainImage == $imageModel->id) {
-                $imageModel->is_main_image = 1;
-            } else {
-                $imageModel->is_main_image = 0;
+        if ($images !== null && $images->count() > 0) {
+            $isMainImage = $request->get('is_main_image');
+            foreach ($images as $id => $data) {
+                $imageModel = $product->images()->find($id);
+                $imageModel->alt_text = $data['alt_text'] ?? '';
+                if ($isMainImage == $imageModel->id) {
+                    $imageModel->is_main_image = 1;
+                } else {
+                    $imageModel->is_main_image = 0;
+                }
+                $imageModel->save();
             }
-            $imageModel->save();
         }
     }
 
@@ -426,7 +428,7 @@ class ProductController
     private function makeProductVariation($product, $request)
     {
         $variations = $this->getVariationsCollection($product, $request);
-        $this->createProductVariations($product, $variations);
+        //$this->createProductVariations($product, $variations);
     }
 
     /**
@@ -449,10 +451,10 @@ class ProductController
     /**
      * Generate Product Data based on given variation id
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param array $variation
+     * @param array $options
      * @return array $data
      */
-    private function generateProductData($product, $variation)
+    private function generateProductData($product, $options)
     {
         $data = [
             'name' => $product->name,
@@ -465,13 +467,17 @@ class ProductController
             'width' => $product->width,
             'length' => $product->length,
         ];
-        foreach ($variation as $optionId) {
+        foreach ($options as $optionId) {
             $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $data['name'] .= ' ' . $optionModel->display_text;
         }
         $data['sku'] = Str::slug($data['name']);
         $data['slug'] = Str::slug($data['name']);
+        
         $variation = $this->productRepository->create($data);
+        $attributeId = $optionModel->attribute->id;
+        $this->saveAttributeProductValue($product, $attributeId, $options, $variation);
+
         $this->productVariationRepository->create(['product_id' => $product->id, 'variation_id' => $variation->id]);
     }
 
@@ -492,12 +498,12 @@ class ProductController
                 $this->attacheAttributeWithCategories($attributeModel, $product);
                 $optionIds = $attributeModel->dropdownOptions->pluck('id');
                 $attributeOptions->push($optionIds);
-                $this->saveAttributeProductValue($product, $attributeId, $optionIds);
             }
             $product->attributes()->sync($request->get('attributes'));
         }
 
-        return $this->makeCombinations($attributeOptions->toArray());
+        $combinations = $this->makeCombinations($attributeOptions->toArray());
+        $this->createProductVariations($product, $combinations);
     }
 
     /**
@@ -505,9 +511,10 @@ class ProductController
      * @param Product $product
      * @param int $attributeId
      * @param Collection $attributeOptionIds
+     * @param \AvoRed\Framework\Database\Models\Product $variation
      * @return void
      */
-    private function saveAttributeProductValue($product, $attributeId, $attributeOptionIds)
+    private function saveAttributeProductValue($product, $attributeId, $attributeOptionIds, $variation)
     {
         foreach ($attributeOptionIds as $optionId) {
             $model = $this->attributeProductValueRepository->findByAttributeProductValues(
@@ -520,7 +527,8 @@ class ProductController
                 $data = [
                     'product_id' => $product->id,
                     'attribute_id' => $attributeId,
-                    'attribute_dropdown_option_id' => $optionId
+                    'attribute_dropdown_option_id' => $optionId,
+                    'variation_id' => $variation->id
                 ];
                 $this->attributeProductValueRepository->create($data);
             }

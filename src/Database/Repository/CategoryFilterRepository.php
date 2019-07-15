@@ -57,7 +57,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
      */
     public function findByCategoryId(int $id) : Collection
     {
-        return CategoryFilter::whereCategoryId($id)->get()->unique('filter_id');
+        return CategoryFilter::whereCategoryId($id)->get();
     }
 
     /**

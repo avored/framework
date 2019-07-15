@@ -442,10 +442,12 @@ class AvoredFrameworkSchema extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('attribute_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('variation_id');
             $table->unsignedBigInteger('attribute_dropdown_option_id');
 
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('variation_id')->references('id')->on('products');
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
             $table->timestamps();
         });

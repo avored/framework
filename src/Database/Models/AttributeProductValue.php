@@ -10,5 +10,5 @@ class AttributeProductValue extends Model
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['attribute_id', 'product_id', 'attribute_dropdown_option_id'];
+    protected $fillable = ['attribute_id', 'product_id', 'variation_id', 'attribute_dropdown_option_id'];
 }

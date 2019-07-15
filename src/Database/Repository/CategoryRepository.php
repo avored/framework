@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Models\Property;
+use AvoRed\Framework\Database\Models\Attribute;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -59,7 +60,13 @@ class CategoryRepository implements CategoryModelInterface
             if ($filterType === 'PROPERTY') {
                 $builder = $this->filterProperties($builder, $paramSuffix, $values);
             }
+
+            if ($filterType === 'ATTRIBUTE') {
+                $builder = $this->filterAttributes($builder, $paramSuffix, $values);
+            }
         }
+        
+        $builder->where('type', '!=', 'VARIATION');
         
         return $builder->get();
     }
@@ -103,6 +110,22 @@ class CategoryRepository implements CategoryModelInterface
             $query
                 ->wherePropertyId($property->id)
                 ->whereIn('value', $values);
+        });
+        
+        return $builder;
+    }
+
+    /**
+     * filter attributes via builder
+     * @return \Illuminate\Database\Eloquent\Builder $builder
+     */
+    private function filterAttributes($builder, $paramSuffix, $values)
+    {
+        $attribute = Attribute::whereSlug($paramSuffix)->first();
+        $builder->whereHas('attributeProductValues', function ($query) use ($attribute, $values) {
+            $query
+                ->whereAttributeId($attribute->id)
+                ->whereIn('attribute_dropdown_option_id', $values);
         });
         
         return $builder;
