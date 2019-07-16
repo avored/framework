@@ -11,6 +11,13 @@ interface CartProductInterface
     public function name();
 
     /**
+     * Get/Set CartProduct attributes.
+     * @param array $attributes
+     * @return mixed $name|$this
+     */
+    public function attributes(array $attributes);
+
+    /**
      * Get/Set CartProduct image.
      * @return mixed $image|$this
      */

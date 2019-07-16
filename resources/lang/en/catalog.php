@@ -109,5 +109,7 @@ return [
         ],
     ],
     
+    'cart_success_notification' => 'Product added to cart successfully.',
+    'cart_variable_product_error_notification' => 'There is an error while adding product to cart.'
 
 ];

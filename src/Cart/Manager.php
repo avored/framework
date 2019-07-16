@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Cart\CartProduct;
+use AvoRed\Framework\Database\Models\Product;
 
 class Manager
 {
@@ -42,40 +43,56 @@ class Manager
      * Add Product to Cart By Given Slug.
      * @param string $slug
      * @param int $qty
+     * @param array $attributes
      * @return void
      */
-    public function add(string $slug, $qty = 1)
+    public function add(string $slug, $qty = 1, $attributes = [])
     {
-
+        $this->clear();
+        $status = false;
+        $message = '';
+        $product = $this->productRepository->findBySlug($slug);
         if ($this->getSession()->has($slug)) {
-            $cartProduct = $this->cartCollection->get($slug);
-
+            $cartProduct = $this->cartCollection->get($product);
+            
             $existingQty = $cartProduct->qty() ?? 0;
-
+            
             $cartProduct->qty($qty + $existingQty);
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
+            $status = true;
+            $message = __('avored::catalog.cart_success_notification');
+        } elseif ($product->type === 'VARIABLE_PRODUCT') {
+            if ($attributes === null || count($attributes) <= 0) {
+                $status = false;
+                $message = __('avored::catalog.cart_variable_product_error_notification');
+            } else {
+                $cartProduct = $this->createCartProductFromSlug($product, $attributes);
+            }
         } else {
-            $cartProduct = $this->createCartProductFromSlug($slug);
+            $cartProduct = $this->createCartProductFromSlug($product);
             $cartProduct->qty($qty);
             
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
         }
+
+        return [$status, $message];
     }
 
     /**
      * Create Cart Product From slug.
-     * @param string $slug
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param array $attributes
      * @return \AvoRed\Framework\Cart\CartProduct $cartProduct
      */
-    public function createCartProductFromSlug(string $slug): CartProduct
+    public function createCartProductFromSlug(Product $product, array $attributes): CartProduct
     {
-        $product = $this->productRepository->findBySlug($slug);
         $cartProduct = new CartProduct;
         $cartProduct->name($product->name)
             ->slug($product->slug)
             ->price($product->price)
+            ->attributes($attributes)
             ->image($product->main_image_url);
 
         return $cartProduct;

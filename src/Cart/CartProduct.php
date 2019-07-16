@@ -14,6 +14,12 @@ class CartProduct implements CartProductInterface
     protected $name;
 
     /**
+     * Cart Product Attributes
+     * @var array $attributes
+     */
+    protected $attributes;
+
+    /**
      * Cart Product Slug
      * @var string $slug
      */
@@ -48,6 +54,21 @@ class CartProduct implements CartProductInterface
             return $this->name;
         } else {
             $this->name = $name;
+            return $this;
+        }
+    }
+
+    /**
+     * Set/Get Cart Product Name
+     * @param mixed $attributes
+     * @return mixed $attributes
+     */
+    public function attributes(array $attributes)
+    {
+        if ($attributes === null || count($attributes) <= 0) {
+            return $this->attributes;
+        } else {
+            $this->attributes = $attributes;
             return $this;
         }
     }
