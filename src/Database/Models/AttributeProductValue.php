@@ -11,4 +11,22 @@ class AttributeProductValue extends Model
      * @var array
      */
     protected $fillable = ['attribute_id', 'product_id', 'variation_id', 'attribute_dropdown_option_id'];
+
+    /**
+     * Attribute product value belongs to a attribute dropdown option
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function attributeDropdownOption()
+    {
+        return $this->belongsTo(AttributeDropdownOption::class);
+    }
+
+    /**
+     * Attribute product value belongs to a attribute
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

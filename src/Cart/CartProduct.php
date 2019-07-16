@@ -63,7 +63,7 @@ class CartProduct implements CartProductInterface
      * @param mixed $attributes
      * @return mixed $attributes
      */
-    public function attributes(array $attributes)
+    public function attributes(array $attributes = [])
     {
         if ($attributes === null || count($attributes) <= 0) {
             return $this->attributes;
