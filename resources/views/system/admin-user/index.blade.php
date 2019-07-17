@@ -22,7 +22,7 @@
 <a-row type="flex" justify="center">
     <a-col :span="24">        
         <admin-user-table inline-template base-url="{{ asset(config('avored.admin_url')) }}" :admin-users="{{ $adminUsers }}">
-            <a-table :columns="columns" row-key="id" :data-source="adminUsers">
+            <a-table :columns="columns" row-key="id" @change="handleTableChange" :data-source="adminUsers">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">

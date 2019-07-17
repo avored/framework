@@ -29,10 +29,10 @@ class AttributeController
      */
     public function index()
     {
-        $properties = $this->attributeRepository->all();
+        $attributes = $this->attributeRepository->all();
 
         return view('avored::catalog.attribute.index')
-            ->with('properties', $properties);
+            ->with('attributes', $attributes);
     }
 
      /**

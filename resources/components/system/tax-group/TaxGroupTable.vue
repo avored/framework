@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -6,7 +7,7 @@ const columns = [
         dataIndex: 'name',
         key: 'name',
         sorter: true,
-    }, 
+    },
     {
         title: 'Action',
         key: 'action',
@@ -18,34 +19,53 @@ const columns = [
 
 
 export default {
-  props: ['roles', 'baseUrl'],
+  props: ['baseUrl', 'taxGroups'],
   data () {
     return {
         columns
     };
   },
   methods: {
-      getData() {
-          return this.roles;
+      handleTableChange(pagination, filters, sorter) {
+        this.taxGroups.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
       },
       getEditUrl(record) {
-          return this.baseUrl + '/role/' + record.id + '/edit';
+          return this.baseUrl + '/tax-group/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/role/' + record.id;
+          return this.baseUrl + '/tax-group/' + record.id;
       },
-      deleteRole(record) {
-        var url = this.baseUrl  + '/role/' + record.id;
+      deleteTaxGroup(record) {
+        var url = this.baseUrl  + '/tax-group/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' role?',
+            title: 'Do you Want to delete ' + record.name + ' tax-group?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'role.delete.success',
+                                key: 'tax-group.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -53,7 +73,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'role.delete.error',
+                            key: 'tax-group.delete.error',
                             message: errors.message
                         });
                     });

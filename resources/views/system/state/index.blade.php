@@ -22,7 +22,7 @@
 <a-row type="flex" justify="center">
     <a-col :span="24">        
         <state-table inline-template base-url="{{ asset(config('avored.admin_url')) }}" :states="{{ $states }}">
-            <a-table :columns="columns" row-key="id" :data-source="states">
+            <a-table @change="handleTableChange" :columns="columns" row-key="id" :data-source="states">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">

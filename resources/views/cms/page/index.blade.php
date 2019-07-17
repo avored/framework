@@ -21,8 +21,8 @@
 </a-row>
 <a-row type="flex" justify="center">
     <a-col :span="24">        
-        <page-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table :columns="columns" row-key="id" :data-source="{{ $pages }}">
+        <page-table :pages="{{ $pages }}" inline-template base-url="{{ asset(config('avored.admin_url')) }}">
+            <a-table :columns="columns" row-key="id" :data-source="pages" @change="handleTableChange">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">
