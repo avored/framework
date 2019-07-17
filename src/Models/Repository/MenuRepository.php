@@ -78,11 +78,11 @@ class MenuRepository implements MenuInterface
     {
         $menuGroup->menus()->delete();
         foreach ($menus as $menu) {
-            $this->_saveMenu($menuGroup, $menu);
+            $this->saveMenu($menuGroup, $menu);
         }
     }
 
-    private function _saveMenu($menuGroup, $menus, $parentId = null)
+    private function saveMenu($menuGroup, $menus, $parentId = null)
     {
         foreach ($menus as $menu) {
             if (isset($menu->name)) {
@@ -96,7 +96,7 @@ class MenuRepository implements MenuInterface
             }
 
             if (isset($menu->children) && count($menu->children[0]) > 0) {
-                $this->_saveMenu($menuGroup, $menu->children[0], $menuModel->id);
+                $this->saveMenu($menuGroup, $menu->children[0], $menuModel->id);
             }
         }
     }

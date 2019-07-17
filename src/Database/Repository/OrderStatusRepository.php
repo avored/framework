@@ -41,9 +41,9 @@ class OrderStatusRepository implements OrderStatusModelInterface
     /**
      * Delete OrderStatus Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return OrderStatus::destroy($id);
     }

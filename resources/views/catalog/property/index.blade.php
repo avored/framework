@@ -21,8 +21,11 @@
 </a-row>
 <a-row type="flex" justify="center">
     <a-col :span="24">
-        <property-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table :columns="columns" row-key="id" :data-source="{{ $properties }}">
+        <property-table
+            :properties="{{ $properties }}"
+            inline-template
+            base-url="{{ asset(config('avored.admin_url')) }}">
+            <a-table @change="handleTableChange" :columns="columns" row-key="id" :data-source="properties">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">
@@ -33,7 +36,7 @@
                     </a>
                 </span>
             </a-table>
-        </property-table>
+        </property-tableinline-template>
     </a-col>
 </a-row>
 @endsection

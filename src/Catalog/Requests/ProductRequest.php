@@ -31,10 +31,6 @@ class ProductRequest extends FormRequest
             $rules['type'] = 'required';
         }
         
-        if (strtolower($this->method()) == 'put') {
-            $rules['is_main_image'] = 'required';
-        }
-        
         return $rules;
     }
 }

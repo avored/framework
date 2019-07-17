@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -12,13 +13,7 @@ const columns = [
         dataIndex: 'slug',
         key: 'slug',
         sorter: true,
-    }, 
-    {
-        title: 'Meta Title',
-        dataIndex: 'meta_title',
-        key: 'meta_title',
-        sorter: true,
-    }, 
+    },
     {
         title: 'Action',
         key: 'action',
@@ -30,31 +25,53 @@ const columns = [
 
 
 export default {
-  props: ['baseUrl'],
+  props: ['baseUrl', 'properties'],
   data () {
     return {
         columns
     };
   },
   methods: {
+      handleTableChange(pagination, filters, sorter) {
+        this.properties.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
+      },
       getEditUrl(record) {
-          return this.baseUrl + '/category/' + record.id + '/edit';
+          return this.baseUrl + '/property/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/category/' + record.id;
+          return this.baseUrl + '/property/' + record.id;
       },
-      deleteCategory(record) {
-        var url = this.baseUrl  + '/category/' + record.id;
+      deleteProperty(record) {
+        var url = this.baseUrl  + '/property/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' category?',
+            title: 'Do you Want to delete ' + record.name + ' property?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'category.delete.success',
+                                key: 'property.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -62,7 +79,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'category.delete.error',
+                            key: 'property.delete.error',
                             message: errors.message
                         });
                     });

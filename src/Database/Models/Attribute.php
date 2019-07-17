@@ -19,12 +19,21 @@ class Attribute extends Model
     protected $appends =  ['dropdown'];
 
     /**
-     * Property has many dropdown options
+     * Attribute has many dropdown options
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function dropdownOptions()
     {
         return $this->hasMany(AttributeDropdownOption::class);
+    }
+
+    /**
+     * Attribute Belongs to many Products
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 
     /**

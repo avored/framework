@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -18,13 +19,35 @@ const columns = [
 
 
 export default {
-  props: ['baseUrl'],
+  props: ['baseUrl', 'orderStatuses'],
   data () {
     return {
         columns
     };
   },
   methods: {
+      handleTableChange(pagination, filters, sorter) {
+        this.orderStatuses.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
+      },
       getEditUrl(record) {
           return this.baseUrl + '/order-status/' + record.id + '/edit';
       },

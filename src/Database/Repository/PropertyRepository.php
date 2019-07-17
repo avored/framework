@@ -31,9 +31,9 @@ class PropertyRepository implements PropertyModelInterface
     /**
      * Delete Property Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Property $property
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Property::destroy($id);
     }

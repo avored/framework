@@ -24,9 +24,9 @@ interface StateModelInterface
     /**
      * Delete State Resource from a database
      * @param int $id
-     * @return bool
+     * @return int
      */
-    public function delete(int $id) : bool;
+    public function delete(int $id) : int;
 
     /**
      * Get All State from the database

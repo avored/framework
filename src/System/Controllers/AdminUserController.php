@@ -37,7 +37,7 @@ class AdminUserController extends Controller
     }
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -49,7 +49,7 @@ class AdminUserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -61,7 +61,7 @@ class AdminUserController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\System\Requests\AdminUserRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AdminUserRequest $request)
     {
@@ -76,7 +76,7 @@ class AdminUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\AdminUser $adminUser
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(AdminUser $adminUser)
     {
@@ -90,7 +90,7 @@ class AdminUserController extends Controller
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\System\Requests\AdminUserRequest $request
      * @param \AvoRed\Framework\Database\Models\AdminUser  $adminUser
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(AdminUserRequest $request, AdminUser $adminUser)
     {
@@ -103,32 +103,32 @@ class AdminUserController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\AdminUser  $adminUser
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(AdminUser $adminUser)
     {
         $adminUser->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'AdminUser'])
-        ];
+        ]);
     }
 
     /**
      * upload user image to file system.
      * @param \AvoRed\Framework\System\Requests\AdminUserImageRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function upload(AdminUserImageRequest $request)
     {
         $image = $request->file('image_file');
         $path = $image->store('uploads/users', 'public');
 
-        return [
+        return response()->json([
             'success' => true,
             'path' => $path,
             'message' => __('avored::system.notification.upload', ['attribute' => 'Admin User Image'])
-        ];
+        ]);
     }
 }

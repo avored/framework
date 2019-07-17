@@ -31,9 +31,9 @@ interface OrderModelInterface
     /**
      * Delete Order Resource from a database
      * @param int $id
-     * @return bool
+     * @return int
      */
-    public function delete(int $id) : bool;
+    public function delete(int $id) : int;
 
     /**
      * Get All Order from the database

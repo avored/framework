@@ -35,7 +35,7 @@ class MenuController
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -48,25 +48,11 @@ class MenuController
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(MenuRequest $request)
     {
-<<<<<<< HEAD
         $this->menuRepository->create($request->all());
-=======
-        $menuGroup = $this->menuGroupRepository
-            ->find($request->get('menu_group_id'));
-        if (null === $menuGroup) {
-            $menuGroup = $this->menuGroupRepository->create($request->all());
-        } else {
-            $menuGroup->update($request->all());
-        }
-        $menuJson = $request->get('menu_json');
-        $menuArray = json_decode($menuJson);
-        
-        $this->repository->truncateAndCreateMenus($menuGroup, $menuArray);
->>>>>>> parent of 6f1e4cb... Merge pull request #69 from avored/dev
 
         return redirect()->route('admin.menu.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Menu']));

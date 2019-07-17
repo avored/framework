@@ -38,7 +38,7 @@ class RoleController extends Controller
     }
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -50,7 +50,7 @@ class RoleController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -62,7 +62,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\System\Requests\RoleRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(RoleRequest $request)
     {
@@ -74,19 +74,9 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * @param  \AvoRed\Framework\Database\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\Role $role
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Role $role)
     {
@@ -100,7 +90,7 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\System\Requests\RoleRequest $request
      * @param \AvoRed\Framework\Database\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(RoleRequest $request, Role $role)
     {
@@ -114,16 +104,16 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Role $role)
     {
         $role->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Role'])
-        ];
+        ]);
     }
 
 

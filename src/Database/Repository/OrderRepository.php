@@ -41,9 +41,9 @@ class OrderRepository implements OrderModelInterface
     /**
      * Delete Order Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Order $order
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Order::destroy($id);
     }

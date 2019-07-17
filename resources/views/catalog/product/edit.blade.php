@@ -15,6 +15,8 @@
             base-url="{{ asset(config('avored.admin_url')) }}"
             :product="{{ $product }}"
             :product-properties="{{ $product->getProperties() }}"
+            :product-attributes="{{ $product->attributes }}"
+            :product-variations="{{ $product->variations }}"
             inline-template>
         <div>
             <a-form 

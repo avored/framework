@@ -21,8 +21,12 @@
 </a-row>
 <a-row type="flex" justify="center">
     <a-col :span="24">        
-        <language-table inline-template base-url="{{ asset(config('avored.admin_url')) }}" :languages="{{ $languages }}">
-            <a-table :columns="columns" row-key="id" :data-source="languages">
+        <language-table
+            :languages="{{ $languages }}"
+            inline-template
+            base-url="{{ asset(config('avored.admin_url')) }}">
+
+            <a-table :columns="columns" row-key="id" @change="handleTableChange" :data-source="languages">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">

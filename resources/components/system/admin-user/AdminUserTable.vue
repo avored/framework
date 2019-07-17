@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -37,8 +38,27 @@ export default {
     };
   },
   methods: {
-      getData() {
-          return this.languages;
+     handleTableChange(pagination, filters, sorter) {
+        this.adminUsers.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
       },
       getEditUrl(record) {
           return this.baseUrl + '/admin-user/' + record.id + '/edit';

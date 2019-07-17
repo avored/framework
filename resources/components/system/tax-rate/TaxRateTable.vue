@@ -1,16 +1,12 @@
+
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        sorter: true,
-    }, 
-    {
-        title: 'Slug',
-        dataIndex: 'slug',
-        key: 'slug',
         sorter: true,
     },
     {
@@ -24,31 +20,53 @@ const columns = [
 
 
 export default {
-  props: ['baseUrl'],
+  props: ['baseUrl', 'taxRates'],
   data () {
     return {
         columns
     };
   },
   methods: {
+      handleTableChange(pagination, filters, sorter) {
+        this.taxRates.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
+      },
       getEditUrl(record) {
-          return this.baseUrl + '/attribute/' + record.id + '/edit';
+          return this.baseUrl + '/tax-rate/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/attribute/' + record.id;
+          return this.baseUrl + '/tax-rate/' + record.id;
       },
-      deleteAttribute(record) {
-        var url = this.baseUrl  + '/attribute/' + record.id;
+      deleteTaxRate(record) {
+        var url = this.baseUrl  + '/tax-rate/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' attribute?',
+            title: 'Do you Want to delete ' + record.name + ' tax-rate?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'attribute.delete.success',
+                                key: 'tax-rate.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -56,7 +74,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'attribute.delete.error',
+                            key: 'tax-rate.delete.error',
                             message: errors.message
                         });
                     });

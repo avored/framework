@@ -31,9 +31,9 @@ class MenuRepository implements MenuModelInterface
     /**
      * Delete Menu Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Menu $menu
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Menu::destroy($id);
     }

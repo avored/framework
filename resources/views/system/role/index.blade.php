@@ -22,7 +22,7 @@
 <a-row type="flex" justify="center">
     <a-col :span="24">        
         <role-index inline-template base-url="{{ asset(config('avored.admin_url')) }}" :roles="{{ $roles }}">
-            <a-table :columns="columns" row-key="id" :data-source="roles">
+            <a-table :columns="columns" row-key="id" @change="handleTableChange" :data-source="roles">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">

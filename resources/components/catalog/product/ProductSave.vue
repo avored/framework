@@ -4,14 +4,36 @@ import isObject from 'lodash/isObject';
 import { quillEditor } from 'vue-quill-editor';
 import axios from 'axios'
 
+const columns = [{
+  dataIndex: 'name',
+  key: 'name',
+  title: 'Name',
+  scopedSlots: { customRender: 'name' },
+}, {
+  title: 'Price',
+  dataIndex: 'price',
+  key: 'price',
+  scopedSlots: { customRender: 'price' },
+}, {
+  title: 'Qty',
+  dataIndex: 'qty',
+  key: 'qty',
+  scopedSlots: { customRender: 'qty' },
+}, {
+  title: 'Action',
+  key: 'action',
+  scopedSlots: { customRender: 'action' },
+}];
+
 export default {
-  props: ['product', 'baseUrl', 'productProperties'],
+  props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
   components: {
     'quil-editor': quillEditor,
   },
   data () {
     return {
         productForm: this.$form.createForm(this),
+        variationForm: this.$form.createForm(this),
         type: null,
         description: null,
         status: 0,
@@ -20,15 +42,90 @@ export default {
         categories: [],
         property: {},
         productImages: [],
+        attributeIds: [],
+        columns,
+        variationModelVisible: false,
+        variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
     };
   },
   methods: {
+      clickVariationSave(e) {
+         this.variationForm.validateFields((err, data) => {
+          if (isNil(err)) {
+              let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
+              var app = this;
+              
+              axios.post(url, data)
+                .then(res => {
+                  if (res.data.success) {
+                    app.$notification.success({
+                        key: 'product.save.variation.success',
+                        message: res.data.message,
+                    });
+                    window.location.reload();
+                  } else {
+                    alert('there is an error')
+                  }
+                })
+            }
+          });
+      },
+      deleteVariation(model) {
+        let url = this.baseUrl + '/variation/' + model.variation_id;
+        var app = this;
+        axios.delete(url)
+          .then(res => {
+            if (res.data.success) {
+              app.$notification.success({
+                  key: 'product.delete.variation.success',
+                  message: res.data.message,
+              });
+              window.location.reload();
+            } else {
+              alert('there is an error')
+            }
+          })
+              
+      },
+      showVariationModel(model) {
+        this.variationModelVisible = true;
+        var variationModel = model.variationModel;
+
+        this.variationFields.forEach(field => {
+          this.variationForm.getFieldDecorator(field, {initialValue: variationModel[field]})
+        });
+        
+      },
       handleSubmit(e) {
         this.productForm.validateFields((err, values) => {
           if (err !== null) {
               e.preventDefault();
           }    
           });
+      },
+      handleVariationBtnClick(e) {
+        let data = { attributes: this.attributeIds};
+        let url = this.baseUrl + '/variation/'+ this.product.id +'/create-variation';
+        var app = this;
+       
+        axios.post(url, data)
+          .then(res => {
+            if (res.data.success) {
+              app.$notification.success({
+                  key: 'product.create.variation.success',
+                  message: res.data.message,
+              });
+              window.location.reload();
+            } else {
+              alert('there is an error')
+            }
+          })
+      },
+      changeVariation(values) {
+        var app = this;
+        values.forEach(val => {
+          app.attributeIds.push(val)
+        });
       },
       handlePropertyChange(id, val) {
         let propertyValue = ''
@@ -94,6 +191,11 @@ export default {
       this.productProperties.forEach(record => {
         this.property[record.id] = record.product_value.value
       });
+      
+      this.productAttributes.forEach(record => {
+        this.attributeIds.push(record.id)
+      });
+
       this.product.images.forEach(record => {
         this.productImages.push(record)
       });

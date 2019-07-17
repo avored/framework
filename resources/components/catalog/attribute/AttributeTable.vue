@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -24,31 +25,53 @@ const columns = [
 
 
 export default {
-  props: ['baseUrl'],
+  props: ['baseUrl', 'attributes'],
   data () {
     return {
         columns
     };
   },
   methods: {
+      handleTableChange(pagination, filters, sorter) {
+        this.attributes.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
+      },
       getEditUrl(record) {
-          return this.baseUrl + '/property/' + record.id + '/edit';
+          return this.baseUrl + '/attribute/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/property/' + record.id;
+          return this.baseUrl + '/attribute/' + record.id;
       },
-      deleteProperty(record) {
-        var url = this.baseUrl  + '/property/' + record.id;
+      deleteAttribute(record) {
+        var url = this.baseUrl  + '/attribute/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' property?',
+            title: 'Do you Want to delete ' + record.name + ' attribute?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'property.delete.success',
+                                key: 'attribute.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -56,7 +79,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'property.delete.error',
+                            key: 'attribute.delete.error',
                             message: errors.message
                         });
                     });

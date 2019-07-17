@@ -36,7 +36,7 @@ class StateController extends Controller
     }
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -48,7 +48,7 @@ class StateController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -60,7 +60,7 @@ class StateController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \AvoRed\Framework\System\Requests\StateRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StateRequest $request)
     {
@@ -76,7 +76,7 @@ class StateController extends Controller
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\State $state
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(State $state)
     {
@@ -90,7 +90,7 @@ class StateController extends Controller
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\System\Requests\StateRequest $request
      * @param \AvoRed\Framework\Database\Models\State  $state
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StateRequest $request, State $state)
     {
@@ -106,15 +106,15 @@ class StateController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param \AvoRed\Framework\Database\Models\State  $state
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(State $state)
     {
         $state->delete();
 
-        return [
+        return response()->json([
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => __('avored:system.state.title')])
-        ];
+        ]);
     }
 }

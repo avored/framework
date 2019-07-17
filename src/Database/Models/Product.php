@@ -59,6 +59,16 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    /**
+     * Belongs to Many Product Images
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function variations()
+    {
+        return $this->hasMany(ProductVariation::class, 'product_id');
+    }
+
     /**
      * Get Main Image Url
      * @return string $mainImageUrl
@@ -86,6 +96,15 @@ class Product extends Model
      * Product has many Product Interger Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function attributeProductValues()
+    {
+        return $this->hasMany(AttributeProductValue::class);
+    }
+
+    /**
+     * Product has many Product Interger Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function productPropertyIntegerValues()
     {
         return $this->hasMany(ProductPropertyIntegerValue::class);
@@ -107,6 +126,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyDecimalValue::class);
     }
+   
     /**
      * Product has many Product Text Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -115,6 +135,16 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyTextValue::class);
     }
+
+    /**
+     * Product has many Product Text Property Values
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class);
+    }
+
     /**
      * Product has many Product Boolean Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -123,6 +153,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductPropertyBooleanValue::class);
     }
+    
     /**
      * Product has many Product Date Time Property Values
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

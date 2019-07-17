@@ -21,8 +21,8 @@
 </a-row>
 <a-row type="flex" justify="center">
     <a-col :span="24">        
-        <order-status-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table :columns="columns" row-key="id" :data-source="{{ $orderStatus }}">
+        <order-status-table :order-statuses="{{ $orderStatus }}" inline-template base-url="{{ asset(config('avored.admin_url')) }}">
+            <a-table :columns="columns" row-key="id" @change="handleTableChange" :data-source="orderStatuses">
                 <span slot="action" slot-scope="text, record">
                     
                     <a :href="getEditUrl(record)">

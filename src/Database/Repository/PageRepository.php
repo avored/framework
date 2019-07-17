@@ -31,9 +31,9 @@ class PageRepository implements PageModelInterface
     /**
      * Delete Page Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Page $page
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Page::destroy($id);
     }

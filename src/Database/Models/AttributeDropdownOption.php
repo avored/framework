@@ -11,4 +11,14 @@ class AttributeDropdownOption extends Model
      * @var array
      */
     protected $fillable = ['attribute_id', 'display_text'];
+
+
+    /**
+     * Attribute dropdown option belongs to one attribute
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

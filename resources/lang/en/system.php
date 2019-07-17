@@ -38,6 +38,16 @@ return [
         'cancel' => 'Cancel',
         'create' => 'Create'
     ],
+    'tab' => [
+        'basic_info' => 'Basic Info',
+        'images' => 'Images',
+        'property' => 'Property',
+        'attribute' => 'Attribute',
+        'basic_configuration' => 'Basic Settings',
+        'user_configuration' => 'User Settings',
+        'payment_configuration' => 'Payment Settings',
+        'shipping_configuration' => 'Shipping Settings',
+    ],
     'admin-user' => [
         'first_name' => 'First Name',
         'last_name' => 'Last Name',

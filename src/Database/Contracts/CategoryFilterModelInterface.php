@@ -30,11 +30,21 @@ interface CategoryFilterModelInterface
     public function findByCategoryId(int $id) : Collection;
     
     /**
+     * Find Category filter by given category and filter and type
+     * @param int $cateogryId
+     * @param int $filterId
+     * @param string $type
+     * @return mixex $categoryFilter
+     */
+    public function isCategoryFilterModelExist(int $categoryId, int $filterId, $type);
+
+    
+    /**
      * Delete CategoryFilter Resource from a database
      * @param int $id
-     * @return bool
+     * @return int
      */
-    public function delete(int $id) : bool;
+    public function delete(int $id) : int;
 
     /**
      * Get All CategoryFilter from the database

@@ -1,4 +1,5 @@
 <script>
+import isNil from 'lodash/isNil'
 
 const columns = [
     {
@@ -24,34 +25,53 @@ const columns = [
 
 
 export default {
-  props: ['languages', 'baseUrl'],
+  props: ['states', 'baseUrl'],
   data () {
     return {
         columns
     };
   },
   methods: {
-      getData() {
-          return this.languages;
+     handleTableChange(pagination, filters, sorter) {
+        this.states.sort(function(a, b){
+            let columnKey = sorter.columnKey
+            let order = sorter.order
+            
+            if (isNil(a[columnKey])) {
+                a[columnKey] = ''
+            }
+            if (isNil(b[columnKey])) {
+                b[columnKey] = ''
+            }
+            if (order === 'ascend'){
+                if(a[columnKey] < b[columnKey]) return -1;
+                if(a[columnKey] > b[columnKey]) return 1;
+            }
+            if (order === 'descend') {
+                if(a[columnKey] > b[columnKey]) return -1;
+                if(a[columnKey] < b[columnKey]) return 1;
+            }
+            return 0;
+        });
       },
       getEditUrl(record) {
-          return this.baseUrl + '/language/' + record.id + '/edit';
+          return this.baseUrl + '/state/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/language/' + record.id;
+          return this.baseUrl + '/state/' + record.id;
       },
-      deleteLanguage(record) {
-        var url = this.baseUrl  + '/language/' + record.id;
+      deleteState(record) {
+        var url = this.baseUrl  + '/state/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' languages?',
+            title: 'Do you Want to delete ' + record.name + ' state?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'language.delete.success',
+                                key: 'state.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -59,7 +79,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'language.delete.error',
+                            key: 'state.delete.error',
                             message: errors.message
                         });
                     });

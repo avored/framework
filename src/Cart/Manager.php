@@ -6,6 +6,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Cart\CartProduct;
+use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 
 class Manager
 {
@@ -14,6 +16,12 @@ class Manager
      * @var \AvoRed\Framework\Database\Repository\ProductRepository
      */
     protected $productRepository;
+
+    /**
+     * Product Repository.
+     * @var \AvoRed\Framework\Database\Repository\AttributeProductValueRepository
+     */
+    protected $attributeProductValueRepository;
 
     /**
      * Cart Product collection.
@@ -34,6 +42,7 @@ class Manager
     public function __construct(SessionManager $manager)
     {
         $this->productRepository = app(ProductModelInterface::class);
+        $this->attributeProductValueRepository = app(AttributeProductValueModelInterface::class);
         $this->sessionManager = $manager;
         $this->cartCollection = $this->getSession();
     }
@@ -42,40 +51,81 @@ class Manager
      * Add Product to Cart By Given Slug.
      * @param string $slug
      * @param int $qty
+     * @param array $attributes
      * @return void
      */
-    public function add(string $slug, $qty = 1)
+    public function add(string $slug, $qty = 1, $attributes = [])
     {
-
+        $this->clear();
+        $status = false;
+        $message = '';
+        $product = $this->productRepository->findBySlug($slug);
         if ($this->getSession()->has($slug)) {
-            $cartProduct = $this->cartCollection->get($slug);
-
+            $cartProduct = $this->cartCollection->get($product);
+            
             $existingQty = $cartProduct->qty() ?? 0;
-
+            
             $cartProduct->qty($qty + $existingQty);
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
+            $status = true;
+            $message = __('avored::catalog.cart_success_notification');
+        } elseif ($product->type === 'VARIABLE_PRODUCT') {
+            if ($attributes === null || count($attributes) <= 0) {
+                $status = false;
+                $message = __('avored::catalog.cart_variable_product_error_notification');
+            } else {
+                $attrs = Collection::make([]);
+                foreach ($attributes as $valueId) {
+                    $valueModel = $this->attributeProductValueRepository->find($valueId);
+
+                    $attributeData = [
+                        'attribute_id' => $valueModel->attribute_id,
+                        'attribute_name' => $valueModel->attribute->name,
+                        'attribute_dropdown_option_id' => $valueModel->attribute_dropdown_option_id,
+                        'attribute_dropdown_text' => $valueModel->attributeDropdownOption->display_text,
+                        'variation_id' => $valueModel->variation_id
+                    ];
+
+                    $attrs->push($attributeData);
+                }
+                $cartProduct = $this->createCartProductFromSlug($product, $attrs);
+                $cartProduct->qty($qty);
+            
+                $this->cartCollection->put($slug, $cartProduct);
+                $this->updateSessionCollection();
+                $status = true;
+                $message = __('avored::catalog.cart_success_notification');
+            }
         } else {
-            $cartProduct = $this->createCartProductFromSlug($slug);
+            $cartProduct = $this->createCartProductFromSlug($product);
             $cartProduct->qty($qty);
             
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
+            $status = true;
+            $message = __('avored::catalog.cart_success_notification');
         }
+
+        return [$status, $message];
     }
 
     /**
      * Create Cart Product From slug.
-     * @param string $slug
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param array $attributes
      * @return \AvoRed\Framework\Cart\CartProduct $cartProduct
      */
-    public function createCartProductFromSlug(string $slug): CartProduct
+    public function createCartProductFromSlug(Product $product, Collection $attributes): CartProduct
     {
-        $product = $this->productRepository->findBySlug($slug);
+       
         $cartProduct = new CartProduct;
         $cartProduct->name($product->name)
+            ->id($product->id)
             ->slug($product->slug)
             ->price($product->price)
+            ->taxAmount(0)
+            ->attributes($attributes->toArray())
             ->image($product->main_image_url);
 
         return $cartProduct;
@@ -146,7 +196,8 @@ class Manager
                 'image' => $product->image(),
                 'price' => $product->price(),
                 'qty' => $product->qty(),
-                'name' => $product->name()
+                'name' => $product->name(),
+                'attributes' => $product->attributes()
             ]);
         }
         return $items;

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Models\Property;
+use AvoRed\Framework\Database\Models\Attribute;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -49,29 +50,32 @@ class CategoryRepository implements CategoryModelInterface
      */
     public function getCategoryProducts(Request $request) : Collection
     {
-        $builder = Product::whereHas('categories', function ($query) {
-            $query->whereSlug('avored');
+        $builder = Product::whereHas('categories', function ($query) use ($request) {
+            $query->whereSlug($request->get('slug'));
         });
 
-
-        $i = 0;
         foreach ($request->except(['slug', '_token']) as $key => $values) {
             list ($filterType , $paramSuffix) = $this->splitParam($key);
            
             if ($filterType === 'PROPERTY') {
-                $builder = $this->filterProperties($builder, $paramSuffix, $values, $i);
+                $builder = $this->filterProperties($builder, $paramSuffix, $values);
             }
-            $i++;
+
+            if ($filterType === 'ATTRIBUTE') {
+                $builder = $this->filterAttributes($builder, $paramSuffix, $values);
+            }
         }
+        
+        $builder->where('type', '!=', 'VARIATION');
         
         return $builder->get();
     }
     /**
      * Delete Category Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Category $category
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Category::destroy($id);
     }
@@ -98,7 +102,7 @@ class CategoryRepository implements CategoryModelInterface
      * filter properties via builder
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */
-    private function filterProperties($builder, $paramSuffix, $values, $index)
+    private function filterProperties($builder, $paramSuffix, $values)
     {
         $property = Property::whereSlug($paramSuffix)->first();
         
@@ -106,6 +110,22 @@ class CategoryRepository implements CategoryModelInterface
             $query
                 ->wherePropertyId($property->id)
                 ->whereIn('value', $values);
+        });
+        
+        return $builder;
+    }
+
+    /**
+     * filter attributes via builder
+     * @return \Illuminate\Database\Eloquent\Builder $builder
+     */
+    private function filterAttributes($builder, $paramSuffix, $values)
+    {
+        $attribute = Attribute::whereSlug($paramSuffix)->first();
+        $builder->whereHas('attributeProductValues', function ($query) use ($attribute, $values) {
+            $query
+                ->whereAttributeId($attribute->id)
+                ->whereIn('attribute_dropdown_option_id', $values);
         });
         
         return $builder;

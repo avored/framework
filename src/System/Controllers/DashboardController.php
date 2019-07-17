@@ -5,7 +5,7 @@ class DashboardController
 {
     /**
      * Show Dashboard of an AvoRed Admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {

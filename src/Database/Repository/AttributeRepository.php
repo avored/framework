@@ -11,7 +11,7 @@ class AttributeRepository implements AttributeModelInterface
     /**
      * Create Attribute Resource into a database
      * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
     public function create(array $data): Attribute
     {
@@ -21,7 +21,7 @@ class AttributeRepository implements AttributeModelInterface
     /**
      * Find Attribute Resource into a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
     public function find(int $id): Attribute
     {
@@ -31,16 +31,16 @@ class AttributeRepository implements AttributeModelInterface
     /**
      * Delete Attribute Resource from a database
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Attribute $property
+     * @return int
      */
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
         return Attribute::destroy($id);
     }
 
     /**
-     * Get all the properties from the connected database
-     * @return \Illuminate\Database\Eloquent\Collection $properties
+     * Get all the attributes from the connected database
+     * @return \Illuminate\Database\Eloquent\Collection $attributes
      */
     public function all() : Collection
     {
