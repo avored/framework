@@ -63,14 +63,14 @@ class InstallCommand extends Command
         
         $relativePath = str_replace($basePath . '/', '', $absolutePath);
 
-        $this->call('migrate:fresh', ['--path' => $relativePath]);
-        $this->call('migrate');
-        $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        $this->call('migrate', ['--path' => $relativePath]);
+        //$this->call('migrate');
+        //$this->call('avored:module:install', ['identifier' => 'avored-demodata']);
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
         $currencyData = $this->getCurrencyData();
         $this->currencyRepository->create($currencyData);
-        $this->call('avored:admin:make');
+        //$this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
     }
 
