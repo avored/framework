@@ -9,6 +9,12 @@ class CartProduct implements CartProductInterface
 {
     /**
      * Cart Product Name
+     * @var int $id
+     */
+    protected $id;
+
+    /**
+     * Cart Product Name
      * @var string $name
      */
     protected $name;
@@ -33,9 +39,15 @@ class CartProduct implements CartProductInterface
 
     /**
      * Cart Product Price
-     * @var int $price
+     * @var float $price
      */
     protected $price;
+
+    /**
+     * Cart Product Tax Amount
+     * @var float $taxAmount
+     */
+    protected $taxAmount = 0;
     
     /**
      * Cart Product Image
@@ -54,6 +66,36 @@ class CartProduct implements CartProductInterface
             return $this->name;
         } else {
             $this->name = $name;
+            return $this;
+        }
+    }
+
+    /**
+     * Set/Get Cart Product id
+     * @param mixed $id
+     * @return mixed $id
+     */
+    public function id($id = null)
+    {
+        if ($id === null) {
+            return $this->id;
+        } else {
+            $this->id = $id;
+            return $this;
+        }
+    }
+
+    /**
+     * Set/Get Cart Product Tax Amount
+     * @param mixed $taxAmount
+     * @return mixed $taxAmount
+     */
+    public function taxAmount($taxAmount = null)
+    {
+        if ($taxAmount === null) {
+            return $this->taxAmount;
+        } else {
+            $this->taxAmount = $taxAmount;
             return $this;
         }
     }

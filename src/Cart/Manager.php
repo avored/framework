@@ -121,8 +121,10 @@ class Manager
        
         $cartProduct = new CartProduct;
         $cartProduct->name($product->name)
+            ->id($product->id)
             ->slug($product->slug)
             ->price($product->price)
+            ->taxAmount(0)
             ->attributes($attributes->toArray())
             ->image($product->main_image_url);
 

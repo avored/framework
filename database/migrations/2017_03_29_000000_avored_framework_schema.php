@@ -405,17 +405,28 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
         });
     
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('order_id');
             $table->decimal('qty', 11, 6);
             $table->decimal('price', 11, 6);
             $table->decimal('tax_amount', 11, 6);
-            $table->json('product_info')->nullable()->default(null);
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
+        });
+
+        Schema::create('order_product_attributes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('order_product_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('attribute_dropdown_option_id');
+            $table->timestamps();
+
+            $table->foreign('order_product_id')->references('id')->on('order_products');
+            $table->foreign('attribute_id')->references('id')->on('attributes');
+            $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });
 
         Schema::create('category_filters', function (Blueprint $table) {

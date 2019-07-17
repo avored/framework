@@ -55,6 +55,10 @@ use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeDropdownOptionRepository;
 use AvoRed\Framework\Database\Contracts\ProductVariationModelInterface;
 use AvoRed\Framework\Database\Repository\ProductVariationRepository;
+use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
+use AvoRed\Framework\Database\Repository\OrderProductRepository;
+use AvoRed\Framework\Database\Contracts\OrderProductAttributeModelInterface;
+use AvoRed\Framework\Database\Repository\OrderProductAttributeRepository;
 
 class ModelProvider extends ServiceProvider
 {
@@ -81,6 +85,8 @@ class ModelProvider extends ServiceProvider
         CurrencyModelInterface::class => CurrencyRepository::class,
         LanguageModelInterface::class => LanguageRepository::class,
         OrderModelInterface::class => OrderRepository::class,
+        OrderProductModelInterface::class => OrderProductRepository::class,
+        OrderProductAttributeModelInterface::class => OrderProductAttributeRepository::class,
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
