@@ -13,7 +13,14 @@
     <a-col :span="24">
         <a-card  title="Admin Dashboard">
             <div>
-                <p>Avored Admin Dashboard</p>
+                <p>We will really appriciate if you give us any feedback about the project.
+                It helps us to developed more better.</p>
+                <p>You can help us in my ways like helping in our 
+                    <a href="https://github.com/avored/documentation" title="AvoRed Documantation Repository">docs</a>, 
+                    <a href="https://github.com/avored/framework" title="AvoRed Framework Repository">framework</a>, or create an
+                    <a href="https://github.com/avored/laravel-ecommerce/issues" title="Avored laravel repository">issue</a>.
+                </p>
+                
             </div>
         </a-card>
     </a-col>
