@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 
 class InstallCommand extends Command
 {
@@ -22,18 +23,27 @@ class InstallCommand extends Command
      * @var \AvoRed\Framework\Database\Repository\CurrencyRepository $currencyRepository
      */
     protected $currencyRepository;
+
+    /**
+     * Currency Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     */
+    protected $languageRepository;
     
     /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
+     * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
      */
     public function __construct(
         RoleModelInterface $roleRepository,
-        CurrencyModelInterface $currencyRepository
+        CurrencyModelInterface $currencyRepository,
+        LanguageModelInterface $languageRepository
     ) {
         $this->roleRepository = $roleRepository;
         $this->currencyRepository = $currencyRepository;
+        $this->languageRepository = $languageRepository;
         parent::__construct();
     }
 
@@ -68,24 +78,40 @@ class InstallCommand extends Command
         //$this->call('avored:module:install', ['identifier' => 'avored-demodata']);
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
-        $currencyData = $this->getCurrencyData();
-        $this->currencyRepository->create($currencyData);
+        $this->createCurrency();
+        $this->createLanguage();
+        
         //$this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
     }
 
     /**
      * Get the Default currency data
-     * @return array $currencyData
+     * @return void
      */
-    public function getCurrencyData()
+    public function createCurrency()
     {
-        return [
+        $data =  [
             'name' => 'US Dollar',
             'code' => 'usd',
             'symbol' => '$',
             'conversation_rate' => 1,
             'status' => 'ENABLED'
         ];
+        $this->currencyRepository->create($data);
+    }
+
+    /**
+     * Get the Language data
+     * @return void
+     */
+    public function createLanguage()
+    {
+        $data =  [
+            'name' => 'English',
+            'code' => 'en',
+            'is_default' => 1
+        ];
+        $this->languageRepository->create($data);
     }
 }

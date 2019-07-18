@@ -60,7 +60,7 @@
                                         @endif
                                         label="{{ __('avored::system.password') }}">
                                     <a-input
-                                        :auto-focus="true"
+                                        type="password"
                                         name="password"
                                         v-decorator="[
                                         'password',
@@ -81,7 +81,7 @@
                                         @endif
                                         label="{{ __('avored::system.password-confirmation') }}">
                                     <a-input
-                                        :auto-focus="true"
+                                        type="password"
                                         name="password_confirmation"
                                         v-decorator="[
                                         'password_confirmation',
