@@ -9,6 +9,8 @@ use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class InstallCommand extends Command
 {
@@ -80,6 +82,7 @@ class InstallCommand extends Command
         $this->roleRepository->create($roleData);
         $this->createCurrency();
         $this->createLanguage();
+        $this->alterUserTable();
         
         //$this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
@@ -113,5 +116,20 @@ class InstallCommand extends Command
             'is_default' => 1
         ];
         $this->languageRepository->create($data);
+    }
+
+    /**
+     * Alter User Table for user group id
+     * @return void
+     */
+    public function alterUserTable()
+    {
+        $user =  config('avored.model.user');
+
+        $model = new $user;
+        $table = $model->getTable();
+        Schema::table($table, function (Blueprint $table) {
+            $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
+        });
     }
 }
