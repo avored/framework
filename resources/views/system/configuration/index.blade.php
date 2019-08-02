@@ -21,9 +21,9 @@
 
                     @csrf
                   
-                    <a-tabs default-active-key="system.configuration.basic"
+                    <a-tabs
+                        default-active-key="system.configuration.basic"
                         tab-position="left">
-
                         @foreach ($tabs as $tab)
                             <a-tab-pane tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
                                 @php
@@ -32,10 +32,7 @@
                                 @include($path)
                             </a-tab-pane>
                         @endforeach
-                        
                     </a-tabs>
-
-                   
 
                     <a-form-item>
                         <a-button type="primary" html-type="submit">

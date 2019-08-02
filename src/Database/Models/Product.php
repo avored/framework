@@ -3,9 +3,16 @@ namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
 class Product extends Model
 {
+
+    /**
+     * Tax Percentage Configuration Constant
+     * @var string $taxConfiguration
+     */
+    const TAX_CONFIGURATION_KEY = 'tax_percentage';
     /**
      * The attributes that are mass assignable.
      * @var array
@@ -49,6 +56,47 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * Get the Price of the Product
+     * @param bool $format
+     * @return float $price
+     */
+    public function getPrice($format = true)
+    {
+        $price = $this->price;
+        if ($format) {
+            return number_format($price, 2);
+        }
+
+        return $price;
+    }
+
+    /**
+     * Get the Qty of the product
+     * @return mixex $qty
+     */
+    public function getQty()
+    {
+        $qty = $this->qty;
+        if ($qty <= 0) {
+            return __('avored::catalog.product.not_available_in_stock');
+        }
+
+        return __('avored::catalog.product.available_in_stock', ['qty' => number_format($qty, 0)]);
+    }
+
+    /**
+     * Get the Tax Amount of the product
+     * @return mixex $taxAmount
+     */
+    public function getTaxAmount()
+    {
+        $configurationRepository = app(ConfigurationModelInterface::class);
+        $taxPercentage = $configurationRepository->getValueByCode(self::TAX_CONFIGURATION_KEY) ?? 0;
+
+        return $this->getPrice(false) * $taxPercentage / 100;
     }
 
     /**

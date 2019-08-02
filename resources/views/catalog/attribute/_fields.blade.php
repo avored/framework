@@ -46,31 +46,79 @@
 </a-form-item>
 
 <a-form-item
-    v-for="(k, index) in dropdownOptions"
-    :key="k"
-    @if ($errors->has('dropdown_options'))
+    @if ($errors->has('display_as'))
         validate-status="error"
-        help="{{ $errors->first('dropdown_options') }}"
+        help="{{ $errors->first('display_as') }}"
     @endif
-    label="{{ __('avored::catalog.attribute.dropdown_options') }}"
+    label="{{ __('avored::catalog.attribute.display_as') }}"
 >
-    <a-input
-        :name="dropdown_options(k)"
+    <a-select
+        @change="displayAsChange"
         v-decorator="[
-        `dropdown_options[${k}]`,
+        'display_as',
         {rules: 
             [
                 {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Dropdown Options']) }}' 
+                    message: '{{ __('avored::validation.required', ['attribute' => __('avored::catalog.attribute.display_as')]) }}' 
                 }
             ]
         }
         ]"
-    >
-    <a-icon slot="addonAfter"
-        v-on:click="dropdownOptionChange(index)"
-        :type="(index == dropdownOptions.length - 1) ? 'plus' : 'minus'"
-    ></a-icon>
-    </a-input>
+    >   
+        @foreach ($displayAsOptions as $val => $label)
+            <a-select-option value="{{ $val }}">{{ $label }}</a-select-option>
+        @endforeach    
+    </a-select>
 </a-form-item>
+<input type="hidden" name="display_as" v-model="display_as" />
+<a-card class="mt-1" v-for="(k, index) in dropdownOptions"
+    :key="k"
+    >
+    <a-row :gutter="20">
+        <a-col :span="12">
+            <a-form-item
+                label="{{ __('avored::catalog.attribute.image') }}"
+            >
+             <a-upload
+                :name="dropdown_options_image(k)"
+                :multiple="false"
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
+                @change="imageSelected">
+                <a-button>
+                <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
+                </a-button>
+            </a-upload>
+            </a-form-item>
+        </a-col>
+        <a-col :span="12">
+            <a-form-item
+                @if ($errors->has('dropdown_options'))
+                    validate-status="error"
+                    help="{{ $errors->first('dropdown_options') }}"
+                @endif
+                label="{{ __('avored::catalog.attribute.dropdown_options') }}"
+            >
+                <a-input
+                    :name="dropdown_options(k)"
+                    v-decorator="[
+                    `dropdown_options[${k}]`,
+                    {rules: 
+                        [
+                            {   required: true, 
+                                message: '{{ __('avored::validation.required', ['attribute' => 'Dropdown Options']) }}' 
+                            }
+                        ]
+                    }
+                    ]"
+                >
+                    <a-icon slot="addonAfter"
+                        v-on:click="dropdownOptionChange(index)"
+                        :type="(index == dropdownOptions.length - 1) ? 'plus' : 'minus'"
+                    ></a-icon>
+                </a-input>
+            </a-form-item>
+        </a-col>
+        
+    </a-row>
+</a-card>
 

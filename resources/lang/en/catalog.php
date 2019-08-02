@@ -30,6 +30,8 @@ return [
         ],
     ],
     'product' => [
+        'available_in_stock' => ':qty available in stock',
+        'not_available_in_stock' => 'Sorry this product is out of stock.',
         'variation_title' => 'Product Variations',
         'variation_create_msg' => 'Product Variation Created Successfully!',
         'variation_save_msg' => 'Product Variation Save Successfully!',
@@ -96,7 +98,10 @@ return [
     'attribute' => [
         'title' => 'Attribute',
         'name' => 'Name',
+        'image' => 'Image',
+        'upload' => 'Click to upload',
         'slug' => 'Slug',
+        'display_as' => 'Display As',
         'dropdown_options' => 'Dropdown Options',
         'index' => [
             'title' => 'Attribute List'

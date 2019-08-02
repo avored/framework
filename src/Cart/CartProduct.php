@@ -105,9 +105,9 @@ class CartProduct implements CartProductInterface
      * @param mixed $attributes
      * @return mixed $attributes
      */
-    public function attributes(array $attributes = [])
+    public function attributes($attributes = null)
     {
-        if ($attributes === null || count($attributes) <= 0) {
+        if ($attributes === null) {
             return $this->attributes;
         } else {
             $this->attributes = $attributes;
@@ -181,6 +181,6 @@ class CartProduct implements CartProductInterface
      */
     public function total(): float
     {
-        return $this->qty() * $this->price();
+        return ($this->qty() * $this->price()) + $this->taxAmount();
     }
 }

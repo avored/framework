@@ -94,6 +94,65 @@ class Property extends Model
      * Get the Property Value based on its fields type
      * @return mixed $value
      */
+    public function getPropertyDisplayTextByProductId(int $productId)
+    {
+        $val = null;
+        $attribute = null;
+        $returnValue = null;
+
+        switch ($this->field_type) {
+            case 'SELECT':
+            case 'RADIO':
+                $val = $this->integerValues()->whereProductId($productId)->first() ?? null;
+                if ($val !== null) {
+                    $attribute = $this->dropdownOptions()->find($val->value);
+                }
+
+                if ($attribute !== null) {
+                    $returnValue = $attribute->display_text;
+                }
+                break;
+
+            case 'SWITCH':
+                $val = $this->booleanValues()->whereProductId($productId)->first() ?? null;
+
+                if ($val !== null) {
+                    $returnValue = $val->value;
+                }
+                break;
+
+            case 'DATETIME':
+                $val = $this->datetimeValues()->whereProductId($productId)->first() ?? null;
+                if ($val !== null) {
+                    $returnValue = $val->value;
+                }
+                break;
+
+            case 'TEXT':
+                $val = $this->varcharValues()->whereProductId($productId)->first() ?? null;
+                if ($val !== null) {
+                    $returnValue = $val->value;
+                }
+                break;
+
+            case 'TEXTAREA':
+                $val = $this->textValues()->whereProductId($productId)->first() ?? null;
+                if ($val !== null) {
+                    $returnValue = $val->value;
+                }
+                break;
+
+            default:
+                throw new \Exception('there is an error while saving an product properties');
+        }
+
+        return $returnValue;
+    }
+
+    /**
+     * Get the Property Value based on its fields type
+     * @return mixed $value
+     */
     public function getPropertyValueByProductId(int $productId)
     {
         $val = null;

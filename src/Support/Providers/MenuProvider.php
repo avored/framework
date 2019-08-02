@@ -162,16 +162,16 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.admin-user.index');
         });
 
-        $systemMenu->subMenu('tax-group', function (MenuItem $menu) {
-            $menu->key('tax-group')
-                ->label('avored::system.admin_menus.tax-group')
-                ->route('admin.tax-group.index');
-        });
-        $systemMenu->subMenu('tax-rate', function (MenuItem $menu) {
-            $menu->key('tax-rate')
-                ->label('avored::system.admin_menus.tax-rate')
-                ->route('admin.tax-rate.index');
-        });
+        // $systemMenu->subMenu('tax-group', function (MenuItem $menu) {
+        //     $menu->key('tax-group')
+        //         ->label('avored::system.admin_menus.tax-group')
+        //         ->route('admin.tax-group.index');
+        // });
+        // $systemMenu->subMenu('tax-rate', function (MenuItem $menu) {
+        //     $menu->key('tax-rate')
+        //         ->label('avored::system.admin_menus.tax-rate')
+        //         ->route('admin.tax-rate.index');
+        // });
 
         $systemMenu->subMenu('currency', function (MenuItem $menu) {
             $menu->key('currency')

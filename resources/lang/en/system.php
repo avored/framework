@@ -52,6 +52,7 @@ return [
         'user_configuration' => 'User Settings',
         'payment_configuration' => 'Payment Settings',
         'shipping_configuration' => 'Shipping Settings',
+        'tax_configuration' => 'Tax Settings',
     ],
     'admin-user' => [
         'first_name' => 'First Name',
@@ -174,7 +175,11 @@ return [
         ],
         'basic' => [
             'site_name' => 'Site Name'
-        ]
+        ],
+        'tax' => [
+            'tax_percentage' => 'Tax Percentage'
+        ],
+
     ],
     'header' => [
         'logout' => 'Logout'

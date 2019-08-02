@@ -41,7 +41,9 @@ class AttributeController
      */
     public function create()
     {
-        return view('avored::catalog.attribute.create');
+        $displayAsOptions = Attribute::DISPLAY_AS;
+        return view('avored::catalog.attribute.create')
+            ->with('displayAsOptions', $displayAsOptions);
     }
 
     /**
@@ -68,8 +70,10 @@ class AttributeController
      */
     public function edit(Attribute $attribute)
     {
+        $displayAsOptions = Attribute::DISPLAY_AS;
         return view('avored::catalog.attribute.edit')
-            ->with('attribute', $attribute);
+            ->with('attribute', $attribute)
+            ->with('displayAsOptions', $displayAsOptions);
     }
 
     /**

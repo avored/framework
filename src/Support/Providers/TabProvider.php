@@ -91,6 +91,11 @@ class TabProvider extends ServiceProvider
                 ->view('avored::system.configuration.cards.user');
         });
         Tab::put('system.configuration', function (TabItem $tab) {
+            $tab->key('system.configuration.tax')
+                ->label('avored::system.tab.tax_configuration')
+                ->view('avored::system.configuration.cards.tax');
+        });
+        Tab::put('system.configuration', function (TabItem $tab) {
             $tab->key('system.configuration.shipping')
                 ->label('avored::system.tab.shipping_configuration')
                 ->view('avored::system.configuration.cards.shipping');

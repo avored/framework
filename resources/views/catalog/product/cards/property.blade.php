@@ -46,7 +46,7 @@
                             }
                         ]">
                            
-                    </a-select>
+                    </a-input>
                 </a-form-item>
             @break
 
@@ -66,7 +66,7 @@
                             }
                         ]">
                            
-                    </a-select>
+                    </a-textarea>
                 </a-form-item>
             @break
 
@@ -87,7 +87,7 @@
                             }
                         ]">
                     </a-date-picker>
-                <v /a-form-item>
+                </a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
             @break
 
@@ -126,7 +126,7 @@
                                 ]
                             }
                         ]">
-                    </a-switch>
+                    </a-radio-group>
                 </a-form-item>
                 <input type="hidden" name="property[{{ $property->id }}]" v-model="property[{{ $property->id }}]" />
             @break

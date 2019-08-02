@@ -192,12 +192,14 @@ class AvoredFrameworkSchema extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->enum('display_as', ['IMAGE', 'TEXT'])->default('TEXT');
             $table->timestamps();
         });
         Schema::create('attribute_dropdown_options', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('attribute_id');
             $table->string('display_text');
+            $table->string('path')->nullable()->default(null);
             $table->timestamps();
             $table->foreign('attribute_id')
                 ->references('id')->on('attributes')->onDelete('cascade');
