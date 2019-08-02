@@ -126,10 +126,17 @@ class InstallCommand extends Command
     {
         $user =  config('avored.model.user');
 
-        $model = new $user;
-        $table = $model->getTable();
-        Schema::table($table, function (Blueprint $table) {
-            $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
-        });
+        try {
+            $model = resolve($user);
+        } catch (\Exception $e) {
+            $model = null;
+        }
+
+        if ($model !== null) {
+            $table = $model->getTable();
+            Schema::table($table, function (Blueprint $table) {
+                $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
+            });
+        }
     }
 }

@@ -33,7 +33,15 @@ class EventServiceProvider extends ServiceProvider
     public function registerUserModelObserver()
     {
         $user = config('avored.model.user');
-        $model = new $user;
-        $model->observe(UserObserver::class);
+        
+        try {
+            $model = resolve($user);
+        } catch (\ReflectionException $e) {
+            $model = null;
+        }
+
+        if ($model !== null) {
+            $model->observe(UserObserver::class);
+        }
     }
 }
