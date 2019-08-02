@@ -10,5 +10,5 @@ class PropertyDropdownOption extends Model
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['property_id', 'display_text'];
+    protected $fillable = ['property_id', 'display_text', 'path'];
 }

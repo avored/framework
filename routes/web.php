@@ -18,11 +18,23 @@ Route::middleware(['web'])
     ->name('admin.')
     ->group(function () {
 
+        /***************** LOGIN ROUTE *****************/
         Route::get('login', 'System\Controllers\LoginController@loginForm')
-            ->name('login');
+        ->name('login');
         Route::post('login', 'System\Controllers\LoginController@login')
-            ->name('login.post');
-
+        ->name('login.post');
+        
+        /***************** PASSWORD RESET *****************/
+        Route::get('password/reset', 'System\Controllers\ForgotPasswordController@linkRequestForm')
+            ->name('password.request');
+            Route::post('password/email', 'System\Controllers\ForgotPasswordController@sendResetLinkEmail')
+            ->name('password.email');
+            
+            Route::get('password/reset/{token}', 'System\Controllers\ResetPasswordController@showResetForm')
+                ->name('password.reset');
+            Route::post('password/reset', 'System\Controllers\ResetPasswordController@reset')
+                ->name('password.update');
+        /***************** LOGOUT *****************/
         Route::post('logout', 'System\Controllers\LoginController@logout')
             ->name('logout');
     });

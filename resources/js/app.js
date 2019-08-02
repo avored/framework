@@ -79,6 +79,8 @@ Vue.component('admin-user-save', require('../components/system/admin-user/AdminU
 Vue.component('avored-layout', require('../components/system/Layout.vue').default);
 Vue.component('avored-flash', require('../components/system/Flash.vue').default);
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default);
+Vue.component('password-reset-page', require('../components/system/PasswordResetPage.vue').default);
+Vue.component('password-new-page', require('../components/system/PasswordNewPage.vue').default);
 
 
 /**

@@ -29,4 +29,13 @@ class AttributeProductValue extends Model
     {
         return $this->belongsTo(Attribute::class);
     }
+
+    /**
+     * Product Variation Model
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function variation()
+    {
+        return $this->belongsTo(Product::class, 'variation_id');
+    }
 }

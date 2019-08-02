@@ -309,7 +309,7 @@ class ProductController
                 $propertyModel = $this->propertyRepository->find($propertyId);
                 $propertyIds->push($propertyId);
                 $this->attachePropertyWithCategories($propertyModel, $product);
-               
+                
                 switch ($propertyModel->field_type) {
                     case 'SELECT':
                     case 'RADIO':
@@ -321,7 +321,7 @@ class ProductController
                         break;
 
                     case 'DATETIME':
-                        $propertyModel->saveDatetimeProperty()($product, $propertyValue);
+                        $propertyModel->saveDatetimeProperty($product, $propertyValue);
                         break;
 
                     case 'TEXT':
@@ -350,7 +350,7 @@ class ProductController
     private function saveProductImages(Product $product, $request)
     {
         $images = $request->get('images');
-        if ($images !== null && $images->count() > 0) {
+        if ($images !== null && count($images) > 0) {
             $isMainImage = $request->get('is_main_image');
             foreach ($images as $id => $data) {
                 $imageModel = $product->images()->find($id);

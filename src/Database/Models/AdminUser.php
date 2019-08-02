@@ -4,9 +4,12 @@ namespace AvoRed\Framework\Database\Models;
 
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class AdminUser extends Authenticatable
 {
+    use Notifiable;
+    
     /**
      * The attributes that are mass assignable.
      *

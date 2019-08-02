@@ -7,10 +7,19 @@ use Illuminate\Database\Eloquent\Collection;
 class Attribute extends Model
 {
     /**
+     * The available display as enum options.
+     * @var array
+     */
+    const DISPLAY_AS = [
+        'IMAGE' => 'Image',
+        'Text' => 'Text'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'display_as'];
 
     /**
      * Appended attribute for the model

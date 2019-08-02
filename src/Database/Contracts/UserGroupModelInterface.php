@@ -15,8 +15,14 @@ interface UserGroupModelInterface
     public function create(array $data) : UserGroup;
 
     /**
-     * find roles for the users
+     * get all user groups form the database
      * @return \Illuminate\Database\Eloquent\Collection $userGroups
      */
     public function all() : Collection;
+
+    /**
+     * get default user group instance
+     * @return \AvoRed\Framework\Database\Models\UserGroup $userGroup
+     */
+    public function getIsDefault() : UserGroup;
 }

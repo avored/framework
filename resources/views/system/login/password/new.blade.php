@@ -16,20 +16,22 @@
 </head>
 <body>
     <div id="app">
-        <login-fields loginpost="{{ route('admin.login.post') }}" inline-template>
+        <password-new-page inline-template>
             <div>
                 <a-row type="flex" align="middle">
                     <a-col :span="12">
                         <a-row type="flex">
                         <a-col :span="20" :offset="2">
-                            <a-card title="{{ __('avored::system.login-card') }}">
+                        
+                            <a-card title="{{ __('avored::system.new_password_title') }}">
                                 <a-form
-                                    :form="loginForm"
+                                    :form="form"
                                     method="post"
-                                    action="{{ route('admin.login.post') }}"
+                                    action="{{ route('admin.password.update') }}"
                                     @submit="handleSubmit"
                                 >
                                     @csrf()
+                                    <input type="hidden" name="token" value="{{ $token }}">
                                     <a-form-item
                                         @if ($errors->has('email'))
                                             validate-status="error"
@@ -51,33 +53,58 @@
                                         ]"
                                     />
                                     </a-form-item>
-                                    
-                                    <a-form-item 
+                                    <a-form-item
                                         @if ($errors->has('password'))
                                             validate-status="error"
                                             help="{{ $errors->first('password') }}"
                                         @endif
                                         label="{{ __('avored::system.password') }}">
-                                        <a-input
-                                            name="password"
-                                            type="password"
-                                            v-decorator="[
-                                            'password',
-                                            {rules: [{ required: true, message: '{{ __('avored::validation.required', ['attribute' => 'password']) }}' }]}
-                                            ]"
-                                        />
+                                    <a-input
+                                        type="password"
+                                        name="password"
+                                        v-decorator="[
+                                        'password',
+                                        {
+                                            rules: [
+                                                {   required: true, 
+                                                    message: '{{ __('avored::validation.required', ['attribute' => 'password']) }}' 
+                                                }
+                                            ]
+                                        }
+                                        ]"
+                                    />
                                     </a-form-item>
-                                    
+                                    <a-form-item
+                                        @if ($errors->has('password_confirmation'))
+                                            validate-status="error"
+                                            help="{{ $errors->first('password_confirmation') }}"
+                                        @endif
+                                        label="{{ __('avored::system.password-confirmation') }}">
+                                    <a-input
+                                        type="password"
+                                        name="password_confirmation"
+                                        v-decorator="[
+                                        'password_confirmation',
+                                        {
+                                            rules: [
+                                                {   required: true, 
+                                                    message: '{{ __('avored::validation.required', ['attribute' => 'confirm password']) }}' 
+                                                }
+                                            ]
+                                        }
+                                        ]"
+                                    />
+                                    </a-form-item>
+
                                     <a-form-item>
                                         <a-button
                                             type="primary"
                                             :loading="loadingSubmitBtn"
                                             html-type="submit"
                                         >
-                                            {{ __('avored::system.login') }}
+                                            {{ __('avored::system.password-new-btn') }}
                                         </a-button>
 
-                                        <a class="ml-1" href="{{ route('admin.password.request') }}">Forgot password?</a>
                                     </a-form-item>
                                 </a-form>
                             </a-card>
@@ -98,7 +125,7 @@
                 </a-row>
             </div>
          
-        </login-fields>
+        </password-new-page>
     </div>
     @stack('scripts')
 </body>

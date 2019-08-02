@@ -113,19 +113,19 @@ class Manager
     /**
      * Create Cart Product From slug.
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param array $attributes
+     * @param mixed $attributes
      * @return \AvoRed\Framework\Cart\CartProduct $cartProduct
      */
-    public function createCartProductFromSlug(Product $product, Collection $attributes): CartProduct
+    public function createCartProductFromSlug(Product $product, $attributes = null): CartProduct
     {
-       
         $cartProduct = new CartProduct;
+
         $cartProduct->name($product->name)
             ->id($product->id)
             ->slug($product->slug)
-            ->price($product->price)
-            ->taxAmount(0)
-            ->attributes($attributes->toArray())
+            ->price($product->getPrice())
+            ->taxAmount($product->getTaxAmount())
+            ->attributes($attributes ?? [])
             ->image($product->main_image_url);
 
         return $cartProduct;
@@ -197,6 +197,7 @@ class Manager
                 'price' => $product->price(),
                 'qty' => $product->qty(),
                 'name' => $product->name(),
+                'tax' => $product->taxAmount(),
                 'attributes' => $product->attributes()
             ]);
         }

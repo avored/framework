@@ -26,4 +26,13 @@ class UserGroupRepository implements UserGroupModelInterface
     {
         return UserGroup::all();
     }
+
+    /**
+     * get default user group instance
+     * @return \AvoRed\Framework\Database\Models\UserGroup $userGroup
+     */
+    public function getIsDefault() : UserGroup
+    {
+        return UserGroup::whereIsDefault(true)->first();
+    }
 }

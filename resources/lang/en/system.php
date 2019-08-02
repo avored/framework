@@ -26,6 +26,11 @@ return [
     'login-card' => 'AvoRed E commerce Admin Login',
     'login' => 'Login',
     'forget-password' => 'Forgot your password?',
+    'password-reset-btn' => 'Forgot your password?',
+    'password-confirmation' => 'Confirm your password',
+    'forgot-password-title' => 'Reset password',
+    'new_password_title' => 'Set New Password',
+    'password-new-btn' => 'Change Password',
     'notification' => [
         'store' => ':attribute Created successfully!',
         'updated' => ':attribute Updated successfully!',
@@ -47,6 +52,7 @@ return [
         'user_configuration' => 'User Settings',
         'payment_configuration' => 'Payment Settings',
         'shipping_configuration' => 'Shipping Settings',
+        'tax_configuration' => 'Tax Settings',
     ],
     'admin-user' => [
         'first_name' => 'First Name',
@@ -169,7 +175,11 @@ return [
         ],
         'basic' => [
             'site_name' => 'Site Name'
-        ]
+        ],
+        'tax' => [
+            'tax_percentage' => 'Tax Percentage'
+        ],
+
     ],
     'header' => [
         'logout' => 'Logout'

@@ -7,42 +7,50 @@ export default {
   data () {
     return {
         attributeForm: this.$form.createForm(this),
-        dropdownOptions: []
+        dropdownOptions: [],
+        display_as: ''
     };
   },
   methods: {
-      handleSubmit() {
+        handleSubmit() {
           this.attributeForm.validateFields((err, values) => {
             if (err) {
               e.preventDefault();
             }
           });
-      },
-     
-     
-      cancelAttribute() {
-          window.location = this.baseUrl + '/attribute';
-      },
-      randomString() {
-          let random_string = '';
-          let random_ascii;
-          for(let i = 0; i < 6; i++) {
-              random_ascii = Math.floor((Math.random() * 25) + 97);
-              random_string += String.fromCharCode(random_ascii)
-          }
-          return random_string
-      },
-      dropdownOptionChange(index) {
-          if (index == this.dropdownOptions.length - 1) {
-              this.dropdownOptions.push(this.randomString());
-          } else {
-              this.dropdownOptions.splice(index, 1);
-          }
-          
-      },
-      dropdown_options(index) {
-        return 'dropdown_option[' + index + ']';
-      }
+         },
+        imageSelected(info){
+            console.log(info);
+        },
+        displayAsChange(val) {
+            this.display_as = val;
+        },
+        cancelAttribute() {
+            window.location = this.baseUrl + '/attribute';
+        },
+        randomString() {
+            let random_string = '';
+            let random_ascii;
+            for(let i = 0; i < 6; i++) {
+                random_ascii = Math.floor((Math.random() * 25) + 97);
+                random_string += String.fromCharCode(random_ascii)
+            }
+            return random_string
+        },
+        dropdownOptionChange(index) {
+            if (index == this.dropdownOptions.length - 1) {
+                this.dropdownOptions.push(this.randomString());
+            } else {
+                this.dropdownOptions.splice(index, 1);
+            }
+            
+        },
+        dropdown_options(index) {
+            return 'dropdown_option[' + index + ']';
+        },
+        dropdown_options_image(index) {
+            return 'dropdown_option_image[' + index + ']';
+        }
   },
   mounted() {
       if (!isNil(this.attribute)) {

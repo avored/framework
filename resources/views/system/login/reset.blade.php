@@ -16,17 +16,18 @@
 </head>
 <body>
     <div id="app">
-        <login-fields loginpost="{{ route('admin.login.post') }}" inline-template>
+        <password-reset-page inline-template>
             <div>
                 <a-row type="flex" align="middle">
                     <a-col :span="12">
                         <a-row type="flex">
                         <a-col :span="20" :offset="2">
-                            <a-card title="{{ __('avored::system.login-card') }}">
+                        
+                            <a-card title="{{ __('avored::system.forgot-password-title') }}">
                                 <a-form
-                                    :form="loginForm"
+                                    :form="form"
                                     method="post"
-                                    action="{{ route('admin.login.post') }}"
+                                    action="{{ route('admin.password.email') }}"
                                     @submit="handleSubmit"
                                 >
                                     @csrf()
@@ -51,33 +52,16 @@
                                         ]"
                                     />
                                     </a-form-item>
-                                    
-                                    <a-form-item 
-                                        @if ($errors->has('password'))
-                                            validate-status="error"
-                                            help="{{ $errors->first('password') }}"
-                                        @endif
-                                        label="{{ __('avored::system.password') }}">
-                                        <a-input
-                                            name="password"
-                                            type="password"
-                                            v-decorator="[
-                                            'password',
-                                            {rules: [{ required: true, message: '{{ __('avored::validation.required', ['attribute' => 'password']) }}' }]}
-                                            ]"
-                                        />
-                                    </a-form-item>
-                                    
+
                                     <a-form-item>
                                         <a-button
                                             type="primary"
                                             :loading="loadingSubmitBtn"
                                             html-type="submit"
                                         >
-                                            {{ __('avored::system.login') }}
+                                            {{ __('avored::system.password-reset-btn') }}
                                         </a-button>
 
-                                        <a class="ml-1" href="{{ route('admin.password.request') }}">Forgot password?</a>
                                     </a-form-item>
                                 </a-form>
                             </a-card>
@@ -98,7 +82,7 @@
                 </a-row>
             </div>
          
-        </login-fields>
+        </password-reset-page>
     </div>
     @stack('scripts')
 </body>

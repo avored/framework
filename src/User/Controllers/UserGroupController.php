@@ -79,6 +79,11 @@ class UserGroupController
      */
     public function update(UserGroupRequest $request, UserGroup $userGroup)
     {
+        if ($request->get('is_default')) {
+            $group = $this->userGroupRepository->getIsDefault();
+            $group->update(['is_default' => 0]);
+        }
+        
         $userGroup->update($request->all());
 
         return redirect()->route('admin.user-group.index')
