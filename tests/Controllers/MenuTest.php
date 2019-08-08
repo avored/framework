@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Tests\Controllers;
 use AvoRed\Framework\Tests\BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Menu;
-use function GuzzleHttp\json_encode;
 
 class MenuTest extends BaseTestCase
 {
