@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Tests\Controllers;
 use AvoRed\Framework\Tests\BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Menu;
+use function GuzzleHttp\json_encode;
 
 class MenuTest extends BaseTestCase
 {
@@ -34,6 +35,7 @@ class MenuTest extends BaseTestCase
     public function testMenuStoreRouteTest()
     {
         $menuJson = json_encode([['name' => 'menu name', 'url' => '/category/slug', 'submenus' => []]]);
+        dd($menuJson, 'here');
         $data = ['name' => 'meun group name', 'identifier' => 'menu-group-name', 'menu_json' => $menuJson];
         $res = $this->createAdminUser()
             ->actingAs($this->user, 'admin')
