@@ -35,7 +35,6 @@ class MenuTest extends BaseTestCase
     public function testMenuStoreRouteTest()
     {
         $menuJson = json_encode([['name' => 'menu name', 'url' => '/category/slug', 'submenus' => []]]);
-        dd($menuJson, 'here');
         $data = ['name' => 'meun group name', 'identifier' => 'menu-group-name', 'menu_json' => $menuJson];
         $res = $this->createAdminUser()
             ->actingAs($this->user, 'admin')
