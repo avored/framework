@@ -12,7 +12,7 @@ jobs:
       
       - run:
           name: "install composer dependency"
-          command: apt-get update && apt-get install -y \
+          command: sudo apt-get update && sudo apt-get install -y \
                   libfreetype6-dev \
                   libjpeg62-turbo-dev \
                   libpng-dev \
