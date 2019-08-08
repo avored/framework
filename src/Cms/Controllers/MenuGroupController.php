@@ -74,7 +74,7 @@ class MenuGroupController
      * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
         $menuGroup = $this->menuGroupRepository->create($request->all());
         $menus = json_decode($request->get('menu_json'));
@@ -87,7 +87,7 @@ class MenuGroupController
     
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Page $page
+     * @param \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
      * @return \Illuminate\View\View
      */
     public function edit(MenuGroup $menuGroup)
@@ -101,11 +101,11 @@ class MenuGroupController
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
+     * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
      * @param \AvoRed\Framework\Database\Models\MenuGroup  $menuGroup
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, MenuGroup $menuGroup)
+    public function update(MenuRequest $request, MenuGroup $menuGroup)
     {
         $menuGroup->update($request->all());
         $menus = json_decode($request->get('menu_json'));
