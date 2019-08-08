@@ -20,7 +20,6 @@
                                     class="left-menu list-group"
                                     group="avored-drag-only"
                                     :list="categories"
-                                    
                                 >
                                     <li
                                         class="list-group-item"

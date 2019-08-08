@@ -24,8 +24,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 import Antd from 'ant-design-vue'
 import VueQuillEditor from 'vue-quill-editor'
+import Vddl from 'vddl'
 
-Vue.use(Antd);
+Vue.use(Vddl)
+Vue.use(Antd)
 Vue.use(VueQuillEditor);
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default);

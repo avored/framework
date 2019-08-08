@@ -1,36 +1,58 @@
 <script>
-import Draggable from "vuedraggable";
 import isNil from 'lodash/isNil';
 
 export default {
-  props: ['categories', 'baseUrl'],
-  components: {
-    'draggable': Draggable,
-  },
+  props: ['propCategories', 'baseUrl'],
   data () {
     return {
-        list2: []
+        categories: [],
+        selected: null,
+        menus: [],
+        form: this.$form.createForm(this),
+        menu_json: ''
     };
   },
   methods: {
-      handleSubmit() {
-          this.pageForm.validateFields((err, values) => {
+      handleSubmit(e) {
+        this.form.validateFields((err, values) => {
             if (err) {
               e.preventDefault();
             }
-          });
+        });
       },
-      cancelMenu() {
-          window.location = this.baseUrl + '/menu';
+      handleDrop(data) {
+        const { index, list, item } = data;
+        item.id = new Date().getTime();
+        list.splice(index, 0, item)
+
+        this.menu_json = JSON.stringify(this.menus);
+        return true
       },
-      updateMenu(item) {
-        console.log(item);
-      }
+      handleSubMenuDrop(data) {
+        const { index, list, item } = data;
+    
+        item.id = new Date().getTime();
+        list.splice(index, 0, item)
+        
+        this.menu_json = JSON.stringify(this.menus);
+        return true
+      },
   },
   mounted() {
       if (!isNil(this.page)) {
         this.content = this.page.content;
       }
+      if (!isNil(this.propCategories)) {
+        this.propCategories.forEach(ele => this.categories.push(ele));
+      }
   }
 };
 </script>
+<style>
+.vddl-list, .vddl-draggable {
+  position: relative;
+}
+.vddl-list {
+  min-height: 44px;
+}
+</style>

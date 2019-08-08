@@ -23,6 +23,8 @@ use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Repository\PageRepository;
 use AvoRed\Framework\Database\Contracts\MenuModelInterface;
 use AvoRed\Framework\Database\Repository\MenuRepository;
+use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
+use AvoRed\Framework\Database\Repository\MenuGroupRepository;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
@@ -94,6 +96,7 @@ class ModelProvider extends ServiceProvider
         ProductVariationModelInterface::class => ProductVariationRepository::class,
         ProductImageModelInterface::class => ProductImageRepository::class,
         MenuModelInterface::class => MenuRepository::class,
+        MenuGroupModelInterface::class => MenuGroupRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,
         StateModelInterface::class => StateRepository::class,
