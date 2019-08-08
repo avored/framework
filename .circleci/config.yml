@@ -12,8 +12,7 @@ jobs:
       
       - run:
           name: "install composer dependency"
-          command: sudo apt-get update && sudo apt-get install -y \
-                  && docker-php-ext-install -j$(nproc) json
+          command: sudo apt-get update && docker-php-ext-install -j$(nproc) json
       - run:
           name: "install composer dependency"
           command: composer install
