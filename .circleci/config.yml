@@ -13,8 +13,6 @@ jobs:
       - run:
           name: "install composer dependency"
           command: sudo apt-get update && sudo apt-get install -y \
-                  libfreetype6-dev \
-                  libjpeg62-turbo-dev \
                   && docker-php-ext-install -j$(nproc) json
       - run:
           name: "install composer dependency"
