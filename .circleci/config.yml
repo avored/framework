@@ -11,7 +11,7 @@ jobs:
       - checkout
       
       - run:
-          name: "install composer dependency"
+          name: "Install Json Extension"
           command: sudo apt-get update && sudo docker-php-ext-install -j$(nproc) json
       - run:
           name: "install composer dependency"
