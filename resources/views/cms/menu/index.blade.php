@@ -12,7 +12,7 @@
 <a-row type="flex" class="mb-1" justify="end">
     <a-col>
         <a 
-            href="{{ route('admin.menu.create') }}"
+            href="{{ route('admin.menu-group.create') }}"
             class="ant-btn ant-btn-primary">
             <a-icon type="plus"></a-icon>
             {{ __('avored::system.btn.create') }}
@@ -30,7 +30,7 @@
                     <a :href="getEditUrl(record)">
                         <a-icon type="edit"></a-icon>
                     </a>
-                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deletePage(record)">
+                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deleteMenuGroup(record)">
                         <a-icon type="delete"></a-icon>
                     </a>
                 </span>

@@ -7,10 +7,9 @@ use AvoRed\Framework\Database\Models\Menu;
 use AvoRed\Framework\Cms\Requests\MenuRequest;
 use Illuminate\Http\Request;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
-use function GuzzleHttp\json_decode;
 use AvoRed\Framework\Database\Models\MenuGroup;
 
-class MenuController
+class MenuGroupController
 {
     /**
      * Menu Repository for the Menu Controller
@@ -82,8 +81,53 @@ class MenuController
         
         $this->saveMenus($menuGroup, $menus);
         
-        return redirect()->route('admin.menu.index')
+        return redirect()->route('admin.menu-group.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Menu']));
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     * @param \AvoRed\Framework\Database\Models\Page $page
+     * @return \Illuminate\View\View
+     */
+    public function edit(MenuGroup $menuGroup)
+    {
+        $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
+        return view('avored::cms.menu.edit')
+            ->with('categories', $categories)
+            ->with('menuGroup', $menuGroup);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
+     * @param \AvoRed\Framework\Database\Models\MenuGroup  $menuGroup
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, MenuGroup $menuGroup)
+    {
+        $menuGroup->update($request->all());
+        $menus = json_decode($request->get('menu_json'));
+        
+        $this->saveMenus($menuGroup, $menus);
+        return redirect()->route('admin.menu-group.index')
+            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Menu']));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param \AvoRed\Framework\Database\Models\MenuGroup  $menuGroup
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(MenuGroup $menuGroup)
+    {
+        $menuGroup->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Menu'])
+        ]);
     }
 
     /**

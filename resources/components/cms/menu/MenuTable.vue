@@ -60,7 +60,7 @@ export default {
       getDeleteUrl(record) {
           return this.baseUrl + '/menu-group/' + record.id;
       },
-      deletemenuGroup(record) {
+      deleteMenuGroup(record) {
         var url = this.baseUrl  + '/menu-group/' + record.id;
         var app = this;
         this.$confirm({

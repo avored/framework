@@ -2,14 +2,15 @@
 import isNil from 'lodash/isNil';
 
 export default {
-  props: ['propCategories', 'baseUrl'],
+  props: ['propCategories', 'baseUrl', 'propMenus', 'menuGroup'],
   data () {
     return {
         categories: [],
         selected: null,
         menus: [],
         form: this.$form.createForm(this),
-        menu_json: ''
+        menu_json: '',
+        fields: ['name', 'identifier']
     };
   },
   methods: {
@@ -37,6 +38,9 @@ export default {
         this.menu_json = JSON.stringify(this.menus);
         return true
       },
+      cancelMenu() {
+        location =  this.baseUrl + '/menu-group/';
+      }
   },
   mounted() {
       if (!isNil(this.page)) {
@@ -44,6 +48,15 @@ export default {
       }
       if (!isNil(this.propCategories)) {
         this.propCategories.forEach(ele => this.categories.push(ele));
+      }
+      if (!isNil(this.propMenus)) {
+        this.propMenus.forEach(ele => this.menus.push(ele));
+      }
+      if (!isNil(this.menuGroup)) {
+        
+        this.fields.forEach(field => {
+          this.form.getFieldDecorator(field, {initialValue: this.menuGroup[field]})
+        });
       }
   }
 };

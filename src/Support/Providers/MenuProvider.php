@@ -98,6 +98,11 @@ class MenuProvider extends ServiceProvider
         });
         $cmsMenu = Menu::admin()->get('cms');
         
+        $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
+            $menu->key('menu-group')
+                ->label('avored::system.admin_menus.menu')
+                ->route('admin.menu-group.index');
+        });
         $cmsMenu->subMenu('page', function (MenuItem $menu) {
             $menu->key('page')
                 ->label('avored::system.admin_menus.page')

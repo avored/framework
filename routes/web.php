@@ -91,7 +91,7 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('order', 'Order\Controllers\OrderController')->only(['index']);
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
-        Route::resource('menu', 'Cms\Controllers\MenuController');
+        Route::resource('menu-group', 'Cms\Controllers\MenuGroupController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');
         Route::resource('product', 'Catalog\Controllers\ProductController');
