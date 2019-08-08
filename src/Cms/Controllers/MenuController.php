@@ -52,6 +52,18 @@ class MenuController
      */
     public function index()
     {
+        $menuGroups = $this->menuGroupRepository->all();
+
+        return view('avored::cms.menu.index')
+            ->with('menuGroups', $menuGroups);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
 
         return view('avored::cms.menu.create')
@@ -83,6 +95,7 @@ class MenuController
      */
     public function saveMenus(MenuGroup $menuGroup, $menus, $parent = null)
     {
+        
         foreach ($menus as $menu) {
             $data = [
                 'name' => $menu->name,

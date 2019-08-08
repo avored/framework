@@ -93,7 +93,7 @@
                             </div>
                         </a-col>
                         <a-col :span="12">
-                            <p>{{ __('avored::cms.menu.menu_title') }}</p>
+                            <p>{{ __('avored::cms.menu.create.title') }}</p>
                             <div class="ant-list menu-builder-list ant-list-split ant-list-bordered">
                                 <vddl-list 
                                     :wrapper="menus"

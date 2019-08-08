@@ -30,14 +30,18 @@ return [
         ],
     ],
     'menu' => [
+        'index' => [
+            'title' => 'Menus'
+        ],
+        'create' => [
+            'title' => 'Menu Builder'
+        ],
         'name' => 'Menu Group Name',
         'identifier' => 'Menu Group Identifier',
         'builder' => 'Menu Builder',
         'category_list' => 'Categories',
-        'menu_title' => 'Menus',
-        'title' => 'Frontend Menus',
         'create' => [
-            'title' => 'Frontend Menus'
+            'title' => 'Menu Builder'
         ]
     ],
     
