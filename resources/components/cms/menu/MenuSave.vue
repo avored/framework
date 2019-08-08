@@ -52,6 +52,9 @@ export default {
       if (!isNil(this.propMenus)) {
         this.propMenus.forEach(ele => this.menus.push(ele));
       }
+      if (!isNil(this.menus)) {
+        this.menu_json = JSON.stringify(this.menus);
+      }
       if (!isNil(this.menuGroup)) {
         
         this.fields.forEach(field => {
