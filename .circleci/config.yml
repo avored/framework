@@ -9,7 +9,9 @@ jobs:
       - image: circleci/php:7-fpm-browsers-legacy
     steps:
       - checkout
-      - run: apt-get update && apt-get install -y \
+      - run: 
+        name: "install json extension"
+        command: apt-get update && apt-get install -y \
                   libfreetype6-dev \
                   libjpeg62-turbo-dev \
                   libpng-dev \
