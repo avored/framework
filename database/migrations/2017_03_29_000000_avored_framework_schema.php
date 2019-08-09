@@ -242,8 +242,7 @@ class AvoredFrameworkSchema extends Migration
             $table->unsignedBigInteger('menu_group_id');
             $table->integer('parent_id')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
-            $table->string('route')->nullable()->default(null);
-            $table->string('params')->nullable()->default(null);
+            $table->string('url')->nullable()->default(null);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');

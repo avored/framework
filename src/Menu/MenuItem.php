@@ -6,34 +6,51 @@ use AvoRed\Framework\Support\Contracts\MenuInterface;
 class MenuItem implements MenuInterface
 {
     /**
+     * Constant Front
+     * @var string FRONT
+     */
+    const FRONT = "front";
+
+    /**
+     * Constant Admin
+     * @var string ADMIN
+     */
+    const ADMIN = "admin";
+    
+    /**
      * @var string $label
      */
-    protected $label;
+    public $label;
+
+    /**
+     * @var string $type
+     */
+    public $type;
 
     /**
      * @var string $icon
      */
-    protected $icon;
+    public $icon;
 
     /**
      * @var array $attributes
      */
-    protected $attributes;
+    public $attributes;
 
     /**
      * @var string $key
      */
-    protected $key;
+    public $key;
 
     /**
      * @var string $params
      */
-    protected $params;
+    public $params;
 
     /**
      * @var string $routeName
      */
-    protected $routeName;
+    public $routeName;
 
     /**
      *  AvoRed Front Menu Construct method.
@@ -55,6 +72,19 @@ class MenuItem implements MenuInterface
             return $this;
         }
         return trans($this->label);
+    }
+
+    /**
+     * Get/Set Admin Menu Type.
+     * @return mixed
+     */
+    public function type($type = null)
+    {
+        if (null !== $type) {
+            $this->type = $type;
+            return $this;
+        }
+        return $this->type;
     }
 
     /**

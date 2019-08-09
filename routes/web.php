@@ -52,11 +52,6 @@ Route::middleware(['web', 'admin.auth'])
         Route::post('configuration', 'System\Controllers\ConfigurationController@store')
             ->name('configuration.store');
         
-        Route::get('menu', 'Cms\Controllers\MenuController@index')
-            ->name('menu.index');
-        Route::post('menu', 'Cms\Controllers\MenuController@store')
-            ->name('menu.store');
-        
         Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
             ->name('admin-user-image-upload');
 
@@ -64,10 +59,12 @@ Route::middleware(['web', 'admin.auth'])
             'variation/{product}/create-variation',
             'Catalog\Controllers\ProductController@createVariation'
         )->name('product.create.variation');
+
         Route::post(
             'variation/{product}/save-variation',
             'Catalog\Controllers\ProductController@saveVariation'
         )->name('product.save.variation');
+        
         Route::delete(
             'variation/{product}',
             'Catalog\Controllers\ProductController@destroyVariation'
@@ -94,6 +91,7 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('language', 'System\Controllers\LanguageController');
         Route::resource('order', 'Order\Controllers\OrderController')->only(['index']);
         Route::resource('order-status', 'Order\Controllers\OrderStatusController');
+        Route::resource('menu-group', 'Cms\Controllers\MenuGroupController');
         Route::resource('page', 'Cms\Controllers\PageController');
         Route::resource('property', 'Catalog\Controllers\PropertyController');
         Route::resource('product', 'Catalog\Controllers\ProductController');

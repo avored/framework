@@ -48,6 +48,12 @@ interface CategoryModelInterface
     public function all() : Collection;
 
     /**
+     * Get all the categories option to use in Menu Builder
+     * @return \Illuminate\Support\Collection $categories
+     */
+    public function getCategoryOptionForMenuBuilder() : SupportCollection;
+
+    /**
      * Get All Category from the database
      * @return \Illuminate\Support\Collection $categoryOptions
      */

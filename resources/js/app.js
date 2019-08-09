@@ -24,8 +24,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 import Antd from 'ant-design-vue'
 import VueQuillEditor from 'vue-quill-editor'
+import Vddl from 'vddl'
 
-Vue.use(Antd);
+Vue.use(Vddl)
+Vue.use(Antd)
 Vue.use(VueQuillEditor);
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default);
@@ -63,6 +65,7 @@ Vue.component('category-save', require('../components/catalog/category/CategoryS
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default);
 
 Vue.component('menu-save', require('../components/cms/menu/MenuSave.vue').default);
+Vue.component('menu-table', require('../components/cms/menu/MenuTable.vue').default);
 
 Vue.component('page-table', require('../components/cms/page/PageTable.vue').default);
 Vue.component('page-save', require('../components/cms/page/PageSave.vue').default);

@@ -11,9 +11,11 @@
 @section('content')
 <a-row type="flex" justify="center">
     <a-col :span="24">
-        <menu-save
+        <menu-save 
+            :prop-categories="{{ $categories }}"
             :prop-front-menus="{{ $frontMenus }}"
-            :prop-categories="{{ $categories }}" 
+            :menu-group="{{ $menuGroup }}"
+            :prop-menus="{{ $menuGroup->menus }}"
             base-url="{{ asset(config('avored.admin_url')) }}" 
             inline-template>
         <div>
@@ -22,11 +24,12 @@
                     :form="form" 
                     v-on:submit="handleSubmit"
                     method="post" 
-                    action="{{ route('admin.menu-group.store') }}">
+                    action="{{ route('admin.menu-group.update', $menuGroup->id) }}">
                 
                 @csrf
+                @method('put')
                 @include('avored::cms.menu._fields')
-                 <a-col class="mt-1" :span="24">
+                <a-col class="mt-1" :span="24">
                     <a-form-item>
                     <a-button
                         type="primary"

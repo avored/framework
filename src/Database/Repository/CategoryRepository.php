@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Models\Attribute;
+use stdClass;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -87,6 +88,32 @@ class CategoryRepository implements CategoryModelInterface
     public function all() : Collection
     {
         return Category::all();
+    }
+
+    /**
+     * Get all the categories option to use in Menu Builder
+     * @return \Illuminate\Support\Collection $categories
+     */
+    public function getCategoryOptionForMenuBuilder() : SupportCollection
+    {
+        $categories = SupportCollection::make([]);
+        $all =  Category::all();
+        
+        $i = 1;
+        foreach ($all as $category) {
+            $dummyModel = new stdClass;
+            $dummyModel->id = $i;
+            
+            $routeParam = config('avored.routes.category.param');
+            $routeName = config('avored.routes.category.name');
+            $dummyModel->name = $category->name;
+            $dummyModel->url = route($routeName, $category->$routeParam, false);
+            $dummyModel->submenus = [];
+
+            $categories->push($dummyModel);
+            $i++;
+        }
+        return $categories;
     }
 
     /**

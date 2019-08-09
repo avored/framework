@@ -24,7 +24,12 @@ class MenuRequest extends Request
     public function rules()
     {
         $rules = [];
-        
+        $rules['name'] = 'required|max:255';
+        if ($this->method() === 'post') {
+            $rules['identifier'] = 'required|max:255|unique:menu_groups';
+        } else {
+            $rules['identifier'] = 'required|max:255';
+        }
         return $rules;
     }
 }

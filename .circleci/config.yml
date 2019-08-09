@@ -9,6 +9,10 @@ jobs:
       - image: circleci/php:7-fpm-browsers-legacy
     steps:
       - checkout
+      
+      - run:
+          name: "Install Json Extension"
+          command: sudo apt-get update && sudo docker-php-ext-install -j$(nproc) json
       - run:
           name: "install composer dependency"
           command: composer install
