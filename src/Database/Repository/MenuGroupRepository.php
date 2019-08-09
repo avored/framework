@@ -49,11 +49,12 @@ class MenuGroupRepository implements MenuGroupModelInterface
         $menus = collect();
         $menuGroup = MenuGroup::whereIdentifier($identifier)->first();
 
-
-        $modelMenus = $menuGroup->menus()->whereNull('parent_id')->get();
-        foreach ($modelMenus as $modelMenu) {
-            $modelMenu->submenus;
-            $menus->push($modelMenu);
+        if ($menuGroup !== null) {
+            $modelMenus = $menuGroup->menus()->whereNull('parent_id')->get();
+            foreach ($modelMenus as $modelMenu) {
+                $modelMenu->submenus;
+                $menus->push($modelMenu);
+            }
         }
 
         return $menus;
