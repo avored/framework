@@ -13,6 +13,7 @@
     <a-col :span="24">
         <menu-save 
             :prop-categories="{{ $categories }}"
+            :prop-front-menus="{{ $frontMenus }}"
             :menu-group="{{ $menuGroup }}"
             :prop-menus="{{ $menuGroup->menus }}"
             base-url="{{ asset(config('avored.admin_url')) }}" 

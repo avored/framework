@@ -2,10 +2,11 @@
 import isNil from 'lodash/isNil';
 
 export default {
-  props: ['propCategories', 'baseUrl', 'propMenus', 'menuGroup'],
+  props: ['propCategories', 'baseUrl', 'propMenus', 'menuGroup', 'propFrontMenus'],
   data () {
     return {
         categories: [],
+        frontMenus: [],
         selected: null,
         menus: [],
         form: this.$form.createForm(this),
@@ -48,6 +49,11 @@ export default {
       }
       if (!isNil(this.propCategories)) {
         this.propCategories.forEach(ele => this.categories.push(ele));
+      }
+      if (!isNil(this.propFrontMenus)) {
+        Object.keys(this.propFrontMenus).forEach(key => {
+          this.frontMenus.push(this.propFrontMenus[key])
+        });
       }
       if (!isNil(this.propMenus)) {
         this.propMenus.forEach(ele => this.menus.push(ele));

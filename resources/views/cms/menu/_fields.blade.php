@@ -49,7 +49,6 @@
     <a-col :span="24">
         <a-card title="{{ __('avored::cms.menu.builder') }}">
             <a-col :span="12">
-
                 <h4>{{ __('avored::cms.menu.category_list') }}</h4>
                 <div class="ant-list menu-builder-list ant-list-split ant-list-bordered mr-1">
                     <vddl-list disabled-if="true" :drop="handleDrop" :wrapper="categories"  :list="categories">
@@ -61,6 +60,22 @@
                             :wrapper="categories"
                             :key="'category-' + item.id"
                             v-for="(item, index) in categories">
+                        @{{item.name}}
+                        </vddl-draggable>
+                    </vddl-list>
+                </div>
+
+                <h4 class="mt-1">{{ __('avored::cms.menu.frontmenu_list') }}</h4>
+                <div class="ant-list menu-builder-list ant-list-split ant-list-bordered mr-1">
+                    <vddl-list disabled-if="true" :drop="handleDrop" :wrapper="frontMenus"  :list="frontMenus">
+                        <vddl-draggable
+                            :draggable="item"
+                            effect-allowed="copy"
+                            class="menu-item"
+                            :index="index"
+                            :wrapper="frontMenus"
+                            :key="'frontmenu-' + item.id"
+                            v-for="(item, index) in frontMenus">
                         @{{item.name}}
                         </vddl-draggable>
                     </vddl-list>

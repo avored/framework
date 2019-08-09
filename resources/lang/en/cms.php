@@ -40,6 +40,7 @@ return [
         'identifier' => 'Menu Group Identifier',
         'builder' => 'Menu Builder',
         'category_list' => 'Categories',
+        'frontmenu_list' => 'Front Menus',
         'create' => [
             'title' => 'Menu Builder'
         ]

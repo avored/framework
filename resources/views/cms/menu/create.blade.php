@@ -11,7 +11,8 @@
 @section('content')
 <a-row type="flex" justify="center">
     <a-col :span="24">
-        <menu-save 
+        <menu-save
+            :prop-front-menus="{{ $frontMenus }}"
             :prop-categories="{{ $categories }}" 
             base-url="{{ asset(config('avored.admin_url')) }}" 
             inline-template>

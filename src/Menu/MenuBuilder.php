@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Menu;
 
 use Illuminate\Support\Collection;
+use stdClass;
 
 class MenuBuilder
 {
@@ -12,23 +13,11 @@ class MenuBuilder
     protected $collection;
 
     /**
-     * Admin Menu Collection.
-     * @var \Illuminate\Support\Collection
-     */
-    protected $adminCollection;
-    /**
-     * Admin Menu Flag.
-     * @var bool
-     */
-    protected $admin = false;
-
-    /**
      * Construct for the menu builder
      */
     public function __construct()
     {
         $this->collection = Collection::make([]);
-        $this->adminCollection = Collection::make([]);
     }
 
     /**
@@ -41,22 +30,8 @@ class MenuBuilder
     {
         $menu = new MenuItem($callable);
         $menu->key($key);
-        if ($this->admin) {
-            $this->adminCollection->put($key, $menu);
-        } else {
-            $this->collection->put($key, $menu);
-        }
-        return $this;
-    }
-
-    /**
-     * Make a admin flag true.
-     * @return self
-     */
-    public function admin()
-    {
-        $this->admin = true;
-
+        $this->collection->put($key, $menu);
+        
         return $this;
     }
 
@@ -67,10 +42,24 @@ class MenuBuilder
      */
     public function get($key)
     {
-        if ($this->admin) {
-            return $this->adminCollection->get($key);
+        return $this->collection->get($key);
+    }
+
+    /**
+     * Return all available Menu in Menu.
+     * @param void
+     * @return \Illuminate\Support\Collection
+     */
+    public function all($admin = false)
+    {
+        if ($admin) {
+            return $this->collection->filter(function ($item) {
+                return $item->type() === MenuItem::ADMIN;
+            });
         } else {
-            return $this->collection->get($key);
+            return $this->collection->filter(function ($item) {
+                return $item->type() === MenuItem::FRONT;
+            });
         }
     }
 
@@ -79,12 +68,23 @@ class MenuBuilder
      * @param void
      * @return \Illuminate\Support\Collection
      */
-    public function all()
+    public function frontMenus()
     {
-        if ($this->admin) {
-            return $this->adminCollection->all();
-        } else {
-            return $this->collection->all();
+        $frontMenus = collect();
+        
+        $i = 1;
+        foreach ($this->collection as $item) {
+            if ($item->type() === MenuItem::FRONT) {
+                $menu = new stdClass;
+                $menu->id = $i;
+                $menu->name = $item->label;
+                $menu->url = route($item->route(), $item->params());
+                $menu->submenus = $item->submenus ?? [];
+                $frontMenus->push($menu);
+                $i++;
+            }
         }
+        
+        return $frontMenus;
     }
 }

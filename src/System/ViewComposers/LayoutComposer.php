@@ -15,7 +15,7 @@ class LayoutComposer
      */
     public function compose(View $view)
     {
-        $adminMenus = Menu::admin()->all();
+        $adminMenus = Menu::all($admin = true);
         $view->with('adminMenus', $adminMenus);
     }
 }

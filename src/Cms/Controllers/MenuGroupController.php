@@ -8,6 +8,7 @@ use AvoRed\Framework\Cms\Requests\MenuRequest;
 use Illuminate\Http\Request;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Models\MenuGroup;
+use AvoRed\Framework\Support\Facades\Menu as MenuFacade;
 
 class MenuGroupController
 {
@@ -64,8 +65,10 @@ class MenuGroupController
     public function create()
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
-
+        $frontMenus = MenuFacade::frontMenus();
+            
         return view('avored::cms.menu.create')
+            ->with('frontMenus', $frontMenus)
             ->with('categories', $categories);
     }
 
@@ -93,8 +96,11 @@ class MenuGroupController
     public function edit(MenuGroup $menuGroup)
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
+        $frontMenus = MenuFacade::frontMenus();
+
         return view('avored::cms.menu.edit')
             ->with('categories', $categories)
+            ->with('frontMenus', $frontMenus)
             ->with('menuGroup', $menuGroup);
     }
 
@@ -107,6 +113,7 @@ class MenuGroupController
      */
     public function update(MenuRequest $request, MenuGroup $menuGroup)
     {
+        $menuGroup->menus()->delete();
         $menuGroup->update($request->all());
         $menus = json_decode($request->get('menu_json'));
         
