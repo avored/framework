@@ -15,7 +15,7 @@ class UserGroupController
     
     /**
      * Construct for the AvoRed user group controller
-     * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
      */
     public function __construct(
         UserGroupModelInterface $userGroupRepository

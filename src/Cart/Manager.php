@@ -52,7 +52,7 @@ class Manager
      * @param string $slug
      * @param int $qty
      * @param array $attributes
-     * @return void
+     * @return array
      */
     public function add(string $slug, $qty = 1, $attributes = [])
     {

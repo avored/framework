@@ -13,20 +13,21 @@ use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 class AdminUserController extends Controller
 {
     /**
-     * AdminUser Repository for the Install Command
+     * AdminUser Repository
      * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
      */
     protected $adminUserRepository;
 
     /**
-     * Role Repository for the Install Command
+     * Role Repository
      * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
     
     /**
      * Construct for the AvoRed User Controller
-     * @param \AvoRed\Framework\Database\Repository\RoleRepository $adminUserRepository
+     * @param \AvoRed\Framework\Database\Contracts\AdminUserModelInterface $adminUserRepository
+     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      */
     public function __construct(
         AdminUserModelInterface $adminUserRepository,

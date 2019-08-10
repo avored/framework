@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 use AvoRed\Framework\Database\Models\Language;
@@ -18,7 +17,7 @@ class LanguageController extends Controller
     
     /**
      * Construct for the AvoRed language controller
-     * @param \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
      */
     public function __construct(
         LanguageModelInterface $languageRepository

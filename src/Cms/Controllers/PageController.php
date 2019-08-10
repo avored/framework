@@ -15,7 +15,7 @@ class PageController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\PageRepository $pageRepository
+     * @param \AvoRed\Framework\Database\Contracts\PageModelInterface $pageRepository
      */
     public function __construct(
         PageModelInterface $pageRepository

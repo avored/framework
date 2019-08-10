@@ -27,7 +27,8 @@ class RoleController extends Controller
     
     /**
      * Construct for the AvoRed role controller
-     * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
+     * @param \AvoRed\Framework\Database\Contracts\PermissionModelInterface $permissionRepository
      */
     public function __construct(
         RoleModelInterface $roleRepository,

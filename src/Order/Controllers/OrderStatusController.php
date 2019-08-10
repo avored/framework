@@ -15,7 +15,7 @@ class OrderStatusController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\OrderStatusRepository $orderStatusRepository
+     * @param \AvoRed\Framework\Database\Contracts\OrderModelInterface $orderStatusRepository
      */
     public function __construct(
         OrderStatusModelInterface $orderStatusRepository

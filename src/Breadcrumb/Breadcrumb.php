@@ -41,7 +41,7 @@ class Breadcrumb implements BreadcrumbInterface
      *  Get/Set AvoRed BreakCrumb Label.
      *
      * @var string|null
-     * @return \AvoRed\Framework\Breadcrumb\Breadcrumb|string
+     * @return mixed
      */
     public function label($label = null)
     {
@@ -57,7 +57,7 @@ class Breadcrumb implements BreadcrumbInterface
      *  Get/Set AvoRed BreakCrumb Route.
      *
      * @var string|null
-     * @return \AvoRed\Framework\Breadcrumb\Breadcrumb|string
+     * @return mixed
      */
     public function route($route = null)
     {

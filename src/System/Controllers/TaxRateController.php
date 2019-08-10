@@ -22,7 +22,8 @@ class TaxRateController
     
     /**
      * Construct for the AvoRed tax rate controller
-     * @param \AvoRed\Framework\Database\Repository\TaxRateRepository $taxRateRepository
+     * @param \AvoRed\Framework\Database\Contracts\TaxRateModelInterface $taxRateRepository
+     * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
     public function __construct(
         TaxRateModelInterface $taxRateRepository,
