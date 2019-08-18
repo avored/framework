@@ -15,7 +15,7 @@ class AttributeController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\AttributeRepository $attributeRepository
+     * @param \AvoRed\Framework\Database\Contracts\AttributeModelInterface $attributeRepository
      */
     public function __construct(
         AttributeModelInterface $attributeRepository

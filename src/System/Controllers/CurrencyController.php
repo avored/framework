@@ -24,8 +24,9 @@ class CurrencyController extends Controller
     protected $countryRepository;
     
     /**
-     * Construct for the AvoRCountryncy controller
-     * @param \AvoRed\Framework\Database\Repository\CurrencyRepository $currencyRepository
+     * Construct for the AvoRed currency controller
+     * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
+     * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
     public function __construct(
         CurrencyModelInterface $currencyRepository,

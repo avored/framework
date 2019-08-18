@@ -33,12 +33,7 @@ return [
             'admin' => [
                 'driver' => 'session',
                 'provider' => 'admin-users',
-            ],
-            'admin_api' => [
-                'driver' => 'passport',
-                'provider' => 'admin-users',
-                'hash' => false,
-            ],
+            ]
         ],
        
         'providers' => [

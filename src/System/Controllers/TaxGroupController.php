@@ -15,7 +15,7 @@ class TaxGroupController
     
     /**
      * Construct for the AvoRed tax group controller
-     * @param \AvoRed\Framework\Database\Repository\TaxGroupRepository $taxGroupRepository
+     * @param \AvoRed\Framework\Database\Contracts\TaxGroupModelInterface $taxGroupRepository
      */
     public function __construct(
         TaxGroupModelInterface $taxGroupRepository

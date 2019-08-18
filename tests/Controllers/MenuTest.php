@@ -15,7 +15,7 @@ class MenuTest extends BaseTestCase
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
-            ->get(route('admin.menu.index'))
+            ->get(route('admin.menu-group.index'))
             ->assertStatus(200)
             ->assertSee(__('avored::cms.menu.index.title'));
     }
@@ -25,7 +25,7 @@ class MenuTest extends BaseTestCase
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
-            ->get(route('admin.menu.create'))
+            ->get(route('admin.menu-group.create'))
             ->assertStatus(200)
             ->assertSee(__('avored::cms.menu.create.title'));
     }
@@ -33,13 +33,12 @@ class MenuTest extends BaseTestCase
     /* @runInSeparateProcess */
     public function testMenuStoreRouteTest()
     {
-        $this->markTestIncomplete('Json Encode is not working on CircleCI but working in local');
         $menuJson = json_encode([['name' => 'menu name', 'url' => '/category/slug', 'submenus' => []]]);
         $data = ['name' => 'meun group name', 'identifier' => 'menu-group-name', 'menu_json' => $menuJson];
         $res = $this->createAdminUser()
             ->actingAs($this->user, 'admin')
-            ->post(route('admin.menu.store', $data))
-            ->assertRedirect(route('admin.menu.index'));
+            ->post(route('admin.menu-group.store', $data))
+            ->assertRedirect(route('admin.menu-group.index'));
         
         $this->assertDatabaseHas('menu_groups', ['name' => 'meun group name']);
         $this->assertDatabaseHas('menus', ['name' => 'menu name', 'url' => '/category/slug']);

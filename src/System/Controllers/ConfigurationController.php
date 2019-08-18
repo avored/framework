@@ -14,8 +14,8 @@ class ConfigurationController
     protected $configurationRepository;
     
     /**
-     * Construct for the AvoRed language controller
-     * @param \AvoRed\Framework\Database\Repository\ConfigurationRepository $configurationRepository
+     * Construct for the AvoRed configuration controller
+     * @param \AvoRed\Framework\Database\Contracts\ConfigurationModelInterface $configurationRepository
      */
     public function __construct(
         ConfigurationModelInterface $configurationRepository

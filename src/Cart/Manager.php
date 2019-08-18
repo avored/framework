@@ -52,14 +52,14 @@ class Manager
      * @param string $slug
      * @param int $qty
      * @param array $attributes
-     * @return void
+     * @return array
      */
     public function add(string $slug, $qty = 1, $attributes = [])
     {
-        $this->clear();
         $status = false;
         $message = '';
         $product = $this->productRepository->findBySlug($slug);
+
         if ($this->getSession()->has($slug)) {
             $cartProduct = $this->cartCollection->get($product);
             
@@ -98,6 +98,7 @@ class Manager
                 $message = __('avored::catalog.cart_success_notification');
             }
         } else {
+            
             $cartProduct = $this->createCartProductFromSlug($product);
             $cartProduct->qty($qty);
             

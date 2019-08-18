@@ -15,7 +15,7 @@ class CategoryController
     
     /**
      * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
+     * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
      */
     public function __construct(
         CategoryModelInterface $categoryRepository

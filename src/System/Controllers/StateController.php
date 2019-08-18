@@ -25,7 +25,8 @@ class StateController extends Controller
     
     /**
      * Construct for the AvoRed state controller
-     * @param \AvoRed\Framework\Database\Repository\StateRepository $stateRepository
+     * @param \AvoRed\Framework\Database\Contracts\StateModelInterface $stateRepository
+     * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
     public function __construct(
         StateModelInterface $stateRepository,

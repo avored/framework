@@ -66,9 +66,11 @@ class MenuGroupController
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
         $frontMenus = MenuFacade::frontMenus();
-            
+        $menus = [];
+
         return view('avored::cms.menu.create')
             ->with('frontMenus', $frontMenus)
+            ->with('menus', $menus)
             ->with('categories', $categories);
     }
 
@@ -97,9 +99,11 @@ class MenuGroupController
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
         $frontMenus = MenuFacade::frontMenus();
+        $menus = $this->menuGroupRepository->getTreeByIdentifier($menuGroup->identifier);
 
         return view('avored::cms.menu.edit')
             ->with('categories', $categories)
+            ->with('menus', $menus)
             ->with('frontMenus', $frontMenus)
             ->with('menuGroup', $menuGroup);
     }

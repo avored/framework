@@ -14,8 +14,8 @@ class PropertyController
     protected $propertyRepository;
     
     /**
-     * Construct for the AvoRed install command
-     * @param \AvoRed\Framework\Database\Repository\PropertyRepository $propertyRepository
+     * Construct for the AvoRed property controller
+     * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
      */
     public function __construct(
         PropertyModelInterface $propertyRepository

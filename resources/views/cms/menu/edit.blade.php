@@ -15,7 +15,7 @@
             :prop-categories="{{ $categories }}"
             :prop-front-menus="{{ $frontMenus }}"
             :menu-group="{{ $menuGroup }}"
-            :prop-menus="{{ $menuGroup->menus }}"
+            :prop-menus="{{ $menus }}"
             base-url="{{ asset(config('avored.admin_url')) }}" 
             inline-template>
         <div>
