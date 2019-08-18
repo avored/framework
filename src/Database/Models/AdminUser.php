@@ -5,10 +5,11 @@ namespace AvoRed\Framework\Database\Models;
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class AdminUser extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
     
     /**
      * The attributes that are mass assignable.

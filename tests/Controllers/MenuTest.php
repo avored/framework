@@ -33,7 +33,6 @@ class MenuTest extends BaseTestCase
     /* @runInSeparateProcess */
     public function testMenuStoreRouteTest()
     {
-        //$this->markTestIncomplete('Json Encode is not working on CircleCI but working in local');
         $menuJson = json_encode([['name' => 'menu name', 'url' => '/category/slug', 'submenus' => []]]);
         $data = ['name' => 'meun group name', 'identifier' => 'menu-group-name', 'menu_json' => $menuJson];
         $res = $this->createAdminUser()
