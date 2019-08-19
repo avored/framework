@@ -29,8 +29,24 @@ return [
     ],
     'order' => [
         'index' => [
-            'title' => 'Order'
-        ]
+            'title' => 'Order',
+            'action' => 'Action',
+            'download_invoice' => 'Download Invoice',
+            'change_status' => 'Change Status',
+            'email_invoice' => 'Email Invoice',
+            'download_shipping_label' => 'Download Shipping Label'
+        ],
+        'invoice' => [
+            'name' => 'Name',
+            'qty' => 'Qty',
+            'price' => 'Price',
+            'tax_amount' => 'Tax Amount',
+            'line_total' => 'Line Total',
+            'total' => 'Total',
+            'payment_method' => 'Payment Method',
+            'invoice' => 'Invoice',
+            'created_at' => 'Created'
+        ],
     ],
     
 

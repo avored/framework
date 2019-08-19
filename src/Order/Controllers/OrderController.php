@@ -1,10 +1,16 @@
 <?php
 namespace AvoRed\Framework\Order\Controllers;
 
+use AvoRed\Framework\Order\Mail\SentOrderInvoice;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Order\Requests\OrderChangeStatusRequest;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OrderController
 {
@@ -63,5 +69,76 @@ class OrderController
                 ['attribute' => __('avored::order.order.index.title')]
             )
         ]);
+    }
+
+    /**
+     * Download Order Invoice in PDF.
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadInvoice(Order $order): BinaryFileResponse
+    {
+        $path = $this->generatePDF($order);
+        return response()->download($path, 'invoice.pdf');
+    }
+
+    /**
+     * Download Order Invoice in PDF.
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return  \Illuminate\Http\Response
+     */
+    public function emailInvoice(Order $order)
+    {
+        $path = $this->generatePDF($order);
+        $email = $order->user->email;
+
+        Mail::to($email)
+            ->send(
+                new SentOrderInvoice($path)
+            );
+        
+        return redirect()->route('admin.order.index');
+    }
+
+   /**
+     * Generate PDF Invoice for the Given Order.
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function generateShippingLabel(Order $order)
+    {
+        $path = storage_path('app/public/uploads/orders/shipping-label-' . $order->id . '.pdf');
+        if (!File::exists($path)) {
+            $html = view('avored::order.order.shipping-label')
+                ->with('order', $order)
+                ->render();
+    
+            PDF::loadHtml($html)
+                ->setPaper('a4')
+                ->save($path);
+        }
+
+        return response()->download($path, 'shipping-label.pdf');
+    }
+
+   /**
+     * Generate PDF Invoice for the Given Order.
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return string
+     */
+    protected function generatePDF(Order $order)
+    {
+        $path = storage_path('app/public/uploads/orders/invoice-' . $order->id . '.pdf');
+        if (!File::exists($path)) {
+            $html = view('avored::order.order.invoice')
+                ->with('order', $order)
+                ->render();
+    
+            PDF::loadHtml($html)
+                ->setPaper('a4')
+                ->save($path);
+        }
+
+        return $path;
     }
 }

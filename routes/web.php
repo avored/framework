@@ -19,85 +19,103 @@ Route::middleware(['web'])
     ->group(function () {
 
         /***************** LOGIN ROUTE *****************/
-        Route::get('login', 'System\Controllers\LoginController@loginForm')
-        ->name('login');
-        Route::post('login', 'System\Controllers\LoginController@login')
-        ->name('login.post');
+        Route::get('login', [\AvoRed\Framework\System\Controllers\LoginController::class,'loginForm'])
+            ->name('login');
+        Route::post('login', [\AvoRed\Framework\System\Controllers\LoginController::class,'login'])
+            ->name('login.post');
         
         /***************** PASSWORD RESET *****************/
-        Route::get('password/reset', 'System\Controllers\ForgotPasswordController@linkRequestForm')
-            ->name('password.request');
-            Route::post('password/email', 'System\Controllers\ForgotPasswordController@sendResetLinkEmail')
-            ->name('password.email');
+        Route::get(
+            'password/reset',
+            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class,'linkRequestForm']
+        )->name('password.request');
+        Route::post(
+            'password/email',
+            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class,'sendResetLinkEmail']
+        )->name('password.email');
             
-            Route::get('password/reset/{token}', 'System\Controllers\ResetPasswordController@showResetForm')
-                ->name('password.reset');
-            Route::post('password/reset', 'System\Controllers\ResetPasswordController@reset')
-                ->name('password.update');
+        Route::get(
+            'password/reset/{token}',
+            [\AvoRed\Framework\System\Controllers\ResetPasswordController::class,'showResetForm']
+        )->name('password.reset');
+        Route::post('password/reset', [\AvoRed\Framework\System\Controllers\ResetPasswordController::class,'reset'])
+            ->name('password.update');
         /***************** LOGOUT *****************/
-        Route::post('logout', 'System\Controllers\LoginController@logout')
+        Route::post('logout', [\AvoRed\Framework\System\Controllers\LoginController::class,'logout'])
             ->name('logout');
     });
 
 Route::middleware(['web', 'admin.auth'])
     ->prefix($baseAdminUrl)
-    ->namespace('AvoRed\\Framework')
+    ->namespace('AvoRed\Framework')
     ->name('admin.')
     ->group(function () {
-        Route::get('', 'System\Controllers\DashboardController@index')
+        Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class,'index'])
             ->name('dashboard');
 
         Route::get('configuration', 'System\Controllers\ConfigurationController@index')
             ->name('configuration.index');
-        Route::post('configuration', 'System\Controllers\ConfigurationController@store')
+        Route::post('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class,'store'])
             ->name('configuration.store');
         
-        Route::post('admin-user-image', 'System\Controllers\AdminUserController@upload')
+        Route::post('admin-user-image', [\AvoRed\Framework\System\Controllers\AdminUserController::class,'upload'])
             ->name('admin-user-image-upload');
 
         Route::post(
             'variation/{product}/create-variation',
-            'Catalog\Controllers\ProductController@createVariation'
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'createVariation']
         )->name('product.create.variation');
 
         Route::post(
             'variation/{product}/save-variation',
-            'Catalog\Controllers\ProductController@saveVariation'
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'saveVariation']
         )->name('product.save.variation');
         
         Route::delete(
             'variation/{product}',
-            'Catalog\Controllers\ProductController@destroyVariation'
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'destroyVariation']
         )->name('product.destroy.variation');
 
         Route::post(
             'product-image/{product}/upload',
-            'Catalog\Controllers\ProductController@upload'
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'upload']
         )->name('product.image.upload');
         Route::delete(
             'product-image/{productImage}',
-            'Catalog\Controllers\ProductController@destroyImage'
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'destroyImage']
         )->name('product.image.destroy');
 
         Route::post(
             'order-change-status/{order}',
-            'Order\Controllers\OrderController@changeStatus'
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'changeStatus']
         )->name('order.change-status');
+        Route::get(
+            'order-download-invoice/{order}',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'downloadInvoice']
+        )->name('order.download.invoice');
+        Route::get(
+            'order-email-invoice/{order}',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'emailInvoice']
+        )->name('order.email.invoice');
+        Route::get(
+            'order-shipping-label/{order}',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'generateShippingLabel']
+        )->name('order.shipping.label');
 
-        Route::resource('admin-user', 'System\Controllers\AdminUserController');
-        Route::resource('attribute', 'Catalog\Controllers\AttributeController');
-        Route::resource('category', 'Catalog\Controllers\CategoryController');
-        Route::resource('currency', 'System\Controllers\CurrencyController');
-        Route::resource('language', 'System\Controllers\LanguageController');
-        Route::resource('order', 'Order\Controllers\OrderController')->only(['index']);
-        Route::resource('order-status', 'Order\Controllers\OrderStatusController');
-        Route::resource('menu-group', 'Cms\Controllers\MenuGroupController');
-        Route::resource('page', 'Cms\Controllers\PageController');
-        Route::resource('property', 'Catalog\Controllers\PropertyController');
-        Route::resource('product', 'Catalog\Controllers\ProductController');
-        Route::resource('role', 'System\Controllers\RoleController');
-        Route::resource('state', 'System\Controllers\StateController');
-        Route::resource('user-group', 'User\Controllers\UserGroupController');
-        Route::resource('tax-group', 'System\Controllers\TaxGroupController');
-        Route::resource('tax-rate', 'System\Controllers\TaxRateController');
+        Route::resource('admin-user', System\Controllers\AdminUserController::class);
+        Route::resource('attribute', Catalog\Controllers\AttributeController::class);
+        Route::resource('category', Catalog\Controllers\CategoryController::class);
+        Route::resource('currency', System\Controllers\CurrencyController::class);
+        Route::resource('language', System\Controllers\LanguageController::class);
+        Route::resource('order', Order\Controllers\OrderController::class)->only(['index']);
+        Route::resource('order-status', Order\Controllers\OrderStatusController::class);
+        Route::resource('menu-group', Cms\Controllers\MenuGroupController::class);
+        Route::resource('page', Cms\Controllers\PageController::class);
+        Route::resource('property', Catalog\Controllers\PropertyController::class);
+        Route::resource('product', Catalog\Controllers\ProductController::class);
+        Route::resource('role', System\Controllers\RoleController::class);
+        Route::resource('state', System\Controllers\StateController::class);
+        Route::resource('user-group', User\Controllers\UserGroupController::class);
+        Route::resource('tax-group', System\Controllers\TaxGroupController::class);
+        Route::resource('tax-rate', System\Controllers\TaxRateController::class);
     });

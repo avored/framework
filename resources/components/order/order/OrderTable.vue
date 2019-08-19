@@ -45,6 +45,15 @@ export default {
         changeStatusDropdown(val) {
             this.changeStatusId = val;
         },
+        downloadOrderAction(record) {
+            return this.baseUrl + '/order-download-invoice/' + record.id;
+        },
+        emailInvoiceOrderAction(record) {
+            return this.baseUrl + '/order-email-invoice/' + record.id;
+        },
+        shippingLabelOrderAction(record) {
+            return this.baseUrl + '/order-shipping-label/' + record.id;
+        },
         onChangeStatus(record) {
             let data = {order_status_id : this.changeStatusId};
 

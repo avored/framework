@@ -58,4 +58,13 @@ class Order extends Model
     {
         return $this->belongsTo(Address::class, 'billing_address_id');
     }
+
+    /**
+     * Order Billing Address
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }
