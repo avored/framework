@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OrderController
@@ -107,7 +108,9 @@ class OrderController
      */
     public function generateShippingLabel(Order $order)
     {
-        $path = storage_path('app/public/uploads/orders/shipping-label-' . $order->id . '.pdf');
+        $folderPath = storage_path('app/public/uploads/orders');
+        File::makeDirectory($folderPath, 0755, true, true);
+        $path = $folderPath . '/shipping-label-' . $order->id . '.pdf';
         if (!File::exists($path)) {
             $html = view('avored::order.order.shipping-label')
                 ->with('order', $order)
@@ -128,7 +131,10 @@ class OrderController
      */
     protected function generatePDF(Order $order)
     {
-        $path = storage_path('app/public/uploads/orders/invoice-' . $order->id . '.pdf');
+        $folderPath = storage_path('app/public/uploads/orders');
+        File::makeDirectory($folderPath, 0755, true, true);
+        $path = $folderPath . '/invoice-' . $order->id . '.pdf';
+
         if (!File::exists($path)) {
             $html = view('avored::order.order.invoice')
                 ->with('order', $order)

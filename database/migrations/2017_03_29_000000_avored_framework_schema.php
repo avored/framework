@@ -126,7 +126,7 @@ class AvoredFrameworkSchema extends Migration
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->tinyInteger('is_default')->default(0);
+            $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
 
@@ -393,14 +393,14 @@ class AvoredFrameworkSchema extends Migration
             $table->string('shipping_option');
             $table->string('payment_option');
             $table->unsignedBigInteger('order_status_id');
-            $table->string('currency_code')->nullable()->default(null);
+            $table->unsignedBigInteger('currency_id')->nullable()->default(null);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('shipping_address_id')->nullable();
             $table->unsignedBigInteger('billing_address_id')->nullable();
             $table->string('track_code')->nullable()->default(null);
             $table->timestamps();
     
-            // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('shipping_address_id')->references('id')->on('addresses');
             $table->foreign('billing_address_id')->references('id')->on('addresses');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');

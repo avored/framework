@@ -85,15 +85,15 @@
                         {{ number_format($product->qty, 2) }}
                     </td>
                     <td style="padding:5px;text-align:right">
-                        {{ $order->currency_code }} {{ number_format($product->product->price, 2) }}
+                        {{ $order->currency->symbol }} {{ number_format($product->product->price, 2) }}
                     </td>
                     
                     <td style="padding:5px;text-align:right">
-                        {{ $order->currency_code }} {{ number_format($product->tax_amount, 2) }}
+                        {{ $order->currency->symbol }} {{ number_format($product->tax_amount, 2) }}
                     </td>
                     
                     <td style="padding:5px; text-align:right">
-                        {{ $order->currency_code }} {{ number_format($product->price * $product->qty, 2) }}
+                        {{ $order->currency->symbol }} {{ number_format($product->price * $product->qty, 2) }}
                     </td>
                 </tr>
                 @php
@@ -105,7 +105,7 @@
                 <td style="padding: 5px"></td>
                 
                 <td colspan="4" style="text-align:right;padding 5px;border-top: 1px solid #eee;">
-                   {{ __('avored::order.order.invoice.total') }}: {{ $order->currency_code }} {{ number_format($total, 2) }}
+                   {{ __('avored::order.order.invoice.total') }}: {{ $order->currency->symbol }} {{ number_format($total, 2) }}
                 </td>
             </tr>
         </table>

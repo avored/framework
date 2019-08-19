@@ -9,6 +9,8 @@ use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Models\Contracts\AdminUserInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -19,6 +21,18 @@ class InstallCommand extends Command
      * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
+
+    /**
+     * OrderStauts Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\OrderStatusRepository $orderStatusRepository
+     */
+    protected $orderStatusRepository;
+
+    /**
+     * UserGroup Repository for the Install Command
+     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     */
+    protected $userGroupRepository;
 
     /**
      * Currency Repository for the Install Command
@@ -37,15 +51,21 @@ class InstallCommand extends Command
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
+     * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
+     * @param \AvoRed\Framework\Database\Contracts\OrderStatusModelInterface $orderStatusRepository
      */
     public function __construct(
         RoleModelInterface $roleRepository,
         CurrencyModelInterface $currencyRepository,
-        LanguageModelInterface $languageRepository
+        LanguageModelInterface $languageRepository,
+        UserGroupModelInterface $userGroupRepository,
+        OrderStatusModelInterface $orderStatusRepository
     ) {
         $this->roleRepository = $roleRepository;
         $this->currencyRepository = $currencyRepository;
         $this->languageRepository = $languageRepository;
+        $this->userGroupRepository = $userGroupRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
         parent::__construct();
     }
 
@@ -75,16 +95,20 @@ class InstallCommand extends Command
         
         $relativePath = str_replace($basePath . '/', '', $absolutePath);
 
-        $this->call('migrate', ['--path' => $relativePath]);
-        //$this->call('migrate');
-        //$this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        //$this->call('migrate', ['--path' => $relativePath]);
+        $this->call('migrate:fresh');
+        if ($this->confirm('Would you like to install Dummy Data?')) {
+            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        }
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
         $this->createCurrency();
         $this->createLanguage();
+        $this->createDefaultUserGroup();
+        $this->createOrderStatus();
         $this->alterUserTable();
         
-        //$this->call('avored:admin:make');
+        $this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
     }
 
@@ -102,6 +126,32 @@ class InstallCommand extends Command
             'status' => 'ENABLED'
         ];
         $this->currencyRepository->create($data);
+    }
+
+    /**
+     * Get the Default currency data
+     * @return void
+     */
+    public function createDefaultUserGroup()
+    {
+        $data =  [
+            'name' => 'Default Group',
+            'is_default' => 1
+        ];
+        $this->userGroupRepository->create($data);
+    }
+
+    /**
+     * create order status
+     * @return void
+     */
+    public function createOrderStatus()
+    {
+        $defaultStatus = $this->orderStatusRepository->create(['name' => 'Pending']);
+        $defaultStatus->is_default = 1;
+        $defaultStatus->save();
+        $this->orderStatusRepository->create(['name' => 'Processing']);
+        $this->orderStatusRepository->create(['name' => 'Completed']);
     }
 
     /**

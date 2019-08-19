@@ -14,7 +14,7 @@ class Order extends Model
         'shipping_option',
         'payment_option',
         'order_status_id',
-        'currency_code',
+        'currency_id',
         'user_id',
         'shipping_address_id',
         'billing_address_id',
@@ -48,6 +48,15 @@ class Order extends Model
     public function shippingAddress()
     {
         return $this->belongsTo(Address::class, 'shipping_address_id');
+    }
+
+    /**
+     * Order Currency Model
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     /**

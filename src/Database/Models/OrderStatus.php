@@ -11,16 +11,4 @@ class OrderStatus extends Model
      * @var array
      */
     protected $fillable = ['name', 'is_default'];
-
-    /**
-     * Set the Default value for the Order Status
-     * @param int $val
-     * @return void
-     */
-    protected function setIsDefaultAttribute($val)
-    {
-        if ($val === null) {
-            $this->attributes ['is_default'] = 0;
-        }
-    }
 }
