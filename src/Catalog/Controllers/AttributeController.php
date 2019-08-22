@@ -127,11 +127,12 @@ class AttributeController
                     continue;
                 }
 
-                if (is_string($key)) {
-                    $property->dropdownOptions()->create(['display_text' => $option]);
+                $optionModel = $property->dropdownOptions()->find($key);
+
+                if ($optionModel === null) {
+                    $property->dropdownOptions()->create($option);
                 } else {
-                    $optionModel = $property->dropdownOptions()->find($key);
-                    $optionModel->update(['display_text' => $option]);
+                    $optionModel->update($option);
                 }
             }
         }
@@ -145,7 +146,7 @@ class AttributeController
     public function upload(AttributeImageRequest $request)
     {
         $image = $request->file('dropdown_options_image');
-        $path = $image->store('uploads/catalog/attributes/', 'public');
+        $path = $image->store('uploads/catalog/attributes', 'public');
 
         return response()->json([
             'success' => true,

@@ -10,7 +10,8 @@ export default {
         dropdownOptions: [],
         image_path_lists: [],
         headers: {},
-        display_as: ''
+        display_as: '',
+        fields: ['name', 'slug', 'display_as']
     };
   },
   methods: {
@@ -22,11 +23,11 @@ export default {
           });
          },
         imagePathName(path) {
-            var name = "attribute_image[";
+            var name = "dropdown_option[";
             Object.keys(path).forEach(key => {
                 name += key
             })
-            name += "]";
+            name += "][path]";
             return name;
         },
         imagePathValue(path) {
@@ -66,8 +67,20 @@ export default {
             }
             
         },
-        dropdown_options(index) {
-            return 'dropdown_option[' + index + ']';
+        getDefaultFile(record) {
+            var dropdownOption = this.attribute.dropdown_options[record];
+            if (!isNil(dropdownOption)) {
+                var filename = dropdownOption.path.replace(/^.*[\\\/]/, '')
+                return [{
+                    uid: dropdownOption.id,
+                    name: filename,
+                    status: 'done',
+                    url: dropdownOption.path,
+                }];
+            }
+        },
+        dropdownOptionDisplayTextName(index) {
+            return 'dropdown_option[' + index + '][display_text]';
         },
         dropdown_options_image(index) {
             return 'dropdown_option_image[' + index + ']';
@@ -76,15 +89,22 @@ export default {
   mounted() {
       this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
       if (!isNil(this.attribute)) {
-          if (this.attribute.dropdown_options.length > 0) {
-              this.attribute.dropdown_options.forEach(element => {
-                this.dropdownOptions.push(element.id);
-                this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
-              });
-          }
+        this.display_as = this.attribute.display_as;
+        this.fields.forEach(field => {
+          this.attributeForm.getFieldDecorator(field, {initialValue: this.attribute[field]})
+        });
+
+        if (this.attribute.dropdown_options.length > 0) {
+            this.attribute.dropdown_options.forEach(element => {
+            this.dropdownOptions.push(element.id);
+            this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
+            });
+        }
       } else {
           this.dropdownOptions.push(this.randomString());
       }
+
+
   }
 };
 </script>

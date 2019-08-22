@@ -10,7 +10,6 @@
         name="name"
         v-decorator="[
         'name',
-        {'initialValue': '{{ $attribute->name ?? '' }}'},
         {rules: 
             [
                 {   required: true, 
@@ -33,7 +32,6 @@
         name="slug"
         v-decorator="[
         'slug',
-        {'initialValue': '{{ $attribute->slug ?? '' }}'},
         {rules: 
             [
                 {   required: true, 
@@ -79,6 +77,7 @@
             <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
              <a-upload
                 name="dropdown_options_image"
+                :default-file-list="getDefaultFile(index)"
                 :multiple="false"
                 :headers="headers"
                 v-on:change="handleUploadImageChange($event, k)"
@@ -99,7 +98,7 @@
                 label="{{ __('avored::catalog.attribute.dropdown_options') }}"
             >
                 <a-input
-                    :name="dropdown_options(k)"
+                    :name="dropdownOptionDisplayTextName(k)"
                     v-decorator="[
                     `dropdown_options[${k}]`,
                     {rules: 
