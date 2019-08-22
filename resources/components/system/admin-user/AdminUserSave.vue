@@ -33,7 +33,7 @@ export default {
       cancelAdminUser() {
           window.location = this.baseUrl + '/admin-user';
       },
-      handleUploadImageChangex(info) {
+      handleUploadImageChange(info) {
           if (info.file.status == "done") {
               this.image_path = info.file.response.path;
           }

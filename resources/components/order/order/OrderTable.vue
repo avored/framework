@@ -54,6 +54,9 @@ export default {
         shippingLabelOrderAction(record) {
             return this.baseUrl + '/order-shipping-label/' + record.id;
         },
+        orderShowAction(record) {
+            return this.baseUrl + '/order/' + record.id;
+        },
         onChangeStatus(record) {
             let data = {order_status_id : this.changeStatusId};
 

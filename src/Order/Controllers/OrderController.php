@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OrderController
@@ -73,6 +74,16 @@ class OrderController
     }
 
     /**
+     * Show Order Details
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return \Illuminate\View\View
+     */
+    public function show(Order $order): View
+    {
+        return view('avored::order.order.show')
+            ->with('order', $order);
+    }
+    /**
      * Download Order Invoice in PDF.
      * @param \AvoRed\Framework\Database\Models\Order  $order
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
@@ -86,7 +97,7 @@ class OrderController
     /**
      * Download Order Invoice in PDF.
      * @param \AvoRed\Framework\Database\Models\Order  $order
-     * @return  \Illuminate\Http\Response
+     * @return  \Illuminate\Http\RedirectResponse
      */
     public function emailInvoice(Order $order)
     {
@@ -106,7 +117,7 @@ class OrderController
      * @param \AvoRed\Framework\Database\Models\Order  $order
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function generateShippingLabel(Order $order)
+    public function generateShippingLabel(Order $order): BinaryFileResponse
     {
         $folderPath = storage_path('app/public/uploads/orders');
         File::makeDirectory($folderPath, 0755, true, true);
@@ -129,7 +140,7 @@ class OrderController
      * @param \AvoRed\Framework\Database\Models\Order  $order
      * @return string
      */
-    protected function generatePDF(Order $order)
+    protected function generatePDF(Order $order): string
     {
         $folderPath = storage_path('app/public/uploads/orders');
         File::makeDirectory($folderPath, 0755, true, true);

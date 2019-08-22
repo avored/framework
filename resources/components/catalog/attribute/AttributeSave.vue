@@ -8,6 +8,8 @@ export default {
     return {
         attributeForm: this.$form.createForm(this),
         dropdownOptions: [],
+        image_path_lists: [],
+        headers: {},
         display_as: ''
     };
   },
@@ -19,8 +21,27 @@ export default {
             }
           });
          },
-        imageSelected(info){
-            console.log(info);
+        imagePathName(path) {
+            var name = "attribute_image[";
+            Object.keys(path).forEach(key => {
+                name += key
+            })
+            name += "]";
+            return name;
+        },
+        imagePathValue(path) {
+            var value = ""
+            Object.keys(path).forEach(key => {
+                value += path[key]
+            })
+            return value;
+        },
+        handleUploadImageChange(info, record){
+            if (info.file.status == "done") {
+                var object = {};
+                object[record] = info.file.response.path; 
+                this.image_path_lists.push(object);
+          }
         },
         displayAsChange(val) {
             this.display_as = val;
@@ -53,6 +74,7 @@ export default {
         }
   },
   mounted() {
+      this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
       if (!isNil(this.attribute)) {
           if (this.attribute.dropdown_options.length > 0) {
               this.attribute.dropdown_options.forEach(element => {

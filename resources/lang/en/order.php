@@ -34,7 +34,17 @@ return [
             'download_invoice' => 'Download Invoice',
             'change_status' => 'Change Status',
             'email_invoice' => 'Email Invoice',
-            'download_shipping_label' => 'Download Shipping Label'
+            'download_shipping_label' => 'Download Shipping Label',
+            'show' => 'Show',
+        ],
+        'show' => [
+            'title' => 'Order Show',
+            'info' => 'Order Information',
+            'product_info' => 'Product Information',
+            'id' => 'Order Id',
+            'payment_option' => 'Payment Option',
+            'shipping_option' => 'Shipping Option',
+            'created_at' => 'Created At'
         ],
         'invoice' => [
             'name' => 'Name',

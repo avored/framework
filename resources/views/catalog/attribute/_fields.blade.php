@@ -76,14 +76,14 @@
     >
     <a-row :gutter="20">
         <a-col :span="12">
-            <a-form-item
-                label="{{ __('avored::catalog.attribute.image') }}"
-            >
+            <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
              <a-upload
-                :name="dropdown_options_image(k)"
+                name="dropdown_options_image"
                 :multiple="false"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
-                @change="imageSelected">
+                :headers="headers"
+                v-on:change="handleUploadImageChange($event, k)"
+                action="{{ route('admin.attribute.upload') }}" 
+                >
                 <a-button>
                 <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
                 </a-button>
@@ -117,8 +117,9 @@
                     ></a-icon>
                 </a-input>
             </a-form-item>
+
+            <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" />
         </a-col>
-        
     </a-row>
 </a-card>
 

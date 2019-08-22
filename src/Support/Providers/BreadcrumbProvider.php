@@ -411,99 +411,56 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.dashboard');
             }
         );
+
+        BreadcrumbFacade::make(
+            'admin.order.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Order')
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.order.show',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Order Show')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.order.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.menu-group.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Menu')
+                    ->parent('admin.dashboard');
+            }
+        );
         
-        // BreadcrumbFacade::make(
-        //     'admin.category.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.category.index');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.product.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Product')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-        // BreadcrumbFacade::make(
-        //     'admin.page.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Page')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.product.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.product.index');
+            }
+        );
 
-        // BreadcrumbFacade::make(
-        //     'admin.page.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.page.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.page.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.page.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.page.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.page.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.menu.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Menu')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        
-        // BreadcrumbFacade::make(
-        //     'admin.product.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Product')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.product.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.product.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.product.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.product.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.product.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.product.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.order.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Order')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.product.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('Edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.product.index');
+            }
+        );
 
         // BreadcrumbFacade::make(
         //     'admin.order.view',

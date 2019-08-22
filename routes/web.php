@@ -58,6 +58,9 @@ Route::middleware(['web', 'admin.auth'])
         Route::post('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class,'store'])
             ->name('configuration.store');
         
+        Route::post('attribute/upload', [\AvoRed\Framework\Catalog\Controllers\AttributeController::class,'upload'])
+            ->name('attribute.upload');
+
         Route::post('admin-user-image', [\AvoRed\Framework\System\Controllers\AdminUserController::class,'upload'])
             ->name('admin-user-image-upload');
 
@@ -85,6 +88,10 @@ Route::middleware(['web', 'admin.auth'])
             [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'destroyImage']
         )->name('product.image.destroy');
 
+        Route::get(
+            'order/{order}',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'show']
+        )->name('order.show');
         Route::post(
             'order-change-status/{order}',
             [\AvoRed\Framework\Order\Controllers\OrderController::class,'changeStatus']
