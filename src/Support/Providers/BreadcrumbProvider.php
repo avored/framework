@@ -415,14 +415,14 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.order.index',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Order')
+                $breadcrumb->label('avored::system.breadcrumb.order.index')
                     ->parent('admin.dashboard');
             }
         );
         BreadcrumbFacade::make(
             'admin.order.show',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Order Show')
+                $breadcrumb->label('avored::system.breadcrumb.order.show')
                     ->parent('admin.dashboard')
                     ->parent('admin.order.index');
             }
@@ -431,15 +431,31 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.menu-group.index',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Menu')
+                $breadcrumb->label('avored::system.breadcrumb.menu.index')
                     ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.menu-group.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.menu.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.menu-group.index');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.menu-group.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.menu.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.menu-group.index');
             }
         );
         
         BreadcrumbFacade::make(
             'admin.product.index',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Product')
+                $breadcrumb->label('avored::system.breadcrumb.product.index')
                     ->parent('admin.dashboard');
             }
         );
@@ -447,7 +463,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.product.create',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Create')
+                $breadcrumb->label('avored::system.breadcrumb.product.create')
                     ->parent('admin.dashboard')
                     ->parent('admin.product.index');
             }
@@ -456,370 +472,36 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.product.edit',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('Edit')
+                $breadcrumb->label('avored::system.breadcrumb.product.edit')
                     ->parent('admin.dashboard')
                     ->parent('admin.product.index');
             }
         );
 
-        // BreadcrumbFacade::make(
-        //     'admin.order.view',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('View')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.order.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.order-status.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Order Status')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.state.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.state.index')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-        // BreadcrumbFacade::make(
-        //     'admin.order-status.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.order-status.index');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.state.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.state.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.state.index');
+            }
+        );
 
-        // BreadcrumbFacade::make(
-        //     'admin.order-status.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.order-status.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.order-status.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.order-status.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.attribute.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Attribute')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.attribute.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.attribute.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.attribute.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.attribute.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.attribute.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.attribute.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.property.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Property')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.property.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.property.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.property.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.property.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.property.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.property.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.user.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('User')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.user.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.user.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.user.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.user-group.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('User Group')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.user-group.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user-group.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.user-group.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user-group.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.user-group.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.user-group.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.admin-user.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Admin User')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.admin-user.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.admin-user.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.admin-user.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.admin-user.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.admin-user.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.admin-user.index');
-        //     }
-        // );
-
-        
-        // BreadcrumbFacade::make(
-        //     'admin.role.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.role.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.configuration',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Configuration')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.site-currency.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Site Currency')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.site-currency.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.site-currency.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.site-currency.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.site-currency.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.site-currency.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.site-currency.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.country.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Country')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.country.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.country.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.country.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.country.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.country.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Show')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.country.index');
-        //     }
-        // );
-        // BreadcrumbFacade::make(
-        //     'admin.state.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('State')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.state.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Create')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.state.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.state.edit',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.state.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.state.show',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Edit')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.state.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.module.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Module')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.module.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Upload')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.module.index');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.theme.index',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Theme')
-        //             ->parent('admin.dashboard');
-        //     }
-        // );
-
-        // BreadcrumbFacade::make(
-        //     'admin.theme.create',
-        //     function (Breadcrumb $breadcrumb) {
-        //         $breadcrumb->label('Upload')
-        //             ->parent('admin.dashboard')
-        //             ->parent('admin.theme.index');
-        //     }
-        // );
+        BreadcrumbFacade::make(
+            'admin.state.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.state.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.state.index');
+            }
+        );
     }
 }
