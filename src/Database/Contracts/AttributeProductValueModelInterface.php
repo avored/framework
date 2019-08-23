@@ -31,6 +31,15 @@ interface AttributeProductValueModelInterface
     public function findByAttributeProductValues(int $productId, int $attributeId, int $optionId);
 
     /**
+     * Find AttributeProductValue Resource into a database
+     * @param int $productId
+     * @param int $variationId
+     * @param int $optionId
+     * @return \AvoRed\Framework\Database\Models\AttributeProductValue $attributeProductValue
+     */
+    public function getModelByProductIdAndVariationId(int $productId, int $variationId);
+
+    /**
      * Delete AttributeProductValue Resource from a database
      * @param int $id
      * @return int

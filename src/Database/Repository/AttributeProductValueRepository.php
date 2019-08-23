@@ -54,6 +54,20 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
+     * Find AttributeProductValue Resource into a database
+     * @param int $productId
+     * @param int $variationId
+     * @param int $optionId
+     * @return \AvoRed\Framework\Database\Models\AttributeProductValue $attributeProductValue
+     */
+    public function getModelByProductIdAndVariationId(int $productId, int $variationId)
+    {
+        return AttributeProductValue::whereProductId($productId)
+            ->whereVariationId($variationId)
+            ->get();
+    }
+
+    /**
      * Get all the attribute product values from the connected database
      * @return \Illuminate\Database\Eloquent\Collection $attributeProductValues
      */

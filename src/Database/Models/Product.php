@@ -118,15 +118,6 @@ class Product extends Model
     }
 
     /**
-     * Belongs to Many Product Images
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function getVariationsWithImages()
-    {
-        return $this->hasMany(ProductVariation::class, 'product_id');
-    }
-
-    /**
      * Get Main Image Url
      * @return string $mainImageUrl
      */

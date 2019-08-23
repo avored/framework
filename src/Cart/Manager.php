@@ -77,8 +77,10 @@ class Manager
             } else {
                 $attrs = Collection::make([]);
                 foreach ($attributes as $valueId) {
-                    $valueModel = $this->attributeProductValueRepository->find($valueId);
-
+                    //@todo fixed ideally this can be multiple if variation has more then one attribute
+                    $valueModel = $this->attributeProductValueRepository
+                        ->getModelByProductIdAndVariationId($product->id, $valueId)->first();
+                        
                     $attributeData = [
                         'attribute_id' => $valueModel->attribute_id,
                         'attribute_name' => $valueModel->attribute->name,
@@ -98,7 +100,6 @@ class Manager
                 $message = __('avored::catalog.cart_success_notification');
             }
         } else {
-            
             $cartProduct = $this->createCartProductFromSlug($product);
             $cartProduct->qty($qty);
             
