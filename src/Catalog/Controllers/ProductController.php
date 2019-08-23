@@ -153,6 +153,7 @@ class ProductController
         $tabs = Tab::get('catalog.product');
         
         $product->images;
+
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();

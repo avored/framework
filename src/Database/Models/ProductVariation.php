@@ -34,6 +34,6 @@ class ProductVariation extends Model
      */
     public function variation()
     {
-        return $this->belongsTo(Product::class, 'variation_id');
+        return $this->belongsTo(Product::class, 'variation_id')->with('images');
     }
 }

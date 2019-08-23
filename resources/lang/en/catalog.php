@@ -30,6 +30,8 @@ return [
         ],
     ],
     'product' => [
+        'variation_image' => 'Variation Image',
+        'variation_image_upload' => 'Upload Image',
         'available_in_stock' => ':qty available in stock',
         'not_available_in_stock' => 'Sorry this product is out of stock.',
         'variation_title' => 'Product Variations',

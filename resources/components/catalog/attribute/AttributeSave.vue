@@ -75,7 +75,7 @@ export default {
                     uid: dropdownOption.id,
                     name: filename,
                     status: 'done',
-                    url: dropdownOption.path,
+                    url: '/storage/' + dropdownOption.path,
                 }];
             }
         },
