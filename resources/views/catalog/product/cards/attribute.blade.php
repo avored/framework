@@ -19,12 +19,12 @@
     <h4>{{ __('avored::catalog.product.variation_title') }}</h4>
 
      <a-table :columns="columns" row-key="id" :data-source="productVariations">
-        <span slot="name" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.name }}</span>
-        <span slot="price" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.price }}</span>
-        <span slot="qty" slot-scope="text, record" href="javascript:;">@{{ record.variationModel.qty }}</span>
+        <span slot="name" slot-scope="text, record" href="javascript:;">@{{ record.variation.name }}</span>
+        <span slot="price" slot-scope="text, record" href="javascript:;">@{{ record.variation.price }}</span>
+        <span slot="qty" slot-scope="text, record" href="javascript:;">@{{ record.variation.qty }}</span>
 
         <span slot="action" slot-scope="text, record">
-            <a href="javascript:;" @click="showVariationModel(record)">Edit</a>
+            <a href="javascript:;" @click="editVariationModel(record)">Edit</a>
             <a-divider type="vertical" />
             <a href="javascript:;" @click="deleteVariation(record)">Delete</a>
         </span>

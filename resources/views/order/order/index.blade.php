@@ -12,7 +12,11 @@
 <a-row type="flex" justify="center">
     <a-col :span="24">        
         <order-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
+            <div>
             <a-table :columns="columns" row-key="id" :data-source="{{ $orders }}">
+                <span slot="order_status" slot-scope="text, record">
+                    
+                </span>
                 <span slot="action" slot-scope="text, record">
                     
                     <a-dropdown>
@@ -25,25 +29,17 @@
                                 {{ __('avored::order.order.index.show') }}
                                 </a>
                             </a-menu-item>
+                            
+                            
                             <a-menu-item>
-                                <a-popconfirm
-                                    ok-text="ChangeStatus"
-                                    @confirm="onChangeStatus(record)">
-                                    <template slot="title">
-                                        {{ __('Please Select:') }}
-                                        <a-select :style="{width: '150px'}" @change="changeStatusDropdown">
-                                            @foreach ($orderStatuses as $orderStatus)                                
-                                                <a-select-option value="{{ $orderStatus->id }}">{{ $orderStatus->name }}</a-select-option>
-                                            @endforeach
-                                        </a-select>
-                                        <input type="hidden" v-model="changeStatusId" />
-                                    </template>
-                                    </template>
-
-                                    <a href="javascript:;">
-                                        {{ __('avored::order.order.index.change_status') }}
-                                    </a>
-                                </a-popconfirm>
+                                <a @click.prevent="changeStatusMenuClick(record, $event)">
+                                {{ __('avored::order.order.index.change_status') }}
+                                </a>
+                            </a-menu-item>
+                            <a-menu-item>
+                                <a @click.prevent="addTrackingCodeMenuClick(record, $event)">
+                                {{ __('avored::order.order.index.add_tracking') }}
+                                </a>
                             </a-menu-item>
                             <a-menu-item>
                                 <a :href="downloadOrderAction(record)">
@@ -65,7 +61,12 @@
 
                 </span>
             </a-table>
+            @include('avored::order.order.modal.track-code')
+            @include('avored::order.order.modal.change-status')
+            </div>
         </order-table>
     </a-col>
 </a-row>
+
+
 @endsection

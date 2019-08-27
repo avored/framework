@@ -22,12 +22,67 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-import Antd from 'ant-design-vue'
 import VueQuillEditor from 'vue-quill-editor'
 import Vddl from 'vddl'
 
+import Row from 'ant-design-vue/lib/row'
+import Col from 'ant-design-vue/lib/col'
+import Slider from 'ant-design-vue/lib/slider'
+import Layout from 'ant-design-vue/lib/layout'
+import Menu from 'ant-design-vue/lib/menu'
+import Icon from 'ant-design-vue/lib/icon'
+import Table from 'ant-design-vue/lib/table'
+import Form from 'ant-design-vue/lib/form'
+import Input from 'ant-design-vue/lib/input'
+import Select from 'ant-design-vue/lib/select'
+import Button from 'ant-design-vue/lib/button'
+import Avatar from 'ant-design-vue/lib/avatar'
+import Card from 'ant-design-vue/lib/card'
+import Breadcrumb from 'ant-design-vue/lib/breadcrumb'
+import Tabs from 'ant-design-vue/lib/tabs'
+import Modal from 'ant-design-vue/lib/modal'
+import Switch from 'ant-design-vue/lib/switch'
+import Notification from 'ant-design-vue/lib/notification'
+import Divider from 'ant-design-vue/lib/divider'
+import Dropdown from 'ant-design-vue/lib/dropdown'
+import Radio from 'ant-design-vue/lib/radio'
+import Upload from 'ant-design-vue/lib/upload'
+import Drawer from 'ant-design-vue/lib/drawer'
+
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Slider)
+Vue.use(Layout)
+Vue.use(Menu)
+Vue.use(Icon)
+Vue.use(Table)
+Vue.use(Form)
+Vue.use(Input)
+Vue.use(Select)
+Vue.use(Button)
+Vue.use(Avatar)
+Vue.use(Card)
+Vue.use(Breadcrumb)
+Vue.use(Tabs)
+Vue.use(Modal)
+Vue.use(Switch)
+Vue.use(Notification)
+Vue.use(Divider)
+Vue.use(Dropdown)
+Vue.use(Radio)
+Vue.use(Upload)
+Vue.use(Drawer)
+
+
+Vue.prototype.$notification = Notification;
+Vue.prototype.$confirm = Modal.confirm;
+Vue.prototype.$info = Modal.info;
+Vue.prototype.$success = Modal.success;
+Vue.prototype.$error = Modal.error;
+Vue.prototype.$warning = Modal.warning;
+Vue.prototype.$confirm = Modal.confirm;
+
 Vue.use(Vddl)
-Vue.use(Antd)
 Vue.use(VueQuillEditor);
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default);

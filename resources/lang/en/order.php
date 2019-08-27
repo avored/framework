@@ -33,9 +33,13 @@ return [
             'action' => 'Action',
             'download_invoice' => 'Download Invoice',
             'change_status' => 'Change Status',
+            'order_status' => 'Order Status',
             'email_invoice' => 'Email Invoice',
             'download_shipping_label' => 'Download Shipping Label',
             'show' => 'Show',
+            'add_tracking' => 'Add Tracking Code',
+            'track_code' => 'Track Code',
+            'change_track_code' => 'Track code'
         ],
         'show' => [
             'title' => 'Order Show',

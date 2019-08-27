@@ -96,6 +96,10 @@ Route::middleware(['web', 'admin.auth'])
             'order-change-status/{order}',
             [\AvoRed\Framework\Order\Controllers\OrderController::class,'changeStatus']
         )->name('order.change-status');
+        Route::post(
+            'save-order-track-code/{order}',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class,'saveTrackCode']
+        )->name('order.save.track.code');
         Route::get(
             'order-download-invoice/{order}',
             [\AvoRed\Framework\Order\Controllers\OrderController::class,'downloadInvoice']

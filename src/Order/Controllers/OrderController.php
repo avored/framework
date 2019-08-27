@@ -6,6 +6,7 @@ use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Order\Requests\OrderChangeStatusRequest;
+use AvoRed\Framework\Order\Requests\OrderTrackCodeRequest;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -48,7 +49,7 @@ class OrderController
     {
         $orders = $this->orderRepository->all();
         $orderStatuses = $this->orderStatusRepository->all();
-
+        
         return view('avored::order.order.index')
             ->with('orderStatuses', $orderStatuses)
             ->with('orders', $orders);
@@ -61,6 +62,25 @@ class OrderController
      * @return \Illuminate\Http\JsonResponse
      */
     public function changeStatus(OrderChangeStatusRequest $request, Order $order)
+    {
+        $order->update($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => __(
+                'avored::system.notification.updated',
+                ['attribute' => __('avored::order.order.index.title')]
+            )
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param \AvoRed\Framework\Order\Requests\OrderTrackCodeRequest  $request
+     * @param \AvoRed\Framework\Database\Models\Order  $order
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveTrackCode(OrderTrackCodeRequest $request, Order $order)
     {
         $order->update($request->all());
 

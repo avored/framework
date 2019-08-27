@@ -68,8 +68,11 @@ export default {
             
         },
         getDefaultFile(record) {
+            if (isNil(this.attribute)) {
+                return []
+            }
             var dropdownOption = this.attribute.dropdown_options[record];
-            if (!isNil(dropdownOption)) {
+            if (!isNil(dropdownOption) && !isNil(dropdownOption.path)) {
                 var filename = dropdownOption.path.replace(/^.*[\\\/]/, '')
                 return [{
                     uid: dropdownOption.id,

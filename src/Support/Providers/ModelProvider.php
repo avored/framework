@@ -55,8 +55,6 @@ use AvoRed\Framework\Database\Contracts\ProductImageModelInterface;
 use AvoRed\Framework\Database\Repository\ProductImageRepository;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeDropdownOptionRepository;
-use AvoRed\Framework\Database\Contracts\ProductVariationModelInterface;
-use AvoRed\Framework\Database\Repository\ProductVariationRepository;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
 use AvoRed\Framework\Database\Repository\OrderProductRepository;
 use AvoRed\Framework\Database\Contracts\OrderProductAttributeModelInterface;
@@ -93,7 +91,6 @@ class ModelProvider extends ServiceProvider
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
         ProductModelInterface::class => ProductRepository::class,
-        ProductVariationModelInterface::class => ProductVariationRepository::class,
         ProductImageModelInterface::class => ProductImageRepository::class,
         MenuModelInterface::class => MenuRepository::class,
         MenuGroupModelInterface::class => MenuGroupRepository::class,

@@ -96,9 +96,9 @@ export default {
       getVariationUploadAction() {
 
       },
-      showVariationModel(model) {
+      editVariationModel(model) {
         this.variationModelVisible = true;
-        var variationModel = model.variationModel;
+        var variationModel = model.variation;
 
         this.variationFields.forEach(field => {
           this.variationForm.getFieldDecorator(field, {initialValue: variationModel[field]})
@@ -106,13 +106,17 @@ export default {
         });
         this.variationUploadImagePath = this.baseUrl + '/product-image/' + variationModel.id + '/upload';
 
-        var fileName = variationModel.images[0].path.replace(/^.*[\\\/]/, '')
-        this.variationImageList = [{
-          uid: variationModel.images[0].id,
-          name: fileName,
-          status: 'done',
-          url: '/storage/' + variationModel.images[0].path,
-        }];
+        if (!isNil(variationModel.images[0])) {
+          var fileName = variationModel.images[0].path.replace(/^.*[\\\/]/, '')
+          this.variationImageList = [{
+            uid: variationModel.images[0].id,
+            name: fileName,
+            status: 'done',
+            url: '/storage/' + variationModel.images[0].path,
+          }];
+        } else {
+          this.variationImageList = [];
+        }
         
       },
       handleSubmit(e) {
@@ -211,11 +215,9 @@ export default {
       this.productProperties.forEach(record => {
         this.property[record.id] = record.product_value.value
       });
-      
       this.productAttributes.forEach(record => {
         this.attributeIds.push(record.id)
       });
-
       this.product.images.forEach(record => {
         this.productImages.push(record)
       });

@@ -459,18 +459,8 @@ class AvoredFrameworkSchema extends Migration
 
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('variation_id')->references('id')->on('products');
-            $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
-            $table->timestamps();
-        });
-
-        Schema::create('product_variations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('variation_id');
-            $table->unsignedBigInteger('product_id');
-
             $table->foreign('variation_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
             $table->timestamps();
         });
 

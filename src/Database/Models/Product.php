@@ -109,15 +109,6 @@ class Product extends Model
     }
 
     /**
-     * Belongs to Many Product Images
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function variations()
-    {
-        return $this->hasMany(ProductVariation::class, 'product_id');
-    }
-
-    /**
      * Get Main Image Url
      * @return string $mainImageUrl
      */
@@ -140,6 +131,7 @@ class Product extends Model
     {
         return Attribute::find($attributeId);
     }
+
     /**
      * Get Variation Groups to display variation of a product
      * @return \Illuminate\Database\Eloquent\Collection $variations
@@ -162,6 +154,24 @@ class Product extends Model
         return $variations;
     }
     /**
+     * Get Variation Groups to display variation of a product
+     * @return \Illuminate\Database\Eloquent\Collection $variations
+     */
+    public function getVariations()
+    {
+        $variations = Collection::make([]);
+        $productAttributeValues = $this->attributeProductValues;
+
+        foreach ($productAttributeValues as $productAttributeValue) {
+            $productAttributeValue->variation;
+            $productAttributeValue->variation->images;
+            $variations->push($productAttributeValue);
+        }
+
+        return $variations;
+    }
+
+    /**
      * Belongs to Many Properties
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -176,6 +186,7 @@ class Product extends Model
      */
     public function attributeProductValues()
     {
+
         return $this->hasMany(AttributeProductValue::class);
     }
 
