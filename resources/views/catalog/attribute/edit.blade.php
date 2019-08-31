@@ -25,7 +25,7 @@
                 @method('put')
                 @include('avored::catalog.attribute._fields')
                 
-                <a-form-item>
+                <a-form-item class="mt-1">
                     <a-button
                         type="primary"
                         html-type="submit"

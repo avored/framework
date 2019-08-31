@@ -109,15 +109,6 @@ class Product extends Model
     }
 
     /**
-     * Belongs to Many Product Images
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function variations()
-    {
-        return $this->hasMany(ProductVariation::class, 'product_id');
-    }
-
-    /**
      * Get Main Image Url
      * @return string $mainImageUrl
      */
@@ -129,6 +120,58 @@ class Product extends Model
             return $defaultImage;
         }
         return asset('storage/' . $image->path);
+    }
+
+
+    /**
+     * Get Attribute by given attribute Id
+     * @return \AvoRed\Framework\Database\Models\Attribute $attribute
+     */
+    public function getAttributeById($attributeId): Attribute
+    {
+        return Attribute::find($attributeId);
+    }
+
+    /**
+     * Get Variation Groups to display variation of a product
+     * @return \Illuminate\Database\Eloquent\Collection $variations
+     */
+    public function getVariationByAttributeGroup()
+    {
+        $variations = Collection::make([]);
+        $productAttributeValues = $this->attributeProductValues;
+        
+        foreach ($productAttributeValues as $productAttributeValue) {
+            $productAttributeValue->variation;
+            if ($variations->has($productAttributeValue->attribute_id)) {
+                $existing = $variations->get($productAttributeValue->attribute_id);
+                $existing[] = $productAttributeValue;
+                $variations->put($productAttributeValue->attribute_id, $existing);
+            } else {
+                $variations->put($productAttributeValue->attribute_id, [$productAttributeValue]);
+            }
+        }
+
+        return $variations;
+    }
+    /**
+     * Get Variation Groups to display variation of a product
+     * @return \Illuminate\Database\Eloquent\Collection $variations
+     */
+    public function getVariations()
+    {
+        $data = Collection::make([]);
+        $productAttributeValues = $this->attributeProductValues;
+        
+        foreach ($productAttributeValues as $productAttributeValue) {
+            $productAttributeValue->attributeDropdownOption;
+            $productAttributeValue->variation;
+            $productAttributeValue->variation->images;
+            $data->push($productAttributeValue);
+        }
+        $variations = $data->groupBy('variation_id');
+
+        return $variations;
     }
 
     /**
@@ -146,6 +189,7 @@ class Product extends Model
      */
     public function attributeProductValues()
     {
+
         return $this->hasMany(AttributeProductValue::class);
     }
 

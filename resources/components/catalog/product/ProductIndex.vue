@@ -52,7 +52,7 @@ export default {
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
-                        if (response.data.success === true) {
+                        if (response.success === true) {
                             app.$notification.error({
                                 key: 'product.delete.success',
                                 message: response.data.message,

@@ -368,6 +368,20 @@ return [
             'edit' => 'Edit Category',
             'create' => 'Create Category',
         ],
+        'product' => [
+            'index' => 'Product',
+            'edit' => 'Edit Product',
+            'create' => 'Create Product',
+        ],
+        'order' => [
+            'index' => 'Order',
+            'show' => 'Show Order'
+        ],
+        'menu' => [
+            'index' => 'Menu',
+            'edit' => 'Edit Menu',
+            'create' => 'Create Menu',
+        ],
         'tax-group' => [
             'index' => 'Tax Group',
             'edit' => 'Edit Tax Group',
@@ -394,9 +408,9 @@ return [
             'create' => 'Create Property',
         ],
         'order-status' => [
-            'index' => 'Status',
-            'edit' => 'Edit Status',
-            'create' => 'Create Status',
+            'index' => 'Order Status',
+            'edit' => 'Edit Order Status',
+            'create' => 'Create Order Status',
         ],
         'currency' => [
             'index' => 'Currency',

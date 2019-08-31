@@ -98,8 +98,8 @@
         :multiple="false"
         list-type="picture"
         action="{{ route('admin.admin-user-image-upload') }}" 
-        :headers="headers" 
-        v-on:change="handleUploadImageChangex">
+        :headers="headers"
+        v-on:change="handleUploadImageChange">
         <a-button>
         <a-icon type="upload"></a-icon> Click to Upload
         </a-button>

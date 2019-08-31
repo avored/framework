@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
+use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
 
 class AttributeController
 {
@@ -126,13 +127,31 @@ class AttributeController
                     continue;
                 }
 
-                if (is_string($key)) {
-                    $property->dropdownOptions()->create(['display_text' => $option]);
+                $optionModel = $property->dropdownOptions()->find($key);
+
+                if ($optionModel === null) {
+                    $property->dropdownOptions()->create($option);
                 } else {
-                    $optionModel = $property->dropdownOptions()->find($key);
-                    $optionModel->update(['display_text' => $option]);
+                    $optionModel->update($option);
                 }
             }
         }
+    }
+
+    /**
+     * upload user image to file system.
+     * @param \AvoRed\Framework\System\Requests\AdminUserImageRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload(AttributeImageRequest $request)
+    {
+        $image = $request->file('dropdown_options_image');
+        $path = $image->store('uploads/catalog/attributes', 'public');
+
+        return response()->json([
+            'success' => true,
+            'path' => $path,
+            'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image'])
+        ]);
     }
 }

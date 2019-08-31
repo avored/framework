@@ -20,8 +20,8 @@ use Illuminate\Http\JsonResponse;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 use Illuminate\Support\Str;
-use AvoRed\Framework\Database\Contracts\ProductVariationModelInterface;
 use AvoRed\Framework\Database\Models\Attribute;
+use Illuminate\Support\Facades\DB;
 
 class ProductController
 {
@@ -68,12 +68,6 @@ class ProductController
     protected $attributeDropdownOptionRepository;
 
     /**
-     * Attribute product value repository for the product controller
-     * @var \AvoRed\Framework\Database\Repository\ProductVariationModelInterface $productVariationRepository
-     */
-    protected $productVariationRepository;
-    
-    /**
      * Construct for the AvoRed install command
      * @param \AvoRed\Framework\Database\Contracts\ProductModelInterface $productRepository
      * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
@@ -82,7 +76,6 @@ class ProductController
      * @param \AvoRed\Framework\Database\Contracts\AttributeModelInterface $attributeRepository
      * @param \AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface $attributeProductValueRepository
      * @param \AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface $attributeDropdownOptionRepository
-     * @param \AvoRed\Framework\Database\Contracts\ProductVariationModelInterface $productVariationRepository
      */
     public function __construct(
         ProductModelInterface $productRepository,
@@ -91,8 +84,7 @@ class ProductController
         CategoryFilterModelInterface $categoryFilterRepository,
         AttributeModelInterface $attributeRepository,
         AttributeProductValueModelInterface $attributeProductValueRepository,
-        AttributeDropdownOptionModelInterface $attributeDropdownOptionRepository,
-        ProductVariationModelInterface $productVariationRepository
+        AttributeDropdownOptionModelInterface $attributeDropdownOptionRepository
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
@@ -101,7 +93,6 @@ class ProductController
         $this->attributeRepository = $attributeRepository;
         $this->attributeProductValueRepository = $attributeProductValueRepository;
         $this->attributeDropdownOptionRepository = $attributeDropdownOptionRepository;
-        $this->productVariationRepository = $productVariationRepository;
     }
 
     /**
@@ -110,7 +101,7 @@ class ProductController
      */
     public function index()
     {
-        $products = $this->productRepository->all();
+        $products = $this->productRepository->getAllWithoutVaiation();
 
         return view('avored::catalog.product.index')
             ->with('products', $products);
@@ -153,6 +144,7 @@ class ProductController
         $tabs = Tab::get('catalog.product');
         
         $product->images;
+
         $typeOptions = Product::PRODUCT_TYPES;
         $categoryOptions = $this->categoryRepository->options();
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
@@ -195,6 +187,16 @@ class ProductController
      */
     public function destroy(Product $product)
     {
+        if ($product->type === 'VARIABLE_PRODUCT') {
+            $varitions = $product->attributeProductValues->pluck('variation_id');
+
+            foreach ($varitions as $varitionId) {
+                $variableProduct = $this->productRepository->find($varitionId);
+                if ($variableProduct !== null) {
+                    $variableProduct->delete();
+                }
+            }
+        }
         $product->delete();
 
         return response()->json([
@@ -229,19 +231,7 @@ class ProductController
     }
 
     /**
-     * Create Product Variation based on given Attributes
-     * @param \Illuminate\Http\Request $request
-     * @param \AvoRed\Framework\Database\Models\Product $product
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createVariation(Request $request, Product $product)
-    {
-        $this->makeProductVariation($product, $request);
-       
-        return response()->json(['success' => true, 'message' => __('avored::catalog.product.variation_create_msg')]);
-    }
-
-    /**
+     * @todo possibly can use update method instead of this one.
      * Save Product Variation based on given Attributes
      * @param \Illuminate\Http\Request $request
      * @param \AvoRed\Framework\Database\Models\Product $product
@@ -281,6 +271,23 @@ class ProductController
         $productImage->delete();
         return response()->json(['success' => true]);
     }
+
+    /**
+     * Create Product Variation based on given Attributes
+     * @param \Illuminate\Http\Request $request
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createVariation(Request $request, Product $product)
+    {
+        DB::transaction(function () use ($product, $request) {
+            $this->makeProductVariation($product, $request);
+        });
+       
+        return response()
+            ->json(['success' => true, 'message' => __('avored::catalog.product.variation_create_msg')]);
+    }
+
     
     /**
      * Save Product Category
@@ -422,27 +429,17 @@ class ProductController
 
     /**
      * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param \Illuminate\Http\Request $request
-     * @return mixed
-     */
-    private function makeProductVariation($product, $request)
-    {
-        $variations = $this->getVariationsCollection($product, $request);
-        //$this->createProductVariations($product, $variations);
-    }
-
-    /**
-     * @param \AvoRed\Framework\Database\Models\Product $product
      * @param \Illuminate\Support\Collection $variations
      * @return void
      */
     private function createProductVariations($product, $variations)
     {
-        $variationIds = $product->variations->pluck('variation_id');
+        $variationIds = $product->attributeProductValues->pluck('variation_id');
 
         foreach ($variationIds as $variationId) {
             $this->productRepository->delete($variationId);
         }
+        
         foreach ($variations as $variation) {
             $this->generateProductData($product, $variation);
         }
@@ -467,34 +464,33 @@ class ProductController
             'width' => $product->width,
             'length' => $product->length,
         ];
+       
         foreach ($options as $optionId) {
             $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $data['name'] .= ' ' . $optionModel->display_text;
         }
         $data['sku'] = Str::slug($data['name']);
         $data['slug'] = Str::slug($data['name']);
+       
         
         $variation = $this->productRepository->create($data);
         $attributeId = $optionModel->attribute->id;
-        $this->saveAttributeProductValue($product, $attributeId, $options, $variation);
-
-        $this->productVariationRepository->create(['product_id' => $product->id, 'variation_id' => $variation->id]);
+        $this->saveAttributeProductValue($product, $options, $variation);
     }
 
     /**
      * Get the Attribute Model from Request
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param \Illuminate\Http\Request $request
-     * @return array $variations
+     * @return void
      */
-    private function getVariationsCollection($product, $request)
+    private function makeProductVariation($product, $request)
     {
-      
         $attributeOptions = Collection::make([]);
-        $variations = Collection::make([]);
-        if ($request->get('attributes') !== null && count($request->get('attributes')) > 0) {
-            foreach ($request->get('attributes') as $attributeId) {
+        if (array_unique($request->get('attributes')) !== null && count(array_unique($request->get('attributes'))) > 0) {
+            foreach (array_unique($request->get('attributes')) as $attributeId) {
                 $attributeModel = $this->attributeRepository->find($attributeId);
+                
                 $this->attacheAttributeWithCategories($attributeModel, $product);
                 $optionIds = $attributeModel->dropdownOptions->pluck('id');
                 $attributeOptions->push($optionIds);
@@ -509,24 +505,25 @@ class ProductController
     /**
      * Store attribute product values into database
      * @param Product $product
-     * @param int $attributeId
      * @param Collection $attributeOptionIds
      * @param \AvoRed\Framework\Database\Models\Product $variation
      * @return void
      */
-    private function saveAttributeProductValue($product, $attributeId, $attributeOptionIds, $variation)
+    private function saveAttributeProductValue($product, $attributeOptionIds, $variation)
     {
         foreach ($attributeOptionIds as $optionId) {
+            $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $model = $this->attributeProductValueRepository->findByAttributeProductValues(
                 $product->id,
-                $attributeId,
-                $optionId
+                $optionModel->attribute->id,
+                $optionId,
+                $variation->id
             );
 
             if ($model === null) {
                 $data = [
                     'product_id' => $product->id,
-                    'attribute_id' => $attributeId,
+                    'attribute_id' => $optionModel->attribute->id,
                     'attribute_dropdown_option_id' => $optionId,
                     'variation_id' => $variation->id
                 ];

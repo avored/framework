@@ -10,7 +10,7 @@ class AttributeDropdownOption extends Model
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['attribute_id', 'display_text'];
+    protected $fillable = ['attribute_id', 'display_text', 'path'];
 
 
     /**

@@ -8,7 +8,10 @@ export default {
     return {
         attributeForm: this.$form.createForm(this),
         dropdownOptions: [],
-        display_as: ''
+        image_path_lists: [],
+        headers: {},
+        display_as: '',
+        fields: ['name', 'slug', 'display_as']
     };
   },
   methods: {
@@ -19,8 +22,27 @@ export default {
             }
           });
          },
-        imageSelected(info){
-            console.log(info);
+        imagePathName(path) {
+            var name = "dropdown_option[";
+            Object.keys(path).forEach(key => {
+                name += key
+            })
+            name += "][path]";
+            return name;
+        },
+        imagePathValue(path) {
+            var value = ""
+            Object.keys(path).forEach(key => {
+                value += path[key]
+            })
+            return value;
+        },
+        handleUploadImageChange(info, record){
+            if (info.file.status == "done") {
+                var object = {};
+                object[record] = info.file.response.path; 
+                this.image_path_lists.push(object);
+          }
         },
         displayAsChange(val) {
             this.display_as = val;
@@ -45,24 +67,47 @@ export default {
             }
             
         },
-        dropdown_options(index) {
-            return 'dropdown_option[' + index + ']';
+        getDefaultFile(record) {
+            if (isNil(this.attribute)) {
+                return []
+            }
+            var dropdownOption = this.attribute.dropdown_options[record];
+            if (!isNil(dropdownOption) && !isNil(dropdownOption.path)) {
+                var filename = dropdownOption.path.replace(/^.*[\\\/]/, '')
+                return [{
+                    uid: dropdownOption.id,
+                    name: filename,
+                    status: 'done',
+                    url: '/storage/' + dropdownOption.path,
+                }];
+            }
+        },
+        dropdownOptionDisplayTextName(index) {
+            return 'dropdown_option[' + index + '][display_text]';
         },
         dropdown_options_image(index) {
             return 'dropdown_option_image[' + index + ']';
         }
   },
   mounted() {
+      this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
       if (!isNil(this.attribute)) {
-          if (this.attribute.dropdown_options.length > 0) {
-              this.attribute.dropdown_options.forEach(element => {
-                this.dropdownOptions.push(element.id);
-                this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
-              });
-          }
+        this.display_as = this.attribute.display_as;
+        this.fields.forEach(field => {
+          this.attributeForm.getFieldDecorator(field, {initialValue: this.attribute[field]})
+        });
+
+        if (this.attribute.dropdown_options.length > 0) {
+            this.attribute.dropdown_options.forEach(element => {
+            this.dropdownOptions.push(element.id);
+            this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
+            });
+        }
       } else {
           this.dropdownOptions.push(this.randomString());
       }
+
+
   }
 };
 </script>

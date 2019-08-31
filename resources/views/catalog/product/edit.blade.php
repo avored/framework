@@ -16,7 +16,7 @@
             :product="{{ $product }}"
             :product-properties="{{ $product->getProperties() }}"
             :product-attributes="{{ $product->attributes }}"
-            :product-variations="{{ $product->variations }}"
+            :product-variations="{{ $product->getVariations()->flatten() }}"
             inline-template>
         <div>
             <a-form 

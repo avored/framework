@@ -22,11 +22,8 @@
                 @csrf
                 @include('avored::catalog.attribute._fields') 
                 
-                <a-form-item>
-                    <a-button
-                        type="primary"
-                        html-type="submit"
-                    >
+                <a-form-item class="mt-1">
+                    <a-button type="primary" html-type="submit">
                         {{ __('avored::system.btn.save') }}
                     </a-button>
                     

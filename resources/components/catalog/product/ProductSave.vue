@@ -35,6 +35,7 @@ export default {
         productForm: this.$form.createForm(this),
         variationForm: this.$form.createForm(this),
         type: null,
+        headers: {},
         description: null,
         status: 0,
         track_stock: 0,
@@ -43,12 +44,17 @@ export default {
         property: {},
         productImages: [],
         attributeIds: [],
+        variationUploadImagePath: '',
+        variationImageList: {},
         columns,
         variationModelVisible: false,
         variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
     };
   },
   methods: {
+      handleUploadImageChange() {
+
+      },
       clickVariationSave(e) {
          this.variationForm.validateFields((err, data) => {
           if (isNil(err)) {
@@ -87,13 +93,30 @@ export default {
           })
               
       },
-      showVariationModel(model) {
+      getVariationUploadAction() {
+
+      },
+      editVariationModel(model) {
         this.variationModelVisible = true;
-        var variationModel = model.variationModel;
+        var variationModel = model.variation;
 
         this.variationFields.forEach(field => {
           this.variationForm.getFieldDecorator(field, {initialValue: variationModel[field]})
+          
         });
+        this.variationUploadImagePath = this.baseUrl + '/product-image/' + variationModel.id + '/upload';
+
+        if (!isNil(variationModel.images[0])) {
+          var fileName = variationModel.images[0].path.replace(/^.*[\\\/]/, '')
+          this.variationImageList = [{
+            uid: variationModel.images[0].id,
+            name: fileName,
+            status: 'done',
+            url: '/storage/' + variationModel.images[0].path,
+          }];
+        } else {
+          this.variationImageList = [];
+        }
         
       },
       handleSubmit(e) {
@@ -185,17 +208,16 @@ export default {
       }
   },
   mounted() {
+    this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
     if (!isNil(this.product)) {
       this.type = this.product.type
       this.description = this.product.description
       this.productProperties.forEach(record => {
         this.property[record.id] = record.product_value.value
       });
-      
       this.productAttributes.forEach(record => {
         this.attributeIds.push(record.id)
       });
-
       this.product.images.forEach(record => {
         this.productImages.push(record)
       });
