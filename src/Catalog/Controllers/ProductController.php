@@ -439,6 +439,7 @@ class ProductController
         foreach ($variationIds as $variationId) {
             $this->productRepository->delete($variationId);
         }
+        
         foreach ($variations as $variation) {
             $this->generateProductData($product, $variation);
         }
@@ -463,16 +464,18 @@ class ProductController
             'width' => $product->width,
             'length' => $product->length,
         ];
+       
         foreach ($options as $optionId) {
             $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $data['name'] .= ' ' . $optionModel->display_text;
         }
         $data['sku'] = Str::slug($data['name']);
         $data['slug'] = Str::slug($data['name']);
+       
         
         $variation = $this->productRepository->create($data);
         $attributeId = $optionModel->attribute->id;
-        $this->saveAttributeProductValue($product, $attributeId, $options, $variation);
+        $this->saveAttributeProductValue($product, $options, $variation);
     }
 
     /**
@@ -484,10 +487,10 @@ class ProductController
     private function makeProductVariation($product, $request)
     {
         $attributeOptions = Collection::make([]);
-        $variations = Collection::make([]);
-        if ($request->get('attributes') !== null && count($request->get('attributes')) > 0) {
-            foreach ($request->get('attributes') as $attributeId) {
+        if (array_unique($request->get('attributes')) !== null && count(array_unique($request->get('attributes'))) > 0) {
+            foreach (array_unique($request->get('attributes')) as $attributeId) {
                 $attributeModel = $this->attributeRepository->find($attributeId);
+                
                 $this->attacheAttributeWithCategories($attributeModel, $product);
                 $optionIds = $attributeModel->dropdownOptions->pluck('id');
                 $attributeOptions->push($optionIds);
@@ -502,24 +505,25 @@ class ProductController
     /**
      * Store attribute product values into database
      * @param Product $product
-     * @param int $attributeId
      * @param Collection $attributeOptionIds
      * @param \AvoRed\Framework\Database\Models\Product $variation
      * @return void
      */
-    private function saveAttributeProductValue($product, $attributeId, $attributeOptionIds, $variation)
+    private function saveAttributeProductValue($product, $attributeOptionIds, $variation)
     {
         foreach ($attributeOptionIds as $optionId) {
+            $optionModel = $this->attributeDropdownOptionRepository->find($optionId);
             $model = $this->attributeProductValueRepository->findByAttributeProductValues(
                 $product->id,
-                $attributeId,
-                $optionId
+                $optionModel->attribute->id,
+                $optionId,
+                $variation->id
             );
 
             if ($model === null) {
                 $data = [
                     'product_id' => $product->id,
-                    'attribute_id' => $attributeId,
+                    'attribute_id' => $optionModel->attribute->id,
                     'attribute_dropdown_option_id' => $optionId,
                     'variation_id' => $variation->id
                 ];

@@ -43,13 +43,15 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
      * @param int $productId
      * @param int $attributeId
      * @param int $optionId
+     * @param int $variationId
      * @return \AvoRed\Framework\Database\Models\AttributeProductValue $attributeProductValue
      */
-    public function findByAttributeProductValues(int $productId, int $attributeId, int $optionId)
+    public function findByAttributeProductValues(int $productId, int $attributeId, int $optionId, int $variationId)
     {
         return AttributeProductValue::whereProductId($productId)
             ->whereAttributeId($attributeId)
             ->whereAttributeDropdownOptionId($optionId)
+            ->whereVariationId($variationId)
             ->first();
     }
 

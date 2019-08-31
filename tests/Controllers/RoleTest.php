@@ -5,6 +5,8 @@ namespace AvoRed\Framework\Tests\Controllers;
 use AvoRed\Framework\Tests\BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Database\Models\Permission;
+use AvoRed\Framework\Support\Facades\Permission as AvoRedPermission;
 
 class RoleTest extends BaseTestCase
 {
@@ -79,5 +81,45 @@ class RoleTest extends BaseTestCase
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('roles', ['id' => $role->id]);
+    }
+
+    /* @runInSeparateProcess */
+    public function testRoleStoreWithPermissionsRouteTest()
+    {
+        $permissionList = AvoRedPermission::all()->first()->permissionList;
+        $permissions = collect();
+        foreach ($permissionList as $permission) {
+            $permissions->push($permission->routes());
+        }
+        
+        $data = ['name' => 'test role name', 'permissions' => $permissions->toArray()];
+        $this->createAdminUser()
+            ->actingAs($this->user, 'admin')
+            ->post(route('admin.role.store', $data))
+            ->assertRedirect(route('admin.role.index'));
+
+        $this->assertDatabaseHas('roles', ['name' => 'test role name']);
+    }
+
+    /* @runInSeparateProcess */
+    public function testRoleUpdateWithPermissionsRouteTest()
+    {
+        $permissionList = AvoRedPermission::all()->first()->permissionList;
+        $permissions = collect();
+        foreach ($permissionList as $permission) {
+            $permissions->push($permission->routes());
+        }
+        
+        $role = factory(Role::class)->create();
+        $role->name = "updated role name";
+        $data = $role->toArray();
+        $data['permissions'] = $permissions->toArray();
+        
+        $this->createAdminUser()
+            ->actingAs($this->user, 'admin')
+            ->put(route('admin.role.update', $role->id), $data)
+            ->assertRedirect(route('admin.role.index'));
+
+        $this->assertDatabaseHas('roles', ['name' => 'updated role name']);
     }
 }

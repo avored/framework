@@ -140,8 +140,9 @@ class Product extends Model
     {
         $variations = Collection::make([]);
         $productAttributeValues = $this->attributeProductValues;
-
+        
         foreach ($productAttributeValues as $productAttributeValue) {
+            $productAttributeValue->variation;
             if ($variations->has($productAttributeValue->attribute_id)) {
                 $existing = $variations->get($productAttributeValue->attribute_id);
                 $existing[] = $productAttributeValue;
@@ -159,14 +160,16 @@ class Product extends Model
      */
     public function getVariations()
     {
-        $variations = Collection::make([]);
+        $data = Collection::make([]);
         $productAttributeValues = $this->attributeProductValues;
-
+        
         foreach ($productAttributeValues as $productAttributeValue) {
+            $productAttributeValue->attributeDropdownOption;
             $productAttributeValue->variation;
             $productAttributeValue->variation->images;
-            $variations->push($productAttributeValue);
+            $data->push($productAttributeValue);
         }
+        $variations = $data->groupBy('variation_id');
 
         return $variations;
     }
