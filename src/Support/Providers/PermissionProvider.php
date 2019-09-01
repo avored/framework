@@ -76,6 +76,120 @@ class PermissionProvider extends ServiceProvider
             }
         );
 
+        $configGroup = PermissionFacade::add(
+            'configuration',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.configuration.title');
+            }
+        );
+
+        $configGroup->addPermission(
+            'admin-configuration-index',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.configuration.view')
+                    ->routes('admin.configuration.index');
+            }
+        );
+        $configGroup->addPermission(
+            'admin-configuration-save',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.configuration.edit')
+                    ->routes('admin.configuration.store');
+            }
+        );
+
+        $productGroup = PermissionFacade::add(
+            'product',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.product.title');
+            }
+        );
+
+        $productGroup->addPermission(
+            'admin-product-index',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.product.list')
+                    ->routes('admin.product.index');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.product.create')
+                    ->routes('admin.product.create,admin.product.store');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-edit',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.product.edit')
+                    ->routes('admin.product.edit,admin.product.update');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.product.destroy')
+                    ->routes('admin.product.edit,admin.product.destroy');
+            }
+        );
+       
+        $orderGroup = PermissionFacade::add(
+            'order',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.order.title');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.list')
+                    ->routes('admin.order.index');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-change-status',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.change-status')
+                    ->routes('admin.order.change-status');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-sent-invoice-by-mail',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.sent-invoice-by-mail')
+                    ->routes('admin.order.email.invoice');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-shipping-label',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.shipping-label')
+                    ->routes('admin.order.shipping.label');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-download-invoice',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.download-invoice')
+                    ->routes('admin.order.download.invoice');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-save=tracking-code',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.save-tracking-code')
+                    ->routes('admin.order.save.track.code');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-view',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order.view')
+                    ->routes('admin.order.create,admin.order.view');
+            }
+        );
+
         $group = PermissionFacade::add(
             'category',
             function (PermissionGroup $group) {
@@ -143,6 +257,108 @@ class PermissionProvider extends ServiceProvider
             function (Permission $permission) {
                 $permission->label('avored::system.permissions.language.destroy')
                     ->routes('admin.language.destroy');
+            }
+        );
+        $group = PermissionFacade::add(
+            'admin-user',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.admin-user.title');
+            }
+        );
+        $group->addPermission(
+            'admin-admin-user-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.admin-user.list')
+                    ->routes('admin.admin-user.index');
+            }
+        );
+        $group->addPermission(
+            'admin-admin-user-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.admin-user.create')
+                    ->routes('admin.admin-user.create,admin.admin-user.store');
+            }
+        );
+        $group->addPermission(
+            'admin-admin-user-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.admin-user.edit')
+                    ->routes('admin.admin-user.edit,admin.admin-user.update');
+            }
+        );
+        $group->addPermission(
+            'admin-admin-user-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.admin-user.destroy')
+                    ->routes('admin.admin-user.destroy');
+            }
+        );
+        $group = PermissionFacade::add(
+            'currency',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.currency.title');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.list')
+                    ->routes('admin.currency.index');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.create')
+                    ->routes('admin.currency.create,admin.currency.store');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.edit')
+                    ->routes('admin.currency.edit,admin.currency.update');
+            }
+        );
+        $group->addPermission(
+            'admin-currency-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.currency.destroy')
+                    ->routes('admin.currency.destroy');
+            }
+        );
+        $group = PermissionFacade::add(
+            'order-status',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.order-status.title');
+            }
+        );
+        $group->addPermission(
+            'admin-order-status-list',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order-status.list')
+                    ->routes('admin.order-status.index');
+            }
+        );
+        $group->addPermission(
+            'admin-order-status-create',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order-status.create')
+                    ->routes('admin.order-status.create,admin.order-status.store');
+            }
+        );
+        $group->addPermission(
+            'admin-order-status-update',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order-status.edit')
+                    ->routes('admin.order-status.edit,admin.order-status.update');
+            }
+        );
+        $group->addPermission(
+            'admin-order-status-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.order-status.destroy')
+                    ->routes('admin.order-status.destroy');
             }
         );
 

@@ -217,6 +217,7 @@ return [
             'destroy' => 'Destroy Page',
             'show' => 'Show Page'
         ],
+       
         'category' => [
             'title' => 'Category Permissions',
             'list' => 'Category List',
@@ -300,7 +301,7 @@ return [
         'configuration' => [
             'title' => 'Configuration Permissions',
             'view' => 'View Configuration',
-            'edit' => 'Store/Update Configuration',
+            'edit' => 'Save Configuration',
         ],
         'currency' => [
             'title' => 'Site Currency Permissions',
@@ -326,32 +327,63 @@ return [
             'destroy' => 'Destroy State',
             'show' => 'Show State'
         ],
-        'theme' => [
-            'title' => 'Theme Permissions',
-            'list' => 'Theme List Permissions',
-            'create' => 'Store/Upload Theme Permissions',
-            'activated' => 'Activated Theme Permissions',
-            'deactivated' => 'Deactivated Theme Permissions',
+        'user-group' => [
+            'title' => 'UserGroup Permissions',
+            'list' => 'UserGroup List',
+            'create' => 'Create/Store UserGroup',
+            'edit' => 'Edit/Update UserGroup',
+            'destroy' => 'Destroy UserGroup',
+            'show' => 'Show UserGroup'
         ],
-        'module' => [
-            'title' => 'Module Permissions',
-            'list' => 'Module List Permissions',
-            'upload' => 'Module Upload Permissions',
+        'tax-group' => [
+            'title' => 'Tax Group Permissions',
+            'list' => 'Tax Group List',
+            'create' => 'Create/Store Tax Group',
+            'edit' => 'Edit/Update Tax Group',
+            'destroy' => 'Destroy Tax Group',
+            'show' => 'Show Tax Group'
+        ],
+        'product' => [
+            'title' => 'Product Permissions',
+            'list' => 'Product List',
+            'create' => 'Create/Store Product',
+            'edit' => 'Edit/Update Product',
+            'destroy' => 'Destroy Product',
+            'show' => 'Show Product'
         ],
         'order' => [
-            'title' => 'Menu Permissions',
+            'title' => 'Order Permissions',
             'list' => 'Order List',
             'view' => 'Order View',
-            'sent_invoice_by_mail' => 'Order Sent Invoice By Email',
-            'status_change' => 'Change Order Status'
+            'sent-invoice-by-mail' => 'Order Sent Invoice By Email',
+            'change-status' => 'Change Order Status',
+            'download-invoice' => 'Download Invoice',
+            'save-tracking-code' => 'Save Tracking Code',
+            'shipping-label' => 'Shipping Label'
         ],
-        'order_status' => [
+        'order-status' => [
             'title' => 'Order Status Permissions',
             'list' => 'Order Status List',
             'create' => 'Create/Store Order Status',
             'edit' => 'Edit/Update Order Status',
             'destroy' => 'Destroy Order Status',
             'show' => 'Show Order Status'
+        ],
+        'currency' => [
+            'title' => 'Currency Permissions',
+            'list' => 'Currency List',
+            'create' => 'Create/Store Currency',
+            'edit' => 'Edit/Update Currency',
+            'destroy' => 'Destroy Currency',
+            'show' => 'Show Currency'
+        ],
+        'admin-user' => [
+            'title' => 'Admin User Permissions',
+            'list' => 'Admin User List',
+            'create' => 'Create/Store Admin User',
+            'edit' => 'Edit/Update Admin User',
+            'destroy' => 'Destroy Admin User',
+            'show' => 'Show Admin User'
         ],
         'menu' => [
             'title' => 'Menu Permissions',
