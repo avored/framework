@@ -184,9 +184,11 @@ class InstallCommand extends Command
 
         if ($model !== null) {
             $table = $model->getTable();
-            Schema::table($table, function (Blueprint $table) {
-                $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
-            });
+            if (Schema::hasTable($table)) {
+                Schema::table($table, function (Blueprint $table) {
+                    $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
+                });
+            }
         }
     }
 }
