@@ -17,6 +17,8 @@ abstract class BaseTestCase extends OrchestraTestCase
      * @var \AvoRed\Framework\Database\Models\AdminUser $user
      */
     protected $user;
+  
+    protected $faker;
 
     /**
      * Setup Config and other data for unit test
@@ -26,6 +28,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     {
         parent::setUp();
         $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
+        $this->faker = $this->app->make(FakerGenerator::class);
         
         $this->app->singleton(EloquentFactory::class, function ($app) {
             $faker = $app->make(FakerGenerator::class);
