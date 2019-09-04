@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Tests\Controllers;
+namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Tests\BaseTestCase;
 use AvoRed\Framework\System\Controllers\LoginController;
