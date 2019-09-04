@@ -11,11 +11,11 @@
 @section('content')
 <a-row type="flex" justify="center">
     <a-col :span="24">        
-        <order-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
+        <order-table inline-template :order-status="{{ $orderStatuses }}" base-url="{{ asset(config('avored.admin_url')) }}">
             <div>
             <a-table :columns="columns" row-key="id" :data-source="{{ $orders }}">
                 <span slot="order_status" slot-scope="text, record">
-                    
+                    @{{ getOrderStatus(text) }}
                 </span>
                 <span slot="action" slot-scope="text, record">
                     

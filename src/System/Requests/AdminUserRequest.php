@@ -29,7 +29,6 @@ class AdminUserRequest extends FormRequest
             $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:admin_users'];
             $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
         }
-        $rules['language'] = ['required'];
         $rules['role_id'] = ['required'];
 
         return $rules;

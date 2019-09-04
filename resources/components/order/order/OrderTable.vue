@@ -32,7 +32,7 @@ const columns = [
 import axios from 'axios'
 
 export default {
-    props: ['baseUrl'],
+    props: ['baseUrl', 'orderStatus'],
     data () {
         return {
             columns,
@@ -52,6 +52,17 @@ export default {
         },
         downloadOrderAction(record) {
             return this.baseUrl + '/order-download-invoice/' + record.id;
+        },
+        getOrderStatus(statusId) {
+            var index;
+            index = this.orderStatus.findIndex(ele => {
+                return ele.id === statusId
+            })
+            if (index >= 0) {
+                return this.orderStatus[index].name
+            }
+
+            return ''
         },
         emailInvoiceOrderAction(record) {
             return this.baseUrl + '/order-email-invoice/' + record.id;
