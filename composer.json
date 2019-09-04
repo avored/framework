@@ -23,7 +23,7 @@
 	"require" : {
 		"php" : "^7.2",
 		"symfony/yaml": "^4.2",
-		"laravel/passport": "^7.3",
+		"laravel/passport": "^7.4",
 		"barryvdh/laravel-dompdf": "^0.8.4",
 		"laravel/framework" : "^5.8|^6.0"
 	},
