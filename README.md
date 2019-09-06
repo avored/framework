@@ -1,3 +1,15 @@
+<p align="center">
+    <a href="https://www.avored.com/" target="_blank"><img src="logo.svg" height="86" alt="AvoRed"></a>
+</p>
+
+<p align="center">
+    <a href="https://circleci.com/gh/avored/framework/tree/master"><img src="https://circleci.com/gh/avored/framework/tree/master.svg" alt="CircleCI"></a>
+    <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/downloads" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/v/stable" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/license" alt="License"></a>
+</p>
+
+
 # Core package for avored shopping cart
 AvoRed Framework contains the core features for the AvoRed E commerce for Laravel. It is the base behind the AvoRed an Laravel Ecommerce.
 
