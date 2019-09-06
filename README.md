@@ -1,4 +1,4 @@
-<p align="center"><img src="logo.svg" width="400"></p>
+<p align="center"><img src="logo.svg" height="86"></p>
 
 # Core package for avored shopping cart
 AvoRed Framework contains the core features for the AvoRed E commerce for Laravel. It is the base behind the AvoRed an Laravel Ecommerce.
