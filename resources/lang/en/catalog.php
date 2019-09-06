@@ -20,13 +20,13 @@ return [
         'meta_title' => 'Meta Title',
         'meta_description' => 'Meta Description',
         'index' => [
-            'title' => 'Category List'
+            'title' => 'Category List',
         ],
         'create' => [
-            'title' => 'Category Create'
+            'title' => 'Category Create',
         ],
         'edit' => [
-            'title' => 'Category Edit'
+            'title' => 'Category Edit',
         ],
     ],
     'product' => [
@@ -67,13 +67,13 @@ return [
         'upload_btn' => 'Upload',
         'variation_btn' => 'Make Variation',
         'index' => [
-            'title' => 'Product List'
+            'title' => 'Product List',
         ],
         'create' => [
-            'title' => 'Product Create'
+            'title' => 'Product Create',
         ],
         'edit' => [
-            'title' => 'Product Edit'
+            'title' => 'Product Edit',
         ],
     ],
     'property' => [
@@ -88,13 +88,13 @@ return [
         'sort_order' => 'Sort Order',
         'dropdown_options' => 'Dropdown Options',
         'index' => [
-            'title' => 'Property List'
+            'title' => 'Property List',
         ],
         'create' => [
-            'title' => 'Property Create'
+            'title' => 'Property Create',
         ],
         'edit' => [
-            'title' => 'Property Edit'
+            'title' => 'Property Edit',
         ],
     ],
     'attribute' => [
@@ -106,17 +106,17 @@ return [
         'display_as' => 'Display As',
         'dropdown_options' => 'Dropdown Options',
         'index' => [
-            'title' => 'Attribute List'
+            'title' => 'Attribute List',
         ],
         'create' => [
-            'title' => 'Attribute Create'
+            'title' => 'Attribute Create',
         ],
         'edit' => [
-            'title' => 'Attribute Edit'
+            'title' => 'Attribute Edit',
         ],
     ],
-    
+
     'cart_success_notification' => 'Product added to cart successfully.',
-    'cart_variable_product_error_notification' => 'There is an error while adding product to cart.'
+    'cart_variable_product_error_notification' => 'There is an error while adding product to cart.',
 
 ];

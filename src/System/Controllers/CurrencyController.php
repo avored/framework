@@ -4,27 +4,27 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\System\Requests\CurrencyRequest;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
+use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 
 class CurrencyController extends Controller
 {
     /**
-     * Currency Repository
-     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository $currencyRepository
+     * Currency Repository.
+     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
-     * Currency Repository
-     * @var \AvoRed\Framework\Database\Repository\CountryRepository $countryRepository
+     * Currency Repository.
+     * @var \AvoRed\Framework\Database\Repository\CountryRepository
      */
     protected $countryRepository;
-    
+
     /**
-     * Construct for the AvoRed currency controller
+     * Construct for the AvoRed currency controller.
      * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
@@ -35,6 +35,7 @@ class CurrencyController extends Controller
         $this->currencyRepository = $currencyRepository;
         $this->countryRepository = $countryRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
@@ -42,7 +43,7 @@ class CurrencyController extends Controller
     public function index()
     {
         $currencies = $this->currencyRepository->all();
-        
+
         return view('avored::system.currency.index')
             ->with('currencies', $currencies);
     }
@@ -53,8 +54,8 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        $currencyCodeOptions =$this->countryRepository->currencyCodeOptions();
-        $currencySymbolOptions =$this->countryRepository->currencySymbolOptions();
+        $currencyCodeOptions = $this->countryRepository->currencyCodeOptions();
+        $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.create')
             ->with('currencySymbolOptions', $currencySymbolOptions)
@@ -84,8 +85,8 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
-        $currencyCodeOptions =$this->countryRepository->currencyCodeOptions();
-        $currencySymbolOptions =$this->countryRepository->currencySymbolOptions();
+        $currencyCodeOptions = $this->countryRepository->currencyCodeOptions();
+        $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.edit')
             ->with('currency', $currency)
@@ -121,7 +122,7 @@ class CurrencyController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => __('avored::system.currency.title')])
+            'message' => __('avored::system.notification.delete', ['attribute' => __('avored::system.currency.title')]),
         ]);
     }
 }

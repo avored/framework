@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use AvoRed\Framework\Database\Models\UserGroup;
 use AvoRed\Framework\User\Requests\UserGroupRequest;
+use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 
 class UserGroupController
 {
     /**
-     * UserGroup Repository for controller
-     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * UserGroup Repository for controller.
+     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
     protected $userGroupRepository;
-    
+
     /**
-     * Construct for the AvoRed user group controller
+     * Construct for the AvoRed user group controller.
      * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
      */
     public function __construct(
@@ -24,7 +25,7 @@ class UserGroupController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -35,7 +36,7 @@ class UserGroupController
             ->with('userGroups', $userGroups);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
@@ -83,7 +84,7 @@ class UserGroupController
             $group = $this->userGroupRepository->getIsDefault();
             $group->update(['is_default' => 0]);
         }
-        
+
         $userGroup->update($request->all());
 
         return redirect()->route('admin.user-group.index')
@@ -107,7 +108,7 @@ class UserGroupController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::user.user-group.title')]
-            )
+            ),
         ]);
     }
 }

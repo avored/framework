@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Menu\MenuBuilder;
 use AvoRed\Framework\Menu\MenuItem;
+use AvoRed\Framework\Menu\MenuBuilder;
+use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Support\Facades\Menu;
 
 class MenuProvider extends ServiceProvider
@@ -16,7 +16,7 @@ class MenuProvider extends ServiceProvider
     protected $defer = true;
 
     /**
-     * Boot the Service Provider
+     * Boot the Service Provider.
      * @return void
      */
     public function boot()
@@ -58,7 +58,7 @@ class MenuProvider extends ServiceProvider
     }
 
     /**
-     * Register Admin Menu for the AvoRed E commerce package
+     * Register Admin Menu for the AvoRed E commerce package.
      * @return void
      */
     public function registerAdminMenu()
@@ -103,7 +103,7 @@ class MenuProvider extends ServiceProvider
                 ->route('#');
         });
         $cmsMenu = Menu::get('cms');
-        
+
         $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
             $menu->key('menu-group')
                 ->type(MenuItem::ADMIN)
@@ -144,14 +144,13 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.order-status.index');
         });
 
-        
         Menu::make('user', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.user')
                 ->type(MenuItem::ADMIN)
                 ->icon('user')
                 ->route('#');
         });
-        
+
         $userGroupMenu = Menu::get('user');
         $userGroupMenu->subMenu('user_group', function (MenuItem $menu) {
             $menu->key('user_group')
@@ -159,7 +158,7 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.user-group')
                 ->route('admin.user-group.index');
         });
-        
+
         Menu::make('system', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.system')
                 ->type(MenuItem::ADMIN)

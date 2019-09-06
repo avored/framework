@@ -23,7 +23,7 @@ class PermissionGroup
     protected $key;
 
     /**
-     * Construct for a permission group
+     * Construct for a permission group.
      * @param callable $callable
      * @return void
      */
@@ -36,7 +36,7 @@ class PermissionGroup
     }
 
     /**
-     * Specify a label for permission group
+     * Specify a label for permission group.
      *
      * @param string $label
      * @return mixed $this|$label
@@ -52,11 +52,12 @@ class PermissionGroup
         if (Lang::has($this->label)) {
             return __($this->label);
         }
+
         return $this->label;
     }
 
     /**
-     * Add an Unique key to a group of permission
+     * Add an Unique key to a group of permission.
      * @param string $key
      * @return mixed $key|$this
      */
@@ -72,11 +73,10 @@ class PermissionGroup
     }
 
     /**
-     * Add Permission to a group
+     * Add Permission to a group.
      * @param string $key
      * @param callable $callable
      * @return \AvoRed\Framework\Permission\Permission $permission
-     *
      */
     public function addPermission($key, $callable = null)
     {

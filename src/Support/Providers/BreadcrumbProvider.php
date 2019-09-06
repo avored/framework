@@ -3,9 +3,9 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Support\Facades\Breadcrumb as BreadcrumbFacade;
-use AvoRed\Framework\Breadcrumb\Breadcrumb;
 use AvoRed\Framework\Breadcrumb\Builder;
+use AvoRed\Framework\Breadcrumb\Breadcrumb;
+use AvoRed\Framework\Support\Facades\Breadcrumb as BreadcrumbFacade;
 
 class BreadcrumbProvider extends ServiceProvider
 {
@@ -451,7 +451,7 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.menu-group.index');
             }
         );
-        
+
         BreadcrumbFacade::make(
             'admin.product.index',
             function (Breadcrumb $breadcrumb) {

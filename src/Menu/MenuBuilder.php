@@ -1,8 +1,9 @@
 <?php
+
 namespace AvoRed\Framework\Menu;
 
-use Illuminate\Support\Collection;
 use stdClass;
+use Illuminate\Support\Collection;
 
 class MenuBuilder
 {
@@ -13,7 +14,7 @@ class MenuBuilder
     protected $collection;
 
     /**
-     * Construct for the menu builder
+     * Construct for the menu builder.
      */
     public function __construct()
     {
@@ -26,12 +27,12 @@ class MenuBuilder
      * @param callable $callable
      * @return self
      */
-    public function make($key, callable  $callable)
+    public function make($key, callable $callable)
     {
         $menu = new MenuItem($callable);
         $menu->key($key);
         $this->collection->put($key, $menu);
-        
+
         return $this;
     }
 
@@ -71,7 +72,7 @@ class MenuBuilder
     public function frontMenus()
     {
         $frontMenus = collect();
-        
+
         $i = 1;
         foreach ($this->collection as $item) {
             if ($item->type() === MenuItem::FRONT) {
@@ -84,7 +85,7 @@ class MenuBuilder
                 $i++;
             }
         }
-        
+
         return $frontMenus;
     }
 }

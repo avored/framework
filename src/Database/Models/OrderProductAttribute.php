@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class OrderProductAttribute extends Model
 {
@@ -13,11 +13,11 @@ class OrderProductAttribute extends Model
     protected $fillable = [
         'order_product_id',
         'attribute_id',
-        'attribute_dropdown_option_id'
+        'attribute_dropdown_option_id',
     ];
 
     /**
-     * Order Product belongs to one order
+     * Order Product belongs to one order.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order()

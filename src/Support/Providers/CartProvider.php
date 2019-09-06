@@ -2,9 +2,8 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Cart\Manager;
-use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use Illuminate\Support\ServiceProvider;
 
 class CartProvider extends ServiceProvider
 {

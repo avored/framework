@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class Permission extends Model
 {

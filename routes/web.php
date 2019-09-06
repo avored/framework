@@ -19,29 +19,29 @@ Route::middleware(['web'])
     ->group(function () {
 
         /***************** LOGIN ROUTE *****************/
-        Route::get('login', [\AvoRed\Framework\System\Controllers\LoginController::class,'loginForm'])
+        Route::get('login', [\AvoRed\Framework\System\Controllers\LoginController::class, 'loginForm'])
             ->name('login');
-        Route::post('login', [\AvoRed\Framework\System\Controllers\LoginController::class,'login'])
+        Route::post('login', [\AvoRed\Framework\System\Controllers\LoginController::class, 'login'])
             ->name('login.post');
-        
+
         /***************** PASSWORD RESET *****************/
         Route::get(
             'password/reset',
-            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class,'linkRequestForm']
+            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class, 'linkRequestForm']
         )->name('password.request');
         Route::post(
             'password/email',
-            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class,'sendResetLinkEmail']
+            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class, 'sendResetLinkEmail']
         )->name('password.email');
-            
+
         Route::get(
             'password/reset/{token}',
-            [\AvoRed\Framework\System\Controllers\ResetPasswordController::class,'showResetForm']
+            [\AvoRed\Framework\System\Controllers\ResetPasswordController::class, 'showResetForm']
         )->name('password.reset');
-        Route::post('password/reset', [\AvoRed\Framework\System\Controllers\ResetPasswordController::class,'reset'])
+        Route::post('password/reset', [\AvoRed\Framework\System\Controllers\ResetPasswordController::class, 'reset'])
             ->name('password.update');
         /***************** LOGOUT *****************/
-        Route::post('logout', [\AvoRed\Framework\System\Controllers\LoginController::class,'logout'])
+        Route::post('logout', [\AvoRed\Framework\System\Controllers\LoginController::class, 'logout'])
             ->name('logout');
     });
 
@@ -50,67 +50,67 @@ Route::middleware(['web', 'admin.auth'])
     ->namespace('AvoRed\Framework')
     ->name('admin.')
     ->group(function () {
-        Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class,'index'])
+        Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class, 'index'])
             ->name('dashboard');
 
         Route::get('configuration', 'System\Controllers\ConfigurationController@index')
             ->name('configuration.index');
-        Route::post('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class,'store'])
+        Route::post('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class, 'store'])
             ->name('configuration.store');
-        
-        Route::post('attribute/upload', [\AvoRed\Framework\Catalog\Controllers\AttributeController::class,'upload'])
+
+        Route::post('attribute/upload', [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'upload'])
             ->name('attribute.upload');
 
-        Route::post('admin-user-image', [\AvoRed\Framework\System\Controllers\AdminUserController::class,'upload'])
+        Route::post('admin-user-image', [\AvoRed\Framework\System\Controllers\AdminUserController::class, 'upload'])
             ->name('admin-user-image-upload');
 
         Route::post(
             'variation/{product}/create-variation',
-            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'createVariation']
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'createVariation']
         )->name('product.create.variation');
 
         Route::post(
             'variation/{product}/save-variation',
-            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'saveVariation']
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'saveVariation']
         )->name('product.save.variation');
-        
+
         Route::delete(
             'variation/{product}',
-            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'destroyVariation']
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'destroyVariation']
         )->name('product.destroy.variation');
 
         Route::post(
             'product-image/{product}/upload',
-            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'upload']
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'upload']
         )->name('product.image.upload');
         Route::delete(
             'product-image/{productImage}',
-            [\AvoRed\Framework\Catalog\Controllers\ProductController::class,'destroyImage']
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'destroyImage']
         )->name('product.image.destroy');
 
         Route::get(
             'order/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'show']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'show']
         )->name('order.show');
         Route::post(
             'order-change-status/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'changeStatus']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'changeStatus']
         )->name('order.change-status');
         Route::post(
             'save-order-track-code/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'saveTrackCode']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'saveTrackCode']
         )->name('order.save.track.code');
         Route::get(
             'order-download-invoice/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'downloadInvoice']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'downloadInvoice']
         )->name('order.download.invoice');
         Route::get(
             'order-email-invoice/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'emailInvoice']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'emailInvoice']
         )->name('order.email.invoice');
         Route::get(
             'order-shipping-label/{order}',
-            [\AvoRed\Framework\Order\Controllers\OrderController::class,'generateShippingLabel']
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'generateShippingLabel']
         )->name('order.shipping.label');
 
         Route::resource('admin-user', System\Controllers\AdminUserController::class);

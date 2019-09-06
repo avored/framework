@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Shipping;
 
 use Illuminate\Support\Collection;
@@ -6,19 +7,21 @@ use Illuminate\Support\Collection;
 class Manager
 {
     /**
-     * Shipping Options collection
+     * Shipping Options collection.
      * @var \Illuminate\Support\Collection
      */
     public $collection;
+
     /**
-     * Construct for the Shipping Manager
+     * Construct for the Shipping Manager.
      */
     public function __construct()
     {
         $this->collection = Collection::make([]);
     }
+
     /**
-     * Get all the Shipping Options Collection
+     * Get all the Shipping Options Collection.
      * @return \Illuminate\Support\Collection
      */
     public function all(): Collection
@@ -27,7 +30,7 @@ class Manager
     }
 
     /**
-     * Put Shipping class to an collection Collection
+     * Put Shipping class to an collection Collection.
      * @return void
      */
     public function put($shipping)

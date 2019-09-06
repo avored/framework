@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,14 +20,14 @@ class Property extends Model
         'use_for_all_products',
         'is_visible_frontend',
         'use_for_category_filter',
-        'sort_order'
+        'sort_order',
     ];
 
     /**
-     * Appended attribute for the model
-     * @var array $appends
+     * Appended attribute for the model.
+     * @var array
      */
-    protected $appends =  ['dropdown'];
+    protected $appends = ['dropdown'];
 
     /**
      * The available data types for the product property.
@@ -38,7 +39,7 @@ class Property extends Model
         'DATETIME' => 'Date Time',
         'VARCHAR' => 'VarChar (max:255)',
         'BOOLEAN' => 'Boolean (true/false)',
-        'TEXT' => 'Text Area (big text)'
+        'TEXT' => 'Text Area (big text)',
     ];
 
     /**
@@ -53,11 +54,11 @@ class Property extends Model
         'FILE' => 'File',
         'DATETIME' => 'Date Time',
         'RADIO' => 'Radio',
-        'SWITCH' => 'Switch'
+        'SWITCH' => 'Switch',
     ];
 
     /**
-     * Get the Dropdown Options for Select
+     * Get the Dropdown Options for Select.
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getDropdownAttribute()
@@ -65,13 +66,10 @@ class Property extends Model
         if ($this->field_type === 'SELECT' || $this->field_type === 'RADIO') {
             return $this->dropdownOptions;
         }
-
-        
-        return null;
     }
 
     /**
-     * Get the Dropdown Options for Select
+     * Get the Dropdown Options for Select.
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getDropdownOptions(): SupportCollection
@@ -82,16 +80,16 @@ class Property extends Model
             foreach ($this->dropdownOptions as $dropdown) {
                 $data->push([
                     'label' => $dropdown->display_text,
-                    'value' => $dropdown->id
+                    'value' => $dropdown->id,
                 ]);
             }
         }
 
         return $data;
     }
-    
+
     /**
-     * Get the Property Value based on its fields type
+     * Get the Property Value based on its fields type.
      * @return mixed $value
      */
     public function getPropertyDisplayTextByProductId(int $productId)
@@ -150,7 +148,7 @@ class Property extends Model
     }
 
     /**
-     * Get the Property Value based on its fields type
+     * Get the Property Value based on its fields type.
      * @return mixed $value
      */
     public function getPropertyValueByProductId(int $productId)
@@ -186,7 +184,7 @@ class Property extends Model
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
      * @return void
@@ -200,13 +198,13 @@ class Property extends Model
         } else {
             $this->integerValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
      * @return void
@@ -220,13 +218,13 @@ class Property extends Model
         } else {
             $this->varcharValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
      * @return void
@@ -240,13 +238,13 @@ class Property extends Model
         } else {
             $this->textValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
      * @return void
@@ -260,13 +258,13 @@ class Property extends Model
         } else {
             $this->booleanValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
      * @return void
@@ -280,13 +278,13 @@ class Property extends Model
         } else {
             $this->datetimeValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Store Product Property Values depend on field type
+     * Store Product Property Values depend on field type.
      * @todo never used it yet
      * @param \AvoRed\Framework\Database\Models\Product $product
      * @param mixed $value
@@ -301,13 +299,13 @@ class Property extends Model
         } else {
             $this->decimalValues()->create(
                 ['product_id' => $product->id,
-                'value' => $value]
+                'value' => $value, ]
             );
         }
     }
 
     /**
-     * Property has many dropdown options
+     * Property has many dropdown options.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function dropdownOptions()
@@ -316,7 +314,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many integer value
+     * Property has many integer value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function integerValues()
@@ -325,7 +323,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many varchar value
+     * Property has many varchar value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function varcharValues()
@@ -334,7 +332,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many text value
+     * Property has many text value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function textValues()
@@ -343,7 +341,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many boolean value
+     * Property has many boolean value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function booleanValues()
@@ -352,7 +350,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many datetime value
+     * Property has many datetime value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function datetimeValues()
@@ -361,7 +359,7 @@ class Property extends Model
     }
 
     /**
-     * Property has many decimal value
+     * Property has many decimal value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function decimalValues()

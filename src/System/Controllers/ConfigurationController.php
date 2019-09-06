@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Support\Facades\Tab;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
 class ConfigurationController
 {
     /**
-     * Configuration Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\ConfigurationRepository $configurationRepository
+     * Configuration Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\ConfigurationRepository
      */
     protected $configurationRepository;
-    
+
     /**
-     * Construct for the AvoRed configuration controller
+     * Construct for the AvoRed configuration controller.
      * @param \AvoRed\Framework\Database\Contracts\ConfigurationModelInterface $configurationRepository
      */
     public function __construct(
@@ -24,7 +25,7 @@ class ConfigurationController
     }
 
     /**
-     * Show Configuration  of an AvoRed Admin
+     * Show Configuration  of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -37,7 +38,7 @@ class ConfigurationController
     }
 
     /**
-     * Show Configuration  of an AvoRed Admin
+     * Show Configuration  of an AvoRed Admin.
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -50,6 +51,7 @@ class ConfigurationController
                 $model->update(['value' => $value]);
             }
         }
+
         return redirect()->route('admin.configuration.index')
             ->with(
                 'successNotification',

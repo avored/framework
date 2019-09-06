@@ -4,29 +4,29 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
+use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Support\Facades\Permission;
+use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
-use AvoRed\Framework\Database\Models\Role;
-use AvoRed\Framework\System\Requests\RoleRequest;
-use AvoRed\Framework\Support\Facades\Permission;
-use Illuminate\Support\Collection;
 
 class RoleController extends Controller
 {
     /**
-     * Role Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * Role Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
 
     /**
-     * Permission Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\PermissionRepository $permissionRepository
+     * Permission Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\PermissionRepository
      */
     protected $permissionRepository;
-    
+
     /**
-     * Construct for the AvoRed role controller
+     * Construct for the AvoRed role controller.
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      * @param \AvoRed\Framework\Database\Contracts\PermissionModelInterface $permissionRepository
      */
@@ -37,6 +37,7 @@ class RoleController extends Controller
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
@@ -44,7 +45,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->roleRepository->all();
-        
+
         return view('avored::system.role.index')
             ->with('roles', $roles);
     }
@@ -56,6 +57,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
+
         return view('avored::system.role.create')
             ->with('permissions', $permissions);
     }
@@ -69,7 +71,7 @@ class RoleController extends Controller
     {
         $role = $this->roleRepository->create($request->all());
         $this->saveRolePermissions($request, $role);
-        
+
         return redirect()->route('admin.role.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Role']));
     }
@@ -82,6 +84,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::all();
+
         return view('avored::system.role.edit')
             ->with('role', $role)
             ->with('permissions', $permissions);
@@ -97,7 +100,7 @@ class RoleController extends Controller
     {
         $role->update($request->all());
         $this->saveRolePermissions($request, $role);
-        
+
         return redirect()->route('admin.role.index')
             ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Role']));
     }
@@ -113,13 +116,12 @@ class RoleController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Role'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Role']),
         ]);
     }
 
-
     /**
-     * Save Role Permission for the Users
+     * Save Role Permission for the Users.
      * @param \AvoRed\Framework\System\Requests\RoleRequest $request
      * @param \AvoRed\Framework\Models\Database\Role $rolet
      *
@@ -128,7 +130,7 @@ class RoleController extends Controller
     private function saveRolePermissions($request, $role)
     {
         $permissionIds = Collection::make([]);
-        
+
         if ($request->get('permissions') !== null && count($request->get('permissions')) > 0) {
             foreach ($request->get('permissions') as $key => $value) {
                 if ($value != 1) {

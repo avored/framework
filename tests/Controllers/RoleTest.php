@@ -3,15 +3,14 @@
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Role;
-use AvoRed\Framework\Database\Models\Permission;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Support\Facades\Permission as AvoRedPermission;
 
 class RoleTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testRoleIndexRouteTest()
     {
@@ -59,7 +58,7 @@ class RoleTest extends BaseTestCase
     public function testRoleUpdateRouteTest()
     {
         $role = factory(Role::class)->create();
-        $role->name = "updated role name";
+        $role->name = 'updated role name';
         $data = $role->toArray();
 
         $this->createAdminUser()
@@ -74,7 +73,7 @@ class RoleTest extends BaseTestCase
     public function testRoleDestroyRouteTest()
     {
         $role = factory(Role::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.role.destroy', $role->id))
@@ -91,7 +90,7 @@ class RoleTest extends BaseTestCase
         foreach ($permissionList as $permission) {
             $permissions->push($permission->routes());
         }
-        
+
         $data = ['name' => 'test role name', 'permissions' => $permissions->toArray()];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -109,12 +108,12 @@ class RoleTest extends BaseTestCase
         foreach ($permissionList as $permission) {
             $permissions->push($permission->routes());
         }
-        
+
         $role = factory(Role::class)->create();
-        $role->name = "updated role name";
+        $role->name = 'updated role name';
         $data = $role->toArray();
         $data['permissions'] = $permissions->toArray();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->put(route('admin.role.update', $role->id), $data)

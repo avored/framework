@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Page;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PageTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testPageIndexRouteTest()
     {
@@ -33,7 +33,7 @@ class PageTest extends BaseTestCase
     /* @runInSeparateProcess */
     public function testPageStoreRouteTest()
     {
-        $data = ['name' => 'test page name', 'slug' => 'test-page-name','content' => 'test content' , ''];
+        $data = ['name' => 'test page name', 'slug' => 'test-page-name', 'content' => 'test content', ''];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->post(route('admin.page.store', $data))
@@ -57,7 +57,7 @@ class PageTest extends BaseTestCase
     public function testPageUpdateRouteTest()
     {
         $page = factory(Page::class)->create();
-        $page->name = "updated page name";
+        $page->name = 'updated page name';
         $data = $page->toArray();
 
         $this->createAdminUser()
@@ -72,7 +72,7 @@ class PageTest extends BaseTestCase
     public function testPageDestroyRouteTest()
     {
         $page = factory(Page::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.page.destroy', $page->id))

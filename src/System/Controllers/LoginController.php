@@ -1,13 +1,13 @@
 <?php
+
 namespace AvoRed\Framework\System\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-use AvoRed\Framework\Database\Models\AdminUser;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class LoginController extends BaseController
 {
@@ -22,6 +22,7 @@ class LoginController extends BaseController
     |
     */
     use AuthenticatesUsers, AuthorizesRequests;
+
     /**
      * Create a new controller instance.
      * @return void
@@ -30,6 +31,7 @@ class LoginController extends BaseController
     {
         $this->middleware('admin.guest')->except('logout');
     }
+
     /**
      * Show the AvoRed Login Form to the User.
      * @return \Illuminate\View\View
@@ -38,6 +40,7 @@ class LoginController extends BaseController
     {
         return view('avored::system.login.form');
     }
+
     /**
      * Using an Admin Guard for the Admin Auth.
      * @return \Illuminate\Auth\SessionGuard
@@ -46,7 +49,7 @@ class LoginController extends BaseController
     {
         return Auth::guard('admin');
     }
-    
+
     /**
      * Get the failed login response instance.
      * @param  \Illuminate\Http\Request  $request
@@ -59,6 +62,7 @@ class LoginController extends BaseController
             [$this->username() => [trans('avored::system.failed')]]
         );
     }
+
     /**
      * Redirect Path after login and logout.
      * @return string
@@ -67,6 +71,7 @@ class LoginController extends BaseController
     {
         return config('avored.admin_url');
     }
+
     /**
      * Redirect Path after login and logout.
      * @return \Illuminate\Http\RedirectResponse
@@ -76,7 +81,7 @@ class LoginController extends BaseController
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
-        
+
         return redirect()->route('admin.login');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\User\Notifications;
 
 use Illuminate\Notifications\Notification;
@@ -12,6 +13,7 @@ class ResetPassword extends Notification
      * @var string
      */
     public $token;
+
     /**
      * Create a notification instance.
      *
@@ -22,6 +24,7 @@ class ResetPassword extends Notification
     {
         $this->token = $token;
     }
+
     /**
      * Get the notification's channels.
      *
@@ -32,6 +35,7 @@ class ResetPassword extends Notification
     {
         return ['mail'];
     }
+
     /**
      * Build the mail representation of the notification.
      *

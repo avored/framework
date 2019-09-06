@@ -18,13 +18,13 @@ return [
         'title' => 'Order Status',
         'is_default' => 'Is Default',
         'index' => [
-            'title' => 'Order Status List'
+            'title' => 'Order Status List',
         ],
         'create' => [
-            'title' => 'Order Status Create'
+            'title' => 'Order Status Create',
         ],
         'edit' => [
-            'title' => 'Order Status Edit'
+            'title' => 'Order Status Edit',
         ],
     ],
     'order' => [
@@ -39,7 +39,7 @@ return [
             'show' => 'Show',
             'add_tracking' => 'Add Tracking Code',
             'track_code' => 'Track Code',
-            'change_track_code' => 'Track code'
+            'change_track_code' => 'Track code',
         ],
         'show' => [
             'title' => 'Order Show',
@@ -48,7 +48,7 @@ return [
             'id' => 'Order Id',
             'payment_option' => 'Payment Option',
             'shipping_option' => 'Shipping Option',
-            'created_at' => 'Created At'
+            'created_at' => 'Created At',
         ],
         'invoice' => [
             'name' => 'Name',
@@ -59,9 +59,8 @@ return [
             'total' => 'Total',
             'payment_method' => 'Payment Method',
             'invoice' => 'Invoice',
-            'created_at' => 'Created'
+            'created_at' => 'Created',
         ],
     ],
-    
 
 ];

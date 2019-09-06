@@ -67,16 +67,16 @@ class ControllerMakeCommand extends Command
         $stubFiles = ['controller'];
 
         foreach ($stubFiles as $stubFile) {
-            $methodName = 'get' . ucfirst($stubFile) . 'Path';
+            $methodName = 'get'.ucfirst($stubFile).'Path';
 
             $path = $this->$methodName($vendor, $name, $controllerName);
             $this->createRequiredDirectories($path);
 
-            $buildMethodName = 'build' . ucfirst($stubFile) . 'File';
+            $buildMethodName = 'build'.ucfirst($stubFile).'File';
             $this->files->put($path, $this->$buildMethodName());
         }
 
-        $this->info($this->type . ' created successfully.');
+        $this->info($this->type.' created successfully.');
     }
 
     /**
@@ -86,13 +86,13 @@ class ControllerMakeCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-        if (!$this->files->isDirectory(dirname($path))) {
+        if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }
 
     /**
-     * Get Controller Path
+     * Get Controller Path.
      * @param string $vendor
      * @param string $name
      * @param string $controllerName
@@ -100,7 +100,7 @@ class ControllerMakeCommand extends Command
      */
     protected function getControllerPath($vendor, $name, $controllerName)
     {
-        return base_path('modules/' . $vendor . '/' . $name . '/' . 'src/Http/Controllers/' . $controllerName . '.php');
+        return base_path('modules/'.$vendor.'/'.$name.'/'.'src/Http/Controllers/'.$controllerName.'.php');
     }
 
     /**
@@ -125,7 +125,7 @@ class ControllerMakeCommand extends Command
      */
     protected function getStub($stubName)
     {
-        return __DIR__ . "/stubs/{$stubName}.stub";
+        return __DIR__."/stubs/{$stubName}.stub";
     }
 
     /**
@@ -143,7 +143,7 @@ class ControllerMakeCommand extends Command
 
         $baseNamespace = $module['namespace'];
 
-        $namespace = $baseNamespace . "Http\Controllers";
+        $namespace = $baseNamespace."Http\Controllers";
 
         $stub = str_replace(
             ['DummyClass', 'DummyRootNamespace', 'DummyNamespace'],

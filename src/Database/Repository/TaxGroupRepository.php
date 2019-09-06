@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\TaxGroup;
 use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class TaxGroupRepository implements TaxGroupModelInterface
 {
     /**
-     * Create TaxGroup Resource into a database
+     * Create TaxGroup Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\TaxGroup $taxGroups
      */
@@ -19,7 +19,7 @@ class TaxGroupRepository implements TaxGroupModelInterface
     }
 
     /**
-     * get all user groups for
+     * get all user groups for.
      * @return \Illuminate\Database\Eloquent\Collection $taxGroups
      */
     public function all() : Collection

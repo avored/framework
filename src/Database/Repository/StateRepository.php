@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\State;
-use AvoRed\Framework\Database\Contracts\StateModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Contracts\StateModelInterface;
 
 class StateRepository implements StateModelInterface
 {
     /**
-     * Create State Resource into a database
+     * Create State Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\State $state
      */
@@ -19,7 +19,7 @@ class StateRepository implements StateModelInterface
     }
 
     /**
-     * Find State Resource into a database
+     * Find State Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\State $state
      */
@@ -29,7 +29,7 @@ class StateRepository implements StateModelInterface
     }
 
     /**
-     * Delete State Resource from a database
+     * Delete State Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class StateRepository implements StateModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $states
      */
     public function all() : Collection

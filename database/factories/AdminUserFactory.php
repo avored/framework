@@ -5,8 +5,8 @@ use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Models\AdminUser;
 
 $factory->define(AdminUser::class, function (Faker $faker) {
-    
     $role = factory(Role::class)->create();
+
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
@@ -14,6 +14,6 @@ $factory->define(AdminUser::class, function (Faker $faker) {
         'password' => 'secret',
         'role_id' => $role->id,
         'is_super_admin' => rand(0, 1),
-        'image_path' => null
+        'image_path' => null,
     ];
 });

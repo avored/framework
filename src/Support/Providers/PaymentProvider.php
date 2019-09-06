@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Payment\Manager;
+use Illuminate\Support\ServiceProvider;
 
 class PaymentProvider extends ServiceProvider
 {
@@ -48,6 +48,6 @@ class PaymentProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['payment','AvoRed\Framework\Payment\Manager'];
+        return ['payment', 'AvoRed\Framework\Payment\Manager'];
     }
 }

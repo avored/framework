@@ -2,21 +2,21 @@
 
 namespace AvoRed\Framework;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
-use AvoRed\Framework\System\ViewComposers\LayoutComposer;
+use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Support\Middleware\AdminAuth;
+use AvoRed\Framework\Support\Middleware\AvoRedCore;
 use AvoRed\Framework\Support\Console\InstallCommand;
 use AvoRed\Framework\Support\Console\AdminMakeCommand;
-use AvoRed\Framework\Support\Middleware\AdminAuth;
+use AvoRed\Framework\System\ViewComposers\LayoutComposer;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
-use AvoRed\Framework\Support\Middleware\AvoRedCore;
 
 class AvoRedProvider extends ServiceProvider
 {
     /**
-     * Providers List for the Framework
-     * @var array $providers
+     * Providers List for the Framework.
+     * @var array
      */
     protected $providers = [
         \AvoRed\Framework\Support\Providers\BreadcrumbProvider::class,
@@ -30,7 +30,6 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\ShippingProvider::class,
         \AvoRed\Framework\Support\Providers\TabProvider::class,
     ];
-
 
     /**
      * Register services.
@@ -105,7 +104,7 @@ class AvoRedProvider extends ServiceProvider
     }
 
     /**
-     * Registering AvoRed E commerce Service Provider
+     * Registering AvoRed E commerce Service Provider.
      * @return void
      */
     protected function registerProviders()
@@ -128,16 +127,16 @@ class AvoRedProvider extends ServiceProvider
     }
 
     /**
-     * Register config data for AvoRed E commerce Framework
+     * Register config data for AvoRed E commerce Framework.
      * @return void
      */
     public function registerConfigData()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/avored.php',
+            __DIR__.'/../config/avored.php',
             'avored'
         );
-        $avoredConfigData = include __DIR__ . '/../config/avored.php';
+        $avoredConfigData = include __DIR__.'/../config/avored.php';
         $fileSystemConfig = $this->app['config']->get('filesystems', []);
         $authConfig = $this->app['config']->get('auth', []);
         $this->app['config']->set(
@@ -162,18 +161,18 @@ class AvoRedProvider extends ServiceProvider
         View::composer('avored::layouts.app', LayoutComposer::class);
     }
 
-   /**
-    * Set up the file which can be published to use the package
-    * @return void
-    */
+    /**
+     * Set up the file which can be published to use the package.
+     * @return void
+     */
     public function setupPublishFiles()
     {
         $this->publishes([
-            __DIR__.'/../config/avored.php' => config_path('avored.php')
+            __DIR__.'/../config/avored.php' => config_path('avored.php'),
         ], 'avored-config');
 
         $this->publishes([
-            __DIR__.'/../assets/avored-admin' => public_path('avored-admin')
+            __DIR__.'/../assets/avored-admin' => public_path('avored-admin'),
         ], 'avored-public');
     }
 }

@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class OrderProduct extends Model
 {
@@ -15,11 +15,11 @@ class OrderProduct extends Model
         'order_id',
         'qty',
         'price',
-        'tax_amount'
+        'tax_amount',
     ];
 
     /**
-     * Order Product belongs to one order
+     * Order Product belongs to one order.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order()
@@ -28,7 +28,7 @@ class OrderProduct extends Model
     }
 
     /**
-     * Order Product belongs to one Product
+     * Order Product belongs to one Product.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
