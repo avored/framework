@@ -7,20 +7,20 @@ use Illuminate\Support\ServiceProvider;
 class Provider extends ServiceProvider
 {
     /**
-     * Command Name for the AvoRed Console
+     * Command Name for the AvoRed Console.
      *
-     * @var array $commandName
+     * @var array
      */
     protected $commandName = [
         'avored.module.install',
         'avored.module.make',
-        'avored.controller.make'
+        'avored.controller.make',
     ];
 
     /**
-     * Command Identifier for the AvoRed Console
+     * Command Identifier for the AvoRed Console.
      *
-     * @var array $commands
+     * @var array
      */
     protected $commands;
 
@@ -37,10 +37,10 @@ class Provider extends ServiceProvider
     protected function registerCommands()
     {
         foreach ($this->commandName as $commandName) {
-            $methodName = 'register' . implode(array_map('ucfirst', explode('.', $commandName)));
+            $methodName = 'register'.implode(array_map('ucfirst', explode('.', $commandName)));
             $this->$methodName();
 
-            $this->commands[] = 'command.' . $commandName;
+            $this->commands[] = 'command.'.$commandName;
         }
 
         $this->commands($this->commands);
@@ -71,7 +71,7 @@ class Provider extends ServiceProvider
     }
 
     /**
-     * Register Avored Module Controller Make Command
+     * Register Avored Module Controller Make Command.
      *
      * @return void
      */

@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Language;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class LanguageRepository implements LanguageModelInterface
 {
     /**
-     * Create Language Resource into a database
+     * Create Language Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Language $language
      */
@@ -19,7 +19,7 @@ class LanguageRepository implements LanguageModelInterface
     }
 
     /**
-     * get all languages available for this store
+     * get all languages available for this store.
      * @return \Illuminate\Database\Eloquent\Collection $languages
      */
     public function all() : Collection

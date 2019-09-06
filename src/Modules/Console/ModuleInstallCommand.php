@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Modules\Console;
 use Illuminate\Console\Command;
 use AvoRed\Framework\Support\Facades\Module;
 use Illuminate\Database\Migrations\Migrator;
-use Symfony\Component\Console\Input\InputArgument;
 
 class ModuleInstallCommand extends Command
 {
@@ -52,12 +51,12 @@ class ModuleInstallCommand extends Command
     {
         $identifier = strtolower($this->getIdentifierInput());
         $module = Module::get($identifier);
-        $provider = $module->namespace() . 'Module';
+        $provider = $module->namespace().'Module';
         $this->call('vendor:publish', ['--provider' => $provider]);
-        $path = $module->basePath() . DIRECTORY_SEPARATOR . 'database/migrations';
+        $path = $module->basePath().DIRECTORY_SEPARATOR.'database/migrations';
         $this->migrator->run($path);
-        
-        $this->info('Module:' . $module->name() . ' has been installed successfully.');
+
+        $this->info('Module:'.$module->name().' has been installed successfully.');
     }
 
     /**
@@ -67,7 +66,7 @@ class ModuleInstallCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-        if (!$this->files->isDirectory(dirname($path))) {
+        if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }

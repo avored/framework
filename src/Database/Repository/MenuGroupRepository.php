@@ -2,15 +2,15 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\MenuGroup;
-use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Models\MenuGroup;
 use Illuminate\Support\Collection as SupportCollection;
+use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
 
 class MenuGroupRepository implements MenuGroupModelInterface
 {
     /**
-     * Create MenuGroup Resource into a database
+     * Create MenuGroup Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
      */
@@ -20,7 +20,7 @@ class MenuGroupRepository implements MenuGroupModelInterface
     }
 
     /**
-     * Find MenuGroup Resource into a database
+     * Find MenuGroup Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
      */
@@ -30,7 +30,7 @@ class MenuGroupRepository implements MenuGroupModelInterface
     }
 
     /**
-     * Delete MenuGroup Resource from a database
+     * Delete MenuGroup Resource from a database.
      * @param int $id
      * @return int
      */
@@ -40,7 +40,7 @@ class MenuGroupRepository implements MenuGroupModelInterface
     }
 
     /**
-     * Find MenuGroup Resource from data store
+     * Find MenuGroup Resource from data store.
      * @param string $identifier
      * @return \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
      */
@@ -61,7 +61,7 @@ class MenuGroupRepository implements MenuGroupModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $menuGroups
      */
     public function all() : Collection

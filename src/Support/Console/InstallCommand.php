@@ -3,51 +3,50 @@
 namespace AvoRed\Framework\Support\Console;
 
 use Illuminate\Console\Command;
-use AvoRed\Framework\Database\Repository\RoleRepository;
-use AvoRed\Framework\Database\Models\Role;
-use AvoRed\Framework\Database\Contracts\RoleModelInterface;
-use AvoRed\Framework\Models\Contracts\AdminUserInterface;
-use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
-use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
-use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Database\Repository\RoleRepository;
+use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
+use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 
 class InstallCommand extends Command
 {
     /**
-     * Role Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * Role Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
 
     /**
-     * OrderStauts Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\OrderStatusRepository $orderStatusRepository
+     * OrderStauts Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\OrderStatusRepository
      */
     protected $orderStatusRepository;
 
     /**
-     * UserGroup Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * UserGroup Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
     protected $userGroupRepository;
 
     /**
-     * Currency Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository $currencyRepository
+     * Currency Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
-     * Currency Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     * Currency Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\LanguageRepository
      */
     protected $languageRepository;
-    
+
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
@@ -75,14 +74,14 @@ class InstallCommand extends Command
      * @var string
      */
     protected $name = 'avored:install';
-    
+
     /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Install AvoRed e commerce an Laravel Shopping Cart';
-    
+
     /**
      * Execute the console command.
      *
@@ -90,10 +89,10 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $absolutePath = __DIR__ .'/../../../database/migrations';
+        $absolutePath = __DIR__.'/../../../database/migrations';
         $basePath = base_path();
-        
-        $relativePath = str_replace($basePath . '/', '', $absolutePath);
+
+        $relativePath = str_replace($basePath.'/', '', $absolutePath);
 
         //$this->call('migrate', ['--path' => $relativePath]);
         $this->call('migrate:fresh');
@@ -107,42 +106,42 @@ class InstallCommand extends Command
         $this->createDefaultUserGroup();
         $this->createOrderStatus();
         $this->alterUserTable();
-        
+
         $this->call('avored:admin:make');
         $this->info('AvoRed Install Successfully!');
     }
 
     /**
-     * Get the Default currency data
+     * Get the Default currency data.
      * @return void
      */
     public function createCurrency()
     {
-        $data =  [
+        $data = [
             'name' => 'US Dollar',
             'code' => 'usd',
             'symbol' => '$',
             'conversation_rate' => 1,
-            'status' => 'ENABLED'
+            'status' => 'ENABLED',
         ];
         $this->currencyRepository->create($data);
     }
 
     /**
-     * Get the Default currency data
+     * Get the Default currency data.
      * @return void
      */
     public function createDefaultUserGroup()
     {
-        $data =  [
+        $data = [
             'name' => 'Default Group',
-            'is_default' => 1
+            'is_default' => 1,
         ];
         $this->userGroupRepository->create($data);
     }
 
     /**
-     * create order status
+     * create order status.
      * @return void
      */
     public function createOrderStatus()
@@ -155,26 +154,26 @@ class InstallCommand extends Command
     }
 
     /**
-     * Get the Language data
+     * Get the Language data.
      * @return void
      */
     public function createLanguage()
     {
-        $data =  [
+        $data = [
             'name' => 'English',
             'code' => 'en',
-            'is_default' => 1
+            'is_default' => 1,
         ];
         $this->languageRepository->create($data);
     }
 
     /**
-     * Alter User Table for user group id
+     * Alter User Table for user group id.
      * @return void
      */
     public function alterUserTable()
     {
-        $user =  config('avored.model.user');
+        $user = config('avored.model.user');
 
         try {
             $model = resolve($user);

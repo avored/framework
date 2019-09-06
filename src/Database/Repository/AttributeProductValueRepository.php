@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\AttributeProductValue;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class AttributeProductValueRepository implements AttributeProductValueModelInterface
 {
     /**
-     * Create AttributeProductValue Resource into a database
+     * Create AttributeProductValue Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\AttributeProductValue $attributeProductValue
      */
@@ -19,7 +19,7 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
-     * Find AttributeProductValue Resource into a database
+     * Find AttributeProductValue Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\AttributeProductValue $attributeProductValue
      */
@@ -29,7 +29,7 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
-     * Delete AttributeProductValue Resource from a database
+     * Delete AttributeProductValue Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
-     * Find AttributeProductValue Resource into a database
+     * Find AttributeProductValue Resource into a database.
      * @param int $productId
      * @param int $attributeId
      * @param int $optionId
@@ -56,7 +56,7 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
-     * Find AttributeProductValue Resource into a database
+     * Find AttributeProductValue Resource into a database.
      * @param int $productId
      * @param int $variationId
      * @param int $optionId
@@ -70,7 +70,7 @@ class AttributeProductValueRepository implements AttributeProductValueModelInter
     }
 
     /**
-     * Get all the attribute product values from the connected database
+     * Get all the attribute product values from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $attributeProductValues
      */
     public function all() : Collection

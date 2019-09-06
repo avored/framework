@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\OrderStatus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderStatusTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testOrderStatusIndexRouteTest()
     {
@@ -56,7 +57,7 @@ class OrderStatusTest extends BaseTestCase
     public function testOrderStatusUpdateRouteTest()
     {
         $orderStatus = factory(OrderStatus::class)->create();
-        $orderStatus->name = "updated order-status name";
+        $orderStatus->name = 'updated order-status name';
         $data = $orderStatus->toArray();
 
         $this->createAdminUser()
@@ -71,7 +72,7 @@ class OrderStatusTest extends BaseTestCase
     public function testOrderStatusDestroyRouteTest()
     {
         $orderStatus = factory(OrderStatus::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.order-status.destroy', $orderStatus->id))

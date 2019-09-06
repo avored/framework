@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class AddressRepository implements AddressModelInterface
 {
     /**
-     * Create Address Resource into a database
+     * Create Address Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Address $address
      */
@@ -19,7 +19,7 @@ class AddressRepository implements AddressModelInterface
     }
 
     /**
-     * Find Address Resource into a database
+     * Find Address Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Address $address
      */
@@ -29,7 +29,7 @@ class AddressRepository implements AddressModelInterface
     }
 
     /**
-     * Delete Address Resource from a database
+     * Delete Address Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class AddressRepository implements AddressModelInterface
     }
 
     /**
-     * Get all the addresses from the connected database
+     * Get all the addresses from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $addresses
      */
     public function all() : Collection
@@ -47,8 +47,8 @@ class AddressRepository implements AddressModelInterface
         return Address::all();
     }
 
-     /**
-     * Get All Addresses from Database via User Id
+    /**
+     * Get All Addresses from Database via User Id.
      * @param int $userId
      * @return \Illuminate\Database\Eloquent\Collection $addresses
      */

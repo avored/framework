@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\Order;
-use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 
 class OrderRepository implements OrderModelInterface
 {
     /**
-     * Create Order Resource into a database
+     * Create Order Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Order $order
      */
@@ -19,7 +19,7 @@ class OrderRepository implements OrderModelInterface
     }
 
     /**
-     * Find Order Resource into a database
+     * Find Order Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Order $order
      */
@@ -29,7 +29,7 @@ class OrderRepository implements OrderModelInterface
     }
 
     /**
-     * Find Orders of a given user Id
+     * Find Orders of a given user Id.
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Collection $userOrders
      */
@@ -39,7 +39,7 @@ class OrderRepository implements OrderModelInterface
     }
 
     /**
-     * Delete Order Resource from a database
+     * Delete Order Resource from a database.
      * @param int $id
      * @return int
      */
@@ -49,7 +49,7 @@ class OrderRepository implements OrderModelInterface
     }
 
     /**
-     * Get all the orders from the connected database
+     * Get all the orders from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $orders
      */
     public function all() : Collection

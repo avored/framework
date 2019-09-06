@@ -8,8 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class DashboardTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
-    
+
     public function testDashboardRouteTest()
     {
         $this->createAdminUser()

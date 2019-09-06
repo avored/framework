@@ -1,14 +1,14 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use AvoRed\Framework\Database\Models\Configuration;
 
 class ConfigurationTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testConfigurationIndexRouteTest()
     {

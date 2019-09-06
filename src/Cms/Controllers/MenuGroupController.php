@@ -1,37 +1,38 @@
 <?php
+
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Database\Contracts\MenuModelInterface;
-use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
+use Illuminate\Http\Request;
 use AvoRed\Framework\Database\Models\Menu;
 use AvoRed\Framework\Cms\Requests\MenuRequest;
-use Illuminate\Http\Request;
-use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Models\MenuGroup;
 use AvoRed\Framework\Support\Facades\Menu as MenuFacade;
+use AvoRed\Framework\Database\Contracts\MenuModelInterface;
+use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
 
 class MenuGroupController
 {
     /**
-     * Menu Repository for the Menu Controller
-     * @var \AvoRed\Framework\Database\Repository\MenuRepository $menuRepository
+     * Menu Repository for the Menu Controller.
+     * @var \AvoRed\Framework\Database\Repository\MenuRepository
      */
     protected $menuRepository;
 
     /**
-     * Menu Group Repository for the Menu Controller
-     * @var \AvoRed\Framework\Database\Repository\MenuGroupRepository $menuGroupRepository
+     * Menu Group Repository for the Menu Controller.
+     * @var \AvoRed\Framework\Database\Repository\MenuGroupRepository
      */
     protected $menuGroupRepository;
 
     /**
-     * Menu Controller for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
+     * Menu Controller for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\CategoryRepository
      */
     protected $categoryRepository;
-    
+
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Contracts\MenuModelInterface $menuRepository
      * @param \AvoRed\Framework\Database\Contracts\MenuGroupModelInterface $menuGroupRepository
      * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
@@ -83,13 +84,13 @@ class MenuGroupController
     {
         $menuGroup = $this->menuGroupRepository->create($request->all());
         $menus = json_decode($request->get('menu_json'));
-        
+
         $this->saveMenus($menuGroup, $menus);
-        
+
         return redirect()->route('admin.menu-group.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Menu']));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
@@ -108,7 +109,6 @@ class MenuGroupController
             ->with('menuGroup', $menuGroup);
     }
 
-
     /**
      * Update the specified resource in storage.
      * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
@@ -120,8 +120,9 @@ class MenuGroupController
         $menuGroup->menus()->delete();
         $menuGroup->update($request->all());
         $menus = json_decode($request->get('menu_json'));
-        
+
         $this->saveMenus($menuGroup, $menus);
+
         return redirect()->route('admin.menu-group.index')
             ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Menu']));
     }
@@ -137,12 +138,12 @@ class MenuGroupController
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Menu'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
         ]);
     }
 
     /**
-     * set the categories url for menu
+     * set the categories url for menu.
      * @param \AvoRed\Framework\Database\Models\MenuGroup
      * @param \AvoRed\Framework\Cms\Requests\MenuRequest $request
      * @param \\AvoRed\Framework\Database\Models\Menu $parent
@@ -150,13 +151,12 @@ class MenuGroupController
      */
     public function saveMenus(MenuGroup $menuGroup, $menus, $parent = null)
     {
-        
         foreach ($menus as $menu) {
             $data = [
                 'name' => $menu->name,
-                'url' => $menu->url
+                'url' => $menu->url,
             ];
-            
+
             if ($parent !== null) {
                 $data['parent_id'] = $parent->id;
             }

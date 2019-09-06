@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Tab\Manager;
-use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Tab\TabItem;
+use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class TabProvider extends ServiceProvider
 {
@@ -50,11 +50,11 @@ class TabProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['tab','AvoRed\Framework\Tab\Manager'];
+        return ['tab', 'AvoRed\Framework\Tab\Manager'];
     }
 
     /**
-     * Register Tabs for the Different CRUD operations
+     * Register Tabs for the Different CRUD operations.
      * @return void
      */
     public function registerTabs()

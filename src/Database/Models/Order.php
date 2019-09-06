@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class Order extends Model
 {
@@ -18,11 +18,11 @@ class Order extends Model
         'user_id',
         'shipping_address_id',
         'billing_address_id',
-        'track_code'
+        'track_code',
     ];
 
     /**
-     * Order Status
+     * Order Status.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function orderStatus()
@@ -31,7 +31,7 @@ class Order extends Model
     }
 
     /**
-     * Order Status
+     * Order Status.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -42,7 +42,7 @@ class Order extends Model
     }
 
     /**
-     * Order Shipping Address
+     * Order Shipping Address.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function shippingAddress()
@@ -51,7 +51,7 @@ class Order extends Model
     }
 
     /**
-     * Order Currency Model
+     * Order Currency Model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function currency()
@@ -60,7 +60,7 @@ class Order extends Model
     }
 
     /**
-     * Order Billing Address
+     * Order Billing Address.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function billingAddress()
@@ -69,7 +69,7 @@ class Order extends Model
     }
 
     /**
-     * Order Billing Address
+     * Order Billing Address.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()

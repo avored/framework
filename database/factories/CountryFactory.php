@@ -1,4 +1,5 @@
 <?php
+
 use Faker\Generator as Faker;
 use AvoRed\Framework\Database\Models\Country;
 

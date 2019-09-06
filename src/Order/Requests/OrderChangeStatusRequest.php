@@ -25,7 +25,7 @@ class OrderChangeStatusRequest extends FormRequest
     {
         $rules = [];
         $rules['order_status_id'] = 'required';
-        
+
         return $rules;
     }
 }

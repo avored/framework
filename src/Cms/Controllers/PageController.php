@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
+use AvoRed\Framework\Database\Contracts\PageModelInterface;
 
 class PageController
 {
     /**
-     * Page Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\PageRepository $pageRepository
+     * Page Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\PageRepository
      */
     protected $pageRepository;
-    
+
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Contracts\PageModelInterface $pageRepository
      */
     public function __construct(
@@ -24,7 +25,7 @@ class PageController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -35,7 +36,7 @@ class PageController
             ->with('pages', $pages);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
@@ -93,7 +94,7 @@ class PageController
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Page'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Page']),
         ]);
     }
 }

@@ -2,16 +2,15 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Database\Models\CategoryFilter;
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
-use AvoRed\Framework\Database\Models\Category;
 
 class CategoryFilterRepository implements CategoryFilterModelInterface
 {
     /**
-     * Create CategoryFilter Resource into a database
+     * Create CategoryFilter Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\CategoryFilter $category
      */
@@ -21,7 +20,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     }
 
     /**
-     * Find CategoryFilter Resource into a database
+     * Find CategoryFilter Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\CategoryFilter $category
      */
@@ -29,9 +28,9 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     {
         return CategoryFilter::find($id);
     }
-    
+
     /**
-     * Find Category filter by given category and filter and type
+     * Find Category filter by given category and filter and type.
      * @param int $cateogryId
      * @param int $filterId
      * @param string $type
@@ -39,7 +38,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
      */
     public function isCategoryFilterModelExist(int $categoryId, int $filterId, $type)
     {
-        $model =  CategoryFilter::whereCategoryId($categoryId)
+        $model = CategoryFilter::whereCategoryId($categoryId)
             ->whereFilterId($filterId)
             ->whereType($type)->first();
 
@@ -51,7 +50,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     }
 
     /**
-     * Find CategoryFilters by given category id
+     * Find CategoryFilters by given category id.
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Collection $categoryFilters
      */
@@ -61,7 +60,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     }
 
     /**
-     * Delete CategoryFilter Resource from a database
+     * Delete CategoryFilter Resource from a database.
      * @param int $id
      * @return int
      */
@@ -71,7 +70,7 @@ class CategoryFilterRepository implements CategoryFilterModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function all() : Collection

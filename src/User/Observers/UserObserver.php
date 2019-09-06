@@ -7,13 +7,13 @@ use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 class UserObserver
 {
     /**
-     * UserGroup Repository for controller
-     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * UserGroup Repository for controller.
+     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
     protected $userGroupRepository;
-    
+
     /**
-     * Construct for the AvoRed user group controller
+     * Construct for the AvoRed user group controller.
      * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
      */
     public function __construct(

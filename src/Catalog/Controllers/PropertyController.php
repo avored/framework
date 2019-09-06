@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\Catalog\Controllers;
 
-use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Catalog\Requests\PropertyRequest;
+use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 
 class PropertyController
 {
     /**
-     * Property Repository for the Property Controller
-     * @var \AvoRed\Framework\Database\Repository\PropertyRepository $propertyRepository
+     * Property Repository for the Property Controller.
+     * @var \AvoRed\Framework\Database\Repository\PropertyRepository
      */
     protected $propertyRepository;
-    
+
     /**
-     * Construct for the AvoRed property controller
+     * Construct for the AvoRed property controller.
      * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
      */
     public function __construct(
@@ -24,18 +25,18 @@ class PropertyController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
     {
         $properties = $this->propertyRepository->all();
-        
+
         return view('avored::catalog.property.index')
             ->with('properties', $properties);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
@@ -43,7 +44,7 @@ class PropertyController
     {
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
-        
+
         return view('avored::catalog.property.create')
             ->with('dataTypeOptions', $dataTypeOptions)
             ->with('fieldTypeOptions', $fieldTypeOptions);
@@ -114,19 +115,19 @@ class PropertyController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::catalog.property.title')]
-            )
+            ),
         ]);
     }
 
     /**
-     * Save Property Dropdown options
+     * Save Property Dropdown options.
      * @param \\AvoRed\Framework\Database\Models\Property  $property
      * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
      * @return void
      */
     private function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
     {
-        if (!($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
+        if (! ($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
             $property->dropdownOptions()->delete();
         }
         if (($request->get('field_type') === 'RADIO' ||

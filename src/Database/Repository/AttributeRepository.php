@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class AttributeRepository implements AttributeModelInterface
 {
     /**
-     * Create Attribute Resource into a database
+     * Create Attribute Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
@@ -19,7 +19,7 @@ class AttributeRepository implements AttributeModelInterface
     }
 
     /**
-     * Find Attribute Resource into a database
+     * Find Attribute Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
@@ -29,7 +29,7 @@ class AttributeRepository implements AttributeModelInterface
     }
 
     /**
-     * Delete Attribute Resource from a database
+     * Delete Attribute Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class AttributeRepository implements AttributeModelInterface
     }
 
     /**
-     * Get all the attributes from the connected database
+     * Get all the attributes from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $attributes
      */
     public function all() : Collection

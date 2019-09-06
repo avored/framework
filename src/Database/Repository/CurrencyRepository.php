@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class CurrencyRepository implements CurrencyModelInterface
 {
     /**
-     * Create Currency Resource into a database
+     * Create Currency Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Currency $currency
      */
@@ -19,7 +19,7 @@ class CurrencyRepository implements CurrencyModelInterface
     }
 
     /**
-     * Find Currency Resource into a database
+     * Find Currency Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Currency $currency
      */
@@ -29,7 +29,7 @@ class CurrencyRepository implements CurrencyModelInterface
     }
 
     /**
-     * Delete Currency Resource from a database
+     * Delete Currency Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class CurrencyRepository implements CurrencyModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $currencies
      */
     public function all() : Collection

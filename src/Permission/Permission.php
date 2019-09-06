@@ -2,28 +2,28 @@
 
 namespace AvoRed\Framework\Permission;
 
-use AvoRed\Framework\Support\Contracts\PermissionInterface;
 use Illuminate\Support\Facades\Lang;
+use AvoRed\Framework\Support\Contracts\PermissionInterface;
 
 class Permission implements PermissionInterface
 {
     /**
-     * @var string $label
+     * @var string
      */
     protected $label;
 
     /**
-     * @var string $routes
+     * @var string
      */
     protected $routes;
 
     /**
-     * @var string $key
+     * @var string
      */
     protected $key;
 
     /**
-     * Construct for a permission group
+     * Construct for a permission group.
      * @param callable $callable
      * @return void
      */
@@ -35,7 +35,7 @@ class Permission implements PermissionInterface
     }
 
     /**
-     * Set/Get Label for permission
+     * Set/Get Label for permission.
      * @param string $label
      * @return mixed $label|$this
      */
@@ -50,11 +50,12 @@ class Permission implements PermissionInterface
         if (Lang::has($this->label)) {
             return __($this->label);
         }
+
         return $this->label;
     }
 
     /**
-     * Set/Get key for permission
+     * Set/Get key for permission.
      * @param string $key
      * @return mixed $key|$this
      */
@@ -68,9 +69,9 @@ class Permission implements PermissionInterface
 
         return $this->key;
     }
-    
+
     /**
-     * Set/Get routes for permission
+     * Set/Get routes for permission.
      * @param string $routes
      * @return mixed $routes|$this
      */

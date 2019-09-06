@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\AttributeDropdownOption;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class AttributeDropdownOptionRepository implements AttributeDropdownOptionModelInterface
 {
     /**
-     * Create AttributeDropdownOption Resource into a database
+     * Create AttributeDropdownOption Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\AttributeDropdownOption $attributeDropdownOption
      */
@@ -19,7 +19,7 @@ class AttributeDropdownOptionRepository implements AttributeDropdownOptionModelI
     }
 
     /**
-     * Find AttributeDropdownOption Resource into a database
+     * Find AttributeDropdownOption Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\AttributeDropdownOption $attributeDropdownOption
      */
@@ -29,7 +29,7 @@ class AttributeDropdownOptionRepository implements AttributeDropdownOptionModelI
     }
 
     /**
-     * Delete AttributeDropdownOption Resource from a database
+     * Delete AttributeDropdownOption Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class AttributeDropdownOptionRepository implements AttributeDropdownOptionModelI
     }
 
     /**
-     * Get all the attributes from the connected database
+     * Get all the attributes from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $attributeDropdownOptions
      */
     public function all() : Collection

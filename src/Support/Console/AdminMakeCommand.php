@@ -10,19 +10,19 @@ use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 class AdminMakeCommand extends Command
 {
     /**
-     * Role Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * Role Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
-     
+
     /**
-     * AdminUser Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
+     * AdminUser Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository
      */
     protected $adminUserRepository;
 
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     public function __construct(
@@ -40,14 +40,14 @@ class AdminMakeCommand extends Command
      * @var string
      */
     protected $name = 'avored:admin:make';
-    
+
     /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Create an Admin User for  AvoRed e commerce';
-    
+
     /**
      * Execute the console command.
      *

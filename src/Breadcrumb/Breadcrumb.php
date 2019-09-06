@@ -3,8 +3,8 @@
 namespace AvoRed\Framework\Breadcrumb;
 
 use Illuminate\Support\Collection;
-use AvoRed\Framework\Support\Facades\Breadcrumb as BreadcrumbFacade;
 use AvoRed\Framework\Support\Contracts\BreadcrumbInterface;
+use AvoRed\Framework\Support\Facades\Breadcrumb as BreadcrumbFacade;
 
 class Breadcrumb implements BreadcrumbInterface
 {

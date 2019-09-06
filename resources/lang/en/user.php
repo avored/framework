@@ -18,15 +18,14 @@ return [
         'is_default' => 'Is Default',
         'title' => 'User Group',
         'index' => [
-            'title' => 'User Group List'
+            'title' => 'User Group List',
         ],
         'create' => [
-            'title' => 'User Group Create'
+            'title' => 'User Group Create',
         ],
         'edit' => [
-            'title' => 'User Group Edit'
+            'title' => 'User Group Edit',
         ],
     ],
-    
 
 ];

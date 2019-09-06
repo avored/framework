@@ -9,9 +9,9 @@ return [
     'symlink_storage_folder' => 'storage',
     'cart' => ['session_key' => 'cart_products'],
     'model' => [
-        'user' => App\User::class
+        'user' => App\User::class,
     ],
-   
+
     'filesystems' => [
         'disks' => [
             'avored' => [
@@ -33,16 +33,16 @@ return [
             'admin' => [
                 'driver' => 'session',
                 'provider' => 'admin-users',
-            ]
+            ],
         ],
-       
+
         'providers' => [
             'admin-users' => [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\AdminUser::class,
             ],
         ],
-    
+
         'passwords' => [
             'adminusers' => [
                 'provider' => 'admin-users',
@@ -50,5 +50,5 @@ return [
                 'expire' => 60,
             ],
         ],
-    ]
+    ],
 ];

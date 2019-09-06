@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;

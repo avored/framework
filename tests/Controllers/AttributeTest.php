@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Attribute;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AttributeTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testAttributeIndexRouteTest()
     {
@@ -32,7 +33,7 @@ class AttributeTest extends BaseTestCase
     /* @runInSeparateProcess */
     public function testAttributeStoreRouteTest()
     {
-        $data = ['name' => 'test attribute name','slug' => 'test-attribute-name'];
+        $data = ['name' => 'test attribute name', 'slug' => 'test-attribute-name'];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->post(route('admin.attribute.store', $data))
@@ -56,7 +57,7 @@ class AttributeTest extends BaseTestCase
     public function testAttributeUpdateRouteTest()
     {
         $attribute = factory(Attribute::class)->create();
-        $attribute->name = "updated attribute name";
+        $attribute->name = 'updated attribute name';
         $data = $attribute->toArray();
 
         $this->createAdminUser()
@@ -71,7 +72,7 @@ class AttributeTest extends BaseTestCase
     public function testAttributeDestroyRouteTest()
     {
         $attribute = factory(Attribute::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.attribute.destroy', $attribute->id))

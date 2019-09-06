@@ -3,20 +3,20 @@
 namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Routing\Controller;
-use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 use AvoRed\Framework\Database\Models\Language;
 use AvoRed\Framework\System\Requests\LanguageRequest;
+use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 
 class LanguageController extends Controller
 {
     /**
-     * Language Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\LanguageRepository $languageRepository
+     * Language Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\LanguageRepository
      */
     protected $languageRepository;
-    
+
     /**
-     * Construct for the AvoRed language controller
+     * Construct for the AvoRed language controller.
      * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
      */
     public function __construct(
@@ -24,6 +24,7 @@ class LanguageController extends Controller
     ) {
         $this->languageRepository = $languageRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
@@ -31,7 +32,7 @@ class LanguageController extends Controller
     public function index()
     {
         $languages = $this->languageRepository->all();
-        
+
         return view('avored::system.language.index')
             ->with('languages', $languages);
     }
@@ -94,7 +95,7 @@ class LanguageController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Language'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Language']),
         ]);
     }
 }

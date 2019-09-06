@@ -33,7 +33,7 @@ class Builder
      * @param callable $callable
      * @return void
      */
-    public function make($name, callable  $callable)
+    public function make($name, callable $callable)
     {
         $breadcrumb = new Breadcrumb($callable);
         $breadcrumb->route($name);

@@ -30,7 +30,7 @@ class PropertyRequest extends FormRequest
         $rules['use_for_all_products'] = 'required';
         $rules['is_visible_frontend'] = 'required';
         $rules['sort_order'] = 'required:integer';
-        
+
         return $rules;
     }
 }

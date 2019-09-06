@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class AttributeProductValue extends Model
 {
@@ -13,7 +13,7 @@ class AttributeProductValue extends Model
     protected $fillable = ['attribute_id', 'product_id', 'variation_id', 'attribute_dropdown_option_id'];
 
     /**
-     * Attribute product value belongs to a attribute dropdown option
+     * Attribute product value belongs to a attribute dropdown option.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function attributeDropdownOption()
@@ -22,7 +22,7 @@ class AttributeProductValue extends Model
     }
 
     /**
-     * Attribute product value belongs to a attribute
+     * Attribute product value belongs to a attribute.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function attribute()
@@ -31,7 +31,7 @@ class AttributeProductValue extends Model
     }
 
     /**
-     * Product Variation Model
+     * Product Variation Model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function variation()

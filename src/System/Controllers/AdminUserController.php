@@ -4,28 +4,28 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Models\AdminUser;
-use AvoRed\Framework\System\Requests\AdminUserImageRequest;
 use AvoRed\Framework\System\Requests\AdminUserRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\System\Requests\AdminUserImageRequest;
+use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 
 class AdminUserController extends Controller
 {
     /**
-     * AdminUser Repository
-     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
+     * AdminUser Repository.
+     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository
      */
     protected $adminUserRepository;
 
     /**
-     * Role Repository
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * Role Repository.
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
-    
+
     /**
-     * Construct for the AvoRed User Controller
+     * Construct for the AvoRed User Controller.
      * @param \AvoRed\Framework\Database\Contracts\AdminUserModelInterface $adminUserRepository
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      */
@@ -36,6 +36,7 @@ class AdminUserController extends Controller
         $this->adminUserRepository = $adminUserRepository;
         $this->roleRepository = $roleRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
@@ -43,7 +44,7 @@ class AdminUserController extends Controller
     public function index()
     {
         $adminUsers = $this->adminUserRepository->all();
-        
+
         return view('avored::system.admin-user.index')
             ->with('adminUsers', $adminUsers);
     }
@@ -55,6 +56,7 @@ class AdminUserController extends Controller
     public function create()
     {
         $roleOptions = $this->roleRepository->options();
+
         return view('avored::system.admin-user.create')
             ->with('roleOptions', $roleOptions);
     }
@@ -82,6 +84,7 @@ class AdminUserController extends Controller
     public function edit(AdminUser $adminUser)
     {
         $roleOptions = $this->roleRepository->options();
+
         return view('avored::system.admin-user.edit')
             ->with('adminUser', $adminUser)
             ->with('roleOptions', $roleOptions);
@@ -112,7 +115,7 @@ class AdminUserController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'AdminUser'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'AdminUser']),
         ]);
     }
 
@@ -129,7 +132,7 @@ class AdminUserController extends Controller
         return response()->json([
             'success' => true,
             'path' => $path,
-            'message' => __('avored::system.notification.upload', ['attribute' => 'Admin User Image'])
+            'message' => __('avored::system.notification.upload', ['attribute' => 'Admin User Image']),
         ]);
     }
 }

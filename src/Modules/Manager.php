@@ -16,25 +16,25 @@ use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 class Manager
 {
     /**
-     * existing module list
-     * @var array $moduleList
+     * existing module list.
+     * @var array
      */
     public $moduleList;
 
     /**
-     * existing files list
-     * @var array $files
+     * existing files list.
+     * @var array
      */
     public $files;
 
     /**
-     * Flag for is Module is loaded or not
-     * @var bool $moduleLoaded
+     * Flag for is Module is loaded or not.
+     * @var bool
      */
     public $moduleLoaded = false;
 
     /**
-     * Construct for the module manager
+     * Construct for the module manager.
      * @param \Illuminate\Filesystem\Filesystem $fileSystem
      */
     public function __construct(Filesystem $files)
@@ -44,7 +44,7 @@ class Manager
     }
 
     /**
-     * Get all the moduleList Collection
+     * Get all the moduleList Collection.
      * @return \Illuminate\Support\Collection $moduleList
      */
     public function all()
@@ -57,7 +57,7 @@ class Manager
     }
 
     /**
-     * Scan Module Path and load into a moduleList Collection
+     * Scan Module Path and load into a moduleList Collection.
      * @return self $this
      */
     protected function loadModules()
@@ -91,9 +91,9 @@ class Manager
 
                     $composerLoader = require base_path('vendor/autoload.php');
                     if (strtolower($module->status()) == 'active') {
-                        $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
+                        $path = $iterator->getPath().DIRECTORY_SEPARATOR.'src';
                         $composerLoader->addPsr4($module->namespace(), $path);
-                        $moduleProvider = $module->namespace() . 'Module';
+                        $moduleProvider = $module->namespace().'Module';
                         App::register($moduleProvider);
                     }
 
@@ -109,7 +109,7 @@ class Manager
     }
 
     /**
-     * Put Module Info to a collection
+     * Put Module Info to a collection.
      * @param string $identifier
      * @param array $moduleInfo
      * @return self $this
@@ -122,7 +122,7 @@ class Manager
     }
 
     /**
-     * Get Module by identifier
+     * Get Module by identifier.
      * @param string $identifier
      * @return \AvoRed\Framework\Modules\Module $module
      */
@@ -136,7 +136,7 @@ class Manager
     }
 
     /**
-     * Get Module by Path
+     * Get Module by Path.
      * @param string $path
      * @return \AvoRed\Framework\Modules\Module $module
      */
@@ -156,7 +156,7 @@ class Manager
     }
 
     /**
-     * Publish an item to given path from passed path
+     * Publish an item to given path from passed path.
      * @param string $from
      * @param string $to
      * @return mixed
@@ -192,14 +192,14 @@ class Manager
     protected function moveManagedFiles($manager)
     {
         foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (!$manager->has('to://' . $file['path']))) {
-                $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
+            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']))) {
+                $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
             }
         }
     }
 
     /**
-     * Slash the given path
+     * Slash the given path.
      * @param string $path
      * @return string $slashPath
      */

@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\UserGroup;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class UserGroupRepository implements UserGroupModelInterface
 {
     /**
-     * Create UserGroup Resource into a database
+     * Create UserGroup Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\UserGroup $userGroups
      */
@@ -19,7 +19,7 @@ class UserGroupRepository implements UserGroupModelInterface
     }
 
     /**
-     * get all user groups for
+     * get all user groups for.
      * @return \Illuminate\Database\Eloquent\Collection $userGroups
      */
     public function all() : Collection
@@ -28,7 +28,7 @@ class UserGroupRepository implements UserGroupModelInterface
     }
 
     /**
-     * get default user group instance
+     * get default user group instance.
      * @return \AvoRed\Framework\Database\Models\UserGroup $userGroup
      */
     public function getIsDefault() : UserGroup

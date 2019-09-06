@@ -30,6 +30,7 @@ class MenuRequest extends Request
         } else {
             $rules['identifier'] = 'required|max:255';
         }
+
         return $rules;
     }
 }

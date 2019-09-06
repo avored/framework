@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\System\Controllers;
 
-use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
 use AvoRed\Framework\Database\Models\TaxGroup;
 use AvoRed\Framework\System\Requests\TaxGroupRequest;
+use AvoRed\Framework\Database\Contracts\TaxGroupModelInterface;
 
 class TaxGroupController
 {
     /**
-     * TaxGroup Repository for Controller
-     * @var \AvoRed\Framework\Database\Repository\TaxGroupRepository $taxGroupRepository
+     * TaxGroup Repository for Controller.
+     * @var \AvoRed\Framework\Database\Repository\TaxGroupRepository
      */
     protected $taxGroupRepository;
-    
+
     /**
-     * Construct for the AvoRed tax group controller
+     * Construct for the AvoRed tax group controller.
      * @param \AvoRed\Framework\Database\Contracts\TaxGroupModelInterface $taxGroupRepository
      */
     public function __construct(
@@ -24,7 +25,7 @@ class TaxGroupController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -35,7 +36,7 @@ class TaxGroupController
             ->with('taxGroups', $taxGroups);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
@@ -102,7 +103,7 @@ class TaxGroupController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::system.tax-group.title')]
-            )
+            ),
         ]);
     }
 }

@@ -26,7 +26,7 @@ class StateRequest extends FormRequest
         $rules['name'] = 'required';
         $rules['code'] = 'required';
         $rules['country_id'] = 'required';
-        
+
         return $rules;
     }
 }
