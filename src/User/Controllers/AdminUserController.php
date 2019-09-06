@@ -1,14 +1,14 @@
 <?php
 
-namespace AvoRed\Framework\System\Controllers;
+namespace AvoRed\Framework\User\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use AvoRed\Framework\Database\Models\AdminUser;
-use AvoRed\Framework\System\Requests\AdminUserRequest;
+use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
-use AvoRed\Framework\System\Requests\AdminUserImageRequest;
+use AvoRed\Framework\User\Requests\AdminUserImageRequest;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class AdminUserController extends Controller
 {
@@ -45,7 +45,7 @@ class AdminUserController extends Controller
     {
         $adminUsers = $this->adminUserRepository->all();
 
-        return view('avored::system.admin-user.index')
+        return view('avored::user.admin-user.index')
             ->with('adminUsers', $adminUsers);
     }
 
@@ -55,10 +55,12 @@ class AdminUserController extends Controller
      */
     public function create()
     {
+        $tabs = Tab::get('user.admin-user');
         $roleOptions = $this->roleRepository->options();
 
-        return view('avored::system.admin-user.create')
-            ->with('roleOptions', $roleOptions);
+        return view('avored::user.admin-user.create')
+            ->with('roleOptions', $roleOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -73,7 +75,7 @@ class AdminUserController extends Controller
         $this->adminUserRepository->create($request->all());
 
         return redirect()->route('admin.admin-user.index')
-            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'AdminUser']));
+            ->with('successNotification', __('avored::user.notification.store', ['attribute' => 'AdminUser']));
     }
 
     /**
@@ -83,11 +85,13 @@ class AdminUserController extends Controller
      */
     public function edit(AdminUser $adminUser)
     {
+        $tabs = Tab::get('user.admin-user');
         $roleOptions = $this->roleRepository->options();
 
-        return view('avored::system.admin-user.edit')
+        return view('avored::user.admin-user.edit')
             ->with('adminUser', $adminUser)
-            ->with('roleOptions', $roleOptions);
+            ->with('roleOptions', $roleOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -101,7 +105,7 @@ class AdminUserController extends Controller
         $adminUser->update($request->all());
 
         return redirect()->route('admin.admin-user.index')
-            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'AdminUser']));
+            ->with('successNotification', __('avored::user.notification.updated', ['attribute' => 'AdminUser']));
     }
 
     /**
@@ -115,7 +119,7 @@ class AdminUserController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'AdminUser']),
+            'message' => __('avored::user.notification.delete', ['attribute' => 'AdminUser']),
         ]);
     }
 
@@ -132,7 +136,7 @@ class AdminUserController extends Controller
         return response()->json([
             'success' => true,
             'path' => $path,
-            'message' => __('avored::system.notification.upload', ['attribute' => 'Admin User Image']),
+            'message' => __('avored::user.notification.upload', ['attribute' => 'Admin User Image']),
         ]);
     }
 }

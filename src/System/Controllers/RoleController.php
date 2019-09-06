@@ -10,6 +10,7 @@ use AvoRed\Framework\Support\Facades\Permission;
 use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class RoleController extends Controller
 {
@@ -56,10 +57,12 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $tabs = Tab::get('system.role');
         $permissions = Permission::all();
 
         return view('avored::system.role.create')
-            ->with('permissions', $permissions);
+            ->with('permissions', $permissions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -83,11 +86,13 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $tabs = Tab::get('system.role');
         $permissions = Permission::all();
 
         return view('avored::system.role.edit')
             ->with('role', $role)
-            ->with('permissions', $permissions);
+            ->with('permissions', $permissions)
+            ->with('tabs', $tabs);
     }
 
     /**

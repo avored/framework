@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Models\State;
 use AvoRed\Framework\System\Requests\StateRequest;
 use AvoRed\Framework\Database\Contracts\StateModelInterface;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class StateController extends Controller
 {
@@ -54,10 +55,12 @@ class StateController extends Controller
      */
     public function create()
     {
+        $tabs = Tab::get('system.state');
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.state.create')
-            ->with('countryOptions', $countryOptions);
+            ->with('countryOptions', $countryOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -83,11 +86,13 @@ class StateController extends Controller
      */
     public function edit(State $state)
     {
+        $tabs = Tab::get('system.state');
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.state.edit')
             ->with('state', $state)
-            ->with('countryOptions', $countryOptions);
+            ->with('countryOptions', $countryOptions)
+            ->with('tabs', $tabs);
     }
 
     /**

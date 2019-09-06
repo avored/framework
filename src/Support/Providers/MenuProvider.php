@@ -4,8 +4,8 @@ namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Menu\MenuItem;
 use AvoRed\Framework\Menu\MenuBuilder;
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Support\Facades\Menu;
+use Illuminate\Support\ServiceProvider;
 
 class MenuProvider extends ServiceProvider
 {
@@ -69,8 +69,9 @@ class MenuProvider extends ServiceProvider
                 ->icon('shop')
                 ->route('#');
         });
-
+       
         $catalogMenu = Menu::get('catalog');
+
         $catalogMenu->subMenu('product', function (MenuItem $menu) {
             $menu->key('product')
                 ->type(MenuItem::ADMIN)
@@ -89,6 +90,7 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.property')
                 ->route('admin.property.index');
         });
+        
         $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
             $menu->key('attribute')
                 ->type(MenuItem::ADMIN)
@@ -103,7 +105,6 @@ class MenuProvider extends ServiceProvider
                 ->route('#');
         });
         $cmsMenu = Menu::get('cms');
-
         $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
             $menu->key('menu-group')
                 ->type(MenuItem::ADMIN)
@@ -116,20 +117,13 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.page')
                 ->route('admin.page.index');
         });
-
-        /*
-        $cmsMenu->subMenu('menu', function (MenuItem $menu) {
-            $menu->key('menu')
-                ->label('avored::system.admin_menus.menu')
-                ->route('admin.menu.index');
-        });
-        */
         Menu::make('order', function (MenuItem $menu) {
             $menu->label('avored::system.admin_menus.order')
                 ->icon('gold')
                 ->type(MenuItem::ADMIN)
                 ->route('#');
         });
+    
         $orderMenu = Menu::get('order');
         $orderMenu->subMenu('order', function (MenuItem $menu) {
             $menu->key('order')
@@ -150,9 +144,17 @@ class MenuProvider extends ServiceProvider
                 ->icon('user')
                 ->route('#');
         });
-
-        $userGroupMenu = Menu::get('user');
-        $userGroupMenu->subMenu('user_group', function (MenuItem $menu) {
+    
+        $userMenu = Menu::get('user');
+        
+        $userMenu->subMenu('admin-user', function (MenuItem $menu) {
+            $menu->key('admin-user')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.admin_menus.admin-user')
+                ->route('admin.admin-user.index');
+        });
+        
+        $userMenu->subMenu('user_group', function (MenuItem $menu) {
             $menu->key('user_group')
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.user-group')
@@ -175,30 +177,13 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.configuration.index');
         });
 
-        $systemMenu->subMenu('admin-user', function (MenuItem $menu) {
-            $menu->key('admin-user')
-                ->type(MenuItem::ADMIN)
-                ->label('avored::system.admin_menus.admin-user')
-                ->route('admin.admin-user.index');
-        });
-
-        // $systemMenu->subMenu('tax-group', function (MenuItem $menu) {
-        //     $menu->key('tax-group')
-        //         ->label('avored::system.admin_menus.tax-group')
-        //         ->route('admin.tax-group.index');
-        // });
-        // $systemMenu->subMenu('tax-rate', function (MenuItem $menu) {
-        //     $menu->key('tax-rate')
-        //         ->label('avored::system.admin_menus.tax-rate')
-        //         ->route('admin.tax-rate.index');
-        // });
-
         $systemMenu->subMenu('currency', function (MenuItem $menu) {
             $menu->key('currency')
-               ->type(MenuItem::ADMIN)
+                ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.currency')
                 ->route('admin.currency.index');
         });
+
         $systemMenu->subMenu('state', function (MenuItem $menu) {
             $menu->key('state')
                 ->type(MenuItem::ADMIN)

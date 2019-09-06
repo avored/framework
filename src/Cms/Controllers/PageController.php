@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Cms\Controllers;
 use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class PageController
 {
@@ -42,7 +43,9 @@ class PageController
      */
     public function create()
     {
-        return view('avored::cms.page.create');
+        $tabs = Tab::get('cms.page');
+        return view('avored::cms.page.create')
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -65,8 +68,10 @@ class PageController
      */
     public function edit(Page $page)
     {
+        $tabs = Tab::get('cms.page');
         return view('avored::cms.page.edit')
-            ->with('page', $page);
+            ->with('page', $page)
+            ->with('tabs', $tabs);
     }
 
     /**

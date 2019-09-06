@@ -6,6 +6,7 @@ use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
 use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class AttributeController
 {
@@ -43,10 +44,12 @@ class AttributeController
      */
     public function create()
     {
+        $tabs = Tab::get('catalog.attribute');
         $displayAsOptions = Attribute::DISPLAY_AS;
 
         return view('avored::catalog.attribute.create')
-            ->with('displayAsOptions', $displayAsOptions);
+            ->with('displayAsOptions', $displayAsOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -73,11 +76,13 @@ class AttributeController
      */
     public function edit(Attribute $attribute)
     {
+        $tabs = Tab::get('catalog.attribute');
         $displayAsOptions = Attribute::DISPLAY_AS;
 
         return view('avored::catalog.attribute.edit')
             ->with('attribute', $attribute)
-            ->with('displayAsOptions', $displayAsOptions);
+            ->with('displayAsOptions', $displayAsOptions)
+            ->with('tabs', $tabs);
     }
 
     /**

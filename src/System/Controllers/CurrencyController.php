@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\System\Requests\CurrencyRequest;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class CurrencyController extends Controller
 {
@@ -54,12 +55,14 @@ class CurrencyController extends Controller
      */
     public function create()
     {
+        $tabs = Tab::get('system.currency');
         $currencyCodeOptions = $this->countryRepository->currencyCodeOptions();
         $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.create')
             ->with('currencySymbolOptions', $currencySymbolOptions)
-            ->with('currencyCodeOptions', $currencyCodeOptions);
+            ->with('currencyCodeOptions', $currencyCodeOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -85,13 +88,15 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
+        $tabs = Tab::get('system.currency');
         $currencyCodeOptions = $this->countryRepository->currencyCodeOptions();
         $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.edit')
             ->with('currency', $currency)
             ->with('currencySymbolOptions', $currencySymbolOptions)
-            ->with('currencyCodeOptions', $currencyCodeOptions);
+            ->with('currencyCodeOptions', $currencyCodeOptions)
+            ->with('tabs', $tabs);
     }
 
     /**

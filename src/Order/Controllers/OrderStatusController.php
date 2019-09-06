@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Order\Controllers;
 use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Order\Requests\OrderStatusRequest;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class OrderStatusController
 {
@@ -42,7 +43,9 @@ class OrderStatusController
      */
     public function create()
     {
-        return view('avored::order.order-status.create');
+        $tabs = Tab::get('order.order-status');
+        return view('avored::order.order-status.create')
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -68,8 +71,10 @@ class OrderStatusController
      */
     public function edit(OrderStatus $orderStatus)
     {
+        $tabs = Tab::get('order.order-status');
         return view('avored::order.order-status.edit')
-            ->with('orderStatus', $orderStatus);
+            ->with('orderStatus', $orderStatus)
+            ->with('tabs', $tabs);
     }
 
     /**

@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 $baseAdminUrl = config('avored.admin_url');
 
 Route::middleware(['web'])
@@ -113,7 +115,7 @@ Route::middleware(['web', 'admin.auth'])
             [\AvoRed\Framework\Order\Controllers\OrderController::class, 'generateShippingLabel']
         )->name('order.shipping.label');
 
-        Route::resource('admin-user', System\Controllers\AdminUserController::class);
+        Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
         Route::resource('category', Catalog\Controllers\CategoryController::class);
         Route::resource('currency', System\Controllers\CurrencyController::class);

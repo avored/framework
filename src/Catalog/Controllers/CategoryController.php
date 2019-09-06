@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Catalog\Requests\CategoryRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class CategoryController
 {
@@ -42,7 +43,9 @@ class CategoryController
      */
     public function create()
     {
-        return view('avored::catalog.category.create');
+        $tabs = Tab::get('catalog.category');
+        return view('avored::catalog.category.create')
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -68,8 +71,10 @@ class CategoryController
      */
     public function edit(Category $category)
     {
+        $tabs = Tab::get('catalog.category');
         return view('avored::catalog.category.edit')
-            ->with('category', $category);
+            ->with('category', $category)
+            ->with('tabs', $tabs);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Catalog\Requests\PropertyRequest;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class PropertyController
 {
@@ -42,12 +43,14 @@ class PropertyController
      */
     public function create()
     {
+        $tabs = Tab::get('catalog.property');
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
 
         return view('avored::catalog.property.create')
             ->with('dataTypeOptions', $dataTypeOptions)
-            ->with('fieldTypeOptions', $fieldTypeOptions);
+            ->with('fieldTypeOptions', $fieldTypeOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -74,13 +77,15 @@ class PropertyController
      */
     public function edit(Property $property)
     {
+        $tabs = Tab::get('catalog.property');
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
 
         return view('avored::catalog.property.edit')
             ->with('property', $property)
             ->with('dataTypeOptions', $dataTypeOptions)
-            ->with('fieldTypeOptions', $fieldTypeOptions);
+            ->with('fieldTypeOptions', $fieldTypeOptions)
+            ->with('tabs', $tabs);
     }
 
     /**

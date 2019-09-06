@@ -5,6 +5,7 @@ namespace AvoRed\Framework\User\Controllers;
 use AvoRed\Framework\Database\Models\UserGroup;
 use AvoRed\Framework\User\Requests\UserGroupRequest;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class UserGroupController
 {
@@ -42,7 +43,9 @@ class UserGroupController
      */
     public function create()
     {
-        return view('avored::user.user-group.create');
+        $tabs = Tab::get('user.user-group');
+        return view('avored::user.user-group.create')
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -68,8 +71,10 @@ class UserGroupController
      */
     public function edit(UserGroup $userGroup)
     {
+        $tabs = Tab::get('user.user-group');
         return view('avored::user.user-group.edit')
-            ->with('userGroup', $userGroup);
+            ->with('userGroup', $userGroup)
+            ->with('tabs', $tabs);
     }
 
     /**
