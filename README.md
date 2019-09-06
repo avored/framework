@@ -1,4 +1,7 @@
-<p align="center"><img src="logo.svg" height="86"></p>
+<p align="center">
+    <a href="https://www.avored.com/" target="_blank"><img src="logo.svg" height="86" alt="AvoRed"></a>
+</p>
+
 <p align="center">
     <a href="https://circleci.com/gh/avored/framework/tree/master"><img src="https://circleci.com/gh/avored/framework/tree/master.svg" alt="CircleCI"></a>
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/downloads" alt="Total Downloads"></a>
