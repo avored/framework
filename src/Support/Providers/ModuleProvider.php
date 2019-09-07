@@ -17,7 +17,7 @@ class ModuleProvider extends ServiceProvider
 
     public function boot()
     {
-        $modules = Module::all();
+        Module::all();
     }
 
     /**

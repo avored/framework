@@ -60,7 +60,7 @@ class Manager
             return $this->permissions->get($key);
         }
 
-        return $collection = Collection::make([]);
+        return Collection::make([]);
     }
 
     /**

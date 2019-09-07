@@ -89,12 +89,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $absolutePath = __DIR__.'/../../../database/migrations';
-        $basePath = base_path();
-
-        $relativePath = str_replace($basePath.'/', '', $absolutePath);
-
-        //$this->call('migrate', ['--path' => $relativePath]);
         $this->call('migrate:fresh');
         if ($this->confirm('Would you like to install Dummy Data?')) {
             $this->call('avored:module:install', ['identifier' => 'avored-demodata']);

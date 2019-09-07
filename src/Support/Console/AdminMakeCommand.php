@@ -65,7 +65,7 @@ class AdminMakeCommand extends Command
         $data['role_id'] = $role->id;
         $data['is_super_admin'] = 1;
         $data['password'] = bcrypt($data['password']);
-        $user = $this->adminUserRepository->create($data);
+        $this->adminUserRepository->create($data);
 
         $this->info('Admin User created Successfully!');
     }
