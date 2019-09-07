@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Catalog\Controllers;
 
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Catalog\Requests\PropertyRequest;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class PropertyController
 {

@@ -4,8 +4,8 @@ namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Menu\MenuItem;
 use AvoRed\Framework\Menu\MenuBuilder;
-use AvoRed\Framework\Support\Facades\Menu;
 use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Support\Facades\Menu;
 
 class MenuProvider extends ServiceProvider
 {
@@ -69,7 +69,7 @@ class MenuProvider extends ServiceProvider
                 ->icon('shop')
                 ->route('#');
         });
-       
+
         $catalogMenu = Menu::get('catalog');
 
         $catalogMenu->subMenu('product', function (MenuItem $menu) {
@@ -90,7 +90,7 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.property')
                 ->route('admin.property.index');
         });
-        
+
         $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
             $menu->key('attribute')
                 ->type(MenuItem::ADMIN)
@@ -123,7 +123,7 @@ class MenuProvider extends ServiceProvider
                 ->type(MenuItem::ADMIN)
                 ->route('#');
         });
-    
+
         $orderMenu = Menu::get('order');
         $orderMenu->subMenu('order', function (MenuItem $menu) {
             $menu->key('order')
@@ -144,16 +144,16 @@ class MenuProvider extends ServiceProvider
                 ->icon('user')
                 ->route('#');
         });
-    
+
         $userMenu = Menu::get('user');
-        
+
         $userMenu->subMenu('admin-user', function (MenuItem $menu) {
             $menu->key('admin-user')
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.admin-user')
                 ->route('admin.admin-user.index');
         });
-        
+
         $userMenu->subMenu('user_group', function (MenuItem $menu) {
             $menu->key('user_group')
                 ->type(MenuItem::ADMIN)

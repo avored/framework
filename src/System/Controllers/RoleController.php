@@ -5,12 +5,12 @@ namespace AvoRed\Framework\System\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Support\Facades\Permission;
 use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class RoleController extends Controller
 {

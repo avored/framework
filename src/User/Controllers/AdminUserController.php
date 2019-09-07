@@ -3,12 +3,12 @@
 namespace AvoRed\Framework\User\Controllers;
 
 use Illuminate\Routing\Controller;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\User\Requests\AdminUserRequest;
-use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\User\Requests\AdminUserImageRequest;
+use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class AdminUserController extends Controller
 {

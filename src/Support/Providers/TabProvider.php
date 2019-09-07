@@ -64,7 +64,7 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.basic_info')
                 ->view('avored::catalog.product._fields');
         });
-        
+
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.image')
                 ->label('avored::system.tab.images')
@@ -80,7 +80,6 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.attribute')
                 ->view('avored::catalog.product.cards.attribute');
         });
-       
 
         /****** CATALOG CATEGORY TABS *******/
         Tab::put('catalog.category', function (TabItem $tab) {
@@ -149,7 +148,6 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.basic_info')
                 ->view('avored::system.language._fields');
         });
-
 
         /******SYSTEM CONFIGURATION TABS  *******/
         Tab::put('system.configuration', function (TabItem $tab) {
