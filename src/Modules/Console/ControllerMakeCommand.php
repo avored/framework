@@ -100,7 +100,7 @@ class ControllerMakeCommand extends Command
      */
     protected function getControllerPath($vendor, $name, $controllerName)
     {
-        return base_path('modules/'.$vendor.'/'.$name.'/'.'src/Http/Controllers/'.$controllerName.'.php');
+        return base_path('modules/'.$vendor.'/'.$name.'/src/Http/Controllers/'.$controllerName.'.php');
     }
 
     /**
