@@ -60,7 +60,7 @@ class ControllerMakeCommand extends Command
     {
         $identifier = strtolower($this->getIdentifierInput());
 
-        list($vendor, $name) = explode('-', $identifier);
+        [$vendor, $name] = explode('-', $identifier);
 
         $controllerName = $this->getNameInput();
 
