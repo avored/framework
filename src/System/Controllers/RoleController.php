@@ -143,7 +143,8 @@ class RoleController extends Controller
                 }
                 $permissions = explode(',', $key);
                 foreach ($permissions as $permissionName) {
-                    if (null === ($permissionModel = $this->permissionRepository->findByName($permissionName))) {
+                    $permissionModel = $this->permissionRepository->findByName($permissionName);
+                    if ($permissionModel === null) {
                         $permissionModel = $this->permissionRepository->create(['name' => $permissionName]);
                     }
                     $permissionIds->push($permissionModel->id);
