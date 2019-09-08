@@ -11,7 +11,6 @@
 |
 */
 
-
 $baseAdminUrl = config('avored.admin_url');
 
 Route::middleware(['web'])

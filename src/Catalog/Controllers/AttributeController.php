@@ -2,11 +2,11 @@
 
 namespace AvoRed\Framework\Catalog\Controllers;
 
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
 use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class AttributeController
 {

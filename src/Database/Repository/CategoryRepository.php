@@ -55,7 +55,7 @@ class CategoryRepository implements CategoryModelInterface
         });
 
         foreach ($request->except(['slug', '_token']) as $key => $values) {
-            list($filterType, $paramSuffix) = $this->splitParam($key);
+            [$filterType, $paramSuffix] = $this->splitParam($key);
 
             if ($filterType === 'PROPERTY') {
                 $builder = $this->filterProperties($builder, $paramSuffix, $values);

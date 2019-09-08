@@ -3,10 +3,10 @@
 namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Routing\Controller;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Language;
 use AvoRed\Framework\System\Requests\LanguageRequest;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class LanguageController extends Controller
 {
@@ -45,6 +45,7 @@ class LanguageController extends Controller
     public function create()
     {
         $tabs = Tab::get('system.language');
+
         return view('avored::system.language.create')
             ->with('tabs', $tabs);
     }
@@ -70,6 +71,7 @@ class LanguageController extends Controller
     public function edit(Language $language)
     {
         $tabs = Tab::get('system.language');
+
         return view('avored::system.language.edit')
             ->with('language', $language)
             ->with('tabs', $tabs);

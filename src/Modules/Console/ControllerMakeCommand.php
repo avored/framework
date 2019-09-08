@@ -60,7 +60,7 @@ class ControllerMakeCommand extends Command
     {
         $identifier = strtolower($this->getIdentifierInput());
 
-        list($vendor, $name) = explode('-', $identifier);
+        [$vendor, $name] = explode('-', $identifier);
 
         $controllerName = $this->getNameInput();
 
@@ -100,7 +100,7 @@ class ControllerMakeCommand extends Command
      */
     protected function getControllerPath($vendor, $name, $controllerName)
     {
-        return base_path('modules/'.$vendor.'/'.$name.'/'.'src/Http/Controllers/'.$controllerName.'.php');
+        return base_path('modules/'.$vendor.'/'.$name.'/src/Http/Controllers/'.$controllerName.'.php');
     }
 
     /**

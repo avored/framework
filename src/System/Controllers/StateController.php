@@ -4,11 +4,11 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\State;
 use AvoRed\Framework\System\Requests\StateRequest;
 use AvoRed\Framework\Database\Contracts\StateModelInterface;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class StateController extends Controller
 {

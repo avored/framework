@@ -4,11 +4,11 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\System\Requests\CurrencyRequest;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
-use AvoRed\Framework\Support\Facades\Tab;
 
 class CurrencyController extends Controller
 {
