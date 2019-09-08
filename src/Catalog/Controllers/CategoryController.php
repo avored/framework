@@ -34,7 +34,7 @@ class CategoryController
         $categories = $this->categoryRepository->all();
 
         return view('avored::catalog.category.index')
-            ->with('categories', $categories);
+            ->with(compact('categories'));
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoryController
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.create')
-            ->with('tabs', $tabs);
+            ->with(compact('tabs'));
     }
 
     /**
@@ -75,8 +75,7 @@ class CategoryController
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.edit')
-            ->with('category', $category)
-            ->with('tabs', $tabs);
+            ->with(compact('category', 'tabs'));
     }
 
     /**

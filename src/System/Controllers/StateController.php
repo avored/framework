@@ -46,7 +46,7 @@ class StateController extends Controller
         $states = $this->stateRepository->all();
 
         return view('avored::system.state.index')
-            ->with('states', $states);
+            ->with(compact('states'));
     }
 
     /**
@@ -59,8 +59,7 @@ class StateController extends Controller
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.state.create')
-            ->with('countryOptions', $countryOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('countryOptions', 'tabs'));
     }
 
     /**
@@ -90,9 +89,7 @@ class StateController extends Controller
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.state.edit')
-            ->with('state', $state)
-            ->with('countryOptions', $countryOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('state', 'countryOptions', 'tabs'));
     }
 
     /**

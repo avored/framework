@@ -46,7 +46,7 @@ class CurrencyController extends Controller
         $currencies = $this->currencyRepository->all();
 
         return view('avored::system.currency.index')
-            ->with('currencies', $currencies);
+            ->with(compact('currencies'));
     }
 
     /**
@@ -60,9 +60,7 @@ class CurrencyController extends Controller
         $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.create')
-            ->with('currencySymbolOptions', $currencySymbolOptions)
-            ->with('currencyCodeOptions', $currencyCodeOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('currencySymbolOptions', 'currencyCodeOptions', 'tabs'));
     }
 
     /**
@@ -93,10 +91,7 @@ class CurrencyController extends Controller
         $currencySymbolOptions = $this->countryRepository->currencySymbolOptions();
 
         return view('avored::system.currency.edit')
-            ->with('currency', $currency)
-            ->with('currencySymbolOptions', $currencySymbolOptions)
-            ->with('currencyCodeOptions', $currencyCodeOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('currency', 'currencySymbolOptions', 'currencyCodeOptions', 'tabs'));
     }
 
     /**

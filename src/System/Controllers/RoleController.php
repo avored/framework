@@ -48,7 +48,7 @@ class RoleController extends Controller
         $roles = $this->roleRepository->all();
 
         return view('avored::system.role.index')
-            ->with('roles', $roles);
+            ->with(compact('roles'));
     }
 
     /**
@@ -61,8 +61,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
 
         return view('avored::system.role.create')
-            ->with('permissions', $permissions)
-            ->with('tabs', $tabs);
+            ->with(compact('permissions', 'tabs'));
     }
 
     /**
@@ -90,9 +89,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
 
         return view('avored::system.role.edit')
-            ->with('role', $role)
-            ->with('permissions', $permissions)
-            ->with('tabs', $tabs);
+            ->with(compact('role', 'permissions', 'tabs'));
     }
 
     /**

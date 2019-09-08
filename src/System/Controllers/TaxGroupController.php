@@ -33,7 +33,7 @@ class TaxGroupController
         $taxGroups = $this->taxGroupRepository->all();
 
         return view('avored::system.tax-group.index')
-            ->with('taxGroups', $taxGroups);
+            ->with(compact('taxGroups'));
     }
 
     /**
@@ -69,7 +69,7 @@ class TaxGroupController
     public function edit(TaxGroup $taxGroup)
     {
         return view('avored::system.tax-group.edit')
-            ->with('taxGroup', $taxGroup);
+            ->with(compact('taxGroup'));
     }
 
     /**

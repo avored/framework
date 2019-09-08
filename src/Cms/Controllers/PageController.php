@@ -34,7 +34,7 @@ class PageController
         $pages = $this->pageRepository->all();
 
         return view('avored::cms.page.index')
-            ->with('pages', $pages);
+            ->with(compact('pages'));
     }
 
     /**
@@ -46,7 +46,7 @@ class PageController
         $tabs = Tab::get('cms.page');
 
         return view('avored::cms.page.create')
-            ->with('tabs', $tabs);
+            ->with(compact('tabs'));
     }
 
     /**
@@ -72,8 +72,7 @@ class PageController
         $tabs = Tab::get('cms.page');
 
         return view('avored::cms.page.edit')
-            ->with('page', $page)
-            ->with('tabs', $tabs);
+            ->with(compact('page', 'tabs'));
     }
 
     /**

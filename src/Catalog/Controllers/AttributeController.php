@@ -35,7 +35,7 @@ class AttributeController
         $attributes = $this->attributeRepository->all();
 
         return view('avored::catalog.attribute.index')
-            ->with('attributes', $attributes);
+            ->with(compact('attributes'));
     }
 
     /**
@@ -48,8 +48,7 @@ class AttributeController
         $displayAsOptions = Attribute::DISPLAY_AS;
 
         return view('avored::catalog.attribute.create')
-            ->with('displayAsOptions', $displayAsOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('displayAsOptions', 'tabs'));
     }
 
     /**
@@ -80,9 +79,7 @@ class AttributeController
         $displayAsOptions = Attribute::DISPLAY_AS;
 
         return view('avored::catalog.attribute.edit')
-            ->with('attribute', $attribute)
-            ->with('displayAsOptions', $displayAsOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('attribute', 'displayAsOptions', 'tabs'));
     }
 
     /**

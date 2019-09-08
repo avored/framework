@@ -43,7 +43,7 @@ class TaxRateController
         $taxRates = $this->taxRateRepository->all();
 
         return view('avored::system.tax-rate.index')
-            ->with('taxRates', $taxRates);
+            ->with(compact('taxRates'));
     }
 
     /**
@@ -56,8 +56,7 @@ class TaxRateController
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.tax-rate.create')
-            ->with('typeOptions', $typeOptions)
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('typeOptions', 'countryOptions'));
     }
 
     /**
@@ -87,9 +86,7 @@ class TaxRateController
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.tax-rate.edit')
-            ->with('taxRate', $taxRate)
-            ->with('typeOptions', $typeOptions)
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('taxRate', 'typeOptions', 'countryOptions'));
     }
 
     /**

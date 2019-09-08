@@ -56,7 +56,7 @@ class MenuGroupController
         $menuGroups = $this->menuGroupRepository->all();
 
         return view('avored::cms.menu.index')
-            ->with('menuGroups', $menuGroups);
+            ->with(compact('menuGroups'));
     }
 
     /**
@@ -70,9 +70,7 @@ class MenuGroupController
         $menus = [];
 
         return view('avored::cms.menu.create')
-            ->with('frontMenus', $frontMenus)
-            ->with('menus', $menus)
-            ->with('categories', $categories);
+            ->with(compact('frontMenus', 'menus', 'categories'));
     }
 
     /**
@@ -103,10 +101,7 @@ class MenuGroupController
         $menus = $this->menuGroupRepository->getTreeByIdentifier($menuGroup->identifier);
 
         return view('avored::cms.menu.edit')
-            ->with('categories', $categories)
-            ->with('menus', $menus)
-            ->with('frontMenus', $frontMenus)
-            ->with('menuGroup', $menuGroup);
+            ->with(compact('categories', 'menus', 'frontMenus', 'menuGroup'));
     }
 
     /**

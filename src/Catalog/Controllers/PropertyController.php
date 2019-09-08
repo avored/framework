@@ -34,7 +34,7 @@ class PropertyController
         $properties = $this->propertyRepository->all();
 
         return view('avored::catalog.property.index')
-            ->with('properties', $properties);
+            ->with(compact('properties'));
     }
 
     /**
@@ -48,9 +48,7 @@ class PropertyController
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
 
         return view('avored::catalog.property.create')
-            ->with('dataTypeOptions', $dataTypeOptions)
-            ->with('fieldTypeOptions', $fieldTypeOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('dataTypeOptions', 'fieldTypeOptions', 'tabs'));
     }
 
     /**
@@ -82,10 +80,7 @@ class PropertyController
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
 
         return view('avored::catalog.property.edit')
-            ->with('property', $property)
-            ->with('dataTypeOptions', $dataTypeOptions)
-            ->with('fieldTypeOptions', $fieldTypeOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('property', 'dataTypeOptions', 'fieldTypeOptions', 'tabs'));
     }
 
     /**

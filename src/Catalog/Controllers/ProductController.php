@@ -104,7 +104,7 @@ class ProductController
         $products = $this->productRepository->getAllWithoutVaiation();
 
         return view('avored::catalog.product.index')
-            ->with('products', $products);
+            ->with(compact('products'));
     }
 
     /**
@@ -116,7 +116,7 @@ class ProductController
         $typeOptions = Product::PRODUCT_TYPES;
 
         return view('avored::catalog.product.create')
-            ->with('typeOptions', $typeOptions);
+            ->with(compact('typeOptions'));
     }
 
     /**
@@ -152,12 +152,7 @@ class ProductController
         $attributes = $this->attributeRepository->all();
 
         return view('avored::catalog.product.edit')
-            ->with('product', $product)
-            ->with('categoryOptions', $categoryOptions)
-            ->with('typeOptions', $typeOptions)
-            ->with('properties', $properties)
-            ->with('attributes', $attributes)
-            ->with('tabs', $tabs);
+            ->with(compact('product', 'categoryOptions', 'typeOptions', 'properties', 'attributes', 'tabs'));
     }
 
     /**
