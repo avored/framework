@@ -56,7 +56,7 @@ class Builder
         }
 
         return view('avored::breadcrumb.index')
-                ->with('breadcrumb', $breadcrumb);
+                ->with(compact('breadcrumb'));
     }
 
     /**

@@ -34,7 +34,7 @@ class OrderStatusController
         $orderStatus = $this->orderStatusRepository->all();
 
         return view('avored::order.order-status.index')
-            ->with('orderStatus', $orderStatus);
+            ->with(compact('orderStatus'));
     }
 
     /**
@@ -46,7 +46,7 @@ class OrderStatusController
         $tabs = Tab::get('order.order-status');
 
         return view('avored::order.order-status.create')
-            ->with('tabs', $tabs);
+            ->with(compact('tabs'));
     }
 
     /**
@@ -75,8 +75,7 @@ class OrderStatusController
         $tabs = Tab::get('order.order-status');
 
         return view('avored::order.order-status.edit')
-            ->with('orderStatus', $orderStatus)
-            ->with('tabs', $tabs);
+            ->with(compact('orderStatus', 'tabs'));
     }
 
     /**

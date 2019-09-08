@@ -35,7 +35,7 @@ class LanguageController extends Controller
         $languages = $this->languageRepository->all();
 
         return view('avored::system.language.index')
-            ->with('languages', $languages);
+            ->with(compact('languages'));
     }
 
     /**
@@ -47,7 +47,7 @@ class LanguageController extends Controller
         $tabs = Tab::get('system.language');
 
         return view('avored::system.language.create')
-            ->with('tabs', $tabs);
+            ->with(compact('tabs'));
     }
 
     /**
@@ -73,8 +73,7 @@ class LanguageController extends Controller
         $tabs = Tab::get('system.language');
 
         return view('avored::system.language.edit')
-            ->with('language', $language)
-            ->with('tabs', $tabs);
+            ->with(compact('language', 'tabs'));
     }
 
     /**

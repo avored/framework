@@ -46,7 +46,7 @@ class AdminUserController extends Controller
         $adminUsers = $this->adminUserRepository->all();
 
         return view('avored::user.admin-user.index')
-            ->with('adminUsers', $adminUsers);
+            ->with(compact('adminUsers'));
     }
 
     /**
@@ -59,8 +59,7 @@ class AdminUserController extends Controller
         $roleOptions = $this->roleRepository->options();
 
         return view('avored::user.admin-user.create')
-            ->with('roleOptions', $roleOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('roleOptions', 'tabs'));
     }
 
     /**
@@ -89,9 +88,7 @@ class AdminUserController extends Controller
         $roleOptions = $this->roleRepository->options();
 
         return view('avored::user.admin-user.edit')
-            ->with('adminUser', $adminUser)
-            ->with('roleOptions', $roleOptions)
-            ->with('tabs', $tabs);
+            ->with(compact('adminUser', 'roleOptions', 'tabs'));
     }
 
     /**

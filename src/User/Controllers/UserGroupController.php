@@ -34,7 +34,7 @@ class UserGroupController
         $userGroups = $this->userGroupRepository->all();
 
         return view('avored::user.user-group.index')
-            ->with('userGroups', $userGroups);
+            ->with(compact('userGroups'));
     }
 
     /**
@@ -46,7 +46,7 @@ class UserGroupController
         $tabs = Tab::get('user.user-group');
 
         return view('avored::user.user-group.create')
-            ->with('tabs', $tabs);
+            ->with(compact('tabs'));
     }
 
     /**
@@ -75,8 +75,7 @@ class UserGroupController
         $tabs = Tab::get('user.user-group');
 
         return view('avored::user.user-group.edit')
-            ->with('userGroup', $userGroup)
-            ->with('tabs', $tabs);
+            ->with(compact('userGroup', 'tabs'));
     }
 
     /**

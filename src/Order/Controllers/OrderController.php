@@ -52,8 +52,7 @@ class OrderController
         $orderStatuses = $this->orderStatusRepository->all();
 
         return view('avored::order.order.index')
-            ->with('orderStatuses', $orderStatuses)
-            ->with('orders', $orders);
+            ->with(compact('orderStatuses', 'orders'));
     }
 
     /**
@@ -102,7 +101,7 @@ class OrderController
     public function show(Order $order): View
     {
         return view('avored::order.order.show')
-            ->with('order', $order);
+            ->with(compact('order'));
     }
 
     /**
@@ -147,7 +146,7 @@ class OrderController
         $path = $folderPath.'/shipping-label-'.$order->id.'.pdf';
         if (! File::exists($path)) {
             $html = view('avored::order.order.shipping-label')
-                ->with('order', $order)
+                ->with(compact('order'))
                 ->render();
 
             PDF::loadHtml($html)
@@ -171,7 +170,7 @@ class OrderController
 
         if (! File::exists($path)) {
             $html = view('avored::order.order.invoice')
-                ->with('order', $order)
+                ->with(compact('order'))
                 ->render();
 
             PDF::loadHtml($html)
