@@ -34,7 +34,12 @@ class Module
     protected $publishedTags = null;
 
     /**
-     * Get/Set the Identifier for the Module.
+     * Module dependencies
+     */
+    protected $dependencies = [];
+
+    /**
+     * Get/Set the Identifier for the Module
      * @param string $identifier
      * @return string|self
      */
@@ -146,7 +151,22 @@ class Module
     }
 
     /**
-     * To check If method Exist then it will execute other wise do nothing.
+     * Get/Set the Dependencies for the Module
+     * @param array $dependencies
+     * @return string|self
+     */
+    public function dependencies($dependencies = [])
+    {
+        if (count($dependencies) <= 0) {
+            return $this->dependencies;
+        }
+
+        $this->dependencies = $dependencies;
+        return $this;
+    }
+
+    /**
+     * To check If method Exist then it will execute other wise do nothing
      *
      * @param string $name
      * @return mixed
