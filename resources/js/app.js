@@ -115,7 +115,7 @@ Vue.component('menu-save', () => import('../components/cms/menu/MenuSave.vue'))
 Vue.component('menu-table', () => import('../components/cms/menu/MenuTable.vue'))
 
 Vue.component('page-table', () => import('../components/cms/page/PageTable.vue'))
-Vue.component('page-save', () => import('../components/cms/page/PageSave.vue'))
+Vue.component('page-save', require('../components/cms/page/PageSave.vue').default)
 
 Vue.component('order-status-table', () => import('../components/order/order-status/OrderStatusTable.vue'))
 Vue.component('order-status-save', () => import('../components/order/order-status/OrderStatusSave.vue'))
