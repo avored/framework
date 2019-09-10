@@ -41,6 +41,11 @@ class Module
     protected $publishedTags = null;
 
     /**
+     * Module dependencies
+     */
+    protected $dependencies = [];
+
+    /**
      * Get/Set the Identifier for the Module
      * @param string $identifier
      * @return string|self
@@ -142,6 +147,21 @@ class Module
         }
 
         $this->publishedTags = $publishedTags;
+        return $this;
+    }
+
+    /**
+     * Get/Set the Dependencies for the Module
+     * @param array $dependencies
+     * @return string|self
+     */
+    public function dependencies($dependencies = [])
+    {
+        if (count($dependencies) <= 0) {
+            return $this->dependencies;
+        }
+
+        $this->dependencies = $dependencies;
         return $this;
     }
 

@@ -89,23 +89,53 @@ class Manager
                     $module->basePath($iterator->getPath());
                     $module->publishedTags($data['published_tags'] ?? []);
 
-                    $composerLoader = require base_path('vendor/autoload.php');
-                    if (strtolower($module->status()) == 'active') {
-                        $path = $iterator->getPath() . DIRECTORY_SEPARATOR . 'src';
-                        $composerLoader->addPsr4($module->namespace(), $path);
-                        $moduleProvider = $module->namespace() . 'Module';
-                        App::register($moduleProvider);
-                    }
+                    // read and store dependency declaration
+                    $dependencies = empty($data['dependencies'])
+                    ? [] : explode(',', str_replace(' ', '', $data['dependencies']));
+                    $module->dependencies($dependencies);
 
                     $this->moduleList->put($module->identifier(), $module);
                 }
                 $iterator->next();
             }
 
+            // Sort modules based on its declared dependency
+            $this->moduleList = $this->sortByDependency($this->moduleList);
+
+            $this->moduleList->each(function ($module) {
+                $composerLoader = require base_path('vendor/autoload.php');
+                if (strtolower($module->status()) == 'enabled') {
+                    $path = $module->basePath() . DIRECTORY_SEPARATOR . 'src';
+                    $composerLoader->addPsr4($module->namespace(), $path);
+                    $moduleProvider = $module->namespace() . 'Module';
+                    App::register($moduleProvider);
+                }
+            });
+
             $this->moduleLoaded = true;
         }
 
         return $this;
+    }
+
+    /**
+     * Sort module based on their dependency declarations
+     */
+    public function sortByDependency(Collection $moduleList)
+    {
+        $modules = $moduleList->sort(function ($moduleA, $moduleB) {
+            if (count($moduleA->dependencies()) === 0 && count($moduleA->dependencies()) === 0) {
+                return 0;
+            }
+
+            if (in_array($moduleA->identifier(), $moduleB->dependencies())) {
+                return -1;
+            } else {
+                return 1;
+            }
+
+        });
+        return $modules;
     }
 
     /**
