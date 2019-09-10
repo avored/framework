@@ -1,20 +1,22 @@
 <?php
+
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\UserGroup;
 use AvoRed\Framework\User\Requests\UserGroupRequest;
+use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 
 class UserGroupController
 {
     /**
-     * UserGroup Repository for controller
-     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * UserGroup Repository for controller.
+     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
     protected $userGroupRepository;
-    
+
     /**
-     * Construct for the AvoRed user group controller
+     * Construct for the AvoRed user group controller.
      * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
      */
     public function __construct(
@@ -24,7 +26,7 @@ class UserGroupController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -32,16 +34,19 @@ class UserGroupController
         $userGroups = $this->userGroupRepository->all();
 
         return view('avored::user.user-group.index')
-            ->with('userGroups', $userGroups);
+            ->with(compact('userGroups'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
     public function create()
     {
-        return view('avored::user.user-group.create');
+        $tabs = Tab::get('user.user-group');
+
+        return view('avored::user.user-group.create')
+            ->with(compact('tabs'));
     }
 
     /**
@@ -67,8 +72,10 @@ class UserGroupController
      */
     public function edit(UserGroup $userGroup)
     {
+        $tabs = Tab::get('user.user-group');
+
         return view('avored::user.user-group.edit')
-            ->with('userGroup', $userGroup);
+            ->with(compact('userGroup', 'tabs'));
     }
 
     /**
@@ -83,7 +90,7 @@ class UserGroupController
             $group = $this->userGroupRepository->getIsDefault();
             $group->update(['is_default' => 0]);
         }
-        
+
         $userGroup->update($request->all());
 
         return redirect()->route('admin.user-group.index')
@@ -107,7 +114,7 @@ class UserGroupController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::user.user-group.title')]
-            )
+            ),
         ]);
     }
 }

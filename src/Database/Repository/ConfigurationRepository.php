@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Models\Configuration;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
 class ConfigurationRepository implements ConfigurationModelInterface
 {
     /**
-     * Get value of a configuration by given code
+     * Get value of a configuration by given code.
      * @param string $code
      * @return string $value
      */
@@ -17,14 +17,14 @@ class ConfigurationRepository implements ConfigurationModelInterface
         $configuration = Configuration::whereCode($code)->first();
 
         if ($configuration === null) {
-            return null;
+            return;
         }
 
         return $configuration->value;
     }
 
     /**
-     * Get model of a configuration by given code
+     * Get model of a configuration by given code.
      * @param string $code
      * @return string $value
      */
@@ -33,14 +33,14 @@ class ConfigurationRepository implements ConfigurationModelInterface
         $configuration = Configuration::whereCode($code)->first();
 
         if ($configuration === null) {
-            return null;
+            return;
         }
 
         return $configuration;
     }
 
     /**
-     * create configuration by given data
+     * create configuration by given data.
      * @param array $data
      * @return string $value
      */

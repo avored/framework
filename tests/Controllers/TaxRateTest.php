@@ -1,15 +1,16 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use AvoRed\Framework\Database\Models\TaxRate;
 use AvoRed\Framework\Database\Models\Country;
+use AvoRed\Framework\Database\Models\TaxRate;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaxRateTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testTaxRateIndexRouteTest()
     {
@@ -39,7 +40,7 @@ class TaxRateTest extends BaseTestCase
             'rate' => 1,
             'country_id' => $country->id,
             'postcode' => 7958,
-            'rate_type' => 'PERCENTAGE'
+            'rate_type' => 'PERCENTAGE',
         ];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -54,7 +55,7 @@ class TaxRateTest extends BaseTestCase
     {
         $country = factory(Country::class)->create();
         $taxRate = factory(TaxRate::class)->create(['country_id' => $country->id]);
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.tax-rate.edit', $taxRate->id))
@@ -67,7 +68,7 @@ class TaxRateTest extends BaseTestCase
     {
         $country = factory(Country::class)->create();
         $taxRate = factory(TaxRate::class)->create(['country_id' => $country->id]);
-        $taxRate->name = "updated tax-rate name";
+        $taxRate->name = 'updated tax-rate name';
         $data = $taxRate->toArray();
 
         $this->createAdminUser()
@@ -83,7 +84,7 @@ class TaxRateTest extends BaseTestCase
     {
         $country = factory(Country::class)->create();
         $taxRate = factory(TaxRate::class)->create(['country_id' => $country->id]);
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.tax-rate.destroy', $taxRate->id))

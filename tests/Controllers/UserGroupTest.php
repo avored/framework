@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\UserGroup;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserGroupTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testUserGroupIndexRouteTest()
     {
@@ -32,7 +33,7 @@ class UserGroupTest extends BaseTestCase
     /* @runInSeparateProcess */
     public function testUserGroupStoreRouteTest()
     {
-        $data = ['name' => 'test user-group name','is_default' => 1];
+        $data = ['name' => 'test user-group name', 'is_default' => 1];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->post(route('admin.user-group.store', $data))
@@ -56,7 +57,7 @@ class UserGroupTest extends BaseTestCase
     public function testUserGroupUpdateRouteTest()
     {
         $userGroup = factory(UserGroup::class)->create();
-        $userGroup->name = "updated user-group name";
+        $userGroup->name = 'updated user-group name';
         $data = $userGroup->toArray();
 
         $this->createAdminUser()
@@ -71,7 +72,7 @@ class UserGroupTest extends BaseTestCase
     public function testUserGroupDestroyRouteTest()
     {
         $userGroup = factory(UserGroup::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.user-group.destroy', $userGroup->id))

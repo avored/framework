@@ -1,12 +1,12 @@
 <?php
+
 namespace AvoRed\Framework\System\ViewComposers;
 
-use AvoRed\Framework\Support\Facades\Menu;
 use Illuminate\View\View;
+use AvoRed\Framework\Support\Facades\Menu;
 
 class LayoutComposer
 {
-   
     /**
      * Bind data to the view.
      *

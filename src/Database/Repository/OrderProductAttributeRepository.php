@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\OrderProductAttribute;
 use AvoRed\Framework\Database\Contracts\OrderProductAttributeModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class OrderProductAttributeRepository implements OrderProductAttributeModelInterface
 {
     /**
-     * Create OrderProductAttribute Resource into a database
+     * Create OrderProductAttribute Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\OrderProductAttribute $orderProduct
      */
@@ -19,7 +19,7 @@ class OrderProductAttributeRepository implements OrderProductAttributeModelInter
     }
 
     /**
-     * Find OrderProductAttribute Resource into a database
+     * Find OrderProductAttribute Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\OrderProductAttribute $orderProduct
      */
@@ -29,7 +29,7 @@ class OrderProductAttributeRepository implements OrderProductAttributeModelInter
     }
 
     /**
-     * Delete OrderProductAttribute Resource from a database
+     * Delete OrderProductAttribute Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class OrderProductAttributeRepository implements OrderProductAttributeModelInter
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $orderProducts
      */
     public function all() : Collection

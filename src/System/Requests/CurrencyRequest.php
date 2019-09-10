@@ -28,7 +28,7 @@ class CurrencyRequest extends FormRequest
         $rules['symbol'] = 'required';
         $rules['conversation_rate'] = 'required';
         $rules['status'] = 'required';
-        
+
         return $rules;
     }
 }

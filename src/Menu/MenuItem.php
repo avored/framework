@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Menu;
 
 use AvoRed\Framework\Support\Contracts\MenuInterface;
@@ -6,49 +7,49 @@ use AvoRed\Framework\Support\Contracts\MenuInterface;
 class MenuItem implements MenuInterface
 {
     /**
-     * Constant Front
+     * Constant Front.
      * @var string FRONT
      */
-    const FRONT = "front";
+    const FRONT = 'front';
 
     /**
-     * Constant Admin
+     * Constant Admin.
      * @var string ADMIN
      */
-    const ADMIN = "admin";
-    
+    const ADMIN = 'admin';
+
     /**
-     * @var string $label
+     * @var string
      */
     public $label;
 
     /**
-     * @var string $type
+     * @var string
      */
     public $type;
 
     /**
-     * @var string $icon
+     * @var string
      */
     public $icon;
 
     /**
-     * @var array $attributes
+     * @var array
      */
     public $attributes;
 
     /**
-     * @var string $key
+     * @var string
      */
     public $key;
 
     /**
-     * @var string $params
+     * @var string
      */
     public $params;
 
     /**
-     * @var string $routeName
+     * @var string
      */
     public $routeName;
 
@@ -69,8 +70,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $label) {
             $this->label = $label;
+
             return $this;
         }
+
         return trans($this->label);
     }
 
@@ -82,8 +85,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $type) {
             $this->type = $type;
+
             return $this;
         }
+
         return $this->type;
     }
 
@@ -95,8 +100,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $key) {
             $this->key = $key;
+
             return $this;
         }
+
         return $this->key;
     }
 
@@ -108,8 +115,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $routeName) {
             $this->routeName = $routeName;
+
             return $this;
         }
+
         return $this->routeName;
     }
 
@@ -121,8 +130,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $params) {
             $this->params = $params;
+
             return $this;
         }
+
         return $this->params;
     }
 
@@ -134,8 +145,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $icon) {
             $this->icon = $icon;
+
             return $this;
         }
+
         return $this->icon;
     }
 
@@ -147,8 +160,10 @@ class MenuItem implements MenuInterface
     {
         if (null !== $attributes) {
             $this->attributes = $attributes;
+
             return $this;
         }
+
         return $this->attributes;
     }
 
@@ -163,14 +178,14 @@ class MenuItem implements MenuInterface
         if (null === $menuItem) {
             return $this->subMenu;
         }
-        $menu = new MenuItem($menuItem);
+        $menu = new self($menuItem);
         $this->subMenu[$key] = $menu;
-        
+
         return $this;
     }
 
     /**
-     * To check if a menu has submenu or not
+     * To check if a menu has submenu or not.
      * @return bool
      */
     public function hasSubMenu()
@@ -178,6 +193,7 @@ class MenuItem implements MenuInterface
         if (isset($this->subMenu) && count($this->subMenu) > 0) {
             return true;
         }
+
         return false;
     }
 }

@@ -45,6 +45,7 @@ class Manager
             $group->key($key);
             $this->permissions->put($key, $group);
         }
+
         return $group;
     }
 
@@ -59,7 +60,7 @@ class Manager
             return $this->permissions->get($key);
         }
 
-        return $collection = Collection::make([]);
+        return Collection::make([]);
     }
 
     /**
@@ -70,6 +71,7 @@ class Manager
     public function set($key, $permissionCollection)
     {
         $this->permissions->put($key, $permissionCollection);
+
         return $this;
     }
 }

@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\Page;
-use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Contracts\PageModelInterface;
 
 class PageRepository implements PageModelInterface
 {
     /**
-     * Create Page Resource into a database
+     * Create Page Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Page $page
      */
@@ -19,7 +19,7 @@ class PageRepository implements PageModelInterface
     }
 
     /**
-     * Find Page Resource into a database
+     * Find Page Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Page $page
      */
@@ -29,7 +29,7 @@ class PageRepository implements PageModelInterface
     }
 
     /**
-     * Delete Page Resource from a database
+     * Delete Page Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class PageRepository implements PageModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $pages
      */
     public function all() : Collection

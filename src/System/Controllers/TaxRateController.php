@@ -1,27 +1,28 @@
 <?php
+
 namespace AvoRed\Framework\System\Controllers;
 
-use AvoRed\Framework\Database\Contracts\TaxRateModelInterface;
 use AvoRed\Framework\Database\Models\TaxRate;
 use AvoRed\Framework\System\Requests\TaxRateRequest;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
+use AvoRed\Framework\Database\Contracts\TaxRateModelInterface;
 
 class TaxRateController
 {
     /**
-     * TaxRate Repository for Controller
-     * @var \AvoRed\Framework\Database\Repository\TaxRateRepository $taxRateRepository
+     * TaxRate Repository for Controller.
+     * @var \AvoRed\Framework\Database\Repository\TaxRateRepository
      */
     protected $taxRateRepository;
 
     /**
-     * Country Repository for the State Controller
-     * @var \AvoRed\Framework\Database\Repository\CountryRepository $countryRepository
+     * Country Repository for the State Controller.
+     * @var \AvoRed\Framework\Database\Repository\CountryRepository
      */
     protected $countryRepository;
-    
+
     /**
-     * Construct for the AvoRed tax rate controller
+     * Construct for the AvoRed tax rate controller.
      * @param \AvoRed\Framework\Database\Contracts\TaxRateModelInterface $taxRateRepository
      * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
@@ -34,7 +35,7 @@ class TaxRateController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -42,10 +43,10 @@ class TaxRateController
         $taxRates = $this->taxRateRepository->all();
 
         return view('avored::system.tax-rate.index')
-            ->with('taxRates', $taxRates);
+            ->with(compact('taxRates'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
@@ -55,8 +56,7 @@ class TaxRateController
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.tax-rate.create')
-            ->with('typeOptions', $typeOptions)
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('typeOptions', 'countryOptions'));
     }
 
     /**
@@ -86,9 +86,7 @@ class TaxRateController
         $countryOptions = $this->countryRepository->options();
 
         return view('avored::system.tax-rate.edit')
-            ->with('taxRate', $taxRate)
-            ->with('typeOptions', $typeOptions)
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('taxRate', 'typeOptions', 'countryOptions'));
     }
 
     /**
@@ -122,7 +120,7 @@ class TaxRateController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::system.tax-rate.title')]
-            )
+            ),
         ]);
     }
 }

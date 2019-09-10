@@ -1,8 +1,8 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class Address extends Model
 {
@@ -22,7 +22,7 @@ class Address extends Model
         'city',
         'state',
         'country_id',
-        'phone'
+        'phone',
     ];
 
     const TYPEOPTIONS = [
@@ -31,7 +31,7 @@ class Address extends Model
     ];
 
     /**
-     * Address Belongs to a Country Model
+     * Address Belongs to a Country Model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function country()

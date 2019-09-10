@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Support\Middleware;
 
 use Closure;
@@ -16,10 +17,10 @@ class AdminAuth
      */
     public function handle($request, Closure $next, $guard = 'admin')
     {
-        if (!Auth::guard($guard)->check()) {
+        if (! Auth::guard($guard)->check()) {
             return redirect()->route('admin.login');
         }
-        
+
         return $next($request);
     }
 }

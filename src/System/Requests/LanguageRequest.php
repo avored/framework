@@ -25,7 +25,7 @@ class LanguageRequest extends FormRequest
     {
         $rules['name'] = 'required';
         $rules['code'] = 'required';
-        
+
         return $rules;
     }
 }

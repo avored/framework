@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class ProductRepository implements ProductModelInterface
 {
     /**
-     * Create Product Resource into a database
+     * Create Product Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Product $product
      */
@@ -19,7 +19,7 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
-     * Find a Product by given slug
+     * Find a Product by given slug.
      * @param string $slug
      * @return \AvoRed\Framework\Database\Models\Product $product
      */
@@ -29,7 +29,7 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
-     * Find a Product by given id
+     * Find a Product by given id.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Product $product
      */
@@ -39,7 +39,7 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
-     * Get all the products from the connected database
+     * Get all the products from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
     public function all() : Collection
@@ -48,7 +48,7 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
-     * Get all the products from the connected database
+     * Get all the products from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
     public function getAllWithoutVaiation() : Collection
@@ -56,8 +56,8 @@ class ProductRepository implements ProductModelInterface
         return Product::where('type', '!=', 'VARIATION')->get();
     }
 
-      /**
-     * Delete Product Resource from a database
+    /**
+     * Delete Product Resource from a database.
      * @param int $id
      * @return int
      */

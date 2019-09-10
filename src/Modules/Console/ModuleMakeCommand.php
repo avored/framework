@@ -62,16 +62,16 @@ class ModuleMakeCommand extends Command
         $stubFiles = ['register', 'module'];
 
         foreach ($stubFiles as $stubFile) {
-            $methodName = 'get' . ucfirst($stubFile) . 'Path';
+            $methodName = 'get'.ucfirst($stubFile).'Path';
 
             $path = $this->$methodName($vendor, $name);
             $this->createRequiredDirectories($path);
 
-            $buildMethodName = 'build' . ucfirst($stubFile) . 'File';
+            $buildMethodName = 'build'.ucfirst($stubFile).'File';
             $this->files->put($path, $this->$buildMethodName());
         }
 
-        $this->info($this->type . ' created successfully.');
+        $this->info($this->type.' created successfully.');
     }
 
     /**
@@ -81,19 +81,19 @@ class ModuleMakeCommand extends Command
      */
     protected function createRequiredDirectories($path)
     {
-        if (!$this->files->isDirectory(dirname($path))) {
+        if (! $this->files->isDirectory(dirname($path))) {
             $this->files->makeDirectory(dirname($path), 0755, true);
         }
     }
 
     protected function getRegisterPath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . '/' . $name . '/' . 'register.yml');
+        return base_path('modules/'.$vendor.'/'.$name.'/register.yml');
     }
 
     protected function getModulePath($vendor, $name)
     {
-        return base_path('modules/' . $vendor . '/' . $name . '/src/' . 'Module.php');
+        return base_path('modules/'.$vendor.'/'.$name.'/src/Module.php');
     }
 
     /**
@@ -135,7 +135,7 @@ class ModuleMakeCommand extends Command
      */
     protected function getStub($stubName)
     {
-        return __DIR__ . "/stubs/{$stubName}.stub";
+        return __DIR__."/stubs/{$stubName}.stub";
     }
 
     /**

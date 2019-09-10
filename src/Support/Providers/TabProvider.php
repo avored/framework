@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Tab\Manager;
-use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Tab\TabItem;
+use Illuminate\Support\ServiceProvider;
+use AvoRed\Framework\Support\Facades\Tab;
 
 class TabProvider extends ServiceProvider
 {
@@ -50,11 +50,11 @@ class TabProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['tab','AvoRed\Framework\Tab\Manager'];
+        return ['tab', 'AvoRed\Framework\Tab\Manager'];
     }
 
     /**
-     * Register Tabs for the Different CRUD operations
+     * Register Tabs for the Different CRUD operations.
      * @return void
      */
     public function registerTabs()
@@ -64,6 +64,7 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.basic_info')
                 ->view('avored::catalog.product._fields');
         });
+
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.image')
                 ->label('avored::system.tab.images')
@@ -80,6 +81,75 @@ class TabProvider extends ServiceProvider
                 ->view('avored::catalog.product.cards.attribute');
         });
 
+        /****** CATALOG CATEGORY TABS *******/
+        Tab::put('catalog.category', function (TabItem $tab) {
+            $tab->key('catalog.category.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::catalog.category._fields');
+        });
+
+        /****** CATALOG PROPERTY TABS *******/
+        Tab::put('catalog.property', function (TabItem $tab) {
+            $tab->key('catalog.property.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::catalog.property._fields');
+        });
+        /****** CATALOG ATTRIBUTE TABS *******/
+        Tab::put('catalog.attribute', function (TabItem $tab) {
+            $tab->key('catalog.attribute.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::catalog.attribute._fields');
+        });
+        /******CMS PAGES TABS  *******/
+        Tab::put('cms.page', function (TabItem $tab) {
+            $tab->key('cms.page.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::cms.page._fields');
+        });
+        /******ORDER ORDER STATUS TABS  *******/
+        Tab::put('order.order-status', function (TabItem $tab) {
+            $tab->key('order.order-status.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::order.order-status._fields');
+        });
+        /******USER USER GROUP TABS  *******/
+        Tab::put('user.user-group', function (TabItem $tab) {
+            $tab->key('user.user-group.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::user.user-group._fields');
+        });
+        /******USER ADMIN USER TABS  *******/
+        Tab::put('user.admin-user', function (TabItem $tab) {
+            $tab->key('user.admin-user.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::user.admin-user._fields');
+        });
+        /******SYSTEM CURRENCY TABS  *******/
+        Tab::put('system.currency', function (TabItem $tab) {
+            $tab->key('system.currency.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::system.currency._fields');
+        });
+        /******SYSTEM STATE TABS  *******/
+        Tab::put('system.state', function (TabItem $tab) {
+            $tab->key('system.state.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::system.state._fields');
+        });
+        /******SYSTEM ROLE TABS  *******/
+        Tab::put('system.role', function (TabItem $tab) {
+            $tab->key('system.role.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::system.role._fields');
+        });
+        /******SYSTEM ROLE TABS  *******/
+        Tab::put('system.language', function (TabItem $tab) {
+            $tab->key('system.language.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::system.language._fields');
+        });
+
+        /******SYSTEM CONFIGURATION TABS  *******/
         Tab::put('system.configuration', function (TabItem $tab) {
             $tab->key('system.configuration.basic')
                 ->label('avored::system.tab.basic_configuration')

@@ -5,38 +5,31 @@ namespace AvoRed\Framework\Modules;
 class Module
 {
     /**
-     * Module Identifier
-     *
+     * Module Identifier.
      */
     protected $identifier = null;
     /**
-     * Module Name
-     *
+     * Module Name.
      */
     protected $name = null;
     /**
-     * Module Description
-     *
+     * Module Description.
      */
     protected $description = null;
     /**
-     * Module Status
-     *
+     * Module Status.
      */
     protected $status = null;
     /**
-     * Module NameSpace
-     *
+     * Module NameSpace.
      */
     protected $namespace = null;
     /**
-     * Module BasePath
-     *
+     * Module BasePath.
      */
     protected $basePath = null;
     /**
-     * Module Published Tabs
-     *
+     * Module Published Tabs.
      */
     protected $publishedTags = null;
 
@@ -57,11 +50,12 @@ class Module
         }
 
         $this->identifier = $identifier;
+
         return $this;
     }
 
     /**
-     * Get/Set the Name for the Module
+     * Get/Set the Name for the Module.
      * @param string $name
      * @return string|self
      */
@@ -72,11 +66,12 @@ class Module
         }
 
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * Get/Set the Description for the Module
+     * Get/Set the Description for the Module.
      * @param string $description
      * @return string|self
      */
@@ -87,11 +82,12 @@ class Module
         }
 
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * Get/Set the Status for the Module
+     * Get/Set the Status for the Module.
      * @param string $identifier
      * @return string|self
      */
@@ -102,11 +98,12 @@ class Module
         }
 
         $this->status = $status;
+
         return $this;
     }
 
     /**
-     * Get/Set the NameSpace for the Module
+     * Get/Set the NameSpace for the Module.
      * @param string $namespace
      * @return string|self
      */
@@ -117,11 +114,12 @@ class Module
         }
 
         $this->namespace = $namespace;
+
         return $this;
     }
 
     /**
-     * Get/Set the BasePath for the Module
+     * Get/Set the BasePath for the Module.
      * @param string $basePath
      * @return string|self
      */
@@ -132,11 +130,12 @@ class Module
         }
 
         $this->basePath = $basePath;
+
         return $this;
     }
 
     /**
-     * Get/Set the Published Tags for the Module
+     * Get/Set the Published Tags for the Module.
      * @param array $publishedTags
      * @return string|self
      */
@@ -147,6 +146,7 @@ class Module
         }
 
         $this->publishedTags = $publishedTags;
+
         return $this;
     }
 

@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\Menu;
-use AvoRed\Framework\Database\Contracts\MenuModelInterface;
 use Illuminate\Database\Eloquent\Collection;
+use AvoRed\Framework\Database\Contracts\MenuModelInterface;
 
 class MenuRepository implements MenuModelInterface
 {
     /**
-     * Create Menu Resource into a database
+     * Create Menu Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Menu $menu
      */
@@ -19,7 +19,7 @@ class MenuRepository implements MenuModelInterface
     }
 
     /**
-     * Find Menu Resource into a database
+     * Find Menu Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Menu $menu
      */
@@ -29,7 +29,7 @@ class MenuRepository implements MenuModelInterface
     }
 
     /**
-     * Delete Menu Resource from a database
+     * Delete Menu Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class MenuRepository implements MenuModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $menus
      */
     public function all() : Collection

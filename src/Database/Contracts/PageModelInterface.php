@@ -8,28 +8,28 @@ use Illuminate\Database\Eloquent\Collection;
 interface PageModelInterface
 {
     /**
-     * Create Page Resource into a database
+     * Create Page Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Page $page
      */
     public function create(array $data) : Page;
 
     /**
-     * Find Page Resource into a database
+     * Find Page Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Page $page
      */
     public function find(int $id) : Page;
 
     /**
-     * Delete Page Resource from a database
+     * Delete Page Resource from a database.
      * @param int $id
      * @return int
      */
     public function delete(int $id) : int;
 
     /**
-     * Get All Page from the database
+     * Get All Page from the database.
      * @return \Illuminate\Database\Eloquent\Collection $pages
      */
     public function all() : Collection;

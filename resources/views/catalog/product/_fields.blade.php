@@ -53,7 +53,7 @@
     </a-col>
 
 </a-row>
-<?php 
+<?php
 //dd();
 ?>
 <a-row type="flex" :gutter="15">

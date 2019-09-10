@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\TaxGroup;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaxGroupTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testTaxGroupIndexRouteTest()
     {
@@ -56,7 +57,7 @@ class TaxGroupTest extends BaseTestCase
     public function testTaxGroupUpdateRouteTest()
     {
         $userGroup = factory(TaxGroup::class)->create();
-        $userGroup->name = "updated tax-group name";
+        $userGroup->name = 'updated tax-group name';
         $data = $userGroup->toArray();
 
         $this->createAdminUser()
@@ -71,7 +72,7 @@ class TaxGroupTest extends BaseTestCase
     public function testTaxGroupDestroyRouteTest()
     {
         $userGroup = factory(TaxGroup::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.tax-group.destroy', $userGroup->id))

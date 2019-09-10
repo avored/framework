@@ -26,11 +26,11 @@ class ProductRequest extends FormRequest
         $rules = [];
         $rules['name'] = 'required|max:255';
         $rules['slug'] = 'required|max:255';
-        
+
         if (strtolower($this->method()) == 'post') {
             $rules['type'] = 'required';
         }
-        
+
         return $rules;
     }
 }

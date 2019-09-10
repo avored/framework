@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,10 +8,9 @@ use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
 class Product extends Model
 {
-
     /**
-     * Tax Percentage Configuration Constant
-     * @var string $taxConfiguration
+     * Tax Percentage Configuration Constant.
+     * @var string
      */
     const TAX_CONFIGURATION_KEY = 'tax_percentage';
     /**
@@ -36,21 +36,21 @@ class Product extends Model
         'width',
         'length',
         'meta_title',
-        'meta_description'
+        'meta_description',
     ];
 
     /**
-     * Product Types
+     * Product Types.
      * @var array
      */
     const PRODUCT_TYPES = [
         'BASIC' => 'Basic',
         'DOWNLOADABLE' => 'Downlodable',
-        'VARIABLE_PRODUCT' => 'Variable Product'
+        'VARIABLE_PRODUCT' => 'Variable Product',
     ];
 
     /**
-     * Belongs to Many Categories
+     * Belongs to Many Categories.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories()
@@ -59,7 +59,7 @@ class Product extends Model
     }
 
     /**
-     * Get the Price of the Product
+     * Get the Price of the Product.
      * @param bool $format
      * @return float $price
      */
@@ -74,7 +74,7 @@ class Product extends Model
     }
 
     /**
-     * Get the Qty of the product
+     * Get the Qty of the product.
      * @return mixex $qty
      */
     public function getQty()
@@ -88,7 +88,7 @@ class Product extends Model
     }
 
     /**
-     * Get the Tax Amount of the product
+     * Get the Tax Amount of the product.
      * @return mixex $taxAmount
      */
     public function getTaxAmount()
@@ -100,7 +100,7 @@ class Product extends Model
     }
 
     /**
-     * Belongs to Many Product Images
+     * Belongs to Many Product Images.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
@@ -109,7 +109,7 @@ class Product extends Model
     }
 
     /**
-     * Get Main Image Url
+     * Get Main Image Url.
      * @return string $mainImageUrl
      */
     public function getMainImageUrlAttribute(): string
@@ -119,12 +119,12 @@ class Product extends Model
         if ($image === null) {
             return $defaultImage;
         }
-        return asset('storage/' . $image->path);
+
+        return asset('storage/'.$image->path);
     }
 
-
     /**
-     * Get Attribute by given attribute Id
+     * Get Attribute by given attribute Id.
      * @return \AvoRed\Framework\Database\Models\Attribute $attribute
      */
     public function getAttributeById($attributeId): Attribute
@@ -133,14 +133,14 @@ class Product extends Model
     }
 
     /**
-     * Get Variation Groups to display variation of a product
+     * Get Variation Groups to display variation of a product.
      * @return \Illuminate\Database\Eloquent\Collection $variations
      */
     public function getVariationByAttributeGroup()
     {
         $variations = Collection::make([]);
         $productAttributeValues = $this->attributeProductValues;
-        
+
         foreach ($productAttributeValues as $productAttributeValue) {
             $productAttributeValue->variation;
             if ($variations->has($productAttributeValue->attribute_id)) {
@@ -154,15 +154,16 @@ class Product extends Model
 
         return $variations;
     }
+
     /**
-     * Get Variation Groups to display variation of a product
+     * Get Variation Groups to display variation of a product.
      * @return \Illuminate\Database\Eloquent\Collection $variations
      */
     public function getVariations()
     {
         $data = Collection::make([]);
         $productAttributeValues = $this->attributeProductValues;
-        
+
         foreach ($productAttributeValues as $productAttributeValue) {
             $productAttributeValue->attributeDropdownOption;
             $productAttributeValue->variation;
@@ -175,7 +176,7 @@ class Product extends Model
     }
 
     /**
-     * Belongs to Many Properties
+     * Belongs to Many Properties.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function properties()
@@ -184,17 +185,16 @@ class Product extends Model
     }
 
     /**
-     * Product has many Product Interger Property Values
+     * Product has many Product Interger Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function attributeProductValues()
     {
-
         return $this->hasMany(AttributeProductValue::class);
     }
 
     /**
-     * Product has many Product Interger Property Values
+     * Product has many Product Interger Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyIntegerValues()
@@ -203,24 +203,25 @@ class Product extends Model
     }
 
     /**
-     * Product has many Product Varchar Property Values
+     * Product has many Product Varchar Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyVarcharValues()
     {
         return $this->hasMany(ProductPropertyVarcharValue::class);
     }
+
     /**
-     * Product has many Product Decimal Property Values
+     * Product has many Product Decimal Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyDecimalValues()
     {
         return $this->hasMany(ProductPropertyDecimalValue::class);
     }
-   
+
     /**
-     * Product has many Product Text Property Values
+     * Product has many Product Text Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyTextValues()
@@ -229,7 +230,7 @@ class Product extends Model
     }
 
     /**
-     * Product has many Product Text Property Values
+     * Product has many Product Text Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function attributes()
@@ -238,16 +239,16 @@ class Product extends Model
     }
 
     /**
-     * Product has many Product Boolean Property Values
+     * Product has many Product Boolean Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyBooleanValues()
     {
         return $this->hasMany(ProductPropertyBooleanValue::class);
     }
-    
+
     /**
-     * Product has many Product Date Time Property Values
+     * Product has many Product Date Time Property Values.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPropertyDatetimeValues()
@@ -256,7 +257,7 @@ class Product extends Model
     }
 
     /**
-     * Get to Many Properties
+     * Get to Many Properties.
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getProperties()

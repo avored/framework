@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
+use AvoRed\Framework\Modules\Manager;
 use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Support\Facades\Module;
-use AvoRed\Framework\Modules\Manager;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class ModuleProvider extends ServiceProvider
 
     public function boot()
     {
-        $modules = Module::all();
+        Module::all();
     }
 
     /**

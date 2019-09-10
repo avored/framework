@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Support\Contracts;
 
 interface MenuInterface
@@ -30,7 +31,7 @@ interface MenuInterface
      * @return $attributes|self
      */
     public function attributes($attributes = []);
-    
+
     /**
      * Get/Set Menu Route Name.
      * @param  string $routeName

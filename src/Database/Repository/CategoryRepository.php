@@ -2,21 +2,20 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Category;
-use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
+use stdClass;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Models\Attribute;
-use stdClass;
+use Illuminate\Support\Collection as SupportCollection;
+use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 
 class CategoryRepository implements CategoryModelInterface
 {
     /**
-     * Create Category Resource into a database
+     * Create Category Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
@@ -26,7 +25,7 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * Find Category Resource into a database
+     * Find Category Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
@@ -36,7 +35,7 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * Find Category Resource into a database
+     * Find Category Resource into a database.
      * @param string $slug
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
@@ -46,7 +45,7 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * Get All Category from the database
+     * Get All Category from the database.
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function getCategoryProducts(Request $request) : Collection
@@ -56,8 +55,8 @@ class CategoryRepository implements CategoryModelInterface
         });
 
         foreach ($request->except(['slug', '_token']) as $key => $values) {
-            list ($filterType , $paramSuffix) = $this->splitParam($key);
-           
+            [$filterType, $paramSuffix] = $this->splitParam($key);
+
             if ($filterType === 'PROPERTY') {
                 $builder = $this->filterProperties($builder, $paramSuffix, $values);
             }
@@ -66,13 +65,14 @@ class CategoryRepository implements CategoryModelInterface
                 $builder = $this->filterAttributes($builder, $paramSuffix, $values);
             }
         }
-        
+
         $builder->where('type', '!=', 'VARIATION');
-        
+
         return $builder->get();
     }
+
     /**
-     * Delete Category Resource from a database
+     * Delete Category Resource from a database.
      * @param int $id
      * @return int
      */
@@ -82,7 +82,7 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function all() : Collection
@@ -91,19 +91,19 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * Get all the categories option to use in Menu Builder
+     * Get all the categories option to use in Menu Builder.
      * @return \Illuminate\Support\Collection $categories
      */
     public function getCategoryOptionForMenuBuilder() : SupportCollection
     {
         $categories = SupportCollection::make([]);
-        $all =  Category::all();
-        
+        $all = Category::all();
+
         $i = 1;
         foreach ($all as $category) {
             $dummyModel = new stdClass;
             $dummyModel->id = $i;
-            
+
             $routeParam = config('avored.routes.category.param');
             $routeName = config('avored.routes.category.name');
             $dummyModel->name = $category->name;
@@ -113,11 +113,12 @@ class CategoryRepository implements CategoryModelInterface
             $categories->push($dummyModel);
             $i++;
         }
+
         return $categories;
     }
 
     /**
-     * Get all the categories options to use in dropdown
+     * Get all the categories options to use in dropdown.
      * @return \Illuminate\Database\Eloquent\Collection $categoryOptions
      */
     public function options() : SupportCollection
@@ -126,24 +127,24 @@ class CategoryRepository implements CategoryModelInterface
     }
 
     /**
-     * filter properties via builder
+     * filter properties via builder.
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */
     private function filterProperties($builder, $paramSuffix, $values)
     {
         $property = Property::whereSlug($paramSuffix)->first();
-        
+
         $builder->whereHas('productPropertyIntegerValues', function ($query) use ($property, $values) {
             $query
                 ->wherePropertyId($property->id)
                 ->whereIn('value', $values);
         });
-        
+
         return $builder;
     }
 
     /**
-     * filter attributes via builder
+     * filter attributes via builder.
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */
     private function filterAttributes($builder, $paramSuffix, $values)
@@ -154,12 +155,12 @@ class CategoryRepository implements CategoryModelInterface
                 ->whereAttributeId($attribute->id)
                 ->whereIn('attribute_dropdown_option_id', $values);
         });
-        
+
         return $builder;
     }
 
     /**
-     * Split the param and find out which type and etc
+     * Split the param and find out which type and etc.
      * @return array
      */
     private function splitParam($key)
@@ -167,12 +168,13 @@ class CategoryRepository implements CategoryModelInterface
         $filterType = '';
         $paramPrefix = substr($key, 0, 4);
         $paramSuffix = substr($key, 4);
-        
+
         if ($paramPrefix === 'p___') {
             $filterType = 'PROPERTY';
         } elseif ($paramPrefix === 'a___') {
             $filterType = 'ATTRIBUTE';
         }
+
         return [$filterType, $paramSuffix];
     }
 }

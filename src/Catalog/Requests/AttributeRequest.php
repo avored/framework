@@ -25,7 +25,7 @@ class AttributeRequest extends FormRequest
     {
         $rules['name'] = 'required|max:255';
         $rules['slug'] = 'required|max:255';
-        
+
         return $rules;
     }
 }

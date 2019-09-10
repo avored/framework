@@ -20,7 +20,6 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
 
-    
     'password' => 'Password',
     'email' => 'Email Address',
     'login-card' => 'AvoRed E commerce Admin Login',
@@ -41,7 +40,7 @@ return [
     'btn' => [
         'save' => 'Save',
         'cancel' => 'Cancel',
-        'create' => 'Create'
+        'create' => 'Create',
     ],
     'tab' => [
         'basic_info' => 'Basic Info',
@@ -65,13 +64,13 @@ return [
         'language' => 'Language',
         'image_file' => 'Admin User Profile Image',
         'index' => [
-            'title' => 'Admin User List'
+            'title' => 'Admin User List',
         ],
         'create' => [
-            'title' => 'Admin User Create'
+            'title' => 'Admin User Create',
         ],
         'edit' => [
-            'title' => 'Admin User Edit'
+            'title' => 'Admin User Edit',
         ],
     ],
     'language' => [
@@ -79,29 +78,29 @@ return [
         'code' => 'Code',
         'is_default' => 'Is Default',
         'index' => [
-            'title' => 'Language List'
+            'title' => 'Language List',
         ],
         'create' => [
-            'title' => 'Language Create'
+            'title' => 'Language Create',
         ],
         'edit' => [
-            'title' => 'Language Edit'
+            'title' => 'Language Edit',
         ],
     ],
     'role' => [
         'name' => 'Name',
         'description' => 'Description',
         'index' => [
-            'title' => 'Role List'
+            'title' => 'Role List',
         ],
         'create' => [
-            'title' => 'Role Create'
+            'title' => 'Role Create',
         ],
         'edit' => [
-            'title' => 'Role Edit'
+            'title' => 'Role Edit',
         ],
     ],
-    
+
     'currency' => [
         'name' => 'Name',
         'code' => 'Code',
@@ -110,29 +109,29 @@ return [
         'symbol' => 'Symbol',
         'title' => 'Currency',
         'index' => [
-            'title' => 'Currency List'
+            'title' => 'Currency List',
         ],
         'create' => [
-            'title' => 'Currency Create'
+            'title' => 'Currency Create',
         ],
         'edit' => [
-            'title' => 'Currency Edit'
+            'title' => 'Currency Edit',
         ],
     ],
-    
+
     'state' => [
         'name' => 'Name',
         'code' => 'Code',
         'country_id' => 'Country',
         'title' => 'State',
         'index' => [
-            'title' => 'State List'
+            'title' => 'State List',
         ],
         'create' => [
-            'title' => 'State Create'
+            'title' => 'State Create',
         ],
         'edit' => [
-            'title' => 'State Edit'
+            'title' => 'State Edit',
         ],
     ],
     'tax-group' => [
@@ -140,13 +139,13 @@ return [
         'description' => 'Description',
         'title' => 'Tax Group',
         'index' => [
-            'title' => 'Tax Group List'
+            'title' => 'Tax Group List',
         ],
         'create' => [
-            'title' => 'Tax Group Create'
+            'title' => 'Tax Group Create',
         ],
         'edit' => [
-            'title' => 'Tax Group Edit'
+            'title' => 'Tax Group Edit',
         ],
     ],
     'tax-rate' => [
@@ -158,31 +157,31 @@ return [
         'rate_type' => 'Tax rate type',
         'title' => 'Tax Rate',
         'index' => [
-            'title' => 'Tax Rate List'
+            'title' => 'Tax Rate List',
         ],
         'create' => [
-            'title' => 'Tax Rate Create'
+            'title' => 'Tax Rate Create',
         ],
         'edit' => [
-            'title' => 'Tax Rate Edit'
+            'title' => 'Tax Rate Edit',
         ],
     ],
 
     'configuration' => [
         'title' => 'Configuration',
         'nav' => [
-            'basic_setting' => 'Basic Settings'
+            'basic_setting' => 'Basic Settings',
         ],
         'basic' => [
-            'site_name' => 'Site Name'
+            'site_name' => 'Site Name',
         ],
         'tax' => [
-            'tax_percentage' => 'Tax Percentage'
+            'tax_percentage' => 'Tax Percentage',
         ],
 
     ],
     'header' => [
-        'logout' => 'Logout'
+        'logout' => 'Logout',
     ],
     'admin_menus' => [
         'admin-user' => 'Staff',
@@ -215,16 +214,16 @@ return [
             'create' => 'Create/Store Page',
             'edit' => 'Edit/Update Page',
             'destroy' => 'Destroy Page',
-            'show' => 'Show Page'
+            'show' => 'Show Page',
         ],
-       
+
         'category' => [
             'title' => 'Category Permissions',
             'list' => 'Category List',
             'create' => 'Create/Store Category',
             'edit' => 'Edit/Update Category',
             'destroy' => 'Destroy Category',
-            'show' => 'Show Category'
+            'show' => 'Show Category',
         ],
         'tax-rate' => [
             'title' => 'Tax Rate Permissions',
@@ -232,7 +231,7 @@ return [
             'create' => 'Create/Store Tax Rate',
             'edit' => 'Edit/Update Tax Rate',
             'destroy' => 'Destroy Tax Rate',
-            'show' => 'Show Tax Rate'
+            'show' => 'Show Tax Rate',
         ],
         'language' => [
             'title' => 'Language Permissions',
@@ -240,7 +239,7 @@ return [
             'create' => 'Create/Store Language',
             'edit' => 'Edit/Update Language',
             'destroy' => 'Destroy Language',
-            'show' => 'Show Language'
+            'show' => 'Show Language',
         ],
         'product' => [
             'title' => 'Product Permissions',
@@ -248,7 +247,7 @@ return [
             'create' => 'Create/Store Product',
             'edit' => 'Edit/Update Product',
             'destroy' => 'Destroy Product',
-            'show' => 'Show Product'
+            'show' => 'Show Product',
         ],
         'attribute' => [
             'title' => 'Attribute Permissions',
@@ -256,7 +255,7 @@ return [
             'create' => 'Create/Store Attribute',
             'edit' => 'Edit/Update Attribute',
             'destroy' => 'Destroy Attribute',
-            'show' => 'Show Attribute'
+            'show' => 'Show Attribute',
         ],
         'property' => [
             'title' => 'Property Permissions',
@@ -264,7 +263,7 @@ return [
             'create' => 'Create/Store Property',
             'edit' => 'Edit/Update Property',
             'destroy' => 'Destroy Property',
-            'show' => 'Show Property'
+            'show' => 'Show Property',
         ],
         'user' => [
             'title' => 'User Permissions',
@@ -272,7 +271,7 @@ return [
             'create' => 'Create/Store User',
             'edit' => 'Edit/Update User',
             'destroy' => 'Destroy User',
-            'show' => 'Show User'
+            'show' => 'Show User',
         ],
         'user_group' => [
             'title' => 'User Group Permissions',
@@ -280,7 +279,7 @@ return [
             'create' => 'Create/Store User Group',
             'edit' => 'Edit/Update User Group',
             'destroy' => 'Destroy User Group',
-            'show' => 'Show User Group'
+            'show' => 'Show User Group',
         ],
         'admin_user' => [
             'title' => 'Admin User Permissions',
@@ -288,7 +287,7 @@ return [
             'create' => 'Create/Store Admin User',
             'edit' => 'Edit/Update Admin User',
             'destroy' => 'Destroy Admin User',
-            'show' => 'Show Admin User'
+            'show' => 'Show Admin User',
         ],
         'role' => [
             'title' => 'Role Permissions',
@@ -296,7 +295,7 @@ return [
             'create' => 'Create/Store Role',
             'edit' => 'Edit/Update Role',
             'destroy' => 'Destroy Role',
-            'show' => 'Show Role'
+            'show' => 'Show Role',
         ],
         'configuration' => [
             'title' => 'Configuration Permissions',
@@ -309,7 +308,7 @@ return [
             'create' => 'Create/Store Site Currency',
             'edit' => 'Edit/Update Site Currency',
             'destroy' => 'Destroy Site Currency',
-            'show' => 'Show Site Currency'
+            'show' => 'Show Site Currency',
         ],
         'country' => [
             'title' => 'Country Permissions',
@@ -317,7 +316,7 @@ return [
             'create' => 'Create/Store Country',
             'edit' => 'Edit/Update Country',
             'destroy' => 'Destroy Country',
-            'show' => 'Show Country'
+            'show' => 'Show Country',
         ],
         'state' => [
             'title' => 'State Permissions',
@@ -325,7 +324,7 @@ return [
             'create' => 'Create/Store State',
             'edit' => 'Edit/Update State',
             'destroy' => 'Destroy State',
-            'show' => 'Show State'
+            'show' => 'Show State',
         ],
         'user-group' => [
             'title' => 'UserGroup Permissions',
@@ -333,7 +332,7 @@ return [
             'create' => 'Create/Store UserGroup',
             'edit' => 'Edit/Update UserGroup',
             'destroy' => 'Destroy UserGroup',
-            'show' => 'Show UserGroup'
+            'show' => 'Show UserGroup',
         ],
         'tax-group' => [
             'title' => 'Tax Group Permissions',
@@ -341,7 +340,7 @@ return [
             'create' => 'Create/Store Tax Group',
             'edit' => 'Edit/Update Tax Group',
             'destroy' => 'Destroy Tax Group',
-            'show' => 'Show Tax Group'
+            'show' => 'Show Tax Group',
         ],
         'product' => [
             'title' => 'Product Permissions',
@@ -349,7 +348,7 @@ return [
             'create' => 'Create/Store Product',
             'edit' => 'Edit/Update Product',
             'destroy' => 'Destroy Product',
-            'show' => 'Show Product'
+            'show' => 'Show Product',
         ],
         'order' => [
             'title' => 'Order Permissions',
@@ -359,7 +358,7 @@ return [
             'change-status' => 'Change Order Status',
             'download-invoice' => 'Download Invoice',
             'save-tracking-code' => 'Save Tracking Code',
-            'shipping-label' => 'Shipping Label'
+            'shipping-label' => 'Shipping Label',
         ],
         'order-status' => [
             'title' => 'Order Status Permissions',
@@ -367,7 +366,7 @@ return [
             'create' => 'Create/Store Order Status',
             'edit' => 'Edit/Update Order Status',
             'destroy' => 'Destroy Order Status',
-            'show' => 'Show Order Status'
+            'show' => 'Show Order Status',
         ],
         'currency' => [
             'title' => 'Currency Permissions',
@@ -375,7 +374,7 @@ return [
             'create' => 'Create/Store Currency',
             'edit' => 'Edit/Update Currency',
             'destroy' => 'Destroy Currency',
-            'show' => 'Show Currency'
+            'show' => 'Show Currency',
         ],
         'admin-user' => [
             'title' => 'Admin User Permissions',
@@ -383,7 +382,7 @@ return [
             'create' => 'Create/Store Admin User',
             'edit' => 'Edit/Update Admin User',
             'destroy' => 'Destroy Admin User',
-            'show' => 'Show Admin User'
+            'show' => 'Show Admin User',
         ],
         'menu' => [
             'title' => 'Menu Permissions',
@@ -407,7 +406,7 @@ return [
         ],
         'order' => [
             'index' => 'Order',
-            'show' => 'Show Order'
+            'show' => 'Show Order',
         ],
         'menu' => [
             'index' => 'Menu',
@@ -474,6 +473,6 @@ return [
             'edit' => 'Edit Role',
             'create' => 'Create Role',
         ],
-    ]
+    ],
 
 ];

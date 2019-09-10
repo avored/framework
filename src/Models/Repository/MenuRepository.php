@@ -8,7 +8,7 @@ use AvoRed\Framework\Models\Contracts\MenuInterface;
 class MenuRepository implements MenuInterface
 {
     /**
-     * Find an Menu by given Id
+     * Find an Menu by given Id.
      *
      * @param $id
      * @return \AvoRed\Framework\Models\Menu
@@ -19,7 +19,7 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * Get Collection for All Parents Menu
+     * Get Collection for All Parents Menu.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -29,7 +29,7 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * Get all Menu
+     * Get all Menu.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -39,7 +39,7 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * Paginate Menu
+     * Paginate Menu.
      *
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
@@ -49,7 +49,7 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * Get an Menu Query Builder Object
+     * Get an Menu Query Builder Object.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -59,7 +59,7 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     * Find an Menu Query
+     * Find an Menu Query.
      *
      * @return \AvoRed\Framework\Models\Menu
      */
@@ -69,7 +69,6 @@ class MenuRepository implements MenuInterface
     }
 
     /**
-     *
      * @param array $menus
      * @param \AvoRed\Framework\Models\Database\MenuGroup $menuGroup
      * @return \AvoRed\Framework\Models\Repository\MenuRepository
@@ -91,7 +90,7 @@ class MenuRepository implements MenuInterface
                     'name' => $menu->name,
                     'route' => $menu->route,
                     'params' => $menu->params,
-                    'parent_id' => $parentId
+                    'parent_id' => $parentId,
                 ]);
             }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework\Payment;
 
 use Illuminate\Support\Collection;
@@ -6,20 +7,21 @@ use Illuminate\Support\Collection;
 class Manager
 {
     /**
-     * Payment Options collection
+     * Payment Options collection.
      * @var \Illuminate\Support\Collection
      */
     public $collection;
+
     /**
-     * Construct for the Payment Manager
+     * Construct for the Payment Manager.
      */
     public function __construct()
     {
         $this->collection = Collection::make([]);
     }
-    
+
     /**
-     * Get all the Payment Options Collection
+     * Get all the Payment Options Collection.
      * @return \Illuminate\Support\Collection
      */
     public function all(): Collection
@@ -28,7 +30,7 @@ class Manager
     }
 
     /**
-     * Put Payment class to an collection Collection
+     * Put Payment class to an collection Collection.
      * @return void
      */
     public function put($payment)

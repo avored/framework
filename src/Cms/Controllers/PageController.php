@@ -1,20 +1,22 @@
 <?php
+
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
+use AvoRed\Framework\Database\Contracts\PageModelInterface;
 
 class PageController
 {
     /**
-     * Page Repository for the Install Command
-     * @var \AvoRed\Framework\Database\Repository\PageRepository $pageRepository
+     * Page Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\PageRepository
      */
     protected $pageRepository;
-    
+
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Contracts\PageModelInterface $pageRepository
      */
     public function __construct(
@@ -24,7 +26,7 @@ class PageController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -32,16 +34,19 @@ class PageController
         $pages = $this->pageRepository->all();
 
         return view('avored::cms.page.index')
-            ->with('pages', $pages);
+            ->with(compact('pages'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
     public function create()
     {
-        return view('avored::cms.page.create');
+        $tabs = Tab::get('cms.page');
+
+        return view('avored::cms.page.create')
+            ->with(compact('tabs'));
     }
 
     /**
@@ -64,8 +69,10 @@ class PageController
      */
     public function edit(Page $page)
     {
+        $tabs = Tab::get('cms.page');
+
         return view('avored::cms.page.edit')
-            ->with('page', $page);
+            ->with(compact('page', 'tabs'));
     }
 
     /**
@@ -93,7 +100,7 @@ class PageController
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Page'])
+            'message' => __('avored::system.notification.delete', ['attribute' => 'Page']),
         ]);
     }
 }
