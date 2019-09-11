@@ -142,3 +142,5 @@ Vue.component('password-new-page', () => import('../components/system/PasswordNe
 const app = new Vue({
     el: '#app'
 });
+
+export const EventBus = new Vue();

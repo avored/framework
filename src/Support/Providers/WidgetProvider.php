@@ -1,6 +1,8 @@
 <?php
 namespace AvoRed\Framework\Support\Providers;
 
+use AvoRed\Framework\Widget\TotalCustomer;
+use AvoRed\Framework\Support\Facades\Widget;
 use AvoRed\Framework\Widget\WidgetManager;
 use Illuminate\Support\ServiceProvider;
 
@@ -57,6 +59,6 @@ class WidgetProvider extends ServiceProvider
      */
     protected function registerWidget()
     {
-        //
+        Widget::make('total-customer', new TotalCustomer);
     }
 }

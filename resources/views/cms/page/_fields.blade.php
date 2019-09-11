@@ -56,7 +56,7 @@
     
     <div class="ant-form-item-control-wrapper">
         <div class="ant-form-item-control">
-            <quil-editor id="page-content" v-model="content"></quil-editor>
+            <quil-editor id="page-content" :options="editorOption" v-model="content"></quil-editor>
             <input type="hidden" name="content" v-model="content" />
         </div>
     </div>
@@ -109,3 +109,25 @@
         ]"
     ></a-input>
 </a-form-item>
+
+
+<a-modal
+      title="{{__('avored::cms.page.widget_modal_title') }}"
+      v-model="widgetModalVisible"
+      @ok="handleWidgetOk">
+    <div>
+        <a-row>
+            <a-col :span="24">
+                <a-form-item label="{{ __('avored::cms.page.widget_modal_title') }}">
+                    <a-select :style="{width: '100%'}" v-model="selectedWidget">
+                        @foreach ($widgets as $widgetKey => $widgetLabel)
+                            <a-select-option value="{{ $widgetKey }}">{{ $widgetLabel }}</a-select-option>
+                        @endforeach
+                    </a-select>
+                </a-form-item>
+            </a-col>
+        </a-row>
+    
+    </div>
+      
+</a-modal>

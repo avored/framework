@@ -19,6 +19,7 @@ return [
         'meta_title' => 'Meta Title',
         'meta_description' => 'Meta Description',
         'content' => 'Content',
+        'widget_modal_title' => 'Select the Widget',
         'index' => [
             'title' => 'Page List',
         ],

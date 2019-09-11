@@ -22,13 +22,13 @@ class WidgetManager
 
     /**
      * Add Widget Class to a collection
-     * @param string $name
+     * @param string $key
      * @param \AvoRed\Framework\Widget\Widget $widget
      * @return \AvoRed\Framework\Widget\Widget $widget
      */
-    public function make($name, $widget)
+    public function make($key, $widget)
     {
-        $this->collection->put($name, $widget);
+        $this->collection->put($key, $widget);
         return $widget;
     }
 
@@ -58,8 +58,8 @@ class WidgetManager
     public function options(): Collection
     {
         $options = Collection::make([]);
-        foreach ($this->collection as $identifier => $widget) {
-            $options->put($identifier, $widget->label());
+        foreach ($this->collection as $key => $widget) {
+            $options->put($key, $widget->label());
         }
         return $options;
     }

@@ -6,6 +6,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Support\Facades\Widget;
 
 class PageController
 {
@@ -43,10 +44,12 @@ class PageController
      */
     public function create()
     {
+        $widgets = Widget::options();
         $tabs = Tab::get('cms.page');
 
         return view('avored::cms.page.create')
-            ->with(compact('tabs'));
+            ->with(compact('tabs'))
+            ->with('widgets', $widgets);
     }
 
     /**
@@ -70,9 +73,11 @@ class PageController
     public function edit(Page $page)
     {
         $tabs = Tab::get('cms.page');
+        $widgets = Widget::options();
 
         return view('avored::cms.page.edit')
-            ->with(compact('page', 'tabs'));
+            ->with(compact('page', 'tabs'))
+            ->with(compact('widgets'));
     }
 
     /**
