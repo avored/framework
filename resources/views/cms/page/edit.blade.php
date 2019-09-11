@@ -23,7 +23,16 @@
             >
                 @csrf
                 @method('put')
-                @include('avored::cms.page._fields')
+                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="cms.page.info">
+                @foreach ($tabs as $tab)
+                    <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                        @php
+                            $path = $tab->view();
+                        @endphp
+                        @include($path)
+                    </a-tab-pane>
+                @endforeach
+                </a-tabs>
                 
                 <a-form-item>
                     <a-button

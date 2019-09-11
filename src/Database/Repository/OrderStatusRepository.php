@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class OrderStatusRepository implements OrderStatusModelInterface
 {
     /**
-     * Create OrderStatus Resource into a database
+     * Create OrderStatus Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
      */
@@ -19,7 +19,7 @@ class OrderStatusRepository implements OrderStatusModelInterface
     }
 
     /**
-     * Find OrderStatus Resource into a database
+     * Find OrderStatus Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
      */
@@ -29,7 +29,7 @@ class OrderStatusRepository implements OrderStatusModelInterface
     }
 
     /**
-     * Find OrderStatus Resource into a database
+     * Find OrderStatus Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
      */
@@ -39,7 +39,7 @@ class OrderStatusRepository implements OrderStatusModelInterface
     }
 
     /**
-     * Delete OrderStatus Resource from a database
+     * Delete OrderStatus Resource from a database.
      * @param int $id
      * @return int
      */
@@ -49,7 +49,7 @@ class OrderStatusRepository implements OrderStatusModelInterface
     }
 
     /**
-     * Get all the categories from the connected database
+     * Get all the categories from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function all() : Collection

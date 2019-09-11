@@ -24,7 +24,7 @@ class ProductImageRequest extends FormRequest
     public function rules()
     {
         $rules = [];
-        
+
         return $rules;
     }
 }

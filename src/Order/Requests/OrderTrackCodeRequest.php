@@ -25,7 +25,7 @@ class OrderTrackCodeRequest extends FormRequest
     {
         $rules = [];
         $rules['track_code'] = 'required|max:255';
-        
+
         return $rules;
     }
 }

@@ -2,10 +2,9 @@
 
 namespace AvoRed\Framework\Tests\Functional;
 
-use AvoRed\Framework\Breadcrumb\Builder;
-use AvoRed\Framework\Support\Facades\Breadcrumb;
-use AvoRed\Framework\Tests\BaseTestCase;
 use Illuminate\View\View;
+use AvoRed\Framework\Breadcrumb\Builder;
+use AvoRed\Framework\Tests\BaseTestCase;
 
 /** @runInSeparateProcess */
 class BreadcrumbTest extends BaseTestCase
@@ -50,7 +49,7 @@ class BreadcrumbTest extends BaseTestCase
         $builder->make('test.route', function ($breadcrumb) {
             $breadcrumb->label('test parent label');
         });
-        
+
         $builder->make('test.child.route', function ($breadcrumb) {
             $breadcrumb->label('test label')
                 ->parent('test.route');

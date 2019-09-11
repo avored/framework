@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\TaxRate;
 use AvoRed\Framework\Database\Contracts\TaxRateModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class TaxRateRepository implements TaxRateModelInterface
 {
     /**
-     * Create TaxRate Resource into a database
+     * Create TaxRate Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\TaxRate $taxRate
      */
@@ -19,7 +19,7 @@ class TaxRateRepository implements TaxRateModelInterface
     }
 
     /**
-     * get all user groups for
+     * get all user groups for.
      * @return \Illuminate\Database\Eloquent\Collection $taxRates
      */
     public function all() : Collection

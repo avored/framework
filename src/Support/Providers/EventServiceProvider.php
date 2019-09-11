@@ -3,8 +3,8 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use AvoRed\Framework\User\Observers\UserObserver;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,13 +27,13 @@ class EventServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register User Created Event Listener
+     * Register User Created Event Listener.
      * @return void
      */
     public function registerUserModelObserver()
     {
         $user = config('avored.model.user');
-        
+
         try {
             $model = resolve($user);
         } catch (\ReflectionException $e) {

@@ -3,13 +3,13 @@
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Language;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LanguageTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testLanguageIndexRouteTest()
     {
@@ -57,7 +57,7 @@ class LanguageTest extends BaseTestCase
     public function testLanguageUpdateRouteTest()
     {
         $language = factory(Language::class)->create();
-        $language->name = "updated language name";
+        $language->name = 'updated language name';
         $data = $language->toArray();
 
         $this->createAdminUser()
@@ -72,7 +72,7 @@ class LanguageTest extends BaseTestCase
     public function testLanguageDestroyRouteTest()
     {
         $language = factory(Language::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.language.destroy', $language->id))

@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Category;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testCategoryIndexRouteTest()
     {
@@ -56,7 +57,7 @@ class CategoryTest extends BaseTestCase
     public function testCategoryUpdateRouteTest()
     {
         $category = factory(Category::class)->create();
-        $category->name = "updated category name";
+        $category->name = 'updated category name';
         $data = $category->toArray();
 
         $this->createAdminUser()
@@ -71,7 +72,7 @@ class CategoryTest extends BaseTestCase
     public function testCategoryDestroyRouteTest()
     {
         $category = factory(Category::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.category.destroy', $category->id))

@@ -1,27 +1,27 @@
 <?php
+
 namespace AvoRed\Framework\Tests;
 
-use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\AvoRedProvider;
+use Faker\Generator as FakerGenerator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Notification;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use Faker\Generator as FakerGenerator;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Session;
-use AvoRed\Framework\AvoRedProvider;
 
 abstract class BaseTestCase extends OrchestraTestCase
 {
     /**
-     * Admin User
-     * @var \AvoRed\Framework\Database\Models\AdminUser $user
+     * Admin User.
+     * @var \AvoRed\Framework\Database\Models\AdminUser
      */
     protected $user;
-  
+
     protected $faker;
 
     /**
-     * Setup Config and other data for unit test
+     * Setup Config and other data for unit test.
      * @return void
      */
     public function setUp(): void
@@ -29,9 +29,10 @@ abstract class BaseTestCase extends OrchestraTestCase
         parent::setUp();
         $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
         $this->faker = $this->app->make(FakerGenerator::class);
-        
+
         $this->app->singleton(EloquentFactory::class, function ($app) {
             $faker = $app->make(FakerGenerator::class);
+
             return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
         });
         $this->setUpDatabase();
@@ -39,7 +40,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Reset the Database
+     * Reset the Database.
      * @return void
      */
     private function resetDatabase(): void
@@ -60,7 +61,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Returns the array with unittest required package
+     * Returns the array with unittest required package.
      * @return array
      */
     protected function getPackageProviders($app): array
@@ -79,15 +80,15 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected function getEnvironmentSetUp($app): void
     {
         $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', array(
+        $app['config']->set('database.connections.sqlite', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
-        ));
+        ]);
     }
 
     /**
-     * Setup sqlite database for the unit test
+     * Setup sqlite database for the unit test.
      * @return void
      */
     protected function setUpDatabase(): void
@@ -96,7 +97,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Setup sqlite database for the unit test
+     * Setup sqlite database for the unit test.
      * @param \Illuminate\Foundation\Application $app
      * @return array
      */
@@ -111,9 +112,9 @@ abstract class BaseTestCase extends OrchestraTestCase
             'Menu' => \AvoRed\Framework\Support\Facades\Menu::class,
             'Module' => \AvoRed\Framework\Support\Facades\Module::class,
             'Permission' => \AvoRed\Framework\Support\Facades\Permission::class,
-            "Cart" => AvoRed\Framework\Support\Facades\Cart::class,
-            "Payment" => AvoRed\Framework\Support\Facades\Payment::class,
-            "Shipping" => AvoRed\Framework\Support\Facades\Shipping::class
+            'Cart' => AvoRed\Framework\Support\Facades\Cart::class,
+            'Payment' => AvoRed\Framework\Support\Facades\Payment::class,
+            'Shipping' => AvoRed\Framework\Support\Facades\Shipping::class,
             //'Tabs' => 'AvoRed\\Framework\\Tabs\\Facade',
             //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
             //'Widget' => 'AvoRed\\Framework\\Widget\\Facade'
@@ -121,7 +122,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Get Admin User Object for unit test
+     * Get Admin User Object for unit test.
      * @param array $data
      * @return self
      */
@@ -130,6 +131,7 @@ abstract class BaseTestCase extends OrchestraTestCase
         if (null === $this->user) {
             $this->user = factory(AdminUser::class)->create($data);
         }
+
         return $this;
     }
 }

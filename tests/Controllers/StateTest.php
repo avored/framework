@@ -3,14 +3,14 @@
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\State;
 use AvoRed\Framework\Database\Models\Country;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StateTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testStateIndexRouteTest()
     {
@@ -62,7 +62,7 @@ class StateTest extends BaseTestCase
         $country = factory(Country::class)->create();
         $state = factory(State::class)->create(['country_id' => $country->id]);
 
-        $state->name = "updated state name";
+        $state->name = 'updated state name';
         $data = $state->toArray();
 
         $this->createAdminUser()
@@ -78,7 +78,7 @@ class StateTest extends BaseTestCase
     {
         $country = factory(Country::class)->create();
         $state = factory(State::class)->create(['country_id' => $country->id]);
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.state.destroy', $state->id))

@@ -3,9 +3,9 @@
 namespace AvoRed\Framework\System\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {
@@ -33,7 +33,7 @@ class ForgotPasswordController extends Controller
     }
 
     /**
-     * Show Password Reset Form
+     * Show Password Reset Form.
      * @return \Illuminate\View\View
      */
     public function linkRequestForm()
@@ -45,6 +45,7 @@ class ForgotPasswordController extends Controller
     {
         return Auth::guard('admin');
     }
+
     /**
      * Get the broker to be used during password reset.
      *

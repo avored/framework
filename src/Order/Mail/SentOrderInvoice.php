@@ -5,15 +5,14 @@ namespace AvoRed\Framework\Order\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SentOrderInvoice extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Attachment Invoice Path
-     * @var string $path
+     * Attachment Invoice Path.
+     * @var string
      */
     protected $path;
 

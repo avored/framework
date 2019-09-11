@@ -4,9 +4,8 @@ namespace AvoRed\Framework\Cart;
 
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
-use AvoRed\Framework\Database\Contracts\ProductModelInterface;
-use AvoRed\Framework\Cart\CartProduct;
 use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 
 class Manager
@@ -62,9 +61,9 @@ class Manager
 
         if ($this->getSession()->has($slug)) {
             $cartProduct = $this->cartCollection->get($product);
-            
+
             $existingQty = $cartProduct->qty() ?? 0;
-            
+
             $cartProduct->qty($qty + $existingQty);
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
@@ -80,20 +79,20 @@ class Manager
                     //@todo fixed ideally this can be multiple if variation has more then one attribute
                     $valueModel = $this->attributeProductValueRepository
                         ->getModelByProductIdAndVariationId($product->id, $valueId)->first();
-                        
+
                     $attributeData = [
                         'attribute_id' => $valueModel->attribute_id,
                         'attribute_name' => $valueModel->attribute->name,
                         'attribute_dropdown_option_id' => $valueModel->attribute_dropdown_option_id,
                         'attribute_dropdown_text' => $valueModel->attributeDropdownOption->display_text,
-                        'variation_id' => $valueModel->variation_id
+                        'variation_id' => $valueModel->variation_id,
                     ];
 
                     $attrs->push($attributeData);
                 }
                 $cartProduct = $this->createCartProductFromSlug($product, $attrs);
                 $cartProduct->qty($qty);
-            
+
                 $this->cartCollection->put($slug, $cartProduct);
                 $this->updateSessionCollection();
                 $status = true;
@@ -102,7 +101,7 @@ class Manager
         } else {
             $cartProduct = $this->createCartProductFromSlug($product);
             $cartProduct->qty($qty);
-            
+
             $this->cartCollection->put($slug, $cartProduct);
             $this->updateSessionCollection();
             $status = true;
@@ -142,7 +141,7 @@ class Manager
         $this->sessionManager->forget($this->getSessionKey());
     }
 
-     /**
+    /**
      * Get the Current Collection for the Prophetoducts.
      * @return \Illuminate\Support\Collection
      */
@@ -166,12 +165,13 @@ class Manager
     }
 
     /**
-     * Update the Session Collection
+     * Update the Session Collection.
      * @return self $this
      */
     protected function updateSessionCollection()
     {
         $this->sessionManager->put($this->getSessionKey(), $this->cartCollection);
+
         return $this;
     }
 
@@ -183,7 +183,7 @@ class Manager
     {
         return $this->getSession();
     }
-    
+
     /**
      * Get the List of All the Current Session Cart Products.
      * @return \Illuminate\Support\Collection
@@ -200,19 +200,20 @@ class Manager
                 'qty' => $product->qty(),
                 'name' => $product->name(),
                 'tax' => $product->taxAmount(),
-                'attributes' => $product->attributes()
+                'attributes' => $product->attributes(),
             ]);
         }
+
         return $items;
     }
-    
+
     /**
      * Get the List of All the Current Session Cart Products.
      * @return mixed $cartTotal
      */
     public function total($format = true)
     {
-        $products =  $this->all();
+        $products = $this->all();
         $total = 0;
         foreach ($products as $product) {
             $total += $product->total();
@@ -221,6 +222,7 @@ class Manager
         if ($format === true) {
             return number_format($total, 2);
         }
+
         return $total;
     }
 

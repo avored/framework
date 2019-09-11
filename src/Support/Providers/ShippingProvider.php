@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use AvoRed\Framework\Shipping\Manager;
+use Illuminate\Support\ServiceProvider;
 
 class ShippingProvider extends ServiceProvider
 {
@@ -48,6 +48,6 @@ class ShippingProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['shipping','AvoRed\Framework\Shipping\Manager'];
+        return ['shipping', 'AvoRed\Framework\Shipping\Manager'];
     }
 }

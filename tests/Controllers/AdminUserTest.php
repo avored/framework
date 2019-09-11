@@ -1,15 +1,16 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Database\Models\AdminUser;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdminUserTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testAdminUserIndexRouteTest()
     {
@@ -42,7 +43,7 @@ class AdminUserTest extends BaseTestCase
             'role_id' => $role->id,
             'password' => 'randompassword',
             'password_confirmation' => 'randompassword',
-            'language' => 'en'
+            'language' => 'en',
         ];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -67,8 +68,8 @@ class AdminUserTest extends BaseTestCase
     public function testAdminUserUpdateRouteTest()
     {
         $adminUser = factory(AdminUser::class)->create();
-        $adminUser->first_name = "updated admin-user name";
-        $adminUser->language = "en";
+        $adminUser->first_name = 'updated admin-user name';
+        $adminUser->language = 'en';
         $data = $adminUser->toArray();
 
         $this->createAdminUser()
@@ -83,7 +84,7 @@ class AdminUserTest extends BaseTestCase
     public function testAdminUserDestroyRouteTest()
     {
         $adminUser = factory(AdminUser::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.admin-user.destroy', $adminUser->id))

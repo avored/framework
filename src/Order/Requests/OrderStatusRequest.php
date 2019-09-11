@@ -25,7 +25,7 @@ class OrderStatusRequest extends FormRequest
     {
         $rules = [];
         $rules['name'] = 'required|max:255';
-        
+
         return $rules;
     }
 }

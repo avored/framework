@@ -24,7 +24,7 @@ class TaxRateRequest extends FormRequest
     public function rules()
     {
         $rules['name'] = 'required';
-        
+
         return $rules;
     }
 }

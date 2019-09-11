@@ -1,20 +1,21 @@
 <?php
+
 namespace AvoRed\Framework\Tab;
 
 class TabItem
 {
     /**
-     * @var string $label
+     * @var string
      */
     protected $label;
 
     /**
-     * @var string $view
+     * @var string
      */
     protected $view;
 
     /**
-     * @var string $key
+     * @var string
      */
     protected $key;
 
@@ -35,8 +36,10 @@ class TabItem
     {
         if (null !== $label) {
             $this->label = $label;
+
             return $this;
         }
+
         return trans($this->label);
     }
 
@@ -48,8 +51,10 @@ class TabItem
     {
         if (null !== $view) {
             $this->view = $view;
+
             return $this;
         }
+
         return $this->view;
     }
 
@@ -61,8 +66,10 @@ class TabItem
     {
         if (null !== $key) {
             $this->key = $key;
+
             return $this;
         }
+
         return $this->key;
     }
 }

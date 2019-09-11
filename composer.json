@@ -57,9 +57,11 @@
 				"Cart" : "AvoRed\\Framework\\Support\\Facades\\Cart",
 				"Menu" : "AvoRed\\Framework\\Support\\Facades\\Menu",
 				"Module" : "AvoRed\\Framework\\Support\\Facades\\Module",
-				"Permission" : "AvoRed\\Framework\\Support\\Facades\\Permission",
 				"Payment" : "AvoRed\\Framework\\Support\\Facades\\Payment",
-				"Shipping" : "AvoRed\\Framework\\Support\\Facades\\Shipping"
+				"Permission" : "AvoRed\\Framework\\Support\\Facades\\Permission",
+				"Shipping" : "AvoRed\\Framework\\Support\\Facades\\Shipping",
+				"Tab" : "AvoRed\\Framework\\Support\\Facades\\Tab",
+				"Widget" : "AvoRed\\Framework\\Support\\Facades\\Widget"
 			}
 		}
 	},

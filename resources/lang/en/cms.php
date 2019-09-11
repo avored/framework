@@ -19,22 +19,23 @@ return [
         'meta_title' => 'Meta Title',
         'meta_description' => 'Meta Description',
         'content' => 'Content',
+        'widget_modal_title' => 'Select the Widget',
         'index' => [
-            'title' => 'Page List'
+            'title' => 'Page List',
         ],
         'create' => [
-            'title' => 'Page Create'
+            'title' => 'Page Create',
         ],
         'edit' => [
-            'title' => 'Page Edit'
+            'title' => 'Page Edit',
         ],
     ],
     'menu' => [
         'index' => [
-            'title' => 'Menus'
+            'title' => 'Menus',
         ],
         'create' => [
-            'title' => 'Menu Builder'
+            'title' => 'Menu Builder',
         ],
         'name' => 'Menu Group Name',
         'identifier' => 'Menu Group Identifier',
@@ -42,9 +43,8 @@ return [
         'category_list' => 'Categories',
         'frontmenu_list' => 'Front Menus',
         'create' => [
-            'title' => 'Menu Builder'
-        ]
+            'title' => 'Menu Builder',
+        ],
     ],
-    
 
 ];

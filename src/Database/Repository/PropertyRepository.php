@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class PropertyRepository implements PropertyModelInterface
 {
     /**
-     * Create Property Resource into a database
+     * Create Property Resource into a database.
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\Property $property
      */
@@ -19,7 +19,7 @@ class PropertyRepository implements PropertyModelInterface
     }
 
     /**
-     * Find Property Resource into a database
+     * Find Property Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Property $property
      */
@@ -29,7 +29,7 @@ class PropertyRepository implements PropertyModelInterface
     }
 
     /**
-     * Delete Property Resource from a database
+     * Delete Property Resource from a database.
      * @param int $id
      * @return int
      */
@@ -39,7 +39,7 @@ class PropertyRepository implements PropertyModelInterface
     }
 
     /**
-     * Get all the properties from the connected database
+     * Get all the properties from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $properties
      */
     public function all() : Collection
@@ -48,7 +48,7 @@ class PropertyRepository implements PropertyModelInterface
     }
 
     /**
-     * Get all the properties from the connected database which is used in all products
+     * Get all the properties from the connected database which is used in all products.
      * @return \Illuminate\Database\Eloquent\Collection $properties
      */
     public function allPropertyToUseInProduct() : Collection

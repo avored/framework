@@ -1,14 +1,15 @@
 <?php
+
 namespace AvoRed\Framework\Tests\Controllers;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use AvoRed\Framework\Database\Models\Property;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PropertyTest extends BaseTestCase
 {
     use RefreshDatabase;
-    
+
     /* @runInSeparateProcess */
     public function testPropertyIndexRouteTest()
     {
@@ -39,7 +40,7 @@ class PropertyTest extends BaseTestCase
             'data_type' => 'VARCHAR',
             'use_for_all_products' => 1,
             'is_visible_frontend' => 1,
-            'sort_order' => 10
+            'sort_order' => 10,
         ];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -64,7 +65,7 @@ class PropertyTest extends BaseTestCase
     public function testPropertyUpdateRouteTest()
     {
         $property = factory(Property::class)->create();
-        $property->name = "updated property name";
+        $property->name = 'updated property name';
         $data = $property->toArray();
 
         $this->createAdminUser()
@@ -79,7 +80,7 @@ class PropertyTest extends BaseTestCase
     public function testPropertyDestroyRouteTest()
     {
         $property = factory(Property::class)->create();
-        
+
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.property.destroy', $property->id))

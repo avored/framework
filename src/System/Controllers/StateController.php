@@ -4,27 +4,28 @@ namespace AvoRed\Framework\System\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use AvoRed\Framework\Database\Contracts\StateModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\State;
 use AvoRed\Framework\System\Requests\StateRequest;
+use AvoRed\Framework\Database\Contracts\StateModelInterface;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
 
 class StateController extends Controller
 {
     /**
-     * State Repository for the State Controller
-     * @var \AvoRed\Framework\Database\Repository\StateRepository $stateRepository
+     * State Repository for the State Controller.
+     * @var \AvoRed\Framework\Database\Repository\StateRepository
      */
     protected $stateRepository;
-    
+
     /**
-     * Country Repository for the State Controller
-     * @var \AvoRed\Framework\Database\Repository\CountryRepository $countryRepository
+     * Country Repository for the State Controller.
+     * @var \AvoRed\Framework\Database\Repository\CountryRepository
      */
     protected $countryRepository;
-    
+
     /**
-     * Construct for the AvoRed state controller
+     * Construct for the AvoRed state controller.
      * @param \AvoRed\Framework\Database\Contracts\StateModelInterface $stateRepository
      * @param \AvoRed\Framework\Database\Contracts\CountryModelInterface $countryRepository
      */
@@ -35,6 +36,7 @@ class StateController extends Controller
         $this->stateRepository = $stateRepository;
         $this->countryRepository = $countryRepository;
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
@@ -42,9 +44,9 @@ class StateController extends Controller
     public function index()
     {
         $states = $this->stateRepository->all();
-        
+
         return view('avored::system.state.index')
-            ->with('states', $states);
+            ->with(compact('states'));
     }
 
     /**
@@ -53,9 +55,11 @@ class StateController extends Controller
      */
     public function create()
     {
+        $tabs = Tab::get('system.state');
         $countryOptions = $this->countryRepository->options();
+
         return view('avored::system.state.create')
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('countryOptions', 'tabs'));
     }
 
     /**
@@ -81,10 +85,11 @@ class StateController extends Controller
      */
     public function edit(State $state)
     {
+        $tabs = Tab::get('system.state');
         $countryOptions = $this->countryRepository->options();
+
         return view('avored::system.state.edit')
-            ->with('state', $state)
-            ->with('countryOptions', $countryOptions);
+            ->with(compact('state', 'countryOptions', 'tabs'));
     }
 
     /**
@@ -115,7 +120,7 @@ class StateController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => __('avored:system.state.title')])
+            'message' => __('avored::system.notification.delete', ['attribute' => __('avored:system.state.title')]),
         ]);
     }
 }

@@ -1,21 +1,23 @@
 <?php
+
 namespace AvoRed\Framework\Catalog\Controllers;
 
-use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
 use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
+use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 
 class AttributeController
 {
     /**
-     * Attribute Repository for the Attribute Controller
-     * @var \AvoRed\Framework\Database\Repository\AttributeRepository $attributeRepository
+     * Attribute Repository for the Attribute Controller.
+     * @var \AvoRed\Framework\Database\Repository\AttributeRepository
      */
     protected $attributeRepository;
-    
+
     /**
-     * Construct for the AvoRed install command
+     * Construct for the AvoRed install command.
      * @param \AvoRed\Framework\Database\Contracts\AttributeModelInterface $attributeRepository
      */
     public function __construct(
@@ -25,7 +27,7 @@ class AttributeController
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin
+     * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
     public function index()
@@ -33,18 +35,20 @@ class AttributeController
         $attributes = $this->attributeRepository->all();
 
         return view('avored::catalog.attribute.index')
-            ->with('attributes', $attributes);
+            ->with(compact('attributes'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
     public function create()
     {
+        $tabs = Tab::get('catalog.attribute');
         $displayAsOptions = Attribute::DISPLAY_AS;
+
         return view('avored::catalog.attribute.create')
-            ->with('displayAsOptions', $displayAsOptions);
+            ->with(compact('displayAsOptions', 'tabs'));
     }
 
     /**
@@ -71,10 +75,11 @@ class AttributeController
      */
     public function edit(Attribute $attribute)
     {
+        $tabs = Tab::get('catalog.attribute');
         $displayAsOptions = Attribute::DISPLAY_AS;
+
         return view('avored::catalog.attribute.edit')
-            ->with('attribute', $attribute)
-            ->with('displayAsOptions', $displayAsOptions);
+            ->with(compact('attribute', 'displayAsOptions', 'tabs'));
     }
 
     /**
@@ -109,12 +114,12 @@ class AttributeController
             'message' => __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::catalog.attribute.title')]
-            )
+            ),
         ]);
     }
 
     /**
-     * Save Attribute Dropdown options
+     * Save Attribute Dropdown options.
      * @param \\AvoRed\Framework\Database\Models\Attribute  $attribute
      * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
      * @return void
@@ -151,7 +156,7 @@ class AttributeController
         return response()->json([
             'success' => true,
             'path' => $path,
-            'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image'])
+            'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image']),
         ]);
     }
 }

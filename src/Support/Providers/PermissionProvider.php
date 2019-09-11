@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Support\Facades\Permission as PermissionFacade;
+use AvoRed\Framework\Permission\Manager;
 use AvoRed\Framework\Permission\Permission;
 use AvoRed\Framework\Permission\PermissionGroup;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Auth;
-use AvoRed\Framework\Permission\Manager;
+use AvoRed\Framework\Support\Facades\Permission as PermissionFacade;
 
 class PermissionProvider extends ServiceProvider
 {
@@ -53,7 +53,7 @@ class PermissionProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['permission','AvoRed\Framework\Permission\Manager'];
+        return ['permission', 'AvoRed\Framework\Permission\Manager'];
     }
 
     /**
@@ -133,7 +133,7 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.product.edit,admin.product.destroy');
             }
         );
-       
+
         $orderGroup = PermissionFacade::add(
             'order',
             function (PermissionGroup $group) {
@@ -610,17 +610,17 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.user-group.destroy');
             }
         );
-        
 
         Blade::if(
             'hasPermission',
             function ($routeName) {
                 $condition = false;
                 $user = Auth::guard('admin')->user();
-                if (!$user) {
+                if (! $user) {
                     $condition = $user->hasPermission($routeName) ?: false;
                 }
                 $converted_res = ($condition) ? 'true' : 'false';
+
                 return "<?php if ($converted_res): ?>";
             }
         );
