@@ -130,4 +130,5 @@ Route::middleware(['web', 'admin.auth'])
         Route::resource('user-group', User\Controllers\UserGroupController::class);
         Route::resource('tax-group', System\Controllers\TaxGroupController::class);
         Route::resource('tax-rate', System\Controllers\TaxRateController::class);
+        Route::resource('promo-code', Promotion\Controllers\PromoCodeController::class);
     });

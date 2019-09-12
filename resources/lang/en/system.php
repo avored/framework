@@ -205,6 +205,8 @@ return [
         'user-group' => 'User Group',
         'tax-group' => 'Tax Group',
         'tax-rate' => 'Tax Rate',
+        'promo-code' => 'Promotion Code',
+        'promotion' => 'Promotion',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
