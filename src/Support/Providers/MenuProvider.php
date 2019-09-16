@@ -153,11 +153,11 @@ class MenuProvider extends ServiceProvider
         });
         $promotionMenu = Menu::get('promotion');
 
-        $promotionMenu->subMenu('promo_code', function (MenuItem $menu) {
-            $menu->key('promo_code')
+        $promotionMenu->subMenu('promotion_code', function (MenuItem $menu) {
+            $menu->key('promotion_code')
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.promo-code')
-                ->route('admin.promo-code.index');
+                ->route('admin.promotion.code.table');
         });
 
         $userMenu = Menu::get('user');

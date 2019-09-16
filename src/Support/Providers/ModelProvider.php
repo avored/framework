@@ -43,12 +43,14 @@ use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 use AvoRed\Framework\Database\Repository\OrderProductRepository;
 use AvoRed\Framework\Database\Repository\ProductImageRepository;
+use AvoRed\Framework\Database\Repository\PromotionCodeRepository;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Repository\CategoryFilterRepository;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductImageModelInterface;
+use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use AvoRed\Framework\Database\Repository\AttributeProductValueRepository;
@@ -88,6 +90,7 @@ class ModelProvider extends ServiceProvider
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
+        PromotionCodeModelInterface::class => PromotionCodeRepository::class,
         ProductModelInterface::class => ProductRepository::class,
         ProductImageModelInterface::class => ProductImageRepository::class,
         MenuModelInterface::class => MenuRepository::class,

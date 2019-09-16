@@ -59,6 +59,14 @@ class TabProvider extends ServiceProvider
      */
     public function registerTabs()
     {
+
+        Tab::put('promotion.promotion-code', function (TabItem $tab) {
+            $tab->key('promotion.promotion.code')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::promotion.promotion-code._fields');
+        });
+
+
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.info')
                 ->label('avored::system.tab.basic_info')

@@ -464,6 +464,19 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('promotion_codes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
+            $table->boolean('status')->nullable()->default(false);
+            $table->enum('type', ['PERCENTAGE', 'FIXED', 'FREE_SHIPPING'])->nullable()->default(null);
+            $table->decimal('amount', 10, 4)->nullable()->default(null);
+            $table->timestamp('active_from')->nullable()->default(null);
+            $table->timestamp('active_till')->nullable()->default(null);
+            $table->timestamps();
+        });
+
         $path = __DIR__.'/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -487,6 +500,7 @@ class AvoredFrameworkSchema extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::dropIfExists('promotion_codes');
         Schema::dropIfExists('attribute_product');
         Schema::dropIfExists('attribute_product_values');
         Schema::dropIfExists('product_variations');

@@ -51,6 +51,7 @@ Vue.use(Dropdown)
 // Vue.use(Drawer)
 
 
+Vue.component('a-date-picker', () => import('ant-design-vue/lib/date-picker'))
 Vue.component('a-icon', () => import('ant-design-vue/lib/icon'))
 Vue.component('a-avatar', () => import('ant-design-vue/lib/avatar'))
 Vue.component('a-row', () => import('ant-design-vue/lib/row'))
@@ -125,6 +126,9 @@ Vue.component('system-role-save', () => import('../components/system/role/RoleSa
 
 Vue.component('admin-user-table', () => import('../components/system/admin-user/AdminUserTable.vue'))
 Vue.component('admin-user-save', () => import('../components/system/admin-user/AdminUserSave.vue'))
+
+Vue.component('promotion-code-table', () => import('../components/promotion/promotion-code/PromotionCodeTable.vue'))
+Vue.component('promotion-code-edit', () => import('../components/promotion/promotion-code/PromotionCodeEdit.vue'))
 
 Vue.component('avored-layout', () => import('../components/system/Layout.vue'))
 Vue.component('avored-flash', () => import('../components/system/Flash.vue'))
