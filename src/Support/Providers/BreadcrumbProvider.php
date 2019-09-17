@@ -503,5 +503,22 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.state.index');
             }
         );
+
+        BreadcrumbFacade::make(
+            'admin.promotion.code.table',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.promotion-code.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.promotion.code.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.promotion-code.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.promotion.code.table');
+            }
+        );
     }
 }

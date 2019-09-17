@@ -218,6 +218,12 @@ return [
             'destroy' => 'Destroy Page',
             'show' => 'Show Page',
         ],
+        'promotion-code' => [
+            'title' => 'Promotion Code',
+            'table' => 'Promotion Code Table',
+            'edit' => 'Edit/Save Promotion Code',
+            'destroy' => 'Destroy Promotion Code'
+        ],
 
         'category' => [
             'title' => 'Category Permissions',
@@ -400,6 +406,10 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'promotion-code' => [
+            'index' => 'Promotion Code',
+            'edit' => 'Promotion Code Save'
         ],
         'product' => [
             'index' => 'Product',
