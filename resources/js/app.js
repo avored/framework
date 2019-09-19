@@ -10,45 +10,29 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-window.Vue = require('vue');
+import AvoRed from './avored'
 
-// import Row from 'ant-design-vue/lib/row'
-// import Col from 'ant-design-vue/lib/col'
-// import Slider from 'ant-design-vue/lib/slider'
+window.Vue = require('vue')
+window.AvoRed = AvoRed
+
 import Layout from 'ant-design-vue/lib/layout'
 import Menu from 'ant-design-vue/lib/menu'
-// import Icon from 'ant-design-vue/lib/icon'
-// import Table from 'ant-design-vue/lib/table'
 import Form from 'ant-design-vue/lib/form'
-// import Input from 'ant-design-vue/lib/input'
 import Select from 'ant-design-vue/lib/select'
-// import Button from 'ant-design-vue/lib/button'
-// import Avatar from 'ant-design-vue/lib/avatar'
-// import Card from 'ant-design-vue/lib/card'
 import Breadcrumb from 'ant-design-vue/lib/breadcrumb'
 import Tabs from 'ant-design-vue/lib/tabs'
 import Modal from 'ant-design-vue/lib/modal'
-// import Switch from 'ant-design-vue/lib/switch'
 import Notification from 'ant-design-vue/lib/notification'
 import Dropdown from 'ant-design-vue/lib/dropdown'
+
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Form)
-// Vue.use(Input)
 Vue.use(Select)
-// Vue.use(Button)
-// Vue.use(Avatar)
-// Vue.use(Card)
 Vue.use(Breadcrumb)
 Vue.use(Tabs)
 Vue.use(Modal)
-// Vue.use(Switch)
-// Vue.use(Notification)
-// Vue.use(Divider)
 Vue.use(Dropdown)
-// Vue.use(Radio)
-// Vue.use(Upload)
-// Vue.use(Drawer)
 
 
 Vue.component('a-date-picker', () => import('ant-design-vue/lib/date-picker'))
@@ -135,7 +119,6 @@ Vue.component('avored-flash', () => import('../components/system/Flash.vue'))
 Vue.component('login-fields', () => import('../components/system/LoginFields.vue'))
 Vue.component('password-reset-page', () => import('../components/system/PasswordResetPage.vue'))
 Vue.component('password-new-page', () => import('../components/system/PasswordNewPage.vue'))
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

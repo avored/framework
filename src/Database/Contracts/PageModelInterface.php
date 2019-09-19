@@ -22,6 +22,13 @@ interface PageModelInterface
     public function find(int $id) : Page;
 
     /**
+     * Find Page Resource into a database.
+     * @param string $slug
+     * @return \AvoRed\Framework\Database\Models\Page $page
+     */
+    public function findBySlug(string $slug) : Page;
+
+    /**
      * Delete Page Resource from a database.
      * @param int $id
      * @return int

@@ -21,7 +21,7 @@
 	],
 	"type" : "library",
 	"require" : {
-		"php" : "^7.2",
+		"php" : ">=7.2",
 		"symfony/yaml": "^4.2",
 		"laravel/passport": "^7.4",
 		"barryvdh/laravel-dompdf": "^0.8.4",

@@ -93,18 +93,16 @@ class Manager
                     $dependencies = empty($data['dependencies']) ? [] : explode(',', str_replace(' ', '', $data['dependencies']));
                     $module->dependencies($dependencies);
 
-
                     $this->moduleList->put($module->identifier(), $module);
                 }
                 $iterator->next();
             }
-
             // Sort modules based on its declared dependency
             $this->moduleList = $this->sortByDependency($this->moduleList);
-
+            
             $this->moduleList->each(function ($module) {
                 $composerLoader = require base_path('vendor/autoload.php');
-                if (strtolower($module->status()) == 'enabled') {
+                if (strtolower($module->status()) == 'active') {
                     $path = $module->basePath() . DIRECTORY_SEPARATOR . 'src';
                     $composerLoader->addPsr4($module->namespace(), $path);
                     $moduleProvider = $module->namespace() . 'Module';
@@ -120,6 +118,7 @@ class Manager
 
     /**
      * Sort module based on their dependency declarations
+     * @return \Illuminate\Support\Collection
      */
     public function sortByDependency(Collection $moduleList)
     {
@@ -133,7 +132,6 @@ class Manager
             } else {
                 return 1;
             }
-
         });
         return $modules;
     }

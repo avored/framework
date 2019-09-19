@@ -27,6 +27,15 @@ class PageRepository implements PageModelInterface
     {
         return Page::find($id);
     }
+    /**
+     * Find Page Resource into a database.
+     * @param string $slug
+     * @return \AvoRed\Framework\Database\Models\Page $page
+     */
+    public function findBySlug(string $slug): Page
+    {
+        return Page::whereSlug($slug)->first();
+    }
 
     /**
      * Delete Page Resource from a database.
