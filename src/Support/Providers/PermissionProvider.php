@@ -610,6 +610,35 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.user-group.destroy');
             }
         );
+        $group = PermissionFacade::add(
+            'permission-code',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.permissions.promotion-code.title');
+            }
+        );
+
+        $group->addPermission(
+            'admin-promotion-code-table',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.promotion-code.table')
+                    ->routes('admin.promotion.code.table');
+            }
+        );
+        $group->addPermission(
+            'admin-promotion-code-edit',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.promotion-code.edit')
+                    ->routes('admin.promotion.code.edit,admin.promotion.code.save');
+            }
+        );
+        $group->addPermission(
+            'admin-promotion-code-destroy',
+            function (Permission $permission) {
+                $permission->label('avored::system.permissions.promotion-code.destroy')
+                    ->routes('admin.promotion.code.destroy');
+            }
+        );
+       
 
         Blade::if(
             'hasPermission',

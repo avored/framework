@@ -205,6 +205,8 @@ return [
         'user-group' => 'User Group',
         'tax-group' => 'Tax Group',
         'tax-rate' => 'Tax Rate',
+        'promo-code' => 'Promotion Code',
+        'promotion' => 'Promotion',
     ],
     'permissions' => [
         'dashboard' => 'Dashboard',
@@ -215,6 +217,12 @@ return [
             'edit' => 'Edit/Update Page',
             'destroy' => 'Destroy Page',
             'show' => 'Show Page',
+        ],
+        'promotion-code' => [
+            'title' => 'Promotion Code',
+            'table' => 'Promotion Code Table',
+            'edit' => 'Edit/Save Promotion Code',
+            'destroy' => 'Destroy Promotion Code'
         ],
 
         'category' => [
@@ -398,6 +406,10 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'promotion-code' => [
+            'index' => 'Promotion Code',
+            'edit' => 'Promotion Code Save'
         ],
         'product' => [
             'index' => 'Product',

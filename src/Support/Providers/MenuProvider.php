@@ -145,6 +145,21 @@ class MenuProvider extends ServiceProvider
                 ->route('#');
         });
 
+        Menu::make('promotion', function (MenuItem $menu) {
+            $menu->label('avored::system.admin_menus.promotion')
+                ->icon('scissor')
+                ->type(MenuItem::ADMIN)
+                ->route('#');
+        });
+        $promotionMenu = Menu::get('promotion');
+
+        $promotionMenu->subMenu('promotion_code', function (MenuItem $menu) {
+            $menu->key('promotion_code')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.admin_menus.promo-code')
+                ->route('admin.promotion.code.table');
+        });
+
         $userMenu = Menu::get('user');
 
         $userMenu->subMenu('admin-user', function (MenuItem $menu) {
