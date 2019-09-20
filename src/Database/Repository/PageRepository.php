@@ -32,7 +32,7 @@ class PageRepository implements PageModelInterface
      * @param string $slug
      * @return \AvoRed\Framework\Database\Models\Page $page
      */
-    public function findBySlug(string $slug): Page
+    public function findBySlug(string $slug)
     {
         return Page::whereSlug($slug)->first();
     }
