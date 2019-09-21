@@ -90,6 +90,7 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->call('migrate:fresh');
+        $this->call('storage:link');
         if ($this->confirm('Would you like to install Dummy Data?')) {
             $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
         }
