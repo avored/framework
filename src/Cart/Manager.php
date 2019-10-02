@@ -60,7 +60,7 @@ class Manager
         $product = $this->productRepository->findBySlug($slug);
 
         if ($this->getSession()->has($slug)) {
-            $cartProduct = $this->cartCollection->get($product);
+            $cartProduct = $this->cartCollection->get($slug);
 
             $existingQty = $cartProduct->qty() ?? 0;
 

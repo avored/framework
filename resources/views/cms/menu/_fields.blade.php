@@ -1,4 +1,4 @@
-<input type="hidden" name="menu_json" v-model="menu_json" />
+    <input type="hidden" name="menu_json" v-model="menu_json" />
     <a-col :span="24">
         <a-form-item
             @if ($errors->has('name'))
@@ -12,6 +12,7 @@
                 name="name"
                 v-decorator="[
                 'name',
+                {'initialValue': '{{ $menuGroup->name ?? '' }}'},
                 {rules: 
                     [
                         {   required: true, 
@@ -35,6 +36,7 @@
                 name="identifier"
                 v-decorator="[
                 'identifier',
+                {'initialValue': '{{ $menuGroup->identifier ?? '' }}'},
                 {rules: 
                     [
                         {   required: true, 
