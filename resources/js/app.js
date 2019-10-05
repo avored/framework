@@ -49,6 +49,7 @@ Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))
 Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))
 Vue.component('a-input', () => import('ant-design-vue/lib/input'))
 Vue.component('a-switch', () => import('ant-design-vue/lib/switch'))
+Vue.component('a-tag', () => import('ant-design-vue/lib/tag'))
 
 Vue.prototype.$notification = Notification;
 Vue.prototype.$confirm = Modal.confirm;

@@ -36,6 +36,7 @@ return [
         'delete' => ':attribute delete successfully!',
         'upload' => ':attribute successfully uploaded!',
         'save' => ':attribute save successfully!',
+        'approved' => ':attribute approved successfully!',
     ],
     'btn' => [
         'save' => 'Save',
