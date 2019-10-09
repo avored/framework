@@ -30,11 +30,8 @@ abstract class BaseTestCase extends OrchestraTestCase
         $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
         $this->faker = $this->app->make(FakerGenerator::class);
 
-        $this->app->singleton(EloquentFactory::class, function ($app) {
-            $faker = $app->make(FakerGenerator::class);
-
-            return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
-        });
+        $this->withFactories(__DIR__ . '/../database/factories');
+        
         $this->setUpDatabase();
         Notification::fake();
     }
