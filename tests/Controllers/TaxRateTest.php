@@ -11,7 +11,6 @@ class TaxRateTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testTaxRateIndexRouteTest()
     {
         $this->createAdminUser()
@@ -21,7 +20,6 @@ class TaxRateTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-rate.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxRateCreateRouteTest()
     {
         $this->createAdminUser()
@@ -31,7 +29,6 @@ class TaxRateTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-rate.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxRateStoreRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -50,7 +47,6 @@ class TaxRateTest extends BaseTestCase
         $this->assertDatabaseHas('tax_rates', ['name' => 'test tax-rate name']);
     }
 
-    /* @runInSeparateProcess */
     public function testTaxRateEditRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -63,7 +59,6 @@ class TaxRateTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-rate.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxRateUpdateRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -79,7 +74,6 @@ class TaxRateTest extends BaseTestCase
         $this->assertDatabaseHas('tax_rates', ['name' => 'updated tax-rate name']);
     }
 
-    /* @runInSeparateProcess */
     public function testTaxRateDestroyRouteTest()
     {
         $country = factory(Country::class)->create();

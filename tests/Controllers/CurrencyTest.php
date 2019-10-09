@@ -11,7 +11,6 @@ class CurrencyTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testCurrencyIndexRouteTest()
     {
         $this->createAdminUser()
@@ -21,7 +20,6 @@ class CurrencyTest extends BaseTestCase
             ->assertSee(__('avored::system.currency.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCurrencyCreateRouteTest()
     {
         $this->createAdminUser()
@@ -31,7 +29,6 @@ class CurrencyTest extends BaseTestCase
             ->assertSee(__('avored::system.currency.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCurrencyStoreRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -51,7 +48,6 @@ class CurrencyTest extends BaseTestCase
         $this->assertDatabaseHas('currencies', ['name' => 'test currency name']);
     }
 
-    /* @runInSeparateProcess */
     public function testCurrencyEditRouteTest()
     {
         $currency = factory(Currency::class)->create();
@@ -62,7 +58,6 @@ class CurrencyTest extends BaseTestCase
             ->assertSee(__('avored::system.currency.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCurrencyUpdateRouteTest()
     {
         $currency = factory(Currency::class)->create();
@@ -78,7 +73,6 @@ class CurrencyTest extends BaseTestCase
         $this->assertDatabaseHas('currencies', ['name' => 'updated currency name']);
     }
 
-    /* @runInSeparateProcess */
     public function testCurrencyDestroyRouteTest()
     {
         $currency = factory(Currency::class)->create();
