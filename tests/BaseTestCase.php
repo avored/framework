@@ -27,13 +27,25 @@ abstract class BaseTestCase extends OrchestraTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
+
         $this->faker = $this->app->make(FakerGenerator::class);
 
         $this->withFactories(__DIR__ . '/../database/factories');
 
         $this->setUpDatabase();
         Notification::fake();
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application   $app
+     *
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
     }
 
     /**
