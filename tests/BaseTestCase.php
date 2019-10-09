@@ -42,9 +42,7 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     private function resetDatabase(): void
     {
-        $this->artisan('migrate:fresh', [
-            '--database' => 'sqlite',
-        ]);
+        $this->artisan('migrate:fresh');
     }
 
     /**
@@ -56,21 +54,6 @@ abstract class BaseTestCase extends OrchestraTestCase
         return [
             AvoRedProvider::class,
         ];
-    }
-
-    /**
-     * Set up the environment.
-     * @param \Illuminate\Foundation\Application $app
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app): void
-    {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
     }
 
     /**
