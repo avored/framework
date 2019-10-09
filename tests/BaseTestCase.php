@@ -21,7 +21,8 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected $faker;
 
     /**
-     * Setup Config and other data for unit test.
+     * Setup the test environment.
+     *
      * @return void
      */
     public function setUp(): void
@@ -58,7 +59,10 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Returns the array with unittest required package.
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
      * @return array
      */
     protected function getPackageProviders($app): array
@@ -69,7 +73,7 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Setup sqlite database for the unit test.
+     * Setup database for the unit test.
      * @return void
      */
     protected function setUpDatabase(): void
@@ -78,8 +82,10 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Setup sqlite database for the unit test.
-     * @param \Illuminate\Foundation\Application $app
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
      * @return array
      */
     protected function getPackageAliases($app): array
@@ -103,8 +109,10 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Get Admin User Object for unit test.
+     * Create an Admin user model.
+     * 
      * @param array $data
+     * 
      * @return self
      */
     protected function createAdminUser($data = ['is_super_admin' => 1]): self
