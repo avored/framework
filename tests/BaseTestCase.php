@@ -31,7 +31,7 @@ abstract class BaseTestCase extends OrchestraTestCase
         $this->faker = $this->app->make(FakerGenerator::class);
 
         $this->withFactories(__DIR__ . '/../database/factories');
-        
+
         $this->setUpDatabase();
         Notification::fake();
     }
@@ -45,16 +45,6 @@ abstract class BaseTestCase extends OrchestraTestCase
         $this->artisan('migrate:fresh', [
             '--database' => 'sqlite',
         ]);
-
-        /*
-        Language::create(
-            ['name' => 'English',
-            'code' => 'en',
-            'is_default' => 1]
-        );
-        $middleware = new LanguageMiddleware(app(LanguageInterface::class));
-        $this->defaultLanguage = Session::get('default_language');
-        */
     }
 
     /**
@@ -64,7 +54,6 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            //GraphQLServiceProvider::class,
             AvoRedProvider::class,
         ];
     }
