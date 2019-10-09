@@ -10,7 +10,6 @@ class CategoryTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testCategoryIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class CategoryTest extends BaseTestCase
             ->assertSee(__('avored::catalog.category.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class CategoryTest extends BaseTestCase
             ->assertSee(__('avored::catalog.category.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryStoreRouteTest()
     {
         $data = ['name' => 'test category name', 'slug' => 'test-category-name'];
@@ -42,7 +39,6 @@ class CategoryTest extends BaseTestCase
         $this->assertDatabaseHas('categories', ['name' => 'test category name']);
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryEditRouteTest()
     {
         $category = factory(Category::class)->create();
@@ -53,7 +49,6 @@ class CategoryTest extends BaseTestCase
             ->assertSee(__('avored::catalog.category.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryUpdateRouteTest()
     {
         $category = factory(Category::class)->create();
@@ -68,7 +63,6 @@ class CategoryTest extends BaseTestCase
         $this->assertDatabaseHas('categories', ['name' => 'updated category name']);
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryDestroyRouteTest()
     {
         $category = factory(Category::class)->create();

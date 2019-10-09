@@ -10,7 +10,6 @@ class LanguageTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testLanguageIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class LanguageTest extends BaseTestCase
             ->assertSee(__('avored::system.language.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testLanguageCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class LanguageTest extends BaseTestCase
             ->assertSee(__('avored::system.language.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testLanguageStoreRouteTest()
     {
         $data = ['name' => 'test language name', 'code' => 'en'];
@@ -42,7 +39,6 @@ class LanguageTest extends BaseTestCase
         $this->assertDatabaseHas('languages', ['name' => 'test language name']);
     }
 
-    /* @runInSeparateProcess */
     public function testLanguageEditRouteTest()
     {
         $language = factory(Language::class)->create();
@@ -53,7 +49,6 @@ class LanguageTest extends BaseTestCase
             ->assertSee(__('avored::system.language.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testLanguageUpdateRouteTest()
     {
         $language = factory(Language::class)->create();
@@ -68,7 +63,6 @@ class LanguageTest extends BaseTestCase
         $this->assertDatabaseHas('languages', ['name' => 'updated language name']);
     }
 
-    /* @runInSeparateProcess */
     public function testLanguageDestroyRouteTest()
     {
         $language = factory(Language::class)->create();

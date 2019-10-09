@@ -10,7 +10,6 @@ class AttributeTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testAttributeIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class AttributeTest extends BaseTestCase
             ->assertSee(__('avored::catalog.attribute.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAttributeCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class AttributeTest extends BaseTestCase
             ->assertSee(__('avored::catalog.attribute.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAttributeStoreRouteTest()
     {
         $data = ['name' => 'test attribute name', 'slug' => 'test-attribute-name'];
@@ -42,7 +39,6 @@ class AttributeTest extends BaseTestCase
         $this->assertDatabaseHas('attributes', ['name' => 'test attribute name']);
     }
 
-    /* @runInSeparateProcess */
     public function testAttributeEditRouteTest()
     {
         $attribute = factory(Attribute::class)->create();
@@ -53,7 +49,6 @@ class AttributeTest extends BaseTestCase
             ->assertSee(__('avored::catalog.attribute.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAttributeUpdateRouteTest()
     {
         $attribute = factory(Attribute::class)->create();
@@ -68,7 +63,6 @@ class AttributeTest extends BaseTestCase
         $this->assertDatabaseHas('attributes', ['name' => 'updated attribute name']);
     }
 
-    /* @runInSeparateProcess */
     public function testAttributeDestroyRouteTest()
     {
         $attribute = factory(Attribute::class)->create();

@@ -11,7 +11,6 @@ class AdminUserTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testAdminUserIndexRouteTest()
     {
         $this->createAdminUser()
@@ -21,7 +20,6 @@ class AdminUserTest extends BaseTestCase
             ->assertSee(__('avored::system.admin-user.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminUserCreateRouteTest()
     {
         $this->createAdminUser()
@@ -31,7 +29,6 @@ class AdminUserTest extends BaseTestCase
             ->assertSee(__('avored::system.admin-user.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminUserStoreRouteTest()
     {
         $role = factory(Role::class)->create();
@@ -53,7 +50,6 @@ class AdminUserTest extends BaseTestCase
         $this->assertDatabaseHas('admin_users', ['first_name' => 'test admin-user name']);
     }
 
-    /* @runInSeparateProcess */
     public function testAdminUserEditRouteTest()
     {
         $adminUser = factory(AdminUser::class)->create();
@@ -64,7 +60,6 @@ class AdminUserTest extends BaseTestCase
             ->assertSee(__('avored::system.admin-user.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminUserUpdateRouteTest()
     {
         $adminUser = factory(AdminUser::class)->create();
@@ -80,7 +75,6 @@ class AdminUserTest extends BaseTestCase
         $this->assertDatabaseHas('admin_users', ['first_name' => 'updated admin-user name']);
     }
 
-    /* @runInSeparateProcess */
     public function testAdminUserDestroyRouteTest()
     {
         $adminUser = factory(AdminUser::class)->create();

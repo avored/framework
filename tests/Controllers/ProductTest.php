@@ -9,7 +9,6 @@ class ProductTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testProductIndexRouteTest()
     {
         $this->createAdminUser()
@@ -19,7 +18,6 @@ class ProductTest extends BaseTestCase
             ->assertSee(__('avored::catalog.product.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testProductCreateRouteTest()
     {
         $this->createAdminUser()

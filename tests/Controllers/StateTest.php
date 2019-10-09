@@ -11,7 +11,6 @@ class StateTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testStateIndexRouteTest()
     {
         $this->createAdminUser()
@@ -21,7 +20,6 @@ class StateTest extends BaseTestCase
             ->assertSee(__('avored::system.state.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testStateCreateRouteTest()
     {
         $this->createAdminUser()
@@ -31,7 +29,6 @@ class StateTest extends BaseTestCase
             ->assertSee(__('avored::system.state.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testStateStoreRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -44,7 +41,6 @@ class StateTest extends BaseTestCase
         $this->assertDatabaseHas('states', ['name' => 'test state name']);
     }
 
-    /* @runInSeparateProcess */
     public function testStateEditRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -56,7 +52,6 @@ class StateTest extends BaseTestCase
             ->assertSee(__('avored::system.state.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testStateUpdateRouteTest()
     {
         $country = factory(Country::class)->create();
@@ -73,7 +68,6 @@ class StateTest extends BaseTestCase
         $this->assertDatabaseHas('states', ['name' => 'updated state name']);
     }
 
-    /* @runInSeparateProcess */
     public function testStateDestroyRouteTest()
     {
         $country = factory(Country::class)->create();

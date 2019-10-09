@@ -11,7 +11,6 @@ class RoleTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testRoleIndexRouteTest()
     {
         $this->createAdminUser()
@@ -21,7 +20,6 @@ class RoleTest extends BaseTestCase
             ->assertSee(__('avored::system.role.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testRoleCreateRouteTest()
     {
         $this->createAdminUser()
@@ -31,7 +29,6 @@ class RoleTest extends BaseTestCase
             ->assertSee(__('avored::system.role.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testRoleStoreRouteTest()
     {
         $data = ['name' => 'test role name'];
@@ -43,7 +40,6 @@ class RoleTest extends BaseTestCase
         $this->assertDatabaseHas('roles', ['name' => 'test role name']);
     }
 
-    /* @runInSeparateProcess */
     public function testRoleEditRouteTest()
     {
         $role = factory(Role::class)->create();
@@ -54,7 +50,6 @@ class RoleTest extends BaseTestCase
             ->assertSee(__('avored::system.role.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testRoleUpdateRouteTest()
     {
         $role = factory(Role::class)->create();
@@ -69,7 +64,6 @@ class RoleTest extends BaseTestCase
         $this->assertDatabaseHas('roles', ['name' => 'updated role name']);
     }
 
-    /* @runInSeparateProcess */
     public function testRoleDestroyRouteTest()
     {
         $role = factory(Role::class)->create();
@@ -82,7 +76,6 @@ class RoleTest extends BaseTestCase
         $this->assertDatabaseMissing('roles', ['id' => $role->id]);
     }
 
-    /* @runInSeparateProcess */
     public function testRoleStoreWithPermissionsRouteTest()
     {
         $permissionList = AvoRedPermission::all()->first()->permissionList;
@@ -100,7 +93,6 @@ class RoleTest extends BaseTestCase
         $this->assertDatabaseHas('roles', ['name' => 'test role name']);
     }
 
-    /* @runInSeparateProcess */
     public function testRoleUpdateWithPermissionsRouteTest()
     {
         $permissionList = AvoRedPermission::all()->first()->permissionList;

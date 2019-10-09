@@ -10,7 +10,6 @@ class PropertyTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testPropertyIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class PropertyTest extends BaseTestCase
             ->assertSee(__('avored::catalog.property.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPropertyCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class PropertyTest extends BaseTestCase
             ->assertSee(__('avored::catalog.property.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPropertyStoreRouteTest()
     {
         $data = [
@@ -50,7 +47,6 @@ class PropertyTest extends BaseTestCase
         $this->assertDatabaseHas('properties', ['name' => 'test property name']);
     }
 
-    /* @runInSeparateProcess */
     public function testPropertyEditRouteTest()
     {
         $property = factory(Property::class)->create();
@@ -61,7 +57,6 @@ class PropertyTest extends BaseTestCase
             ->assertSee(__('avored::catalog.property.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPropertyUpdateRouteTest()
     {
         $property = factory(Property::class)->create();
@@ -76,7 +71,6 @@ class PropertyTest extends BaseTestCase
         $this->assertDatabaseHas('properties', ['name' => 'updated property name']);
     }
 
-    /* @runInSeparateProcess */
     public function testPropertyDestroyRouteTest()
     {
         $property = factory(Property::class)->create();

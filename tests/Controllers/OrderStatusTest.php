@@ -10,7 +10,6 @@ class OrderStatusTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testOrderStatusIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class OrderStatusTest extends BaseTestCase
             ->assertSee(__('avored::order.order-status.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testOrderStatusCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class OrderStatusTest extends BaseTestCase
             ->assertSee(__('avored::order.order-status.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testOrderStatusStoreRouteTest()
     {
         $data = ['name' => 'test order-status name', 'is_default' => 1];
@@ -42,7 +39,6 @@ class OrderStatusTest extends BaseTestCase
         $this->assertDatabaseHas('order_statuses', ['name' => 'test order-status name']);
     }
 
-    /* @runInSeparateProcess */
     public function testOrderStatusEditRouteTest()
     {
         $orderStatus = factory(OrderStatus::class)->create();
@@ -53,7 +49,6 @@ class OrderStatusTest extends BaseTestCase
             ->assertSee(__('avored::order.order-status.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testOrderStatusUpdateRouteTest()
     {
         $orderStatus = factory(OrderStatus::class)->create();
@@ -68,7 +63,6 @@ class OrderStatusTest extends BaseTestCase
         $this->assertDatabaseHas('order_statuses', ['name' => 'updated order-status name']);
     }
 
-    /* @runInSeparateProcess */
     public function testOrderStatusDestroyRouteTest()
     {
         $orderStatus = factory(OrderStatus::class)->create();
