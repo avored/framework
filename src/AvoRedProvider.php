@@ -9,6 +9,7 @@ use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\AvoRedCore;
 use AvoRed\Framework\Support\Console\InstallCommand;
 use AvoRed\Framework\Support\Console\AdminMakeCommand;
+use AvoRed\Framework\Support\Middleware\Permission;
 use AvoRed\Framework\System\ViewComposers\LayoutComposer;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 
@@ -123,6 +124,7 @@ class AvoRedProvider extends ServiceProvider
     {
         $router = $this->app['router'];
         $router->aliasMiddleware('admin.auth', AdminAuth::class);
+        $router->aliasMiddleware('permission', Permission::class);
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
         $router->aliasMiddleware('avored', AvoRedCore::class);
     }
