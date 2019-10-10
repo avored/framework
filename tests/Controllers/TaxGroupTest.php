@@ -10,7 +10,6 @@ class TaxGroupTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testTaxGroupIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class TaxGroupTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-group.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxGroupCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class TaxGroupTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-group.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxGroupStoreRouteTest()
     {
         $data = ['name' => 'test tax-group name'];
@@ -42,7 +39,6 @@ class TaxGroupTest extends BaseTestCase
         $this->assertDatabaseHas('tax_groups', ['name' => 'test tax-group name']);
     }
 
-    /* @runInSeparateProcess */
     public function testTaxGroupEditRouteTest()
     {
         $userGroup = factory(TaxGroup::class)->create();
@@ -53,7 +49,6 @@ class TaxGroupTest extends BaseTestCase
             ->assertSee(__('avored::system.tax-group.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testTaxGroupUpdateRouteTest()
     {
         $userGroup = factory(TaxGroup::class)->create();
@@ -68,7 +63,6 @@ class TaxGroupTest extends BaseTestCase
         $this->assertDatabaseHas('tax_groups', ['name' => 'updated tax-group name']);
     }
 
-    /* @runInSeparateProcess */
     public function testTaxGroupDestroyRouteTest()
     {
         $userGroup = factory(TaxGroup::class)->create();

@@ -10,7 +10,6 @@ class PageTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testPageIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class PageTest extends BaseTestCase
             ->assertSee(__('avored::cms.page.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPageCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class PageTest extends BaseTestCase
             ->assertSee(__('avored::cms.page.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPageStoreRouteTest()
     {
         $data = ['name' => 'test page name', 'slug' => 'test-page-name', 'content' => 'test content', ''];
@@ -42,7 +39,6 @@ class PageTest extends BaseTestCase
         $this->assertDatabaseHas('pages', ['name' => 'test page name']);
     }
 
-    /* @runInSeparateProcess */
     public function testPageEditRouteTest()
     {
         $page = factory(Page::class)->create();
@@ -53,7 +49,6 @@ class PageTest extends BaseTestCase
             ->assertSee(__('avored::cms.page.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testPageUpdateRouteTest()
     {
         $page = factory(Page::class)->create();
@@ -68,7 +63,6 @@ class PageTest extends BaseTestCase
         $this->assertDatabaseHas('pages', ['name' => 'updated page name']);
     }
 
-    /* @runInSeparateProcess */
     public function testPageDestroyRouteTest()
     {
         $page = factory(Page::class)->create();

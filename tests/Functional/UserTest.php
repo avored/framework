@@ -8,7 +8,6 @@ use AvoRed\Framework\System\Controllers\LoginController;
 /** @runInSeparateProcess */
 class UserTest extends BaseTestCase
 {
-    /* @runInSeparateProcess */
     public function testRedirectPathForLoginController()
     {
         $loginController = app(LoginController::class);
