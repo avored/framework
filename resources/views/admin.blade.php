@@ -9,7 +9,13 @@
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
+<a-row type="flex" :gutter="20" justify="center">
+    {{ Widget::get('avored-total-order')->render() }}
+    {{ Widget::get('avored-total-customer')->render() }}
+    {{ Widget::get('avored-total-revenue')->render() }}
+    
+</a-row>
+<a-row type="flex" class="mt-1" justify="center">
     <a-col :span="24">
         <a-card  title="Admin Dashboard">
             <div>

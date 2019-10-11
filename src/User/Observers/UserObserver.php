@@ -2,7 +2,9 @@
 
 namespace AvoRed\Framework\User\Observers;
 
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Widget\TotalCustomer;
 
 class UserObserver
 {
@@ -13,13 +15,22 @@ class UserObserver
     protected $userGroupRepository;
 
     /**
+     * UserGroup Repository for controller.
+     * @var \AvoRed\Framework\Database\Repository\ConfigurationRepository
+     */
+    protected $configurationRepository;
+
+    /**
      * Construct for the AvoRed user group controller.
      * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * @param \AvoRed\Framework\Database\Repository\ConfigurationRepository $configurationRepository
      */
     public function __construct(
-        UserGroupModelInterface $userGroupRepository
+        UserGroupModelInterface $userGroupRepository,
+        ConfigurationModelInterface $configurationRepository
     ) {
         $this->userGroupRepository = $userGroupRepository;
+        $this->configurationRepository = $configurationRepository;
     }
 
     /**
@@ -30,8 +41,27 @@ class UserObserver
      */
     public function created($user)
     {
+        $this->setTotalCustomerConfiguration();
         $userGroup = $this->userGroupRepository->getIsDefault();
         $user->user_group_id = $userGroup->id;
         $user->save();
+    }
+
+    /**
+     * Set Total Customer Configuration
+     *
+     */
+    public function setTotalCustomerConfiguration()
+    {
+        $model = $this->configurationRepository->getModelByCode(TotalCustomer::CONFIGURATION_KEY);
+        if ($model === null) {
+            $value = 1;
+            $data = ['code' => TotalCustomer::CONFIGURATION_KEY, 'value' => $value];
+            $this->configurationRepository->create($data);
+        } else {
+            $value = $model->value + 1;
+            $data = ['code' => TotalCustomer::CONFIGURATION_KEY, 'value' => $value];
+            $model->update($data);
+        }
     }
 }

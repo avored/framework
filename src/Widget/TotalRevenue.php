@@ -1,43 +1,21 @@
 <?php
 namespace AvoRed\Framework\Widget;
 
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
-
-class TotalCustomer
+class TotalRevenue
 {
-    /**
-     * UserGroup Repository for controller.
-     * @var \AvoRed\Framework\Database\Repository\ConfigurationModelInterface
-     */
-    protected $configurationRepository;
-
-    /**
-     * Construct for the AvoRed user group controller.
-     */
-    public function __construct()
-    {
-        $this->configurationRepository = app(ConfigurationModelInterface::class);
-    }
-
-    /**
-     * AvoRed Configuration Total Order Value
-     * @var string
-     */
-    const CONFIGURATION_KEY = "avored-total-customer-value";
-
     /**
      * Widget View Path
      * @var string $view
      */
 
-    protected $view = "avored::widget.total-customer";
+    protected $view = "avored::widget.total-revenue";
 
     /**
      * Widget Label
      * @var string $view
      */
 
-    protected $label = 'Total Customer';
+    protected $label = 'Total Revenue';
 
     /**
      * Widget Type
@@ -50,7 +28,7 @@ class TotalCustomer
      * Widget unique identifier
      * @var string $identifier
      */
-    protected $identifier = "avored-total-customer";
+    protected $identifier = "avored-total-revenue";
 
     public function view()
     {
@@ -91,8 +69,7 @@ class TotalCustomer
      */
     public function with()
     {
-        $value = $this->configurationRepository->getValueByCode(self::CONFIGURATION_KEY) ?? 0;
-        return ['value' => $value];
+        return ['amount' => rand(10, 20)];
     }
 
     public function render()

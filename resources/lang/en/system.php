@@ -30,6 +30,9 @@ return [
     'forgot-password-title' => 'Reset password',
     'new_password_title' => 'Set New Password',
     'password-new-btn' => 'Change Password',
+    'total-customer' => 'Total Customer',
+    'total-order' => 'Total Order',
+    'total-revenue' => 'Total Revenue',
     'notification' => [
         'store' => ':attribute Created successfully!',
         'updated' => ':attribute Updated successfully!',

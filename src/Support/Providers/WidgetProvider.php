@@ -2,6 +2,8 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Widget\TotalCustomer;
+use AvoRed\Framework\Widget\TotalOrder;
+use AvoRed\Framework\Widget\TotalRevenue;
 use AvoRed\Framework\Support\Facades\Widget;
 use AvoRed\Framework\Widget\WidgetManager;
 use Illuminate\Support\ServiceProvider;
@@ -59,6 +61,11 @@ class WidgetProvider extends ServiceProvider
      */
     protected function registerWidget()
     {
-        Widget::make('total-customer', new TotalCustomer);
+        $totalRevenue = new TotalRevenue;
+        $totalCustomer = new TotalCustomer;
+        $totalOrder = new TotalOrder;
+        Widget::make($totalCustomer->identifier(), $totalCustomer);
+        Widget::make($totalOrder->identifier(), $totalOrder);
+        Widget::make($totalRevenue->identifier(), $totalRevenue);
     }
 }

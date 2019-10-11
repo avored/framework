@@ -2,7 +2,8 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
-use Illuminate\Support\Facades\Event;
+use AvoRed\Framework\Database\Models\Order;
+use AvoRed\Framework\Order\Observers\OrderObserver;
 use AvoRed\Framework\User\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -43,5 +44,7 @@ class EventServiceProvider extends ServiceProvider
         if ($model !== null) {
             $model->observe(UserObserver::class);
         }
+
+        Order::observe(OrderObserver::class);
     }
 }

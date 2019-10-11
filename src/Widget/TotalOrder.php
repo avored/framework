@@ -3,7 +3,7 @@ namespace AvoRed\Framework\Widget;
 
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
-class TotalCustomer
+class TotalOrder
 {
     /**
      * UserGroup Repository for controller.
@@ -23,21 +23,20 @@ class TotalCustomer
      * AvoRed Configuration Total Order Value
      * @var string
      */
-    const CONFIGURATION_KEY = "avored-total-customer-value";
+    const CONFIGURATION_KEY = "avored-total-order-value";
 
     /**
      * Widget View Path
      * @var string $view
      */
-
-    protected $view = "avored::widget.total-customer";
+    protected $view = "avored::widget.total-order";
 
     /**
      * Widget Label
      * @var string $view
      */
 
-    protected $label = 'Total Customer';
+    protected $label = 'Total Order';
 
     /**
      * Widget Type
@@ -50,7 +49,7 @@ class TotalCustomer
      * Widget unique identifier
      * @var string $identifier
      */
-    protected $identifier = "avored-total-customer";
+    protected $identifier = "avored-total-order";
 
     public function view()
     {
