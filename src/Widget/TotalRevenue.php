@@ -1,6 +1,8 @@
 <?php
 namespace AvoRed\Framework\Widget;
 
+use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+
 class TotalRevenue
 {
     /**
@@ -69,7 +71,9 @@ class TotalRevenue
      */
     public function with()
     {
-        return ['amount' => rand(10, 20)];
+        $orderRepository = app(OrderModelInterface::class);
+        $value = $orderRepository->getCurrentMonthTotalRevenue();
+        return ['value' => $value];
     }
 
     public function render()

@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use Illuminate\Support\Carbon;
 
 class OrderRepository implements OrderModelInterface
 {
@@ -55,5 +56,41 @@ class OrderRepository implements OrderModelInterface
     public function all() : Collection
     {
         return Order::all();
+    }
+
+    /**
+     * Get no of  order by given month
+     * @return int $totalOrders
+     */
+    public function getCurrentMonthTotalOrder() : int
+    {
+        $firstDay = $this->getFirstDay();
+        $totalOrder = Order::select('id')->where('created_at', '>', $firstDay)->count();
+        
+        return $totalOrder;
+    }
+    /**
+     * Get Total Revenue of current month
+     * @return int $totalOrders
+     */
+    public function getCurrentMonthTotalRevenue() : float
+    {
+        $total = 0;
+        $firstDay = $this->getFirstDay();
+        $orders = Order::select('*')->where('created_at', '>', $firstDay)->get();
+
+        foreach ($orders as $order) {
+            foreach ($order->products as $product) {
+                $total += ($product->qty * $product->price) + $product->tax_amount;
+            }
+        }
+        
+        return $total;
+    }
+
+    private function getFirstDay()
+    {
+        $startDay = Carbon::now();
+        return $startDay->firstOfMonth();
     }
 }

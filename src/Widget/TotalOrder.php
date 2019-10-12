@@ -2,29 +2,11 @@
 namespace AvoRed\Framework\Widget;
 
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use Illuminate\Support\Carbon;
 
 class TotalOrder
 {
-    /**
-     * UserGroup Repository for controller.
-     * @var \AvoRed\Framework\Database\Repository\ConfigurationModelInterface
-     */
-    protected $configurationRepository;
-
-    /**
-     * Construct for the AvoRed user group controller.
-     */
-    public function __construct()
-    {
-        $this->configurationRepository = app(ConfigurationModelInterface::class);
-    }
-
-    /**
-     * AvoRed Configuration Total Order Value
-     * @var string
-     */
-    const CONFIGURATION_KEY = "avored-total-order-value";
-
     /**
      * Widget View Path
      * @var string $view
@@ -90,7 +72,9 @@ class TotalOrder
      */
     public function with()
     {
-        $value = $this->configurationRepository->getValueByCode(self::CONFIGURATION_KEY) ?? 0;
+        $orderRepository = app(OrderModelInterface::class);
+        $value = $orderRepository->getCurrentMonthTotalOrder();
+        
         return ['value' => $value];
     }
 

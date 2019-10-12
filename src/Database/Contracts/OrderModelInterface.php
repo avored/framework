@@ -40,4 +40,16 @@ interface OrderModelInterface
      * @return \Illuminate\Database\Eloquent\Collection $orders
      */
     public function all() : Collection;
+
+    /**
+     * Get current month total orders
+     * @return int $totalOrders
+     */
+    public function getCurrentMonthTotalOrder() : int;
+
+    /**
+     * Get current month total revenue
+     * @return int $totalOrders
+     */
+    public function getCurrentMonthTotalRevenue() : float;
 }

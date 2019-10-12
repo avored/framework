@@ -2,28 +2,10 @@
 namespace AvoRed\Framework\Widget;
 
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use Illuminate\Support\Carbon;
 
 class TotalCustomer
 {
-    /**
-     * UserGroup Repository for controller.
-     * @var \AvoRed\Framework\Database\Repository\ConfigurationModelInterface
-     */
-    protected $configurationRepository;
-
-    /**
-     * Construct for the AvoRed user group controller.
-     */
-    public function __construct()
-    {
-        $this->configurationRepository = app(ConfigurationModelInterface::class);
-    }
-
-    /**
-     * AvoRed Configuration Total Order Value
-     * @var string
-     */
-    const CONFIGURATION_KEY = "avored-total-customer-value";
 
     /**
      * Widget View Path
@@ -91,12 +73,27 @@ class TotalCustomer
      */
     public function with()
     {
-        $value = $this->configurationRepository->getValueByCode(self::CONFIGURATION_KEY) ?? 0;
+        $userModel = $this->getUserModel();
+        $firstDay = $this->getFirstDay();
+        $value = $userModel->select('id')->where('created_at', '>', $firstDay)->count();
+        
         return ['value' => $value];
     }
 
     public function render()
     {
         return view($this->view(), $this->with());
+    }
+
+    private function getFirstDay()
+    {
+        $startDay = Carbon::now();
+        return $startDay->firstOfMonth();
+    }
+
+    private function getUserModel()
+    {
+        $model = config('avored.model.user');
+        return new $model;
     }
 }
