@@ -50,4 +50,10 @@ class AuthTest extends BaseTestCase
             ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => 'wrongpassword']))
             ->assertSessionHasErrors('email');
     }
+
+    public function testGuestUserIsRedirectedToLogin()
+    {
+        $this->get(route('admin.dashboard'))
+            ->assertRedirect(route('admin.login'));
+    }
 }
