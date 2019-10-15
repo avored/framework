@@ -102,17 +102,15 @@ abstract class BaseTestCase extends OrchestraTestCase
             'Cart' => AvoRed\Framework\Support\Facades\Cart::class,
             'Payment' => AvoRed\Framework\Support\Facades\Payment::class,
             'Shipping' => AvoRed\Framework\Support\Facades\Shipping::class,
-            //'Tabs' => 'AvoRed\\Framework\\Tabs\\Facade',
+            'Tab' => AvoRed\Framework\Support\Facades\Tab::class,
             //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
-            //'Widget' => 'AvoRed\\Framework\\Widget\\Facade'
+            'Widget' => AvoRed\Framework\Support\Facades\Widget::class
         ];
     }
 
     /**
      * Create an Admin user model.
-     * 
      * @param array $data
-     * 
      * @return self
      */
     protected function createAdminUser($data = ['is_super_admin' => 1]): self
