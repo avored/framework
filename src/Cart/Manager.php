@@ -7,6 +7,8 @@ use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
+use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
+use AvoRed\Framework\Database\Models\PromotionCode;
 
 class Manager
 {
@@ -23,10 +25,28 @@ class Manager
     protected $attributeProductValueRepository;
 
     /**
+     * Promotion Code Repository.
+     * @var \AvoRed\Framework\Database\Repository\PromotionCodeRepository
+     */
+    protected $promotionCodeRepository;
+
+    /**
      * Cart Product collection.
      * @var \Illuminate\Support\Collection
      */
     protected $cartCollection;
+
+    /**
+     * Cart totoal discount.
+     * @var float $totalDiscount
+     */
+    protected $totalDiscount = 0.00;
+
+    /**
+     * Cart applied coupon list.
+     * @var @var \Illuminate\Support\Collection
+     */
+    protected $promotionList;
 
     /**
      * AvoRed Cart Session Manager.
@@ -41,9 +61,35 @@ class Manager
     public function __construct(SessionManager $manager)
     {
         $this->productRepository = app(ProductModelInterface::class);
+        $this->promotionCodeRepository = app(PromotionCodeModelInterface::class);
         $this->attributeProductValueRepository = app(AttributeProductValueModelInterface::class);
         $this->sessionManager = $manager;
+        $this->promotionList = collect();
         $this->cartCollection = $this->getSession();
+    }
+
+    /**
+     * Apply Coupon Discount to Cart
+     * @param string $code
+     * @return mixed
+     */
+    public function applyCoupon(string $code)
+    {
+        $promotionModel = $this->promotionCodeRepository->findByCode($code);
+        $this->promotionList->push($promotionModel);
+
+        $message = __('avored::catalog.promotion_code_errot_notification');
+        if ($promotionModel->type === 'FIXED') {
+            $this->totalDiscount = $promotionModel->amount;
+            $message = __('avored::catalog.promotion_code_success_notification');
+        }
+
+        $this->sessionManager->put(
+            $this->getPromotionKey(),
+            ['total' => $this->totalDiscount, 'list' => $this->promotionList]
+        );
+
+        return $message;
     }
 
     /**
@@ -165,6 +211,15 @@ class Manager
     }
 
     /**
+     * Get the Session Key for the Session Manager.
+     * @return string $sessionKey
+     */
+    public function getPromotionKey()
+    {
+        return config('avored.cart.promotion_key') ?? 'cart_discount';
+    }
+
+    /**
      * Update the Session Collection.
      * @return self $this
      */
@@ -211,6 +266,21 @@ class Manager
      * Get the List of All the Current Session Cart Products.
      * @return mixed $cartTotal
      */
+    public function discount($format = true)
+    {
+        $discountSessionData = $this->sessionManager->get($this->getPromotionKey());
+        $total = $discountSessionData['total'];
+
+        if ($format === true) {
+            return number_format($total, 2);
+        }
+
+        return $total;
+    }
+    /**
+     * Get the List of All the Current Session Cart Products.
+     * @return mixed $cartTotal
+     */
     public function total($format = true)
     {
         $products = $this->all();
@@ -218,6 +288,7 @@ class Manager
         foreach ($products as $product) {
             $total += $product->total();
         }
+        $total = $total - $this->totalDiscount;
 
         if ($format === true) {
             return number_format($total, 2);

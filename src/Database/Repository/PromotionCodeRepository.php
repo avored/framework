@@ -28,6 +28,16 @@ class PromotionCodeRepository implements PromotionCodeModelInterface
         return PromotionCode::find($id);
     }
 
+      /**
+     * Find PromotionCode Resource into a database.
+     * @param string $code
+     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode
+     */
+    public function findByCode(string $code) : ?PromotionCode
+    {
+        return PromotionCode::whereCode($code)->status(1)->activeFrom()->activeTill()->first();
+    }
+
     /**
      * Delete PromotionCode Resource from a database.
      * @param int $id

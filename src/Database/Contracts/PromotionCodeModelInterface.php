@@ -10,14 +10,23 @@ interface PromotionCodeModelInterface
     /**
      * Create PromotionCode Resource into a database.
      * @param array $data
-     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode     */
+     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode
+     */
     public function create(array $data) : PromotionCode;
 
     /**
      * Find PromotionCode Resource into a database.
      * @param int $id
-     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode     */
+     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode
+     */
     public function find(int $id) : PromotionCode;
+  
+    /**
+     * Find PromotionCode Resource into a database.
+     * @param string $code
+     * @return \AvoRed\Framework\Database\Models\PromotionCode $promotionCode
+     */
+    public function findByCode(string $code) : ?PromotionCode;
 
     /**
      * Delete PromotionCode Resource from a database.

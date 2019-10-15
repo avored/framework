@@ -7,7 +7,7 @@
 return [
     'admin_url' => 'admin',
     'symlink_storage_folder' => 'storage',
-    'cart' => ['session_key' => 'cart_products'],
+    'cart' => ['session_key' => 'cart_products', 'promotion_key' => 'cart_discount'],
     'model' => [
         'user' => App\User::class,
     ],

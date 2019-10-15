@@ -117,6 +117,8 @@ return [
     ],
 
     'cart_success_notification' => 'Product added to cart successfully.',
+    'promotion_code_success_notification' => 'Promotion code applied to cart successfully.',
+    'promotion_code_errot_notification' => 'There is an error. Please check your code or contact administrator.',
     'cart_variable_product_error_notification' => 'There is an error while adding product to cart.',
 
 ];
