@@ -1,14 +1,30 @@
-
-
-@primary-color: #1890ff;  
-@link-color: #dc281e;
-
 @import '~ant-design-vue/dist/antd.less';
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
 @import 'helper/margin';
 @import 'helper/padding';
 
+.dashboard-widget {
+    .ant-card-head-title {
+        color: #fff;
+    }
+    .amount {
+        color: #fff;
+        font-size: 4rem;
+        margin-bottom: 0px;
+        line-height: 3rem;
+    }
+
+    &.primary { 
+        background-color: @primary-color;
+    }
+    &.warning {
+        background-color: @warning-color;
+    }
+    &.info {
+        background-color: @info-color;
+    }
+}
 .attribute-dropdown .ant-select-arrow{
     top: 5px;
     right: 0px;

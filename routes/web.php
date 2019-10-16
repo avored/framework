@@ -46,7 +46,7 @@ Route::middleware(['web'])
             ->name('logout');
     });
 
-Route::middleware(['web', 'admin.auth'])
+Route::middleware(['web', 'admin.auth:admin', 'permission'])
     ->prefix($baseAdminUrl)
     ->namespace('AvoRed\Framework')
     ->name('admin.')

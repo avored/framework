@@ -1,25 +1,23 @@
 <?php
 namespace AvoRed\Framework\Widget;
 
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
-use Illuminate\Support\Carbon;
+use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 
-class TotalCustomer
+class TotalRevenue
 {
-
     /**
      * Widget View Path
      * @var string $view
      */
 
-    protected $view = "avored::widget.total-customer";
+    protected $view = "avored::widget.total-revenue";
 
     /**
      * Widget Label
      * @var string $view
      */
 
-    protected $label = 'Total Customer';
+    protected $label = 'Total Revenue';
 
     /**
      * Widget Type
@@ -32,7 +30,7 @@ class TotalCustomer
      * Widget unique identifier
      * @var string $identifier
      */
-    protected $identifier = "avored-total-customer";
+    protected $identifier = "avored-total-revenue";
 
     public function view()
     {
@@ -73,27 +71,13 @@ class TotalCustomer
      */
     public function with()
     {
-        $userModel = $this->getUserModel();
-        $firstDay = $this->getFirstDay();
-        $value = $userModel->select('id')->where('created_at', '>', $firstDay)->count();
-        
+        $orderRepository = app(OrderModelInterface::class);
+        $value = $orderRepository->getCurrentMonthTotalRevenue();
         return ['value' => $value];
     }
 
     public function render()
     {
         return view($this->view(), $this->with());
-    }
-
-    private function getFirstDay()
-    {
-        $startDay = Carbon::now();
-        return $startDay->firstOfMonth();
-    }
-
-    private function getUserModel()
-    {
-        $model = config('avored.model.user');
-        return new $model;
     }
 }

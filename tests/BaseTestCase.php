@@ -21,22 +21,32 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected $faker;
 
     /**
-     * Setup Config and other data for unit test.
+     * Setup the test environment.
+     *
      * @return void
      */
     public function setUp(): void
     {
         parent::setUp();
-        $this->app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
+
         $this->faker = $this->app->make(FakerGenerator::class);
 
-        $this->app->singleton(EloquentFactory::class, function ($app) {
-            $faker = $app->make(FakerGenerator::class);
+        $this->withFactories(__DIR__ . '/../database/factories');
 
-            return EloquentFactory::construct($faker, __DIR__.('/../database/factories'));
-        });
         $this->setUpDatabase();
         Notification::fake();
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application   $app
+     *
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
     }
 
     /**
@@ -45,50 +55,25 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     private function resetDatabase(): void
     {
-        $this->artisan('migrate:fresh', [
-            '--database' => 'sqlite',
-        ]);
-
-        /*
-        Language::create(
-            ['name' => 'English',
-            'code' => 'en',
-            'is_default' => 1]
-        );
-        $middleware = new LanguageMiddleware(app(LanguageInterface::class));
-        $this->defaultLanguage = Session::get('default_language');
-        */
+        $this->artisan('migrate:fresh');
     }
 
     /**
-     * Returns the array with unittest required package.
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
      * @return array
      */
     protected function getPackageProviders($app): array
     {
         return [
-            //GraphQLServiceProvider::class,
             AvoRedProvider::class,
         ];
     }
 
     /**
-     * Set up the environment.
-     * @param \Illuminate\Foundation\Application $app
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app): void
-    {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
-    }
-
-    /**
-     * Setup sqlite database for the unit test.
+     * Setup database for the unit test.
      * @return void
      */
     protected function setUpDatabase(): void
@@ -97,8 +82,10 @@ abstract class BaseTestCase extends OrchestraTestCase
     }
 
     /**
-     * Setup sqlite database for the unit test.
-     * @param \Illuminate\Foundation\Application $app
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
      * @return array
      */
     protected function getPackageAliases($app): array
@@ -115,14 +102,14 @@ abstract class BaseTestCase extends OrchestraTestCase
             'Cart' => AvoRed\Framework\Support\Facades\Cart::class,
             'Payment' => AvoRed\Framework\Support\Facades\Payment::class,
             'Shipping' => AvoRed\Framework\Support\Facades\Shipping::class,
-            //'Tabs' => 'AvoRed\\Framework\\Tabs\\Facade',
+            'Tab' => AvoRed\Framework\Support\Facades\Tab::class,
             //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
-            //'Widget' => 'AvoRed\\Framework\\Widget\\Facade'
+            'Widget' => AvoRed\Framework\Support\Facades\Widget::class
         ];
     }
 
     /**
-     * Get Admin User Object for unit test.
+     * Create an Admin user model.
      * @param array $data
      * @return self
      */

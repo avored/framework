@@ -9,7 +9,6 @@ class ConfigurationTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testConfigurationIndexRouteTest()
     {
         $this->createAdminUser()
@@ -19,7 +18,6 @@ class ConfigurationTest extends BaseTestCase
             ->assertSee(__('avored::system.configuration.nav.basic_setting'));
     }
 
-    /* @runInSeparateProcess */
     public function testCategoryStoreRouteTest()
     {
         $data = ['site_title' => 'test site title'];

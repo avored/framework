@@ -10,14 +10,12 @@ class AuthTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testAdminLoginRouteTest()
     {
         $this->get(route('admin.login'))
             ->assertStatus(200);
     }
 
-    /* @runInSeparateProcess */
     public function testAdminLogoutRouteTest()
     {
         $this
@@ -27,7 +25,6 @@ class AuthTest extends BaseTestCase
             ->assertRedirect(route('admin.login'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminLoginRedirectGuestMiddleware()
     {
         $this->createAdminUser()
@@ -36,7 +33,6 @@ class AuthTest extends BaseTestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminLoginPostRoute()
     {
         $password = 'phpunittest';
@@ -46,7 +42,6 @@ class AuthTest extends BaseTestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    /* @runInSeparateProcess */
     public function testAdminLoginPostRouteFailed()
     {
         $password = 'phpunittest';
@@ -54,5 +49,11 @@ class AuthTest extends BaseTestCase
             ->createAdminUser(['is_super_admin' => 1, 'password' => $password])
             ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => 'wrongpassword']))
             ->assertSessionHasErrors('email');
+    }
+
+    public function testGuestUserIsRedirectedToLogin()
+    {
+        $this->get(route('admin.dashboard'))
+            ->assertRedirect(route('admin.login'));
     }
 }

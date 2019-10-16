@@ -10,7 +10,6 @@ class UserGroupTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testUserGroupIndexRouteTest()
     {
         $this->createAdminUser()
@@ -20,7 +19,6 @@ class UserGroupTest extends BaseTestCase
             ->assertSee(__('avored::user.user-group.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testUserGroupCreateRouteTest()
     {
         $this->createAdminUser()
@@ -30,7 +28,6 @@ class UserGroupTest extends BaseTestCase
             ->assertSee(__('avored::user.user-group.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testUserGroupStoreRouteTest()
     {
         $data = ['name' => 'test user-group name', 'is_default' => 1];
@@ -42,7 +39,6 @@ class UserGroupTest extends BaseTestCase
         $this->assertDatabaseHas('user_groups', ['name' => 'test user-group name']);
     }
 
-    /* @runInSeparateProcess */
     public function testUserGroupEditRouteTest()
     {
         $userGroup = factory(UserGroup::class)->create();
@@ -53,7 +49,6 @@ class UserGroupTest extends BaseTestCase
             ->assertSee(__('avored::user.user-group.edit.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testUserGroupUpdateRouteTest()
     {
         $userGroup = factory(UserGroup::class)->create();
@@ -68,7 +63,6 @@ class UserGroupTest extends BaseTestCase
         $this->assertDatabaseHas('user_groups', ['name' => 'updated user-group name']);
     }
 
-    /* @runInSeparateProcess */
     public function testUserGroupDestroyRouteTest()
     {
         $userGroup = factory(UserGroup::class)->create();

@@ -9,7 +9,6 @@ class MenuTest extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /* @runInSeparateProcess */
     public function testMenuIndexRouteTest()
     {
         $this->createAdminUser()
@@ -19,7 +18,6 @@ class MenuTest extends BaseTestCase
             ->assertSee(__('avored::cms.menu.index.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testMenuCreateRouteTest()
     {
         $this->createAdminUser()
@@ -29,7 +27,6 @@ class MenuTest extends BaseTestCase
             ->assertSee(__('avored::cms.menu.create.title'));
     }
 
-    /* @runInSeparateProcess */
     public function testMenuStoreRouteTest()
     {
         $menuJson = json_encode([['name' => 'menu name', 'url' => '/category/slug', 'submenus' => []]]);

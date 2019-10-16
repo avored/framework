@@ -2,25 +2,20 @@
 
 namespace AvoRed\Framework\Support\Middleware;
 
-use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class AdminAuth
+class AdminAuth extends Middleware
 {
     /**
-     * Handle an incoming request.
+     * Get the path the user should be redirected to when they are not authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
-     * @return mixed
+     * @return string
      */
-    public function handle($request, Closure $next, $guard = 'admin')
+    protected function redirectTo($request)
     {
-        if (! Auth::guard($guard)->check()) {
-            return redirect()->route('admin.login');
+        if (! $request->expectsJson()) {
+            return route('admin.login');
         }
-
-        return $next($request);
     }
 }

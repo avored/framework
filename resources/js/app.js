@@ -49,6 +49,7 @@ Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))
 Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))
 Vue.component('a-input', () => import('ant-design-vue/lib/input'))
 Vue.component('a-switch', () => import('ant-design-vue/lib/switch'))
+Vue.component('a-tag', () => import('ant-design-vue/lib/tag'))
 
 Vue.prototype.$notification = Notification;
 Vue.prototype.$confirm = Modal.confirm;
@@ -109,7 +110,7 @@ Vue.component('role-index', () => import('../components/system/role/RoleTable.vu
 Vue.component('system-role-save', () => import('../components/system/role/RoleSave.vue'))
 
 Vue.component('admin-user-table', () => import('../components/system/admin-user/AdminUserTable.vue'))
-Vue.component('admin-user-save', () => import('../components/system/admin-user/AdminUserSave.vue'))
+Vue.component('admin-user-save', require('../components/system/admin-user/AdminUserSave.vue').default)
 
 Vue.component('promotion-code-table', () => import('../components/promotion/promotion-code/PromotionCodeTable.vue'))
 Vue.component('promotion-code-edit', () => import('../components/promotion/promotion-code/PromotionCodeEdit.vue'))

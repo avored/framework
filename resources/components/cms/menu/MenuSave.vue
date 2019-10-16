@@ -66,7 +66,8 @@ export default {
       if (!isNil(this.menuGroup)) {
         
         this.fields.forEach(field => {
-          this.form.getFieldDecorator(field, {initialValue: this.menuGroup[field]})
+          console.log(window.x = this)
+          this.form.getFieldDecorator(field, { 'name' :this.menuGroup[field]})
         });
       }
   }

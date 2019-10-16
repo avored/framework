@@ -2,11 +2,9 @@
 
 namespace AvoRed\Framework\Cms\Controllers;
 
-use Illuminate\Http\Request;
-use AvoRed\Framework\Database\Models\Menu;
 use AvoRed\Framework\Cms\Requests\MenuRequest;
 use AvoRed\Framework\Database\Models\MenuGroup;
-use AvoRed\Framework\Support\Facades\Menu as MenuFacade;
+use AvoRed\Framework\Support\Facades\Menu;
 use AvoRed\Framework\Database\Contracts\MenuModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
@@ -66,8 +64,9 @@ class MenuGroupController
     public function create()
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
-        $frontMenus = MenuFacade::frontMenus();
+        $frontMenus = Menu::frontMenus();
         $menus = [];
+
 
         return view('avored::cms.menu.create')
             ->with(compact('frontMenus', 'menus', 'categories'));
@@ -85,7 +84,8 @@ class MenuGroupController
 
         $this->saveMenus($menuGroup, $menus);
 
-        return redirect()->route('admin.menu-group.index')
+        return redirect()
+            ->route('admin.menu-group.index')
             ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Menu']));
     }
 
@@ -97,7 +97,7 @@ class MenuGroupController
     public function edit(MenuGroup $menuGroup)
     {
         $categories = $this->categoryRepository->getCategoryOptionForMenuBuilder();
-        $frontMenus = MenuFacade::frontMenus();
+        $frontMenus = Menu::frontMenus();
         $menus = $this->menuGroupRepository->getTreeByIdentifier($menuGroup->identifier);
 
         return view('avored::cms.menu.edit')

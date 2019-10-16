@@ -2,7 +2,9 @@
 
 namespace AvoRed\Framework\User\Observers;
 
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Widget\TotalCustomer;
 
 class UserObserver
 {
@@ -11,7 +13,7 @@ class UserObserver
      * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
     protected $userGroupRepository;
-
+    
     /**
      * Construct for the AvoRed user group controller.
      * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository

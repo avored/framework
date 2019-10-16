@@ -1,6 +1,6 @@
 <script>
-import isNil from 'lodash/isNil';
-import isEmpty from 'lodash/isEmpty';
+import isNil from 'lodash/isNil'
+import isEmpty from 'lodash/isEmpty'
 
 export default {
   props: ['adminUser', 'baseUrl', 'token'],

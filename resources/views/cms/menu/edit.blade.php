@@ -26,27 +26,20 @@
                     method="post" 
                     action="{{ route('admin.menu-group.update', $menuGroup->id) }}">
                 
-                @csrf
-                @method('put')
-                @include('avored::cms.menu._fields')
-                <a-col class="mt-1" :span="24">
-                    <a-form-item>
-                    <a-button
-                        type="primary"
-                        html-type="submit"
-                    >
-                        {{ __('avored::system.btn.save') }}
-                    </a-button>
-                    
-                    <a-button
-                        class="ml-1"
-                        type="default"
-                        v-on:click.prevent="cancelMenu"
-                    >
-                        {{ __('avored::system.btn.cancel') }}
-                    </a-button>
-                </a-form-item>
-                </a-col>
+                    @csrf
+                    @method('put')
+                    @include('avored::cms.menu._fields')
+                    <a-col class="mt-1" :span="24">
+                        <a-form-item>
+                            <a-button type="primary" html-type="submit">
+                                {{ __('avored::system.btn.save') }}
+                            </a-button>
+                            
+                            <a-button class="ml-1" type="default" v-on:click.prevent="cancelMenu">
+                                {{ __('avored::system.btn.cancel') }}
+                            </a-button>
+                        </a-form-item>
+                    </a-col>
                 </a-form>
             </a-row>
         </div>
