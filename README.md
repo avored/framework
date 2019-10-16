@@ -11,35 +11,33 @@
 
 
 # Core package for avored shopping cart
-AvoRed Framework contains the core features for the AvoRed E commerce for Laravel. It is the base behind the AvoRed an Laravel Ecommerce.
+AvoRed Framework contains the core features for the AvoRed E-commerce for Laravel. It is the base behind the AvoRed and Laravel Ecommerce.
 
 #### Installation
-AvoRed E commerce framework provided as a composer package so it make installation of the avored is much easier as
+The AvoRed E-commerce framework is provided as a composer package, so it makes installation of AvoRed as easy as:
 
      composer require avored/framework
 
-At these stage we been using latest laravel framework which is 5.8 if you are using some older version let us know at our [Discussion Forum](https://www.avored.com/discussion). We will do a test and if it works then add support for that version too.
+At this stage we hav been using version 5.8 of the Laravel framework. If you are using an older version, let us know at our [Discussion Forum](https://www.avored.com/discussion). We can test if it works and add support for that version too.
 
-Once these finished then you have to run few command to finished up and then you are ready to roll.
+Once this is finished, you will need to run a few commands to finish up and then you are ready to roll.
 
 #### Publish the Files
-Publish the AvoRed E commerce framework config 
-file and assets(JS/CSS and Images).
+Publish the AvoRed E-commerce framework config file and assets (JS/CSS and Images):
 
     php artisan vendor:publish --provider="AvoRed\Framework\AvoRedProvider"
 
-
-Once the all the file is publish then we run below command to install the required database tables.
+Once all the files are published, we can run the command to install the required database tables.
 
     php artisan avored:install
 
-We almost there and now create your Administrator Account by running 
+We are almost there. Now create your Administrator Account by running:
 
     php artisan avored:admin:make
 
 
 That's It. 
 
-Now Visit
+Now visit:
 
     yoursiteurl.com/admin
