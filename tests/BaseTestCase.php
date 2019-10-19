@@ -3,10 +3,12 @@
 namespace AvoRed\Framework\Tests;
 
 use AvoRed\Framework\AvoRedProvider;
+use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use Faker\Generator as FakerGenerator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Notification;
 use AvoRed\Framework\Database\Models\AdminUser;
+use AvoRed\Framework\Database\Models\Currency;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
@@ -34,6 +36,7 @@ abstract class BaseTestCase extends OrchestraTestCase
         $this->withFactories(__DIR__ . '/../database/factories');
 
         $this->setUpDatabase();
+        $this->setDefaultCurrency();
         Notification::fake();
     }
 
@@ -55,7 +58,7 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     private function resetDatabase(): void
     {
-        $this->artisan('migrate:fresh');
+        $this->artisan('migrate');
     }
 
     /**
@@ -78,7 +81,16 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     protected function setUpDatabase(): void
     {
+        $this->loadLaravelMigrations();
         $this->resetDatabase();
+    }
+
+    protected function setDefaultCurrency()
+    {
+        factory(Currency::class)->create();
+        $currencyRepository = app(CurrencyModelInterface::class);
+        $currency = $currencyRepository->all()->first();
+        $this->withSession(['default_currency' => $currency]);
     }
 
     /**
