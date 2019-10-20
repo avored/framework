@@ -3,7 +3,7 @@
         validate-status="error"
         help="{{ $errors->first('site_name') }}"
     @endif
-    label="{{ __('avored::system.configuration.basic.user_name') }}">
+    label="{{ __('avored::system.configuration.user.user_name') }}">
     <a-input
         :auto-focus="true"
         name="site_name"
