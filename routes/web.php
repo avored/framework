@@ -62,7 +62,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::post('attribute/upload', [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'upload'])
             ->name('attribute.upload');
 
-        Route::post('admin-user-image', [\AvoRed\Framework\System\Controllers\AdminUserController::class, 'upload'])
+        Route::post('admin-user-image', [\AvoRed\Framework\User\Controllers\AdminUserController::class, 'upload'])
             ->name('admin-user-image-upload');
 
         Route::post(

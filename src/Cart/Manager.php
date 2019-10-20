@@ -91,7 +91,17 @@ class Manager
 
         return $message;
     }
-
+    
+    /**
+     * Destroy Product from Cart By Given Slug.
+     * @param string $slug
+     * @return self
+     */
+    public function destroy(string $slug)
+    {
+        $this->cartCollection->pull($slug);
+        return $this;
+    }
     /**
      * Add Product to Cart By Given Slug.
      * @param string $slug
