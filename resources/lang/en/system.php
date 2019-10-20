@@ -179,8 +179,17 @@ return [
         'basic' => [
             'site_name' => 'Site Name',
         ],
+        'user' => [
+            'user_name' => 'Username',
+        ],
         'tax' => [
             'tax_percentage' => 'Tax Percentage',
+        ],
+        'shipping' => [
+            'shipping_name' => 'Shipping Name'
+        ],
+        'payment' => [
+            'payment_name' => 'Payment Name'
         ],
 
     ],
