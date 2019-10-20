@@ -103,6 +103,20 @@ class Manager
         return $this;
     }
     /**
+     * update Product from Cart By Given Slug.
+     * @param string $slug
+     * @return self
+     */
+    public function update(string $slug, $qty)
+    {
+        $product = $this->cartCollection->get($slug);
+        $product->qty($qty);
+
+        $this->cartCollection->put($slug, $product);
+        $this->updateSessionCollection();
+        return $this;
+    }
+    /**
      * Add Product to Cart By Given Slug.
      * @param string $slug
      * @param int $qty
