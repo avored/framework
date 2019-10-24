@@ -151,7 +151,7 @@ class AvoRedProvider extends ServiceProvider
         );
         $this->app['config']->set(
             'auth',
-            array_merge_recursive($avoredConfigData['auth'], $authConfig)
+            array_merge($avoredConfigData['auth'], $authConfig)
         );
     }
 
