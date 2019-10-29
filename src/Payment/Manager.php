@@ -35,6 +35,15 @@ class Manager
      */
     public function put($payment)
     {
-        $this->collection->push($payment);
+        $this->collection->put($payment->identifier(), $payment);
+    }
+
+    /**
+     * Put Payment class to an collection Collection.
+     * @return void
+     */
+    public function get($identifier)
+    {
+        return $this->collection->get($identifier);
     }
 }
