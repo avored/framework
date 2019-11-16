@@ -41,6 +41,13 @@ interface ProductModelInterface
     public function findBySlug(string $slug): Product;
 
     /**
+     * Find a Product by given barcode.
+     * @param string $barcode
+     * @return \AvoRed\Framework\Database\Models\Product $product
+     */
+    public function findByBarcode(string $barcode): Product;
+
+    /**
      * Delete Address Resource from a database.
      * @param int $id
      * @return int

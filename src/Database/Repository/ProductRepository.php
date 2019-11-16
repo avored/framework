@@ -29,6 +29,16 @@ class ProductRepository implements ProductModelInterface
     }
 
     /**
+     * Find a Product by given barcode.
+     * @param string $barcode
+     * @return \AvoRed\Framework\Database\Models\Product $product
+     */
+    public function findByBarcode(string $barcode): Product
+    {
+        return Product::whereBarcode($barcode)->first();
+    }
+
+    /**
      * Find a Product by given id.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Product $product
