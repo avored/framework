@@ -19,7 +19,7 @@ class PermissionTest extends BaseTestCase
             ->get(route('admin.dashboard'))
             ->assertStatus(Response::HTTP_FORBIDDEN);
 
-        $this->createPermissionForUser($this->user, 'admin-dashboard');
+        $this->createPermissionForUser($this->user, 'admin.dashboard');
         $this->actingAs($this->user, 'admin')
             ->get(route('admin.dashboard'))
             ->assertStatus(Response::HTTP_OK);
