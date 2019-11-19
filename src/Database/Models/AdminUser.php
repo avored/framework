@@ -6,6 +6,8 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\ClientRepository;
 
 class AdminUser extends Authenticatable
 {
@@ -102,12 +104,39 @@ class AdminUser extends Authenticatable
     }
 
     /**
+     * Get the Passport Client for User and If it doesnot exist then create a new one
+     * @return \Laravel\Passport\Client $client
+     */
+    public function getPassportClient()
+    {
+        $client = $this->clients->first();
+        if (null === $client) {
+            $clientRepository = app(ClientRepository::class);
+            $redirectUri = asset('');
+            $client = $clientRepository->createPasswordGrantClient($this->id, $this->full_name, $redirectUri);
+        }
+        
+        return $client;
+    }
+    
+    /**
      * To check if user has permission to access the given route name.
      * @return \Illuminate\Database\Eloquent\Collection $permissions
      */
     public function permissions()
     {
         dd($this->role->permissions);
+    }
+
+    /**
+     * Validate the password of the user for the Passport password grant.
+     *
+     * @param  string  $password
+     * @return bool
+     */
+    public function validateForPassportPasswordGrant($password)
+    {
+        return Hash::check($password, $this->password);
     }
 
     public function role()

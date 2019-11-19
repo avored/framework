@@ -25,7 +25,7 @@
                         default-active-key="system.configuration.basic"
                         tab-position="left">
                         @foreach ($tabs as $tab)
-                            <a-tab-pane tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                            <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
                                 @php
                                     $path = $tab->view();
                                 @endphp
