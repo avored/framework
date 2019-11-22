@@ -11,9 +11,14 @@ if (token) {
 }
 
 import AvoRed from './avored'
+import router from './router'
+import apolloProvider from './vue-apollo'
 
 window.Vue = require('vue')
 window.AvoRed = AvoRed
+
+import i18n from 'vue-i18n'
+
 
 import Layout from 'ant-design-vue/lib/layout'
 import Menu from 'ant-design-vue/lib/menu'
@@ -121,14 +126,14 @@ Vue.component('login-fields', () => import('../components/system/LoginFields.vue
 Vue.component('password-reset-page', () => import('../components/system/PasswordResetPage.vue'))
 Vue.component('password-new-page', () => import('../components/system/PasswordNewPage.vue'))
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    i18n,
+    apolloProvider
 });
 
 export const EventBus = new Vue();
