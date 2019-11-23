@@ -22,9 +22,12 @@ return [
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
                     'product' => \AvoRed\Framework\Graphql\Queries\ProductQuery::class,
                     'barcodeProduct' => \AvoRed\Framework\Graphql\Queries\BarcodeProductQuery::class,
+
+                    
+                    'adminCategoryTable' => \AvoRed\Framework\Graphql\Queries\Admin\Catalog\Category\AllCategoryQuery::class,
                 ],
                 'mutation' => [
-                    'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\Auth\LoginMutation::class,
+                    'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                     'login' => \AvoRed\Framework\Graphql\Mutations\Auth\LoginMutation::class,
                     'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
                 ],

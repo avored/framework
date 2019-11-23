@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Graphql\Mutations\Admin\Auth;
+namespace AvoRed\Framework\Graphql\Mutations\Admin\User;
 
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Models\AdminUser;
