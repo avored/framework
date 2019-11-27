@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class CategoryCreateMutation extends Mutation
+class CategoryUpdateMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'adminCategoryCreate',
+        'name' => 'adminCategoryUpdate',
         'description' => 'A mutation'
     ];
 
@@ -50,6 +50,10 @@ class CategoryCreateMutation extends Mutation
     public function args(): array
     {
         return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::nonNull(Type::int()),
+            ],
             'name' => [
                 'name' => 'name',
                 'type' => Type::nonNull(Type::string()),
@@ -71,6 +75,8 @@ class CategoryCreateMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        return $this->categoryRepository->create($args);
+        $category = $this->categoryRepository->find($args['id']);
+        $category->update($args);
+        return $category;
     }
 }

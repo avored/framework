@@ -4,16 +4,17 @@ namespace AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category;
 
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use Closure;
+use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class CategoryCreateMutation extends Mutation
+class CategoryDeleteMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'adminCategoryCreate',
+        'name' => 'adminCategoryDelete',
         'description' => 'A mutation'
     ];
 
@@ -39,7 +40,7 @@ class CategoryCreateMutation extends Mutation
      */
     public function type(): Type
     {
-        return GraphQL::type('category');
+        return GraphQL::type('delete');
     }
 
     public function authorize($root, array $args, $ctx, ResolveInfo $resolveInfo = null, Closure $getSelectFields = null): bool
@@ -50,27 +51,18 @@ class CategoryCreateMutation extends Mutation
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' => Type::nonNull(Type::string()),
-            ],
-            'slug' => [
-                'name' => 'slug',
-                'type' => Type::nonNull(Type::string())
-            ],
-            'meta_title' => [
-                'name' => 'meta_title',
-                'type' => Type::string()
-            ],
-            'meta_description' => [
-                'name' => 'meta_description',
-                'type' => Type::string()
-            ],
+            'id' => [
+                'name' => 'id',
+                'type' => Type::nonNull(Type::int()),
+            ]
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        return $this->categoryRepository->create($args);
+        if ($this->categoryRepository->delete($args['id'])) {
+            return ['success' => true, 'message' => 'Category Destroyed successfully!'];
+        }
+        throw new Exception('There is an error while deleting an category model with given id:'. $args['id']);
     }
 }

@@ -33,6 +33,8 @@ return [
 
                     'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                     'adminCategoryCreate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryCreateMutation::class,
+                    'adminCategoryUpdate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryUpdateMutation::class,
+                    'adminCategoryDelete' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryDeleteMutation::class,
                 ],
                 'middleware' => [],
                 'method'     => ['get', 'post'],
@@ -58,6 +60,7 @@ return [
             'cartProduct' => AvoRed\Framework\Graphql\Types\CartProductType::class,
             'order' => AvoRed\Framework\Graphql\Types\OrderType::class,
             'address' => AvoRed\Framework\Graphql\Types\AddressType::class,
+            'delete' => AvoRed\Framework\Graphql\Types\DeleteType::class,
         ],
     ],
 
