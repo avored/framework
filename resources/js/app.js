@@ -11,13 +11,13 @@ if (token) {
 }
 
 import AvoRed from './avored'
-import router from './router'
-import apolloProvider from './vue-apollo'
+//import router from './router'
+//import apolloProvider from './vue-apollo'
 
 window.Vue = require('vue')
 window.AvoRed = AvoRed
 
-import i18n from 'vue-i18n'
+//import i18n from 'vue-i18n'
 
 
 import Layout from 'ant-design-vue/lib/layout'
@@ -122,7 +122,7 @@ Vue.component('promotion-code-edit', () => import('../components/promotion/promo
 
 Vue.component('avored-layout', () => import('../components/system/Layout.vue'))
 Vue.component('avored-flash', () => import('../components/system/Flash.vue'))
-Vue.component('login-fields', () => import('../components/system/LoginFields.vue'))
+Vue.component('login-fields', require('../components/system/LoginFields.vue').default)
 Vue.component('password-reset-page', () => import('../components/system/PasswordResetPage.vue'))
 Vue.component('password-new-page', () => import('../components/system/PasswordNewPage.vue'))
 
@@ -131,9 +131,9 @@ Vue.component('password-new-page', () => import('../components/system/PasswordNe
 
 const app = new Vue({
     el: '#app',
-    router,
-    i18n,
-    apolloProvider
+    //router,
+    //i18n,
+    //apolloProvider
 });
 
 export const EventBus = new Vue();

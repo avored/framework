@@ -14,7 +14,6 @@
 </head>
 <body>
     <div id="app">
-        <router-view></router-view>
         <avored-layout inline-template>
             <a-layout id="avored-admin-layout" style="min-height: 100vh">
                 @include('avored::partials.sidebar')

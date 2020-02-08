@@ -10,20 +10,20 @@ export default {
     },
 
     mounted() {
-        let data = this.$apollo.query({
-            query: gql `query AllCategories {
-                allCategory { 
-                    id 
-                    name
-                    slug
-                    meta_title
-                    meta_description
-                }
-            }`
-        }).then(res => {
-            console.log(res.data.allCategory);
+        // let data = this.$apollo.query({
+        //     query: gql `query AllCategories {
+        //         allCategory { 
+        //             id 
+        //             name
+        //             slug
+        //             meta_title
+        //             meta_description
+        //         }
+        //     }`
+        // }).then(res => {
+        //     console.log(res.data.allCategory);
 
-        });
+        // });
     }
 }
 </script>
