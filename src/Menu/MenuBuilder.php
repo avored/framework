@@ -64,6 +64,26 @@ class MenuBuilder
         }
     }
 
+    public function getMenuItemFromRouteName($name)
+    {
+        $currentOpenKey = '';
+        $currentMenuItemKey = '';
+        foreach ($this->collection as $key => $menuGroup) {
+            if ($menuGroup->hasSubMenu()) {
+                $subMenus = $menuGroup->subMenu($key);
+
+                foreach($subMenus as $subKey => $subMenu) {
+                    if ($subMenu->route() == $name) {
+                        $currentOpenKey = $key;
+                        $currentMenuItemKey = $subMenu->key();
+                    }
+                }
+            }
+        }
+
+        return [$currentOpenKey, $currentMenuItemKey];
+    }
+
     /**
      * Return all available Menu in Menu.
      * @param void
