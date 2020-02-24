@@ -63,7 +63,7 @@ class AttributeTest extends BaseTestCase
         $attribute->dropdownOptions()->create(['display_text' => 'option 2']);
 
         $attribute->name = 'updated attribute name';
-        $attribute->dropdownOptions()->first()->display_text = 'option updated';
+        $attribute->dropdownOptions->first()->display_text = 'option updated';
         $data = $attribute->toArray();
 
         $this->createAdminUser()

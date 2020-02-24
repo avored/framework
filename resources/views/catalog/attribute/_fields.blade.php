@@ -10,6 +10,7 @@
         name="name"
         v-decorator="[
         'name',
+        {'initialValue': '{{ $attribute->name ?? '' }}'},
         {rules: 
             [
                 {   required: true, 
@@ -32,6 +33,7 @@
         name="slug"
         v-decorator="[
         'slug',
+        {'initialValue': '{{ $attribute->slug ?? '' }}'},
         {rules: 
             [
                 {   required: true, 
@@ -54,6 +56,7 @@
         @change="displayAsChange"
         v-decorator="[
         'display_as',
+        {'initialValue': '{{ $attribute->display_as ?? '' }}'},
         {rules: 
             [
                 {   required: true, 
