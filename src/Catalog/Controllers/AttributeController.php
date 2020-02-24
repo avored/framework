@@ -33,7 +33,7 @@ class AttributeController
     public function index()
     {
         $attributes = $this->attributeRepository->all();
-
+        
         return view('avored::catalog.attribute.index')
             ->with(compact('attributes'));
     }
@@ -124,7 +124,7 @@ class AttributeController
      * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
      * @return void
      */
-    public function saveAttributeDropdownOptions(Attribute $property, AttributeRequest $request)
+    public function saveAttributeDropdownOptions(Attribute $attribute, AttributeRequest $request)
     {
         if ($request->get('dropdown_option') !== null && count($request->get('dropdown_option')) > 0) {
             foreach ($request->get('dropdown_option') as $key => $option) {
@@ -132,10 +132,10 @@ class AttributeController
                     continue;
                 }
 
-                $optionModel = $property->dropdownOptions()->find($key);
+                $optionModel = $attribute->dropdownOptions()->find($key);
 
                 if ($optionModel === null) {
-                    $property->dropdownOptions()->create($option);
+                    $attribute->dropdownOptions()->create($option);
                 } else {
                     $optionModel->update($option);
                 }
