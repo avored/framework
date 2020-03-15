@@ -6,7 +6,7 @@ jobs:
         - dev
         - master
     docker:
-      - image: circleci/php:7-fpm-browsers-legacy
+      - image: circleci/php:7.3.9-fpm
     steps:
       - checkout
       - run:

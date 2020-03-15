@@ -1,7 +1,11 @@
+<template>
+  
+</template>
+
 <script>
 
 export default {
-  props: { name:'loginpost', type: String },
+  props: [],
   data () {
     return {
       loginForm: this.$form.createForm(this),

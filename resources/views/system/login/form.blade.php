@@ -16,26 +16,21 @@
 </head>
 <body>
     <div id="app">
-        <login-fields loginpost="{{ route('admin.login.post') }}" inline-template>
-            <div>
+        <login-fields inline-template>
+              <div>
                 <a-row type="flex" align="middle">
                     <a-col :span="12">
                         <a-row type="flex">
                         <a-col :span="20" :offset="2">
-                            <a-card title="{{ __('avored::system.login-card') }}">
+                            <a-card title="Card title">
                                 <a-form
                                     :form="loginForm"
                                     method="post"
-                                    action="{{ route('admin.login.post') }}"
+                                    action=""
                                     @submit="handleSubmit"
                                 >
-                                    @csrf()
-                                    <a-form-item
-                                        @if ($errors->has('email'))
-                                            validate-status="error"
-                                            help="{{ $errors->first('email') }}"
-                                        @endif
-                                        label="{{ __('avored::system.email') }}">
+                                    @csrf
+                                    <a-form-item label="Email Address">
                                     <a-input
                                         :auto-focus="true"
                                         name="email"
@@ -44,7 +39,7 @@
                                         {
                                             rules: [
                                                 {   required: true, 
-                                                    message: '{{ __('avored::validation.required', ['attribute' => 'email']) }}' 
+                                                    message: 'Email Address is required' 
                                                 }
                                             ]
                                         }
@@ -53,17 +48,14 @@
                                     </a-form-item>
                                     
                                     <a-form-item 
-                                        @if ($errors->has('password'))
-                                            validate-status="error"
-                                            help="{{ $errors->first('password') }}"
-                                        @endif
-                                        label="{{ __('avored::system.password') }}">
+                                    
+                                        label="Password Label">
                                         <a-input
                                             name="password"
                                             type="password"
                                             v-decorator="[
                                             'password',
-                                            {rules: [{ required: true, message: '{{ __('avored::validation.required', ['attribute' => 'password']) }}' }]}
+                                            {rules: [{ required: true, message: 'Password is required' }]}
                                             ]"
                                         />
                                     </a-form-item>
@@ -74,30 +66,29 @@
                                             :loading="loadingSubmitBtn"
                                             html-type="submit"
                                         >
-                                            {{ __('avored::system.login') }}
+                                            Login Button
                                         </a-button>
 
-                                        <a class="ml-1" href="{{ route('admin.password.request') }}">Forgot password?</a>
+                                        <a class="ml-1" href="#forgot-password-url">Forgot password?</a>
                                     </a-form-item>
                                 </a-form>
                             </a-card>
                         </a-col>
                         </a-row>
                     </a-col>
-               
+                
                     <a-col :span="12">
-                     <a-row type="flex" align="middle" class="h-100 text-center">
-                      <a-col :span="24">
+                    <a-row type="flex" align="middle" class="h-100 text-center">
+                    <a-col :span="24">
                             <img 
                                 class="height-100"
-                                src="{{ asset('avored-admin/images/avored_admin_login.svg')}}" 
+                                src="/avored-admin/images/avored_admin_login.svg" 
                                 width="55%" alt="AvoRed Admin Login" />
                         </a-col>
                         </a-row>
                     </a-col>
                 </a-row>
             </div>
-         
         </login-fields>
     </div>
     @stack('scripts')

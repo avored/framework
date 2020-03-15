@@ -14,7 +14,7 @@
 </head>
 <body>
     <div id="app">
-        <avored-layout inline-template >
+        <avored-layout inline-template>
             <a-layout id="avored-admin-layout" style="min-height: 100vh">
                 @include('avored::partials.sidebar')
                 <a-layout>

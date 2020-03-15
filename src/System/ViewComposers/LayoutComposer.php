@@ -4,6 +4,7 @@ namespace AvoRed\Framework\System\ViewComposers;
 
 use Illuminate\View\View;
 use AvoRed\Framework\Support\Facades\Menu;
+use Illuminate\Support\Facades\Route;
 
 class LayoutComposer
 {
@@ -15,7 +16,14 @@ class LayoutComposer
      */
     public function compose(View $view)
     {
+        $routeName = Route::currentRouteName();
+
+        [$currentOpenKey, $currentMenuItemKey] = Menu::getMenuItemFromRouteName($routeName);
+
+        
         $adminMenus = Menu::all($admin = true);
-        $view->with('adminMenus', $adminMenus);
+        $view->with('adminMenus', $adminMenus)
+            ->with('currentOpenKey', $currentOpenKey)
+            ->with('currentMenuItemKey', $currentMenuItemKey);
     }
 }

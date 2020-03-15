@@ -17,6 +17,9 @@
     <filter>
         <whitelist>
             <directory suffix=".php">src</directory>
+             <exclude>
+                <file>routes/web.php</file>
+            </exclude>
         </whitelist>
     </filter>
 

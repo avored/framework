@@ -4,8 +4,8 @@
     </a>
     <a-menu 
         theme="light"
-        :default-selected-keys="[]"
-        :default-open-keys="[]"
+        :default-selected-keys="['{{ $currentMenuItemKey }}']"
+        :default-open-keys="['{{ $currentOpenKey }}']"
         mode="inline">
     @foreach ($adminMenus as $key => $adminMenu)
         @if ($adminMenu->hasSubmenu())
@@ -23,13 +23,7 @@
                         </a>
                     </a-menu-item>
                 @endforeach
-                
             </a-sub-menu>
-        @else
-            <a-menu-item key="1">
-                <a-icon type="user"></a-icon>
-                <span>Test</span>
-            </a-menu-item>
         @endif
     @endforeach
     </a-menu>
