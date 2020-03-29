@@ -1,0 +1,24 @@
+
+.form-control {
+    @apply block;
+    @apply w-full;
+    @apply px-3;
+    @apply py-2;
+    @apply border;
+    @apply border-gray-300;
+    @apply text-gray-900;
+    @apply rounded-sm;
+    @apply rounded-t-md;
+    @apply relative; 
+}
+.form-control:focus {
+    outline: none;
+    @apply border-red-300;
+    @apply z-10;
+}
+
+@screen sm {
+    .form-control {
+        @apply text-sm leading-5;
+    }
+}

@@ -19,7 +19,7 @@
     <div id="app">
         <login-fields inline-template>
             <div>
-                <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+                <div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-md w-full">
                     <div>
                         <a href="https://avored.com" target="_blank">
@@ -28,7 +28,7 @@
                                 alt="AvoRed Ecommerce" />
                         </a>
                         <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-                            Sign in to admin account
+                            {{ __('avored::system.auth.form.title') }}
                         </h2>
                         <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
                         </p>
@@ -42,8 +42,8 @@
                                     name="email" 
                                     autofocus
                                     type="email" required 
-                                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-red focus:border-red-300 focus:z-10 sm:text-sm sm:leading-5" 
-                                    placeholder="Email address" />
+                                    class="form-control placeholder-gray-500" 
+                                    placeholder="{{ __('avored::system.auth.form.email') }}" />
                             </div>
 
                             <div class="mt-3">
@@ -51,7 +51,8 @@
                                     name="password" 
                                     type="password" 
                                     required 
-                                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-red  focus:border-red-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Password" />
+                                    class="form-control placeholder-gray-500" 
+                                    placeholder="{{ __('avored::system.auth.form.password') }}" />
                             </div>
                         </div>
 
@@ -61,13 +62,14 @@
                                     class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out" 
                                 />
                                 <label for="remember_me" class="ml-2 block text-sm leading-5 text-gray-900">
-                                    Remember me
+                                    {{ __('avored::system.auth.form.remember-me') }}
                                 </label>
                             </div>
 
                             <div class="text-sm leading-5">
-                                <a href="#" class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                    Forgot your password?
+                                <a href="{{ route('admin.password.request') }}" 
+                                    class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                    {{ __('avored::system.auth.form.forgot-password') }}
                                 </a>
                             </div>
                         </div>
@@ -88,7 +90,7 @@
                                     />
                                 </svg>
                             </span>
-                                {{ __('Sign In') }}
+                                {{ __('avored::system.auth.form.sign-in') }}
                             </button>
                         </div>
                     </form>
