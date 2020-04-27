@@ -2,7 +2,7 @@ name: Testing AvoRed
 
 on:
   push:
-    branches: [ restart ]
+    branches: [ marster, restart ]
   pull_request:
     branches: [ restart ]
 
