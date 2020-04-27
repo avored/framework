@@ -4,7 +4,7 @@ on:
   push:
     branches: [ restart ]
   pull_request:
-    branches: [ restart ]
+    branches: [ master ]
 
 jobs:
   laravel-tests:
