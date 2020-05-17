@@ -107,6 +107,15 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+    
+    /**
+     * Has one Product Images.
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function mainImage()
+    {
+        return $this->hasOne(ProductImage::class)->whereIsMainImage(true);
+    }
 
     /**
      * Get Main Image Url.
