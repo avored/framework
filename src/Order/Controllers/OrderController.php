@@ -48,7 +48,7 @@ class OrderController
      */
     public function index()
     {
-        $orders = $this->orderRepository->all();
+        $orders = Order::with('user')->get();
         $orderStatuses = $this->orderStatusRepository->all();
 
         return view('avored::order.order.index')

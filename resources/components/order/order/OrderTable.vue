@@ -2,6 +2,18 @@
 
 const columns = [
     {
+        title: 'Order Id',
+        dataIndex: 'id',
+        key: 'id',
+        sorter: true,
+    }, 
+    {
+        title: 'Customer',
+        dataIndex: 'user.name',
+        key: 'user.name',
+        sorter: true,
+    }, 
+    {
         title: 'Payment Options',
         dataIndex: 'payment_option',
         key: 'payment_option',

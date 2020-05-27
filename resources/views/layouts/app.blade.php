@@ -25,7 +25,7 @@
                     @include('avored::partials.breadcrumb')
                     
                     
-                    <h1 class="mt-1 ml-1 mb-0">@yield('page_title')</h1>
+                    <h1 class="ml-4 my-3 text-red-700 text-bold text-2xl">@yield('page_title')</h1>
                     
                     <a-layout-content class="mh-1 ph-1 pt-1 bg-white">
                         @yield('content')

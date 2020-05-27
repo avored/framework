@@ -26,6 +26,6 @@ return [
         'edit' => [
             'title' => 'User Group Edit',
         ],
-    ],
+    ]
 
 ];

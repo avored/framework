@@ -13,6 +13,17 @@ return [
     |
     */
 
+    'auth' => [
+        'form' => [
+            'title' => 'Sign in to admin account',
+            'password' => 'Enter your password',
+            'email' => 'Enter your email address',
+            'forgot-password' => 'Forgot your password?',
+            'remember-me' => 'Remember me',
+            'sign-in' => 'Sign in',
+        ]
+    ],
+
     'failed' => 'These credentials do not match our records.',
     'password' => 'Passwords must be at least eight characters and match the confirmation.',
     'reset' => 'Your password has been reset!',
@@ -20,11 +31,8 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
 
-    'password' => 'Password',
-    'email' => 'Email Address',
-    'login-card' => 'AvoRed E commerce Admin Login',
-    'login' => 'Login',
-    'forget-password' => 'Forgot your password?',
+    
+    
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',
     'forgot-password-title' => 'Reset password',
