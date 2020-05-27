@@ -9,18 +9,17 @@
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <script defer src="{{ asset('avored-admin/js/tailwind.js') }}"></script>
+    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
     
     <!-- Styles -->
-    {{-- <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('avored-admin/css/tailwind.css') }}" rel="stylesheet">
+    <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <login-fields inline-template>
             <div>
-                <div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-md w-full">
+                <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-md w-full bg-white rounded-md shadow-md p-6">
                     <div>
                         <a href="https://avored.com" target="_blank">
                             <img class="mx-auto h-12 w-auto" 
@@ -38,21 +37,36 @@
                         <input type="hidden" name="remember" value="true" />
                         <div class="rounded-md shadow-sm">
                             <div class="mt-3">
-                                <input aria-label="Email address" 
+                                <label for="email" class="my-2 px-1 block font-medium">
+                                    {{ __('avored::system.auth.form.email') }}
+                                </label>
+                                <input aria-label="Email address"
+                                    id="email"
                                     name="email" 
                                     autofocus
-                                    type="email" required 
-                                    class="form-control placeholder-gray-500" 
-                                    placeholder="{{ __('avored::system.auth.form.email') }}" />
+                                    type="email"
+                                    required
+                                    class="px-3 py-2 border border-gray-400 focus:outline-none focus:shadow rounded-md w-full placeholder-gray-500" 
+                                    placeholder="{{ __('avored::system.auth.form.email') }}"
+                                />
+                                @if ($errors->has('email'))
+                                    <div class="text-red-500 mt-2">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="mt-3">
+                                <label for="email" class="my-2 px-1 block font-medium">
+                                    {{ __('avored::system.auth.form.password') }}
+                                </label>
                                 <input aria-label="Password" 
                                     name="password" 
                                     type="password" 
-                                    required 
-                                    class="form-control placeholder-gray-500" 
+                                    required
+                                    class="px-3 py-2 border border-gray-400 focus:outline-none focus:shadow rounded-md w-full placeholder-gray-500" 
                                     placeholder="{{ __('avored::system.auth.form.password') }}" />
+                                
                             </div>
                         </div>
 
@@ -68,7 +82,7 @@
 
                             <div class="text-sm leading-5">
                                 <a href="{{ route('admin.password.request') }}" 
-                                    class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                    class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline">
                                     {{ __('avored::system.auth.form.forgot-password') }}
                                 </a>
                             </div>
@@ -77,11 +91,11 @@
                         <div class="mt-6">
                             <button 
                                 type="submit" 
-                                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition duration-150 ease-in-out"
+                                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700"
                             >
                             <span class="absolute left-0 inset-y pl-3">
                                 <svg 
-                                    class="h-5 w-5 text-red-500 group-hover:text-red-400 transition ease-in-out duration-150" 
+                                    class="h-5 w-5 text-red-500 group-hover:text-red-400" 
                                     fill="currentColor" 
                                     viewBox="0 0 20 20"
                                 >

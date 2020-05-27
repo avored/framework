@@ -7,7 +7,6 @@ use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Rebing\GraphQL\Support\Facades\GraphQL;
-use Rebing\GraphQL\Support\SelectFields;
 use Rebing\GraphQL\Support\Query;
 
 class BarcodeProductQuery extends Query
