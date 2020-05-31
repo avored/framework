@@ -5,11 +5,10 @@ namespace AvoRed\Framework\Database\Models;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\ClientRepository;
 
-class AdminUser extends Authenticatable
+class AdminUser extends BaseModel
 {
     use Notifiable, HasApiTokens;
 

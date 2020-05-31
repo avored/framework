@@ -103,7 +103,7 @@ Vue.component('product-save', () => import('../components/catalog/product/Produc
 Vue.component('state-table', () => import('../components/system/state/StateTable.vue'))
 Vue.component('state-save', () => import('../components/system/state/StateSave.vue'))
 
-Vue.component('currency-table', () => import('../components/system/currency/CurrencyIndex.vue'))
+Vue.component('currency-table', () => import('../components/system/currency/CurrencyTable.vue'))
 Vue.component('currency-save', () => import('../components/system/currency/CurrencySave.vue'))
 
 Vue.component('category-table', () => import('../components/catalog/category/CategoryTable.vue'))
@@ -120,7 +120,7 @@ Vue.component('page-save', require('../components/cms/page/PageSave.vue').defaul
 Vue.component('order-status-table', () => import('../components/order/order-status/OrderStatusTable.vue'))
 Vue.component('order-status-save', () => import('../components/order/order-status/OrderStatusSave.vue'))
 
-Vue.component('role-index', () => import('../components/system/role/RoleTable.vue'))
+Vue.component('role-table', () => import('../components/system/role/RoleTable.vue'))
 Vue.component('system-role-save', () => import('../components/system/role/RoleSave.vue'))
 
 Vue.component('admin-user-table', () => import('../components/system/admin-user/AdminUserTable.vue'))

@@ -2,12 +2,12 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initRoles.from"
-            :to="initRoles.to"
-            :total="initRoles.total"
-            :prev_page_url="initRoles.prev_page_url"
-            :next_page_url="initRoles.next_page_url"
-            :items="initRoles.data"
+            :from="initCurrencies.from"
+            :to="initCurrencies.to"
+            :total="initCurrencies.total"
+            :prev_page_url="initCurrencies.prev_page_url"
+            :next_page_url="initCurrencies.next_page_url"
+            :items="initCurrencies.data"
         >
           >
           <template slot="action" slot-scope="{item}">
@@ -43,13 +43,21 @@ const columns = [
     fieldKey: "name"
   },
   {
+    label: "Code",
+    fieldKey: "code"
+  },
+  {
+    label: "Conversation Rate",
+    fieldKey: "conversation_rate"
+  },
+  {
     label: "Actions",
     slotName: "action"
   }
 ];
 
 export default {
-  props: ['baseUrl', 'initRoles'],
+  props: ['baseUrl', 'initCurrencies'],
   data () {
     return {
         columns,    
@@ -57,23 +65,23 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/role/' + record.id + '/edit';
+          return this.baseUrl + '/currency/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/role/' + record.id;
+          return this.baseUrl + '/currency/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/role/' + record.id;
+        var url = this.baseUrl  + '/currency/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' role?',
+            title: 'Do you Want to delete ' + record.name + ' currency?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
                             app.$notification.error({
-                                key: 'role.delete.success',
+                                key: 'currency.delete.success',
                                 message: response.data.message,
                             });
                         }
@@ -81,7 +89,7 @@ export default {
                     })
                     .catch(errors => {
                         app.$notification.error({
-                            key: 'role.delete.error',
+                            key: 'currency.delete.error',
                             message: errors.message
                         });
                     });

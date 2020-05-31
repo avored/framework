@@ -43,7 +43,7 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        $adminUsers = $this->adminUserRepository->all();
+        $adminUsers = $this->adminUserRepository->paginate();
 
         return view('avored::user.admin-user.index')
             ->with(compact('adminUsers'));

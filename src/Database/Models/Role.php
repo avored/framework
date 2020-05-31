@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model
+class Role extends BaseModel
 {
     /**
      * Admin Role name Constatnt.

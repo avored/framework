@@ -199,12 +199,12 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.currency.index');
         });
 
-        $systemMenu->subMenu('state', function (MenuItem $menu) {
-            $menu->key('state')
-                ->type(MenuItem::ADMIN)
-                ->label('avored::system.admin_menus.state')
-                ->route('admin.state.index');
-        });
+        // $systemMenu->subMenu('state', function (MenuItem $menu) {
+        //     $menu->key('state')
+        //         ->type(MenuItem::ADMIN)
+        //         ->label('avored::system.admin_menus.state')
+        //         ->route('admin.state.index');
+        // });
 
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')

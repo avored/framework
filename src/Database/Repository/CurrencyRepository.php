@@ -6,8 +6,30 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 
-class CurrencyRepository implements CurrencyModelInterface
+class CurrencyRepository extends BaseRepository implements CurrencyModelInterface
 {
+
+    /**
+     * @var Currency $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the Currency Repository
+     */
+    public function __construct()
+    {
+        $this->model = new Currency();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return Currency 
+     */
+    public function model(): Currency
+    {
+        return $this->model;
+    }
     /**
      * Create Currency Resource into a database.
      * @param array $data

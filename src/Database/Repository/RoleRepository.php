@@ -3,20 +3,31 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\Role;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 
-class RoleRepository implements RoleModelInterface
+class RoleRepository extends BaseRepository implements RoleModelInterface
 {
     /**
-     * Create Role Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Role $role
+     * @var Role $model
      */
-    public function create(array $data): Role
+    protected $model;
+
+    /**
+     * Construct for the Role Repository
+     */
+    public function __construct()
     {
-        return Role::create($data);
+        $this->model = new Role();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return Role 
+     */
+    public function model(): Role
+    {
+        return $this->model;
     }
 
     /**
@@ -27,15 +38,6 @@ class RoleRepository implements RoleModelInterface
     public function findAdminRole(): Role
     {
         return Role::whereName(Role::ADMIN)->first();
-    }
-
-    /**
-     * find roles for the users.
-     * @return \Illuminate\Database\Eloquent\Collection $roles
-     */
-    public function all() : Collection
-    {
-        return Role::all();
     }
 
     /**

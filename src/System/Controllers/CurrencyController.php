@@ -43,7 +43,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $currencies = $this->currencyRepository->all();
+        $currencies = $this->currencyRepository->paginate();
 
         return view('avored::system.currency.index')
             ->with(compact('currencies'));

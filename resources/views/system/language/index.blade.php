@@ -9,35 +9,21 @@
 @endsection
 
 @section('content')
-<a-row type="flex" class="mb-1" justify="end">
-    <a-col>
-        <a 
-            href="{{ route('admin.language.create') }}"
-            class="ant-btn ant-btn-primary">
-            <a-icon type="plus"></a-icon>
-            {{ __('avored::system.btn.create') }}
-        </a>
-    </a-col>
-</a-row>
-<a-row type="flex" justify="center">
-    <a-col :span="24">        
-        <language-table
-            :languages="{{ $languages }}"
-            inline-template
-            base-url="{{ asset(config('avored.admin_url')) }}">
+<div class="flex justify-end mt-3">
+    <a 
+        href="{{ route('admin.language.create') }}"
+        class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
+        <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+        </svg>
+        {{ __('avored::system.btn.create') }}
+    </a>
+</div>
 
-            <a-table :columns="columns" row-key="id" @change="handleTableChange" :data-source="languages">
-                <span slot="action" slot-scope="text, record">
-                    
-                    <a :href="getEditUrl(record)">
-                        <a-icon type="edit"></a-icon>
-                    </a>
-                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deleteLanguage(record)">
-                        <a-icon type="delete"></a-icon>
-                    </a>
-                </span>
-            </a-table>
-        </language-table>
-    </a-col>
-</a-row>
+<div>
+    <language-table
+        :init-languages="{{ json_encode($languages) }}"
+        base-url="{{ asset(config('avored.admin_url')) }}"
+    ></language-table>
+</div>
 @endsection

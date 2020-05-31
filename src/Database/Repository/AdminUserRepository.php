@@ -6,16 +6,28 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 
-class AdminUserRepository implements AdminUserModelInterface
+class AdminUserRepository extends BaseRepository implements AdminUserModelInterface
 {
     /**
-     * Create AdminUser Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\AdminUser $adminUser
+     * @var AdminUser $model
      */
-    public function create(array $data): AdminUser
+    protected $model;
+
+    /**
+     * Construct for the AdminUser Repository
+     */
+    public function __construct()
     {
-        return AdminUser::create($data);
+        $this->model = new AdminUser();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return AdminUser 
+     */
+    public function model(): AdminUser
+    {
+        return $this->model;
     }
 
     /**
@@ -26,14 +38,5 @@ class AdminUserRepository implements AdminUserModelInterface
     public function findByEmail(string $email) : AdminUser
     {
         return AdminUser::whereEmail($email)->first();
-    }
-
-    /**
-     * Get all the admin users from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $adminUsers
-     */
-    public function all() : Collection
-    {
-        return AdminUser::all();
     }
 }

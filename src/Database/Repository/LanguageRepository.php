@@ -6,24 +6,27 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Language;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
 
-class LanguageRepository implements LanguageModelInterface
+class LanguageRepository extends BaseRepository implements LanguageModelInterface
 {
     /**
-     * Create Language Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Language $language
+     * @var Language $model
      */
-    public function create(array $data): Language
+    protected $model;
+
+    /**
+     * Construct for the Language Repository
+     */
+    public function __construct()
     {
-        return Language::create($data);
+        $this->model = new Language();
     }
 
     /**
-     * get all languages available for this store.
-     * @return \Illuminate\Database\Eloquent\Collection $languages
+     * Get the model for the repository
+     * @return Language 
      */
-    public function all() : Collection
+    public function model(): Language
     {
-        return Language::all();
+        return $this->model;
     }
 }
