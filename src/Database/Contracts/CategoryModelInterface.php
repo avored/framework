@@ -10,20 +10,6 @@ use Illuminate\Support\Collection as SupportCollection;
 
 interface CategoryModelInterface extends BaseInterface
 {
-    /**
-     * Create Category Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Category $category
-     */
-    public function create(array $data) : Category;
-
-
-    /**
-     * Find Category Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Category $category
-     */
-    public function find(int $id) : Category;
 
     /**
      * Find Category Resource into a database.
@@ -32,24 +18,12 @@ interface CategoryModelInterface extends BaseInterface
      */
     public function findBySlug(string $slug) : Category;
 
-    /**
-     * Delete Category Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id) : int;
 
     /**
      * Get All Category from the database.
      * @return \Illuminate\Database\Eloquent\Collection $categories
      */
     public function getCategoryProducts(Request $request) : Collection;
-
-    /**
-     * Get All Category from the database.
-     * @return \Illuminate\Database\Eloquent\Collection $categories
-     */
-    public function all() : Collection;
 
     /**
      * Get all the categories option to use in Menu Builder.

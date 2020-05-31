@@ -11,29 +11,25 @@ use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Models\Attribute;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
-use Illuminate\Pagination\LengthAwarePaginator;
 
-class CategoryRepository implements CategoryModelInterface
+class CategoryRepository extends BaseRepository implements CategoryModelInterface
 {
     /**
-     * Create Category Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Category $category
+     * 
+     * @var \AvoRed\Framework\Database\Models\Category $model
      */
-    public function create(array $data): Category
-    {
-        return Category::create($data);
-    }
+    protected $model;
 
     /**
-     * Find Category Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Category $category
+     * Construct for the Category Repository
+     * 
      */
-    public function find(int $id): Category
+    public function __construct()
     {
-        return Category::find($id);
+        $this->model = new Category;   
     }
+
+  
 
     /**
      * Find Category Resource into a database.
@@ -72,34 +68,7 @@ class CategoryRepository implements CategoryModelInterface
         return $builder->get();
     }
 
-    /**
-     * Delete Category Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return Category::destroy($id);
-    }
-
-    /**
-     * Get all the categories from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $categories
-     */
-    public function all() : Collection
-    {
-        return Category::all();
-    }
-
-    /**
-     * Get Pagination of the model
-     * @param int $perPage
-     * @return Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function paginate($perPage = 10) : LengthAwarePaginator
-    {
-        return Category::paginate($perPage);
-    }
+  
 
     /**
      * Get all the categories option to use in Menu Builder.
@@ -187,5 +156,14 @@ class CategoryRepository implements CategoryModelInterface
         }
 
         return [$filterType, $paramSuffix];
+    }
+
+    /**
+     * Model object for the repository
+     * @return \AvoRed\Framework\Database\Models\Category $model
+     */
+    public function model(): Category
+    {
+        return $this->model;
     }
 }
