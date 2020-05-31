@@ -11,6 +11,7 @@ use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Models\Attribute;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryRepository implements CategoryModelInterface
 {
@@ -88,6 +89,16 @@ class CategoryRepository implements CategoryModelInterface
     public function all() : Collection
     {
         return Category::all();
+    }
+
+    /**
+     * Get Pagination of the model
+     * @param int $perPage
+     * @return Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function paginate($perPage = 10) : LengthAwarePaginator
+    {
+        return Category::paginate($perPage);
     }
 
     /**

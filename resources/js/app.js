@@ -20,6 +20,14 @@ window.AvoRed = AvoRed
 //import i18n from 'vue-i18n'
 
 
+/*************** AVORED VUE COMPONENTS ***************/
+
+Vue.component('avored-table', () => import('../components/system/forms/AvoRedTable'))
+
+
+
+
+
 import Layout from 'ant-design-vue/lib/layout'
 import Menu from 'ant-design-vue/lib/menu'
 import Form from 'ant-design-vue/lib/form'

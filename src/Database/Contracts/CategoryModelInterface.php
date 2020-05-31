@@ -5,9 +5,10 @@ namespace AvoRed\Framework\Database\Contracts;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Category;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection as SupportCollection;
 
-interface CategoryModelInterface
+interface CategoryModelInterface extends BaseInterface
 {
     /**
      * Create Category Resource into a database.
@@ -15,6 +16,7 @@ interface CategoryModelInterface
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
     public function create(array $data) : Category;
+
 
     /**
      * Find Category Resource into a database.
