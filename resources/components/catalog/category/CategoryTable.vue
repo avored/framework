@@ -2,12 +2,12 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="categoryData.from"
-            :to="categoryData.to"
-            :total="categoryData.total"
-            :prev_page_url="categoryData.prev_page_url"
-            :next_page_url="categoryData.next_page_url"
-            :items="categoryData.data"
+            :from="initCategories.from"
+            :to="initCategories.to"
+            :total="initCategories.total"
+            :prev_page_url="initCategories.prev_page_url"
+            :next_page_url="initCategories.next_page_url"
+            :items="initCategories.data"
         >
           >
           <template slot="action" slot-scope="{item}">
@@ -21,7 +21,7 @@
               </svg>
             </a>
 
-            <button type="button" @click.prevent="deleteCategory(item)">
+            <button type="button" @click.prevent="deleteOnClick(item)">
               <svg class="h-6 w-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path class="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 012 2v2h5a1 1 0 010 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8H3a1 1 0 110-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 011 1v6a1 1 0 01-2 0v-6a1 1 0 011-1zm4 0a1 1 0 011 1v6a1 1 0 01-2 0v-6a1 1 0 011-1z"/>
               </svg>
@@ -32,8 +32,6 @@
     </div>
 </template>
 <script>
-import isNil from 'lodash/isNil'
-
 
 const columns = [
   {
@@ -55,7 +53,7 @@ const columns = [
 ];
 
 export default {
-  props: ['baseUrl', 'categoryData'],
+  props: ['baseUrl', 'initCategories'],
   data () {
     return {
         columns,    
@@ -68,7 +66,7 @@ export default {
       getDeleteUrl(record) {
           return this.baseUrl + '/category/' + record.id;
       },
-      deleteCategory(record) {
+      deleteOnClick(record) {
         var url = this.baseUrl  + '/category/' + record.id;
         var app = this;
         this.$confirm({

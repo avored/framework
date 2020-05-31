@@ -51,7 +51,7 @@ class MenuGroupController
      */
     public function index()
     {
-        $menuGroups = $this->menuGroupRepository->all();
+        $menuGroups = $this->menuGroupRepository->paginate();
 
         return view('avored::cms.menu.index')
             ->with(compact('menuGroups'));

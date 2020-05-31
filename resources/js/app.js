@@ -96,7 +96,7 @@ Vue.component('attribute-save', () => import('../components/catalog/attribute/At
 Vue.component('property-table', () => import('../components/catalog/property/PropertyTable.vue'))
 Vue.component('property-save', () => import('../components/catalog/property/PropertySave.vue'))
 
-Vue.component('product-table', () => import('../components/catalog/product/ProductIndex.vue'))
+Vue.component('product-table', () => import('../components/catalog/product/ProductTable.vue'))
 Vue.component('product-save', () => import('../components/catalog/product/ProductSave.vue'))
 
 Vue.component('state-table', () => import('../components/system/state/StateTable.vue'))

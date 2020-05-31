@@ -2,11 +2,10 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 
-class Product extends Model
+class Product extends BaseModel
 {
     /**
      * Tax Percentage Configuration Constant.
@@ -129,7 +128,7 @@ class Product extends Model
             return $defaultImage;
         }
 
-        return asset('storage/'.$image->path);
+        return asset('storage/'. $image->path);
     }
 
     /**
@@ -278,5 +277,16 @@ class Product extends Model
         }
 
         return $properties;
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithoutVariation($query)
+    {
+        return $query->where('type', '!=', 'VARIATION');
     }
 }

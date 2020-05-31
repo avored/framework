@@ -7,38 +7,30 @@ use AvoRed\Framework\Database\Models\MenuGroup;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
 
-class MenuGroupRepository implements MenuGroupModelInterface
+class MenuGroupRepository extends BaseRepository implements MenuGroupModelInterface
 {
     /**
-     * Create MenuGroup Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
+     * @var MenuGroup $model
      */
-    public function create(array $data): MenuGroup
+    protected $model;
+
+    /**
+     * Construct for the Attribute Repository
+     */
+    public function __construct()
     {
-        return MenuGroup::create($data);
+        $this->model = new MenuGroup();
     }
 
     /**
-     * Find MenuGroup Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
+     * Get the model for the repository
+     * @return MenuGroup 
      */
-    public function find(int $id): MenuGroup
+    public function model(): MenuGroup
     {
-        return MenuGroup::find($id);
+        return $this->model;
     }
-
-    /**
-     * Delete MenuGroup Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return MenuGroup::destroy($id);
-    }
-
+    
     /**
      * Find MenuGroup Resource from data store.
      * @param string $identifier
@@ -58,14 +50,5 @@ class MenuGroupRepository implements MenuGroupModelInterface
         }
 
         return $menus;
-    }
-
-    /**
-     * Get all the categories from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $menuGroups
-     */
-    public function all() : Collection
-    {
-        return MenuGroup::all();
     }
 }

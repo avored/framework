@@ -5,17 +5,23 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class ProductRepository implements ProductModelInterface
+class ProductRepository extends BaseRepository implements ProductModelInterface
 {
     /**
-     * Create Product Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Product $product
+     * 
+     * @var \AvoRed\Framework\Database\Models\Product $model
      */
-    public function create(array $data): Product
+    protected $model;
+
+    /**
+     * Construct for the Produdct Repository
+     * 
+     */
+    public function __construct()
     {
-        return Product::create($data);
+        $this->model = new Product();   
     }
 
     /**
@@ -59,13 +65,13 @@ class ProductRepository implements ProductModelInterface
 
     /**
      * Get all the products from the connected database.
+     * @param int $perPage
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
-    public function getAllWithoutVaiation() : Collection
+    public function getAllWithoutVaiation($perPage = 10): LengthAwarePaginator
     {
-        return Product::where('type', '!=', 'VARIATION')->get();
+        return Product::withoutVariation()->paginate($perPage);
     }
-
     /**
      * Delete Product Resource from a database.
      * @param int $id
@@ -74,5 +80,14 @@ class ProductRepository implements ProductModelInterface
     public function delete(int $id): int
     {
         return Product::destroy($id);
+    }
+
+    /**
+     * Model object for the repository
+     * @return \AvoRed\Framework\Database\Models\Product $model
+     */
+    public function model(): Product
+    {
+        return $this->model;
     }
 }

@@ -2,11 +2,10 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 
-class Property extends Model
+class Property extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

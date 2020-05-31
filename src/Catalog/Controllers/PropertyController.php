@@ -31,7 +31,7 @@ class PropertyController
      */
     public function index()
     {
-        $properties = $this->propertyRepository->all();
+        $properties = $this->propertyRepository->paginate();
 
         return view('avored::catalog.property.index')
             ->with(compact('properties'));
