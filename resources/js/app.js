@@ -47,8 +47,9 @@ Vue.use(Tabs)
 Vue.use(Modal)
 Vue.use(Dropdown)
 
+import AntDatePicker from 'ant-design-vue/lib/date-picker'
 
-Vue.component('a-date-picker', () => import('ant-design-vue/lib/date-picker'))
+Vue.component('a-date-picker', AntDatePicker)
 Vue.component('a-icon', () => import('ant-design-vue/lib/icon'))
 Vue.component('a-avatar', () => import('ant-design-vue/lib/avatar'))
 Vue.component('a-row', () => import('ant-design-vue/lib/row'))

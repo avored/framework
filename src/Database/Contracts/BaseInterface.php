@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Contracts;
 use AvoRed\Framework\Database\Models\BaseModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 
 interface BaseInterface
 {
@@ -14,6 +15,13 @@ interface BaseInterface
      * @return Illuminate\Pagination\Paginator
      */
     public function paginate($perPage = 10) : LengthAwarePaginator;
+
+    /**
+     * Get Query Builder of the model
+     * @param int $perPage
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query(): Builder;
 
     /**
      * Create Model Resource into a database.

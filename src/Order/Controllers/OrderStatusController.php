@@ -31,10 +31,10 @@ class OrderStatusController
      */
     public function index()
     {
-        $orderStatus = $this->orderStatusRepository->all();
+        $orderStatuses = $this->orderStatusRepository->paginate();
 
         return view('avored::order.order-status.index')
-            ->with(compact('orderStatus'));
+            ->with(compact('orderStatuses'));
     }
 
     /**

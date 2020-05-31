@@ -27,6 +27,6 @@
             }
             ]"
       ></a-input>
-      </a-form-item>
+</a-form-item>
 
 </a-modal>

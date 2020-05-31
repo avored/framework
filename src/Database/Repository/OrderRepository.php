@@ -7,28 +7,30 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use Illuminate\Support\Carbon;
 
-class OrderRepository implements OrderModelInterface
+class OrderRepository extends BaseRepository implements OrderModelInterface
 {
     /**
-     * Create Order Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Order $order
+     * @var Order $model
      */
-    public function create(array $data): Order
+    protected $model;
+
+    /**
+     * Construct for the Order Repository
+     */
+    public function __construct()
     {
-        return Order::create($data);
+        $this->model = new Order();
     }
 
     /**
-     * Find Order Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Order $order
+     * Get the model for the repository
+     * @return Order 
      */
-    public function find(int $id): Order
+    public function model(): Order
     {
-        return Order::find($id);
+        return $this->model;
     }
-
+  
     /**
      * Find Orders of a given user Id.
      * @param int $id
@@ -37,25 +39,6 @@ class OrderRepository implements OrderModelInterface
     public function findByUserId(int $id) : Collection
     {
         return Order::whereUserId($id)->get();
-    }
-
-    /**
-     * Delete Order Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return Order::destroy($id);
-    }
-
-    /**
-     * Get all the orders from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $orders
-     */
-    public function all() : Collection
-    {
-        return Order::all();
     }
 
     /**

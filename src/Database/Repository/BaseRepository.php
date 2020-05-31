@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Models\BaseModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -13,6 +14,16 @@ abstract class BaseRepository
      * 
      */
     abstract function model(): BaseModel;
+
+    /**
+     * Get Query Builder of the model
+     * @param int $perPage
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query(): Builder
+    {
+        return $this->model()->query();
+    }
 
     /**
      * Get Pagination of the model
