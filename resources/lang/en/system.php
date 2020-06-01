@@ -12,6 +12,20 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
+    'fields' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'meta_title' => 'Meta Title',
+        'meta_description' => 'Meta Description'
+    ],
+    'common' => [
+        'list' => 'List',
+        'create' => 'Create',
+        'edit' => 'Edit',
+    ],
+    'terms' => [
+        'category' => 'Category'
+    ],
 
     'auth' => [
         'form' => [

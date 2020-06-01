@@ -62,19 +62,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id')->nullable()->default(null);
-            $table->unsignedBigInteger('language_id')->nullable()->default(null);
-            $table->string('name')->nullable()->default(null);
-            $table->string('slug')->nullable()->default(null);
-            $table->string('meta_title')->nullable()->default(null);
-            $table->string('meta_description')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-        });
-
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
@@ -99,21 +86,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
-        });
-
-        Schema::create('page_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('page_id')->nullable()->default(null);
-            $table->unsignedBigInteger('language_id')->nullable()->default(null);
-            $table->string('name')->nullable()->default(null);
-            $table->string('slug')->nullable()->default(null);
-            $table->text('content')->nullable()->default(null);
-            $table->string('meta_title')->nullable()->default(null);
-            $table->string('meta_description')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
         Schema::create('configurations', function (Blueprint $table) {
@@ -537,7 +509,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');
 
-        Schema::dropIfExists('category_translations');
         Schema::dropIfExists('categories');
 
         Schema::dropIfExists('admin_users');

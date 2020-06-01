@@ -23,6 +23,7 @@ window.AvoRed = AvoRed
 /*************** AVORED VUE COMPONENTS ***************/
 
 Vue.component('avored-table', () => import('../components/system/forms/AvoRedTable'))
+Vue.component('avored-input', () => import('../components/system/forms/AvoRedInput'))
 
 
 
@@ -57,7 +58,7 @@ Vue.component('a-col', () => import('ant-design-vue/lib/col'))
 Vue.component('a-icon', () => import('ant-design-vue/lib/icon'))
 Vue.component('a-drawer', () => import('ant-design-vue/lib/drawer'))
 Vue.component('a-card', () => import('ant-design-vue/lib/card'))
-Vue.component('a-table', () => import('ant-design-vue/lib/table'))
+// Vue.component('a-table', () => import('ant-design-vue/lib/table'))
 Vue.component('a-button', () => import('ant-design-vue/lib/button'))
 Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))
 Vue.component('a-upload', () => import('ant-design-vue/lib/upload'))

@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Route;
 
 $baseAdminUrl = config('avored.admin_url');
 
@@ -20,10 +21,12 @@ Route::middleware(['web'])
     ->group(function () {
 
         /***************** LOGIN ROUTE *****************/
-        Route::get('login', [\AvoRed\Framework\System\Controllers\LoginController::class, 'loginForm'])
+        Route::get('login', [\AvoRed\Framework\User\Controllers\LoginController::class, 'loginForm'])
             ->name('login');
-        Route::post('login', [\AvoRed\Framework\System\Controllers\LoginController::class, 'login'])
+        Route::post('login', [\AvoRed\Framework\User\Controllers\LoginController::class, 'login'])
             ->name('login.post');
+        Route::post('logout', [\AvoRed\Framework\User\Controllers\LoginController::class, 'logout'])
+            ->name('logout');
 
         /***************** PASSWORD RESET *****************/
         Route::get(
@@ -41,9 +44,6 @@ Route::middleware(['web'])
         )->name('password.reset');
         Route::post('password/reset', [\AvoRed\Framework\System\Controllers\ResetPasswordController::class, 'reset'])
             ->name('password.update');
-        /***************** LOGOUT *****************/
-        Route::post('logout', [\AvoRed\Framework\System\Controllers\LoginController::class, 'logout'])
-            ->name('logout');
     });
 
 Route::middleware(['web', 'admin.auth:admin', 'permission'])

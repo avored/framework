@@ -24,7 +24,11 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         $rules['name'] = 'required';
-        $rules['slug'] = 'required';
+        if (strtolower($this->method()) === 'post') {
+            $rules['slug'] = 'required|unique:categories';
+        } else {
+            $rules['slug'] = 'required';
+        }
 
         return $rules;
     }

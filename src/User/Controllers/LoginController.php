@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\System\Controllers;
+namespace AvoRed\Framework\User\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ class LoginController extends BaseController
      */
     public function loginForm()
     {
-        return view('avored::system.login.form');
+        return view('avored::user.auth.login');
     }
 
     /**

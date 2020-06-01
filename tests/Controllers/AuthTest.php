@@ -14,7 +14,7 @@ class AuthTest extends BaseTestCase
     {
         $this->get(route('admin.login'))
             ->assertStatus(200)
-            ->assertViewIs('avored::system.login.form');
+            ->assertViewIs('avored::user.auth.login');
     }
 
     public function testAdminLogoutRouteTest()
