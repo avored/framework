@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * Cart Manager.
- * @method \AvoRed\Framework\Cart\Manager add($slug)
+ * @method static \AvoRed\Framework\Cart\Manager add($slug)
  */
 class Cart extends Facade
 {

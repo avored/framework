@@ -8,7 +8,6 @@ use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
-use AvoRed\Framework\Database\Models\PromotionCode;
 
 class Manager
 {
@@ -129,16 +128,24 @@ class Manager
         $message = '';
         $product = $this->productRepository->findBySlug($slug);
 
-        if ($this->getSession()->has($slug)) {
+        if ($this->exist($slug)) {
             $cartProduct = $this->cartCollection->get($slug);
 
             $existingQty = $cartProduct->qty() ?? 0;
 
-            $cartProduct->qty($qty + $existingQty);
-            $this->cartCollection->put($slug, $cartProduct);
-            $this->updateSessionCollection();
-            $status = true;
-            $message = __('avored::catalog.cart_success_notification');
+            $newQty = $qty + $existingQty;
+
+            if ($newQty > $product->qty) {
+                $status = false;
+                $message = __('avored::system.notification.not_enough_qty'); 
+                
+            } else {
+                $cartProduct->qty($qty + $existingQty);
+                $this->cartCollection->put($slug, $cartProduct);
+                $this->updateSessionCollection();
+                $status = true;
+                $message = __('avored::catalog.cart_success_notification');
+            }
         } elseif ($product->type === 'VARIABLE_PRODUCT') {
             if ($attributes === null || count($attributes) <= 0) {
                 $status = false;
@@ -169,13 +176,21 @@ class Manager
                 $message = __('avored::catalog.cart_success_notification');
             }
         } else {
-            $cartProduct = $this->createCartProductFromSlug($product);
-            $cartProduct->qty($qty);
+            if ($qty > $product->qty) {
+                $status = false;
+                $message = __('avored::system.notification.not_enough_qty');
+            } else {
+                $cartProduct = $this->createCartProductFromSlug($product);
+                $cartProduct->qty($qty);
+    
+                
+                $this->cartCollection->put($slug, $cartProduct);
+                $this->updateSessionCollection();
+                $status = true;
+                $message = __('avored::catalog.cart_success_notification');
+            }
 
-            $this->cartCollection->put($slug, $cartProduct);
-            $this->updateSessionCollection();
-            $status = true;
-            $message = __('avored::catalog.cart_success_notification');
+            
         }
 
         return [$status, $message];
@@ -200,6 +215,16 @@ class Manager
             ->image($product->main_image_url);
 
         return $cartProduct;
+    }
+
+    /**
+     * To check if the Product Existing in the Cart
+     * @param string $slug
+     * @return boolean
+     */
+    protected function exist($slug): bool
+    {
+        return $this->getSession()->has($slug);
     }
 
     /**
@@ -293,7 +318,7 @@ class Manager
     public function discount($format = true)
     {
         $discountSessionData = $this->sessionManager->get($this->getPromotionKey());
-        $total = $discountSessionData['total'];
+        $total = $discountSessionData['total'] ?? 0;
 
         if ($format === true) {
             return number_format($total, 2);

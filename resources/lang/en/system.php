@@ -27,6 +27,10 @@ return [
         'category' => 'Category'
     ],
 
+    'notification' => [
+        'not_enough_qty' => 'Sorry We do not have enought qty available for this product.'
+    ],
+
     'auth' => [
         'form' => [
             'title' => 'Sign in to admin account',
