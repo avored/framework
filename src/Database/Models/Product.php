@@ -43,10 +43,14 @@ class Product extends BaseModel
      * @var array
      */
     const PRODUCT_TYPES = [
-        'BASIC' => 'Basic',
-        'DOWNLOADABLE' => 'Downlodable',
-        'VARIABLE_PRODUCT' => 'Variable Product',
+        self::PRODUCT_TYPES_BASIC => 'Basic',
+        self::PRODUCT_TYPES_DOWNLOADABLE => 'Downlodable',
+        self::PRODUCT_TYPES_VARIABLE_PRODUCT => 'Variable Product',
     ];
+
+    const PRODUCT_TYPES_BASIC = 'BASIC';
+    const PRODUCT_TYPES_DOWNLOADABLE = 'DOWNLOADABLE';
+    const PRODUCT_TYPES_VARIABLE_PRODUCT = 'DOWNLOADABLE';
 
     /**
      * Belongs to Many Categories.

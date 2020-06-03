@@ -128,6 +128,19 @@ class Manager
         $message = '';
         $product = $this->productRepository->findBySlug($slug);
 
+
+        //If Exist: Get Cart Product Object
+        //If Not Exist: Get Cart Product Empty Object
+        // Then compare the new Qty here
+       
+        if (
+            $product->type === Product::PRODUCT_TYPES_BASIC &&
+            $qty > (float) $product->qty
+        ) {
+            
+            return [false, __('avored::system.notification.not_enough_qty')];
+        }
+
         if ($this->exist($slug)) {
             $cartProduct = $this->cartCollection->get($slug);
 
@@ -176,21 +189,12 @@ class Manager
                 $message = __('avored::catalog.cart_success_notification');
             }
         } else {
-            if ($qty > $product->qty) {
-                $status = false;
-                $message = __('avored::system.notification.not_enough_qty');
-            } else {
-                $cartProduct = $this->createCartProductFromSlug($product);
-                $cartProduct->qty($qty);
-    
-                
-                $this->cartCollection->put($slug, $cartProduct);
-                $this->updateSessionCollection();
-                $status = true;
-                $message = __('avored::catalog.cart_success_notification');
-            }
-
-            
+            $cartProduct = $this->createCartProductFromSlug($product);
+            $cartProduct->qty($qty);  
+            $this->cartCollection->put($slug, $cartProduct);
+            $this->updateSessionCollection();
+            $status = true;
+            $message = __('avored::catalog.cart_success_notification');  
         }
 
         return [$status, $message];
