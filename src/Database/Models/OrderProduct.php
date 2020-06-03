@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class OrderProduct extends Model
+class OrderProduct extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
