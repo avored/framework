@@ -45,7 +45,23 @@
     ></a-input>
 </a-form-item>
 
-<a-form-item
+<avored-select
+    label-text="{{ __('avored::catalog.property.data_type') }}"
+    :options="{{ json_encode($dataTypeOptions) }}"
+>
+</avored-select>
+
+<avored-select
+    label-text="{{ __('avored::catalog.property.data_type') }}"
+>
+</avored-select>
+
+<avored-select
+    label-text="{{ __('avored::catalog.property.data_type') }}"
+></avored-select>
+
+
+{{-- <a-form-item
     @if ($errors->has('data_type'))
         validate-status="error"
         help="{{ $errors->first('data_type') }}"
@@ -58,7 +74,7 @@
         @endforeach
     </a-select>
 </a-form-item>
-<input type="hidden" name="data_type" v-model="data_type" />
+<input type="hidden" name="data_type" v-model="data_type" /> --}}
 
 <a-form-item
     @if ($errors->has('field_type'))
@@ -168,4 +184,3 @@
     ></a-icon>
     </a-input>
 </a-form-item>
-
