@@ -16,6 +16,7 @@
             :name="fieldName"   
             class="px-3 flex-1 w-full py-2 outline-none focus:shadow focus:border rounded border block border-gray-400"
             :class="inputClass"
+            :disabled="isDisabled"
             v-model="changeValue"
         />
       </div>
@@ -33,7 +34,8 @@ export default {
     inputType: { type: [String], default: "text" },
     initValue: { type: [String], default: "" },
     errorText: { type: [String], default: "" },
-    fieldName: { type: [String], default: "" }
+    fieldName: { type: [String], default: "" },
+    isDisabled: { type: [Boolean], default: false },
   },
   data() {
     return {

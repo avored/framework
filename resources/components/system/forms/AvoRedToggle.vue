@@ -39,6 +39,7 @@ export default {
         errorText: { type: [String], default: ''},
         fieldName: { type: [String], default: ''},
         toggleOnValue: { type: [String, Number], default: 1},
+        toggleOffValue: { type: [String, Number], default: 0},
     },
     data() {
         return {
@@ -52,7 +53,7 @@ export default {
         toggleChange() {
             if (this.toggle) {
                 this.toggle = false
-                this.changeValue = 0
+                this.changeValue = this.toggleOffValue
                 this.toggleBgClass = 'bg-gray-200'
                 this.toggleTransitionClass = 'translate-x-0'
             } else if (!this.toggle) {

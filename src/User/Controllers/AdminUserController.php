@@ -85,10 +85,11 @@ class AdminUserController extends Controller
     public function edit(AdminUser $adminUser)
     {
         $tabs = Tab::get('user.admin-user');
+        $languageOptions = ['en' => 'English'];
         $roleOptions = $this->roleRepository->options();
 
         return view('avored::user.admin-user.edit')
-            ->with(compact('adminUser', 'roleOptions', 'tabs'));
+            ->with(compact('adminUser', 'roleOptions', 'tabs', 'languageOptions'));
     }
 
     /**

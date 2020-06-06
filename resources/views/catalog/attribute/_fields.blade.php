@@ -1,77 +1,33 @@
-<a-form-item
-    @if ($errors->has('name'))
-        validate-status="error"
-        help="{{ $errors->first('name') }}"
-    @endif
-    label="{{ __('avored::catalog.attribute.name') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="name"
-        v-decorator="[
-        'name',
-        {'initialValue': '{{ $attribute->name ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.name') }}"
+        field-name="name"
+        init-value="{{ $attribute->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
+    >
+    </avored-input>
+</div>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.slug') }}"
+        field-name="slug"
+        init-value="{{ $attribute->slug ?? '' }}" 
+        error-text="{{ $errors->first('slug') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('slug'))
-        validate-status="error"
-        help="{{ $errors->first('slug') }}"
-    @endif
-    label="{{ __('avored::catalog.attribute.slug') }}"
->
-    <a-input
-        name="slug"
-        v-decorator="[
-        'slug',
-        {'initialValue': '{{ $attribute->slug ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Slug']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::catalog.attribute.display_as') }}"
+        field-name="display_as"
+        error-text="{{ $errors->first('display_as') }}"
+        :options="{{ json_encode($displayAsOptions) }}"
+        init-value="{{ $attribute->display_as ?? '' }}"
+    >
+    </avored-select>
+</div>
 
-<a-form-item
-    @if ($errors->has('display_as'))
-        validate-status="error"
-        help="{{ $errors->first('display_as') }}"
-    @endif
-    label="{{ __('avored::catalog.attribute.display_as') }}"
->
-    <a-select
-        @change="displayAsChange"
-        v-decorator="[
-        'display_as',
-        {'initialValue': '{{ $attribute->display_as ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => __('avored::catalog.attribute.display_as')]) }}' 
-                }
-            ]
-        }
-        ]"
-    >   
-        @foreach ($displayAsOptions as $val => $label)
-            <a-select-option value="{{ $val }}">{{ $label }}</a-select-option>
-        @endforeach    
-    </a-select>
-</a-form-item>
-<input type="hidden" name="display_as" v-model="display_as" />
 <a-card class="mt-1" v-for="(k, index) in dropdownOptions"
     :key="k"
     >
@@ -93,35 +49,29 @@
             </a-form-item>
         </a-col>
         <a-col :span="12">
-            <a-form-item
-                @if ($errors->has('dropdown_options'))
-                    validate-status="error"
-                    help="{{ $errors->first('dropdown_options') }}"
-                @endif
-                label="{{ __('avored::catalog.attribute.dropdown_options') }}"
-            >
-                <a-input
+            <div class="mt-3 flex w-full">
+                <avored-input
+                    label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
                     :name="dropdownOptionDisplayTextName(k)"
-                    v-decorator="[
-                    `dropdown_options[${k}]`,
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Dropdown Options']) }}' 
-                            }
-                        ]
-                    }
-                    ]"
+                    :init-value="getInitDropdownValue(index)" 
+                    error-text="{{ $errors->first('dropdown_options') }}"
                 >
-                    <a-icon slot="addonAfter"
-                        v-on:click="dropdownOptionChange(index)"
-                        :type="(index == dropdownOptions.length - 1) ? 'plus' : 'minus'"
-                    ></a-icon>
-                </a-input>
-            </a-form-item>
+                    <template slot="addOnAfter">
+                        <button type="button" v-on:click="dropdownOptionChange(index)" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700">
+                            <svg v-if="(index == dropdownOptions.length - 1)" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                            </svg>
+                            <svg v-if="!(index == dropdownOptions.length - 1)" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path class="heroicon-ui" d="M17 11a1 1 0 010 2H7a1 1 0 010-2h10z"/>
+                            </svg>
+                        </button>
+                    </template>
+                </avored-input>
+            </div>
+
+            
 
             <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" />
         </a-col>
     </a-row>
 </a-card>
-

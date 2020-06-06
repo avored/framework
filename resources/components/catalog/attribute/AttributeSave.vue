@@ -1,5 +1,6 @@
 <script>
-import isNil from 'lodash/isNil';
+import isNil from 'lodash/isNil'
+import get from 'lodash/get'
 let id = 0;
 
 export default {
@@ -36,6 +37,9 @@ export default {
                 value += path[key]
             })
             return value;
+        },
+        getInitDropdownValue(index) {
+            return get(this.attribute, `dropdown_options.[${index}]['display_text']`, '')
         },
         handleUploadImageChange(info, record){
             if (info.file.status == "done") {

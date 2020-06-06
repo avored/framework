@@ -1,51 +1,23 @@
-<a-form-item
-    @if ($errors->has('name'))
-        validate-status="error"
-        help="{{ $errors->first('name') }}"
-    @endif
-    label="{{ __('avored::cms.page.name') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="name"
-        v-decorator="[
-        'name',
-        {'initialValue': '{{ $page->name ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::cms.page.name') }}"
+        field-name="name"
+        init-value="{{ $page->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
+    >
+    </avored-input>
+</div>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::cms.page.slug') }}"
+        field-name="slug"
+        init-value="{{ $page->slug ?? '' }}" 
+        error-text="{{ $errors->first('slug') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('slug'))
-        validate-status="error"
-        help="{{ $errors->first('slug') }}"
-    @endif
-    label="{{ __('avored::cms.page.slug') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="slug"
-        v-decorator="[
-        'code',
-        {'initialValue': '{{ $page->slug ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Slug']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
 
-</a-form-item>
 
 <div class="ant-row ant-form-item">
     <div class="ant-form-item-label">
@@ -63,52 +35,26 @@
 </div>
 
 
-<a-form-item
-    @if ($errors->has('meta_title'))
-        validate-status="error"
-        help="{{ $errors->first('meta_title') }}"
-    @endif
-    label="{{ __('avored::cms.page.meta_title') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="meta_title"
-        v-decorator="[
-        'meta_title',
-        {'initialValue': '{{ $page->meta_title ?? '' }}'},
-        {rules: 
-            [
-                {   required: false, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Meta Title']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
-<a-form-item
-    @if ($errors->has('meta_description'))
-        validate-status="error"
-        help="{{ $errors->first('meta_description') }}"
-    @endif
-    label="{{ __('avored::cms.page.meta_description') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="meta_description"
-        v-decorator="[
-        'meta_description',
-        {'initialValue': '{{ $page->meta_description ?? '' }}'},
-        {rules: 
-            [
-                {   required: false, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'meta_description']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::cms.page.meta_title') }}"
+        field-name="meta_title"
+        init-value="{{ $menuGroup->meta_title ?? '' }}" 
+        error-text="{{ $errors->first('meta_title') }}"
+    >
+    </avored-input>
+</div>
+
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::cms.page.meta_description') }}"
+        field-name="meta_description"
+        init-value="{{ $menuGroup->meta_description ?? '' }}" 
+        error-text="{{ $errors->first('meta_description') }}"
+    >
+    </avored-input>
+</div>
+
 
 
 <a-modal

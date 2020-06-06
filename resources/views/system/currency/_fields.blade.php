@@ -1,92 +1,58 @@
-<a-form-item
-    @if ($errors->has('name'))
-        validate-status="error"
-        help="{{ $errors->first('name') }}"
-    @endif
-    label="{{ __('avored::system.currency.name') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="name"
-        v-decorator="[
-        'name',
-        {initialValue: '{{ ($currency->name) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
 
-<a-form-item
-    @if ($errors->has('code'))
-        validate-status="error"
-        help="{{ $errors->first('code') }}"
-    @endif
-    label="{{ __('avored::system.currency.code') }}"
->
-    <a-select default-value="{{ ($currency->code) ?? '' }}"   @change="handleCodeSelectChange" >
-        @foreach($currencyCodeOptions as $code)
-            <a-select-option value="{{ $code }}">Currency Code- {{ $code }}</a-select-option>
-        @endforeach
-    </a-select>
-</a-form-item>
-<input type="hidden" name="code" v-model="code" />
-
-<a-form-item
-    @if ($errors->has('symbol'))
-        validate-status="error"
-        help="{{ $errors->first('symbol') }}"
-    @endif
-    label="{{ __('avored::system.currency.symbol') }}"
->
-    <a-select default-value="{{ ($currency->symbol) ?? '' }}"   @change="handleSymbolSelectChange">
-        @foreach($currencySymbolOptions as $symbol)
-            <a-select-option value="{{ $symbol }}">Currency Symbol- {{ $symbol }}</a-select-option>
-        @endforeach
-    </a-select>
-</a-form-item>
-<input type="hidden" name="symbol" v-model="symbol" />
+ <div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.currency.name') }}"
+        field-name="name"
+        init-value="{{ $currency->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
+    >
+    </avored-input>
+</div>
 
 
-<a-form-item
-    @if ($errors->has('conversation_rate'))
-        validate-status="error"
-        help="{{ $errors->first('conversation_rate') }}"
-    @endif
-    label="{{ __('avored::system.currency.conversation_rate') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="conversation_rate"
-        v-decorator="[
-        'conversation_rate',
-        {initialValue: '{{ ($currency->conversation_rate) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'conversation_rate']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::system.currency.code') }}"
+        error-text="{{ $errors->first('code') }}"
+        field-name="code"
+        :options="{{ json_encode($currencyCodeOptions) }}"
+        init-value="{{ strtoupper($currency->code) ?? '' }}"
+    >
+    </avored-select>
+</div>
 
-<a-form-item
-    @if ($errors->has('status'))
-        validate-status="error"
-        help="{{ $errors->first('status') }}"
-    @endif
-    label="{{ __('avored::system.currency.status') }}"
->
-    <a-switch
-        {{ (isset($currency) && $currency->status) ? 'default-checked' : '' }}
-        v-on:change="isStatusSwitchChange"
-    ></a-switch>
-</a-form-item>
-<input type="hidden" v-model="status" name="status"  />
+
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::system.currency.symbol') }}"
+        error-text="{{ $errors->first('symbol') }}"
+        field-name="symbol"
+        :options="{{ json_encode($currencySymbolOptions) }}"
+        init-value="{{ strtoupper($currency->symbol) ?? '' }}"
+    >
+    </avored-select>
+</div>
+
+
+ <div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.currency.conversation_rate') }}"
+        field-name="conversation_rate"
+        init-value="{{ $currency->conversation_rate ?? '' }}" 
+        error-text="{{ $errors->first('conversation_rate') }}"
+    >
+    </avored-input>
+</div>
+
+
+<div class="mt-3 flex w-full">
+    <avored-toggle
+        label-text="{{ __('avored::system.currency.status') }}"
+        error-text="{{ $errors->first('status') }}"
+        field-name="status"
+        toggle-on-value="ENABLED"
+        toggle-off-value="DISABLED"
+        init-value="{{ $currency->status ?? '' }}"
+    >
+    </avored-toggle>
+</div>

@@ -41,7 +41,7 @@ export default {
       return random_string;
     },
     getInitDropdownValue(index) {
-      if (isNil(this.property.dropdown_options[index]["display_text"])) {
+      if (isNil(this.property.dropdown_options[index])) {
         return ''
       }
       return this.property.dropdown_options[index]["display_text"];

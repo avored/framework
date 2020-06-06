@@ -1,52 +1,27 @@
     <input type="hidden" name="menu_json" v-model="menu_json" />
     <a-col :span="24">
-        <a-form-item
-            @if ($errors->has('name'))
-                validate-status="error"
-                help="{{ $errors->first('name') }}"
-            @endif
-            label="{{ __('avored::cms.menu.name') }}"
-        >
-            <a-input
-                :auto-focus="true"
-                name="name"
-                v-decorator="[
-                'name',
-                {'initialValue': '{{ $menuGroup->name ?? '' }}'},
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
+        
+        <div class="mt-3 flex w-full">
+            <avored-input
+                label-text="{{ __('avored::cms.menu.name') }}"
+                field-name="name"
+                init-value="{{ $menuGroup->name ?? '' }}" 
+                error-text="{{ $errors->first('name') }}"
+            >
+            </avored-input>
+        </div>
+        
     </a-col>
     <a-col :span="24">
-        <a-form-item
-            @if ($errors->has('identifier'))
-                validate-status="error"
-                help="{{ $errors->first('identifier') }}"
-            @endif
-            label="{{ __('avored::cms.menu.identifier') }}"
-        >
-            <a-input
-                name="identifier"
-                v-decorator="[
-                'identifier',
-                {'initialValue': '{{ $menuGroup->identifier ?? '' }}'},
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Identifier']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <div class="mt-3 flex w-full">
+            <avored-input
+                label-text="{{ __('avored::cms.menu.identifier') }}"
+                field-name="identifier"
+                init-value="{{ $menuGroup->identifier ?? '' }}" 
+                error-text="{{ $errors->first('identifier') }}"
+            >
+            </avored-input>
+        </div>
     </a-col>
     <a-col :span="24">
         <a-card title="{{ __('avored::cms.menu.builder') }}">
