@@ -60,7 +60,10 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
     {
         $total = 0;
         $firstDay = $this->getFirstDay();
-        $orders = Order::select('*')->where('created_at', '>', $firstDay)->get();
+        $orders = Order::with('products')
+            ->select('*')
+            ->where('created_at', '>', $firstDay)
+            ->get();
 
         foreach ($orders as $order) {
             foreach ($order->products as $product) {

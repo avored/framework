@@ -32,7 +32,7 @@ class PageController
      */
     public function index()
     {
-        $pages = $this->pageRepository->all();
+        $pages = $this->pageRepository->paginate();
 
         return view('avored::cms.page.index')
             ->with(compact('pages'));

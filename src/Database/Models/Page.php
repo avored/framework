@@ -3,9 +3,8 @@
 namespace AvoRed\Framework\Database\Models;
 
 use AvoRed\Framework\Support\Facades\Widget;
-use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class Page extends BaseModel
 {
     /**
      * Widget Content Tag
