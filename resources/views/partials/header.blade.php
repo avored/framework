@@ -1,11 +1,12 @@
 <a-layout-header class="bg-white z-1 p-0">
     <a-menu class="float-left" mode="horizontal">
-        <a-menu-item>
-            <a-icon 
-                class="trigger header-trigger" 
-                :type="collapsed ? 'menu-unfold' : 'menu-fold'" 
-                @click="()=> collapsed = !collapsed">
-            </a-icon>
+        <a-menu-item class="border-b-0">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="w-4 h-4"
+                @click="()=> collapsed = !collapsed"
+            ><path d="M1 1h18v2H1V1zm6 8h12v2H7V9zm-6 8h18v2H1v-2zM7 5h12v2H7V5zm0 8h12v2H7v-2zM1 6l4 4-4 4V6z"/>
+            </svg>
         </a-menu-item>
     </a-menu>
     <a-menu class="header-nav" mode="horizontal">

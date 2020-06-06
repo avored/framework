@@ -25,22 +25,4 @@
         base-url="{{ asset(config('avored.admin_url')) }}"
 ></product-table>
 
-
-{{-- <a-row type="flex" justify="center">
-    <a-col :span="24">        
-        <product-table inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table :columns="columns" row-key="id" :data-source="{{ $products }}">
-                <span slot="action" slot-scope="text, record">
-                    
-                    <a :href="getEditUrl(record)">
-                        <a-icon type="edit"></a-icon>
-                    </a>
-                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deleteProduct(record)">
-                        <a-icon type="delete"></a-icon>
-                    </a>
-                </span>
-            </a-table>
-        </product-table>
-    </a-col>
-</a-row> --}}
 @endsection
