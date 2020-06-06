@@ -25,6 +25,7 @@ window.AvoRed = AvoRed
 Vue.component('avored-table', () => import('../components/system/forms/AvoRedTable'))
 Vue.component('avored-input', () => import('../components/system/forms/AvoRedInput'))
 Vue.component('avored-select', () => import('../components/system/forms/AvoRedSelect'))
+Vue.component('avored-toggle', () => import('../components/system/forms/AvoRedToggle'))
 
 
 

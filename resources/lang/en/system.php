@@ -16,7 +16,9 @@ return [
         'name' => 'Name',
         'slug' => 'Slug',
         'meta_title' => 'Meta Title',
-        'meta_description' => 'Meta Description'
+        'meta_description' => 'Meta Description',
+        'sort_order' => 'Sort Order',
+        'dropdown_option' => 'Dropdown Option',
     ],
     'common' => [
         'list' => 'List',

@@ -26,7 +26,7 @@ class Property extends BaseModel
      * Appended attribute for the model.
      * @var array
      */
-    protected $appends = ['dropdown'];
+    //protected $appends = ['dropdown'];
 
     /**
      * The available data types for the product property.
