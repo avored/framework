@@ -86,7 +86,7 @@ class ProductRepository extends BaseRepository implements ProductModelInterface
      * Model object for the repository
      * @return \AvoRed\Framework\Database\Models\Product $model
      */
-    public function model(): Product
+    public function model()
     {
         return $this->model;
     }

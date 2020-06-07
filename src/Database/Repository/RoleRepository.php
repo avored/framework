@@ -25,7 +25,7 @@ class RoleRepository extends BaseRepository implements RoleModelInterface
      * Get the model for the repository
      * @return Role 
      */
-    public function model(): Role
+    public function model()
     {
         return $this->model;
     }

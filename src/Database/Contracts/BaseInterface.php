@@ -28,14 +28,14 @@ interface BaseInterface
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\BaseModel $model
      */
-    public function create(array $data) : BaseModel;
+    public function create(array $data);
 
     /**
      * Find Model Resource into a database.
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Model $model
      */
-    public function find(int $id) : BaseModel;
+    public function find(int $id);
 
     /**
      * Delete Model Resource from a database.

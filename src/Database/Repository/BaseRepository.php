@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -13,7 +12,7 @@ abstract class BaseRepository
      * All the Repository class must have an model method which should return the Model Class
      * 
      */
-    abstract function model(): BaseModel;
+    abstract function model();
 
     /**
      * Get Query Builder of the model
@@ -40,7 +39,7 @@ abstract class BaseRepository
      * @param array $data
      * @return \AvoRed\Framework\Database\Models\BaseModel $model
      */
-    public function create(array $data): BaseModel
+    public function create(array $data)
     {
         return $this->model()->create($data);
     }
@@ -50,7 +49,7 @@ abstract class BaseRepository
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Model $category
      */
-    public function find(int $id): BaseModel
+    public function find(int $id)
     {
         return $this->model()->find($id);
     }
