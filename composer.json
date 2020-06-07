@@ -27,7 +27,7 @@
 		"barryvdh/laravel-dompdf": "^0.8.4",
 		"laravel/helpers": "^1.1",
 		"spatie/laravel-view-models": "^1.2",
-		"laravel/framework" : "^5.8|^6.0|^6.1|^6.2",
+		"laravel/framework" : "^5.8.15|^6.0|^7.0",
 		"rebing/graphql-laravel": "^2.0"
 	},
 	"require-dev" : {
