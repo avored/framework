@@ -40,10 +40,8 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a>
                 </div>
-
-                
             </form>
-            </div>
+        </div>
         </category-save>
 </div>
 @endsection

@@ -22,10 +22,10 @@ window.AvoRed = AvoRed
 
 /*************** AVORED VUE COMPONENTS ***************/
 
-Vue.component('avored-table', () => import('../components/system/forms/AvoRedTable'))
-Vue.component('avored-input', () => import('../components/system/forms/AvoRedInput'))
-Vue.component('avored-select', () => import('../components/system/forms/AvoRedSelect'))
-Vue.component('avored-toggle', () => import('../components/system/forms/AvoRedToggle'))
+Vue.component('avored-table', require('../components/system/forms/AvoRedTable').default)
+Vue.component('avored-input', require('../components/system/forms/AvoRedInput').default)
+Vue.component('avored-select', require('../components/system/forms/AvoRedSelect').default)
+Vue.component('avored-toggle', require('../components/system/forms/AvoRedToggle').default)
 
 
 
@@ -55,6 +55,8 @@ import AntDatePicker from 'ant-design-vue/lib/date-picker'
 Vue.component('a-date-picker', AntDatePicker)
 Vue.component('a-icon', () => import('ant-design-vue/lib/icon'))
 Vue.component('a-avatar', () => import('ant-design-vue/lib/avatar'))
+Vue.component('a-divider', () => import('ant-design-vue/lib/divider'))
+Vue.component('a-table', () => import('ant-design-vue/lib/table'))
 Vue.component('a-row', () => import('ant-design-vue/lib/row'))
 Vue.component('a-col', () => import('ant-design-vue/lib/col'))
 Vue.component('a-drawer', () => import('ant-design-vue/lib/drawer'))

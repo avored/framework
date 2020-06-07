@@ -2,54 +2,30 @@
  <a-row :gutter="15" type="flex">
     <a-col :span="12">
     
-        <a-form-item
-            @if ($errors->has('name'))
-                validate-status="error"
-                help="{{ $errors->first('name') }}"
-            @endif
-            label="{{ __('avored::catalog.product.name') }}">
-            <a-input
-                :auto-focus="true"
-                name="name"
-                v-decorator="[
-                'name',
-                {{ ($product->name !== '') ? "{'initialValue': '" . $product->name . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <div class="mt-3 flex w-full">
+            <avored-input
+                label-text="{{ __('avored::system.fields.name') }}"
+                field-name="name"
+                init-value="{{ $product->name ?? '' }}" 
+                error-text="{{ $errors->first('name') }}"
+            >
+            </avored-input>
+        </div>
+
     </a-col>
 
 
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('slug'))
-                validate-status="error"
-                help="{{ $errors->first('slug') }}"
-            @endif
-            label="{{ __('avored::catalog.product.slug') }}">
-            <a-input
-                name="slug"
-                v-decorator="[
-                'slug',
-                {{ ($product->slug !== '') ? "{'initialValue': '" . $product->slug . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Slug']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
+        <div class="mt-3 flex w-full">
+            <avored-input
+                label-text="{{ __('avored::system.fields.slug') }}"
+                field-name="slug"
+                init-value="{{ $product->slug ?? '' }}" 
+                error-text="{{ $errors->first('slug') }}"
+            >
+            </avored-input>
+        </div>
 
-        </a-form-item>
     </a-col>
 
 </a-row>
@@ -125,53 +101,26 @@
 
 <a-row :gutter="15" type="flex">
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('sku'))
-                validate-status="error"
-                help="{{ $errors->first('sku') }}"
-            @endif
-            label="{{ __('avored::catalog.product.sku') }}">
-            <a-input
-                name="sku"
-                v-decorator="[
-                'sku',
-                {{ ($product->sku !== '') ? "{'initialValue': '" . $product->sku . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'SKU']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <div class="mt-3 flex w-full">
+            <avored-input
+                label-text="{{ __('avored::system.fields.sku') }}"
+                field-name="sku"
+                init-value="{{ $product->sku ?? '' }}" 
+                error-text="{{ $errors->first('sku') }}"
+            >
+            </avored-input>
+        </div>
+
     </a-col>
 
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('barcode'))
-                validate-status="error"
-                help="{{ $errors->first('barcode') }}"
-            @endif
-            label="{{ __('avored::catalog.product.barcode') }}">
-            <a-input
-            
-                name="barcode"
-                v-decorator="[
-                'barcode',
-                {{ ($product->barcode !== '') ? "{'initialValue': '" . $product->barcode . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Barcode']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-
-        </a-form-item>
+        <avored-input
+                label-text="{{ __('avored::system.fields.barcode') }}"
+                field-name="barcode"
+                init-value="{{ $product->barcode ?? '' }}" 
+                error-text="{{ $errors->first('barcode') }}"
+            >
+            </avored-input>
     </a-col>
 </a-row>
 
@@ -193,279 +142,141 @@
 
 <a-row :gutter="15" type="flex">
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('qty'))
-                validate-status="error"
-                help="{{ $errors->first('qty') }}"
-            @endif
-            label="{{ __('avored::catalog.product.qty') }}">
-            <a-input
-                name="qty"
-                v-decorator="[
-                'qty',
-                {{ ($product->qty !== '') ? "{'initialValue': '" . $product->qty . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Qty']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.qty') }}"
+            field-name="qty"
+            init-value="{{ $product->qty ?? '' }}" 
+            error-text="{{ $errors->first('qty') }}"
+        >
+        </avored-input>
     </a-col>
 
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('status'))
-                validate-status="error"
-                help="{{ $errors->first('status') }}"
-            @endif
-            label="{{ __('avored::catalog.product.status') }}">
-            
-            <a-switch 
-                @if ($product->status)
-                    default-checked
-                @endif
-                @change="handleStatusChange"></a-switch>
-        </a-form-item>
-        <input type="hidden" name="status" v-model="status" />
+        <div class="mt-3 flex w-full">
+            <avored-toggle
+                label-text="{{ __('avored::system.fields.status') }}"
+                error-text="{{ $errors->first('status') }}"
+                field-name="status"
+                init-value="{{ $product->status ?? '' }}"
+            >
+            </avored-toggle>
+        </div>
+        
     </a-col>
 </a-row>
 
 <a-row :gutter="15" type="flex">
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('track_stock'))
-                validate-status="error"
-                help="{{ $errors->first('track_stock') }}"
-            @endif
-            label="{{ __('avored::catalog.product.track_stock') }}">
-            
-            <a-switch
-                @if ($product->track_stock)
-                    default-checked
-                @endif
-                @change="handleTrackStockChange"></a-switch>
-        </a-form-item>
-        <input type="hidden" name="track_stock" v-model="track_stock" />
+
+        <avored-toggle
+            label-text="{{ __('avored::system.fields.track_stock') }}"
+            error-text="{{ $errors->first('track_stock') }}"
+            field-name="track_stock"
+            init-value="{{ $product->track_stock ?? '' }}"
+        >
+        </avored-toggle>
+
     </a-col>
 
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('is_taxable'))
-                validate-status="error"
-                help="{{ $errors->first('is_taxable') }}"
-            @endif
-            label="{{ __('avored::catalog.product.is_taxable') }}">
-            
-            <a-switch
-                @if ($product->is_taxable)
-                    default-checked
-                @endif
-                @change="handleIsTaxableChange"></a-switch>
-        </a-form-item>
-        <input type="hidden" name="is_taxable" v-model="is_taxable" />
+
+        <avored-toggle
+            label-text="{{ __('avored::system.fields.is_taxable') }}"
+            error-text="{{ $errors->first('is_taxable') }}"
+            field-name="is_taxable"
+            init-value="{{ $product->is_taxable ?? '' }}"
+        >
+        </avored-toggle>
+
     </a-col>
 </a-row>
 
-<a-row :gutter="15" type="flex">
+<a-row :gutter="15" class="mt-3" type="flex">
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('price'))
-                validate-status="error"
-                help="{{ $errors->first('price') }}"
-            @endif
-            label="{{ __('avored::catalog.product.price') }}">
-            <a-input
-                name="price"
-                v-decorator="[
-                    'price',
-                    {{ ($product->price !== '') ? "{'initialValue': '" . $product->price . "'}," : "" }}
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Price']) }}' 
-                            }
-                        ]
-                    }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.price') }}"
+            field-name="price"
+            init-value="{{ $product->price ?? '' }}" 
+            error-text="{{ $errors->first('price') }}"
+        >
+        </avored-input>
     </a-col>
 
 
     <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('cost_price'))
-                validate-status="error"
-                help="{{ $errors->first('cost_price') }}"
-            @endif
-            label="{{ __('avored::catalog.product.cost_price') }}">
-            <a-input
-                name="cost_price"
-                v-decorator="[
-                    'cost_price',
-                    {{ ($product->cost_price !== '') ? "{'initialValue': '" . $product->cost_price . "'}," : "" }}
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Cost Price']) }}' 
-                            }
-                        ]
-                    }
-                ]"
-            ></a-input>
-
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.cost_price') }}"
+            field-name="cost_price"
+            init-value="{{ $product->cost_price ?? '' }}" 
+            error-text="{{ $errors->first('cost_price') }}"
+        >
+        </avored-input>
     </a-col>
 
 </a-row>
 
 
-<a-row :gutter="15" type="flex">
+<a-row :gutter="15" class="mt-3" type="flex">
     <a-col :span="6">
-        <a-form-item
-            @if ($errors->has('length'))
-                validate-status="error"
-                help="{{ $errors->first('length') }}"
-            @endif
-            label="{{ __('avored::catalog.product.length') }}">
-            <a-input
-                name="length"
-                v-decorator="[
-                    'length',
-                    {{ ($product->length !== '') ? "{'initialValue': '" . $product->length . "'}," : "" }}
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Length']) }}' 
-                            }
-                        ]
-                    }
-                ]"
-            ></a-input>
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.length') }}"
+            field-name="length"
+            init-value="{{ $product->length ?? '' }}" 
+            error-text="{{ $errors->first('length') }}"
+        >
+        </avored-input>
     </a-col>
 
 
     <a-col :span="6">
-        <a-form-item
-            @if ($errors->has('width'))
-                validate-status="error"
-                help="{{ $errors->first('width') }}"
-            @endif
-            label="{{ __('avored::catalog.product.width') }}">
-            <a-input
-                name="width"
-                v-decorator="[
-                    'width',
-                    {{ ($product->width !== '') ? "{'initialValue': '" . $product->width . "'}," : "" }}
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Width']) }}' 
-                            }
-                        ]
-                    }
-                ]"
-            ></a-input>
-
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.width') }}"
+            field-name="width"
+            init-value="{{ $product->width ?? '' }}" 
+            error-text="{{ $errors->first('width') }}"
+        >
+        </avored-input>
     </a-col>
     <a-col :span="6">
-        <a-form-item
-            @if ($errors->has('height'))
-                validate-status="error"
-                help="{{ $errors->first('height') }}"
-            @endif
-            label="{{ __('avored::catalog.product.height') }}">
-            <a-input
-                name="height"
-                v-decorator="[
-                    'height',
-                    {{ ($product->height !== '') ? "{'initialValue': '" . $product->height . "'}," : "" }}
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'Height']) }}' 
-                            }
-                        ]
-                    }
-                ]"
-            ></a-input>
-
-        </a-form-item>
+        <avored-input
+            label-text="{{ __('avored::system.fields.height') }}"
+            field-name="height"
+            init-value="{{ $product->height ?? '' }}" 
+            error-text="{{ $errors->first('height') }}"
+        >
+        </avored-input>
     </a-col>
     <a-col :span="6">
-        <a-form-item
-        @if ($errors->has('weight'))
-            validate-status="error"
-            help="{{ $errors->first('weight') }}"
-        @endif
-        label="{{ __('avored::catalog.product.weight') }}">
-        <a-input
-            name="weight"
-            v-decorator="[
-                'weight',
-                {{ ($product->weight !== '') ? "{'initialValue': '" . $product->weight . "'}," : "" }}
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Weight']) }}' 
-                        }
-                    ]
-                }
-            ]"
-        ></a-input>
+        <avored-input
+            label-text="{{ __('avored::system.fields.weight') }}"
+            field-name="weight"
+            init-value="{{ $product->weight ?? '' }}" 
+            error-text="{{ $errors->first('weight') }}"
+        >
+        </avored-input>
     </a-col>
 </a-form-item>
 
 </a-row>
 
+<div class="mt-3">
+    <avored-input
+        label-text="{{ __('avored::system.fields.meta_title') }}"
+        field-name="meta_title"
+        init-value="{{ $product->meta_title ?? '' }}" 
+        error-text="{{ $errors->first('meta_title') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('meta_title'))
-        validate-status="error"
-        help="{{ $errors->first('meta_title') }}"
-    @endif
-    label="{{ __('avored::catalog.product.meta_title') }}">
-    <a-input
-        name="meta_title"
-        v-decorator="[
-            'meta_title',
-            {'initialValue': '{{ $product->meta_title ?? '' }}'},
-            {rules: 
-                [
-                    {   required: false, 
-                        message: '{{ __('avored::validation.required', ['attribute' => 'Meta Title']) }}' 
-                    }
-                ]
-            }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3">
+    <avored-input
+        label-text="{{ __('avored::system.fields.meta_description') }}"
+        field-name="meta_description"
+        init-value="{{ $product->meta_description ?? '' }}" 
+        error-text="{{ $errors->first('meta_description') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('meta_description'))
-        validate-status="error"
-        help="{{ $errors->first('meta_description') }}"
-    @endif
-    label="{{ __('avored::catalog.product.meta_description') }}">
-    <a-input
-        name="meta_description"
-        v-decorator="[
-            'meta_description',
-            {'initialValue': '{{ $product->meta_description ?? '' }}'},
-            {rules: 
-                [
-                    {   required: false, 
-                        message: '{{ __('avored::validation.required', ['attribute' => 'meta_description']) }}' 
-                    }
-                ]
-            }
-        ]"
-    ></a-input>
-</a-form-item>
 </a-card>
