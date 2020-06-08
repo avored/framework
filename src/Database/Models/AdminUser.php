@@ -89,7 +89,7 @@ class AdminUser extends BaseModel
      * To check if user has permission to access the given route name.
      * @return bool
      */
-    public function hasPermission($routeName)
+    public function hasPermission($routeName) : bool
     {
         if ($this->is_super_admin) {
             return true;

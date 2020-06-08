@@ -10,25 +10,25 @@
 </div>
 
 
-<div class="mt-3 flex w-full">
+<div class="mt-3 w-full">
     <avored-select
         label-text="{{ __('avored::system.currency.code') }}"
         error-text="{{ $errors->first('code') }}"
         field-name="code"
         :options="{{ json_encode($currencyCodeOptions) }}"
-        init-value="{{ strtoupper($currency->code) ?? '' }}"
+        init-value="{{ (isset($currency->code)) ? strtoupper($currency->code) : '' }}"
     >
     </avored-select>
 </div>
 
 
-<div class="mt-3 flex w-full">
+<div class="mt-3 w-full">
     <avored-select
         label-text="{{ __('avored::system.currency.symbol') }}"
         error-text="{{ $errors->first('symbol') }}"
         field-name="symbol"
         :options="{{ json_encode($currencySymbolOptions) }}"
-        init-value="{{ strtoupper($currency->symbol) ?? '' }}"
+        init-value="{{ (isset($currency->code)) ? strtoupper($currency->symbol) : '' }}"
     >
     </avored-select>
 </div>

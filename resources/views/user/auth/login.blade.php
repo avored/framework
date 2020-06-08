@@ -9,7 +9,7 @@
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <script defer src="{{ mix('avored-admin/js/app.js') }}"></script>
+    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
     
     <!-- Styles -->
     <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">

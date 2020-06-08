@@ -27,7 +27,7 @@
                     </span>
                 </button>
                 <ul @click="selectedOption" v-if="dropdownToggle" 
-                    class="w-full mt-1 z-10 bg-white border border-gray-500 absolute h-64 overflow-y-scroll rounded shadow text-gray-700">
+                    class="dropdown-options w-full mt-1 z-10 bg-white border border-gray-500 absolute overflow-y-scroll rounded shadow text-gray-700">
                     
                     <template v-for="(optionLabel, optionValue) in options">
                         <li :key="optionValue" :value="optionValue"
@@ -88,3 +88,8 @@ export default {
     }
 };
 </script>
+<style scoped>
+.dropdown-options {
+    max-height: 9rem;
+}
+</style>

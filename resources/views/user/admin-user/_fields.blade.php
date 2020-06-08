@@ -88,7 +88,7 @@
 
 
 
-<div class="mt-3 flex w-full">
+<div class="mt-3 w-full">
     <avored-select
         label-text="{{ __('avored::system.admin-user.language') }}"
         error-text="{{ $errors->first('language') }}"
@@ -99,7 +99,7 @@
     </avored-select>
 </div>
 
-<div class="mt-3  mb-6 flex w-full">
+<div class="mt-3 mb-6 w-full">
     <avored-select
         label-text="{{ __('avored::system.admin-user.role_id') }}"
         error-text="{{ $errors->first('role_id') }}"

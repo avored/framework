@@ -56,10 +56,11 @@ class AdminUserController extends Controller
     public function create()
     {
         $tabs = Tab::get('user.admin-user');
+        $languageOptions = ['en' => 'English'];
         $roleOptions = $this->roleRepository->options();
 
         return view('avored::user.admin-user.create')
-            ->with(compact('roleOptions', 'tabs'));
+            ->with(compact('roleOptions', 'tabs', 'languageOptions'));
     }
 
     /**
