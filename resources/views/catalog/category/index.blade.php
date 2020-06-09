@@ -9,22 +9,12 @@
 @endsection
 
 @section('content')
-<div class="flex justify-end mt-3">
-    <a 
-        href="{{ route('admin.category.create') }}"
-        class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
-        <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
-        </svg>
-        {{ __('avored::system.btn.create') }}
-    </a>
-</div>
 
-<div>
-    <category-table
-        :init-categories="{{ json_encode($categories) }}"
-        base-url="{{ asset(config('avored.admin_url')) }}"
-    ></category-table>
-</div>
+<category-table
+    :init-categories="{{ json_encode($categories) }}"
+    create-url="{{ route('admin.category.create') }}"
+    base-url="{{ asset(config('avored.admin_url')) }}"
+></category-table>
+
 
 @endsection

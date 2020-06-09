@@ -1,4 +1,13 @@
 <template>
+  <div>
+    <div class="flex justify-end mt-3">
+      <avored-button 
+        button-text="Create"
+        html-type="link" 
+        :link-url="createUrl">
+
+      </avored-button>
+    </div>
     <div class="mt-3">
          <avored-table
             :columns="columns"
@@ -30,8 +39,11 @@
           </template>
         </avored-table>
     </div>
+  </div>
 </template>
 <script>
+
+import AvoRedButton from '../../system/forms/AvoRedButtton'
 
 const columns = [
   {
@@ -53,7 +65,10 @@ const columns = [
 ];
 
 export default {
-  props: ['baseUrl', 'initCategories'],
+  props: ['baseUrl', 'initCategories', 'createUrl'],
+  components: {
+    'avored-button': AvoRedButton
+  },
   data () {
     return {
         columns,    
