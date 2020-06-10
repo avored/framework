@@ -27,7 +27,8 @@
 		"barryvdh/laravel-dompdf": "^0.8.4",
 		"laravel/helpers": "^1.1",
 		"laravel/framework" : "^5.8.15|^6.0|^7.0",
-		"rebing/graphql-laravel": "^5.1"
+		"rebing/graphql-laravel": "^5.1",
+		"laravel/ui": "^2.0"
 	},
 	"require-dev" : {
 		"phpunit/phpunit": "^8.0|^9.0",
