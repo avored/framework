@@ -1,24 +1,42 @@
-name: AvoRed
+name: "Run Tests"
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  avored-tests:
+  test:
 
     runs-on: ubuntu-latest
-    
+    strategy:
+      fail-fast: true
+      matrix:
+        # php: ['7.2', '7.3', '7.4']
+        php: ['7.2']
+        laravel: ['5.8.*']
+        include:
+          - laravel: '5.8.*'
+            testbench: '3.8.*'
+       
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-  
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: vendor/bin/phpunit
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, iconv
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "symfony/console:>=4.3.4" --no-interaction --no-update
+          composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
+      - name: Execute tests
+        run: vendor/bin/phpunit

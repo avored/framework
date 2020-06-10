@@ -1,60 +1,41 @@
-<a-form-item
-    @if ($errors->has('name'))
-        validate-status="error"
-        help="{{ $errors->first('name') }}"
-    @endif
-    label="{{ __('avored::system.role.name') }}">
-    <a-input
-        :auto-focus="true"
-        name="name"
-        v-decorator="[
-        'name',
-        {initialValue: '{{ ($role->name) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                }
-            ]
-        }
-        ]"></a-input>
-</a-form-item>
 
-<a-form-item
-    @if ($errors->has('description'))
-        validate-status="error"
-        help="{{ $errors->first('description') }}"
-    @endif
-    label="{{ __('avored::system.role.description') }}">
+ <div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.role.name') }}"
+        field-name="name"
+        init-value="{{ $role->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
+    >
+    </avored-input>
+</div>
 
-    <a-input
-        name="description"
-        default-value="{{ $role->description ?? '' }}"
-       ></a-input>
-</a-form-item>
+ <div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.role.description') }}"
+        field-name="description"
+        init-value="{{ $role->description ?? '' }}" 
+        error-text="{{ $errors->first('description') }}"
+    >
+    </avored-input>
+</div>
+
 
 <a-row type="flex" :gutter="16">
     @foreach ($permissions as $group)
         <a-col class="mt-1"  :span="6">
             <a-card title="{{ $group->label() }}">
                 @foreach ($group->permissionList as $permission)
-                    <div class="{{ ($loop->index > 0) ? 'mt-1' : ''  }} ">
-                        <a-switch
-                            {{ (isset($role) && $role->hasPermission($permission->routes())) ? 'default-checked' : '' }}
-                            key="{{ $permission->key() }}"
-                            v-on:change="onUserPermissionSwitchChange($event, '{{ $permission->key() }}')"
+                    <div class="mt-3 flex w-full">
+                        <avored-toggle
+                            label-text="{{ $permission->label() }}"
+                            field-name="permissions[{{ $permission->routes() }}]"
+                            {{-- toggle-on-value="ENABLED"
+                            toggle-off-value="DISABLED" --}}
+                            init-value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0 }}"
                         >
-                        </a-switch>
-                        
-                        <input
-                            id="permissions-{{ $permission->key() }}"
-                            type="hidden"
-                            value="{{ (isset($role)) ? $role->hasPermission($permission->routes()) : 0 }}"
-                            name="permissions[{{ $permission->routes() }}]"  />
-                        {{ $permission->label() }}
+                        </avored-toggle>
                     </div>
                 @endforeach
-
             </a-card>
         </a-col>
             

@@ -2,12 +2,34 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\OrderProduct;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
+use AvoRed\Framework\Order\Events\OrderProductCreated;
 
-class OrderProductRepository implements OrderProductModelInterface
+class OrderProductRepository extends BaseRepository implements OrderProductModelInterface
 {
+    /**
+     * @var OrderProduct $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the OrderProduct Repository
+     */
+    public function __construct()
+    {
+        $this->model = new OrderProduct();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return OrderProduct 
+     */
+    public function model(): OrderProduct
+    {
+        return $this->model;
+    }
+
     /**
      * Create OrderProduct Resource into a database.
      * @param array $data
@@ -15,35 +37,9 @@ class OrderProductRepository implements OrderProductModelInterface
      */
     public function create(array $data): OrderProduct
     {
-        return OrderProduct::create($data);
-    }
+        $orderProduct = parent::create($data);
+        event(new OrderProductCreated($orderProduct));
 
-    /**
-     * Find OrderProduct Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\OrderProduct $orderProduct
-     */
-    public function find(int $id): OrderProduct
-    {
-        return OrderProduct::find($id);
-    }
-
-    /**
-     * Delete OrderProduct Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return OrderProduct::destroy($id);
-    }
-
-    /**
-     * Get all the categories from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $orderProducts
-     */
-    public function all() : Collection
-    {
-        return OrderProduct::all();
+        return $orderProduct;
     }
 }

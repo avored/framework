@@ -31,7 +31,7 @@ class CategoryController
      */
     public function index()
     {
-        $categories = $this->categoryRepository->all();
+        $categories = $this->categoryRepository->paginate();
 
         return view('avored::catalog.category.index')
             ->with(compact('categories'));

@@ -3,7 +3,7 @@
 namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Tests\BaseTestCase;
-use AvoRed\Framework\System\Controllers\LoginController;
+use AvoRed\Framework\User\Controllers\LoginController;
 
 /** @runInSeparateProcess */
 class UserTest extends BaseTestCase

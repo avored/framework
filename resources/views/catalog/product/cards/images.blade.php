@@ -11,27 +11,34 @@
     </a-button>
 </a-upload>
 
+<div class="mt-3" v-for="item in productImages" :key="item.id">
 
-    <a-row :gutter="15" v-for="item in productImages" :key="item.id">
-        <a-col :span="3">
+    <div class="flex justify-center items-center">
+        <div class="w-1/6">
             <a-avatar :size="64" shape="square"  :src="'/storage/' + item.path"></a-avatar>
-        </a-col>
-        <a-col :span="9">
-            <a-input 
-                placeholder="Image alt text"
-                :default-value="item.alt_text"
-                :name="'images[' + item.id +'][alt_text]'"/>
-        </a-col>
-        <a-col :span="6"> 
+        </div>
+        <div class="w-2/6">
+            <avored-input
+                label-text="{{ __('avored::system.fields.alt_text') }}"
+                :name="'images[' + item.id +'][alt_text]'"
+                :init-value="item.alt_text" 
+                error-text="{{ $errors->first('alt_text') }}"
+            >
+            </avored-input>
+        </div>
+        <div class="w-2/6">
             <input type="radio"
+                class="mt-3 ml-5"
                 name="is_main_image"
                 :checked="item.is_main_image"
                 :value="item.id">
             {{ __('Is main image') }}
-        </a-col>
-         <a-col :span="6">
-             <a-button type="danger" @click="deleteImage(item.id)" icon="delete">
+        </div
+        >
+        <div class="w-1/6">
+            <a-button type="danger" @click="deleteImage(item.id)" icon="delete">
              </a-button>
-        </a-col>
-    </a-row>
 
+        </div>
+    </div>
+</div>

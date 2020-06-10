@@ -1,171 +1,97 @@
-<a-form-item
-    @if ($errors->has('name'))
-        validate-status="error"
-        help="{{ $errors->first('name') }}"
-    @endif
-    label="{{ __('avored::catalog.property.name') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="name"
-        v-decorator="[
-        'name',
-        {'initialValue': '{{ $property->name ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
-
-<a-form-item
-    @if ($errors->has('slug'))
-        validate-status="error"
-        help="{{ $errors->first('slug') }}"
-    @endif
-    label="{{ __('avored::catalog.property.slug') }}"
->
-    <a-input
-        name="slug"
-        v-decorator="[
-        'slug',
-        {'initialValue': '{{ $property->slug ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Slug']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
-
-<a-form-item
-    @if ($errors->has('data_type'))
-        validate-status="error"
-        help="{{ $errors->first('data_type') }}"
-    @endif
-    label="{{ __('avored::catalog.property.data_type') }}"
->
-    <a-select default-value="{{ $property->data_type ?? '' }}" v-on:change="dataTypeChange">
-        @foreach ($dataTypeOptions as $dataType => $label)
-            <a-select-option value="{{ $dataType }}">{{ $label }}</a-select-option>
-        @endforeach
-    </a-select>
-</a-form-item>
-<input type="hidden" name="data_type" v-model="data_type" />
-
-<a-form-item
-    @if ($errors->has('field_type'))
-        validate-status="error"
-        help="{{ $errors->first('field_type') }}"
-    @endif
-    label="{{ __('avored::catalog.property.field_type') }}"
->
-    <a-select default-value="{{ $property->field_type ?? '' }}" v-on:change="fieldTypeChange">
-        @foreach ($fieldTypeOptions as $fieldType => $label)
-            <a-select-option value="{{ $fieldType }}">{{ $label }}</a-select-option>
-        @endforeach
-    </a-select>
-</a-form-item>
-<input type="hidden" name="field_type" v-model="field_type" />
-
-<a-form-item
-    @if ($errors->has('use_for_all_products'))
-        validate-status="error"
-        help="{{ $errors->first('use_for_all_products') }}"
-    @endif
-    label="{{ __('avored::catalog.property.use_for_all_products') }}">
-    <a-switch
-        {{ (isset($property) && $property->use_for_all_products) ? 'default-checked' : '' }}
-        v-on:change="useForAllProductSwitchChange"
-    ></a-switch>
-</a-form-item>
-<input type="hidden" name="use_for_all_products" v-model="use_for_all_products" />
-
-<a-form-item
-    @if ($errors->has('use_for_category_filter'))
-        validate-status="error"
-        help="{{ $errors->first('use_for_category_filter') }}"
-    @endif
-    label="{{ __('avored::catalog.property.use_for_category_filter') }}">
-    <a-switch
-        {{ (isset($property) && $property->use_for_category_filter) ? 'default-checked' : '' }}
-        v-on:change="useForCategoryFilterSwitchChange"
-    ></a-switch>
-</a-form-item>
-<input type="hidden" name="use_for_category_filter" v-model="use_for_category_filter" />
-
-<a-form-item
-    @if ($errors->has('is_visible_frontend'))
-        validate-status="error"
-        help="{{ $errors->first('is_visible_frontend') }}"
-    @endif
-    label="{{ __('avored::catalog.property.is_visible_frontend') }}"
->
-    <a-switch
-        {{ (isset($property) && $property->is_visible_frontend) ? 'default-checked' : '' }}
-        v-on:change="isVisibleInFrontendSwitchChange"
-    ></a-switch>
-</a-form-item>
-<input type="hidden" name="is_visible_frontend" v-model="is_visible_frontend" />
-
-<a-form-item
-    @if ($errors->has('sort_order'))
-        validate-status="error"
-        help="{{ $errors->first('sort_order') }}"
-    @endif
-    label="{{ __('avored::catalog.property.sort_order') }}"
->
-    <a-input
-        name="sort_order"
-        v-decorator="[
-        'sort_order',
-        {'initialValue': '{{ $property->sort_order ?? '' }}'},
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'SortOrder']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
-
-
-
-<a-form-item
-    v-for="(k, index) in dropdownOptions"
-    :key="k"
-    @if ($errors->has('dropdown_options'))
-        validate-status="error"
-        help="{{ $errors->first('dropdown_options') }}"
-    @endif
-    label="{{ __('avored::catalog.property.dropdown_options') }}"
->
-    <a-input
-        :name="dropdown_options(k)"
-        v-decorator="[
-        `dropdown_options[${k}]`,
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Dropdown Options']) }}' 
-                }
-            ]
-        }
-        ]"
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.name') }}"
+        field-name="name"
+        init-value="{{ $property->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
     >
-    <a-icon slot="addonAfter"
-        v-on:click="dropdownOptionChange(index)"
-        :type="(index == dropdownOptions.length - 1) ? 'plus' : 'minus'"
-    ></a-icon>
-    </a-input>
-</a-form-item>
+    </avored-input>
+</div>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.slug') }}"
+        field-name="slug"
+        init-value="{{ $property->slug ?? '' }}" 
+        error-text="{{ $errors->first('slug') }}"
+    >
+    </avored-input>
+</div>
 
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::catalog.property.data_type') }}"
+        field-name="data_type"
+        error-text="{{ $errors->first('data_type') }}"
+        :options="{{ json_encode($dataTypeOptions) }}"
+        init-value="{{ $property->data_type ?? '' }}"
+    >
+    </avored-select>
+</div>
+
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::catalog.property.field_type') }}"
+        error-text="{{ $errors->first('field_type') }}"
+        field-name="field_type"
+        :options="{{ json_encode($fieldTypeOptions) }}"
+        init-value="{{ $property->field_type ?? '' }}"
+    >
+    </avored-select>
+</div>
+
+<div class="mt-3 flex w-full">
+    <avored-toggle
+        label-text="{{ __('avored::catalog.property.use_for_all_products') }}"
+        error-text="{{ $errors->first('use_for_all_products') }}"
+        field-name="use_for_all_products"
+        init-value="{{ $property->use_for_all_products ?? '' }}"
+    >
+    </avored-toggle>
+</div>
+
+<div class="mt-3 flex w-full">
+    <avored-toggle
+        label-text="{{ __('avored::catalog.property.is_visible_frontend') }}"
+        error-text="{{ $errors->first('is_visible_frontend') }}"
+        field-name="is_visible_frontend"
+        init-value="{{ $property->is_visible_frontend ?? '' }}"
+    >
+    </avored-toggle>
+</div>
+
+
+
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.sort_order') }}"
+        field-name="sort_order"
+        init-value="{{ $property->sort_order ?? '' }}" 
+        error-text="{{ $errors->first('sort_order') }}"
+    >
+    </avored-input>
+</div>
+
+<template v-if="processDropdownOptionStatus">
+    <div class="mt-3 flex w-full"
+
+        v-for="(k, index) in dropdownOptions"
+        :key="k">
+        <avored-input
+            label-text="{{ __('avored::system.fields.dropdown_option') }}"
+            :field-name="dropdown_options(k)"
+            :init-value="getInitDropdownValue(index)"
+            error-text="{{ $errors->first('dropdown_options') }}"
+        >
+            <template slot="addOnAfter">
+                <button type="button" v-on:click="dropdownOptionChange(index)" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700">
+                    <svg v-if="(index == dropdownOptions.length - 1)" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                    </svg>
+                    <svg v-if="!(index == dropdownOptions.length - 1)" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path class="heroicon-ui" d="M17 11a1 1 0 010 2H7a1 1 0 010-2h10z"/>
+                    </svg>
+                </button>
+            </template>
+        </avored-input>
+    </div>
+</template>

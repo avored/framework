@@ -12,6 +12,39 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
+    'fields' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'meta_title' => 'Meta Title',
+        'meta_description' => 'Meta Description',
+        'sort_order' => 'Sort Order',
+        'dropdown_option' => 'Dropdown Option',
+        'sku' => 'SKU',
+        'barcode' => 'Barcode',
+        'price' => 'Price',
+        'cost_price' => 'Cost Price',
+        'height' => 'Height',
+        'width' => 'Width',
+        'length' => 'Length',
+        'weight' => 'Weight',
+        'status' => 'Status',
+        'qty' => 'Qty',
+        'is_taxable' => 'Is Taxable',
+        'track_stock' => 'Track Stock',
+        'alt_text' => 'Image alt text'
+    ],
+    'common' => [
+        'list' => 'List',
+        'create' => 'Create',
+        'edit' => 'Edit',
+    ],
+    'terms' => [
+        'category' => 'Category'
+    ],
+
+    'notification' => [
+        'not_enough_qty' => 'Sorry We do not have enought qty available for this product.'
+    ],
 
     'auth' => [
         'form' => [

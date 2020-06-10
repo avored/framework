@@ -6,25 +6,28 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\UserGroup;
 use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
 
-class UserGroupRepository implements UserGroupModelInterface
+class UserGroupRepository extends BaseRepository implements UserGroupModelInterface
 {
     /**
-     * Create UserGroup Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\UserGroup $userGroups
+     * @var UserGroup $model
      */
-    public function create(array $data): UserGroup
+    protected $model;
+
+    /**
+     * Construct for the UserGroup Repository
+     */
+    public function __construct()
     {
-        return UserGroup::create($data);
+        $this->model = new UserGroup();
     }
 
     /**
-     * get all user groups for.
-     * @return \Illuminate\Database\Eloquent\Collection $userGroups
+     * Get the model for the repository
+     * @return UserGroup 
      */
-    public function all() : Collection
+    public function model(): UserGroup
     {
-        return UserGroup::all();
+        return $this->model;
     }
 
     /**

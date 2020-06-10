@@ -31,7 +31,7 @@ class PropertyController
      */
     public function index()
     {
-        $properties = $this->propertyRepository->all();
+        $properties = $this->propertyRepository->paginate();
 
         return view('avored::catalog.property.index')
             ->with(compact('properties'));
@@ -75,6 +75,10 @@ class PropertyController
      */
     public function edit(Property $property)
     {
+        if ($property->field_type === 'SELECT' || $property->field_type === 'RADIO') {
+            $property->load('dropdownOptions');
+        }
+        
         $tabs = Tab::get('catalog.property');
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;

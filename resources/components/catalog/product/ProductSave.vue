@@ -169,24 +169,10 @@ export default {
             this.status = 0;
           }
       },
-      handleCategoryChange(val) {
-           
-            this.categories = val;
+      handleCategoryChange(val) {  
+          this.categories = val;
       },
-      handleTrackStockChange(val) {
-          if (val) {
-            this.track_stock = 1;
-          } else {
-            this.track_stock = 0;
-          }
-      },
-      handleIsTaxableChange(val) {
-          if (val) {
-            this.is_taxable = 1;
-          } else {
-            this.is_taxable = 0;
-          }
-      },
+      
       cancelProduct() {
           window.location = this.baseUrl + '/product';
       },

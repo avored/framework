@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use AvoRed\Framework\Database\Models\Country;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Arr;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -62,19 +63,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id')->nullable()->default(null);
-            $table->unsignedBigInteger('language_id')->nullable()->default(null);
-            $table->string('name')->nullable()->default(null);
-            $table->string('slug')->nullable()->default(null);
-            $table->string('meta_title')->nullable()->default(null);
-            $table->string('meta_description')->nullable()->default(null);
-            $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-        });
-
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
@@ -99,21 +87,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
-        });
-
-        Schema::create('page_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('page_id')->nullable()->default(null);
-            $table->unsignedBigInteger('language_id')->nullable()->default(null);
-            $table->string('name')->nullable()->default(null);
-            $table->string('slug')->nullable()->default(null);
-            $table->text('content')->nullable()->default(null);
-            $table->string('meta_title')->nullable()->default(null);
-            $table->string('meta_description')->nullable()->default(null);
-            $table->timestamps();
-
-            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
 
         Schema::create('configurations', function (Blueprint $table) {
@@ -436,7 +409,7 @@ class AvoredFrameworkSchema extends Migration
             $table->unsignedBigInteger('filter_id');
             $table->enum('type', ['ATTRIBUTE', 'PROPERTY']);
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -481,12 +454,12 @@ class AvoredFrameworkSchema extends Migration
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
             Country::create([
-                'code' => strtolower(array_get($country, 'alpha2Code')),
-                'name' => array_get($country, 'name'),
-                'phone_code' => array_get($country, 'callingCodes.0'),
-                'currency_code' => array_get($country, 'currencies.0.code'),
-                'currency_symbol' => array_get($country, 'currencies.0.symbol'),
-                'lang_code' => array_get($country, 'languages.0.name'),
+                'code' => strtolower(Arr::get($country, 'alpha2Code')),
+                'name' => Arr::get($country, 'name'),
+                'phone_code' => Arr::get($country, 'callingCodes.0'),
+                'currency_code' => Arr::get($country, 'currencies.0.code'),
+                'currency_symbol' => Arr::get($country, 'currencies.0.symbol'),
+                'lang_code' => Arr::get($country, 'languages.0.name'),
             ]);
         }
     }
@@ -537,7 +510,6 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');
 
-        Schema::dropIfExists('category_translations');
         Schema::dropIfExists('categories');
 
         Schema::dropIfExists('admin_users');

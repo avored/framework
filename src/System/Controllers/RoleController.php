@@ -45,7 +45,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository->paginate();
 
         return view('avored::system.role.index')
             ->with(compact('roles'));

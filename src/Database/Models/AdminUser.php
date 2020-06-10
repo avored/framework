@@ -5,11 +5,10 @@ namespace AvoRed\Framework\Database\Models;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\ClientRepository;
 
-class AdminUser extends Authenticatable
+class AdminUser extends BaseModel
 {
     use Notifiable, HasApiTokens;
 
@@ -90,7 +89,7 @@ class AdminUser extends Authenticatable
      * To check if user has permission to access the given route name.
      * @return bool
      */
-    public function hasPermission($routeName)
+    public function hasPermission($routeName) : bool
     {
         if ($this->is_super_admin) {
             return true;

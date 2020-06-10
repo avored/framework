@@ -32,7 +32,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = $this->languageRepository->all();
+        $languages = $this->languageRepository->paginate();
 
         return view('avored::system.language.index')
             ->with(compact('languages'));

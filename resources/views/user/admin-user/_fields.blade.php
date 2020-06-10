@@ -1,89 +1,44 @@
-<a-form-item
-    @if ($errors->has('first_name'))
-        validate-status="error"
-        help="{{ $errors->first('first_name') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.first_name') }}"
->
-    <a-input
-        :auto-focus="true"
-        name="first_name"
-        v-decorator="[
-        'first_name',
-        {initialValue: '{{ ($adminUser->first_name) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'First Name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+ <div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.admin-user.first_name') }}"
+        field-name="first_name"
+        init-value="{{ $adminUser->first_name ?? '' }}" 
+        error-text="{{ $errors->first('first_name') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('last_name'))
-        validate-status="error"
-        help="{{ $errors->first('last_name') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.last_name') }}"
->
-    <a-input
-        name="last_name"
-        v-decorator="[
-        'last_name',
-        {initialValue: '{{ ($adminUser->last_name) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Last Name']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.admin-user.last_name') }}"
+        field-name="last_name"
+        init-value="{{ $adminUser->last_name ?? '' }}" 
+        error-text="{{ $errors->first('last_name') }}"
+    >
+    </avored-input>
+</div>
 
-<a-form-item
-    @if ($errors->has('is_super_admin'))
-        validate-status="error"
-        help="{{ $errors->first('is_super_admin') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.is_super_admin') }}"
->
-    <a-switch
-        {{ (isset($adminUser) && $adminUser->is_super_admin) ? 'default-checked' : '' }}
-        v-on:change="isLanguageDefaultSwitchChange"
-    ></a-switch>
-</a-form-item>
-<input type="hidden" v-model="is_super_admin" name="is_super_admin"  />
 
-<a-form-item
-    @if ($errors->has('email'))
-        validate-status="error"
-        help="{{ $errors->first('email') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.email') }}"
->
-    <a-input
-        name="email"
-        @if (isset($adminUser))
-            disabled
-        @endif
-        v-decorator="[
-        'email',
-        {initialValue: '{{ ($adminUser->email) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Email']) }}' 
-                }
-            ]
-        }
-        ]"
-    ></a-input>
-</a-form-item>
+<div class="mt-3 flex w-full">
+    <avored-toggle
+        label-text="{{ __('avored::system.admin-user.is_super_admin') }}"
+        error-text="{{ $errors->first('is_super_admin') }}"
+        field-name="is_super_admin"
+        init-value="{{ $adminUser->is_super_admin ?? '' }}"
+    >
+    </avored-toggle>
+</div>
+
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.admin-user.email') }}"
+        field-name="email"
+        init-value="{{ $adminUser->email ?? '' }}" 
+        error-text="{{ $errors->first('email') }}"
+        :is-disabled="true"
+    >
+    </avored-input>
+</div>
 
 <a-form-item
     @if ($errors->has('image_file'))
@@ -108,104 +63,49 @@
 <input type="hidden" name="image_path" v-model="image_path" />
 
 @if (!isset($adminUser))
-    <a-form-item
-        @if ($errors->has('password'))
-            validate-status="error"
-            help="{{ $errors->first('password') }}"
-        @endif
-        label="{{ __('avored::system.admin-user.password') }}"
-    >
-        <a-input
-            name="password"
-            type="password"
-            v-decorator="[
-            'password',
-            {rules: 
-                [
-                    {   required: true, 
-                        message: '{{ __('avored::validation.required', ['attribute' => 'Password']) }}' 
-                    }
-                ]
-            }
-            ]"
-        ></a-input>
-    </a-form-item>
 
-    <a-form-item
-        @if ($errors->has('password_confirmation'))
-            validate-status="error"
-            help="{{ $errors->first('password_confirmation') }}"
-        @endif
-        label="{{ __('avored::system.admin-user.password_confirmation') }}"
-    >
-        <a-input
-            name="password_confirmation"
+    <div class="mt-3 flex w-full">
+        <avored-input
+            label-text="{{ __('avored::system.admin-user.password') }}"
+            field-name="password"
             type="password"
-            v-decorator="[
-            'password_confirmation',
-            {rules: 
-                [
-                    {   required: true, 
-                        message: '{{ __('avored::validation.required', ['attribute' => 'Confirm Password']) }}' 
-                    }
-                ]
-            }
-            ]"
-        ></a-input>
-    </a-form-item>
+            init-value="{{ $adminUser->password ?? '' }}" 
+            error-text="{{ $errors->first('password') }}"
+        >
+        </avored-input>
+    </div>
+    <div class="mt-3 flex w-full">
+        <avored-input
+            label-text="{{ __('avored::system.admin-user.password_confirmation') }}"
+            field-name="password_confirmation"
+            type="password_confirmation"
+            init-value="{{ $adminUser->password_confirmation ?? '' }}" 
+            error-text="{{ $errors->first('password_confirmation') }}"
+        >
+        </avored-input>
+    </div>
 @endif
 
-<a-form-item
-    @if ($errors->has('language'))
-        validate-status="error"
-        help="{{ $errors->first('language') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.language') }}"
->
-    <a-select
-        v-on:change="handleLanguageChange"
-        v-decorator="[
-        'language',
-        {initialValue: '{{ ($adminUser->language) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Language']) }}' 
-                }
-            ]
-        }
-        ]"
-    >
-        <a-select-option value="en">English</a-select-option>
-    </a-select>
-</a-form-item>
-<input type="hidden" v-model="language" name="language"  />
 
-<a-form-item
-    @if ($errors->has('role_id'))
-        validate-status="error"
-        help="{{ $errors->first('role_id') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.role_id') }}"
->
-    <a-select
-        name="role_id"
-        v-on:change="handleRoleChange"
-        v-decorator="[
-        'role_id',
-        {initialValue: '{{ ($adminUser->role_id) ?? '' }}' },
-        {rules: 
-            [
-                {   required: true, 
-                    message: '{{ __('avored::validation.required', ['attribute' => 'Role']) }}' 
-                }
-            ]
-        }
-        ]"
-    >   
-        @foreach ($roleOptions as $roleId => $roleName)
-            <a-select-option value="{{ $roleId }}">{{ $roleName }}</a-select-option>
-        @endforeach
-    </a-select>
-</a-form-item>
-<input type="hidden" v-model="role_id" name="role_id"  />
+
+<div class="mt-3 w-full">
+    <avored-select
+        label-text="{{ __('avored::system.admin-user.language') }}"
+        error-text="{{ $errors->first('language') }}"
+        field-name="language"
+        :options="{{ json_encode($languageOptions) }}"
+        init-value="{{ $adminUser->language ?? '' }}"
+    >
+    </avored-select>
+</div>
+
+<div class="mt-3 mb-6 w-full">
+    <avored-select
+        label-text="{{ __('avored::system.admin-user.role_id') }}"
+        error-text="{{ $errors->first('role_id') }}"
+        field-name="role_id"
+        :options="{{ json_encode($roleOptions) }}"
+        init-value="{{ $adminUser->role_id ?? '' }}"
+    >
+    </avored-select>
+</div>

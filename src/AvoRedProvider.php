@@ -145,14 +145,18 @@ class AvoRedProvider extends ServiceProvider
         $authConfig = $this->app['config']->get('auth', []);
         $this->app['config']->set(
             'filesystems',
-            array_merge_recursive(
-                $avoredConfigData['filesystems'],
-                $fileSystemConfig
+            array_merge(
+                $fileSystemConfig,
+                $avoredConfigData['filesystems']
             )
         );
         $this->app['config']->set(
-            'auth',
-            array_merge_recursive($avoredConfigData['auth'], $authConfig)
+            'auth.guards',
+            array_merge($authConfig['guards'], $avoredConfigData['auth']['guards'])
+        );
+        $this->app['config']->set(
+            'auth.providers',
+            array_merge($authConfig['providers'], $avoredConfigData['auth']['providers'])
         );
     }
 

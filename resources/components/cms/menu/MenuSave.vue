@@ -39,6 +39,22 @@ export default {
         this.menu_json = JSON.stringify(this.menus);
         return true
       },
+      deleteOnClick(menu, submenu = false) {
+        const index = this.menus.findIndex((tmpMenu) => {
+          if (submenu === true) {
+            const submenuIndex = tmpMenu.submenus.findIndex((tmpSubmenu) => {
+              return tmpSubmenu.id === menu.id
+            })
+            tmpMenu.submenus.splice(submenuIndex, 1)
+          } else {
+            return tmpMenu.id === menu.id
+          }
+          
+        })
+        if (index !== -1) {
+          this.menus.splice(index, 1)
+        }
+      },
       cancelMenu() {
         location =  this.baseUrl + '/menu-group/';
       }
@@ -63,10 +79,10 @@ export default {
       if (!isNil(this.menus)) {
         this.menu_json = JSON.stringify(this.menus);
       }
+
       if (!isNil(this.menuGroup)) {
         
         this.fields.forEach(field => {
-          console.log(window.x = this)
           this.form.getFieldDecorator(field, { 'name' :this.menuGroup[field]})
         });
       }

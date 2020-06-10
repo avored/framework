@@ -6,8 +6,30 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 
-class PropertyRepository implements PropertyModelInterface
+class PropertyRepository extends BaseRepository implements PropertyModelInterface
 {
+    /**
+     * @var Property $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the Property Repository
+     */
+    public function __construct()
+    {
+        $this->model = new Property();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return Property 
+     */
+    public function model(): Property
+    {
+        return $this->model;
+    }
+
     /**
      * Create Property Resource into a database.
      * @param array $data

@@ -3,6 +3,8 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Database\Models\Order;
+use AvoRed\Framework\Order\Events\OrderProductCreated;
+use AvoRed\Framework\Order\Listeners\OrderProductCreatedListener;
 use AvoRed\Framework\Order\Observers\OrderObserver;
 use AvoRed\Framework\User\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -14,7 +16,11 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [];
+    protected $listen = [
+        OrderProductCreated::class => [
+            OrderProductCreatedListener::class,
+        ],
+    ];
 
     /**
      * Register any events for your application.

@@ -9,31 +9,21 @@
 @endsection
 
 @section('content')
-<a-row type="flex" class="mb-1" justify="end">
-    <a-col>
-        <a 
-            href="{{ route('admin.user-group.create') }}"
-            class="ant-btn ant-btn-primary">
-            <a-icon type="plus"></a-icon>
-            {{ __('avored::system.btn.create') }}
-        </a>
-    </a-col>
-</a-row>
-<a-row type="flex" justify="center">
-    <a-col :span="24">        
-        <user-group-table :user-groups="{{ $userGroups }}" inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table @change="handleTableChange" :columns="columns" row-key="id" :data-source="userGroups">
-                <span slot="action" slot-scope="text, record">
-                    
-                    <a :href="getEditUrl(record)">
-                        <a-icon type="edit"></a-icon>
-                    </a>
-                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deleteUserGroup(record)">
-                        <a-icon type="delete"></a-icon>
-                    </a>
-                </span>
-            </a-table>
-        </user-group-table>
-    </a-col>
-</a-row>
+<div class="flex justify-end mt-3">
+    <a 
+        href="{{ route('admin.user-group.create') }}"
+        class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
+        <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+        </svg>
+        {{ __('avored::system.btn.create') }}
+    </a>
+</div>
+
+<div>
+    <user-group-table
+        :init-user-groups="{{ json_encode($userGroups) }}"
+        base-url="{{ asset(config('avored.admin_url')) }}"
+    ></user-group-table>
+</div>
 @endsection

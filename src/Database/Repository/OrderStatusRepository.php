@@ -6,26 +6,29 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 
-class OrderStatusRepository implements OrderStatusModelInterface
+class OrderStatusRepository extends BaseRepository implements OrderStatusModelInterface
 {
+
     /**
-     * Create OrderStatus Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
+     * @var OrderStatus $model
      */
-    public function create(array $data): OrderStatus
+    protected $model;
+
+    /**
+     * Construct for the OrderStatus Repository
+     */
+    public function __construct()
     {
-        return OrderStatus::create($data);
+        $this->model = new OrderStatus();
     }
 
     /**
-     * Find OrderStatus Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
+     * Get the model for the repository
+     * @return OrderStatus 
      */
-    public function find(int $id): OrderStatus
+    public function model(): OrderStatus
     {
-        return OrderStatus::find($id);
+        return $this->model;
     }
 
     /**
@@ -36,24 +39,5 @@ class OrderStatusRepository implements OrderStatusModelInterface
     public function findDefault(): OrderStatus
     {
         return OrderStatus::whereIsDefault(1)->first();
-    }
-
-    /**
-     * Delete OrderStatus Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return OrderStatus::destroy($id);
-    }
-
-    /**
-     * Get all the categories from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $categories
-     */
-    public function all() : Collection
-    {
-        return OrderStatus::all();
     }
 }

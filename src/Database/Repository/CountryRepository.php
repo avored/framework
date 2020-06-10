@@ -23,7 +23,9 @@ class CountryRepository implements CountryModelInterface
      */
     public function currencyCodeOptions() : Collection
     {
-        return Country::all()->pluck('currency_code')->unique();
+        return Country::all()
+            ->pluck('currency_code', 'currency_code')
+            ;
     }
 
     /**

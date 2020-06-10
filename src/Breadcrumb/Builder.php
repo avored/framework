@@ -63,7 +63,7 @@ class Builder
      * Get Breadcrum from collection.
      *
      * @param string $key
-     * @return callable $callable
+     * @return mixed $route
      */
     public function get($key)
     {

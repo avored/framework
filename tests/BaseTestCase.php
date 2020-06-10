@@ -5,14 +5,12 @@ namespace AvoRed\Framework\Tests;
 use AvoRed\Framework\AvoRedProvider;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use Faker\Generator as FakerGenerator;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Notification;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Models\Currency;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
-abstract class BaseTestCase extends OrchestraTestCase
+class BaseTestCase extends OrchestraTestCase
 {
     /**
      * Admin User.
@@ -103,20 +101,15 @@ abstract class BaseTestCase extends OrchestraTestCase
     protected function getPackageAliases($app): array
     {
         return [
-            //'AdminMenu' => 'AvoRed\\Framework\\AdminMenu\\Facade',
-            //'AdminConfiguration' => 'AvoRed\\Framework\\AdminConfiguration\\Facade',
-            //'DataGrid' => 'AvoRed\\Framework\\DataGrid\\Facade',
-            //'Image' => 'AvoRed\\Framework\\Image\\Facade',
             'Breadcrumb' => \AvoRed\Framework\Support\Facades\Breadcrumb::class,
             'Menu' => \AvoRed\Framework\Support\Facades\Menu::class,
             'Module' => \AvoRed\Framework\Support\Facades\Module::class,
             'Permission' => \AvoRed\Framework\Support\Facades\Permission::class,
-            'Cart' => AvoRed\Framework\Support\Facades\Cart::class,
-            'Payment' => AvoRed\Framework\Support\Facades\Payment::class,
-            'Shipping' => AvoRed\Framework\Support\Facades\Shipping::class,
-            'Tab' => AvoRed\Framework\Support\Facades\Tab::class,
-            //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
-            'Widget' => AvoRed\Framework\Support\Facades\Widget::class
+            'Cart' => \AvoRed\Framework\Support\Facades\Cart::class,
+            'Payment' => \AvoRed\Framework\Support\Facades\Payment::class,
+            'Shipping' => \AvoRed\Framework\Support\Facades\Shipping::class,
+            'Tab' => \AvoRed\Framework\Support\Facades\Tab::class,
+            'Widget' => \AvoRed\Framework\Support\Facades\Widget::class
         ];
     }
 

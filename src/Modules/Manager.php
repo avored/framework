@@ -192,7 +192,7 @@ class Manager
     public function publishItem($from, $to)
     {
         if ($this->files->isDirectory($from)) {
-            return $this->publishDirectory($from, $to);
+            $this->publishDirectory($from, $to);
         }
 
         throw new \Exception("Can't locate path: <{$from}>");

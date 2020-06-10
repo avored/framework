@@ -9,33 +9,21 @@
 @endsection
 
 @section('content')
-<a-row type="flex" class="mb-1" justify="end">
-    <a-col>
-        <a 
-            href="{{ route('admin.menu-group.create') }}"
-            class="ant-btn ant-btn-primary">
-            <a-icon type="plus"></a-icon>
-            {{ __('avored::system.btn.create') }}
-        </a>
-    </a-col>
-</a-row>
-<a-row type="flex" justify="center">
-    <a-col :span="24">        
-        <menu-table
-            :menu-groups="{{ $menuGroups }}"
-            inline-template base-url="{{ asset(config('avored.admin_url')) }}">
-            <a-table :columns="columns" row-key="id" :data-source="menuGroups" @change="handleTableChange">
-                <span slot="action" slot-scope="text, record">
-                    
-                    <a :href="getEditUrl(record)">
-                        <a-icon type="edit"></a-icon>
-                    </a>
-                    <a :href="getDeleteUrl(record)" v-on:click.prevent="deleteMenuGroup(record)">
-                        <a-icon type="delete"></a-icon>
-                    </a>
-                </span>
-            </a-table>
-        </menu-table>
-    </a-col>
-</a-row>
+<div class="flex justify-end mt-3">
+    <a 
+        href="{{ route('admin.menu-group.create') }}"
+        class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
+        <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+        </svg>
+        {{ __('avored::system.btn.create') }}
+    </a>
+</div>
+
+<div>
+    <menu-table
+        :init-menu-groups="{{ json_encode($menuGroups) }}"
+        base-url="{{ asset(config('avored.admin_url')) }}"
+    ></attribute-table>
+</div>
 @endsection

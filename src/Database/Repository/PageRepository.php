@@ -6,8 +6,30 @@ use AvoRed\Framework\Database\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 
-class PageRepository implements PageModelInterface
+class PageRepository extends BaseRepository implements PageModelInterface
 {
+    /**
+     * @var Page $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the Page Repository
+     * @param Page $page
+     */
+    public function __construct(Page $page)
+    {
+        $this->model = $page;
+    }
+
+    /**
+     * Get the model for the repository
+     * @return Page 
+     */
+    public function model(): Page
+    {
+        return $this->model;
+    }
     /**
      * Create Page Resource into a database.
      * @param array $data

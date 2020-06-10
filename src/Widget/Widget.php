@@ -29,7 +29,7 @@ class Widget implements WidgetInterface
      */
     public function __construct($callable)
     {
-        $this->callback = $callable;
+        $this->callable = $callable;
         $callable($this);
     }
 

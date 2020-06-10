@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Attribute extends Model
+class Attribute extends BaseModel
 {
     /**
      * The available display as enum options.

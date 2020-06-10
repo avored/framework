@@ -31,7 +31,7 @@ class UserGroupController
      */
     public function index()
     {
-        $userGroups = $this->userGroupRepository->all();
+        $userGroups = $this->userGroupRepository->paginate();
 
         return view('avored::user.user-group.index')
             ->with(compact('userGroups'));

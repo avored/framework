@@ -12,11 +12,13 @@ class AttributeTest extends BaseTestCase
 
     public function testAttributeIndexRouteTest()
     {
+        $attribute = factory(Attribute::class)->create();
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.attribute.index'))
             ->assertStatus(200)
-            ->assertSee(__('avored::catalog.attribute.index.title'));
+            ->assertSee(__('avored::catalog.attribute.index.title'))
+            ->assertSee($attribute->name);
     }
 
     public function testAttributeCreateRouteTest()
