@@ -9,7 +9,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['7.2', '7.3', '7.4']
+        # php: ['7.2', '7.3', '7.4']
+        php: ['7.2']
         laravel: ['5.8.*']
         include:
           - laravel: '5.8.*'

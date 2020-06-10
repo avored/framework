@@ -50,7 +50,7 @@ class Product extends BaseModel
 
     const PRODUCT_TYPES_BASIC = 'BASIC';
     const PRODUCT_TYPES_DOWNLOADABLE = 'DOWNLOADABLE';
-    const PRODUCT_TYPES_VARIABLE_PRODUCT = 'DOWNLOADABLE';
+    const PRODUCT_TYPES_VARIABLE_PRODUCT = 'VARIABLE_PRODUCT';
 
     /**
      * Belongs to Many Categories.

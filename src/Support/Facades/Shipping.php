@@ -5,7 +5,7 @@ namespace AvoRed\Framework\Support\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method \AvoRed\Framework\Shipping\all all()
+ * @method \AvoRed\Framework\Shipping\all static all()
  */
 class Shipping extends Facade
 {

@@ -81,9 +81,9 @@ class GraphqlProvider extends ServiceProvider
     protected function registerMiddleware()
     {
         $router = $this->app['router'];
-        $router->aliasMiddleware('admin.auth', AdminAuth::class);
-        $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
-        $router->aliasMiddleware('avored', AvoRedCore::class);
+        // $router->aliasMiddleware('admin.auth', AdminAuth::class);
+        // $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
+        // $router->aliasMiddleware('avored', AvoRedCore::class);
     }
 
     /**

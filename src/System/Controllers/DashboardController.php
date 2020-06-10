@@ -13,6 +13,7 @@ class DashboardController
     public function index()
     {
         $orderWidget = Widget::get('avored-total-order');
+        dd($orderWidget);
         $customerWidget = Widget::get('avored-total-customer');
         $revenueWidget = Widget::get('avored-total-revenue');
         

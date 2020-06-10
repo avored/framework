@@ -29,6 +29,14 @@ class ModuleInstallCommand extends Command
      */
     protected $description = 'Install a module';
 
+   
+    /**
+     * The migrator instance.
+     *
+     * @var \Illuminate\Database\Migrations\Migrator
+     */
+    protected $migrator;
+
     /**
      * Create a new migration command instance.
      *

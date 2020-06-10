@@ -54,6 +54,16 @@ class MenuItem implements MenuInterface
     public $routeName;
 
     /**
+     * @var calllback
+     */
+    public $callback;
+    
+    /**
+     * @var array $subMenu
+     */
+    public $subMenu;
+
+    /**
      *  AvoRed Front Menu Construct method.
      */
     public function __construct($callable)
