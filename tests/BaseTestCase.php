@@ -101,10 +101,6 @@ class BaseTestCase extends OrchestraTestCase
     protected function getPackageAliases($app): array
     {
         return [
-            //'AdminMenu' => 'AvoRed\\Framework\\AdminMenu\\Facade',
-            //'AdminConfiguration' => 'AvoRed\\Framework\\AdminConfiguration\\Facade',
-            //'DataGrid' => 'AvoRed\\Framework\\DataGrid\\Facade',
-            //'Image' => 'AvoRed\\Framework\\Image\\Facade',
             'Breadcrumb' => \AvoRed\Framework\Support\Facades\Breadcrumb::class,
             'Menu' => \AvoRed\Framework\Support\Facades\Menu::class,
             'Module' => \AvoRed\Framework\Support\Facades\Module::class,
@@ -113,7 +109,6 @@ class BaseTestCase extends OrchestraTestCase
             'Payment' => \AvoRed\Framework\Support\Facades\Payment::class,
             'Shipping' => \AvoRed\Framework\Support\Facades\Shipping::class,
             'Tab' => \AvoRed\Framework\Support\Facades\Tab::class,
-            //'Theme' => 'AvoRed\\Framework\\Theme\\Facade',
             'Widget' => \AvoRed\Framework\Support\Facades\Widget::class
         ];
     }

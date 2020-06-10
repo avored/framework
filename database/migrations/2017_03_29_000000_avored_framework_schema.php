@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use AvoRed\Framework\Database\Models\Country;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Arr;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -453,12 +454,12 @@ class AvoredFrameworkSchema extends Migration
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
             Country::create([
-                'code' => strtolower(array_get($country, 'alpha2Code')),
-                'name' => array_get($country, 'name'),
-                'phone_code' => array_get($country, 'callingCodes.0'),
-                'currency_code' => array_get($country, 'currencies.0.code'),
-                'currency_symbol' => array_get($country, 'currencies.0.symbol'),
-                'lang_code' => array_get($country, 'languages.0.name'),
+                'code' => strtolower(Arr::get($country, 'alpha2Code')),
+                'name' => Arr::get($country, 'name'),
+                'phone_code' => Arr::get($country, 'callingCodes.0'),
+                'currency_code' => Arr::get($country, 'currencies.0.code'),
+                'currency_symbol' => Arr::get($country, 'currencies.0.symbol'),
+                'lang_code' => Arr::get($country, 'languages.0.name'),
             ]);
         }
     }

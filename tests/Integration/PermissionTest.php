@@ -14,7 +14,7 @@ class PermissionTest extends BaseTestCase
 
     public function testPermission()
     {
-        $this->markTestIncomplete('Todo Fix this unit test');
+        $this->markTestIncomplete('Not working in Github action');
         $this->createAdminUser(['is_super_admin' => 0])
             ->actingAs($this->user, 'admin')
             ->get(route('admin.dashboard'))
