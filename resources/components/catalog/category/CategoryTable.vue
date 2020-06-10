@@ -5,7 +5,6 @@
         button-text="Create"
         html-type="link" 
         :link-url="createUrl">
-
       </avored-button>
     </div>
     <div class="mt-3">

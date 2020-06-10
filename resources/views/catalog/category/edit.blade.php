@@ -17,11 +17,11 @@
             <form 
                 method="post"
                 action="{{ route('admin.category.update', $category->id) }}"                    
-                @submit="handleSubmit"
+                
             >
                 @csrf
                 @method('put')
-                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="catalog.category.basic">
+                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="catalog.category.info">
                     @foreach ($tabs as $tab)
                         <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
                             @php
@@ -32,7 +32,7 @@
                     @endforeach
                 </a-tabs>
                 
-                <div class="flex mt-3">
+                <div class="flex mt-5">
                     <button type="submit"
                         class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
                         <svg class="h-4 w-4 inline-block" fill="currentColor" viewBox="0 0 24 24">
