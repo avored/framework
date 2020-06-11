@@ -15,6 +15,7 @@ class DashboardController
         $orderWidget = Widget::get('avored-total-order');
         $customerWidget = Widget::get('avored-total-customer');
         $revenueWidget = Widget::get('avored-total-revenue');
+      
         
         return view('avored::admin', compact('orderWidget', 'customerWidget', 'revenueWidget'));
     }

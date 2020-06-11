@@ -11,7 +11,6 @@ class DashboardTest extends BaseTestCase
 
     public function testDashboardRouteTest()
     {
-        $this->markTestIncomplete('Not working in Github Action');
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.dashboard'))
