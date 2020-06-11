@@ -40,9 +40,9 @@ Route::middleware(['web'])
 
         Route::get(
             'password/reset/{token}',
-            [\AvoRed\Framework\System\Controllers\ResetPasswordController::class, 'showResetForm']
+            [\AvoRed\Framework\User\Controllers\ResetPasswordController::class, 'showResetForm']
         )->name('password.reset');
-        Route::post('password/reset', [\AvoRed\Framework\System\Controllers\ResetPasswordController::class, 'reset'])
+        Route::post('password/reset', [\AvoRed\Framework\User\Controllers\ResetPasswordController::class, 'reset'])
             ->name('password.update');
     });
 

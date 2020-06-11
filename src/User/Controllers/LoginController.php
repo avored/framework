@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\User\Controllers;
 
+use AvoRed\Framework\User\Requests\AdminUserLoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -20,8 +21,6 @@ class LoginController extends BaseController
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
-    use AuthenticatesUsers, AuthorizesRequests;
 
     /**
      * Create a new controller instance.
@@ -31,6 +30,51 @@ class LoginController extends BaseController
     {
         $this->middleware('admin.guest')->except('logout');
     }
+
+      /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(AdminUserLoginRequest $request)
+    {
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+     /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            $request->only('email', 'password'), $request->filled('remember')
+        );
+    }
+
 
     /**
      * Show the AvoRed Login Form to the User.
@@ -61,15 +105,6 @@ class LoginController extends BaseController
         throw ValidationException::withMessages(
             [$this->username() => [trans('avored::system.failed')]]
         );
-    }
-
-    /**
-     * Redirect Path after login and logout.
-     * @return string
-     */
-    public function redirectPath()
-    {
-        return config('avored.admin_url');
     }
 
     /**
