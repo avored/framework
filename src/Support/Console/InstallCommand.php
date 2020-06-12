@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Support\Console;
 
+use AvoRed\Framework\AvoRedProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -89,20 +90,24 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->call('migrate:fresh');
-        $this->call('storage:link');
-        if ($this->confirm('Would you like to install Dummy Data?')) {
-            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
-        }
-        $roleData = ['name' => Role::ADMIN];
-        $this->roleRepository->create($roleData);
-        $this->createCurrency();
-        $this->createLanguage();
-        $this->createDefaultUserGroup();
-        $this->createOrderStatus();
-        $this->alterUserTable();
+        // $this->call('migrate:fresh');
+        // $this->call('storage:link');
+        // if ($this->confirm('Would you like to install Dummy Data?')) {
+        //     $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        // }
+        // $roleData = ['name' => Role::ADMIN];
+        // $this->roleRepository->create($roleData);
+        // $this->createCurrency();
+        // $this->createLanguage();
+        // $this->createDefaultUserGroup();
+        // $this->createOrderStatus();
+        // $this->alterUserTable();
 
-        $this->call('avored:admin:make');
+        // $this->call('avored:admin:make');
+
+        $this->call('vendor:publish', ['--provider' => AvoRedProvider::class]);
+
+
         $this->info('AvoRed Install Successfully!');
     }
 

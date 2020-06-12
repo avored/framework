@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\System\Controllers;
+namespace AvoRed\Framework\User\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ class ForgotPasswordController extends Controller
      */
     public function linkRequestForm()
     {
-        return view('avored::system.login.reset');
+        return view('avored::user.auth.reset');
     }
 
     protected function guard()

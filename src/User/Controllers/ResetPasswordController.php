@@ -45,7 +45,7 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('avored::system.login.password.new')->with(
+        return view('avored::user.auth.password.new')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }

@@ -31,11 +31,11 @@ Route::middleware(['web'])
         /***************** PASSWORD RESET *****************/
         Route::get(
             'password/reset',
-            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class, 'linkRequestForm']
+            [\AvoRed\Framework\User\Controllers\ForgotPasswordController::class, 'linkRequestForm']
         )->name('password.request');
         Route::post(
             'password/email',
-            [\AvoRed\Framework\System\Controllers\ForgotPasswordController::class, 'sendResetLinkEmail']
+            [\AvoRed\Framework\User\Controllers\ForgotPasswordController::class, 'sendResetLinkEmail']
         )->name('password.email');
 
         Route::get(
