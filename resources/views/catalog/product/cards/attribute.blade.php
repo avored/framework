@@ -1,5 +1,5 @@
 <a-card class="mt-1 mb-1" title="{{ __('avored::catalog.product.attribute_card_title') }}">
-    <p>
+    {{-- <p>
         <a-form-item label="{{ __('avored::catalog.product.attribute_card_title') }}">
         <a-select @change="changeVariation" :default-value="attributeIds" mode="multiple"  placeholder="Please select">
             @foreach ($attributes as $attribute)
@@ -16,9 +16,9 @@
         </div>
     </p>
 
-    <h4>{{ __('avored::catalog.product.variation_title') }}</h4>
+    <h4>{{ __('avored::catalog.product.variation_title') }}</h4> --}}
 
-     <a-table :columns="columns" row-key="id" :data-source="productVariations">
+     {{-- <a-table :columns="columns" row-key="id" :data-source="productVariations">
         <span slot="name" slot-scope="text, record" href="javascript:;">@{{ record.variation.name }}</span>
         <span slot="price" slot-scope="text, record" href="javascript:;">@{{ record.variation.price }}</span>
         <span slot="qty" slot-scope="text, record" href="javascript:;">@{{ record.variation.qty }}</span>
@@ -28,13 +28,12 @@
             <a-divider type="vertical" />
             <a href="javascript:;" @click="deleteVariation(record)">Delete</a>
         </span>
-    </a-table>
+    </a-table> --}}
 
-<a-modal title="{{__('avored::catalog.product.variation_model_title') }}"
+{{-- <a-modal title="{{__('avored::catalog.product.variation_model_title') }}"
     v-model="variationModelVisible"
     ok-text="{{__('avored::catalog.product.variation_save_btn') }}"
     @ok="clickVariationSave">
-
         <a-form  :form="variationForm">
             <a-row type="flex" :gutter="15">
                 <a-col :span="12">
@@ -258,6 +257,6 @@
                 </a-col>
             </a-row>
         </a-form>
-</a-modal>
+</a-modal> --}}
 
 </a-card>

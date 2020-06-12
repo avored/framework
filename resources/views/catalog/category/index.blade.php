@@ -16,5 +16,4 @@
     base-url="{{ asset(config('avored.admin_url')) }}"
 ></category-table>
 
-
 @endsection

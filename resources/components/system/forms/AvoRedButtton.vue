@@ -1,24 +1,43 @@
 <template>
-  <div>
+  <div class="flex justify-center">
       <a  v-if="htmlType==='link'"
           :href="linkUrl"
-          class="px-4 py-2 font-semibold leading-7 rounded"
-          :class="buttonClass">
-          <svg class="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
-          </svg>
-          {{ buttonText }}
+          @click="$emit('click', $event)"
+          class="px-4 py-2 rounded"
+          :class="orverrideClass">
+              <zondicon 
+                v-if="iconType"
+                :icon="iconType" 
+                class="h-4 w-4 inline-block fill-current" />
+              {{ buttonText }}
       </a>
+      <button 
+        v-if="htmlType==='button'" 
+        @click="$emit('click', $event)" 
+        class="px-4 py-2 rounded"
+        :class="orverrideClass"
+        type="button">
+          <zondicon 
+                v-if="iconType"
+                :icon="iconType" 
+                class="h-4 w-4 inline-block fill-current"
+                 />
+          {{ buttonText }}
+      </button>
   </div>
 </template>
 <script>
+
 export default {
   name: "avored-button",
+  
   props: {
     buttonText: { type: [String], default: '' },
     htmlType: { type: [String], default: 'button' },
     type: { type: [String], default: 'default' },
     linkUrl: { type: [String], default: ''},
+    iconType: { type: String, default: ''},
+    buttonClass: { type: String, default: ''}
   },
   data() {
     return {
@@ -27,12 +46,12 @@ export default {
   },
   
   computed: {
-      buttonClass() {
+      orverrideClass() {
         if (this.type === 'primary') {
-          return 'bg-red-600 hover:bg-red-700 text-white hover:text-white'
+          return this.buttonClass + ' bg-red-600 text-white hover:bg-red-500 hover:text-white'
         }
 
-        return 'border border-gray-700 text-gray-600'
+        return this.buttonClass + ' border border-gray-700 text-gray-600 hover:text-red-500'
         
       }
   },

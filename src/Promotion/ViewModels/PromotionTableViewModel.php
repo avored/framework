@@ -7,12 +7,7 @@ use Spatie\ViewModels\ViewModel;
 
 class PromotionTableViewModel extends ViewModel
 {
-    protected $repository;
-
-    public function __construct()
-    {
-        $this->repository = app(PromotionCodeModelInterface::class);
-    }
+    
 
     public function promotionCodes()
     {

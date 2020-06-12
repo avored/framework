@@ -31,7 +31,11 @@ return [
         'qty' => 'Qty',
         'is_taxable' => 'Is Taxable',
         'track_stock' => 'Track Stock',
-        'alt_text' => 'Image alt text'
+        'alt_text' => 'Image alt text',
+        'description' => 'Description',
+        'code' => 'Code',
+        'type' => 'Type',
+        'amount' => 'Amount',
     ],
     'common' => [
         'list' => 'List',

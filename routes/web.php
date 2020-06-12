@@ -131,16 +131,15 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('tax-group', System\Controllers\TaxGroupController::class);
         Route::resource('tax-rate', System\Controllers\TaxRateController::class);
 
-        Route::get('promotion-code', Promotion\Controllers\PromotionCode\TableController::class)
-            ->name('promotion.code.table');
-        Route::get(
-            'promotion-code-edit/{promotionCode?}',
-            Promotion\Controllers\PromotionCode\EditController::class
-        )->name('promotion.code.edit');
-        Route::post(
-            'promotion-code-save/{promotionCode?}',
-            Promotion\Controllers\PromotionCode\SaveController::class
-        )->name('promotion.code.save');
-        Route::delete('promotion-code/{promotionCode}', Promotion\Controllers\PromotionCode\DestroyController::class)
-            ->name('promotion.code.destroy');
+        Route::resource('promotion-code', Promotion\Controllers\PromotionController::class);
+        // Route::get(
+        //     'promotion-code-edit/{promotionCode?}',
+        //     Promotion\Controllers\PromotionCode\EditController::class
+        // )->name('promotion.code.edit');
+        // Route::post(
+        //     'promotion-code-save/{promotionCode?}',
+        //     Promotion\Controllers\PromotionCode\SaveController::class
+        // )->name('promotion.code.save');
+        // Route::delete('promotion-code/{promotionCode}', Promotion\Controllers\PromotionCode\DestroyController::class)
+        //     ->name('promotion.code.destroy');
     });

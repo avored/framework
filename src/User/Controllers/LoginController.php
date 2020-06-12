@@ -62,6 +62,10 @@ class LoginController extends BaseController
     }
 
 
+    public function redirectPath()
+    {
+        return route('admin.dashboard');
+    }
     /**
      * Attempt to log the user into the application.
      *
@@ -103,7 +107,7 @@ class LoginController extends BaseController
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages(
-            [$this->username() => [trans('avored::system.failed')]]
+            ['email' => [trans('avored::system.failed')]]
         );
     }
 

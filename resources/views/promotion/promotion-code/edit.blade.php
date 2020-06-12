@@ -11,12 +11,12 @@
 @section('content')
 <a-row type="flex" justify="center">
     <a-col :span="24">
-        <promotion-code-edit base-url="{{ asset(config('avored.admin_url')) }}" :promotion-code="{{ $promotionCode }}" inline-template>
+        <promotion-code-save base-url="{{ asset(config('avored.admin_url')) }}" :promotion-code="{{ $promotionCode }}" inline-template>
         <div>
             <a-form 
                 :form="form"
                 method="post"
-                action="{{ route('admin.promotion.code.save', $promotionCode->id ?? null) }}"                    
+                action="{{ route('admin.promotion-code.update', $promotionCode->id ?? null) }}"                    
                 @submit="handleSubmit"
             >
                 @csrf
