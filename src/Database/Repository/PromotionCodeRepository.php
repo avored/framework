@@ -6,8 +6,31 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\PromotionCode;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
 
-class PromotionCodeRepository implements PromotionCodeModelInterface
+class PromotionCodeRepository extends BaseRepository implements PromotionCodeModelInterface
 {
+
+    /**
+     * @var PromotionCode $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the PromotionCode Repository
+     */
+    public function __construct()
+    {
+        $this->model = new PromotionCode();
+    }
+
+    /**
+     * Get the model for the repository
+     * @return PromotionCode 
+     */
+    public function model(): PromotionCode
+    {
+        return $this->model;
+    }
+
     /**
      * Create PromotionCode Resource into a database.
      * @param array $data

@@ -157,7 +157,7 @@ class MenuProvider extends ServiceProvider
             $menu->key('promotion_code')
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.promo-code')
-                ->route('admin.promotion.code.table');
+                ->route('admin.promotion-code.index');
         });
 
         $userMenu = Menu::get('user');

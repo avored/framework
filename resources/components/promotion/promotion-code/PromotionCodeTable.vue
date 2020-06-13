@@ -1,66 +1,92 @@
+<template>
+  <div>
+    <div class="flex justify-end mt-3">
+      <avored-button 
+        button-text="Create"
+        html-type="link"
+        type="primary"
+        icon-type="edit-pencil"
+        :link-url="createUrl">
+      </avored-button>
+    </div>
+    <div class="mt-3">
+         <avored-table
+            :columns="columns"
+            :from="initPromotionCodes.from"
+            :to="initPromotionCodes.to"
+            :total="initPromotionCodes.total"
+            :prev_page_url="initPromotionCodes.prev_page_url"
+            :next_page_url="initPromotionCodes.next_page_url"
+            :items="initPromotionCodes.data"
+        >
+          >
+          <template slot="action" slot-scope="{item}">
+            <div class="flex items-center">
+               <avored-button
+                icon-type="edit-pencil"
+                button-class="px-0"
+                html-type="link"
+                :link-url="getEditUrl(item)">
+              </avored-button>
+
+
+            <avored-button
+              icon-type="trash"
+              @click.prevent="deleteOnClick(item)">
+            </avored-button>
+           
+            </div>
+          </template>
+        </avored-table>
+    </div>
+  </div>
+</template>
+
 <script>
-import isNil from 'lodash/isNil'
+
+import AvoRedButton from '../../system/forms/AvoRedButtton'
 
 const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        sorter: true,
-    }, 
-    {
-        title: 'Code',
-        dataIndex: 'code',
-        key: 'code',
-        sorter: true,
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        scopedSlots: { customRender: 'action' },
-        sorter: false,
-        width: "10%"
-    }
+  {
+    label: "ID",
+    fieldKey: "id"
+  },
+  {
+    label: "Name",
+    fieldKey: "name"
+  },
+  {
+    label: "Code",
+    fieldKey: "code"
+  },
+  {
+    label: "Active From",
+    fieldKey: "active_from"
+  },
+  {
+    label: "Actions",
+    slotName: "action"
+  }
 ];
 
-
 export default {
-  props: ['baseUrl', 'promotionCodes'],
+  props: ['baseUrl', 'initPromotionCodes', 'createUrl'],
+  components: {
+    'avored-button': AvoRedButton
+  },
   data () {
     return {
-        columns
+        columns,    
     };
   },
   methods: {
-      handleTableChange(pagination, filters, sorter) {
-        this.promotionCodes.sort(function(a, b){
-            let columnKey = sorter.columnKey
-            let order = sorter.order
-            
-            if (isNil(a[columnKey])) {
-                a[columnKey] = ''
-            }
-            if (isNil(b[columnKey])) {
-                b[columnKey] = ''
-            }
-            if (order === 'ascend'){
-                if(a[columnKey] < b[columnKey]) return -1;
-                if(a[columnKey] > b[columnKey]) return 1;
-            }
-            if (order === 'descend') {
-                if(a[columnKey] > b[columnKey]) return -1;
-                if(a[columnKey] < b[columnKey]) return 1;
-            }
-            return 0;
-        });
-      },
       getEditUrl(record) {
-          return this.baseUrl + '/promotion-code-edit/' + record.id;
+          return this.baseUrl + '/promotion-code/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
           return this.baseUrl + '/promotion-code/' + record.id;
       },
-      clickOnDeleteIcon(record) {
+      deleteOnClick(record) {
         var url = this.baseUrl  + '/promotion-code/' + record.id;
         var app = this;
         this.$confirm({

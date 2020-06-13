@@ -75,7 +75,11 @@ class TotalCustomer
     {
         $userModel = $this->getUserModel();
         $firstDay = $this->getFirstDay();
-        $value = $userModel->select('id')->where('created_at', '>', $firstDay)->count();
+        if ($userModel === null) {
+            $value = 0;
+        } else {
+            $value = $userModel->select('id')->where('created_at', '>', $firstDay)->count();
+        }
         
         return ['value' => $value];
     }
@@ -93,7 +97,14 @@ class TotalCustomer
 
     private function getUserModel()
     {
-        $model = config('avored.model.user');
-        return new $model;
+        $user = config('avored.model.user');
+
+        try {
+            $model = app($user);
+        } catch (\Exception $e) {
+            $model = null;
+        }
+        
+        return $model;
     }
 }

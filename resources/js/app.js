@@ -56,7 +56,6 @@ Vue.component('a-date-picker', AntDatePicker)
 Vue.component('a-icon', require('ant-design-vue/lib/icon').default)
 Vue.component('a-avatar', require('ant-design-vue/lib/avatar').default)
 Vue.component('a-divider', require('ant-design-vue/lib/divider').default)
-Vue.component('a-table', require('ant-design-vue/lib/table').default)
 Vue.component('a-row', require('ant-design-vue/lib/row').default)
 Vue.component('a-col', require('ant-design-vue/lib/col').default)
 Vue.component('a-drawer', require('ant-design-vue/lib/drawer').default)
@@ -129,7 +128,7 @@ Vue.component('admin-user-table', require('../components/system/admin-user/Admin
 Vue.component('admin-user-save', require('../components/system/admin-user/AdminUserSave.vue').default)
 
 Vue.component('promotion-code-table', require('../components/promotion/promotion-code/PromotionCodeTable.vue').default)
-Vue.component('promotion-code-edit', require('../components/promotion/promotion-code/PromotionCodeEdit.vue').default)
+Vue.component('promotion-code-save', require('../components/promotion/promotion-code/PromotionCodeSave.vue').default)
 
 Vue.component('avored-layout', require('../components/system/Layout.vue').default)
 Vue.component('avored-flash', require('../components/system/Flash.vue').default)
@@ -138,7 +137,9 @@ Vue.component('password-reset-page', require('../components/system/PasswordReset
 Vue.component('password-new-page', require('../components/system/PasswordNewPage.vue').default)
 
 
+import Zondicon from 'vue-zondicons'
 
+Vue.component('zondicon', Zondicon)
 
 const app = new Vue({
     el: '#app',

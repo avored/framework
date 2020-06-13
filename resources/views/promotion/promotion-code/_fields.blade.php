@@ -1,154 +1,65 @@
-<a-row :gutter="20">
-    <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('name'))
-                validate-status="error"
-                help="{{ $errors->first('name') }}"
-            @endif
-            label="{{ __('avored::promotion.promotion-code.name') }}">
-            <a-input
-                :auto-focus="true"
-                name="name"
-                v-decorator="[
-                'name',
-                {initialValue: '{{ ($promotionCode->name) ?? '' }}' },
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'name']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
-    </a-col>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.name') }}"
+        field-name="name"
+        init-value="{{ $promotionCode->name ?? '' }}" 
+        error-text="{{ $errors->first('name') }}"
+    >
+    </avored-input>
+</div>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.description') }}"
+        field-name="description"
+        init-value="{{ $promotionCode->description ?? '' }}" 
+        error-text="{{ $errors->first('description') }}"
+    >
+    </avored-input>
+</div>
 
-    <a-col :span="12">    
-        <a-form-item
-                @if ($errors->has('description'))
-                    validate-status="error"
-                    help="{{ $errors->first('description') }}"
-                @endif
-                label="{{ __('avored::promotion.promotion-code.description') }}"
-            >
-                <a-input
-                    name="description"
-                    v-decorator="[
-                    'description',
-                    {initialValue: '{{ ($promotionCode->description) ?? '' }}' },
-                    {rules: 
-                        [
-                            {   required: true, 
-                                message: '{{ __('avored::validation.required', ['attribute' => 'description']) }}' 
-                            }
-                        ]
-                    }
-                    ]"
-                ></a-input>
-            </a-form-item>
-    </a-col>
-</a-row>
-
-<a-row :gutter="20">
-    <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('code'))
-                validate-status="error"
-                help="{{ $errors->first('code') }}"
-            @endif
-            label="{{ __('avored::promotion.promotion-code.code') }}">
-            <a-input
-                name="code"
-                v-decorator="[
-                'code',
-                {initialValue: '{{ ($promotionCode->code) ?? '' }}' },
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'code']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
-    </a-col>
-    <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('status'))
-                validate-status="error"
-                help="{{ $errors->first('status') }}"
-            @endif
-            label="{{ __('avored::promotion.promotion-code.status') }}"
-        >
-            <a-switch 
-                {{ (isset($promotionCode) && $promotionCode->status) ? 'default-checked' : '' }}
-                @change="changeStatus"></a-switch>
-        </a-form-item>
-
-        <input type="hidden" name="status" v-model="status" />
-    </a-col>
-</a-row>
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.code') }}"
+        field-name="code"
+        init-value="{{ $promotionCode->code ?? '' }}" 
+        error-text="{{ $errors->first('code') }}"
+    >
+    </avored-input>
+</div>
 
 
-<a-row :gutter="20">
-    <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('type'))
-                validate-status="error"
-                help="{{ $errors->first('language') }}"
-            @endif
-            label="{{ __('avored::promotion.promotion-code.type') }}"
-        >
-            <a-select
-                v-on:change="handleTypeChange"
-                v-decorator="[
-                'type',
-                {initialValue: '{{ ($promotionCode->type) ?? '' }}' },
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'Promotion Code Type']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            >
-                @foreach ($typeOptions as $typeOptionVal => $typeOptionLabel)        
-                    <a-select-option value="{{ $typeOptionVal }}">{{ $typeOptionLabel }}</a-select-option>
-                @endforeach
-            </a-select>
-        </a-form-item>
-        <input type="hidden" v-model="type" name="type"  />
-    </a-col>
+<div class="mt-3 flex w-full">
+    <avored-toggle
+        label-text="{{ __('avored::system.fields.status') }}"
+        error-text="{{ $errors->first('status') }}"
+        field-name="status"
+        init-value="{{ $promotionCode->status ?? '' }}"
+    >
+    </avored-toggle>
+</div>
 
-    <a-col :span="12">
-        <a-form-item
-            @if ($errors->has('amount'))
-                validate-status="error"
-                help="{{ $errors->first('amount') }}"
-            @endif
-            label="{{ __('avored::promotion.promotion-code.amount') }}"
-        >
-            <a-input
-                name="amount"
-                v-decorator="[
-                'amount',
-                {initialValue: '{{ ($promotionCode->amount) ?? '' }}' },
-                {rules: 
-                    [
-                        {   required: true, 
-                            message: '{{ __('avored::validation.required', ['attribute' => 'amount']) }}' 
-                        }
-                    ]
-                }
-                ]"
-            ></a-input>
-        </a-form-item>
-    </a-col>
-</a-row>
 
+<div class="mt-3 flex w-full">
+    <avored-select
+        label-text="{{ __('avored::system.fields.type') }}"
+        field-name="type"
+        error-text="{{ $errors->first('type') }}"
+        :options="{{ json_encode($typeOptions) }}"
+        init-value="{{ $promotionCode->type ?? '' }}"
+    >
+    </avored-select>
+</div>
+
+    
+<div class="mt-3 flex w-full">
+    <avored-input
+        label-text="{{ __('avored::system.fields.amount') }}"
+        field-name="amount"
+        init-value="{{ $promotionCode->amount ?? '' }}" 
+        error-text="{{ $errors->first('amount') }}"
+    >
+    </avored-input>
+</div>
 
 <a-row>
     <a-col :span="12">

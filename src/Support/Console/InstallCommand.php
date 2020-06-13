@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Support\Console;
 
+use AvoRed\Framework\AvoRedProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -103,6 +104,8 @@ class InstallCommand extends Command
         $this->alterUserTable();
 
         $this->call('avored:admin:make');
+        $this->call('vendor:publish', ['--provider' => AvoRedProvider::class]);
+
         $this->info('AvoRed Install Successfully!');
     }
 

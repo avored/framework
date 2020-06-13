@@ -11,7 +11,7 @@ class UserTest extends BaseTestCase
     public function testRedirectPathForLoginController()
     {
         $loginController = app(LoginController::class);
-        $adminPath = config('avored.admin_url');
+        $adminPath = route('admin.dashboard');
         $this->assertEquals($loginController->redirectPath(), $adminPath);
     }
 }

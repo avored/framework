@@ -5,8 +5,8 @@
         class="block text-sm leading-5 text-gray-500">
            {{ labelText }}
     </label>
-    <div class="mt-1 flex rounded-md shadow-sm">
-      <div class="relative flex-grow focus-within:z-10">
+    <div class="mt-1">
+      <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <slot name="addOnBefore" />
         </div>
@@ -14,13 +14,14 @@
             :id="fieldName"
             :type="inputType"
             :name="fieldName"   
-            class="px-3 flex-1 w-full py-2 outline-none focus:shadow focus:border rounded border block border-gray-400"
-            :class="inputClass"
+            class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
+            :class="extraClass"
             :disabled="isDisabled"
             v-model="changeValue"
         />
       </div>
       <slot name="addOnAfter" />
+      <p class="text-sm italic text-red-500" v-if="errorText">{{ errorText }}</p>
     </div>
   </div>
 </template>
@@ -39,7 +40,8 @@ export default {
   },
   data() {
     return {
-      changeValue: this.initValue
+      changeValue: this.initValue,
+      extraClass: ''
     };
   },
   watch: {
@@ -49,7 +51,7 @@ export default {
   },
   mounted() {
     if (this.errorText) {
-      this.inputClass += " border-red-500";
+      this.extraClass += " border-red-500";
     }
   }
 };

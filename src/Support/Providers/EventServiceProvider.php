@@ -42,11 +42,11 @@ class EventServiceProvider extends ServiceProvider
         $user = config('avored.model.user');
 
         try {
-            $model = resolve($user);
-        } catch (\ReflectionException $e) {
+            $model = app($user);
+        } catch (\Exception $e) {
             $model = null;
         }
-
+       
         if ($model !== null) {
             $model->observe(UserObserver::class);
         }

@@ -2,10 +2,9 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-class PromotionCode extends Model
+class PromotionCode extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

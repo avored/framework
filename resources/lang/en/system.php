@@ -31,7 +31,11 @@ return [
         'qty' => 'Qty',
         'is_taxable' => 'Is Taxable',
         'track_stock' => 'Track Stock',
-        'alt_text' => 'Image alt text'
+        'alt_text' => 'Image alt text',
+        'description' => 'Description',
+        'code' => 'Code',
+        'type' => 'Type',
+        'amount' => 'Amount',
     ],
     'common' => [
         'list' => 'List',
@@ -50,11 +54,20 @@ return [
         'form' => [
             'title' => 'Sign in to admin account',
             'password' => 'Enter your password',
+            'password_confirmation' => 'Confirm Your Password',
             'email' => 'Enter your email address',
             'forgot-password' => 'Forgot your password?',
             'remember-me' => 'Remember me',
             'sign-in' => 'Sign in',
-        ]
+        ],
+        'reset' => [
+            'title' => 'Reset Password',
+            'btn_sent_password_reset_link' => 'Sent Password Reset Link'
+        ],
+        'password' => [
+            'title' => 'Set New Password',
+            'submit_btn' => 'Change Password'
+        ],
     ],
 
     'failed' => 'These credentials do not match our records.',
@@ -68,9 +81,7 @@ return [
     
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',
-    'forgot-password-title' => 'Reset password',
-    'new_password_title' => 'Set New Password',
-    'password-new-btn' => 'Change Password',
+
     'total-customer' => 'Total Customer',
     'total-order' => 'Total Order',
     'total-revenue' => 'Total Revenue',

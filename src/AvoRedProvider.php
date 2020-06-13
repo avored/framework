@@ -157,6 +157,10 @@ class AvoRedProvider extends ServiceProvider
         $this->app['config']->set(
             'auth.providers',
             array_merge($authConfig['providers'], $avoredConfigData['auth']['providers'])
+        );  
+        $this->app['config']->set(
+            'auth.passwords',
+            array_merge($authConfig['passwords'], $avoredConfigData['auth']['passwords'])
         );
     }
 
