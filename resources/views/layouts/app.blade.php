@@ -11,7 +11,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <!-- Styles -->
-    <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
             </a-layout>
         </avored-layout>
     </div>
-    <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
+    <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @stack('scripts')
 </body>
 

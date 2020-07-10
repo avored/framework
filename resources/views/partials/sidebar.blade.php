@@ -1,6 +1,7 @@
 <a-layout-sider :style="{background: '#fff'}" :trigger="null" collapsible v-model="collapsed">
-    <a href="{{ route('admin.dashboard') }}">
-        <div class="logo">AvoRed</div>
+    <a href="{{ route('admin.dashboard') }}" class="flex items-center mt-2">
+        <img class="h-12 block ml-8 w-12" src="{{ asset('vendor/avored/images/logo_only.svg') }}" />
+        <div class="text-xl text-red-600">AvoRed</div>
     </a>
     <a-menu 
         theme="light"

@@ -27,18 +27,22 @@ mix.setPublicPath(publicPath)
 
 /******** AVORED ADMIN JS  **********/
 mix.js('resources/js/app.js', 'vendor/avored/js/app.js')
-mix.copyDirectory('resources/images', '../../public/vendor/avored/images');
+
+/******** AVORED COPY IMAGES  **********/
+mix.copyDirectory('resources/images', '../../public/vendor/avored/images')
+
+
 /******** AVORED ADMIN CSS  **********/
-mix.less('resources/less/app.less', 'vendor/avored/css/app.css', {
-    lessOptions: {
-        javascriptEnabled: true,
-        modifyVars: {
-            'primary-color': '#E64448',
-            'link-color': '#C12E32',
-            'border-radius-base': '5px',
-        },
-    }
-}).options({
-    processCssUrls: false,
-    postCss: [ tailwindcss('tailwind.config.js') ],
-})
+// mix.less('resources/less/app.less', 'vendor/avored/css/app.css', {
+//     lessOptions: {
+//         javascriptEnabled: true,
+//         modifyVars: {
+//             'primary-color': '#E64448',
+//             'link-color': '#C12E32',
+//             'border-radius-base': '5px',
+//         },
+//     }
+// }).options({
+//     processCssUrls: false,
+//     postCss: [ tailwindcss('tailwind.config.js') ],
+// })
