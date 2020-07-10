@@ -1,6 +1,5 @@
 
 <script>
-import gql from 'graphql-tag'
 
 export default {
     data() {
@@ -9,7 +8,6 @@ export default {
             isVisible: false
         }
     },
-
     mounted() {
        
     }

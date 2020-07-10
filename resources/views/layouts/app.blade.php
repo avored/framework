@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +11,9 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <!-- Styles -->
-    <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <avored-layout inline-template>
@@ -23,21 +25,22 @@
 
                     @include('avored::partials.flash')
                     @include('avored::partials.breadcrumb')
-                    
-                    
+
+
                     <h1 class="ml-4 my-3 text-red-700 text-bold text-2xl">@yield('page_title')</h1>
-                    
+
                     <a-layout-content class="mh-1 ph-1 pt-1 bg-white">
                         @yield('content')
                     </a-layout-content>
 
                     @include('avored::partials.footer')
                 </a-layout>
-           
+
             </a-layout>
         </avored-layout>
     </div>
-    <script src="{{ asset('avored-admin/js/app.js') }}"></script>
+    <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
     @stack('scripts')
 </body>
+
 </html>

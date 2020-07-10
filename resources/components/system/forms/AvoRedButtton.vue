@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-      <a  v-if="htmlType==='link'"
+      <a v-if="htmlType==='link'"
           :href="linkUrl"
           @click="$emit('click', $event)"
           class="px-4 py-2 rounded"

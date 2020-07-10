@@ -10,6 +10,8 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+
+
 import AvoRed from './avored'
 //import router from './router'
 //import apolloProvider from './vue-apollo'
@@ -18,7 +20,6 @@ window.Vue = require('vue')
 window.AvoRed = AvoRed
 
 //import i18n from 'vue-i18n'
-
 
 /*************** AVORED VUE COMPONENTS ***************/
 
