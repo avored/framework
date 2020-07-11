@@ -24,22 +24,20 @@
         <avored-layout inline-template>
             <a-layout id="avored-admin-layout" style="min-height: 100vh">
                 @include('avored::partials.sidebar')
-                <a-layout>
-
+                <div class="w-full z-10">
                     @include('avored::partials.header')
-
                     @include('avored::partials.flash')
                     @include('avored::partials.breadcrumb')
 
-
-                    <h1 class="ml-4 my-3 text-red-700 text-bold text-2xl">@yield('page_title')</h1>
-
-                    <a-layout-content class="mh-1 ph-1 pt-1 bg-white">
+                    <h1 class="ml-4 my-3 text-red-700 text-bold text-2xl">
+                        @yield('page_title')
+                    </h1>
+                    <div class="rounded p-5 mx-3 my-3 bg-white">
                         @yield('content')
-                    </a-layout-content>
+                    </div>
 
                     @include('avored::partials.footer')
-                </a-layout>
+                </div>
 
             </a-layout>
         </avored-layout>

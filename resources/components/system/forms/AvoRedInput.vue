@@ -6,8 +6,8 @@
            {{ labelText }}
     </label>
     <div class="mt-1">
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <div class="relative flex items-center">
+        <div class="absolute inset-y-0 left-0 pl-3 pointer-events-none">
             <slot name="addOnBefore" />
         </div>
         <input
@@ -19,8 +19,9 @@
             :disabled="isDisabled"
             v-model="changeValue"
         />
+        <slot name="addOnAfter" />
       </div>
-      <slot name="addOnAfter" />
+      
       <p class="text-sm italic text-red-500" v-if="errorText">{{ errorText }}</p>
     </div>
   </div>

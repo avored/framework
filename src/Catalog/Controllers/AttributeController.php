@@ -32,7 +32,7 @@ class AttributeController
      */
     public function index()
     {
-        $attributes = $this->attributeRepository->all();
+        $attributes = $this->attributeRepository->paginate();
         
         return view('avored::catalog.attribute.index')
             ->with(compact('attributes'));
