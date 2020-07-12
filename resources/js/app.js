@@ -25,6 +25,7 @@ window.AvoRed = AvoRed
 import i18n from './services/i18n'
 // import apolloProvider from './services/apollo'
 // import Router from './services/router'
+import Router from './services/router'
 import Store from './services/store'
 import './services/components'
 
@@ -143,7 +144,7 @@ Vue.component('zondicon', Zondicon)
 
 const app = new Vue({
     el: '#app',
-    //router,
+    router: Router,
     i18n,
     store: Store,
     //apolloProvider

@@ -21,6 +21,7 @@
 
 <body>
     <div id="app">
+        
         <avored-layout inline-template>
             <a-layout id="avored-admin-layout" style="min-height: 100vh">
                 @include('avored::partials.sidebar')
@@ -33,6 +34,7 @@
                         @yield('page_title')
                     </h1>
                     <div class="rounded p-5 mx-3 my-3 bg-white">
+                        <router-view></router-view>
                         @yield('content')
                     </div>
 

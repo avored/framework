@@ -26,6 +26,7 @@
     "vddl": "^0.7.1",
     "vue": "^2.6.11",
     "vue-quill-editor": "^3.0.6",
+    "vue-router": "^3.3.4",
     "vue-zondicons": "^0.1.10"
   }
 }
