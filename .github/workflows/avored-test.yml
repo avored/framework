@@ -47,7 +47,7 @@ jobs:
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v2
-        if: always()
+        if: failure()
         with:
             status: ${{ job.status }}
             author_name: ${{ github.actor }}
