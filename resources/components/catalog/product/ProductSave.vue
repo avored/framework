@@ -194,6 +194,7 @@ export default {
       }
   },
   mounted() {
+  
     this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
     if (!isNil(this.product)) {
       this.type = this.product.type

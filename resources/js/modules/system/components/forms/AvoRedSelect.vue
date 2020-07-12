@@ -1,7 +1,9 @@
 <template>
     <div class="w-full">
         <slot>
-             <div class="relative w-full mb-6" v-click-outside="()=>{dropdownToggle=false}">
+             <div class="relative w-full mb-6" 
+                v-click-outside="()=>{dropdownToggle=false}">
+                
                 <label
                     v-if="labelText"
                     class="text-sm w-full text-gray-600"
@@ -9,8 +11,10 @@
                 >{{ labelText }}</label>
                 <button
                     type="button"
-                    @click="dropdownToggle=!dropdownToggle"
+                    :tabindex="disabled ? -1 : 0"
+                    @click="disabled ? '' : dropdownToggle=!dropdownToggle"
                     class="border flex w-full border-gray-400 py-2 px-4 rounded"
+                    :class="disabled ? 'bg-gray-300 cursor-not-allowed' : ''"
                 >
                 
                     <span class="flex-1 text-left">{{ displayText }}</span>
@@ -60,7 +64,8 @@ export default {
         initValue: { type: [String], default: "" },
         options: {type: [Array, Object], default: () =>[]},
         errorText: { type: [String], default: ''},
-        fieldName: { type: [String], default: ''}
+        fieldName: { type: [String], default: ''},
+        disabled: { type: [Boolean], default: false}
     },
     data() {
         return {
