@@ -20,8 +20,7 @@
             inline-template>
         <div>
             <a-row :gutter="30" class="menu-save-page">
-                <a-form 
-                    :form="form" 
+                <form 
                     v-on:submit="handleSubmit"
                     method="post" 
                     action="{{ route('admin.menu-group.update', $menuGroup->id) }}">
@@ -40,7 +39,7 @@
                             </a-button>
                         </a-form-item>
                     </a-col>
-                </a-form>
+                </form>
             </a-row>
         </div>
         </menu-save>

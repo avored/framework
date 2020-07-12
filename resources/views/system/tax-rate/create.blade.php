@@ -13,8 +13,7 @@
     <a-col :span="24">
         <tax-rate-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div>
-            <a-form 
-                :form="taxRateForm"
+            <form 
                 method="post"
                 action="{{ route('admin.tax-rate.store') }}"                    
                 @submit="handleSubmit"
@@ -38,7 +37,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </tax-rate-save>
     </a-col>

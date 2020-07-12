@@ -61,19 +61,13 @@
       title="{{__('avored::cms.page.widget_modal_title') }}"
       v-model="widgetModalVisible"
       @ok="handleWidgetOk">
-    <div>
-        <a-row>
-            <a-col :span="24">
-                <a-form-item label="{{ __('avored::cms.page.widget_modal_title') }}">
-                    <a-select :style="{width: '100%'}" v-model="selectedWidget">
-                        @foreach ($widgets as $widgetKey => $widgetLabel)
-                            <a-select-option value="{{ $widgetKey }}">{{ $widgetLabel }}</a-select-option>
-                        @endforeach
-                    </a-select>
-                </a-form-item>
-            </a-col>
-        </a-row>
-    
-    </div>
-      
+   
+    <div class="block">
+        <avored-select
+            field-name="selected_widget"
+            v-model="selectedWidget"
+            :options="{{ $widgets }}"
+        >
+        </avored-select>
+    </div>      
 </a-modal>

@@ -34,7 +34,7 @@
     v-model="variationModelVisible"
     ok-text="{{__('avored::catalog.product.variation_save_btn') }}"
     @ok="clickVariationSave">
-        <a-form  :form="variationForm">
+        <form  :form="variationForm">
             <a-row type="flex" :gutter="15">
                 <a-col :span="12">
                     <a-form-item
@@ -256,7 +256,7 @@
 
                 </a-col>
             </a-row>
-        </a-form>
+        </form>
 </a-modal> --}}
 
 </a-card>

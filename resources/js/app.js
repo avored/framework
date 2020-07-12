@@ -19,18 +19,14 @@ import AvoRed from './avored'
 window.Vue = require('vue')
 window.AvoRed = AvoRed
 
-//import i18n from 'vue-i18n'
-
-/*************** AVORED VUE COMPONENTS ***************/
-
-Vue.component('avored-table', require('../components/system/forms/AvoRedTable').default)
-Vue.component('avored-input', require('../components/system/forms/AvoRedInput').default)
-Vue.component('avored-select', require('../components/system/forms/AvoRedSelect').default)
-Vue.component('avored-toggle', require('../components/system/forms/AvoRedToggle').default)
 
 
 
-
+import i18n from './services/i18n'
+// import apolloProvider from './services/apollo'
+// import Router from './services/router'
+import Store from './services/store'
+import './services/components'
 
 import Layout from 'ant-design-vue/lib/layout'
 import Menu from 'ant-design-vue/lib/menu'
@@ -75,6 +71,9 @@ Vue.prototype.$success = Modal.success;
 Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
+
+
+window.EventBus = new Vue()
 
 import Vddl from 'vddl'
 Vue.use(Vddl)
@@ -145,8 +144,7 @@ Vue.component('zondicon', Zondicon)
 const app = new Vue({
     el: '#app',
     //router,
-    //i18n,
+    i18n,
+    store: Store,
     //apolloProvider
 });
-
-export const EventBus = new Vue();

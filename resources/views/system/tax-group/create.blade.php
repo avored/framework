@@ -13,8 +13,7 @@
     <a-col :span="24">
         <tax-group-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div>
-            <a-form 
-                :form="taxGroupForm"
+            <form 
                 method="post"
                 action="{{ route('admin.tax-group.store') }}"                    
                 @submit="handleSubmit"
@@ -38,7 +37,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </tax-group-save>
     </a-col>

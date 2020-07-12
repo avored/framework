@@ -49,19 +49,31 @@ export default {
           this.widgetModalVisible = true
       },
       handleWidgetOk() {
-        var selection = this.toolbar.quill.getSelection()
-        //this.toolbar.quill.insertEmbed(selection.index, 'image', 'http://placehold.it/250x250')
-        this.toolbar.quill.insertText(selection.index, '%%%' + this.selectedWidget + '%%%')
-        this.toolbar.quill.update()
-        this.toolbar.quill.setSelection(selection.index + this.selectedWidget.length + 1)
-        this.widgetModalVisible = false
+        // 
+
+        setTimeout(() => {
+            // @tood fix this not sure why is this happening here
+            var selection = this.toolbar.quill.getSelection()
+            if (selection) {
+              // this.toolbar.quill.insertEmbed(selection.index, 'image', 'http://placehold.it/250x250')
+              this.toolbar.quill.insertText(selection.index, '%%%' + this.selectedWidget + '%%%')
+              this.toolbar.quill.update()
+              this.toolbar.quill.setSelection(selection.index + this.selectedWidget.length + 1)
+             
+            }
+        }, 200)
+        
+       
+        
+         this.widgetModalVisible = false
+        
       }
   },
   mounted() {
       if (!isNil(this.page)) {
         this.content = this.page.content;
       }
-      EventBus.$on('widgetClick', toolbar => {
+      window.EventBus.$on('widgetClick', toolbar => {
         this.widgetClick(toolbar)
       });
   },

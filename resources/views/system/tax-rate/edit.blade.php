@@ -15,7 +15,7 @@
             base-url="{{ asset(config('avored.admin_url')) }}"
             :tax-rate="{{ $taxRate }}" inline-template>
         <div>
-            <a-form 
+            <form 
                 :form="taxRateForm"
                 method="post"
                 action="{{ route('admin.tax-rate.update', $taxRate->id) }}"                    
@@ -41,7 +41,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </tax-rate-save>
     </a-col>

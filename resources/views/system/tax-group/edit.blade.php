@@ -15,8 +15,7 @@
             base-url="{{ asset(config('avored.admin_url')) }}"
             :tax-group="{{ $taxGroup }}" inline-template>
         <div>
-            <a-form 
-                :form="taxGroupForm"
+            <form 
                 method="post"
                 action="{{ route('admin.tax-group.update', $taxGroup->id) }}"                    
                 @submit="handleSubmit"
@@ -41,7 +40,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </tax-group-save>
     </a-col>

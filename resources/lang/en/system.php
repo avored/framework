@@ -43,7 +43,8 @@ return [
         'edit' => 'Edit',
     ],
     'terms' => [
-        'category' => 'Category'
+        'category' => 'Category',
+        'dashboard' => 'Dashboard'
     ],
 
     'notification' => [

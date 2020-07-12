@@ -9,12 +9,11 @@
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
-    <a-col :span="24">
-        <attribute-save
+<div class="flex items-center">
+    <attribute-save
             base-url="{{ asset(config('avored.admin_url')) }}"
             :attribute="{{ $attribute }}" inline-template>
-        <div>
+        <div class="w-full block">
             <form 
                 method="post"
                 action="{{ route('admin.attribute.update', $attribute->id) }}"                    
@@ -23,14 +22,14 @@
                 @csrf
                 @method('put')
                 <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="catalog.attribute.info">
-                @foreach ($tabs as $tab)
-                    <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
-                        @php
-                            $path = $tab->view();
-                        @endphp
-                        @include($path)
-                    </a-tab-pane>
-                @endforeach
+                    @foreach ($tabs as $tab)
+                        <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+                        </a-tab-pane>
+                    @endforeach
                 </a-tabs>
                 
                 <div class="mt-3 py-3">
@@ -52,7 +51,6 @@
                 </div>
             </form>
             </div>
-        </attribute-save>
-    </a-col>
-</a-row>
+    </attribute-save>
+</div>
 @endsection

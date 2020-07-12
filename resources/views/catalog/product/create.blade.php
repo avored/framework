@@ -13,8 +13,7 @@
     <a-col :span="24">
         <product-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div>
-            <a-form 
-                :form="productForm"
+            <form 
                 method="post"
                 action="{{ route('admin.product.store') }}"                    
                 @submit="handleSubmit"
@@ -125,7 +124,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </product-save>
     </a-col>

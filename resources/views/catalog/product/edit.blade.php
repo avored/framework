@@ -19,8 +19,7 @@
             :product-variations="{{ $product->getVariations()->flatten() }}"
             inline-template>
         <div>
-            <a-form 
-                :form="productForm"
+            <form 
                 method="post"
                 action="{{ route('admin.product.update', $product->id) }}"                    
                 @submit="handleSubmit"
@@ -56,7 +55,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </product-save>
     </a-col>

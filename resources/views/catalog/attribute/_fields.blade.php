@@ -28,27 +28,27 @@
     </avored-select>
 </div>
 
-<a-card class="mt-1" v-for="(k, index) in dropdownOptions"
+<div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
     :key="k"
     >
-    <a-row :gutter="20">
-        <a-col :span="12">
+<div class="flex">
+        <div class="w-1/2 block">
             <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
-             <a-upload
-                name="dropdown_options_image"
-                :default-file-list="getDefaultFile(index)"
-                :multiple="false"
-                :headers="headers"
-                v-on:change="handleUploadImageChange($event, k)"
-                action="{{ route('admin.attribute.upload') }}" 
-                >
-                <a-button>
-                <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
-                </a-button>
-            </a-upload>
+                <a-upload
+                    name="dropdown_options_image"
+                    :default-file-list="getDefaultFile(index)"
+                    :multiple="false"
+                    :headers="headers"
+                    v-on:change="handleUploadImageChange($event, k)"
+                    action="{{ route('admin.attribute.upload') }}" 
+                    >
+                    <a-button>
+                        <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
+                    </a-button>
+                </a-upload>
             </a-form-item>
-        </a-col>
-        <a-col :span="12">
+        </div>
+        <div class="w-1/2 block">
             <div class="mt-3 flex w-full">
                 <avored-input
                     label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
@@ -68,10 +68,7 @@
                     </template>
                 </avored-input>
             </div>
-
-            
-
             <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" />
-        </a-col>
-    </a-row>
-</a-card>
+        </div>
+    </div>
+</div>

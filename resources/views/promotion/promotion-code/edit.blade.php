@@ -13,8 +13,7 @@
     <a-col :span="24">
         <promotion-code-save base-url="{{ asset(config('avored.admin_url')) }}" :promotion-code="{{ $promotionCode }}" inline-template>
         <div>
-            <a-form 
-                :form="form"
+            <form 
                 method="post"
                 action="{{ route('admin.promotion-code.update', $promotionCode->id ?? null) }}"                    
                 @submit="handleSubmit"
@@ -49,7 +48,7 @@
                         {{ __('avored::system.btn.cancel') }}
                     </a-button>
                 </a-form-item>
-            </a-form>
+            </form>
             </div>
         </promotion-code-edit>
     </a-col>
