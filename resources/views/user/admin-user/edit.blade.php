@@ -5,14 +5,27 @@
 @endsection
 
 @section('page_title')
-    {{ __('avored::system.admin-user.edit.title') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::system.admin-user.edit.title') }}
+        </div>
+        {{-- <div class="ml-auto">
+            <a href="{{ route('admin.admin-user.create') }}"
+                class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+            >
+                <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                </svg>
+                {{ __('avored::system.btn.create') }}
+            </a>
+        </div> --}}
+    </div>
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
-    <a-col :span="24">
-        <admin-user-save base-url="{{ asset(config('avored.admin_url')) }}" :admin-user="{{ $adminUser }}" inline-template>
-        <div>
+<div class="flex items-center">
+    <admin-user-save base-url="{{ asset(config('avored.admin_url')) }}" :admin-user="{{ $adminUser }}" inline-template>
+        <div class="w-full block">
             <form 
                 method="post"
                 action="{{ route('admin.admin-user.update', $adminUser->id) }}"                    
@@ -21,14 +34,14 @@
                 @csrf
                 @method('put')
                 <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="user.admin-user.info">
-                @foreach ($tabs as $tab)
-                    <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
-                        @php
-                            $path = $tab->view();
-                        @endphp
-                        @include($path)
-                    </a-tab-pane>
-                @endforeach
+                    @foreach ($tabs as $tab)
+                        <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+                        </a-tab-pane>
+                    @endforeach
                 </a-tabs>
 
                 
@@ -51,8 +64,7 @@
                 </div>
                 
             </form>
-            </div>
-        </admin-user-save>
-    </a-col>
-</a-row>
+        </div>
+    </admin-user-save>
+</div>
 @endsection

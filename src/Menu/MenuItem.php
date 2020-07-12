@@ -74,6 +74,7 @@ class MenuItem implements MenuInterface
 
     /**
      * Get/Set Admin Menu Label.
+     * @param string|null $label
      * @return \AvoRed\Framework\Menu\Menu|string
      */
     public function label($label = null)

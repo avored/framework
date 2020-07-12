@@ -212,11 +212,11 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.role')
                 ->route('admin.role.index');
         });
-        $systemMenu->subMenu('language', function (MenuItem $menu) {
-            $menu->key('language')
-                ->type(MenuItem::ADMIN)
-                ->label('avored::system.admin_menus.language')
-                ->route('admin.language.index');
-        });
+        // $systemMenu->subMenu('language', function (MenuItem $menu) {
+        //     $menu->key('language')
+        //         ->type(MenuItem::ADMIN)
+        //         ->label('avored::system.admin_menus.language')
+        //         ->route('admin.language.index');
+        // });
     }
 }
