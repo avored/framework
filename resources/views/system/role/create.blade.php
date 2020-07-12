@@ -45,9 +45,6 @@
                 @endforeach
                 </a-tabs>
                 
-               
-                
-                
                 <div class="mt-3 py-3">
                     <button type="submit"
                         class="px-6 py-3 font-semibold leading-7  text-white hover:text-white bg-red-600 rounded hover:bg-red-700"

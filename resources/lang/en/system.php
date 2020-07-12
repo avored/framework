@@ -475,7 +475,8 @@ return [
         ],
         'promotion-code' => [
             'index' => 'Promotion Code',
-            'edit' => 'Promotion Code Save'
+            'edit' => 'Edit Promotion Code',
+            'create' => 'CreatePromotion Code'
         ],
         'product' => [
             'index' => 'Product',

@@ -60,16 +60,14 @@
       ok-text="Save"
       @ok="handleChangeStatusOk"
     >
-      <a-row>
-        <a-col :span="24">
-          <a-form-item label="Order Status">
+      <div class="block">
+          <label>Order Status</label>
             <a-select :style="{'width':'100%'}" @change="changeStatusDropdown">
               <option>Test</option>
             </a-select>
             <input type="hidden" v-model="changeStatusId" />
-          </a-form-item>
-        </a-col>
-      </a-row>
+         
+      </div>
     </a-modal>
   </div>
 </template>

@@ -7,7 +7,6 @@ export default {
   props: ['promotionCode', 'baseUrl'],
   data () {
     return {
-        form: this.$form.createForm(this),
         status: 0,
         type: null,
         activeFrom: null,
@@ -19,11 +18,7 @@ export default {
   },
   methods: {
       handleSubmit() {
-          this.form.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
+          
       },
       onActiveFromChange(val) {
         this.activeFrom = val.format('Y-MM-DD')
