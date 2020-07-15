@@ -34,9 +34,7 @@
         <div class="w-full block">
             <form 
                 method="post"
-                action="{{ route('admin.product.update', $product->id) }}"                    
-                @submit="handleSubmit"
-            >
+                action="{{ route('admin.product.update', $product->id) }}">
                 @csrf
                 @method('put')
 

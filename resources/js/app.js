@@ -12,13 +12,12 @@ if (token) {
 
 
 
-import AvoRed from './avored'
+// import AvoRed from './avored'
 //import router from './router'
 //import apolloProvider from './vue-apollo'
-
-window.Vue = require('vue')
-window.AvoRed = AvoRed
-
+// import Vue from 'vue'
+// window.Vue = require('vue')
+// window.AvoRed = AvoRed
 
 
 
@@ -142,7 +141,8 @@ import Zondicon from 'vue-zondicons'
 
 Vue.component('zondicon', Zondicon)
 
-const app = new Vue({
+
+window.app = new Vue({
     el: '#app',
     router: Router,
     i18n,

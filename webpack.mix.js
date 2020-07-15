@@ -33,7 +33,11 @@ mix.alias({'@': '/resources/js'})
 
 
 /******** AVORED ADMIN JS  **********/
+mix.js('resources/js/avored.js', 'vendor/avored/js/avored.js')
+    // .extract(['vue', 'ant-design-vue'])
+
 mix.js('resources/js/app.js', 'vendor/avored/js/app.js')
+    // .extract(['ant-design-vue'])
 
 /******** AVORED COPY IMAGES  **********/
 mix.copyDirectory('resources/images', '../../public/vendor/avored/images')
