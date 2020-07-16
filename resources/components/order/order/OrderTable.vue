@@ -43,39 +43,70 @@
         </div>
       </template>
     </avored-table>
-    <a-modal
-        title="Change Track Code"
-        v-model="track_code_modal_visibility"
-        ok-text="Save"
-        @cancel="handleTrackCodeCancel"
-        @ok="handleTrackCodeOk">
-      <avored-input
-        label-text="Tracking Code"
-        field-name="track_code"
-        :init-value="track_code"
-        v-model="track_code"
-    >
-    </avored-input>
-    </a-modal>
-    <a-modal
-      title="Order Status"
-      v-model="change_status_modal_visibility"
-      @cancel="handleChangeStatusCancel"
-      ok-text="Save"
-      @ok="handleChangeStatusOk"
-    >
-      <div class="block">
-            <avored-select
-                  label-text="Order Status"
-                  field-name="order_status_id"
-                  :init-value="currentRecord.order_status_id"
-                  :options="orderStatuses"
-                  v-model="changeStatusId"
-            >
-            </avored-select>
-         
-      </div>
-    </a-modal>
+   
+        <avored-modal modal-title="Change Track Code" @close="track_code_modal_visibility=false" :is-visible="track_code_modal_visibility">
+            <div class="block">
+                <avored-input
+                    label-text="Tracking Code"
+                    field-name="track_code"
+                    :init-value="track_code"
+                    v-model="track_code"
+                  >
+                  </avored-input>
+                <div class="mt-3 py-3">
+                    <button type="button" @click="handleTrackCodeOk"
+                        class="px-3 py-2 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+                    >   
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
+                        </svg>
+                        <span class="ml-3">Save</span>
+                    </button>
+                    
+
+                    <button type="button" @click="handleTrackCodeCancel"
+                        class="px-3 py-2 font-xs text-white hover:text-white bg-gray-500 hover:bg-gray-600 rounded"
+                    >   
+                        <span class="">Cancel</span>
+                    </button>
+                    
+                </div>
+            
+            </div>
+        </avored-modal>
+
+        <avored-modal modal-title="Change Order Status" @close="change_status_modal_visibility=false" :is-visible="change_status_modal_visibility">
+            <div class="block">
+                <avored-select
+                      label-text="Order Status"
+                      field-name="order_status_id"
+                      :init-value="currentRecord.order_status_id"
+                      :options="orderStatuses"
+                      v-model="changeStatusId"
+                >
+                </avored-select>
+                <div class="mt-3 py-3">
+                    <button type="button" @click="handleChangeStatusOk"
+                        class="px-3 py-2 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+                    >   
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
+                        </svg>
+                        <span class="ml-3">Save</span>
+                    </button>
+                    
+
+                    <button type="button" @click="handleChangeStatusCancel"
+                        class="px-3 py-2 font-xs text-white hover:text-white bg-gray-500 hover:bg-gray-600 rounded"
+                    >   
+                        <span class="">Cancel</span>
+                    </button>
+                    
+                </div>
+            
+            </div>
+        </avored-modal>
+   
   </div>
 </template>
 

@@ -15,7 +15,7 @@
     @if(file_exists(public_path('mix-manifest.json')))
         <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
     @else
-        <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
+        <link href="{{ mi('vendor/avored/css/app.css') }}" rel="stylesheet">
     @endif
 </head>
 

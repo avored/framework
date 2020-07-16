@@ -1,4 +1,4 @@
-<a-layout-header class="bg-white z-1 p-0">
+<div class="bg-white z-1 p-0">
     
         <div class="flex px-3 py-2 h-16 items-center">
             <div class="mr-auto ml-3 cursor-pointer">
@@ -23,11 +23,11 @@
                         </button>
                         <transition enter-active-class="transition duration-300 ease-out transform" enter-class="-translate-y-3 scale-95 opacity-0" enter-to-class="translate-y-0 scale-100 opacity-100" leave-active-class="transition duration-150 ease-in transform" leave-class="translate-y-0 opacity-100" leave-to-class="-translate-y-3 opacity-0">
                             <div v-show="isVisible" class="absolute w-full pt-2">
-                                <div class="relative py-1 bg-white border border-gray-200">
+                                <div class="relative mt-2 py-3 bg-white border border-gray-200">
                                     <a href="{{ route('admin.logout') }}"
                                         onclick="event.preventDefault();
                                             document.getElementById('admin-logout-form').submit();"
-                                        class="w-full py-2 px-4 font-medium text-gray-700 hover:bg-gray-100 focus:outline-none hover:text-gray-900 focus:text-gray-900 focus:shadow-outline transition duration-300 ease-in-out">
+                                        class="w-full py-4 px-4 font-medium text-gray-700 hover:bg-gray-100 focus:outline-none hover:text-gray-900 focus:text-gray-900 focus:shadow-outline transition duration-300 ease-in-out">
                                     {{ __('avored::system.header.logout') }}
                                     </a>
                                     <form id="admin-logout-form" 
@@ -43,4 +43,4 @@
             </div>
         </div>
         
-</a-layout-header>
+</div>
