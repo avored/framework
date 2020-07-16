@@ -4,9 +4,25 @@
     {{ __('avored::system.common.create') . ' ' . __('avored::system.terms.category') }}: AvoRed E commerce Admin Dashboard
 @endsection
 
+
 @section('page_title')
-    {{ __('avored::system.common.create') . ' ' . __('avored::system.terms.category') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::system.pages.title.create', ['attribute' => __('avored::system.terms.category')]) }}
+        </div>
+        {{-- <div class="ml-auto">
+            <a href="{{ route('admin.category.create') }}"
+                class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+            >
+                <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                </svg>
+                {{ __('avored::system.btn.create') }}
+            </a>
+        </div> --}}
+    </div>
 @endsection
+
 
 @section('content')
 <div class="mt-3">
@@ -16,20 +32,18 @@
         <div>
             <form action="{{ route('admin.category.store') }}"  method="post">
                 @csrf
-                <a-tabs tabbar-gutter="15" tab-position="left" 
-                    default-active-key="catalog.category.info">
+
+                <avored-tabs>
                     @foreach ($tabs as $tab)
-                        <a-tab-pane 
-                            :force-render="true" 
-                            tab="{{ $tab->label() }}" 
-                            key="{{ $tab->key() }}">
+                        <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
                             @php
                                 $path = $tab->view();
                             @endphp
                             @include($path)
-                        </a-tab-pane>
+                        </avored-tab>
                     @endforeach
-                </a-tabs>
+                </avored-tabs>
+                
                 
                 <div class="mt-3 py-3">
                     <button type="submit"

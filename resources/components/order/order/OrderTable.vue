@@ -49,9 +49,13 @@
         ok-text="Save"
         @cancel="handleTrackCodeCancel"
         @ok="handleTrackCodeOk">
-      <a-form-item label="Track Code">
-        <a-input :auto-focus="true" name="track_code" v-model="track_code"></a-input>
-      </a-form-item>
+      <avored-input
+        label-text="Tracking Code"
+        field-name="track_code"
+        :init-value="track_code"
+        v-model="track_code"
+    >
+    </avored-input>
     </a-modal>
     <a-modal
       title="Order Status"
@@ -61,11 +65,14 @@
       @ok="handleChangeStatusOk"
     >
       <div class="block">
-          <label>Order Status</label>
-            <a-select :style="{'width':'100%'}" @change="changeStatusDropdown">
-              <option>Test</option>
-            </a-select>
-            <input type="hidden" v-model="changeStatusId" />
+            <avored-select
+                  label-text="Order Status"
+                  field-name="order_status_id"
+                  :init-value="currentRecord.order_status_id"
+                  :options="orderStatuses"
+                  v-model="changeStatusId"
+            >
+            </avored-select>
          
       </div>
     </a-modal>
@@ -97,7 +104,7 @@ const columns = [
 ];
 
 export default {
-  props: ["baseUrl", "initOrders"],
+  props: ["baseUrl", "initOrders", 'orderStatuses'],
   data() {
     return {
       columns,
@@ -105,7 +112,7 @@ export default {
       track_code: "",
       track_code_modal_visibility: false,
       change_status_modal_visibility: false,
-      currentRecord: {}
+      currentRecord: {},
     };
   },
   methods: {

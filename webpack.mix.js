@@ -29,7 +29,7 @@ mix.setPublicPath(publicPath)
 
 
 
-mix.alias({'@': '/resources/js'})
+mix.alias({'@': 'resources/js'})
 
 
 /******** AVORED ADMIN JS  **********/

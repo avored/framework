@@ -10,7 +10,6 @@
             :next_page_url="initCategories.next_page_url"
             :items="initCategories.data"
         >
-          >
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
                 <a :href="getEditUrl(item)">

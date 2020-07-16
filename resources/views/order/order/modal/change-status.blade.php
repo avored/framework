@@ -4,22 +4,16 @@
       @cancel="handleChangeStatusCancel"
       ok-text="{{__('avored::system.btn.save') }}"
       @ok="handleChangeStatusOk">
-      <a-row>
-            <a-col :span="24">
-                  <a-form-item
-                  @if ($errors->has('order_status_id'))
-                        validate-status="error"
-                        help="{{ $errors->first('order_status_id') }}"
-                  @endif
-                  label="{{ __('avored::order.order.index.order_status') }}">
-                        <a-select :style="{'width':'100%'}" @change="changeStatusDropdown">
-                              @foreach ($orderStatuses as $orderStatus)                                
-                              <a-select-option value="{{ $orderStatus->id }}">{{ $orderStatus->name }}</a-select-option>
-                              @endforeach
-                        </a-select>
-                        <input type="hidden" v-model="changeStatusId" />
-                  </a-form-item>
-            </a-col>
-      </a-row>
+      <div class="block">
 
+            <avored-select
+                  label-text="{{ __('avored::order.order.index.order_status') }}"
+                  field-name="order_status_id"
+                  error-text="{{ $errors->first('order_status_id') }}"
+                  :options="{{ json_encode($orderStatuses) }}"
+                  {{-- init-value="{{ $property->data_type ?? '' }}" --}}
+                  v-model="changeStatusId"
+            >
+            </avored-select>
+      </div>
 </a-modal>

@@ -32,16 +32,16 @@
                 @submit="handleSubmit"
             >
                 @csrf
-                <a-tabs tabbar-gutter="15" tab-position="left" default-active-key="cms.page.info">
-                @foreach ($tabs as $tab)
-                    <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
-                        @php
-                            $path = $tab->view();
-                        @endphp
-                        @include($path)
-                    </a-tab-pane>
-                @endforeach
-                </a-tabs>
+                <avored-tabs>
+                    @foreach ($tabs as $tab)
+                        <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+                        </avored-tab>
+                    @endforeach
+                </avored-tabs>
                 
                 <div class="mt-3 py-3">
                     <button type="submit"

@@ -11,7 +11,6 @@ if (token) {
 }
 
 
-
 // import AvoRed from './avored'
 //import router from './router'
 //import apolloProvider from './vue-apollo'
@@ -19,7 +18,7 @@ if (token) {
 // window.Vue = require('vue')
 // window.AvoRed = AvoRed
 
-
+// console.log(Vue)
 
 import i18n from './services/i18n'
 // import apolloProvider from './services/apollo'
@@ -72,8 +71,6 @@ Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
 
-
-window.EventBus = new Vue()
 
 import Vddl from 'vddl'
 Vue.use(Vddl)
@@ -142,7 +139,7 @@ import Zondicon from 'vue-zondicons'
 Vue.component('zondicon', Zondicon)
 
 
-window.app = new Vue({
+const app = new Vue({
     el: '#app',
     router: Router,
     i18n,

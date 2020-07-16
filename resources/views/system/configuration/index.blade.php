@@ -33,18 +33,16 @@
                 action="{{ route('admin.configuration.store') }}">
                     @csrf
                   
-                    <a-tabs
-                        default-active-key="system.configuration.basic"
-                        tab-position="left">
+                    <avored-tabs>
                         @foreach ($tabs as $tab)
-                            <a-tab-pane :force-render="true" tab="{{ $tab->label() }}" key="{{ $tab->key() }}">
+                            <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
                                 @php
                                     $path = $tab->view();
                                 @endphp
                                 @include($path)
-                            </a-tab-pane>
+                            </avored-tab>
                         @endforeach
-                    </a-tabs>
+                    </avored-tabs>
 
                     <div class="mt-3 py-3">
                         <button type="submit"

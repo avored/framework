@@ -48,16 +48,17 @@
     
     {{-- <script src="{{ asset('vendor/avored/js/manifest.js') }}"></script>
     <script src="{{ asset('vendor/avored/js/vendor.js') }}"></script> --}}
-    <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
+    <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
     
-    <script src="{{ asset('vendor/avored/cash-on-delivery/js/cash-on-delivery.js') }}"></script>
-    @if(file_exists(public_path('mix-manifest.json') && false))
+    {{-- <script src="{{ asset('vendor/avored/cash-on-delivery/js/cash-on-delivery.js') }}"></script> --}}
+    @stack('scripts')
+    
+    @if(file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @else
         <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
     @endif
     
-    {{-- @stack('scripts') --}}
 </body>
 
 </html>

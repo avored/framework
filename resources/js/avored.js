@@ -10,4 +10,6 @@ window.AvoRed = (function() {
 })();
 
 
+window.EventBus = new Vue()
+
 exports = module.exports = AvoRed;
