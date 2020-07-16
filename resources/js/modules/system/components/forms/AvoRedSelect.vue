@@ -105,6 +105,9 @@ export default {
                     this.changeValue.push(val)
                 }
             } else {
+                findVal = true
+                this.changeValue = []
+                this.displayTexts = []
                 this.changeValue.push(val)
             }
 
@@ -133,7 +136,7 @@ export default {
         }
     },
     mounted() {
-        if (this.initValue && this.multiple) {
+        if (this.initValue.length > 0 && this.multiple) {
             this.initValue.forEach((ele) => {
                 this.displayTexts.push(this.options[ele])
                 this.changeValue.push(ele)

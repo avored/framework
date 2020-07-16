@@ -3,15 +3,17 @@
     <div class="p-5">
 
         <p>
-            <a-form-item label="{{ __('avored::catalog.product.attribute_card_title') }}">
-                <a-select @change="changeVariation" :default-value="attributeIds" mode="multiple"  placeholder="Please select">
-                    @foreach ($attributes as $attribute)
-                        <a-select-option :value="{{ $attribute->id }}" key="{{ $attribute->id }}">
-                            {{ $attribute->name }}
-                        </a-select-option>
-                    @endforeach
-                </a-select>
-            </a-form-item>
+                
+                <avored-select
+                        @change="changeVariation"
+                        label-text="{{ __('avored::catalog.product.attribute_card_title') }}"
+                        field-name="variable_product_attributes[]"
+                        :multiple=true
+                        :options="{{ json_encode($attributes->pluck('name', 'id')) }}"
+                        :init-value="attributeIds"
+                    >
+                    </avored-select>
+            
             <div class="add-on-button">
                 <button type="button" @click="handleVariationBtnClick" t
                     class="px-6 py-2 font-semibold leading-5 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"

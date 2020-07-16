@@ -40,32 +40,7 @@
                         :init-value="{{ $product->categories ?  json_encode($product->categories->pluck('id')->toArray()) : '' }}"
                     >
                     </avored-select>
-                    {{-- <label
-                        class="text-sm w-full text-gray-600"
-                    >{{ __('avored::catalog.product.category') }}</label>
-                    <a-select
-                        mode="multiple"
-                        @change="handleCategoryChange"
-                        v-decorator="[
-                        'category',
-                        {{ ($product->categories !== null && count($product->categories) > 0) ? "{'initialValue': [\"". implode('","', $product->categories->pluck('id')->toArray()) . "\"]}," : "" }}
-                        {rules:
-                            [
-                                {   required: true, 
-                                    message: '{{ __('avored::validation.required', ['attribute' => 'Categories']) }}' 
-                                }
-                            ]
-                        }
-                        ]">
-                        @foreach ($categoryOptions as $catVal => $catLabel)
-                            <a-select-option
-                            value="{{ $catVal }}">{{ $catLabel }}</a-select-option>
-                        @endforeach
-                    </a-select> --}}
-               
-                    {{-- <span v-for="(category, index) in categories">
-                        <input name="category[]" :value="category" type="hidden" />
-                    </span> --}}
+                    
                 </div>
             </div>
             <div class="w-1/2 ml-3">
@@ -240,7 +215,7 @@
                 >
                 </avored-input>
             </div>
-        </a-form-item>
+        
 
         </div>
 
