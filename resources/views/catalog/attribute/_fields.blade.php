@@ -31,9 +31,17 @@
 <div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
     :key="k"
     >
-<div class="flex">
-        <div class="w-1/2 block">
-            <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
+<div class="flex items-center">
+        <div class="w-1/2">
+            <avored-upload
+                    label-text="{{ __('avored::catalog.attribute.image') }}"
+                    :name="imagePathName(path)"
+                    :init-value="getInitDropdownValue(index)" 
+                    error-text="{{ $errors->first('dropdown_options') }}"
+                    upload-url="{{ route('admin.attribute.upload') }}"
+                >
+            </avored-upload>
+            {{-- <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
                 <a-upload
                     name="dropdown_options_image"
                     :default-file-list="getDefaultFile(index)"
@@ -46,10 +54,10 @@
                         <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
                     </a-button>
                 </a-upload>
-            </a-form-item>
+            </a-form-item> --}}
         </div>
-        <div class="w-1/2 block">
-            <div class="mt-3 flex w-full">
+        <div class="w-1/2 ml-3">
+            <div class="flex w-full">
                 <avored-input
                     label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
                     :name="dropdownOptionDisplayTextName(k)"
@@ -68,7 +76,7 @@
                     </template>
                 </avored-input>
             </div>
-            <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" />
+            {{-- <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" /> --}}
         </div>
     </div>
 </div>

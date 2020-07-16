@@ -2,6 +2,7 @@
 
 Vue.component('avored-table', require('@/modules/system/components/forms/AvoRedTable').default)
 Vue.component('avored-input', require('@/modules/system/components/forms/AvoRedInput').default)
+Vue.component('avored-upload', require('@/modules/system/components/forms/AvoRedUpload').default)
 Vue.component('avored-select', require('@/modules/system/components/forms/AvoRedSelect').default)
 Vue.component('avored-toggle', require('@/modules/system/components/forms/AvoRedToggle').default)
 Vue.component('avored-tabs', require('@/modules/system/components/forms/AvoRedTabs').default)

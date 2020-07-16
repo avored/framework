@@ -151,7 +151,7 @@ class AttributeController
     public function upload(AttributeImageRequest $request)
     {
         $image = $request->file('dropdown_options_image');
-        $path = $image->store('uploads/catalog/attributes', 'public');
+        $path = $image->store('uploads/catalog/attributes', 'avored');
 
         return response()->json([
             'success' => true,
