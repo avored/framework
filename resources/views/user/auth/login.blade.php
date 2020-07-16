@@ -10,6 +10,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     @if(file_exists(public_path('mix-manifest.json')))
+    <script defer src="{{ mix('vendor/avored/js/avored.js') }}"></script>
         <script defer src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @else
         <script defer src="{{ asset('vendor/avored/js/app.js') }}"></script>

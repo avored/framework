@@ -31,7 +31,16 @@
         <div class="flex mt-3 items-center">
             <div class="w-1/2">
                 <div class="">
-                    <label
+                    <avored-select
+                        label-text="{{ __('avored::catalog.product.category') }}"
+                        field-name="category[]"
+                        :multiple=true
+                        error-text="{{ $errors->first('category') }}"
+                        :options="{{ json_encode($categoryOptions) }}"
+                        :init-value="{{ $product->categories ?  json_encode($product->categories->pluck('id')->toArray()) : '' }}"
+                    >
+                    </avored-select>
+                    {{-- <label
                         class="text-sm w-full text-gray-600"
                     >{{ __('avored::catalog.product.category') }}</label>
                     <a-select
@@ -52,11 +61,11 @@
                             <a-select-option
                             value="{{ $catVal }}">{{ $catLabel }}</a-select-option>
                         @endforeach
-                    </a-select>
+                    </a-select> --}}
                
-                    <span v-for="(category, index) in categories">
+                    {{-- <span v-for="(category, index) in categories">
                         <input name="category[]" :value="category" type="hidden" />
-                    </span>
+                    </span> --}}
                 </div>
             </div>
             <div class="w-1/2 ml-3">
