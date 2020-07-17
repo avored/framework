@@ -26,11 +26,7 @@
 <div class="flex items-center">
     <admin-user-save base-url="{{ asset(config('avored.admin_url')) }}" :admin-user="{{ $adminUser }}" inline-template>
         <div class="w-full block">
-            <form 
-                method="post"
-                action="{{ route('admin.admin-user.update', $adminUser->id) }}"                    
-                @submit="handleSubmit"
-            >
+            <form method="post" action="{{ route('admin.admin-user.update', $adminUser->id) }}">
                 @csrf
                 @method('put')
                 <avored-tabs>
@@ -43,7 +39,6 @@
                         </avored-tab>
                     @endforeach
                 </avored-tabs>
-
                 
                 <div class="mt-3 py-3">
                     <button type="submit"

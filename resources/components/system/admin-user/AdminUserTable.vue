@@ -9,7 +9,7 @@
             :next_page_url="initAdminUsers.next_page_url"
             :items="initAdminUsers.data"
         >
-          >
+          
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">

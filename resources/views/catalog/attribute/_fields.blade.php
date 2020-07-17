@@ -31,36 +31,23 @@
 <div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
     :key="k"
     >
-<div class="flex items-center">
+<div class="flex items-start">
         <div class="w-1/2">
             <avored-upload
                     label-text="{{ __('avored::catalog.attribute.image') }}"
-                    :name="imagePathName(path)"
-                    :init-value="getInitDropdownValue(index)" 
+                    :field-name="`dropdown_options[${k}][path]`"
+                    :init-value="getInitDropdownPathValue(index)" 
                     error-text="{{ $errors->first('dropdown_options') }}"
                     upload-url="{{ route('admin.attribute.upload') }}"
                 >
             </avored-upload>
-            {{-- <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
-                <a-upload
-                    name="dropdown_options_image"
-                    :default-file-list="getDefaultFile(index)"
-                    :multiple="false"
-                    :headers="headers"
-                    v-on:change="handleUploadImageChange($event, k)"
-                    action="{{ route('admin.attribute.upload') }}" 
-                    >
-                    <a-button>
-                        <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
-                    </a-button>
-                </a-upload>
-            </a-form-item> --}}
+          
         </div>
         <div class="w-1/2 ml-3">
             <div class="flex w-full">
                 <avored-input
                     label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
-                    :name="dropdownOptionDisplayTextName(k)"
+                    :field-name="`dropdown_options[${k}][display_text]`"
                     :init-value="getInitDropdownValue(index)" 
                     error-text="{{ $errors->first('dropdown_options') }}"
                 >

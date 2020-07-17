@@ -40,27 +40,17 @@
     </avored-input>
 </div>
 
-<a-form-item
-    @if ($errors->has('image_file'))
-        validate-status="error"
-        help="{{ $errors->first('image_file') }}"
-    @endif
-    label="{{ __('avored::system.admin-user.image_file') }}"
->
-    <a-upload 
-        name="image_file"
-        :default-file-list="userImageList"
-        :multiple="false"
-        list-type="picture"
-        action="{{ route('admin.admin-user-image-upload') }}" 
-        :headers="headers"
-        v-on:change="handleUploadImageChange">
-        <a-button>
-        <a-icon type="upload"></a-icon> Click to Upload
-        </a-button>
-    </a-upload>
-</a-form-item>
-<input type="hidden" name="image_path" v-model="image_path" />
+<div class="mt-3 flex w-full">
+    <avored-upload
+            label-text="{{ __('avored::system.admin-user.image_file') }}"
+            field-name="image_path"
+            init-value="{{ $adminUser->image_path ?? '' }}" 
+            error-text="{{ $errors->first('image_path') }}"
+            upload-url="{{ route('admin.admin-user-image-upload') }}"
+        >
+    </avored-upload>
+</div>
+
 
 @if (!isset($adminUser))
 

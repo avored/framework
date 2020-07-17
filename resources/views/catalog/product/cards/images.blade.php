@@ -20,7 +20,7 @@
         <div class="w-2/6">
             <avored-input
                 label-text="{{ __('avored::system.fields.alt_text') }}"
-                :name="'images[' + item.id +'][alt_text]'"
+                :field-name="'images[' + item.id +'][alt_text]'"
                 :init-value="item.alt_text" 
                 error-text="{{ $errors->first('alt_text') }}"
             >

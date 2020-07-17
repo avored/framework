@@ -103,12 +103,7 @@ export default {
 
         if (!isNil(this.variationModel.images[0])) {
           var fileName = this.variationModel.images[0].path.replace(/^.*[\\\/]/, '')
-          this.variationImageList = [{
-            uid: this.variationModel.images[0].id,
-            name: fileName,
-            status: 'done',
-            url: '/storage/' + this.variationModel.images[0].path,
-          }];
+          this.variationImageList = this.variationModel.images[0].path;
         } else {
           this.variationImageList = [];
         }

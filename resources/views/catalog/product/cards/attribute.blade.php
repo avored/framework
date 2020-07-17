@@ -108,18 +108,14 @@
                 <div class="flex mt-3 mb-5">
                     <div class="w-full">
                         <div class="block">
-                            <label>{{ __('avored::catalog.product.variation_image') }}</label>
-                            <a-upload
-                                name="file"
-                                :multiple="false"
-                                :default-file-list="variationImageList"
-                                :headers="headers"
-                                :action="variationUploadImagePath" 
+                            <avored-upload
+                                    label-text="{{ __('avored::catalog.product.variation_image') }}"
+                                    field-name="file"
+                                    :init-value="variationImageList"
+                                    :upload-url="variationUploadImagePath"
                                 >
-                                <a-button>
-                                    <a-icon type="upload"></a-icon> {{ __('avored::catalog.product.variation_image_upload') }}
-                                </a-button>
-                            </a-upload>
+                            </avored-upload>
+                            
                         </div>
                     </div>
                 </div>
