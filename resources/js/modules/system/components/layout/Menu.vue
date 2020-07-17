@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button @click="isVisible=!isVisible" class="w-full flex justify-between items-center py-3 px-6 text-gray-600 cursor-pointer hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+        <button @click="isVisible=!isVisible" class="w-full menu-item flex justify-between items-center py-3 px-6 text-gray-600 cursor-pointer hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
             <span class="flex items-center">
-                <zondicon class="fill-current h-4 w-4" :icon="menu.icon"></zondicon>
-                <span class="mx-4 font-medium">{{  $t(menu.name) }}</span>
+                <zondicon class="menu-icon fill-current h-4 w-4" :icon="menu.icon"></zondicon>
+                <span class="ml-6 font-medium">{{ $t(menu.name) }}</span>
             </span>
 
             <span>

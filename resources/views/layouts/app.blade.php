@@ -23,9 +23,12 @@
     <div id="app">
         
         <avored-layout inline-template>
-            <a-layout id="avored-admin-layout" style="min-height: 100vh">
-                @include('avored::partials.sidebar')
-                <div class="w-full z-10">
+            <div class="flex items-start">
+                <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500 overflow-hidden' : 'sidebar-collapsed w-64'">
+                    @include('avored::partials.sidebar')
+                </div>
+                <div class="w-full">
+                    <div class="w-full">
                     @include('avored::partials.header')
                     @include('avored::partials.flash')
                     @include('avored::partials.breadcrumb')
@@ -39,9 +42,10 @@
                     </div>
 
                     @include('avored::partials.footer')
+                    </div>
                 </div>
 
-            </a-layout>
+            </div>
         </avored-layout>
     </div>
     
