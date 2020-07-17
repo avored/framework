@@ -64,18 +64,23 @@
 <div class="flex mt-3 items-center">
     <div class="w-1/2">
         
-        <label>
-            {{ __('avored::promotion.promotion-code.active_from') }}
-        </label>
-        <a-date-picker :default-value="activeFromDefault" :format="dateFormat" @change="onActiveFromChange"></a-date-picker>
-        <input type="hidden" v-model="activeFrom" name="active_from"  />
-
+        <avored-input
+            label-text="{{ __('avored::promotion.promotion-code.active_from') }}"
+            field-name="active_from"
+            input-type="date"
+            init-value="{{ $promotionCode->active_from->format('Y-m-d') ?? '' }}" 
+            error-text="{{ $errors->first('active_from') }}"
+        >
+        </avored-input>
     </div>
     <div class="w-1/2 ml-3">
-         <label>
-            {{ __('avored::promotion.promotion-code.active_till') }}
-        </label>
-        <a-date-picker :default-value="activeTillDefault" :format="dateFormat" @change="onActiveTillChange"></a-date-picker>
-        <input type="hidden" v-model="activeTill" name="active_till"  />
+        <avored-input
+        label-text="{{ __('avored::promotion.promotion-code.active_till') }}"
+        field-name="active_till"
+        input-type="date"
+        init-value="{{ $promotionCode->active_till->format('Y-m-d') ?? '' }}" 
+        error-text="{{ $errors->first('active_till') }}"
+    >
+    </avored-input>
     </div>
 </div>

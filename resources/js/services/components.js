@@ -8,3 +8,5 @@ Vue.component('avored-toggle', require('@/modules/system/components/forms/AvoRed
 Vue.component('avored-tabs', require('@/modules/system/components/forms/AvoRedTabs').default)
 Vue.component('avored-tab', require('@/modules/system/components/forms/AvoRedTab').default)
 Vue.component('avored-modal', require('@/modules/system/components/forms/AvoRedModal').default)
+
+Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').default)
