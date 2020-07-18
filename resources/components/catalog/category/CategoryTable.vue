@@ -76,31 +76,40 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/category/' + record.id;
         var app = this;
-        this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' category?',
-            okType: 'danger',
-            onOk() {    
+        this.$confirm(
+        {
+          message: 'Do you Want to delete ' + record.name + ' category?',
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+              if (confirm) {
                 axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'category.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'category.delete.error',
-                            message: errors.message
-                        });
-                    });
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
+                      .then(response =>  {
+                          if (response.data.success === true) {
+                              app.$notification.error({
+                                  key: 'category.delete.success',
+                                  message: response.data.message,
+                              });
+                          }
+                          window.location.reload();
+                      })
+                      .catch(errors => {
+                          app.$notification.error({
+                              key: 'category.delete.error',
+                              message: errors.message
+                          });
+                      });
+              }
+          }
+        }
+      )
+     
     },
   }
 };

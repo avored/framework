@@ -70,29 +70,32 @@ export default {
         var url = this.baseUrl  + '/property/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' property?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'property.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'property.delete.error',
-                            message: errors.message
-                        });
-                    });
+            message: 'Do you Want to delete ' + record.name + ' property?',
+            button: {
+              no: 'No',
+              yes: 'Yes'
             },
-            onCancel() {
-                // Do nothing
+            callback: confirm =>  {
+                if (confirm) {    
+                  axios.delete(url)
+                      .then(response =>  {
+                          if (response.data.success === true) {
+                              app.$notification.error({
+                                  key: 'property.delete.success',
+                                  message: response.data.message,
+                              });
+                          }
+                          window.location.reload();
+                      })
+                      .catch(errors => {
+                          app.$notification.error({
+                              key: 'property.delete.error',
+                              message: errors.message
+                          });
+                      });
+                }
             },
+            
         });
     },
   }

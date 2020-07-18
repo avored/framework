@@ -9,4 +9,10 @@ Vue.component('avored-tabs', require('@/modules/system/components/forms/AvoRedTa
 Vue.component('avored-tab', require('@/modules/system/components/forms/AvoRedTab').default)
 Vue.component('avored-modal', require('@/modules/system/components/forms/AvoRedModal').default)
 
+
 Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').default)
+
+import VueConfirmDialog from 'vue-confirm-dialog'
+
+Vue.use(VueConfirmDialog)
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)

@@ -70,9 +70,13 @@ export default {
         var url = this.baseUrl  + '/attribute/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' attirbute?',
-            okType: 'danger',
-            onOk() {    
+            message: 'Do you Want to delete ' + record.name + ' attribute?',
+            button: {
+              no: 'No',
+              yes: 'Yes'
+            },
+            callback: confirm => { 
+              if (confirm) {   
                 axios.delete(url)
                     .then(response =>  {
                         if (response.data.success === true) {
@@ -89,10 +93,9 @@ export default {
                             message: errors.message
                         });
                     });
+              }
             },
-            onCancel() {
-                // Do nothing
-            },
+           
         });
     },
   }

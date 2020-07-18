@@ -66,29 +66,32 @@ export default {
         var url = this.baseUrl  + '/role/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' role?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
+            message: 'Do you Want to delete ' + record.name + ' role?',
+            button: {
+              no: 'No',
+              yes: 'Yes'
+            },
+            callback: confirm => {
+                if (confirm) {    
+                    axios.delete(url)
+                        .then(response =>  {
+                            if (response.data.success === true) {
+                                app.$notification.error({
+                                    key: 'role.delete.success',
+                                    message: response.data.message,
+                                });
+                            }
+                            window.location.reload();
+                        })
+                        .catch(errors => {
                             app.$notification.error({
-                                key: 'role.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'role.delete.error',
-                            message: errors.message
-                        });
-                    });
+                                key: 'role.delete.error',
+                                message: errors.message
+                            })
+                        })
+                }
             },
-            onCancel() {
-                // Do nothing
-            },
+           
         });
     },
   }

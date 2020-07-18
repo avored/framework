@@ -64,12 +64,12 @@ Vue.component('a-switch', require('ant-design-vue/lib/switch').default)
 Vue.component('a-tag', require('ant-design-vue/lib/tag').default)
 
 Vue.prototype.$notification = Notification;
-Vue.prototype.$confirm = Modal.confirm;
+// Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$info = Modal.info;
 Vue.prototype.$success = Modal.success;
 Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
-Vue.prototype.$confirm = Modal.confirm;
+// Vue.prototype.$confirm = Modal.confirm;
 
 
 import Vddl from 'vddl'

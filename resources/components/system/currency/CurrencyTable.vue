@@ -74,29 +74,32 @@ export default {
         var url = this.baseUrl  + '/currency/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' currency?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
+            message: 'Do you Want to delete ' + record.name + ' currency?',
+            button: {
+              no: 'No',
+              yes: 'Yes'
+            },
+            callback: confirm => {
+                if (confirm) {  
+                    axios.delete(url)
+                        .then(response =>  {
+                            if (response.data.success === true) {
+                                app.$notification.error({
+                                    key: 'currency.delete.success',
+                                    message: response.data.message,
+                                });
+                            }
+                            window.location.reload();
+                        })
+                        .catch(errors => {
                             app.$notification.error({
-                                key: 'currency.delete.success',
-                                message: response.data.message,
+                                key: 'currency.delete.error',
+                                message: errors.message
                             });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'currency.delete.error',
-                            message: errors.message
                         });
-                    });
+                }
             },
-            onCancel() {
-                // Do nothing
-            },
+           
         });
     },
   }

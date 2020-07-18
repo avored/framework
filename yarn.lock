@@ -7031,6 +7031,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-confirm-dialog@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-confirm-dialog/-/vue-confirm-dialog-1.0.2.tgz#a9c02b21e3aa6211ac50d6cedb2078e6eb721aaa"
+  integrity sha512-gTo1bMDWOLd/6ihmWv8VlPxhc9QaKoE5YqlsKydUOfrrQ3Q3taljF6yI+1TMtAtJLrvZ8DYrePhgBhY1VCJzbQ==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
