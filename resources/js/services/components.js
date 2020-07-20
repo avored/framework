@@ -12,11 +12,14 @@ Vue.component('avored-modal', require('@/modules/system/components/forms/AvoRedM
 
 Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').default)
 
-import VueConfirmDialog from 'vue-confirm-dialog'
-Vue.use(VueConfirmDialog)
-Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+// import VueConfirmDialog from 'vue-confirm-dialog'
+// Vue.use(VueConfirmDialog)
+// Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
 
 
 import Alert from '@/modules/system/components/forms/alert'
 Vue.use(Alert)
+
+import Confirm from '@/modules/system/components/forms/confirm'
+Vue.use(Confirm)
 

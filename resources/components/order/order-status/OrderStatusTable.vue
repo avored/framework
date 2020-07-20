@@ -65,34 +65,19 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/order-status/' + record.id;
         var app = this;
-        this.$confirm({
-            message: 'Do you Want to delete ' + record.name + ' order-status?',
-            button: {
-              no: 'No',
-              yes: 'Yes'
-            },
-            callback: confirm => {
-                if (confirm) {    
-                  axios.delete(url)
-                      .then(response =>  {
-                          if (response.data.success === true) {
-                              app.$notification.error({
-                                  key: 'order-status.delete.success',
-                                  message: response.data.message,
-                              });
-                          }
-                          window.location.reload();
-                      })
-                      .catch(errors => {
-                          app.$notification.error({
-                              key: 'order-status.delete.error',
-                              message: errors.message
-                          });
-                      });
-                }
-            },
-           
-        });
+        this.$confirm({message: `Do you Want to delete ${record.name} order-status?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
+      
     },
   }
 };

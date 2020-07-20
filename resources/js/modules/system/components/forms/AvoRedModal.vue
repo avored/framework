@@ -22,7 +22,7 @@
         </div>
       
 				<div class="overflow-auto p-5 block max-h-screen w-full">
-					<slot />
+					{{ confirmMessage }}
 				</div>
 			</div>
 		</div>
@@ -39,6 +39,10 @@ export default {
       default: true
     },
     modalTitle: {
+      type: [String],
+      default: ''
+    },
+    confirmMessage: {
       type: [String],
       default: ''
     },

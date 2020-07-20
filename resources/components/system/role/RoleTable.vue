@@ -57,42 +57,27 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/role/' + record.id + '/edit';
+          return this.baseUrl + '/role/' + record.id + '/edit'
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/role/' + record.id;
+          return this.baseUrl + '/role/' + record.id
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/role/' + record.id;
-        var app = this;
-        this.$confirm({
-            message: 'Do you Want to delete ' + record.name + ' role?',
-            button: {
-              no: 'No',
-              yes: 'Yes'
-            },
-            callback: confirm => {
-                if (confirm) {    
-                    axios.delete(url)
-                        .then(response =>  {
-                            if (response.data.success === true) {
-                                app.$notification.error({
-                                    key: 'role.delete.success',
-                                    message: response.data.message,
-                                });
-                            }
-                            window.location.reload();
-                        })
-                        .catch(errors => {
-                            app.$notification.error({
-                                key: 'role.delete.error',
-                                message: errors.message
-                            })
-                        })
-                }
-            },
-           
-        });
+        var url = this.baseUrl  + '/role/' + record.id
+        var app = this
+        this.$confirm({message: `Do you Want to delete ${record.name} role?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
+    
     },
   }
 };

@@ -80,36 +80,18 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/promotion-code/' + record.id;
         var app = this;
-        this.$confirm({
-            message: 'Do you Want to delete ' + record.name + ' promotion code?',
-            button: {
-              no: 'No',
-              yes: 'Yes'
-            },
-            callback: confirm => {  
-                if (confirm){   
-                    axios.delete(url)
-                        .then(response =>  {
-                            if (response.data.success === true) {
-                                app.$notification.error({
-                                    key: 'promotion-code.delete.success',
-                                    message: response.data.message,
-                                });
-                            }
-                            window.location.reload();
-                        })
-                        .catch(errors => {
-                            app.$notification.error({
-                                key: 'promotion-code.delete.error',
-                                message: errors.message
-                            });
-                        });
+        this.$confirm({message: `Do you Want to delete ${record.name} promotion code?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
                   }
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
     },
   }
 };

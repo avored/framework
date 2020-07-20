@@ -12,10 +12,7 @@ export default {
         const alert = params => {
             EventBus.$emit('open', params)
         }
-        alert.open = () => {
-            EventBus.$emit('open')
-        }
-
+     
         Vue.prototype.$alert = alert
         Vue['$alert'] = alert
     }

@@ -228,18 +228,14 @@ export default {
         .post(url, data)
         .then(response => {
           if (response.data.success === true) {
-            app.$notification.success({
-              key: "order.delete.success",
-              message: response.data.message
-            });
+            app.$alert(response.data.message)
+           
           }
           window.location.reload();
         })
         .catch(errors => {
-          app.$notification.error({
-            key: "order.delete.error",
-            message: errors.message
-          });
+          app.$alert(errors.message)
+        
         });
     }
   }

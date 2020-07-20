@@ -1,6 +1,6 @@
 <h1>{{ __('avored::catalog.product.image_title') }}</h1>
 
-<a-upload
+{{-- <a-upload
     action="{{ route('admin.product.image.upload', $product->id) }}"
     :headers="{'X-CSRF-TOKEN': '{{ csrf_token() }}' }"
     :show-upload-list="false"
@@ -9,13 +9,13 @@
     <a-button>
         <a-icon type="upload"></a-icon> {{ __('avored::catalog.product.upload_btn') }}
     </a-button>
-</a-upload>
+</a-upload> --}}
 
 <div class="mt-3" v-for="item in productImages" :key="item.id">
 
     <div class="flex justify-center items-center">
         <div class="w-1/6">
-            <a-avatar :size="64" shape="square"  :src="'/storage/' + item.path"></a-avatar>
+            {{-- <a-avatar :size="64" shape="square"  :src="'/storage/' + item.path"></a-avatar> --}}
         </div>
         <div class="w-2/6">
             <avored-input
@@ -36,8 +36,8 @@
         </div
         >
         <div class="w-1/6">
-            <a-button type="danger" @click="deleteImage(item.id)" icon="delete">
-             </a-button>
+            {{-- <a-button type="danger" @click="deleteImage(item.id)" icon="delete">
+             </a-button> --}}
 
         </div>
     </div>

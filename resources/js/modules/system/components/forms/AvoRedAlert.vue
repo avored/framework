@@ -40,6 +40,7 @@ export default {
       open(params) {
         this.isAlertVisible = true
         if (typeof params === 'object') {
+          //@todo implement different types of alert
         } else {
           this.message = params
           this.extraClass = 'bg-green-100'

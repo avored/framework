@@ -1,7 +1,7 @@
 <script>
-import isNil from 'lodash/isNil';
-import isObject from 'lodash/isObject';
-import { quillEditor } from 'vue-quill-editor';
+import isNil from 'lodash/isNil'
+import isObject from 'lodash/isObject'
+import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios'
 
 const columns = [{
@@ -32,8 +32,6 @@ export default {
   },
   data () {
     return {
-        productForm: this.$form.createForm(this),
-        // variationForm: this.$form.createForm(this),
         type: null,
         headers: {},
         description: null,

@@ -35,7 +35,7 @@
 
 <script>
 
-import AvoRedButton from '../../system/forms/AvoRedButtton'
+// import AvoRedButton from '../../system/forms/AvoRedButtton'
 
 const columns = [
   {
@@ -59,7 +59,7 @@ const columns = [
 export default {
   props: ['baseUrl', 'initCategories'],
   components: {
-    'avored-button': AvoRedButton
+    // 'avored-button': AvoRedButton
   },
   data () {
     return {
@@ -67,6 +67,8 @@ export default {
     };
   },
   mounted() {
+   
+    this.$alert('test Confirm')
   },
   methods: {
       getEditUrl(record) {
@@ -78,34 +80,18 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/category/' + record.id;
         var app = this;
-        this.$confirm(
-        {
-          message: 'Do you Want to delete ' + record.name + ' category?',
-          button: {
-            no: 'No',
-            yes: 'Yes'
-          },
-          /**
-          * Callback Function
-          * @param {Boolean} confirm
-          */
-          callback: confirm => {
-              if (confirm) {
-                axios.delete(url)
-                      .then(response =>  {
-                          if (response.data.success === true) {
-                              app.$alert(response.data.message)
-                          }
-                          window.location.reload();
-                      })
-                      .catch(errors => {
-                          app.$alert(errors.message)
-                          // app.$twack.show({text: error.message, button: 'Close'})
-                      });
-              }
-          }
-        }
-      )
+        this.$confirm({message: `Do you Want to delete ${record.name} category?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
      
     },
   }

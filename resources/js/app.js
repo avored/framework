@@ -10,16 +10,6 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-
-// import AvoRed from './avored'
-//import router from './router'
-//import apolloProvider from './vue-apollo'
-// import Vue from 'vue'
-// window.Vue = require('vue')
-// window.AvoRed = AvoRed
-
-// console.log(Vue)
-
 import i18n from './services/i18n'
 // import apolloProvider from './services/apollo'
 // import Router from './services/router'
@@ -27,53 +17,8 @@ import Router from './services/router'
 import Store from './services/store'
 import './services/components'
 
-// import Layout from 'ant-design-vue/lib/layout'
-// import Menu from 'ant-design-vue/lib/menu'
-// import Form from 'ant-design-vue/lib/form'
-// import Select from 'ant-design-vue/lib/select'
-// import Breadcrumb from 'ant-design-vue/lib/breadcrumb'
-// import Tabs from 'ant-design-vue/lib/tabs'
-// import Modal from 'ant-design-vue/lib/modal'
-// import Notification from 'ant-design-vue/lib/notification'
-// import Dropdown from 'ant-design-vue/lib/dropdown'
-
-// Vue.use(Layout)
-// Vue.use(Menu)
-// Vue.use(Form)
-// Vue.use(Select)
-// Vue.use(Breadcrumb)
-// Vue.use(Tabs)
-// Vue.use(Modal)
-// Vue.use(Dropdown)
-
-// import AntDatePicker from 'ant-design-vue/lib/date-picker'
-
-// Vue.component('a-date-picker', AntDatePicker)
-// Vue.component('a-icon', require('ant-design-vue/lib/icon').default)
-// Vue.component('a-avatar', require('ant-design-vue/lib/avatar').default)
-// Vue.component('a-divider', require('ant-design-vue/lib/divider').default)
-// Vue.component('a-row', require('ant-design-vue/lib/row').default)
-// Vue.component('a-col', require('ant-design-vue/lib/col').default)
-// Vue.component('a-drawer', require('ant-design-vue/lib/drawer').default)
-// Vue.component('a-card', require('ant-design-vue/lib/card').default)
-// Vue.component('a-button', require('ant-design-vue/lib/button').default)
-// Vue.component('a-upload', require('ant-design-vue/lib/upload').default)
-// Vue.component('a-upload', require('ant-design-vue/lib/upload').default)
-// Vue.component('a-input', require('ant-design-vue/lib/input').default)
-// Vue.component('a-switch', require('ant-design-vue/lib/switch').default)
-// Vue.component('a-tag', require('ant-design-vue/lib/tag').default)
-
-// Vue.prototype.$notification = Notification;
-// // Vue.prototype.$confirm = Modal.confirm;
-// Vue.prototype.$info = Modal.info;
-// Vue.prototype.$success = Modal.success;
-// Vue.prototype.$error = Modal.error;
-// Vue.prototype.$warning = Modal.warning;
-// Vue.prototype.$confirm = Modal.confirm;
-
-
-// import Vddl from 'vddl'
-// Vue.use(Vddl)
+import Vddl from 'vddl'
+Vue.use(Vddl)
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 
