@@ -22,6 +22,7 @@
 <body>
     <div id="app">
         <vue-confirm-dialog></vue-confirm-dialog>
+        <avored-alert></avored-alert>
         <avored-layout inline-template>
             <div class="flex items-start">
                 <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">

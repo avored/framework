@@ -66,6 +66,8 @@ export default {
         columns,    
     };
   },
+  mounted() {
+  },
   methods: {
       getEditUrl(record) {
           return this.baseUrl + '/category/' + record.id + '/edit';
@@ -92,18 +94,13 @@ export default {
                 axios.delete(url)
                       .then(response =>  {
                           if (response.data.success === true) {
-                              app.$notification.error({
-                                  key: 'category.delete.success',
-                                  message: response.data.message,
-                              });
+                              app.$alert(response.data.message)
                           }
                           window.location.reload();
                       })
                       .catch(errors => {
-                          app.$notification.error({
-                              key: 'category.delete.error',
-                              message: errors.message
-                          });
+                          app.$alert(errors.message)
+                          // app.$twack.show({text: error.message, button: 'Close'})
                       });
               }
           }

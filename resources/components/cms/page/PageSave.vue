@@ -4,7 +4,7 @@ import quill from 'quill'
 import Vue from 'vue'
 import isNil from 'lodash/isNil'
 import { Widget } from './widget'
-import { EventBus } from '../../../js/app'
+// import { EventBus } from '../../../js/app'
 
  const container = [
       ['bold', 'italic', 'underline', 'strike'],
