@@ -21,9 +21,11 @@
 
 <body>
     <div id="app">
+        
         <avored-alert></avored-alert>
         <avored-confirm></avored-confirm>
         <avored-layout inline-template>
+            
             <div class="flex items-start">
                 <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
                     @include('avored::partials.sidebar')

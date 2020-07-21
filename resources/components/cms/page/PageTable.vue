@@ -52,6 +52,8 @@ const columns = [
   }
 ];
 
+import get from 'lodash/get'
+
 export default {
   props: ['baseUrl', 'initPages'],
   data () {
@@ -71,8 +73,8 @@ export default {
         var app = this
         this.$confirm({message: `Do you Want to delete ${record.name} page?`, callback: () => {
            axios.delete(url)
-              .then(response =>  {
-                  if (response.data.success === true) {
+              .then((response) =>  {
+                  if (get(response, 'data.success', false) === true) {
                       app.$alert(response.data.message)
                   }
                   window.location.reload();

@@ -28,8 +28,7 @@
     
     <div class="ant-form-item-control-wrapper">
         <div class="ant-form-item-control">
-            <quil-editor id="page-content" :options="editorOption" v-model="content"></quil-editor>
-            <input type="hidden" name="content" v-model="content" />
+            <vue-simplemde name="content" v-model="content" ref="markdownEditor" />
         </div>
     </div>
 </div>
@@ -55,7 +54,9 @@
     </avored-input>
 </div>
 
-<avored-modal modal-title="{{__('avored::cms.page.widget_modal_title') }}" @close="widgetModalVisible=false" :is-visible="widgetModalVisible">
+{{-- <avored-modal modal-title="{{__('avored::cms.page.widget_modal_title') }}" 
+    @close="widgetModalVisible=false" 
+    :is-visible="widgetModalVisible">
     <div class="block">
         <avored-select
             label-text="Please Select Widget"
@@ -76,4 +77,4 @@
         </div>
     
     </div>
-</avored-modal>
+</avored-modal> --}}

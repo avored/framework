@@ -59,7 +59,8 @@ const columns = [
 export default {
   props: ['baseUrl', 'initCategories'],
   components: {
-    // 'avored-button': AvoRedButton
+    // 'avored-button': AvoRedButton,
+    
   },
   data () {
     return {
@@ -67,8 +68,7 @@ export default {
     };
   },
   mounted() {
-   
-    this.$alert('test Confirm')
+
   },
   methods: {
       getEditUrl(record) {

@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    // import expiringStorage from '../expiringStorage';
-    export default {
+
+export default {
         props: {
             
            

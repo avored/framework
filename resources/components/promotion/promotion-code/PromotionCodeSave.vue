@@ -1,7 +1,5 @@
 <script>
-import { quillEditor } from 'vue-quill-editor'
 import isNil from 'lodash/isNil'
-import moment from 'moment'
 
 export default {
   props: ['promotionCode', 'baseUrl'],
@@ -39,14 +37,7 @@ export default {
         this.status = this.promotionCode.status;
         this.type = this.promotionCode.type;
       }
-      if (!isNil(this.promotionCode)) {
-        this.activeFromDefault = moment(this.promotionCode.active_from, 'Y-MM-DD')
-        this.activeFrom = this.promotionCode.active_from;
-      }
-      if (!isNil(this.promotionCode)) {
-        this.activeTillDefault = moment(this.promotionCode.active_till, 'Y-MM-DD')
-        this.activeTill = this.promotionCode.active_till;
-      }
+    
   }
 };
 </script>

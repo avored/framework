@@ -1,47 +1,14 @@
-@import '~ant-design-vue/dist/antd.less';
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
-@import 'helper/margin';
-@import 'helper/padding';
 
-.dashboard-widget {
-    .ant-card-head-title {
-        color: #fff;
-    }
-    .amount {
-        color: #fff;
-        font-size: 4rem;
-        margin-bottom: 0px;
-        line-height: 3rem;
-    }
-
-    &.primary { 
-        background-color: @primary-color;
-    }
-    &.warning {
-        background-color: @warning-color;
-    }
-    &.info {
-        background-color: @info-color;
-    }
-}
-.attribute-dropdown .ant-select-arrow{
-    top: 5px;
-    right: 0px;
-}
 .ql-snow .ql-picker-label::before {
     position: absolute;
 }
-.widget-icon {
-    margin-bottom: 5px;
-    font-size: 1.4rem;
-}
 .menu-save-page{
-
     .vddl-placeholder {
-        background: @primary-color;
         margin: 10px 0;
         padding: 5px 0;
+        @apply bg-red-500;
     }
     .menu-builder-list {
         padding: 10px;
@@ -53,106 +20,6 @@
         }
     }
 }
-.header-avtar .anticon {
-    margin-right: 0px;
-}
-.z-1 {
-    z-index: 1;
-}
-.z-0 {
-    z-index: 0;
-}
-.bg-primary {
-    background-color: @primary-color;
-}
-.text-center {
-    text-align: center;
-}
-.float-left {
-    float: left;
-}
-.float-right {
-    float: right;
-}
-.bg-white {
-    background-color: #fff;
-}
-.breadcrumb {
-    margin: 1.2rem 1.3rem 0px;
-}
-.header-nav {
-    float:right;
-    line-height:64px;
-    margin-right:10px;
-}
-.avored-admin-layout .logo {
-    height: 32px;
-    background: rgba(255,255,255,.2);
-    margin: 16px;
-}
-.sidebar {
-    background: #dc281e;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-}
-.bg-transparent {
-    background: transparent;
-}
-#avored-admin-layout .logo {
-    background-image: url(/avored-admin/images/logo.svg);
-    height: 64px;
-    background-repeat: no-repeat;
-    background-size: 40px;
-    background-position: 20px;
-    line-height: 64px;
-    padding-left: 80px;
-    font-size: 1.2rem;
-    z-index: 0;
-}
-.header-trigger {
-    line-height: 64px;
-}
-.account-settings-info-main {
-    width: 100%;
-    display: flex;
-    height: 100%;
-    overflow: auto;
-    &.mobile {
-      display: block;
-      .account-settings-info-left {
-        border-right: unset;
-        border-bottom: 1px solid #e8e8e8;
-        width: 100%;
-        height: 50px;
-        overflow-x: auto;
-        overflow-y: scroll;
-      }
-      .account-settings-info-right {
-        padding: 20px 40px;
-      }
-    }
-    .account-settings-info-left {
-      border-right: 1px solid #e8e8e8;
-      width: 224px;
-    }
-    .account-settings-info-right {
-      flex: 1 1;
-      padding: 8px 40px;
-      .account-settings-info-title {
-        color: rgba(0,0,0,.85);
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 28px;
-        margin-bottom: 12px;
-      }
-      .account-settings-info-view {
-        padding-top: 12px;
-      }
-    }
-  }
 
 @tailwind base;
 

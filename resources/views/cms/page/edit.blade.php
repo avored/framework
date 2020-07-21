@@ -30,8 +30,7 @@
         <div class="w-full block">
             <form 
                 method="post"
-                action="{{ route('admin.page.update', $page->id) }}"                    
-                @submit="handleSubmit"
+                action="{{ route('admin.page.update', $page->id) }}"
             >
                 @csrf
                 @method('put')

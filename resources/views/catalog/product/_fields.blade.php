@@ -93,8 +93,7 @@
             
             <div class="mt-3 block w-full">
                 <div class="">
-                    <quil-editor id="product-description" v-model="description"></quil-editor>
-                    <input type="hidden" name="description" v-model="description" />
+                    <vue-simplemde name="description" v-model="description" ref="markdownEditor" />
                 </div>
             </div>
         </div>

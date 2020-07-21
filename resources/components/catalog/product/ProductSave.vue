@@ -25,10 +25,12 @@ const columns = [{
   slotName: "variableProductAction"
 }];
 
+import VueSimplemde from 'vue-simplemde'
+
 export default {
   props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
   components: {
-    'quil-editor': quillEditor,
+    'vue-simplemde': VueSimplemde,
   },
   data () {
     return {

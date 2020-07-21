@@ -1,5 +1,4 @@
-<div class="bg-white z-1 p-0">
-    
+<div class="bg-white z-1 shadow p-0">
         <div class="flex px-3 py-2 h-16 items-center">
             <div class="mr-auto ml-3 cursor-pointer">
                 <svg 
