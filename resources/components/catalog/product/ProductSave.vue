@@ -162,10 +162,8 @@ export default {
       cancelProduct() {
           window.location = this.baseUrl + '/product';
       },
-      uploadFileChange(file) {
-        if (file.file.status == 'done') {
-          this.productImages.push(file.file.response.image);
-        }
+      uploadFileChange(path) {
+        this.productImages.push({path: path})
       },
       deleteImage(id) {
         let deleteImageUrl = this.baseUrl + '/product-image/' + id;
