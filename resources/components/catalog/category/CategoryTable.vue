@@ -59,7 +59,6 @@ const columns = [
 export default {
   props: ['baseUrl', 'initCategories'],
   components: {
-    // 'avored-button': AvoRedButton,
     
   },
   data () {

@@ -23,6 +23,7 @@ use AvoRed\Framework\Database\Repository\LanguageRepository;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
 use AvoRed\Framework\Database\Repository\TaxGroupRepository;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
+use AvoRed\Framework\Database\Repository\CustomerRepository;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
 use AvoRed\Framework\Database\Repository\MenuGroupRepository;
 use AvoRed\Framework\Database\Repository\UserGroupRepository;
@@ -57,6 +58,7 @@ use AvoRed\Framework\Database\Repository\AttributeProductValueRepository;
 use AvoRed\Framework\Database\Repository\OrderProductAttributeRepository;
 use AvoRed\Framework\Database\Repository\AttributeDropdownOptionRepository;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
+use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductAttributeModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 
@@ -75,6 +77,7 @@ class ModelProvider extends ServiceProvider
     protected $models = [
         AddressModelInterface::class => AddressRepository::class,
         AdminUserModelInterface::class => AdminUserRepository::class,
+        CustomerModelInterface::class => CustomerRepository::class,
         AttributeModelInterface::class => AttributeRepository::class,
         AttributeDropdownOptionModelInterface::class => AttributeDropdownOptionRepository::class,
         AttributeProductValueModelInterface::class => AttributeProductValueRepository::class,
