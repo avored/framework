@@ -49,10 +49,11 @@ class OrderController
     public function index()
     {
         $orders = $this->orderRepository->query()->with('user')->paginate(10);
-        $orderStatuses = $this->orderStatusRepository->all();
+        $orderStatuses = $this->orderStatusRepository->all()->pluck('name', 'id');
 
         return view('avored::order.order.index')
-            ->with(compact('orderStatuses', 'orders'));
+            ->with('orderStatuses', $orderStatuses)
+            ->with('orders', $orders);
     }
 
     /**

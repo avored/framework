@@ -212,8 +212,8 @@ class ProductController
      */
     public function upload(ProductImageRequest $request, Product $product)
     {
-        $image = $request->file('file');
-        $dbPath = $image->storePublicly('uploads/catalog/'.$product->id, 'public');
+        $image = $request->file('files');
+        $dbPath = $image->store('uploads/catalog/'.$product->id, 'avored');
 
         if ($product->images === null || $product->images->count() === 0) {
             $imageModel = $product->images()->create(
@@ -224,7 +224,13 @@ class ProductController
             $imageModel = $product->images()->create(['path' => $dbPath]);
         }
 
-        return response()->json(['image' => $imageModel]);
+        return response()->json([
+            'success' => true,
+            'path' => $dbPath,
+            'message' => __('avored::user.notification.upload', ['attribute' => 'Image']),
+        ]);
+        
+        // return response()->json(['image' => $imageModel]);
     }
 
     /**

@@ -100,6 +100,32 @@ class BreadcrumbProvider extends ServiceProvider
         );
 
         BreadcrumbFacade::make(
+            'admin.promotion-code.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.promotion-code.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.promotion-code.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.promotion-code.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.promotion-code.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
+            'admin.promotion-code.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.promotion-code.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.promotion-code.index');
+            }
+        );
+
+        BreadcrumbFacade::make(
             'admin.role.index',
             function (Breadcrumb $breadcrumb) {
                 $breadcrumb->label('avored::system.breadcrumb.role.index')

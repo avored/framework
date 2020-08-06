@@ -5,31 +5,42 @@
 @endsection
 
 @section('page_title')
-    {{ __('avored::system.common.create') . ' ' . __('avored::system.terms.promotion-code') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::promotion.promotion-code.create.title') }}
+        </div>
+        {{-- <div class="ml-auto">
+            <a href="{{ route('admin.promotion-code.create') }}"
+                class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+            >
+                <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                </svg>
+                {{ __('avored::system.btn.create') }}
+            </a>
+        </div> --}}
+    </div>
 @endsection
+
 
 @section('content')
 <div class="mt-3">
-        <promotion-code-save 
+    <promotion-code-save 
             base-url="{{ asset(config('avored.admin_url')) }}" 
             inline-template>
         <div>
             <form action="{{ route('admin.promotion-code.store') }}"  method="post">
                 @csrf
-                <a-tabs tabbar-gutter="15" tab-position="left" 
-                    default-active-key="catalog.promotion-code.info">
+                <avored-tabs>
                     @foreach ($tabs as $tab)
-                        <a-tab-pane 
-                            :force-render="true" 
-                            tab="{{ $tab->label() }}" 
-                            key="{{ $tab->key() }}">
+                        <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
                             @php
                                 $path = $tab->view();
                             @endphp
                             @include($path)
-                        </a-tab-pane>
+                        </avored-tab>
                     @endforeach
-                </a-tabs>
+                </avored-tabs>
                 
                 <div class="flex mt-5">
                     <button type="submit"
@@ -50,6 +61,6 @@
                 </div>
             </form>
         </div>
-        </promotion-code-save>
+    </promotion-code-save>
 </div>
 @endsection

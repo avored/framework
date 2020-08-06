@@ -52,6 +52,8 @@ const columns = [
   }
 ];
 
+import get from 'lodash/get'
+
 export default {
   props: ['baseUrl', 'initPages'],
   data () {
@@ -61,39 +63,26 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/page/' + record.id + '/edit';
+          return this.baseUrl + '/page/' + record.id + '/edit'
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/page/' + record.id;
+          return this.baseUrl + '/page/' + record.id
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/page/' + record.id;
-        var app = this;
-        this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' page?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'page.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'page.delete.error',
-                            message: errors.message
-                        });
-                    });
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
+        var url = this.baseUrl  + '/page/' + record.id
+        var app = this
+        this.$confirm({message: `Do you Want to delete ${record.name} page?`, callback: () => {
+           axios.delete(url)
+              .then((response) =>  {
+                  if (get(response, 'data.success', false) === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
     },
   }
 };

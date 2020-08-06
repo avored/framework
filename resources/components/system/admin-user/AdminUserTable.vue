@@ -9,7 +9,7 @@
             :next_page_url="initAdminUsers.next_page_url"
             :items="initAdminUsers.data"
         >
-          >
+          
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -65,39 +65,27 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/admin-user/' + record.id + '/edit';
+          return this.baseUrl + '/admin-user/' + record.id + '/edit'
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/admin-user/' + record.id;
+          return this.baseUrl + '/admin-user/' + record.id
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/admin-user/' + record.id;
-        var app = this;
-        this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' admin-user?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'admin.user.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'admin.user.delete.error',
-                            message: errors.message
-                        });
-                    });
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
+        var url = this.baseUrl  + '/admin-user/' + record.id
+        var app = this
+        this.$confirm({message: `Do you Want to delete ${record.name} admin user?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              })
+        }})
+     
     },
   }
 };

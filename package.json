@@ -1,0 +1,35 @@
+{
+  "name": "@avored/framework",
+  "version": "1.0.0",
+  "repository": "https://www.github.com/avored/framework",
+  "author": "Purvesh <purvesh.patel@digistorm.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --https --key ~/.config/valet/Certificates/laravel-ecommerce.test.key --cert ~/.config/valet/Certificates/laravel-ecommerce.test.crt --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "dependencies": {
+    "avored-components": "^0.1.0",
+    "axios": "^0.19.2",
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^5.0.4",
+    "laravel-mix-alias": "^1.0.2",
+    "less": "^3.11.3",
+    "less-loader": "^6.2.0",
+    "lodash": "^4.17.19",
+    "tailwindcss": "^1.4.6",
+    "vddl": "^0.7.1",
+    "vue": "^2.5",
+    "vue-i18n": "^8.18.2",
+    "vue-router": "^3.3.4",
+    "vue-simplemde": "^1.1.2",
+    "vue-zondicons": "^0.1.10",
+    "vuex": "^3.5.1"
+  }
+}

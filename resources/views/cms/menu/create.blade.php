@@ -4,50 +4,62 @@
     {{ __('avored::cms.menu.create.title') }}: AvoRed E commerce Admin Dashboard
 @endsection
 
+
 @section('page_title')
-    {{ __('avored::cms.menu.create.title') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::cms.menu.create.title') }}
+        </div>
+        {{-- <div class="ml-auto">
+            <a href="{{ route('admin.page.create') }}"
+                class="px-4 py-2 font-semibold leading-7 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+            >
+                <svg class="w-5 h-5 inline-block text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/>
+                </svg>
+                {{ __('avored::system.btn.create') }}
+            </a>
+        </div> --}}
+    </div>
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
-    <a-col :span="24">
-        <menu-save
+<div class="flex items-center">
+    <menu-save
             :prop-front-menus="{{ $frontMenus }}"
             :prop-categories="{{ $categories }}" 
             base-url="{{ asset(config('avored.admin_url')) }}" 
             inline-template>
-        <div>
-            <a-row :gutter="30" class="menu-save-page">
-                <a-form 
-                    :form="form" 
+        <div class="w-full block">
+            <div class="flex menu-save-page">
+                <form 
                     v-on:submit="handleSubmit"
                     method="post" 
                     action="{{ route('admin.menu-group.store') }}">
                 
-                @csrf
-                @include('avored::cms.menu._fields')
-                 <a-col class="mt-1" :span="24">
-                    <a-form-item>
-                    <a-button
-                        type="primary"
-                        html-type="submit"
-                    >
-                        {{ __('avored::system.btn.save') }}
-                    </a-button>
+                    @csrf
+                    @include('avored::cms.menu._fields')
                     
-                    <a-button
-                        class="ml-1"
-                        type="default"
-                        v-on:click.prevent="cancelMenu"
-                    >
-                        {{ __('avored::system.btn.cancel') }}
-                    </a-button>
-                </a-form-item>
-                </a-col>
-                </a-form>
-            </a-row>
+                    <div class="mt-3 py-3">
+                        <button type="submit"
+                            class="px-6 py-3 font-semibold leading-7  text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
+                        >   
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
+                            </svg>
+                            <span class="ml-3">{{ __('avored::system.btn.save') }}</span>
+                        </button>
+                        
+                        <a href="{{ route('admin.page.index') }}"
+                            class="px-6 py-3 font-semibold inline-block text-white leading-7 hover:text-white bg-gray-500 rounded hover:bg-gray-600">
+                            <span class="leading-7">
+                                {{ __('avored::system.btn.cancel') }}
+                            </span>
+                        </a>
+                    </div>
+              </form>
+            </div>
         </div>
-        </menu-save>
-    </a-col>
-</a-row>
+    </menu-save>
+</div>
 @endsection

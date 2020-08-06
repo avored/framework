@@ -54,6 +54,18 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
+        Schema::create('customers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('image_path')->nullable()->default(null);
+            $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -344,7 +356,7 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('customer_id');
             $table->enum('type', ['SHIPPING', 'BILLING']);
             $table->string('first_name')->nullable()->default(null);
             $table->string('last_name')->nullable()->default(null);
@@ -357,7 +369,7 @@ class AvoredFrameworkSchema extends Migration
             $table->unsignedBigInteger('country_id')->nullable()->default(null);
             $table->string('phone')->nullable()->default(null);
             $table->timestamps();
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
 
@@ -367,7 +379,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('payment_option');
             $table->unsignedBigInteger('order_status_id');
             $table->unsignedBigInteger('currency_id')->nullable()->default(null);
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('shipping_address_id')->nullable();
             $table->unsignedBigInteger('billing_address_id')->nullable();
             $table->string('track_code')->nullable()->default(null);
@@ -377,6 +389,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('shipping_address_id')->references('id')->on('addresses');
             $table->foreign('billing_address_id')->references('id')->on('addresses');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
 
         Schema::create('order_products', function (Blueprint $table) {

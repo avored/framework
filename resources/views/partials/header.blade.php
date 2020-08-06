@@ -1,11 +1,10 @@
-<a-layout-header class="bg-white z-1 p-0">
-    
+<div class="bg-white z-1 shadow p-0">
         <div class="flex px-3 py-2 h-16 items-center">
             <div class="mr-auto ml-3 cursor-pointer">
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     class="w-5 h-5"
-                    @click="()=> collapsed = !collapsed"
+                    @click="sidebar = !sidebar"
                 ><path d="M1 1h18v2H1V1zm6 8h12v2H7V9zm-6 8h18v2H1v-2zM7 5h12v2H7V5zm0 8h12v2H7v-2zM1 6l4 4-4 4V6z"/>
                 </svg>
             </div>
@@ -23,11 +22,11 @@
                         </button>
                         <transition enter-active-class="transition duration-300 ease-out transform" enter-class="-translate-y-3 scale-95 opacity-0" enter-to-class="translate-y-0 scale-100 opacity-100" leave-active-class="transition duration-150 ease-in transform" leave-class="translate-y-0 opacity-100" leave-to-class="-translate-y-3 opacity-0">
                             <div v-show="isVisible" class="absolute w-full pt-2">
-                                <div class="relative py-1 bg-white border border-gray-200">
+                                <div class="relative mt-2 py-3 bg-white border border-gray-200">
                                     <a href="{{ route('admin.logout') }}"
                                         onclick="event.preventDefault();
                                             document.getElementById('admin-logout-form').submit();"
-                                        class="w-full py-2 px-4 font-medium text-gray-700 hover:bg-gray-100 focus:outline-none hover:text-gray-900 focus:text-gray-900 focus:shadow-outline transition duration-300 ease-in-out">
+                                        class="w-full py-4 px-4 font-medium text-gray-700 hover:bg-gray-100 focus:outline-none hover:text-gray-900 focus:text-gray-900 focus:shadow-outline transition duration-300 ease-in-out">
                                     {{ __('avored::system.header.logout') }}
                                     </a>
                                     <form id="admin-logout-form" 
@@ -42,36 +41,5 @@
                 </div>
             </div>
         </div>
-        {{-- <a-menu-item class="border-b-0">
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                class="w-4 h-4"
-                @click="()=> collapsed = !collapsed"
-            ><path d="M1 1h18v2H1V1zm6 8h12v2H7V9zm-6 8h18v2H1v-2zM7 5h12v2H7V5zm0 8h12v2H7v-2zM1 6l4 4-4 4V6z"/>
-            </svg>
-        </a-menu-item> --}}
-    
-    {{-- <a-menu class="header-nav" mode="horizontal">
-        <a-sub-menu key="header-account">
-            <span slot="title">
-                <a-avatar
-                    class="header-avtar" 
-                    size="small" 
-                    shape="square" 
-                    icon="user"></a-avatar>
-                {{ Auth::guard('admin')->user()->full_name }}
-            </span>
-            <a-menu-item key="1">
-                <a href="{{ route('admin.logout') }}"
-                    onclick="event.preventDefault();
-                        document.getElementById('admin-logout-form').submit();">
-                <a-icon type="logout"></a-icon>
-                <span>{{ __('avored::system.header.logout') }}</span>
-                </a>
-            </a-menu-item>
-        </a-sub-menu>
-    </a-menu>
-     <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form> --}}
-</a-layout-header>
+        
+</div>

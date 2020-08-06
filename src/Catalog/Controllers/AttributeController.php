@@ -32,7 +32,7 @@ class AttributeController
      */
     public function index()
     {
-        $attributes = $this->attributeRepository->all();
+        $attributes = $this->attributeRepository->paginate();
         
         return view('avored::catalog.attribute.index')
             ->with(compact('attributes'));
@@ -90,6 +90,7 @@ class AttributeController
      */
     public function update(AttributeRequest $request, Attribute $attribute)
     {
+       
         $attribute->update($request->all());
         $this->saveAttributeDropdownOptions($attribute, $request);
 
@@ -126,19 +127,20 @@ class AttributeController
      */
     public function saveAttributeDropdownOptions(Attribute $attribute, AttributeRequest $request)
     {
-        if ($request->get('dropdown_option') !== null && count($request->get('dropdown_option')) > 0) {
-            foreach ($request->get('dropdown_option') as $key => $option) {
-                if (empty($option)) {
+        if ($request->get('dropdown_options') !== null && count($request->get('dropdown_options')) > 0) {
+            $attribute->dropdownOptions()->delete();
+            foreach ($request->get('dropdown_options') as $key => $option) {
+                if (empty($option['display_text'])) {
                     continue;
                 }
+                
+                // $optionModel = $attribute->dropdownOptions()->find($key);
 
-                $optionModel = $attribute->dropdownOptions()->find($key);
-
-                if ($optionModel === null) {
-                    $attribute->dropdownOptions()->create($option);
-                } else {
-                    $optionModel->update($option);
-                }
+                // if ($optionModel === null) {
+                $attribute->dropdownOptions()->create($option);
+                // } else {
+                //     $optionModel->update($option);
+                // }
             }
         }
     }
@@ -150,9 +152,12 @@ class AttributeController
      */
     public function upload(AttributeImageRequest $request)
     {
-        $image = $request->file('dropdown_options_image');
-        $path = $image->store('uploads/catalog/attributes', 'public');
+        $files = $request->file('files');
+        // foreach ($files as $file) {
+        $path = $files->store('uploads/catalog/attributes', 'avored');
+        // }
 
+        
         return response()->json([
             'success' => true,
             'path' => $path,

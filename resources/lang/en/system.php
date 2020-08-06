@@ -43,9 +43,17 @@ return [
         'edit' => 'Edit',
     ],
     'terms' => [
-        'category' => 'Category'
+        'category' => 'Category',
+        'dashboard' => 'Dashboard'
     ],
+    'pages' => [
+        'title' => [
+            'list' => ':attribute List',
+            'create' => 'Create :attribute',
+            'edit' => 'Edit :attribute',
 
+        ]
+    ],
     'notification' => [
         'not_enough_qty' => 'Sorry We do not have enought qty available for this product.'
     ],
@@ -474,7 +482,8 @@ return [
         ],
         'promotion-code' => [
             'index' => 'Promotion Code',
-            'edit' => 'Promotion Code Save'
+            'edit' => 'Edit Promotion Code',
+            'create' => 'CreatePromotion Code'
         ],
         'product' => [
             'index' => 'Product',

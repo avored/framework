@@ -1,15 +1,20 @@
 
 <script>
-import gql from 'graphql-tag'
 
 export default {
     data() {
         return {
             collapsed: false,
-            isVisible: false
+            isVisible: false,
+            leftSideNavMenu: false,
+            sidebar: false
         }
     },
-
+    methods: {
+        open() {
+            this.leftSideNavMenu = ! this.leftSideNavMenu
+        }
+    },
     mounted() {
        
     }

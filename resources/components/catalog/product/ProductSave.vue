@@ -1,39 +1,39 @@
 <script>
-import isNil from 'lodash/isNil';
-import isObject from 'lodash/isObject';
-import { quillEditor } from 'vue-quill-editor';
+import isNil from 'lodash/isNil'
+import isObject from 'lodash/isObject'
+import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios'
 
 const columns = [{
-  dataIndex: 'name',
+  fieldKey: 'name',
   key: 'name',
-  title: 'Name',
-  scopedSlots: { customRender: 'name' },
+  label: 'Name',
+  slotName: "variableProductName"
 }, {
-  title: 'Price',
-  dataIndex: 'price',
+  label: 'Price',
+  fieldKey: 'price',
   key: 'price',
-  scopedSlots: { customRender: 'price' },
+  slotName: "variableProductPrice"
 }, {
-  title: 'Qty',
-  dataIndex: 'qty',
+  label: 'Qty',
+  fieldKey: 'qty',
   key: 'qty',
-  scopedSlots: { customRender: 'qty' },
+  slotName: "variableProductQty"
 }, {
-  title: 'Action',
+  label: 'Action',
   key: 'action',
-  scopedSlots: { customRender: 'action' },
+  slotName: "variableProductAction"
 }];
+
+import VueSimplemde from 'vue-simplemde'
 
 export default {
   props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
   components: {
-    'quil-editor': quillEditor,
+    'vue-simplemde': VueSimplemde,
   },
   data () {
     return {
-        productForm: this.$form.createForm(this),
-        variationForm: this.$form.createForm(this),
         type: null,
         headers: {},
         description: null,
@@ -48,6 +48,7 @@ export default {
         variationImageList: {},
         columns,
         variationModelVisible: false,
+        variationModel: {},
         variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
     };
   },
@@ -56,25 +57,22 @@ export default {
 
       },
       clickVariationSave(e) {
-         this.variationForm.validateFields((err, data) => {
-          if (isNil(err)) {
-              let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
-              var app = this;
-              
-              axios.post(url, data)
-                .then(res => {
-                  if (res.data.success) {
-                    app.$notification.success({
-                        key: 'product.save.variation.success',
-                        message: res.data.message,
-                    });
-                    window.location.reload();
-                  } else {
-                    alert('there is an error')
-                  }
-                })
+        let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
+        var app = this;
+        
+        axios.post(url, this.variationModel)
+          .then(res => {
+            if (res.data.success) {
+              app.$notification.success({
+                  key: 'product.save.variation.success',
+                  message: res.data.message,
+              });
+              window.location.reload();
+            } else {
+              alert('there is an error')
             }
-          });
+          })
+         
       },
       deleteVariation(model) {
         let url = this.baseUrl + '/variation/' + model.variation_id;
@@ -98,33 +96,21 @@ export default {
       },
       editVariationModel(model) {
         this.variationModelVisible = true;
-        var variationModel = model.variation;
+        this.variationModel = model.variation;
 
-        this.variationFields.forEach(field => {
-          this.variationForm.getFieldDecorator(field, {initialValue: variationModel[field]})
-          
-        });
-        this.variationUploadImagePath = this.baseUrl + '/product-image/' + variationModel.id + '/upload';
+     
+        this.variationUploadImagePath = this.baseUrl + '/product-image/' + this.variationModel.id + '/upload';
 
-        if (!isNil(variationModel.images[0])) {
-          var fileName = variationModel.images[0].path.replace(/^.*[\\\/]/, '')
-          this.variationImageList = [{
-            uid: variationModel.images[0].id,
-            name: fileName,
-            status: 'done',
-            url: '/storage/' + variationModel.images[0].path,
-          }];
+        if (!isNil(this.variationModel.images[0])) {
+          var fileName = this.variationModel.images[0].path.replace(/^.*[\\\/]/, '')
+          this.variationImageList = this.variationModel.images[0].path;
         } else {
           this.variationImageList = [];
         }
         
       },
       handleSubmit(e) {
-        this.productForm.validateFields((err, values) => {
-          if (err !== null) {
-              e.preventDefault();
-          }    
-          });
+       
       },
       handleVariationBtnClick(e) {
         let data = { attributes: this.attributeIds};
@@ -176,10 +162,8 @@ export default {
       cancelProduct() {
           window.location = this.baseUrl + '/product';
       },
-      uploadFileChange(file) {
-        if (file.file.status == 'done') {
-          this.productImages.push(file.file.response.image);
-        }
+      uploadFileChange(path) {
+        this.productImages.push({path: path})
       },
       deleteImage(id) {
         let deleteImageUrl = this.baseUrl + '/product-image/' + id;
@@ -194,6 +178,7 @@ export default {
       }
   },
   mounted() {
+  
     this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
     if (!isNil(this.product)) {
       this.type = this.product.type

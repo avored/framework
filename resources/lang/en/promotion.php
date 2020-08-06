@@ -27,7 +27,10 @@ return [
             'title' => 'Promotion Code List',
         ],
         'edit' => [
-            'title' => 'Promotion Code Save',
+            'title' => 'Promotion Code Update',
+        ],
+        'create' => [
+            'title' => 'Promotion Code Create',
         ]
     ],
 

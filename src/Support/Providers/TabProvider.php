@@ -61,7 +61,7 @@ class TabProvider extends ServiceProvider
     {
 
         Tab::put('promotion.promotion-code', function (TabItem $tab) {
-            $tab->key('promotion.promotion.code')
+            $tab->key('promotion.promotion-code.info')
                 ->label('avored::system.tab.basic_info')
                 ->view('avored::promotion.promotion-code._fields');
         });

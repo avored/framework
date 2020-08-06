@@ -37,6 +37,9 @@ return [
         'create' => [
             'title' => 'Menu Builder',
         ],
+        'edit' => [
+            'title' => 'Menu Builder',
+        ],
         'name' => 'Menu Group Name',
         'identifier' => 'Menu Group Identifier',
         'builder' => 'Menu Builder',

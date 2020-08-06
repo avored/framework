@@ -129,8 +129,8 @@ class AdminUserController extends Controller
      */
     public function upload(AdminUserImageRequest $request)
     {
-        $image = $request->file('image_file');
-        $path = $image->store('uploads/users', 'public');
+        $image = $request->file('files');
+        $path = $image->store('uploads/users', 'avored');
 
         return response()->json([
             'success' => true,

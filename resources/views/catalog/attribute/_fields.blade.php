@@ -28,31 +28,26 @@
     </avored-select>
 </div>
 
-<a-card class="mt-1" v-for="(k, index) in dropdownOptions"
+<div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
     :key="k"
     >
-    <a-row :gutter="20">
-        <a-col :span="12">
-            <a-form-item label="{{ __('avored::catalog.attribute.image') }}">
-             <a-upload
-                name="dropdown_options_image"
-                :default-file-list="getDefaultFile(index)"
-                :multiple="false"
-                :headers="headers"
-                v-on:change="handleUploadImageChange($event, k)"
-                action="{{ route('admin.attribute.upload') }}" 
+<div class="flex items-start">
+        <div class="w-1/2">
+            <avored-upload
+                    label-text="{{ __('avored::catalog.attribute.image') }}"
+                    :field-name="`dropdown_options[${k}][path]`"
+                    :init-value="getInitDropdownPathValue(index)" 
+                    error-text="{{ $errors->first('dropdown_options') }}"
+                    upload-url="{{ route('admin.attribute.upload') }}"
                 >
-                <a-button>
-                <a-icon type="upload"></a-icon> {{ __('avored::catalog.attribute.upload') }}
-                </a-button>
-            </a-upload>
-            </a-form-item>
-        </a-col>
-        <a-col :span="12">
-            <div class="mt-3 flex w-full">
+            </avored-upload>
+          
+        </div>
+        <div class="w-1/2 ml-3">
+            <div class="flex w-full">
                 <avored-input
                     label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
-                    :name="dropdownOptionDisplayTextName(k)"
+                    :field-name="`dropdown_options[${k}][display_text]`"
                     :init-value="getInitDropdownValue(index)" 
                     error-text="{{ $errors->first('dropdown_options') }}"
                 >
@@ -68,10 +63,7 @@
                     </template>
                 </avored-input>
             </div>
-
-            
-
-            <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" />
-        </a-col>
-    </a-row>
-</a-card>
+            {{-- <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" /> --}}
+        </div>
+    </div>
+</div>

@@ -66,7 +66,7 @@ class AvoRedProvider extends ServiceProvider
      */
     public function registerRoutePath()
     {
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 
     /**
@@ -85,7 +85,7 @@ class AvoRedProvider extends ServiceProvider
      */
     public function registerMigrationPath()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**
@@ -94,7 +94,7 @@ class AvoRedProvider extends ServiceProvider
      */
     public function registerViewPath()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'avored');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'avored');
     }
 
     /**
@@ -103,7 +103,7 @@ class AvoRedProvider extends ServiceProvider
      */
     public function registerTranslationPath()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'avored');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'avored');
     }
 
     /**
@@ -137,10 +137,10 @@ class AvoRedProvider extends ServiceProvider
     public function registerConfigData()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/avored.php',
+            __DIR__ . '/../config/avored.php',
             'avored'
         );
-        $avoredConfigData = include __DIR__.'/../config/avored.php';
+        $avoredConfigData = include __DIR__ . '/../config/avored.php';
         $fileSystemConfig = $this->app['config']->get('filesystems', []);
         $authConfig = $this->app['config']->get('auth', []);
         $this->app['config']->set(
@@ -157,7 +157,7 @@ class AvoRedProvider extends ServiceProvider
         $this->app['config']->set(
             'auth.providers',
             array_merge($authConfig['providers'], $avoredConfigData['auth']['providers'])
-        );  
+        );
         $this->app['config']->set(
             'auth.passwords',
             array_merge($authConfig['passwords'], $avoredConfigData['auth']['passwords'])
@@ -180,11 +180,11 @@ class AvoRedProvider extends ServiceProvider
     public function setupPublishFiles()
     {
         $this->publishes([
-            __DIR__.'/../config/avored.php' => config_path('avored.php'),
+            __DIR__ . '/../config/avored.php' => config_path('avored.php'),
         ], 'avored-config');
 
         $this->publishes([
-            __DIR__.'/../assets/avored-admin' => public_path('avored-admin'),
+            __DIR__ . '/../assets/avored-admin' => public_path('avored-admin'),
         ], 'avored-public');
     }
 }

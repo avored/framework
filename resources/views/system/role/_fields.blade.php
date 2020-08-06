@@ -20,24 +20,28 @@
 </div>
 
 
-<a-row type="flex" :gutter="16">
+<div class="flex flex-wrap"> 
     @foreach ($permissions as $group)
-        <a-col class="mt-1"  :span="6">
-            <a-card title="{{ $group->label() }}">
-                @foreach ($group->permissionList as $permission)
-                    <div class="mt-3 flex w-full">
-                        <avored-toggle
-                            label-text="{{ $permission->label() }}"
-                            field-name="permissions[{{ $permission->routes() }}]"
-                            {{-- toggle-on-value="ENABLED"
-                            toggle-off-value="DISABLED" --}}
-                            init-value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0 }}"
-                        >
-                        </avored-toggle>
-                    </div>
-                @endforeach
-            </a-card>
-        </a-col>
-            
+        <div class="mt-3 w-1/4">
+            <div class="ml-3 rounded border">
+                <div class="p-5 border-b">
+                    {{ $group->label() }}
+                </div>
+                <div class="p-5">
+                    @foreach ($group->permissionList as $permission)
+                        <div class="mt-1 flex w-full">
+                            <avored-toggle
+                                label-text="{{ $permission->label() }}"
+                                field-name="permissions[{{ $permission->routes() }}]"
+                                {{-- toggle-on-value="ENABLED"
+                                toggle-off-value="DISABLED" --}}
+                                init-value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0 }}"
+                            >
+                            </avored-toggle>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>  
     @endforeach
-</a-row>
+</div>

@@ -13,7 +13,7 @@ class Order extends BaseModel
         'payment_option',
         'order_status_id',
         'currency_id',
-        'user_id',
+        'customer_id',
         'shipping_address_id',
         'billing_address_id',
         'track_code',
@@ -34,9 +34,7 @@ class Order extends BaseModel
      */
     public function user()
     {
-        $userClass = config('avored.model.user');
-
-        return $this->belongsTo($userClass);
+        return $this->belongsTo(Customer::class);
     }
 
     /**

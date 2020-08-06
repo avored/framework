@@ -23,14 +23,7 @@ export default {
             }
           });
          },
-        imagePathName(path) {
-            var name = "dropdown_option[";
-            Object.keys(path).forEach(key => {
-                name += key
-            })
-            name += "][path]";
-            return name;
-        },
+      
         imagePathValue(path) {
             var value = ""
             Object.keys(path).forEach(key => {
@@ -40,6 +33,9 @@ export default {
         },
         getInitDropdownValue(index) {
             return get(this.attribute, `dropdown_options.[${index}]['display_text']`, '')
+        },
+          getInitDropdownPathValue(index) {
+            return get(this.attribute, `dropdown_options.[${index}]['path']`, '')
         },
         handleUploadImageChange(info, record){
             if (info.file.status == "done") {
@@ -72,7 +68,7 @@ export default {
             
         },
         getDefaultFile(record) {
-            if (isNil(this.attribute)) {
+            if (true ||isNil(this.attribute)) {
                 return []
             }
             var dropdownOption = this.attribute.dropdown_options[record];
@@ -107,6 +103,7 @@ export default {
             this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
             });
         }
+        this.dropdownOptions.push(this.randomString());
       } else {
           this.dropdownOptions.push(this.randomString());
       }

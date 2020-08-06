@@ -1,0 +1,27 @@
+{
+    "admin_menus": {
+        "admin-user": "Staff",
+        "attribute": "Attribute",
+        "catalog": "Catalog",
+        "category": "Category",
+        "currency": "Currency",
+        "cms": "CMS",
+        "menu": "Menu",
+        "configuration": "Configuration",
+        "language": "Language",
+        "order": "Order",
+        "order-status": "Order Status",
+        "page": "Page",
+        "product": "Product",
+        "property": "Product Property",
+        "role": "Role",
+        "system": "System",
+        "state": "State",
+        "user": "User",
+        "user-group": "User Group",
+        "tax-group": "Tax Group",
+        "tax-rate": "Tax Rate",
+        "promo-code": "Promotion Code",
+        "promotion": "Promotion"
+    }    
+}

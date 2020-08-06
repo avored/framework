@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full">
         <slot>
              <div class="relative w-full mb-6" v-click-outside="()=>{dropdownToggle=false}">
                 <label

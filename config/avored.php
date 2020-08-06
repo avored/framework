@@ -4,12 +4,14 @@
   | AvoRed Cart Products Session Identifier
   |--------------------------------------------------------------------------
  */
+
+
 return [
     'admin_url' => 'admin',
     'symlink_storage_folder' => 'storage',
     'cart' => ['session_key' => 'cart_products', 'promotion_key' => 'cart_discount'],
     'model' => [
-        'user' => App\User::class,
+        'user' => \AvoRed\Framework\Database\Models\Customer::class,
     ],
 
     'graphql' => [
@@ -86,6 +88,10 @@ return [
                 'driver' => 'session',
                 'provider' => 'admin-users',
             ],
+            'customer' => [
+                'driver' => 'session',
+                'provider' => 'customers',
+            ],
             'admin_api' => [
                 'driver' => 'passport',
                 'provider' => 'admin-users',
@@ -97,6 +103,10 @@ return [
             'admin-users' => [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\AdminUser::class,
+            ],
+            'customers' => [
+                'driver' => 'eloquent',
+                'model' => AvoRed\Framework\Database\Models\Customer::class,
             ],
         ],
 

@@ -10,7 +10,7 @@
         <div @click="toggleChange" class="w-full flex items-center mt-2">
             <span role="checkbox" tabindex="0" aria-checked="false" 
                 class="relative inline-block flex-shrink-0 h-4 w-12 
-                    rounded-full border border-2 cursor-pointer transition-colors ease-in-out duration-200 
+                    rounded-full bordercursor-pointer transition-colors ease-in-out duration-200 
                     outline-none"
                 :class="toggleBgClass">
                 <!-- On: "translate-x-5", Off: "translate-x-0" -->

@@ -21,7 +21,8 @@ class LayoutComposer
         [$currentOpenKey, $currentMenuItemKey] = Menu::getMenuItemFromRouteName($routeName);
 
         
-        $adminMenus = Menu::all($admin = true);
+        $adminMenus = Menu::adminMenus();
+        // dd($adminMenus);
         $view->with('adminMenus', $adminMenus)
             ->with('currentOpenKey', $currentOpenKey)
             ->with('currentMenuItemKey', $currentMenuItemKey);

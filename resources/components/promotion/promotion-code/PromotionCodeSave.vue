@@ -1,13 +1,10 @@
 <script>
-import { quillEditor } from 'vue-quill-editor'
 import isNil from 'lodash/isNil'
-import moment from 'moment'
 
 export default {
   props: ['promotionCode', 'baseUrl'],
   data () {
     return {
-        form: this.$form.createForm(this),
         status: 0,
         type: null,
         activeFrom: null,
@@ -19,11 +16,7 @@ export default {
   },
   methods: {
       handleSubmit() {
-          this.form.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
+          
       },
       onActiveFromChange(val) {
         this.activeFrom = val.format('Y-MM-DD')
@@ -44,14 +37,7 @@ export default {
         this.status = this.promotionCode.status;
         this.type = this.promotionCode.type;
       }
-      if (!isNil(this.promotionCode)) {
-        this.activeFromDefault = moment(this.promotionCode.active_from, 'Y-MM-DD')
-        this.activeFrom = this.promotionCode.active_from;
-      }
-      if (!isNil(this.promotionCode)) {
-        this.activeTillDefault = moment(this.promotionCode.active_till, 'Y-MM-DD')
-        this.activeTill = this.promotionCode.active_till;
-      }
+    
   }
 };
 </script>

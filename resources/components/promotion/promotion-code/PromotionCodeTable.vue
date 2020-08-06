@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div class="flex justify-end mt-3">
-      <avored-button 
-        button-text="Create"
-        html-type="link"
-        type="primary"
-        icon-type="edit-pencil"
-        :link-url="createUrl">
-      </avored-button>
-    </div>
     <div class="mt-3">
          <avored-table
             :columns="columns"
@@ -70,7 +61,7 @@ const columns = [
 ];
 
 export default {
-  props: ['baseUrl', 'initPromotionCodes', 'createUrl'],
+  props: ['baseUrl', 'initPromotionCodes'],
   components: {
     'avored-button': AvoRedButton
   },
@@ -89,31 +80,18 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/promotion-code/' + record.id;
         var app = this;
-        this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' promotion-code?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'promotion-code.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'promotion-code.delete.error',
-                            message: errors.message
-                        });
-                    });
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
+        this.$confirm({message: `Do you Want to delete ${record.name} promotion code?`, callback: () => {
+           axios.delete(url)
+              .then(response =>  {
+                  if (response.data.success === true) {
+                      app.$alert(response.data.message)
+                  }
+                  window.location.reload();
+              })
+              .catch(errors => {
+                  app.$alert(errors.message)
+              });
+        }})
     },
   }
 };
