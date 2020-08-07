@@ -1,7 +1,6 @@
 <script>
 import isNil from 'lodash/isNil'
 import isObject from 'lodash/isObject'
-import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios'
 
 const columns = [{
