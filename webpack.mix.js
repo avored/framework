@@ -15,15 +15,21 @@ require('laravel-mix-alias')
  */
 
 
-let url = process.env.APP_URL.replace(/(^\w+:|^)\/\//, '');
-mix.options({
-   hmrOptions: {
-       host: url,
-       port: 8082 // Can't use 443 here because address already in use
-   }
-});
+ let appUrl = process.env.APP_URL
 
-let publicPath = '../../public'
+ 
+ if (typeof appUrl !== 'undefinded') {
+    let url = appUrl.replace(/(^\w+:|^)\/\//, '');
+    mix.options({
+        hmrOptions: {
+            host: url,
+            port: 8082
+        }
+    })
+ }
+
+
+let publicPath = '../../../public'
 
 mix.setPublicPath(publicPath)
 
@@ -39,20 +45,12 @@ mix.js('resources/js/avored.js', 'vendor/avored/js/avored.js')
 mix.js('resources/js/app.js', 'vendor/avored/js/app.js')
 
 /******** AVORED COPY IMAGES  **********/
-mix.copyDirectory('resources/images', '../../public/vendor/avored/images')
+mix.copyDirectory('resources/images', publicPath + '/vendor/avored/images')
 
 
 /******** AVORED ADMIN CSS  **********/
-mix.less('resources/less/app.less', 'vendor/avored/css/app.css', {
-    lessOptions: {
-        javascriptEnabled: true,
-        modifyVars: {
-            'primary-color': '#E64448',
-            'link-color': '#C12E32',
-            'border-radius-base': '5px',
-        },
-    }
-}).options({
-    processCssUrls: false,
-    postCss: [ tailwindcss('tailwind.config.js') ],
-})
+mix.sass('resources/sass/app.scss', 'vendor/avored/css/app.css')
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('tailwind.config.js') ],
+    })
