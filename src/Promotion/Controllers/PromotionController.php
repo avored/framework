@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Promotion\Controllers;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
 use AvoRed\Framework\Database\Models\PromotionCode;
 use AvoRed\Framework\Promotion\Requests\PromotionCodeRequest;
-use AvoRed\Framework\Promotion\ViewModels\PromotionTableViewModel;
 use AvoRed\Framework\Support\Facades\Tab;
 
 class PromotionController

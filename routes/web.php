@@ -117,6 +117,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
         Route::resource('category', Catalog\Controllers\CategoryController::class);
+        Route::get('category-test', [\AvoRed\Framework\System\Controllers\SpaController::class, 'index']);
         Route::resource('currency', System\Controllers\CurrencyController::class);
         Route::resource('language', System\Controllers\LanguageController::class);
         Route::resource('order', Order\Controllers\OrderController::class)->only(['index']);

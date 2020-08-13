@@ -12,11 +12,11 @@
 
     <!-- Styles -->
    
-    @if(file_exists(public_path('mix-manifest.json')))
-        <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
-    @else
+    {{-- @if(file_exists(public_path('mix-manifest.json'))) --}}
+        {{-- <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet"> --}}
+    {{-- @else --}}
         <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
-    @endif
+    {{-- @endif --}}
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                         @yield('page_title')
                     </h1>
                     <div class="rounded p-5 mx-3 my-3 bg-white">
-                        {{-- <router-view></router-view> --}}
+                        <router-view></router-view>
                         @yield('content')
                     </div>
 
@@ -55,7 +55,7 @@
     
     {{-- <script src="{{ asset('vendor/avored/js/manifest.js') }}"></script>
     <script src="{{ asset('vendor/avored/js/vendor.js') }}"></script> --}}
-    @if(file_exists(public_path('mix-manifest.json')))
+    @if(true || file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
     @else
         <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
@@ -64,7 +64,7 @@
     {{-- <script src="{{ asset('vendor/avored/cash-on-delivery/js/cash-on-delivery.js') }}"></script> --}}
     @stack('scripts')
     
-    @if(file_exists(public_path('mix-manifest.json')))
+    @if(true|| file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @else
         <script src="{{ asset('vendor/avored/js/app.js') }}"></script>

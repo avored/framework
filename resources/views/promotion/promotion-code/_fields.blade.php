@@ -68,7 +68,7 @@
             label-text="{{ __('avored::promotion.promotion-code.active_from') }}"
             field-name="active_from"
             input-type="date"
-            init-value="{{ $promotionCode->active_from->format('Y-m-d') ?? '' }}" 
+            init-value="{{ (isset($promotionCode)) ? $promotionCode->active_from->format('Y-m-d') : '' }}"
             error-text="{{ $errors->first('active_from') }}"
         >
         </avored-input>
@@ -78,7 +78,7 @@
         label-text="{{ __('avored::promotion.promotion-code.active_till') }}"
         field-name="active_till"
         input-type="date"
-        init-value="{{ $promotionCode->active_till->format('Y-m-d') ?? '' }}" 
+        init-value="{{ (isset($promotionCode)) ? $promotionCode->active_till->format('Y-m-d') : '' }}"
         error-text="{{ $errors->first('active_till') }}"
     >
     </avored-input>

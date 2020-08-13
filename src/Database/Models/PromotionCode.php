@@ -28,10 +28,16 @@ class PromotionCode extends BaseModel
         'updated_at'
     ];
 
+    const PERCENTAGE = 'PERCENTAGE';
+    const FIXED = 'FIXED';
+
     const TYPEOPTIONS = [
-        'PERCENTAGE' => 'Percentage',
-        'FIXED' => 'Fixed Amount',
-        'FREE_SHIPPING' => 'Free Shipping'
+        self::PERCENTAGE => 'Percentage',
+        self::FIXED => 'Fixed Amount',
+        // 'FREE_SHIPPING' => 'Free Shipping' 
+        
+        // Needs To think about 
+        // If this is active then how does shipping option works in checkout page
     ];
 
     public function scopeStatus($query, $value = 1)
