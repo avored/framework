@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
+use AvoRed\Framework\Database\Models\PromotionCode;
 
 class Manager
 {
@@ -77,12 +78,18 @@ class Manager
         $promotionModel = $this->promotionCodeRepository->findByCode($code);
         $this->promotionList->push($promotionModel);
 
+       
         $message = __('avored::catalog.promotion_code_errot_notification');
-        if ($promotionModel->type === 'FIXED') {
+        if ($promotionModel->type === PromotionCode::FIXED) {
             $this->totalDiscount = $promotionModel->amount;
             $message = __('avored::catalog.promotion_code_success_notification');
         }
+        if ($promotionModel->type === PromotionCode::PERCENTAGE) {
+            $this->totalDiscount = $this->total() * $promotionModel->amount / 100;
+            $message = __('avored::catalog.promotion_code_success_notification');
+        }
 
+      
         $this->sessionManager->put(
             $this->getPromotionKey(),
             ['total' => $this->totalDiscount, 'list' => $this->promotionList]
@@ -341,7 +348,7 @@ class Manager
         foreach ($products as $product) {
             $total += $product->total();
         }
-        $total = $total - $this->totalDiscount;
+        $total = $total - $this->discount();
 
         if ($format === true) {
             return number_format($total, 2);
