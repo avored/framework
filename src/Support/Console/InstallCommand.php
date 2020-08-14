@@ -92,9 +92,7 @@ class InstallCommand extends Command
     {
         $this->call('migrate:fresh');
         $this->call('storage:link');
-        if ($this->confirm('Would you like to install Dummy Data?')) {
-            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
-        }
+        
         $roleData = ['name' => Role::ADMIN];
         $this->roleRepository->create($roleData);
         $this->createCurrency();
@@ -103,6 +101,9 @@ class InstallCommand extends Command
         $this->createOrderStatus();
         $this->alterUserTable();
 
+        if ($this->confirm('Would you like to install Dummy Data?')) {
+            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        }
         $this->call('avored:admin:make');
         $this->call('vendor:publish', ['--provider' => AvoRedProvider::class]);
 

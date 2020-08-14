@@ -12,11 +12,11 @@
 
     <!-- Styles -->
    
-    {{-- @if(file_exists(public_path('mix-manifest.json'))) --}}
-        {{-- <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet"> --}}
-    {{-- @else --}}
+    @if(file_exists(public_path('mix-manifest.json')))
+        <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
+    @else
         <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
-    {{-- @endif --}}
+    @endif
 </head>
 
 <body>

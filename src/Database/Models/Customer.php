@@ -85,6 +85,10 @@ class Customer extends BaseModel
         $this->attributes['password'] = bcrypt($val);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
     /**
      * To check if user has permission to access the given route name.
      * @return bool

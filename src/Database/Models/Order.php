@@ -29,10 +29,10 @@ class Order extends BaseModel
     }
 
     /**
-     * Order Status.
+     * Order Customer.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function customer()
     {
         return $this->belongsTo(Customer::class);
     }

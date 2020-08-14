@@ -3,11 +3,9 @@
 namespace AvoRed\Framework\Order\Controllers;
 
 use Illuminate\View\View;
-use Illuminate\Http\Response;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Order\Mail\SentOrderInvoice;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -48,7 +46,7 @@ class OrderController
      */
     public function index()
     {
-        $orders = $this->orderRepository->query()->with('user')->paginate(10);
+        $orders = $this->orderRepository->query()->with('customer')->paginate(10);
         $orderStatuses = $this->orderStatusRepository->all()->pluck('name', 'id');
 
         return view('avored::order.order.index')
@@ -112,6 +110,7 @@ class OrderController
      */
     public function downloadInvoice(Order $order): BinaryFileResponse
     {
+     
         $path = $this->generatePDF($order);
 
         return response()->download($path, 'invoice.pdf');
@@ -125,7 +124,7 @@ class OrderController
     public function emailInvoice(Order $order)
     {
         $path = $this->generatePDF($order);
-        $email = $order->user->email;
+        $email = $order->customer->email;
 
         Mail::to($email)
             ->send(

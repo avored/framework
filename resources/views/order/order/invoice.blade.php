@@ -40,7 +40,7 @@
                             <td style="padding: 5px;text-align:right">
                                 {{ $order->billingAddress->company_name }}<br>
                                 {{ $order->billingAddress->first_name }} {{ $order->billingAddress->last_name }}<br>
-                                {{ $order->user->email }}
+                                {{ $order->customer->email }}
                             </td>
                         </tr>
                     </table>
