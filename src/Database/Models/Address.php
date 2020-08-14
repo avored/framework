@@ -25,9 +25,12 @@ class Address extends Model
         'phone',
     ];
 
+    const SHIPPING = 'SHIPPING';
+    const BILLING = 'BILLING';
+
     const TYPEOPTIONS = [
-        'SHIPPING' => 'Shipping Address',
-        'BILLING' => 'Billing Address',
+        self::SHIPPING => 'Shipping Address',
+        self::BILLING => 'Billing Address',
     ];
 
     /**
