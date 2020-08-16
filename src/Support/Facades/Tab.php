@@ -5,9 +5,9 @@ namespace AvoRed\Framework\Support\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method \AvoRed\Framework\Tab\Manager static all()
- * @method \AvoRed\Framework\Tab\Manager static put($key, $tab)
- * @method static \AvoRed\Framework\Tab\Manager static get($key)
+ * @method static \AvoRed\Framework\Tab\Manager all()
+ * @method static \AvoRed\Framework\Tab\Manager put($key, $tab)
+ * @method static \AvoRed\Framework\Tab\Manager  get($key)
  */
 class Tab extends Facade
 {

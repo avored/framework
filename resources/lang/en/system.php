@@ -238,6 +238,7 @@ return [
         ],
         'basic' => [
             'site_name' => 'Site Name',
+            'default_currency' => 'Default Currency'
         ],
         'user' => [
             'user_name' => 'Username',

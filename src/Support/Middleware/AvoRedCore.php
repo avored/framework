@@ -43,7 +43,7 @@ class AvoRedCore
     public function setDefaultCurrency()
     {
         if (! Session::has('default_currency')) {
-            $currency = $this->currencyRepository->all()->first();
+            $currency = $this->currencyRepository->getDefault();
             Session::put('default_currency', $currency);
         }
     }

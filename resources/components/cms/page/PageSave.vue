@@ -14,33 +14,39 @@ export default {
         content: '',
         widgetModalVisible: false,
         selectedWidget: '',
-        toolbar: null,
+        editor: null,
         widgetModalVisible: false,
+        configs: {
+          toolbar: [
+              'bold',
+              'italic',
+              'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
+              {
+                name: 'custom',
+                action: this.widgetClick,
+                className: 'fa fa-star',
+                title: 'Widget'
+              
+              }
+            ]
+        }
     };
   },
   methods: {
-      handleSubmit() {
-          this.pageForm.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
-      },
+      
       cancelPage() {
           window.location = this.baseUrl + '/page';
       },
-      widgetClick(toolbar) {
-          this.toolbar = toolbar
+      widgetClick(editor) {
+          this.editor = editor
           this.widgetModalVisible = true
       },
       handleWidgetOk() {
-        // 
+          var cm = this.editor.codemirror
+          var output = '%%%' + this.selectedWidget + '%%%'
+          cm.replaceSelection(output)
 
-        
-       
-        
-         this.widgetModalVisible = false
-        
+          this.widgetModalVisible = false
       }
   },
   mounted() {

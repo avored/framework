@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 interface OrderModelInterface extends BaseInterface
 {
     /**
-     * Find Orders of a given user Id.
+     * Find Orders of a given customer Id.
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Collection $userOrders
+     * @return \Illuminate\Database\Eloquent\Collection $customerOrders
      */
-    public function findByUserId(int $id) : Collection;
+    public function findByCustomerId(int $id) : Collection;
 
     /**
      * Get current month total orders
