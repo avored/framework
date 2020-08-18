@@ -54,6 +54,6 @@ class AddressRepository implements AddressModelInterface
      */
     public function getByCustomerId(int $userId) : Collection
     {
-        return Address::whereCustomerId($userId)->get();
+        return Address::with('country')->whereCustomerId($userId)->get();
     }
 }
