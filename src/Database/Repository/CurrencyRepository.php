@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
@@ -67,5 +68,17 @@ class CurrencyRepository extends BaseRepository implements CurrencyModelInterfac
     public function all() : Collection
     {
         return Currency::all();
+    }
+
+    /**
+     * Get default currency from the database.
+     * @return \AvoRed\Framework\Database\Models\Currency $currency
+     */
+    public function getDefault() : Currency
+    {
+        $configurationRepository = app(ConfigurationModelInterface::class);
+        $id = $configurationRepository->getValueByCode('default_currency');
+       
+        return $this->model->find($id);
     }
 }

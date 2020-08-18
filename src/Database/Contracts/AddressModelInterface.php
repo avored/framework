@@ -22,11 +22,11 @@ interface AddressModelInterface
     public function find(int $id) : Address;
 
     /**
-     * Get All Addresses from Database via User Id.
+     * Get All Addresses from Database via Customer Id.
      * @param int $userId
      * @return \Illuminate\Database\Eloquent\Collection $addresses
      */
-    public function getByUserId(int $userId) : Collection;
+    public function getByCustomerId(int $userId) : Collection;
 
     /**
      * Delete Address Resource from a database.

@@ -19,17 +19,16 @@
 
 
 
-<div class="ant-row ant-form-item">
-    <div class="ant-form-item-label">
-        <label for="page-content" title="{{ __('avored::cms.page.content') }}">
+<div class="mt-3">
+    <div class="">
+        <label class="block text-sm leading-5 text-gray-500" 
+            for="page-content" title="{{ __('avored::cms.page.content') }}">
             {{ __('avored::cms.page.content') }}
         </label>
     </div>
     
-    <div class="ant-form-item-control-wrapper">
-        <div class="ant-form-item-control">
-            <vue-simplemde name="content" v-model="content" ref="markdownEditor" />
-        </div>
+    <div class="mt-1">
+        <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" />
     </div>
 </div>
 
@@ -38,7 +37,7 @@
     <avored-input
         label-text="{{ __('avored::cms.page.meta_title') }}"
         field-name="meta_title"
-        init-value="{{ $menuGroup->meta_title ?? '' }}" 
+        init-value="{{ $page->meta_title ?? '' }}" 
         error-text="{{ $errors->first('meta_title') }}"
     >
     </avored-input>
@@ -48,16 +47,16 @@
     <avored-input
         label-text="{{ __('avored::cms.page.meta_description') }}"
         field-name="meta_description"
-        init-value="{{ $menuGroup->meta_description ?? '' }}" 
+        init-value="{{ $page->meta_description ?? '' }}" 
         error-text="{{ $errors->first('meta_description') }}"
     >
     </avored-input>
 </div>
 
-{{-- <avored-modal modal-title="{{__('avored::cms.page.widget_modal_title') }}" 
+<avored-modal modal-title="{{__('avored::cms.page.widget_modal_title') }}" 
     @close="widgetModalVisible=false" 
     :is-visible="widgetModalVisible">
-    <div class="block">
+    <div class="block z-30">
         <avored-select
             label-text="Please Select Widget"
             field-name="selected_widget"
@@ -77,4 +76,4 @@
         </div>
     
     </div>
-</avored-modal> --}}
+</avored-modal>

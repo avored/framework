@@ -36,9 +36,9 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Collection $userOrders
      */
-    public function findByUserId(int $id) : Collection
+    public function findByCustomerId(int $id) : Collection
     {
-        return Order::whereUserId($id)->get();
+        return Order::whereCustomerId($id)->get();
     }
 
     /**

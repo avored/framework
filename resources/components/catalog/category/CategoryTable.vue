@@ -80,7 +80,7 @@ export default {
         var url = this.baseUrl  + '/category/' + record.id;
         var app = this;
         this.$confirm({message: `Do you Want to delete ${record.name} category?`, callback: () => {
-           axios.delete(url)
+            axios.delete(url)
               .then(response =>  {
                   if (response.data.success === true) {
                       app.$alert(response.data.message)

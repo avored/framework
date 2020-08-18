@@ -20,7 +20,9 @@ class OrderProductCreatedListener
         $orderProduct = $event->orderProduct;
         $product = $orderProduct->product;
         
-        $product->qty -= $orderProduct->qty;
+        if ($product->track_stock) {
+            $product->qty -= $orderProduct->qty;
+        }
         $product->save();
     }
 }

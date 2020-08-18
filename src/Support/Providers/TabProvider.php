@@ -163,25 +163,25 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.tab.basic_configuration')
                 ->view('avored::system.configuration.cards.basic');
         });
-        Tab::put('system.configuration', function (TabItem $tab) {
-            $tab->key('system.configuration.user')
-                ->label('avored::system.tab.user_configuration')
-                ->view('avored::system.configuration.cards.user');
-        });
+        // Tab::put('system.configuration', function (TabItem $tab) {
+        //     $tab->key('system.configuration.user')
+        //         ->label('avored::system.tab.user_configuration')
+        //         ->view('avored::system.configuration.cards.user');
+        // });
         Tab::put('system.configuration', function (TabItem $tab) {
             $tab->key('system.configuration.tax')
                 ->label('avored::system.tab.tax_configuration')
                 ->view('avored::system.configuration.cards.tax');
         });
-        Tab::put('system.configuration', function (TabItem $tab) {
-            $tab->key('system.configuration.shipping')
-                ->label('avored::system.tab.shipping_configuration')
-                ->view('avored::system.configuration.cards.shipping');
-        });
-        Tab::put('system.configuration', function (TabItem $tab) {
-            $tab->key('system.configuration.payment')
-                ->label('avored::system.tab.payment_configuration')
-                ->view('avored::system.configuration.cards.payment');
-        });
+        // Tab::put('system.configuration', function (TabItem $tab) {
+        //     $tab->key('system.configuration.shipping')
+        //         ->label('avored::system.tab.shipping_configuration')
+        //         ->view('avored::system.configuration.cards.shipping');
+        // });
+        // Tab::put('system.configuration', function (TabItem $tab) {
+        //     $tab->key('system.configuration.payment')
+        //         ->label('avored::system.tab.payment_configuration')
+        //         ->view('avored::system.configuration.cards.payment');
+        // });
     }
 }

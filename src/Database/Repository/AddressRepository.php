@@ -52,8 +52,8 @@ class AddressRepository implements AddressModelInterface
      * @param int $userId
      * @return \Illuminate\Database\Eloquent\Collection $addresses
      */
-    public function getByUserId(int $userId) : Collection
+    public function getByCustomerId(int $userId) : Collection
     {
-        return Address::whereUserId($userId)->get();
+        return Address::with('country')->whereCustomerId($userId)->get();
     }
 }
