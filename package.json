@@ -15,7 +15,7 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --https --key ~/.config/valet/Certificates/laravel-ecommerce.test.key --cert ~/.config/valet/Certificates/laravel-ecommerce.test.crt --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
-    "avored-components": "^0.1.5",
+    "avored-components": "^0.1.6",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "laravel-mix": "^5.0.4",
