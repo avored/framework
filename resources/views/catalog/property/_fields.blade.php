@@ -19,7 +19,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-select
-        label-text="{{ __('avored::catalog.property.data_type') }}"
+        label-text="{{ __('avored::system.fields.data_type') }}"
         field-name="data_type"
         error-text="{{ $errors->first('data_type') }}"
         :options="{{ json_encode($dataTypeOptions) }}"
@@ -30,7 +30,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-select
-        label-text="{{ __('avored::catalog.property.field_type') }}"
+        label-text="{{ __('avored::system.fields.field_type') }}"
         error-text="{{ $errors->first('field_type') }}"
         field-name="field_type"
         :options="{{ json_encode($fieldTypeOptions) }}"
@@ -41,7 +41,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-toggle
-        label-text="{{ __('avored::catalog.property.use_for_all_products') }}"
+        label-text="{{ __('avored::system.fields.use_for_all_products') }}"
         error-text="{{ $errors->first('use_for_all_products') }}"
         field-name="use_for_all_products"
         init-value="{{ $property->use_for_all_products ?? '' }}"
@@ -51,7 +51,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-toggle
-        label-text="{{ __('avored::catalog.property.is_visible_frontend') }}"
+        label-text="{{ __('avored::system.fields.is_visible_frontend') }}"
         error-text="{{ $errors->first('is_visible_frontend') }}"
         field-name="is_visible_frontend"
         init-value="{{ $property->is_visible_frontend ?? '' }}"

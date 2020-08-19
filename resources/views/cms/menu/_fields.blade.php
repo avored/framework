@@ -2,7 +2,7 @@
         
         <div class="mt-3 flex w-full">
             <avored-input
-                label-text="{{ __('avored::cms.menu.name') }}"
+                label-text="{{ __('avored::system.fields.name') }}"
                 field-name="name"
                 init-value="{{ $menuGroup->name ?? '' }}" 
                 error-text="{{ $errors->first('name') }}"
@@ -12,7 +12,7 @@
         
         <div class="mt-3 flex w-full">
             <avored-input
-                label-text="{{ __('avored::cms.menu.identifier') }}"
+                label-text="{{ __('avored::system.fields.identifier') }}"
                 field-name="identifier"
                 init-value="{{ $menuGroup->identifier ?? '' }}" 
                 error-text="{{ $errors->first('identifier') }}"
@@ -22,11 +22,11 @@
     <div class="mt-3 flex items-center">
         <div class="block rounded w-full border">
             <div class="p-5 text-xl border-b font-semibold">
-                {{ __('avored::cms.menu.builder') }}
+                {{ __('avored::system.fields.menu_builder') }}
             </div>
             <div class="p-5 flex items-start">
                 <div class="w-1/2">
-                    <h4>{{ __('avored::cms.menu.category_list') }}</h4>
+                    <h4>{{ __('avored::system.fields.category_list') }}</h4>
                     <div class="ant-list menu-builder-list ant-list-split ant-list-bordered mr-1">
                         <vddl-list disabled-if="true" :drop="handleDrop" :wrapper="categories"  :list="categories">
                             <vddl-draggable
@@ -42,7 +42,7 @@
                         </vddl-list>
                     </div>
 
-                    <h4 class="mt-1">{{ __('avored::cms.menu.frontmenu_list') }}</h4>
+                    <h4 class="mt-1">{{ __('avored::system.fields.frontmenu_list') }}</h4>
                     <div class="ant-list menu-builder-list ant-list-split ant-list-bordered mr-1">
                         <vddl-list disabled-if="true" :drop="handleDrop" :wrapper="frontMenus"  :list="frontMenus">
                             <vddl-draggable
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="w-1/2 ml-5">
-                    <p>{{ __('avored::cms.menu.create.title') }}</p>
+                    <p>{{ __('avored::system.fields.menu_builder') }}</p>
                     <div class="ant-list menu-builder-list ant-list-split ant-list-bordered">
                         <vddl-list 
                             :wrapper="menus"

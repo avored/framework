@@ -1,24 +1,13 @@
-<h1>{{ __('avored::catalog.product.image_title') }}</h1>
+<h1>{{ __('avored::system.image_title') }}</h1>
 
-{{-- <a-upload
-    action="{{ route('admin.product.image.upload', $product->id) }}"
-    :headers="{'X-CSRF-TOKEN': '{{ csrf_token() }}' }"
-    :show-upload-list="false"
-    @change="uploadFileChange"
->
-    <a-button>
-        <a-icon type="upload"></a-icon> {{ __('avored::catalog.product.upload_btn') }}
-    </a-button>
-</a-upload> --}}
-
-        <avored-upload
-            label-text="{{ __('avored::catalog.product.upload_btn') }}"
-            field-name="images"
-            @input="uploadFileChange"
-            :display-preview="false"
-            error-text="{{ $errors->first('images') }}"
-            upload-url="{{ route('admin.product.image.upload', ['product' => $product]) }}"
-        ></avored-upload>
+    <avored-upload
+        label-text="{{ __('avored::system.btn.upload') }}"
+        field-name="images"
+        @input="uploadFileChange"
+        :display-preview="false"
+        error-text="{{ $errors->first('images') }}"
+        upload-url="{{ route('admin.product.image.upload', ['product' => $product]) }}"
+    ></avored-upload>
 
 <div class="mt-3" v-for="item in productImages" :key="item.id">
 

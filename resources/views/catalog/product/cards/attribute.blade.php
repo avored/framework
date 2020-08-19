@@ -1,18 +1,20 @@
 <div class="mt-3 rounded border">
-    <div class="font-semibold border-b text-red-500 p-5 py-3">{{ __('avored::catalog.product.attribute_card_title') }}</div>
+    <div class="font-semibold border-b text-red-500 p-5 py-3">
+        {{ __('avored::system.tab.attribute_card_title') }}
+    </div>
     <div class="p-5">
 
         <p>
                 
-                <avored-select
-                        @change="changeVariation"
-                        label-text="{{ __('avored::catalog.product.attribute_card_title') }}"
-                        field-name="variable_product_attributes[]"
-                        :multiple=true
-                        :options="{{ json_encode($attributes->pluck('name', 'id')) }}"
-                        :init-value="attributeIds"
-                    >
-                    </avored-select>
+            <avored-select
+                    @change="changeVariation"
+                    label-text="{{ __('avored::system.tab.attribute_card_title') }}"
+                    field-name="variable_product_attributes[]"
+                    :multiple=true
+                    :options="{{ json_encode($attributes->pluck('name', 'id')) }}"
+                    :init-value="attributeIds"
+                >
+                </avored-select>
             
             <div class="add-on-button">
                 <button type="button" @click="handleVariationBtnClick" t
@@ -21,12 +23,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                     </svg>
-                    <span class="ml-3">{{ __('avored::catalog.product.variation_btn') }}</span>
+                    <span class="ml-3">{{ __('avored::system.btn.variation') }}</span>
                 </button>
             </div>
         </p>
 
-        <h4 class="my-4 text-xl text-red-500">{{ __('avored::catalog.product.variation_title') }}</h4>
+        <h4 class="my-4 text-xl text-red-500">{{ __('avored::system.variation_title') }}</h4>
 
         <avored-table :columns="columns" row-key="id" :items="productVariations">
             <template slot="variableProductName" slot-scope="{item}">
@@ -49,7 +51,7 @@
         </avored-table>
 
 
-        <avored-modal modal-title="{{__('avored::catalog.product.variation_model_title') }}" @close="variationModelVisible=false" :is-visible="variationModelVisible">
+        <avored-modal modal-title="{{__('avored::system.variation_model_title') }}" @close="variationModelVisible=false" :is-visible="variationModelVisible">
             <div class="block">
                 <div class="flex items-center">
                     <div class="w-1/2">
@@ -109,7 +111,7 @@
                     <div class="w-full">
                         <div class="block">
                             <avored-upload
-                                    label-text="{{ __('avored::catalog.product.variation_image') }}"
+                                    label-text="{{ __('avored::system.variation_image') }}"
                                     field-name="file"
                                     :init-value="variationImageList"
                                     :upload-url="variationUploadImagePath"
@@ -162,7 +164,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                         </svg>
-                        <span class="ml-3">{{__('avored::catalog.product.variation_save_btn') }}</span>
+                        <span class="ml-3">{{__('avored::system.btn.variation_save') }}</span>
                     </button>
                 </div>
             

@@ -1,4 +1,4 @@
-<div class="w-64 cursor-pointer bg-purple-500 ml-3 border text-center b-gray-400 rounded items-center p-6 text-white">
+<div class="md:w-1/3 sm:w-full cursor-pointer bg-purple-500 mr-5 mt-5 border text-center b-gray-400 rounded items-center p-6 text-white">
     <div class="text-md border-b pb-3 font-bold w-full">
         <span class="uppercase">
             {{ __('avored::system.total-order') }}
@@ -11,7 +11,7 @@
             </svg>
            
         </div>
-        <div class="text-4xl ml-5 font-bold">
+        <div class="text-3xl ml-5 font-bold">
             {{ $value }}   
         </div>
     </div>

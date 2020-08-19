@@ -46,5 +46,9 @@ class AvoRedCore
             $currency = $this->currencyRepository->getDefault();
             Session::put('default_currency', $currency);
         }
+        if (! Session::has('default_currency_symbol')) {
+            $currency = $this->currencyRepository->getDefault();
+            Session::put('default_currency_symbol', $currency->symbol);
+        }
     }
 }

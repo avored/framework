@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-<div class="flex justify-around my-5">
+<div class="md:flex sm:block justify-around mb-5">
     {{ $orderWidget->render() }}
     {{ $customerWidget->render() }}
     {{ $revenueWidget->render() }}

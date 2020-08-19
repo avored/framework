@@ -4,8 +4,7 @@
         field-name="site_name"
         init-value="{{ ($repository->getValueByCode('site_name')) ?? '' }}" 
         error-text="{{ $errors->first('site_name') }}"
-    >
-    </avored-input>
+    ></avored-input>
 </div>
 
 <div class="mt-3">
@@ -15,6 +14,5 @@
         :options="{{ $currencyOptions }}"
         init-value="{{ ($repository->getValueByCode('default_currency')) ?? '' }}" 
         error-text="{{ $errors->first('default_currency') }}"
-    >
-    </avored-select>
+    ></avored-select>
 </div>

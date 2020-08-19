@@ -1,6 +1,6 @@
  <div class="mt-3 flex w-full">
     <avored-input
-        label-text="{{ __('avored::user.user-group.name') }}"
+        label-text="{{ __('avored::system.fields.name') }}"
         field-name="name"
         init-value="{{ $userGroup->name ?? '' }}" 
         error-text="{{ $errors->first('name') }}"
@@ -10,7 +10,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-toggle
-        label-text="{{ __('avored::user.user-group.is_default') }}"
+        label-text="{{ __('avored::system.fields.is_default') }}"
         error-text="{{ $errors->first('is_default') }}"
         field-name="is_default"
         init-value="{{ $userGroup->is_default ?? '' }}"

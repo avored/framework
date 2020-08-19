@@ -1,6 +1,6 @@
 <div class="border rounded">
     <div class="p-5 text-md font-semibold border-b">
-        {{ __('avored::catalog.product.basic_card_title') }}
+        {{ __('avored::system.tab.basic_info') }}
     </div>
     <div class="p-5">
         <div class="flex items-center">
@@ -32,7 +32,7 @@
             <div class="w-1/2">
                 <div class="">
                     <avored-select
-                        label-text="{{ __('avored::catalog.product.category') }}"
+                        label-text="{{ __('avored::system.fields.category') }}"
                         field-name="category[]"
                         :multiple=true
                         error-text="{{ $errors->first('category') }}"
@@ -46,7 +46,7 @@
             <div class="w-1/2 ml-3">
                 <div class="mt-3">
                     <avored-select
-                        label-text="{{ __('avored::catalog.product.type') }}"
+                        label-text="{{ __('avored::system.fields.type') }}"
                         field-name="type"
                         :disabled="true"
                         error-text="{{ $errors->first('type') }}"
@@ -87,7 +87,7 @@
         <div class="block mt-3">
             <div class="block w-full">
                 <label for="product-description" title="{{ __('avored::cms.product.description') }}">
-                    {{ __('avored::catalog.product.description') }}
+                    {{ __('avored::system.fields.description') }}
                 </label>
             </div>
             

@@ -1,4 +1,4 @@
-<a-modal title="{{ __('avored::order.order.index.change_track_code') }}" v-model="track_code_modal_visibility"
+<a-modal title="{{ __('avored::system.change_track_code') }}" v-model="track_code_modal_visibility"
       @cancel="handleTrackCodeCancel" ok-text="{{__('avored::system.btn.save') }}" @ok="handleTrackCodeOk">
 
       <avored-input

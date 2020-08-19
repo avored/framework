@@ -65,7 +65,7 @@
     <div class="w-1/2">
         
         <avored-input
-            label-text="{{ __('avored::promotion.promotion-code.active_from') }}"
+            label-text="{{ __('avored::system.fields.active_from') }}"
             field-name="active_from"
             input-type="date"
             init-value="{{ (isset($promotionCode)) ? $promotionCode->active_from->format('Y-m-d') : '' }}"
@@ -75,7 +75,7 @@
     </div>
     <div class="w-1/2 ml-3">
         <avored-input
-        label-text="{{ __('avored::promotion.promotion-code.active_till') }}"
+        label-text="{{ __('avored::system.fields.active_till') }}"
         field-name="active_till"
         input-type="date"
         init-value="{{ (isset($promotionCode)) ? $promotionCode->active_till->format('Y-m-d') : '' }}"

@@ -1,7 +1,7 @@
 
  <div class="mt-3 flex w-full">
     <avored-input
-        label-text="{{ __('avored::system.role.name') }}"
+        label-text="{{ __('avored::system.fields.name') }}"
         field-name="name"
         init-value="{{ $role->name ?? '' }}" 
         error-text="{{ $errors->first('name') }}"
@@ -11,7 +11,7 @@
 
  <div class="mt-3 flex w-full">
     <avored-input
-        label-text="{{ __('avored::system.role.description') }}"
+        label-text="{{ __('avored::system.fields.description') }}"
         field-name="description"
         init-value="{{ $role->description ?? '' }}" 
         error-text="{{ $errors->first('description') }}"

@@ -1,13 +1,13 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::catalog.attribute.index.title') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.attribute')]) }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::catalog.attribute.index.title') }}
+            {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.attribute')]) }}
         </div>
         <div class="ml-auto">
             <a href="{{ route('admin.attribute.create') }}"
