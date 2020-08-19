@@ -15,8 +15,7 @@ class PageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.page.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::cms.page.index.title'));
+            ->assertStatus(200);
     }
 
     public function testPageCreateRouteTest()
@@ -24,8 +23,7 @@ class PageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.page.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::cms.page.create.title'));
+            ->assertStatus(200);
     }
 
     public function testPageStoreRouteTest()
@@ -45,8 +43,7 @@ class PageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.page.edit', $page->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::cms.page.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testPageUpdateRouteTest()

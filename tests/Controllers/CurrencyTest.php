@@ -16,8 +16,7 @@ class CurrencyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.currency.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.currency.index.title'));
+            ->assertStatus(200);
     }
 
     public function testCurrencyCreateRouteTest()
@@ -25,8 +24,7 @@ class CurrencyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.currency.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.currency.create.title'));
+            ->assertStatus(200);
     }
 
     public function testCurrencyStoreRouteTest()
@@ -54,8 +52,7 @@ class CurrencyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.currency.edit', $currency->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.currency.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testCurrencyUpdateRouteTest()

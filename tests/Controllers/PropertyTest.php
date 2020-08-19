@@ -15,8 +15,7 @@ class PropertyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.property.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.property.index.title'));
+            ->assertStatus(200);
     }
 
     public function testPropertyCreateRouteTest()
@@ -24,8 +23,7 @@ class PropertyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.property.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.property.create.title'));
+            ->assertStatus(200);
     }
 
     public function testPropertyStoreRouteTest()
@@ -53,8 +51,7 @@ class PropertyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.property.edit', $property->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.property.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testPropertyUpdateRouteTest()

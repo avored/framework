@@ -15,8 +15,7 @@ class LanguageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.language.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.language.index.title'));
+            ->assertStatus(200);
     }
 
     public function testLanguageCreateRouteTest()
@@ -24,8 +23,7 @@ class LanguageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.language.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.language.create.title'));
+            ->assertStatus(200);
     }
 
     public function testLanguageStoreRouteTest()
@@ -45,8 +43,7 @@ class LanguageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.language.edit', $language->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.language.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testLanguageUpdateRouteTest()
