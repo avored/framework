@@ -18,11 +18,7 @@
             base-url="{{ asset(config('avored.admin_url')) }}"
             :attribute="{{ $attribute }}" inline-template>
         <div class="w-full block">
-            <form 
-                method="post"
-                action="{{ route('admin.attribute.update', $attribute->id) }}"                    
-                @submit="handleSubmit"
-            >
+            <form method="post" action="{{ route('admin.attribute.update', $attribute->id) }}">
                 @csrf
                 @method('put')
                 <avored-tabs>

@@ -7,7 +7,6 @@ export default {
   props: ['attribute', 'baseUrl'],
   data () {
     return {
-        attributeForm: this.$form.createForm(this),
         dropdownOptions: [],
         image_path_lists: [],
         headers: {},
@@ -16,14 +15,7 @@ export default {
     };
   },
   methods: {
-        handleSubmit() {
-          this.attributeForm.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
-         },
-      
+       
         imagePathValue(path) {
             var value = ""
             Object.keys(path).forEach(key => {
@@ -60,6 +52,7 @@ export default {
             return random_string
         },
         dropdownOptionChange(index) {
+            console.log(index == this.dropdownOptions.length - 1)
             if (index == this.dropdownOptions.length - 1) {
                 this.dropdownOptions.push(this.randomString());
             } else {
@@ -89,26 +82,13 @@ export default {
             return 'dropdown_option_image[' + index + ']';
         }
   },
-  mounted() {
-      this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
-      if (!isNil(this.attribute)) {
-        this.display_as = this.attribute.display_as;
-        this.fields.forEach(field => {
-          this.attributeForm.getFieldDecorator(field, {initialValue: this.attribute[field]})
-        });
-
-        if (this.attribute.dropdown_options.length > 0) {
-            this.attribute.dropdown_options.forEach(element => {
-            this.dropdownOptions.push(element.id);
-            this.attributeForm.getFieldDecorator('dropdown_options['+ element.id +']', { initialValue: element.display_text, preserve: true });
-            });
+    mounted() {
+        this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
+        if (!isNil(this.attribute)) {
+            this.dropdownOptions = this.attribute.dropdown_options
+        } else {
+            this.dropdownOptions.push(this.randomString())
         }
-        this.dropdownOptions.push(this.randomString());
-      } else {
-          this.dropdownOptions.push(this.randomString());
-      }
-
-
   }
 };
 </script>

@@ -9,7 +9,6 @@ export default {
         frontMenus: [],
         selected: null,
         menus: [],
-        form: this.$form.createForm(this),
         menu_json: '',
         fields: ['name', 'identifier']
     };
@@ -80,12 +79,7 @@ export default {
         this.menu_json = JSON.stringify(this.menus);
       }
 
-      if (!isNil(this.menuGroup)) {
-        
-        this.fields.forEach(field => {
-          this.form.getFieldDecorator(field, { 'name' :this.menuGroup[field]})
-        });
-      }
+     
   }
 };
 </script>

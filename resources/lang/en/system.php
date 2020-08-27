@@ -65,7 +65,9 @@ return [
         'active_from' => 'Active From',
         'active_till' => 'Active Till',
         'symbol' => 'Symbole',
-        'conversation_rate' => 'Conversation Rate'
+        'conversation_rate' => 'Conversation Rate',
+        'image' => 'Image',
+        'dropdown_options' => 'Dropdown Options'
     ],
     'common' => [
         'list' => 'List',

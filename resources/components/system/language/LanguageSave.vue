@@ -5,7 +5,6 @@ export default {
   props: ['language', 'baseUrl'],
   data () {
     return {
-        languageForm: this.$form.createForm(this),
         is_default: 0,
     };
   },

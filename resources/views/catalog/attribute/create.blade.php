@@ -16,11 +16,7 @@
 <div class="flex items-center">
     <attribute-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div class="w-full block">
-            <form 
-                method="post"
-                action="{{ route('admin.attribute.store') }}"                    
-                @submit="handleSubmit"
-            >
+            <form method="post" action="{{ route('admin.attribute.store') }}">
                 @csrf
                 <avored-tabs>
                     @foreach ($tabs as $tab)

@@ -18,7 +18,7 @@
 <div class="flex items-center">
     <property-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
         <div class="w-full block">
-            <form method="post" action="{{ route('admin.property.store') }}" @submit="handleSubmit">
+            <form method="post" action="{{ route('admin.property.store') }}">
                 @csrf
 
                 <avored-tabs>

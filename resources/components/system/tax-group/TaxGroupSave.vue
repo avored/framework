@@ -5,16 +5,12 @@ export default {
   props: ['taxGroup', 'baseUrl'],
   data () {
     return {
-        taxGroupForm: this.$form.createForm(this)
+       
     };
   },
   methods: {
       handleSubmit() {
-          this.taxGroupForm.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
+         
       },
      
       cancelTaxGroup() {

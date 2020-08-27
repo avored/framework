@@ -29,18 +29,17 @@
 </div>
 
 <div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
-    :key="k"
+    :key="index"
     >
 <div class="flex items-start">
         <div class="w-1/2">
             <avored-upload
-                    label-text="{{ __('avored::system.fields.image') }}"
-                    :field-name="`dropdown_options[${k}][path]`"
-                    :init-value="getInitDropdownPathValue(index)" 
-                    error-text="{{ $errors->first('dropdown_options') }}"
-                    upload-url="{{ route('admin.attribute.upload') }}"
-                >
-            </avored-upload>
+                label-text="{{ __('avored::system.fields.image') }}"
+                :field-name="`dropdown_options[${k}][path]`"
+                :init-value="getInitDropdownPathValue(index)" 
+                error-text="{{ $errors->first('dropdown_options') }}"
+                upload-url="{{ route('admin.attribute.upload') }}"
+            ></avored-upload>
           
         </div>
         <div class="w-1/2 ml-3">
@@ -63,7 +62,6 @@
                     </template>
                 </avored-input>
             </div>
-            {{-- <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" /> --}}
         </div>
     </div>
 </div>

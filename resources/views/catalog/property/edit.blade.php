@@ -19,11 +19,7 @@
             base-url="{{ asset(config('avored.admin_url')) }}"
             :property="{{ $property }}" inline-template>
         <div class="w-full block">
-            <form 
-                method="post"
-                action="{{ route('admin.property.update', $property->id) }}"                    
-                @submit="handleSubmit"
-            >
+            <form method="post" action="{{ route('admin.property.update', $property->id) }}">
                 @csrf
                 @method('put')
                 
