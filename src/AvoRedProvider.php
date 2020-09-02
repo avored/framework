@@ -23,7 +23,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\BreadcrumbProvider::class,
         \AvoRed\Framework\Support\Providers\CartProvider::class,
         \AvoRed\Framework\Support\Providers\EventServiceProvider::class,
-        //\AvoRed\Framework\Support\Providers\GraphqlProvider::class,
+        \AvoRed\Framework\Support\Providers\GraphqlProvider::class,
         \AvoRed\Framework\Support\Providers\MenuProvider::class,
         \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,

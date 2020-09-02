@@ -52,7 +52,6 @@ export default {
             return random_string
         },
         dropdownOptionChange(index) {
-            console.log(index == this.dropdownOptions.length - 1)
             if (index == this.dropdownOptions.length - 1) {
                 this.dropdownOptions.push(this.randomString());
             } else {

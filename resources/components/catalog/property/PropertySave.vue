@@ -13,6 +13,7 @@ export default {
   methods: {
     fieldTypeChange(val) {
       this.field_type = val;
+      if (val === "SELECT" || val === "RADIO") {
         this.dropdownOptions.push(this.randomString());
       } else {
         this.dropdownOptions = [];
