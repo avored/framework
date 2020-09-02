@@ -5,18 +5,14 @@ export default {
   props: ['taxRate', 'baseUrl'],
   data () {
     return {
-        taxRateForm: this.$form.createForm(this),
+       
         rate_type: '',
         country_id: 0
     };
   },
   methods: {
       handleSubmit() {
-          this.taxRateForm.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
+         
       },
       handleRateTypeChange(val) {
           this.rate_type = val;

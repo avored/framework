@@ -39,7 +39,7 @@ return [
             'show' => 'Show',
             'add_tracking' => 'Add Tracking Code',
             'track_code' => 'Track Code',
-            'change_track_code' => 'Track code',
+            
         ],
         'show' => [
             'title' => 'Order Show',

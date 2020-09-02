@@ -1,13 +1,13 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::catalog.product.index.title') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.product')]) }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::catalog.product.index.title') }}
+            {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.product')]) }}
         </div>
         <div class="ml-auto">
             <a href="{{ route('admin.product.create') }}"
@@ -23,11 +23,8 @@
 @endsection
 
 @section('content')
-
-
-<product-table
-        :init-products="{{ json_encode($products) }}"
-        base-url="{{ asset(config('avored.admin_url')) }}"
-></product-table>
-
+    <product-table
+            :init-products="{{ json_encode($products) }}"
+            base-url="{{ asset(config('avored.admin_url')) }}"
+    ></product-table>
 @endsection

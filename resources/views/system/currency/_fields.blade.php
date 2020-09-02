@@ -1,7 +1,7 @@
 
  <div class="mt-3 flex w-full">
     <avored-input
-        label-text="{{ __('avored::system.currency.name') }}"
+        label-text="{{ __('avored::system.fields.name') }}"
         field-name="name"
         init-value="{{ $currency->name ?? '' }}" 
         error-text="{{ $errors->first('name') }}"
@@ -12,7 +12,7 @@
 
 <div class="mt-3 w-full">
     <avored-select
-        label-text="{{ __('avored::system.currency.code') }}"
+        label-text="{{ __('avored::system.fields.code') }}"
         error-text="{{ $errors->first('code') }}"
         field-name="code"
         :options="{{ json_encode($currencyCodeOptions) }}"
@@ -24,7 +24,7 @@
 
 <div class="mt-3 w-full">
     <avored-select
-        label-text="{{ __('avored::system.currency.symbol') }}"
+        label-text="{{ __('avored::system.fields.symbol') }}"
         error-text="{{ $errors->first('symbol') }}"
         field-name="symbol"
         :options="{{ json_encode($currencySymbolOptions) }}"
@@ -36,7 +36,7 @@
 
  <div class="mt-3 flex w-full">
     <avored-input
-        label-text="{{ __('avored::system.currency.conversation_rate') }}"
+        label-text="{{ __('avored::system.fields.conversation_rate') }}"
         field-name="conversation_rate"
         init-value="{{ $currency->conversation_rate ?? '' }}" 
         error-text="{{ $errors->first('conversation_rate') }}"
@@ -47,7 +47,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-toggle
-        label-text="{{ __('avored::system.currency.status') }}"
+        label-text="{{ __('avored::system.fields.status') }}"
         error-text="{{ $errors->first('status') }}"
         field-name="status"
         toggle-on-value="ENABLED"

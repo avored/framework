@@ -14,8 +14,7 @@ class ProductTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.product.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.product.index.title'));
+            ->assertStatus(200);
     }
 
     public function testProductCreateRouteTest()
@@ -23,7 +22,6 @@ class ProductTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.product.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.product.create.title'));
+            ->assertStatus(200);
     }
 }

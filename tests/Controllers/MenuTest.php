@@ -14,8 +14,7 @@ class MenuTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.menu-group.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::cms.menu.index.title'));
+            ->assertStatus(200);
     }
 
     public function testMenuCreateRouteTest()
@@ -23,8 +22,7 @@ class MenuTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.menu-group.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::cms.menu.create.title'));
+            ->assertStatus(200);
     }
 
     public function testMenuStoreRouteTest()

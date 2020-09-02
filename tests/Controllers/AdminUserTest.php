@@ -17,7 +17,7 @@ class AdminUserTest extends BaseTestCase
             ->actingAs($this->user, 'admin')
             ->get(route('admin.admin-user.index'))
             ->assertStatus(200)
-            ->assertSee(__('avored::system.admin-user.index.title'));
+            ->assertSee(__('avored::system.terms.admin_user'));
     }
 
     public function testAdminUserCreateRouteTest()
@@ -25,8 +25,7 @@ class AdminUserTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.admin-user.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.admin-user.create.title'));
+            ->assertStatus(200);
     }
 
     public function testAdminUserStoreRouteTest()
@@ -56,8 +55,7 @@ class AdminUserTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.admin-user.edit', $adminUser->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.admin-user.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testAdminUserUpdateRouteTest()

@@ -15,8 +15,7 @@ class CategoryTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.category.index'))
-            ->assertStatus(200)
-            ->assertViewIs('avored::catalog.category.index');
+            ->assertStatus(200);
     }
 
     public function testCategoryCreateRouteTest()
@@ -24,8 +23,7 @@ class CategoryTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.category.create'))
-            ->assertStatus(200)
-            ->assertViewIs('avored::catalog.category.create');
+            ->assertStatus(200);
     }
 
     public function testCategoryStoreRouteTest()
@@ -45,8 +43,7 @@ class CategoryTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.category.edit', $category->id))
-            ->assertStatus(200)
-            ->assertViewIs('avored::catalog.category.edit');
+            ->assertStatus(200);
     }
 
     public function testCategoryUpdateRouteTest()

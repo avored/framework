@@ -5,17 +5,12 @@ export default {
   props: ['userGroup', 'baseUrl'],
   data () {
     return {
-        userGroupForm: this.$form.createForm(this),
         is_default: 1
     };
   },
   methods: {
       handleSubmit() {
-          this.userGroupForm.validateFields((err, values) => {
-            if (err) {
-              e.preventDefault();
-            }
-          });
+         
       },
       isDefaultSwitchChange(val) {
         if (val) {

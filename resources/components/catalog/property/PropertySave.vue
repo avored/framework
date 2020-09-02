@@ -6,19 +6,11 @@ export default {
   props: ["property", "baseUrl"],
   data() {
     return {
-      propertyForm: this.$form.createForm(this),
       dropdownOptions: [],
       processDropdownOptionStatus: false
     };
   },
   methods: {
-    handleSubmit() {
-      this.propertyForm.validateFields((err, values) => {
-        if (err) {
-          e.preventDefault();
-        }
-      });
-    },
     fieldTypeChange(val) {
       this.field_type = val;
       if (val === "SELECT" || val === "RADIO") {

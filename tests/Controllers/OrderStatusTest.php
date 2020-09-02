@@ -15,8 +15,7 @@ class OrderStatusTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.order-status.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::order.order-status.index.title'));
+            ->assertStatus(200);
     }
 
     public function testOrderStatusCreateRouteTest()
@@ -24,8 +23,7 @@ class OrderStatusTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.order-status.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::order.order-status.create.title'));
+            ->assertStatus(200);
     }
 
     public function testOrderStatusStoreRouteTest()
@@ -45,8 +43,7 @@ class OrderStatusTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.order-status.edit', $orderStatus->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::order.order-status.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testOrderStatusUpdateRouteTest()

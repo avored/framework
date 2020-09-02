@@ -15,8 +15,7 @@ class UserGroupTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.user-group.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::user.user-group.index.title'));
+            ->assertStatus(200);
     }
 
     public function testUserGroupCreateRouteTest()
@@ -24,8 +23,7 @@ class UserGroupTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.user-group.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::user.user-group.create.title'));
+            ->assertStatus(200);
     }
 
     public function testUserGroupStoreRouteTest()
@@ -45,8 +43,7 @@ class UserGroupTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.user-group.edit', $userGroup->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::user.user-group.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testUserGroupUpdateRouteTest()

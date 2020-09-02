@@ -4,7 +4,6 @@ import isNil from 'lodash/isNil'
 export default {
   data () {
     return {
-      form: this.$form.createForm(this),
       loadingSubmitBtn: false
     };
   },

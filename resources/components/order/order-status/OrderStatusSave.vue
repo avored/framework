@@ -5,7 +5,6 @@ export default {
   props: ['orderStatus', 'baseUrl'],
   data () {
     return {
-        orderStatusForm: this.$form.createForm(this),
         is_default: ''
     };
   },

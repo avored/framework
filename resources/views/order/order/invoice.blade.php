@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Order Invoice</title>
+    <title>{{ __('avored::system.order_invoice') }}</title>
 </head>
 
 <body>
@@ -17,8 +17,8 @@
                             </td>
                             
                             <td style="padding-bottom: 20px;text-align:right">
-                                {{ __('avored::order.order.invoice.invoice') }} #: {{ $order->id }}<br>
-                                {{ __('avored::order.order.invoice.created_at') }}: {{ $order->created_at->format('d-M-Y') }}<br>
+                                {{ __('avored::system.invoice') }} #: {{ $order->id }}<br>
+                                {{ __('avored::system.fields.created_at') }}: {{ $order->created_at->format('d-M-Y') }}<br>
                             </td>
                         </tr>
                     </table>
@@ -49,8 +49,8 @@
             
             <tr class="heading">
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px">
-                    {{ __('avored::order.order.invoice.payment_method')}}
-                    </td>
+                    {{ __('avored::system.fields.payment_option')}}
+                </td>
                 
                 <td colspan="4" style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px;text-align:right">
                     {{ $order->payment_option }}
@@ -59,19 +59,19 @@
             
             <tr class="heading">
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px">
-                {{ __('avored::order.order.invoice.name')}}
+                    {{ __('avored::system.fields.name') }}
                 </td>
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px">
-                    {{ __('avored::order.order.invoice.qty')}}
+                    {{ __('avored::system.fields.qty')}}
                 </td>
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px;text-align:right">
-                    {{ __('avored::order.order.invoice.price')}}
+                    {{ __('avored::system.fields.price')}}
                 </td>
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px;text-align:right">
-                    {{ __('avored::order.order.invoice.tax_amount')}}
+                    {{ __('avored::system.fields.tax_amount')}}
                 </td>
                 <td style="background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;padding:5px;text-align:right">
-                    {{ __('avored::order.order.invoice.line_total')}}
+                    {{ __('avored::system.fields.line_total')}}
                 </td>
             </tr>
             @php
@@ -105,7 +105,7 @@
                 <td style="padding: 5px"></td>
                 
                 <td colspan="4" style="text-align:right;padding 5px;border-top: 1px solid #eee;">
-                   {{ __('avored::order.order.invoice.total') }}: {{ $order->currency->symbol }} {{ number_format($total, 2) }}
+                   {{ __('avored::system.fields.total') }}: {{ $order->currency->symbol }} {{ number_format($total, 2) }}
                 </td>
             </tr>
         </table>

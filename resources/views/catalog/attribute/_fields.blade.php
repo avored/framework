@@ -19,7 +19,7 @@
 
 <div class="mt-3 flex w-full">
     <avored-select
-        label-text="{{ __('avored::catalog.attribute.display_as') }}"
+        label-text="{{ __('avored::system.fields.display_as') }}"
         field-name="display_as"
         error-text="{{ $errors->first('display_as') }}"
         :options="{{ json_encode($displayAsOptions) }}"
@@ -29,24 +29,23 @@
 </div>
 
 <div class="mt-3 p-5 border rounded" v-for="(k, index) in dropdownOptions"
-    :key="k"
+    :key="index"
     >
 <div class="flex items-start">
         <div class="w-1/2">
             <avored-upload
-                    label-text="{{ __('avored::catalog.attribute.image') }}"
-                    :field-name="`dropdown_options[${k}][path]`"
-                    :init-value="getInitDropdownPathValue(index)" 
-                    error-text="{{ $errors->first('dropdown_options') }}"
-                    upload-url="{{ route('admin.attribute.upload') }}"
-                >
-            </avored-upload>
+                label-text="{{ __('avored::system.fields.image') }}"
+                :field-name="`dropdown_options[${k}][path]`"
+                :init-value="getInitDropdownPathValue(index)" 
+                error-text="{{ $errors->first('dropdown_options') }}"
+                upload-url="{{ route('admin.attribute.upload') }}"
+            ></avored-upload>
           
         </div>
         <div class="w-1/2 ml-3">
             <div class="flex w-full">
                 <avored-input
-                    label-text="{{ __('avored::catalog.attribute.dropdown_options') }}"
+                    label-text="{{ __('avored::system.fields.dropdown_options') }}"
                     :field-name="`dropdown_options[${k}][display_text]`"
                     :init-value="getInitDropdownValue(index)" 
                     error-text="{{ $errors->first('dropdown_options') }}"
@@ -63,7 +62,6 @@
                     </template>
                 </avored-input>
             </div>
-            {{-- <input type="hidden" v-for="path in image_path_lists" :name="imagePathName(path)" :value="imagePathValue(path)" /> --}}
         </div>
     </div>
 </div>

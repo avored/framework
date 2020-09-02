@@ -17,7 +17,6 @@ class AttributeTest extends BaseTestCase
             ->actingAs($this->user, 'admin')
             ->get(route('admin.attribute.index'))
             ->assertStatus(200)
-            ->assertSee(__('avored::catalog.attribute.index.title'))
             ->assertSee($attribute->name);
     }
 
@@ -26,8 +25,7 @@ class AttributeTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.attribute.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.attribute.create.title'));
+            ->assertStatus(200);
     }
 
     public function testAttributeStoreRouteTest()
@@ -54,8 +52,7 @@ class AttributeTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.attribute.edit', $attribute->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::catalog.attribute.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testAttributeUpdateRouteTest()

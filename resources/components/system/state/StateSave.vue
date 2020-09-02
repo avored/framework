@@ -5,7 +5,6 @@ export default {
   props: ['state', 'baseUrl'],
   data () {
     return {
-        stateForm: this.$form.createForm(this),
         country_id: 0
     };
   },

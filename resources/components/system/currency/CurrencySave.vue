@@ -5,8 +5,7 @@ export default {
   props: ['currency', 'baseUrl'],
   data () {
     return {
-        currencyForm: this.$form.createForm(this),
-  
+       
     };
   },
   methods: {

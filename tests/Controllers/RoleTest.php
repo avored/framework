@@ -16,8 +16,7 @@ class RoleTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.role.index'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.role.index.title'));
+            ->assertStatus(200);
     }
 
     public function testRoleCreateRouteTest()
@@ -25,8 +24,7 @@ class RoleTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.role.create'))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.role.create.title'));
+            ->assertStatus(200);
     }
 
     public function testRoleStoreRouteTest()
@@ -46,8 +44,7 @@ class RoleTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.role.edit', $role->id))
-            ->assertStatus(200)
-            ->assertSee(__('avored::system.role.edit.title'));
+            ->assertStatus(200);
     }
 
     public function testRoleUpdateRouteTest()

@@ -36,6 +36,38 @@ return [
         'code' => 'Code',
         'type' => 'Type',
         'amount' => 'Amount',
+        'category' => 'Category',
+        'data_type' => 'Data Type',
+        'field_type' => 'Field Type',
+        'use_for_all_products' => 'Use for all products',
+        'is_visible_frontend' => 'Is visible frontend',
+        'display_as' => 'Display as',
+        'identifier' => 'Identifier',
+        'menu_builder' => 'Menu Builder',
+        'category_list' => 'Category List',
+        'frontmenu_list' => 'Frontend Menu List',
+        'order_id' => 'Order ID',
+        'payment_option' => 'Payment option',
+        'shipping_option' => 'Shipping option',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'total' => 'Total',
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
+        'is_super_admin' => 'Is super admin',
+        'email' => 'Email',
+        'image_file' => 'Image File',
+        'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
+        'language' => 'Language',
+        'role_id' => 'Staff Role',
+        'is_default' => 'Is default',
+        'active_from' => 'Active From',
+        'active_till' => 'Active Till',
+        'symbol' => 'Symbole',
+        'conversation_rate' => 'Conversation Rate',
+        'image' => 'Image',
+        'dropdown_options' => 'Dropdown Options'
     ],
     'common' => [
         'list' => 'List',
@@ -44,13 +76,28 @@ return [
     ],
     'terms' => [
         'category' => 'Category',
-        'dashboard' => 'Dashboard'
+        'dashboard' => 'Dashboard',
+        'product' => 'Product',
+        'property' => 'Property',
+        'attribute' => 'Attribute',
+        'menu' => 'Menu',
+        'page' => 'Page',
+        'order' => 'Order',
+        'order_status' => 'Order Status',
+        'admin_user' => 'Staff',
+        'user_group' => 'User Group',
+        'promotion_code' => 'Promotion code',
+        'configuration' => 'Configuration',
+        'currency' => 'Currency',
+        'role' => 'Role'
     ],
     'pages' => [
         'title' => [
             'list' => ':attribute List',
             'create' => 'Create :attribute',
             'edit' => 'Edit :attribute',
+            'show' => 'Show :attribute',
+            'info' => ':attribute Information'
 
         ]
     ],
@@ -89,7 +136,16 @@ return [
     
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',
-
+    'variation_title' => 'Product Variations',
+    'variation_model_title' => 'Save Variation',
+    'variation_image' => 'Variation Image',
+    'image_title' => 'Product Images',
+    'widget_modal_title' => 'Select the Widget',
+    'order_invoice' => 'Order Invoice',
+    'invoice' => 'Invoice',
+    
+    'change_order_status' => 'Change Order Status',
+    'change_track_code' => 'Change Track code',
     'total-customer' => 'Total Customer',
     'total-order' => 'Total Order',
     'total-revenue' => 'Total Revenue',
@@ -105,6 +161,9 @@ return [
         'save' => 'Save',
         'cancel' => 'Cancel',
         'create' => 'Create',
+        'variation' => 'Make Variation',
+        'variation_save' => 'Save Variation',
+        'upload' => 'Upload'
     ],
     'tab' => [
         'basic_info' => 'Basic Info',
@@ -472,7 +531,6 @@ return [
             'save' => 'Save Front Menu',
         ],
     ],
-
     'breadcrumb' => [
         'dashboard' => 'Dashboard',
         'configuration' => 'Configuration',

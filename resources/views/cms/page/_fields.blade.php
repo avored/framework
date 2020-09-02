@@ -53,7 +53,7 @@
     </avored-input>
 </div>
 
-<avored-modal modal-title="{{__('avored::cms.page.widget_modal_title') }}" 
+<avored-modal modal-title="{{__('avored::system.widget_modal_title') }}" 
     @close="widgetModalVisible=false" 
     :is-visible="widgetModalVisible">
     <div class="block z-30">
