@@ -27,11 +27,16 @@ abstract class BaseRepository
     /**
      * Get Pagination of the model
      * @param int $perPage
+     * @param array $with
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function paginate($perPage = 10) : LengthAwarePaginator
+    public function paginate($perPage = 10, array $with = []) : LengthAwarePaginator
     {
-        return $this->model()->paginate($perPage);
+        $query = $this->query();
+        if (count($with) > 0) {
+            return $query->with($with)->paginate($perPage);
+        }
+        return $query->paginate($perPage);
     }
 
     /**

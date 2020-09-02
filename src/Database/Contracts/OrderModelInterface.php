@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-use AvoRed\Framework\Database\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 
 interface OrderModelInterface extends BaseInterface

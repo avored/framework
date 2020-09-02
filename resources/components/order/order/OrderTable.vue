@@ -10,6 +10,7 @@
       :items="initOrders.data"
     >
       <template slot="orderCustomer" slot-scope="{item}">{{ item.customer.first_name }} {{ item.customer.last_name }}</template>
+      <template slot="orderStatus" slot-scope="{item}">{{ item.order_status.name }}</template>
 
       <template slot="action" slot-scope="{item}">
         <div class="flex items-center">
@@ -73,9 +74,11 @@
                 </button>
                 
 
-                <button type="button" @click="handleTrackCodeCancel"
-                    class="px-3 py-2 font-xs text-white hover:text-white bg-gray-500 hover:bg-gray-600 rounded"
-                >   
+                <button 
+                  type="button" 
+                  @click="handleTrackCodeCancel"
+                  class="px-3 py-2 font-xs text-white hover:text-white bg-gray-500 hover:bg-gray-600 rounded"
+                >
                     <span class="">Cancel</span>
                 </button>
                 
@@ -136,6 +139,10 @@ const columns = [
   {
     label: "Customer",
     slotName: "orderCustomer"
+  },
+   {
+    label: "Order Status",
+    slotName: "orderStatus"
   },
   {
     label: "Actions",

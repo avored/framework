@@ -12,9 +12,10 @@ interface BaseInterface
     /**
      * Get Pagination of the model
      * @param int $perPage
+     * @param array $with
      * @return Illuminate\Pagination\Paginator
      */
-    public function paginate($perPage = 10) : LengthAwarePaginator;
+    public function paginate($perPage = 10, array $with = []) : LengthAwarePaginator;
 
     /**
      * Get Query Builder of the model
