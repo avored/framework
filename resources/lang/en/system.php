@@ -67,7 +67,10 @@ return [
         'symbol' => 'Symbole',
         'conversation_rate' => 'Conversation Rate',
         'image' => 'Image',
-        'dropdown_options' => 'Dropdown Options'
+        'dropdown_options' => 'Dropdown Options',
+        'customer_name' => 'Customer Name',
+        'customer_email' => 'Customer Email',
+        'customer_phone' => 'Customer Phone',
     ],
     'common' => [
         'list' => 'List',
@@ -89,7 +92,11 @@ return [
         'promotion_code' => 'Promotion code',
         'configuration' => 'Configuration',
         'currency' => 'Currency',
-        'role' => 'Role'
+        'role' => 'Role',
+        'customer' => 'Customer',
+        'address' => 'Customer Address',
+        'shipping_address' => 'Customer Shipping Address',
+        'billing_address' => 'Customer Billing Address',
     ],
     'pages' => [
         'title' => [

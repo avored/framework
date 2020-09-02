@@ -1,13 +1,25 @@
 
-<div class="mt-1 ml-1 flex items-center">
+<div class="bg-gray-200 mr-8 p-3 rounded text-sm m-4">
+    <ol class="list-reset flex text-gray-700">
     @if(isset($breadcrumb->parents) && $breadcrumb->parents->count() >0)
         @foreach($breadcrumb->parents as $parentBreadcrumb)
-            <div class="ml-1">
-                <a href="{{ route($parentBreadcrumb->route) }}">
+            <li>
+                <a class=" font-semibold" href="{{ route($parentBreadcrumb->route) }}">
                     {{ __($parentBreadcrumb->label) }}
-                </a> > 
-            </div>
+                </a> > &nbsp;
+            </li>
         @endforeach
     @endif
-    <div class="ml-1"> {{ __($breadcrumb->label) }}</div>
+    <li> <span class="">{{ __($breadcrumb->label) }}</span></li>
+    </ol>
 </div>
+
+{{-- <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+  <ol class="list-reset flex text-grey-dark">
+    <li><a href="#" class="text-blue font-bold">Home</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-blue font-bold">Library</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li>Data</li>
+  </ol>
+</nav> --}}
