@@ -72,4 +72,13 @@ class Order extends BaseModel
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    /**
+     * Order has many Comments.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderComments()
+    {
+        return $this->hasMany(OrderComment::class);
+    }
 }

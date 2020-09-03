@@ -97,6 +97,7 @@ return [
         'address' => 'Customer Address',
         'shipping_address' => 'Customer Shipping Address',
         'billing_address' => 'Customer Billing Address',
+        
     ],
     'pages' => [
         'title' => [
@@ -139,7 +140,11 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
 
-    
+    'comments' => 'Comments',
+    'comment' => 'Comment',
+    'commented' => 'Commented',
+    'order' => 'Order',
+    'is_private' => 'Is Private',
     
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',

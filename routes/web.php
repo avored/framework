@@ -121,6 +121,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('currency', System\Controllers\CurrencyController::class);
         Route::resource('language', System\Controllers\LanguageController::class);
         Route::resource('order', Order\Controllers\OrderController::class)->only(['index']);
+        Route::resource('order/{order}/comment/order-comment', Order\Controllers\OrderCommentController::class);
         Route::resource('order-status', Order\Controllers\OrderStatusController::class);
         Route::resource('menu-group', Cms\Controllers\MenuGroupController::class);
         Route::resource('page', Cms\Controllers\PageController::class);

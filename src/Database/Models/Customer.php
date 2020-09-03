@@ -63,6 +63,9 @@ class Customer extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
+        if ($this->attributes['image_path'] === null) {
+            return 'https://placehold.it/250x250';
+        }
         return asset('storage/'.$this->attributes['image_path']);
     }
 
@@ -145,5 +148,13 @@ class Customer extends BaseModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the order comments.
+     */
+    public function orderComments()
+    {
+        return $this->morphMany(OrderComment::class, 'commentable');
     }
 }

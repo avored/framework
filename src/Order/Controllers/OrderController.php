@@ -99,6 +99,8 @@ class OrderController
      */
     public function show(Order $order): View
     {
+        $order->load('orderComments.commentable');
+       
         return view('avored::order.order.show')
             ->with(compact('order'));
     }

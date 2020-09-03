@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 
 class OrderRepository extends BaseRepository implements OrderModelInterface
@@ -36,9 +37,9 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Collection $userOrders
      */
-    public function findByCustomerId(int $id) : Collection
+    public function findByCustomerId(int $id) : LengthAwarePaginator
     {
-        return Order::whereCustomerId($id)->get();
+        return Order::whereCustomerId($id)->paginate();
     }
 
     /**
