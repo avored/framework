@@ -78,16 +78,6 @@ class Customer extends BaseModel
         return basename($this->image_path);
     }
 
-    /**
-     * Set User Password for the Admin User.
-     * @param string $password
-     * @return void
-     */
-    public function setPasswordAttribute($val)
-    {
-        $this->attributes['password'] = bcrypt($val);
-    }
-
     public function addresses()
     {
         return $this->hasMany(Address::class);

@@ -24,6 +24,11 @@ class AvoredFrameworkSchema313 extends Migration
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
+        Schema::create('customer_password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -34,5 +39,6 @@ class AvoredFrameworkSchema313 extends Migration
     public function down()
     {
         Schema::dropIfExists('order_comments');
+        Schema::dropIfExists('customer_password_resets');
     }
 }

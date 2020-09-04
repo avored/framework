@@ -145,6 +145,7 @@ return [
     'commented' => 'Commented',
     'order' => 'Order',
     'is_private' => 'Is Private',
+    'order_email_address' => 'Order Email Address',
     
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',
