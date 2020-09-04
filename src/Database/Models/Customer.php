@@ -63,6 +63,9 @@ class Customer extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
+        if ($this->attributes['image_path'] === null) {
+            return 'https://placehold.it/250x250';
+        }
         return asset('storage/'.$this->attributes['image_path']);
     }
 
@@ -73,16 +76,6 @@ class Customer extends BaseModel
     public function getImagePathNameAttribute()
     {
         return basename($this->image_path);
-    }
-
-    /**
-     * Set User Password for the Admin User.
-     * @param string $password
-     * @return void
-     */
-    public function setPasswordAttribute($val)
-    {
-        $this->attributes['password'] = bcrypt($val);
     }
 
     public function addresses()
@@ -145,5 +138,13 @@ class Customer extends BaseModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the order comments.
+     */
+    public function orderComments()
+    {
+        return $this->morphMany(OrderComment::class, 'commentable');
     }
 }

@@ -28,3 +28,7 @@ Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').
 
 Vue.use(AvoRedAlert)
 Vue.use(AvoRedConfirm)
+
+
+import Zondicon from 'vue-zondicons'
+Vue.component('zondicon', Zondicon)

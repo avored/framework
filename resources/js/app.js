@@ -21,19 +21,10 @@ import Vddl from 'vddl'
 Vue.use(Vddl)
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
-
-// Vue.component('language-table', require('../components/system/language/LanguageTable.vue').default)
-// Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default)
-
+Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)
 
 Vue.component('user-group-table', require('../components/user/user-group/UserGroupTable.vue').default)
 Vue.component('user-group-save', require('../components/user/user-group/UserGroupSave.vue').default)
-
-// Vue.component('tax-group-table', require('../components/system/tax-group/TaxGroupTable.vue').default)
-// Vue.component('tax-group-save', require('../components/system/tax-group/TaxGroupSave.vue').default)
-
-// Vue.component('tax-rate-table', require('../components/system/tax-rate/TaxRateTable.vue').default)
-// Vue.component('tax-rate-save', require('../components/system/tax-rate/TaxRateSave.vue').default)
 
 Vue.component('attribute-table', require('../components/catalog/attribute/AttributeTable.vue').default)
 Vue.component('attribute-save', require('../components/catalog/attribute/AttributeSave.vue').default)
@@ -42,9 +33,6 @@ Vue.component('property-save', require('../components/catalog/property/PropertyS
 
 Vue.component('product-table', require('../components/catalog/product/ProductTable.vue').default)
 Vue.component('product-save', require('../components/catalog/product/ProductSave.vue').default)
-
-// Vue.component('state-table', require('../components/system/state/StateTable.vue').default)
-// Vue.component('state-save', require('../components/system/state/StateSave.vue').default)
 
 Vue.component('currency-table', require('../components/system/currency/CurrencyTable.vue').default)
 Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default)
@@ -77,11 +65,6 @@ Vue.component('avored-flash', require('../components/system/Flash.vue').default)
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default)
 Vue.component('password-reset-page', require('../components/system/PasswordResetPage.vue').default)
 Vue.component('password-new-page', require('../components/system/PasswordNewPage.vue').default)
-
-
-import Zondicon from 'vue-zondicons'
-Vue.component('zondicon', Zondicon)
-
 
 const app = new Vue({
     el: '#app',

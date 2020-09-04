@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Database\Contracts;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface OrderModelInterface extends BaseInterface
 {
@@ -11,7 +12,7 @@ interface OrderModelInterface extends BaseInterface
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Collection $customerOrders
      */
-    public function findByCustomerId(int $id) : Collection;
+    public function findByCustomerId(int $id) : LengthAwarePaginator;
 
     /**
      * Get current month total orders

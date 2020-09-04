@@ -16,3 +16,12 @@
         error-text="{{ $errors->first('default_currency') }}"
     ></avored-select>
 </div>
+
+<div class="mt-3">
+    <avored-input
+        label-text="{{ __('avored::system.order_email_address') }}"
+        field-name="order_email_address"
+        init-value="{{ ($repository->getValueByCode('order_email_address')) ?? '' }}" 
+        error-text="{{ $errors->first('order_email_address') }}"
+    ></avored-input>
+</div>

@@ -16,6 +16,7 @@ use AvoRed\Framework\Database\Repository\CountryRepository;
 use AvoRed\Framework\Database\Repository\ProductRepository;
 use AvoRed\Framework\Database\Repository\TaxRateRepository;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Repository\OrderCommentRepository;
 use AvoRed\Framework\Database\Contracts\StateModelInterface;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
 use AvoRed\Framework\Database\Repository\CurrencyRepository;
@@ -61,6 +62,7 @@ use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductAttributeModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderCommentModelInterface;
 
 class ModelProvider extends ServiceProvider
 {
@@ -91,6 +93,7 @@ class ModelProvider extends ServiceProvider
         OrderProductModelInterface::class => OrderProductRepository::class,
         OrderProductAttributeModelInterface::class => OrderProductAttributeRepository::class,
         OrderStatusModelInterface::class => OrderStatusRepository::class,
+        OrderCommentModelInterface::class => OrderCommentRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         PageModelInterface::class => PageRepository::class,
         PromotionCodeModelInterface::class => PromotionCodeRepository::class,
