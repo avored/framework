@@ -141,6 +141,20 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.order-status.index');
         });
 
+        Menu::make('report', function (MenuItem $menu) {
+            $menu->label('avored::system.admin_menus.report')
+                ->type(MenuItem::ADMIN)
+                ->icon('user-group')
+                ->route('#');
+        });
+        $reportMenu = Menu::get('report');
+        $reportMenu->subMenu('new_customer', function (MenuItem $menu) {
+            $menu->key('new_customer')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.admin_menus.new_customer')
+                ->route('admin.report.new-customers');
+        });
+        
         Menu::make('user', function (MenuItem $menu) {
             $menu->label('system.admin_menus.user')
                 ->type(MenuItem::ADMIN)

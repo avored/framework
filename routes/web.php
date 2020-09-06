@@ -134,7 +134,12 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('tax-rate', System\Controllers\TaxRateController::class);
 
         Route::resource('promotion-code', Promotion\Controllers\PromotionController::class);
-        // Route::get(
+
+        Route::get('report/new-customers', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'index'])
+            ->name('report.new-customers');
+        Route::post('report/new-customers/results', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'results'])
+            ->name('report.new-customers.post');
+    // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class
         // )->name('promotion.code.edit');

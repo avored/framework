@@ -71,6 +71,9 @@ return [
         'customer_name' => 'Customer Name',
         'customer_email' => 'Customer Email',
         'customer_phone' => 'Customer Phone',
+        'from' => 'From',
+        'to' => 'To',
+        'group_by' => 'Group By',
     ],
     'common' => [
         'list' => 'List',
@@ -139,7 +142,11 @@ return [
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
-
+    'new_customers' => 'New Custoners',
+    'total_new_customers' => 'Total New Customer',
+    'new_customer_label' => 'In Perioud Label',
+    'time_period' => 'Time Period',
+    
     'comments' => 'Comments',
     'comment' => 'Comment',
     'commented' => 'Commented',
@@ -344,6 +351,8 @@ return [
         'page' => 'Page',
         'product' => 'Product',
         'property' => 'Product Property',
+        'report' => 'Report',
+        'new_customer' => 'New Customers',
         'role' => 'Role',
         'system' => 'System',
         'state' => 'State',
