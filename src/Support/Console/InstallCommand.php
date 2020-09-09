@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Support\Console;
 
 use AvoRed\Framework\AvoRedProvider;
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -45,6 +46,11 @@ class InstallCommand extends Command
      * @var \AvoRed\Framework\Database\Repository\LanguageRepository
      */
     protected $languageRepository;
+    /**
+     * Configuration Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\LanguageRepository
+     */
+    protected $configurationRepository;
 
     /**
      * Construct for the AvoRed install command.
@@ -53,19 +59,22 @@ class InstallCommand extends Command
      * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
      * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
      * @param \AvoRed\Framework\Database\Contracts\OrderStatusModelInterface $orderStatusRepository
+     * @param \AvoRed\Framework\Database\Contracts\ConfigurationModelInterface $configurationRepository
      */
     public function __construct(
         RoleModelInterface $roleRepository,
         CurrencyModelInterface $currencyRepository,
         LanguageModelInterface $languageRepository,
         UserGroupModelInterface $userGroupRepository,
-        OrderStatusModelInterface $orderStatusRepository
+        OrderStatusModelInterface $orderStatusRepository,
+        ConfigurationModelInterface $configurationRepository
     ) {
         $this->roleRepository = $roleRepository;
         $this->currencyRepository = $currencyRepository;
         $this->languageRepository = $languageRepository;
         $this->userGroupRepository = $userGroupRepository;
         $this->orderStatusRepository = $orderStatusRepository;
+        $this->configurationRepository = $configurationRepository;
         parent::__construct();
     }
 
@@ -123,7 +132,11 @@ class InstallCommand extends Command
             'conversation_rate' => 1,
             'status' => 'ENABLED',
         ];
-        $this->currencyRepository->create($data);
+        $currency = $this->currencyRepository->create($data);
+        $this->configurationRepository->create([
+            'code' => 'default_currency',
+            'value' => $currency->id
+        ]);
     }
 
     /**
