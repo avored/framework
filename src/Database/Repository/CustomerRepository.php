@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use AvoRed\Framework\Database\Models\Customer;
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use Carbon\Carbon;
