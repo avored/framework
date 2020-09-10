@@ -24,7 +24,11 @@
     </filter>
 
     <php>
-        <env name="DB_CONNECTION" value="testing"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_USERNAME" value="root"/>
+        <env name="DB_DATABASE" value="avored_ecommerce_test"/>
+        <env name="DB_HOST" value="127.0.0.1" />
+        <env name="DB_PORT" value="3306" />
     </php>
     
     <!--logging>

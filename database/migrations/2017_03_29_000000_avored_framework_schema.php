@@ -142,7 +142,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('name')->nullable()->default(null);
             $table->string('code')->nullable()->default(null);
             $table->string('symbol')->nullable()->default(null);
-            $table->float('conversation_rate');
+            $table->decimal('conversation_rate', 10, 6)->nullable()->default(null);
             $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
             $table->timestamps();
         });

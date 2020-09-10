@@ -4,7 +4,6 @@ on: [push, pull_request]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -21,6 +20,16 @@ jobs:
             testbench: '5.*'
        
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+
+    services:
+      mysql:
+          image: mysql:5.7
+          env:
+              MYSQL_ALLOW_EMPTY_PASSWORD: yes
+              MYSQL_DATABASE: avored_ecommerce_test
+          ports:
+              - 3306
+          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
