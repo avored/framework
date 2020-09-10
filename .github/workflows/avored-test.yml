@@ -53,6 +53,9 @@ jobs:
           composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
       - name: Execute tests
         run: vendor/bin/phpunit
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v2
