@@ -7,7 +7,7 @@
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.menu')]) }}
+            {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.menu_group')]) }}
         </div>
         <div class="ml-auto">
             <a href="{{ route('admin.menu-group.create') }}"

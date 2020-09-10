@@ -7,6 +7,7 @@ use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Support\Facades\Widget;
+use Illuminate\Support\Collection;
 
 class PageController
 {
@@ -46,9 +47,11 @@ class PageController
     {
         $widgets = Widget::options();
         $tabs = Tab::get('cms.page');
+        $components = Collection::make(['blog-card']);
 
         return view('avored::cms.page.create')
             ->with(compact('tabs'))
+            ->with('components', $components)
             ->with('widgets', $widgets);
     }
 
@@ -74,9 +77,11 @@ class PageController
     {
         $tabs = Tab::get('cms.page');
         $widgets = Widget::options();
+        $components = Collection::make(['blog-card']);
 
         return view('avored::cms.page.edit')
             ->with(compact('page', 'tabs'))
+            ->with('components', $components)
             ->with(compact('widgets'));
     }
 

@@ -87,6 +87,7 @@ return [
         'property' => 'Property',
         'attribute' => 'Attribute',
         'menu' => 'Menu',
+        'menu_group' => 'Menu Group',
         'page' => 'Page',
         'order' => 'Order',
         'order_status' => 'Order Status',

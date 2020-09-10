@@ -32,7 +32,9 @@ interface CategoryModelInterface extends BaseInterface
 
     /**
      * Get All Category from the database.
+     * @param string $label
+     * @param mixed $value
      * @return \Illuminate\Support\Collection $categoryOptions
      */
-    public function options() : SupportCollection;
+    public function options(string $label = 'name', $value = 'id' ) : SupportCollection;
 }

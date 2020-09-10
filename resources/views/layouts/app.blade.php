@@ -36,7 +36,7 @@
                     @include('avored::partials.flash')
                     @include('avored::partials.breadcrumb')
 
-                    <h1 class="mx-4 my-3">
+                    <h1 class="mx-4 px-4 my-3">
                         @yield('page_title')
                     </h1>
                     <div class="rounded p-5 mx-3 my-3 bg-white">

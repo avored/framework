@@ -124,6 +124,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('order/{order}/comment/order-comment', Order\Controllers\OrderCommentController::class);
         Route::resource('order-status', Order\Controllers\OrderStatusController::class);
         Route::resource('menu-group', Cms\Controllers\MenuGroupController::class);
+        Route::resource('menu-group/{menuGroup}/menu', Cms\Controllers\MenuController::class);
         Route::resource('page', Cms\Controllers\PageController::class);
         Route::resource('property', Catalog\Controllers\PropertyController::class);
         Route::resource('product', Catalog\Controllers\ProductController::class);

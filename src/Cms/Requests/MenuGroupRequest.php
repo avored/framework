@@ -4,7 +4,7 @@ namespace AvoRed\Framework\Cms\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as Request;
 
-class MenuRequest extends Request
+class MenuGroupRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,7 @@ class MenuRequest extends Request
     {
         $rules = [];
         $rules['name'] = 'required|max:255';
-        $rules['type'] = 'required|max:255';
-        $rules['route_info'] = 'required|max:255';
-        $rules['sort_order'] = 'required|max:255';
-      
+        $rules['identifier'] = 'required|max:255';
 
         return $rules;
     }

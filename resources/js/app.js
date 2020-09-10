@@ -43,6 +43,7 @@ Vue.component('category-save', require('../components/catalog/category/CategoryS
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default)
 
 Vue.component('menu-save', require('../components/cms/menu/MenuSave.vue').default)
+Vue.component('menu-group-table', require('../components/cms/menu/MenuGroupTable.vue').default)
 Vue.component('menu-table', require('../components/cms/menu/MenuTable.vue').default)
 
 Vue.component('page-table', require('../components/cms/page/PageTable.vue').default)
@@ -65,6 +66,9 @@ Vue.component('avored-flash', require('../components/system/Flash.vue').default)
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default)
 Vue.component('password-reset-page', require('../components/system/PasswordResetPage.vue').default)
 Vue.component('password-new-page', require('../components/system/PasswordNewPage.vue').default)
+
+Vue.component('blog-card', require('../components/content/BlogCard.vue').default)
+Vue.component('content-builder', require('../components/content/Builder.vue').default)
 
 const app = new Vue({
     el: '#app',
