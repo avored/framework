@@ -99,6 +99,8 @@ class MenuBuilder
                 $menu = new stdClass;
                 $menu->id = $i;
                 $menu->name = $item->label;
+                $menu->route = $item->route();
+                $menu->params = $item->params();
                 $menu->url = route($item->route(), $item->params());
                 $menu->submenus = $item->submenus ?? [];
                 $frontMenus->push($menu);

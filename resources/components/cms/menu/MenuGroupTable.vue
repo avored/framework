@@ -2,12 +2,12 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initMenus.from"
-            :to="initMenus.to"
-            :total="initMenus.total"
-            :prev_page_url="initMenus.prev_page_url"
-            :next_page_url="initMenus.next_page_url"
-            :items="initMenus.data"
+            :from="initMenuGroups.from"
+            :to="initMenuGroups.to"
+            :total="initMenuGroups.total"
+            :prev_page_url="initMenuGroups.prev_page_url"
+            :next_page_url="initMenuGroups.next_page_url"
+            :items="initMenuGroups.data"
         >
           >
           <template slot="action" slot-scope="{item}">
@@ -43,12 +43,8 @@ const columns = [
     fieldKey: "name"
   },
   {
-    label: "Type",
-    fieldKey: "type"
-  },
-  {
-    label: "Sort Order",
-    fieldKey: "sort_order"
+    label: "Identifier",
+    fieldKey: "identifier"
   },
   {
     label: "Actions",
@@ -57,7 +53,7 @@ const columns = [
 ];
 
 export default {
-  props: ['baseUrl', 'initMenus', 'menuGroup'],
+  props: ['baseUrl', 'initMenuGroups'],
   data () {
     return {
         columns,    
@@ -65,15 +61,15 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id + '/edit'
+          return this.baseUrl + '/menu-group/' + record.id + '/edit'
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id
+          return this.baseUrl + '/menu-group/' + record.id
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id
+        var url = this.baseUrl  + '/menu-group/' + record.id
         var app = this
-        this.$confirm({message: `Do you Want to delete ${record.name} menu?`, callback: () => {
+        this.$confirm({message: `Do you Want to delete ${record.name} menu-group?`, callback: () => {
            axios.delete(url)
               .then(response =>  {
                   if (response.data.success === true) {

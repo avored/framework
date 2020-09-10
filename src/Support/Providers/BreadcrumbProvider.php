@@ -473,8 +473,28 @@ class BreadcrumbProvider extends ServiceProvider
             'admin.menu-group.edit',
             function (Breadcrumb $breadcrumb) {
                 $breadcrumb->label('avored::system.breadcrumb.menu.edit')
-                    ->parent('admin.dashboard')
-                    ->parent('admin.menu-group.index');
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.menu.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.menu.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.menu.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.menu.create')
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.menu.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.menu.edit')
+                    ->parent('admin.dashboard');
             }
         );
 
