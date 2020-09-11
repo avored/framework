@@ -2,7 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-class UserGroup extends BaseModel
+class CustomerGroup extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

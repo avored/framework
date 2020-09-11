@@ -2,15 +2,15 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initRoles.from"
-            :to="initRoles.to"
-            :total="initRoles.total"
-            :prev_page_url="initRoles.prev_page_url"
-            :next_page_url="initRoles.next_page_url"
-            :items="initRoles.data"
+            :from="initCustomerGroups.from"
+            :to="initCustomerGroups.to"
+            :total="initCustomerGroups.total"
+            :prev_page_url="initCustomerGroups.prev_page_url"
+            :next_page_url="initCustomerGroups.next_page_url"
+            :items="initCustomerGroups.data"
         >
           <template slot="name" slot-scope="{item}">
-              <a :href="`${baseUrl}/role/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+              <a :href="`${baseUrl}/customer-group/${item.id}/edit`" class="text-red-700 hover:text-red-600">
                   {{ item.name }}
               </a>
           </template>
@@ -36,14 +36,11 @@
     </div>
 </template>
 <script>
-
-
-
 export default {
-  props: ['baseUrl', 'initRoles'],
+  props: ['baseUrl', 'initCustomerGroups'],
   data () {
     return {
-        columns: [],
+        columns: [],    
     };
   },
   mounted() {
@@ -57,34 +54,51 @@ export default {
             slotName: "name"
           },
           {
+            label: this.$t('system.is_default'),
+            fieldKey: "is_default"
+          },
+          {
             label: this.$t('system.actions'),
             slotName: "action"
           }
-      ];
+    ];
+
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/role/' + record.id + '/edit'
+          return this.baseUrl + '/customer-group/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/role/' + record.id
+          return this.baseUrl + '/customer-group/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/role/' + record.id
-        var app = this
-        this.$confirm({message: `Do you Want to delete ${record.name} role?`, callback: () => {
-           axios.delete(url)
-              .then(response =>  {
-                  if (response.data.success === true) {
-                      app.$alert(response.data.message)
-                  }
-                  window.location.reload();
-              })
-              .catch(errors => {
-                  app.$alert(errors.message)
-              });
-        }})
-    
+        var url = this.baseUrl  + '/customer-group/' + record.id;
+        var app = this;
+        this.$confirm({
+            title: 'Do you Want to delete ' + record.name + ' customer-group?',
+            okType: 'danger',
+            onOk() {    
+                axios.delete(url)
+                    .then(response =>  {
+                        if (response.data.success === true) {
+                            app.$notification.error({
+                                key: 'user.group.delete.success',
+                                message: response.data.message,
+                            });
+                        }
+                        window.location.reload();
+                    })
+                    .catch(errors => {
+                        app.$notification.error({
+                            key: 'user.group.delete.error',
+                            message: errors.message
+                        });
+                    });
+            },
+            onCancel() {
+                // Do nothing
+            },
+        });
     },
   }
 };

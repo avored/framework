@@ -2,16 +2,21 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initUserGroups.from"
-            :to="initUserGroups.to"
-            :total="initUserGroups.total"
-            :prev_page_url="initUserGroups.prev_page_url"
-            :next_page_url="initUserGroups.next_page_url"
-            :items="initUserGroups.data"
+            :from="initCustomers.from"
+            :to="initCustomers.to"
+            :total="initCustomers.total"
+            :prev_page_url="initCustomers.prev_page_url"
+            :next_page_url="initCustomers.next_page_url"
+            :items="initCustomers.data"
         >
-          <template slot="name" slot-scope="{item}">
-              <a :href="`${baseUrl}/user-group/${item.id}/edit`" class="text-red-700 hover:text-red-600">
-                  {{ item.name }}
+          <template slot="first_name" slot-scope="{item}">
+              <a :href="`${baseUrl}/customer/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.first_name }}
+              </a>
+          </template>
+          <template slot="last_name" slot-scope="{item}">
+              <a :href="`${baseUrl}/customer/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.last_name }}
               </a>
           </template>
           <template slot="action" slot-scope="{item}">
@@ -37,7 +42,7 @@
 </template>
 <script>
 export default {
-  props: ['baseUrl', 'initUserGroups'],
+  props: ['baseUrl', 'initCustomers'],
   data () {
     return {
         columns: [],    
@@ -50,12 +55,16 @@ export default {
             fieldKey: "id"
           },
           {
-            label: this.$t('system.name'),
-            slotName: "name"
+            label: this.$t('system.first_name'),
+            slotName: "first_name"
           },
           {
-            label: this.$t('system.is_default'),
-            fieldKey: "is_default"
+            label: this.$t('system.last_name'),
+            slotName: "last_name"
+          },
+          {
+            label: this.$t('system.email'),
+            fieldKey: "email"
           },
           {
             label: this.$t('system.actions'),
@@ -66,16 +75,16 @@ export default {
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/user-group/' + record.id + '/edit';
+          return this.baseUrl + '/customer/' + record.id + '/edit';
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/user-group/' + record.id;
+          return this.baseUrl + '/customer/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/user-group/' + record.id;
+        var url = this.baseUrl  + '/customer/' + record.id;
         var app = this;
         this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' user-group?',
+            title: 'Do you Want to delete ' + record.name + ' customer?',
             okType: 'danger',
             onOk() {    
                 axios.delete(url)

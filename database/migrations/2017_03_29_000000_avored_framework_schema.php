@@ -190,7 +190,7 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
 
-        Schema::create('user_groups', function (Blueprint $table) {
+        Schema::create('customer_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->tinyInteger('is_default')->default(0);
@@ -506,7 +506,7 @@ class AvoredFrameworkSchema extends Migration
 
         Schema::dropIfExists('tax_rates');
         Schema::dropIfExists('tax_groups');
-        Schema::dropIfExists('user_groups');
+        Schema::dropIfExists('customer_groups');
 
         Schema::dropIfExists('property_dropdown_options');
         Schema::dropIfExists('properties');

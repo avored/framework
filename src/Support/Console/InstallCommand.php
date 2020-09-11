@@ -8,11 +8,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use AvoRed\Framework\Database\Models\Role;
-use AvoRed\Framework\Database\Repository\RoleRepository;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 
 class InstallCommand extends Command
@@ -33,7 +32,7 @@ class InstallCommand extends Command
      * UserGroup Repository for the Install Command.
      * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
      */
-    protected $userGroupRepository;
+    protected $customerGroupRepository;
 
     /**
      * Currency Repository for the Install Command.
@@ -57,7 +56,7 @@ class InstallCommand extends Command
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      * @param \AvoRed\Framework\Database\Contracts\CurrencyModelInterface $currencyRepository
      * @param \AvoRed\Framework\Database\Contracts\LanguageModelInterface $languageRepository
-     * @param \AvoRed\Framework\Database\Contracts\UserGroupModelInterface $userGroupRepository
+     * @param \AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface $customerGroupRepository
      * @param \AvoRed\Framework\Database\Contracts\OrderStatusModelInterface $orderStatusRepository
      * @param \AvoRed\Framework\Database\Contracts\ConfigurationModelInterface $configurationRepository
      */
@@ -65,14 +64,14 @@ class InstallCommand extends Command
         RoleModelInterface $roleRepository,
         CurrencyModelInterface $currencyRepository,
         LanguageModelInterface $languageRepository,
-        UserGroupModelInterface $userGroupRepository,
+        CustomerGroupModelInterface $customerGroupRepository,
         OrderStatusModelInterface $orderStatusRepository,
         ConfigurationModelInterface $configurationRepository
     ) {
         $this->roleRepository = $roleRepository;
         $this->currencyRepository = $currencyRepository;
         $this->languageRepository = $languageRepository;
-        $this->userGroupRepository = $userGroupRepository;
+        $this->customerGroupRepository = $customerGroupRepository;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->configurationRepository = $configurationRepository;
         parent::__construct();
@@ -149,7 +148,7 @@ class InstallCommand extends Command
             'name' => 'Default Group',
             'is_default' => 1,
         ];
-        $this->userGroupRepository->create($data);
+        $this->customerGroupRepository->create($data);
     }
 
     /**
@@ -197,7 +196,7 @@ class InstallCommand extends Command
             $table = $model->getTable();
             if (Schema::hasTable($table)) {
                 Schema::table($table, function (Blueprint $table) {
-                    $table->unsignedBigInteger('user_group_id')->nullable()->default(null);
+                    $table->unsignedBigInteger('customer_group_id')->nullable()->default(null);
                 });
             }
         }

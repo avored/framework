@@ -186,11 +186,17 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.admin-user.index');
         });
 
-        $userMenu->subMenu('user_group', function (MenuItem $menu) {
-            $menu->key('user_group')
+        $userMenu->subMenu('customer', function (MenuItem $menu) {
+            $menu->key('customer')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.user-group')
-                ->route('admin.user-group.index');
+                ->label('avored::system.admin_menus.customer')
+                ->route('admin.customer.index');
+        });
+        $userMenu->subMenu('customer_group', function (MenuItem $menu) {
+            $menu->key('customer_group')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.admin_menus.customer-group')
+                ->route('admin.customer-group.index');
         });
 
         Menu::make('system', function (MenuItem $menu) {

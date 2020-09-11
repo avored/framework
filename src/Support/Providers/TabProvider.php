@@ -121,10 +121,15 @@ class TabProvider extends ServiceProvider
                 ->view('avored::order.order-status._fields');
         });
         /******USER USER GROUP TABS  *******/
-        Tab::put('user.user-group', function (TabItem $tab) {
-            $tab->key('user.user-group.info')
+        Tab::put('user.customer-group', function (TabItem $tab) {
+            $tab->key('user.customer-group.info')
                 ->label('avored::system.tab.basic_info')
-                ->view('avored::user.user-group._fields');
+                ->view('avored::user.customer-group._fields');
+        });
+        Tab::put('user.customer', function (TabItem $tab) {
+            $tab->key('user.customer.info')
+                ->label('avored::system.tab.basic_info')
+                ->view('avored::user.customer._fields');
         });
         /******USER ADMIN USER TABS  *******/
         Tab::put('user.admin-user', function (TabItem $tab) {
