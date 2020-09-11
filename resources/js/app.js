@@ -38,7 +38,6 @@ Vue.component('currency-table', require('../components/system/currency/CurrencyT
 Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default)
 
 Vue.component('category-table', require('../components/catalog/category/CategoryTable.vue').default)
-Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default)
 
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default)
 

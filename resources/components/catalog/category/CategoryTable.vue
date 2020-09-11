@@ -10,6 +10,11 @@
             :next_page_url="initCategories.next_page_url"
             :items="initCategories.data"
         >
+          <template slot="name" slot-scope="{item}">
+              <a :href="`${baseUrl}/category/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.name }}
+              </a>
+          </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
                 <a :href="getEditUrl(item)">
@@ -35,38 +40,32 @@
 
 <script>
 
-// import AvoRedButton from '../../system/forms/AvoRedButtton'
-
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Slug",
-    fieldKey: "slug"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initCategories'],
-  components: {
-    
-  },
   data () {
     return {
-        columns,    
+        columns: [],
     };
   },
   mounted() {
+    this.columns = [
+        {
+          label: this.$t('system.id'),
+          fieldKey: "id"
+        },
+        {
+          label: this.$t('system.name'),
+          slotName: "name"
+        },
+        {
+          label: this.$t('system.slug'),
+          fieldKey: "slug"
+        },
+        {
+          label: this.$t('system.actions'),
+          slotName: "action"
+        }
+    ];
 
   },
   methods: {
@@ -79,7 +78,7 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/category/' + record.id;
         var app = this;
-        this.$confirm({message: `Do you Want to delete ${record.name} category?`, callback: () => {
+        this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
             axios.delete(url)
               .then(response =>  {
                   if (response.data.success === true) {

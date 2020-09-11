@@ -9,7 +9,6 @@
             :next_page_url="initMenus.next_page_url"
             :items="initMenus.data"
         >
-          >
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -33,35 +32,36 @@
 </template>
 <script>
 
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Type",
-    fieldKey: "type"
-  },
-  {
-    label: "Sort Order",
-    fieldKey: "sort_order"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initMenus', 'menuGroup'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted() {
+    this.columns = [
+        {
+          label: this.$t('system.id'),
+          fieldKey: "id"
+        },
+        {
+          label: this.$t('system.name'),
+          fieldKey: "name"
+        },
+        {
+          label: this.$t('system.type'),
+          fieldKey: "type"
+        },
+        {
+          label: this.$t('system.sort_order'),
+          fieldKey: "sort_order"
+        },
+        {
+          label: this.$t('system.actions'),
+          slotName: "action"
+        }
+    ];
   },
   methods: {
       getEditUrl(record) {

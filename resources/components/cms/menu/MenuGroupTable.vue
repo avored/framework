@@ -9,7 +9,11 @@
             :next_page_url="initMenuGroups.next_page_url"
             :items="initMenuGroups.data"
         >
-          >
+          <template slot="name" slot-scope="{item}">
+              <a :href="`${baseUrl}/menu-group/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.name }}
+              </a>
+          </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -32,32 +36,33 @@
     </div>
 </template>
 <script>
-
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Identifier",
-    fieldKey: "identifier"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initMenuGroups'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted() {
+      this.columns = [
+          {
+            label: this.$t('system.id'),
+            fieldKey: "id"
+          },
+          {
+            label: this.$t('system.name'),
+            slotName: "name"
+          },
+          {
+            label: this.$t('system.identifier'),
+            fieldKey: "identifier"
+          },
+          {
+            label: this.$t('system.actions'),
+            slotName: "action"
+          }
+        ];
+
   },
   methods: {
       getEditUrl(record) {

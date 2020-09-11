@@ -9,8 +9,13 @@
             :prev_page_url="initPromotionCodes.prev_page_url"
             :next_page_url="initPromotionCodes.next_page_url"
             :items="initPromotionCodes.data"
-        >
-          >
+        > 
+          <template slot="name" slot-scope="{item}">
+              <a :href="`${baseUrl}/order-status/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.name }}
+              </a>
+          </template>
+          
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
                <avored-button
@@ -35,40 +40,41 @@
 
 <script>
 
-import AvoRedButton from '../../system/forms/AvoRedButtton'
-
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Code",
-    fieldKey: "code"
-  },
-  {
-    label: "Active From",
-    fieldKey: "active_from"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initPromotionCodes'],
-  components: {
-    'avored-button': AvoRedButton
-  },
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted () {
+      this.columns = [
+          {
+            label: this.$t('system.id'),
+            fieldKey: "id"
+          },
+          {
+            label: this.$t('system.name'),
+            slotName: "name"
+          },
+          {
+            label: this.$t('system.code'),
+            fieldKey: "code"
+          },
+          {
+            label: this.$t('system.active_from'),
+            fieldKey: "active_from"
+          },
+          {
+            label: this.$t('system.active_till'),
+            fieldKey: "active_till"
+          },
+          {
+            label: this.$t('system.actions'),
+            slotName: "action"
+          }
+    ];
+
   },
   methods: {
       getEditUrl(record) {
