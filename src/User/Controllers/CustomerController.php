@@ -45,7 +45,7 @@ class CustomerController
     public function edit(Customer $customer)
     {
         $tabs = Tab::get('user.customer');
-
+        
         return view('avored::user.customer.edit')
             ->with(compact('customer', 'tabs'));
     }

@@ -154,7 +154,9 @@ return [
     'order' => 'Order',
     'is_private' => 'Is Private',
     'order_email_address' => 'Order Email Address',
-    
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'email' => 'Email',
     'password-reset-btn' => 'Forgot your password?',
     'password-confirmation' => 'Confirm your password',
     'variation_title' => 'Product Variations',
@@ -164,7 +166,8 @@ return [
     'widget_modal_title' => 'Select the Widget',
     'order_invoice' => 'Order Invoice',
     'invoice' => 'Invoice',
-    
+    'address' => 'Address',
+    'addresses' => 'Addresses',
     'change_order_status' => 'Change Order Status',
     'change_track_code' => 'Change Track code',
     'total-customer' => 'Total Customer',
@@ -563,6 +566,11 @@ return [
             'index' => 'Category',
             'edit' => 'Edit Category',
             'create' => 'Create Category',
+        ],
+        'customer' => [
+            'index' => 'Customer',
+            'edit' => 'Edit Customer',
+            'create' => 'Create Customer',
         ],
         'promotion-code' => [
             'index' => 'Promotion Code',

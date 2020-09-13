@@ -179,19 +179,13 @@ class MenuProvider extends ServiceProvider
 
         $userMenu = Menu::get('user');
         /** @var Builder $userMenu */
-        $userMenu->subMenu('admin-user', function (MenuItem $menu) {
-            $menu->key('admin-user')
-                ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.admin-user')
-                ->route('admin.admin-user.index');
-        });
 
-        $userMenu->subMenu('customer', function (MenuItem $menu) {
-            $menu->key('customer')
-                ->type(MenuItem::ADMIN)
-                ->label('avored::system.admin_menus.customer')
-                ->route('admin.customer.index');
-        });
+        // $userMenu->subMenu('customer', function (MenuItem $menu) {
+        //     $menu->key('customer')
+        //         ->type(MenuItem::ADMIN)
+        //         ->label('avored::system.admin_menus.customer')
+        //         ->route('admin.customer.index');
+        // });
         $userMenu->subMenu('customer_group', function (MenuItem $menu) {
             $menu->key('customer_group')
                 ->type(MenuItem::ADMIN)
@@ -199,6 +193,13 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.customer-group.index');
         });
 
+        $userMenu->subMenu('admin-user', function (MenuItem $menu) {
+            $menu->key('admin-user')
+                ->type(MenuItem::ADMIN)
+                ->label('system.admin_menus.admin-user')
+                ->route('admin.admin-user.index');
+        });
+        
         Menu::make('system', function (MenuItem $menu) {
             $menu->label('system.admin_menus.system')
                 ->type(MenuItem::ADMIN)

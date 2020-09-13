@@ -131,6 +131,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('role', System\Controllers\RoleController::class);
         Route::resource('state', System\Controllers\StateController::class);
         Route::resource('customer', User\Controllers\CustomerController::class);
+        Route::resource('customer/{customer}/address', User\Controllers\AddressController::class);
         Route::resource('customer-group', User\Controllers\CustomerGroupController::class);
         Route::resource('tax-group', System\Controllers\TaxGroupController::class);
         Route::resource('tax-rate', System\Controllers\TaxRateController::class);

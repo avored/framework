@@ -24,6 +24,7 @@ Vue.component('order-table', require('../components/order/order/OrderTable.vue')
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)
 
 Vue.component('customer-table', require('../components/user/customer/CustomerTable.vue').default)
+Vue.component('address-table', require('../components/user/customer/AddressTable.vue').default)
 
 Vue.component('customer-group-table', require('../components/user/customer-group/CustomerGroupTable.vue').default)
 Vue.component('customer-group-save', require('../components/user/customer-group/CustomerGroupSave.vue').default)

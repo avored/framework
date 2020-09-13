@@ -16,6 +16,7 @@
     "payment_option": "Payment Option",
     "shipping_option": "Shipping Option",
     "customer": "Customer",
+    "phone": "Phone",
     "order_status": "Order Status",
     "price": "Price",
     "type": "Type",
