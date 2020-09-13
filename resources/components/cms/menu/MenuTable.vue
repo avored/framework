@@ -2,14 +2,13 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initMenuGroups.from"
-            :to="initMenuGroups.to"
-            :total="initMenuGroups.total"
-            :prev_page_url="initMenuGroups.prev_page_url"
-            :next_page_url="initMenuGroups.next_page_url"
-            :items="initMenuGroups.data"
+            :from="initMenus.from"
+            :to="initMenus.to"
+            :total="initMenus.total"
+            :prev_page_url="initMenus.prev_page_url"
+            :next_page_url="initMenus.next_page_url"
+            :items="initMenus.data"
         >
-          >
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -33,43 +32,48 @@
 </template>
 <script>
 
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Identifier",
-    fieldKey: "identifier"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
-  props: ['baseUrl', 'initMenuGroups'],
+  props: ['baseUrl', 'initMenus', 'menuGroup'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted() {
+    this.columns = [
+        {
+          label: this.$t('system.id'),
+          fieldKey: "id"
+        },
+        {
+          label: this.$t('system.name'),
+          fieldKey: "name"
+        },
+        {
+          label: this.$t('system.type'),
+          fieldKey: "type"
+        },
+        {
+          label: this.$t('system.sort_order'),
+          fieldKey: "sort_order"
+        },
+        {
+          label: this.$t('system.actions'),
+          slotName: "action"
+        }
+    ];
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/menu-group/' + record.id + '/edit'
+          return this.baseUrl + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id + '/edit'
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/menu-group/' + record.id
+          return this.baseUrl + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/menu-group/' + record.id
+        var url = this.baseUrl  + '/menu-group/' + this.menuGroup.id + '/menu/' + record.id
         var app = this
-        this.$confirm({message: `Do you Want to delete ${record.name} menu-group?`, callback: () => {
+        this.$confirm({message: `Do you Want to delete ${record.name} menu?`, callback: () => {
            axios.delete(url)
               .then(response =>  {
                   if (response.data.success === true) {

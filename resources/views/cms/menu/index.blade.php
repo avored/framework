@@ -23,9 +23,9 @@
 @endsection
 
 @section('content')
-    <menu-table
+    <menu-group-table
         :init-menu-groups="{{ json_encode($menuGroups) }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
-    ></attribute-table>
+    ></menu-group-table>
 
 @endsection

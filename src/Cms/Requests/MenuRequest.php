@@ -25,11 +25,10 @@ class MenuRequest extends Request
     {
         $rules = [];
         $rules['name'] = 'required|max:255';
-        if ($this->method() === 'post') {
-            $rules['identifier'] = 'required|max:255|unique:menu_groups';
-        } else {
-            $rules['identifier'] = 'required|max:255';
-        }
+        $rules['type'] = 'required|max:255';
+        $rules['route_info'] = 'required|max:255';
+        $rules['sort_order'] = 'required|max:255';
+      
 
         return $rules;
     }

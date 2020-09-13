@@ -17,8 +17,6 @@
     </avored-input>
 </div>
 
-
-
 <div class="mt-3">
     <div class="">
         <label class="block text-sm leading-5 text-gray-500" 
@@ -28,7 +26,9 @@
     </div>
     
     <div class="mt-1">
-        <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" />
+        <content-builder :avored-components="{{ $components }}"
+        ></content-builder>
+        {{-- <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" /> --}}
     </div>
 </div>
 

@@ -124,17 +124,25 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('order/{order}/comment/order-comment', Order\Controllers\OrderCommentController::class);
         Route::resource('order-status', Order\Controllers\OrderStatusController::class);
         Route::resource('menu-group', Cms\Controllers\MenuGroupController::class);
+        Route::resource('menu-group/{menuGroup}/menu', Cms\Controllers\MenuController::class);
         Route::resource('page', Cms\Controllers\PageController::class);
         Route::resource('property', Catalog\Controllers\PropertyController::class);
         Route::resource('product', Catalog\Controllers\ProductController::class);
         Route::resource('role', System\Controllers\RoleController::class);
         Route::resource('state', System\Controllers\StateController::class);
-        Route::resource('user-group', User\Controllers\UserGroupController::class);
+        Route::resource('customer', User\Controllers\CustomerController::class);
+        Route::resource('customer/{customer}/address', User\Controllers\AddressController::class);
+        Route::resource('customer-group', User\Controllers\CustomerGroupController::class);
         Route::resource('tax-group', System\Controllers\TaxGroupController::class);
         Route::resource('tax-rate', System\Controllers\TaxRateController::class);
 
         Route::resource('promotion-code', Promotion\Controllers\PromotionController::class);
-        // Route::get(
+
+        Route::get('report/new-customers', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'index'])
+            ->name('report.new-customers');
+        Route::post('report/new-customers/results', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'results'])
+            ->name('report.new-customers.post');
+    // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class
         // )->name('promotion.code.edit');

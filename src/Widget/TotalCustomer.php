@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Widget;
 
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use Illuminate\Support\Carbon;
 
 class TotalCustomer
@@ -73,13 +74,8 @@ class TotalCustomer
      */
     public function with()
     {
-        $userModel = $this->getUserModel();
-        $firstDay = $this->getFirstDay();
-        if ($userModel === null) {
-            $value = 0;
-        } else {
-            $value = $userModel->select('id')->where('created_at', '>', $firstDay)->count();
-        }
+        $customerRepository = app(CustomerModelInterface::class);
+        $value = $customerRepository->all()->count();
         
         return ['value' => $value];
     }

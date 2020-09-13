@@ -14,10 +14,7 @@
 
 @section('content')
 <div class="mt-3">
-    <category-save
-        base-url="{{ asset(config('avored.admin_url')) }}"
-        :category="{{ $category }}" inline-template
-    >x
+    
         <div>
         <form method="post" action="{{ route('admin.category.update', $category->id) }}">
             @csrf
@@ -50,6 +47,6 @@
             </div>
         </form>
         </div>
-    </category-save>
+    
 </div>
 @endsection

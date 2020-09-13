@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Customer;
+use Illuminate\Support\Collection;
 
 interface CustomerModelInterface extends BaseInterface
 {
@@ -14,4 +14,13 @@ interface CustomerModelInterface extends BaseInterface
      * @return \AvoRed\Framework\Database\Models\Customer $customer
      */
     public function findByEmail(string $email) : ?Customer;
+
+    /**
+     * Find New Customer by given parameter in database.
+     * @param string $from
+     * @param string $to
+     * @param string $groupBy
+     * @return \Illuminate\Support\Collection $customers
+     */
+    public function getNewCustomersBy($from, $to, $groupBy) : Collection;
 }

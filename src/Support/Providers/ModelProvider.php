@@ -27,7 +27,7 @@ use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Repository\CustomerRepository;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
 use AvoRed\Framework\Database\Repository\MenuGroupRepository;
-use AvoRed\Framework\Database\Repository\UserGroupRepository;
+use AvoRed\Framework\Database\Repository\CustomerGroupRepository;
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Contracts\CountryModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
@@ -42,7 +42,7 @@ use AvoRed\Framework\Database\Repository\OrderStatusRepository;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
+use AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface;
 use AvoRed\Framework\Database\Repository\OrderProductRepository;
 use AvoRed\Framework\Database\Repository\ProductImageRepository;
 use AvoRed\Framework\Database\Repository\PromotionCodeRepository;
@@ -104,7 +104,7 @@ class ModelProvider extends ServiceProvider
         PropertyModelInterface::class => PropertyRepository::class,
         RoleModelInterface::class => RoleRepository::class,
         StateModelInterface::class => StateRepository::class,
-        UserGroupModelInterface::class => UserGroupRepository::class,
+        CustomerGroupModelInterface::class => CustomerGroupRepository::class,
         TaxGroupModelInterface::class => TaxGroupRepository::class,
         TaxRateModelInterface::class => TaxRateRepository::class,
     ];
