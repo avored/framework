@@ -16,10 +16,7 @@ export default {
     },
     mounted() {
         if (!isEmpty(this.successNotification)){
-            this.$notification['success']({
-                key: successNotificationKey, 
-                message: this.successNotification,
-            });
+            this.$alert(this.successNotification)
         }
     }
 }

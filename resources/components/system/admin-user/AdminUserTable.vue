@@ -9,7 +9,16 @@
             :next_page_url="initAdminUsers.next_page_url"
             :items="initAdminUsers.data"
         >
-          
+          <template slot="first_name" slot-scope="{item}">
+              <a :href="`${baseUrl}/admin-user/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.first_name }}
+              </a>
+          </template>
+          <template slot="last_name" slot-scope="{item}">
+              <a :href="`${baseUrl}/admin-user/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.last_name }}
+              </a>
+          </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -33,35 +42,38 @@
 </template>
 <script>
 
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "First Name",
-    fieldKey: "first_name"
-  },
-  {
-    label: "Last Name",
-    fieldKey: "last_name"
-  },
-  {
-    label: "Email",
-    fieldKey: "email"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
+
 
 export default {
   props: ['baseUrl', 'initAdminUsers'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted() {
+      this.columns = [
+          {
+            label: this.$t('system.id'),
+            fieldKey: "id"
+          },
+          {
+            label: this.$t('system.first_name'),
+            slotName: "first_name"
+          },
+          {
+            label: this.$t("system.last_name"),
+            slotName: "last_name"
+          },
+          {
+            label: this.$t("system.email"),
+            fieldKey: "email"
+          },
+          {
+            label: this.$t('system.actions'),
+            slotName: "action"
+          }
+    ];
   },
   methods: {
       getEditUrl(record) {

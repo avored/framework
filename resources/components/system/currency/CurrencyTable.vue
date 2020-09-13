@@ -9,7 +9,11 @@
             :next_page_url="initCurrencies.next_page_url"
             :items="initCurrencies.data"
         >
-          >
+          <template slot="name" slot-scope="{item}">
+                <a :href="`${baseUrl}/currency/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                    {{ item.name }}
+                </a>
+            </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -33,35 +37,36 @@
 </template>
 <script>
 
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Code",
-    fieldKey: "code"
-  },
-  {
-    label: "Conversation Rate",
-    fieldKey: "conversation_rate"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initCurrencies'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
+  },
+  mounted() {
+      this.columns = [
+          {
+            label: this.$t('system.id'),
+            fieldKey: "id"
+          },
+          {
+            label: this.$t('system.name'),
+            slotName: "name"
+          },
+          {
+            label: this.$t('system.code'),
+            fieldKey: "code"
+          },
+          {
+            label: this.$t('system.conversation_rate'),
+            fieldKey: "conversation_rate"
+          },
+          {
+            label: this.$t('system.actions'),
+            slotName: "action"
+          }
+    ];
   },
   methods: {
       getEditUrl(record) {

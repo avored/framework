@@ -10,6 +10,14 @@
             :items="initProducts.data"
         >
           >
+          <template slot="name" slot-scope="{item}">
+              <a :href="`${baseUrl}/product/${item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ item.name }}
+              </a>
+          </template>
+          <template slot="price" slot-scope="{item}">
+                {{ parseFloat(item.price).toFixed(2) }}
+          </template>
           <template slot="productType" slot-scope="{item}">
             {{ item.type }}
           </template>
@@ -37,37 +45,14 @@
 <script>
 import isNil from 'lodash/isNil'
 
-
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Type",
-    slotName: "productType"
-  },
-  {
-    label: "Slug",
-    fieldKey: "slug"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
   props: ['baseUrl', 'initProducts'],
   data () {
     return {
-        columns,    
+        columns: [],    
     };
   },
+
   methods: {
       getEditUrl(record) {
           return this.baseUrl + '/product/' + record.id + '/edit'
@@ -78,7 +63,7 @@ export default {
       deleteOnClick(record) {
         var url = this.baseUrl  + '/product/' + record.id
         var app = this
-        this.$confirm({message: `Do you Want to delete ${record.name} product?`, callback: () => {
+        this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.product')}), callback: () => {
            axios.delete(url)
               .then(response =>  {
                   if (response.data.success === true) {
@@ -92,6 +77,34 @@ export default {
         }})
         
     },
+  },
+  mounted() {
+    this.columns = [
+      {
+        label: this.$t('system.id'),
+        fieldKey: "id"
+      },
+      {
+        label: this.$t('system.name'),
+        slotName: "name"
+      },
+       {
+        label: this.$t('system.price'),
+        slotName: "price"
+      },
+      {
+        label: this.$t('system.type'),
+        slotName: "productType"
+      },
+      {
+        label: this.$t('system.slug'),
+        fieldKey: "slug"
+      },
+      {
+        label: this.$t('system.actions'),
+        slotName: "action"
+      }
+    ];
   }
 };
 </script>

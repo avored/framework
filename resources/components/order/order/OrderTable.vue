@@ -123,44 +123,47 @@
 </template>
 
 <script>
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Shipping Options",
-    fieldKey: "shipping_option"
-  },
-  {
-    label: "Payment Options",
-    fieldKey: "payment_option"
-  },
-  {
-    label: "Customer",
-    slotName: "orderCustomer"
-  },
-   {
-    label: "Order Status",
-    slotName: "orderStatus"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
 
 export default {
   props: ["baseUrl", "initOrders", 'orderStatuses'],
   data() {
     return {
-      columns,
+      columns: [],
       changeStatusId: null,
       track_code: "",
       track_code_modal_visibility: false,
       change_status_modal_visibility: false,
       currentRecord: {},
     };
+  },
+  mounted() {
+    this.columns = [
+        {
+          label: this.$t('system.id'),
+          fieldKey: "id"
+        },
+        {
+          label: this.$t('system.shipping_option'),
+          fieldKey: "shipping_option"
+        },
+        {
+          label: this.$t('system.payment_option'),
+          fieldKey: "payment_option"
+        },
+        {
+          label: this.$t('system.customer'),
+          slotName: "orderCustomer"
+        },
+        {
+          label: this.$t('system.order_status'),
+          slotName: "orderStatus"
+        },
+        {
+          label: this.$t('system.actions'),
+          slotName: "action"
+        }
+    ];
+
   },
   methods: {
     orderShowAction(record) {

@@ -44,7 +44,7 @@
                         <span class="ml-3">{{ __('avored::system.btn.save') }}</span>
                     </button>
                     
-                    <a href="{{ route('admin.property.create') }}"
+                    <a href="{{ route('admin.property.index') }}"
                         class="px-6 py-3 font-semibold inline-block text-white leading-7 hover:text-white bg-gray-500 rounded hover:bg-gray-600">
                         <span class="leading-7">
                             {{ __('avored::system.btn.cancel') }}
@@ -52,7 +52,7 @@
                     </a>
                 </div>
             </form>
-            </div>
-        </property-save>
+        </div>
+    </property-save>
 </div>
 @endsection

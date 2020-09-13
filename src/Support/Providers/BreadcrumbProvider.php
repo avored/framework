@@ -499,6 +499,28 @@ class BreadcrumbProvider extends ServiceProvider
         );
 
         BreadcrumbFacade::make(
+            'admin.customer.index',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.customer.index')
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.customer.create',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.customer.create')
+                    ->parent('admin.dashboard');
+            }
+        );
+        BreadcrumbFacade::make(
+            'admin.customer.edit',
+            function (Breadcrumb $breadcrumb) {
+                $breadcrumb->label('avored::system.breadcrumb.customer.edit')
+                    ->parent('admin.dashboard');
+            }
+        );
+
+        BreadcrumbFacade::make(
             'admin.product.index',
             function (Breadcrumb $breadcrumb) {
                 $breadcrumb->label('avored::system.breadcrumb.product.index')

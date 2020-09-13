@@ -69,38 +69,39 @@
         </form>
     </div>
 
-    <div class="w-full mt-5 block">
-        <h1 class="mt-3 text-red-700 text-2xl">{{ __('avored::system.new_customers') }}</h1>
-        <table class="mt-5 border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
-				<thead>
-					<tr class="text-left">
-						
-                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs">
-                            {{ __('avored::system.new_customer_label') }}
-                        </th>
-                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs">
-                            {{ __('avored::system.total_new_customers') }}
-                        </th>
+    @if ($displayReport)
+        <div class="w-full mt-5 block">
+            <h1 class="mt-3 text-red-700 text-2xl">{{ __('avored::system.new_customers') }}</h1>
+            <table class="mt-5 border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+                    <thead>
+                        <tr class="text-left">
+                            
+                            <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs">
+                                {{ __('avored::system.new_customer_label') }}
+                            </th>
+                            <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs">
+                                {{ __('avored::system.total_new_customers') }}
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($customers as $key => $customer)
+                            <tr>
+                                <td class="border-dashed border-t border-gray-200 userId">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center" >{{ $key }}</span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200 firstName">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center">
+                                        {{ $customer->count() }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
                         
-					</tr>
-				</thead>
-				<tbody>
-                    @foreach ($customers as $key => $customer)
-                        
-						<tr>
-							<td class="border-dashed border-t border-gray-200 userId">
-								<span class="text-gray-700 px-6 py-3 flex items-center" >{{ $key }}</span>
-							</td>
-							<td class="border-dashed border-t border-gray-200 firstName">
-								<span class="text-gray-700 px-6 py-3 flex items-center">
-                                    {{ $customer->count() }}
-                                </span>
-							</td>
-						</tr>
-                    @endforeach
-					
-				</tbody>
-			</table>
-    </div>
+                    </tbody>
+                </table>
+        </div>
+    @endif
 </div>
 @endsection

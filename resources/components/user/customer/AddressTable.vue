@@ -2,19 +2,13 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initProperties.from"
-            :to="initProperties.to"
-            :total="initProperties.total"
-            :prev_page_url="initProperties.prev_page_url"
-            :next_page_url="initProperties.next_page_url"
-            :items="initProperties.data"
+            :from="initAddresses.from"
+            :to="initAddresses.to"
+            :total="initAddresses.total"
+            :prev_page_url="initAddresses.prev_page_url"
+            :next_page_url="initAddresses.next_page_url"
+            :items="initAddresses.data"
         >
-          
-          <template slot="name" slot-scope="{item}">
-              <a :href="`${baseUrl}/property/${item.id}/edit`" class="text-red-700 hover:text-red-600">
-                  {{ item.name }}
-              </a>
-          </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -37,9 +31,8 @@
     </div>
 </template>
 <script>
-
 export default {
-  props: ['baseUrl', 'initProperties'],
+  props: ['baseUrl', 'initAddresses', 'customer'],
   data () {
     return {
         columns: [],    
@@ -52,43 +45,59 @@ export default {
             fieldKey: "id"
           },
           {
-            label: this.$t('system.name'),
-            slotName: "name"
+            label: this.$t('system.first_name'),
+            fieldKey: "first_name"
           },
           {
-            label: this.$t('system.slug'),
-            fieldKey: "slug"
+            label: this.$t('system.last_name'),
+            fieldKey: "last_name"
+          },
+          {
+            label: this.$t('system.phone'),
+            fieldKey: "phone"
           },
           {
             label: this.$t('system.actions'),
             slotName: "action"
           }
-      ];
+    ];
 
   },
   methods: {
       getEditUrl(record) {
-          return this.baseUrl + '/property/' + record.id + '/edit';
+          return `${this.baseUrl}/customer/${this.customer.id}/address/${record.id}/edit`
       },
       getDeleteUrl(record) {
-          return this.baseUrl + '/property/' + record.id;
+          return this.baseUrl + '/customer/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/property/' + record.id;
+        var url = this.baseUrl  + '/customer/' + record.id;
         var app = this;
-        this.$confirm({message: `Do you Want to delete ${record.name} property?`, callback: () => {
-           axios.delete(url)
-              .then(response =>  {
-                  if (response.data.success === true) {
-                      app.$alert(response.data.message)
-                  }
-                  window.location.reload();
-              })
-              .catch(errors => {
-                  app.$alert(errors.message)
-              });
-        }})
-        
+        this.$confirm({
+            title: 'Do you Want to delete ' + record.name + ' customer?',
+            okType: 'danger',
+            onOk() {    
+                axios.delete(url)
+                    .then(response =>  {
+                        if (response.data.success === true) {
+                            app.$notification.error({
+                                key: 'user.group.delete.success',
+                                message: response.data.message,
+                            });
+                        }
+                        window.location.reload();
+                    })
+                    .catch(errors => {
+                        app.$notification.error({
+                            key: 'user.group.delete.error',
+                            message: errors.message
+                        });
+                    });
+            },
+            onCancel() {
+                // Do nothing
+            },
+        });
     },
   }
 };

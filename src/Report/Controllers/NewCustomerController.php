@@ -43,9 +43,12 @@ class NewCustomerController
     public function index()
     {
         Session::put('report_new_customer', []);
-        
+        $displayReport = false;
+
+
         return view('avored::report.new-customer')
-            ->with('timePeriodOptions', $this->timePeriodOptions);
+            ->with('timePeriodOptions', $this->timePeriodOptions)
+            ->with('displayReport', $displayReport);
     }
 
     /**
@@ -57,13 +60,14 @@ class NewCustomerController
         $from = $request->get('from');
         $to = $request->get('to');
         $groupBy = $request->get('group_by');
-
+        $displayReport = true;
         Session::put('report_new_customer', $request->all());
        
         $customers = $this->customerRepository->getNewCustomersBy($from, $to, $groupBy);
         
         return view('avored::report.new-customer')
             ->with('timePeriodOptions', $this->timePeriodOptions)
-            ->with('customers', $customers);
+            ->with('customers', $customers)
+            ->with('displayReport', $displayReport);
     }
 }

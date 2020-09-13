@@ -87,7 +87,7 @@
     <avored-input
         label-text="{{ __('avored::system.fields.sort_order') }}"
         field-name="sort_order"
-        init-value="{{ $menu->sort_order ?? '' }}" 
+        init-value="{{ $menuav->sort_order ?? '' }}" 
         error-text="{{ $errors->first('sort_order') }}"
     ></avored-input>
 </div>

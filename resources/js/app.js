@@ -23,8 +23,11 @@ Vue.use(Vddl)
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)
 
-Vue.component('user-group-table', require('../components/user/user-group/UserGroupTable.vue').default)
-Vue.component('user-group-save', require('../components/user/user-group/UserGroupSave.vue').default)
+Vue.component('customer-table', require('../components/user/customer/CustomerTable.vue').default)
+Vue.component('address-table', require('../components/user/customer/AddressTable.vue').default)
+
+Vue.component('customer-group-table', require('../components/user/customer-group/CustomerGroupTable.vue').default)
+Vue.component('customer-group-save', require('../components/user/customer-group/CustomerGroupSave.vue').default)
 
 Vue.component('attribute-table', require('../components/catalog/attribute/AttributeTable.vue').default)
 Vue.component('attribute-save', require('../components/catalog/attribute/AttributeSave.vue').default)
@@ -38,7 +41,6 @@ Vue.component('currency-table', require('../components/system/currency/CurrencyT
 Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default)
 
 Vue.component('category-table', require('../components/catalog/category/CategoryTable.vue').default)
-Vue.component('category-save', require('../components/catalog/category/CategorySave.vue').default)
 
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default)
 
