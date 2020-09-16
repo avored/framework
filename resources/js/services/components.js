@@ -30,5 +30,7 @@ Vue.use(AvoRedAlert)
 Vue.use(AvoRedConfirm)
 
 
+Vue.component('avored-new-customer-report', require('@/modules/system/components/report/NewCustomer.vue').default)
+
 import Zondicon from 'vue-zondicons'
 Vue.component('zondicon', Zondicon)

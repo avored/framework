@@ -152,7 +152,8 @@ class MenuProvider extends ServiceProvider
             $menu->key('new_customer')
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.admin_menus.new_customer')
-                ->route('admin.report.new-customers');
+                ->route('admin.report.index')
+                ->params(['identifier' => 'new-customer']);
         });
         
         Menu::make('user', function (MenuItem $menu) {

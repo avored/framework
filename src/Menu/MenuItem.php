@@ -122,7 +122,7 @@ class MenuItem implements MenuInterface
      * Get/Set Admin Menu Route Name.
      * @return \AvoRed\Framework\Menu\Menu|string
      */
-    public function route($routeName = null)
+    public function route($routeName = null, $params = [])
     {
         if (null !== $routeName) {
             $this->routeName = $routeName;
