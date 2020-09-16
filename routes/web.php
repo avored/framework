@@ -138,10 +138,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         Route::resource('promotion-code', Promotion\Controllers\PromotionController::class);
 
-        Route::get('report/new-customers', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'index'])
-            ->name('report.new-customers');
-        Route::post('report/new-customers/results', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'results'])
-            ->name('report.new-customers.post');
+        Route::get('report/{identifier}', [\AvoRed\Framework\Report\Controllers\ReportController::class, 'index'])
+            ->name('report.index');
+        Route::post('report/{identifier}', [\AvoRed\Framework\Report\Controllers\ReportController::class, 'results'])
+            ->name('report.post');
     // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class
