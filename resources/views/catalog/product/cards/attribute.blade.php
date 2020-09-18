@@ -1,14 +1,12 @@
 <div class="mt-3 rounded border">
     <div class="font-semibold border-b text-red-500 p-5 py-3">
-        {{ __('avored::system.tab.attribute_card_title') }}
+        {{ __('avored::system.attribute') }}
     </div>
     <div class="p-5">
-
         <p>
-                
             <avored-select
                     @change="changeVariation"
-                    label-text="{{ __('avored::system.tab.attribute_card_title') }}"
+                    label-text="{{ __('avored::system.select_attribute') }}"
                     field-name="variable_product_attributes[]"
                     :multiple=true
                     :options="{{ json_encode($attributes->pluck('name', 'id')) }}"

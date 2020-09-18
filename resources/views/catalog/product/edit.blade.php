@@ -30,6 +30,9 @@
 
                 <avored-tabs>
                     @foreach ($tabs as $tab)
+                        @if ($tab->key() === 'catalog.product.attribute' && $product->type !== 'VARIABLE_PRODUCT')
+                            @continue
+                        @endif
                         <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
                             @php
                                 $path = $tab->view();
@@ -38,7 +41,6 @@
                         </avored-tab>
                     @endforeach
                 </avored-tabs>
-                
                 
                 <div class="mt-3 py-3">
                     <button type="submit"

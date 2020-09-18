@@ -1,6 +1,6 @@
 <div class="border rounded">
     <div class="p-5 text-md font-semibold border-b">
-        {{ __('avored::system.tabl.property') }}
+        {{ __('avored::system.property') }}
     </div>
     <div class="p-5">
         @foreach ($properties as $property)
