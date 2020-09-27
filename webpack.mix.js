@@ -29,7 +29,8 @@ require('laravel-mix-alias')
  }
 
 
-let publicPath = '../../../public'
+// let publicPath = '../../../public'
+let publicPath = 'dist'
 
 mix.setPublicPath(publicPath)
 
@@ -37,19 +38,22 @@ mix.setPublicPath(publicPath)
 
 mix.alias({'@': 'resources/js'})
 
+// filePath = 'vendor/avored/'
+let filePath = ''
 
 /******** AVORED ADMIN JS  **********/
-mix.js('resources/js/avored.js', 'vendor/avored/js/avored.js')
+
+mix.js('resources/js/avored.js', filePath + 'js/avored.js')
     // .extract(['vue', 'ant-design-vue'])
 
-mix.js('resources/js/app.js', 'vendor/avored/js/app.js')
+mix.js('resources/js/app.js', filePath + 'js/app.js')
 
 /******** AVORED COPY IMAGES  **********/
-mix.copyDirectory('resources/images', publicPath + '/vendor/avored/images')
+mix.copyDirectory('resources/images', publicPath + filePath + 'images')
 
 
 /******** AVORED ADMIN CSS  **********/
-mix.sass('resources/sass/app.scss', 'vendor/avored/css/app.css')
+mix.sass('resources/sass/app.scss', filePath + 'css/app.css')
     .options({
         processCssUrls: false,
         postCss: [ tailwindcss('tailwind.config.js') ],

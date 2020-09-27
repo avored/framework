@@ -331,6 +331,15 @@ class Property extends BaseModel
     }
 
     /**
+     * Property has many varchar value.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
      * Property has many text value.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

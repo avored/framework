@@ -14,7 +14,7 @@ interface ProductModelInterface
      * @param int $perPage
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
-    public function getAllWithoutVaiation(int $perPage): LengthAwarePaginator;
+    public function getAllWithoutVaiation(int $perPage = 10): LengthAwarePaginator;
 
     /**
      * Find a Product by given slug.
