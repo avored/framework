@@ -30,7 +30,7 @@ require('laravel-mix-alias')
 
 
 // let publicPath = '../../../public'
-let publicPath = 'dist'
+let publicPath = 'dist/'
 
 mix.setPublicPath(publicPath)
 

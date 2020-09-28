@@ -104,6 +104,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.qty') }}"
                     field-name="qty"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->qty ?? '' }}" 
                     error-text="{{ $errors->first('qty') }}"
                 >
@@ -155,6 +157,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.price') }}"
                     field-name="price"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->price ?? '' }}" 
                     error-text="{{ $errors->first('price') }}"
                 >
@@ -166,6 +170,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.cost_price') }}"
                     field-name="cost_price"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->cost_price ?? '' }}" 
                     error-text="{{ $errors->first('cost_price') }}"
                 >
@@ -180,6 +186,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.length') }}"
                     field-name="length"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->length ?? '' }}" 
                     error-text="{{ $errors->first('length') }}"
                 >
@@ -191,6 +199,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.width') }}"
                     field-name="width"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->width ?? '' }}" 
                     error-text="{{ $errors->first('width') }}"
                 >
@@ -200,6 +210,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.height') }}"
                     field-name="height"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->height ?? '' }}" 
                     error-text="{{ $errors->first('height') }}"
                 >
@@ -209,6 +221,8 @@
                 <avored-input
                     label-text="{{ __('avored::system.fields.weight') }}"
                     field-name="weight"
+                    input-type="number"
+                    number-steps="any"
                     init-value="{{ $product->weight ?? '' }}" 
                     error-text="{{ $errors->first('weight') }}"
                 >
