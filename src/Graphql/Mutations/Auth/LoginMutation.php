@@ -10,8 +10,7 @@ use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
-use Rebing\GraphQL\Support\SelectFields;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\ServerRequest;
 
 class LoginMutation extends Mutation
 {

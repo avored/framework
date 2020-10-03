@@ -51,6 +51,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
     ->namespace('AvoRed\Framework')
     ->name('admin.')
     ->group(function () {
+        
         Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class, 'index'])
             ->name('dashboard');
 
@@ -138,10 +139,17 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         Route::resource('promotion-code', Promotion\Controllers\PromotionController::class);
 
-        Route::get('report/new-customers', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'index'])
-            ->name('report.new-customers');
-        Route::post('report/new-customers/results', [\AvoRed\Framework\Report\Controllers\NewCustomerController::class, 'results'])
-            ->name('report.new-customers.post');
+        Route::get('report/{identifier}', [\AvoRed\Framework\Report\Controllers\ReportController::class, 'index'])
+            ->name('report.index');
+        Route::post('report/{identifier}', [\AvoRed\Framework\Report\Controllers\ReportController::class, 'results'])
+            ->name('report.post');
+
+        Route::get('js/avored.js', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'avoredJs'])
+            ->name('avored.scripts');
+        Route::get('js/app.js', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'appJs'])
+            ->name('app.scripts');
+        Route::get('css/app.css', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'appStyles'])
+            ->name('app.styles');
     // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class

@@ -68,7 +68,7 @@ class ProductRepository extends BaseRepository implements ProductModelInterface
      * @param int $perPage
      * @return \Illuminate\Database\Eloquent\Collection $products
      */
-    public function getAllWithoutVaiation($perPage = 10): LengthAwarePaginator
+    public function getAllWithoutVaiation(int $perPage = 10): LengthAwarePaginator
     {
         return Product::withoutVariation()->paginate($perPage);
     }

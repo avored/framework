@@ -26,9 +26,9 @@
     </div>
     
     <div class="mt-1">
-        <content-builder :avored-components="{{ $components }}"
-        ></content-builder>
-        {{-- <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" /> --}}
+        {{-- <content-builder :avored-components="{{ $components }}"
+        ></content-builder> --}}
+        <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" />
     </div>
 </div>
 

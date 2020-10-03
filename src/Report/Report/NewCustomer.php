@@ -1,16 +1,15 @@
 <?php
 
-namespace AvoRed\Framework\Report\Controllers;
+namespace AvoRed\Framework\Report\Report;
 
 use Illuminate\Http\Request;
-use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use Illuminate\Support\Facades\Session;
 
-class NewCustomerController
+class NewCustomer implements ReportInterface
 {
     /**
-     * Customer Repository for the New Customer Controller.
+     * Customer Repository for the Report Controller.
      * @var \AvoRed\Framework\Database\Repository\CustomerRepository
      */
     protected $customerRepository;
@@ -40,34 +39,21 @@ class NewCustomerController
      * Show Configuration  of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function options()
     {
-        Session::put('report_new_customer', []);
-        $displayReport = false;
-
-
-        return view('avored::report.new-customer')
-            ->with('timePeriodOptions', $this->timePeriodOptions)
-            ->with('displayReport', $displayReport);
+        return $this->timePeriodOptions;
     }
 
     /**
      * Show Configuration  of an AvoRed Admin.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function results(Request $request)
+    public function data(Request $request)
     {
         $from = $request->get('from');
         $to = $request->get('to');
         $groupBy = $request->get('group_by');
-        $displayReport = true;
-        Session::put('report_new_customer', $request->all());
-       
-        $customers = $this->customerRepository->getNewCustomersBy($from, $to, $groupBy);
         
-        return view('avored::report.new-customer')
-            ->with('timePeriodOptions', $this->timePeriodOptions)
-            ->with('customers', $customers)
-            ->with('displayReport', $displayReport);
+        return $this->customerRepository->getNewCustomersBy($from, $to, $groupBy);
     }
 }

@@ -291,6 +291,6 @@ class Product extends BaseModel
      */
     public function scopeWithoutVariation($query)
     {
-        return $query->where('type', '!=', 'VARIATION');
+        return $query->where('type', '!=', self::PRODUCT_TYPES_VARIABLE_PRODUCT);
     }
 }

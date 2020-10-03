@@ -163,6 +163,7 @@ class ProductController
      */
     public function update(ProductRequest $request, Product $product)
     {
+        // dd($request->all());
         $product->update($request->all());
         $this->saveProductCategory($product, $request);
         $this->saveProductImages($product, $request);
@@ -360,6 +361,7 @@ class ProductController
     private function saveProductImages(Product $product, $request)
     {
         $images = $request->get('images');
+       
         if ($images !== null && count($images) > 0) {
             $isMainImage = $request->get('is_main_image');
             foreach ($images as $id => $data) {
