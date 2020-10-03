@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://www.avored.com/" target="_blank"><img src="logo.svg" height="86" alt="AvoRed"></a>
+    <a href="https://avored.com/" target="_blank"><img src="logo.svg" height="86" alt="AvoRed"></a>
 </p>
 
 <p align="center">
@@ -14,7 +14,7 @@
 AvoRed Framework contains the core features for the AvoRed E-commerce for Laravel. It is the base behind the AvoRed and Laravel Ecommerce.
 
 ## Requirements
-At this stage the minimum Lavarel version required is 5.8. If you are using an older version, let us know at our [Discussion Forum](https://www.avored.com/discussion). We can test if it works and add support for that version too.
+At this stage the minimum Lavarel version required is 5.8. If you are using an older version, let us know at our [Discussion Forum](https://avored.com/discussion). We can test if it works and add support for that version too.
 
 ## Installation
 The AvoRed E-commerce framework is provided as a composer package, so it makes installation of AvoRed as easy as:
