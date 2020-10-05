@@ -367,11 +367,11 @@ class ProductController
             foreach ($images as $id => $data) {
                 $imageModel = $product->images()->find($id);
                 $imageModel->alt_text = $data['alt_text'] ?? '';
-                if ($isMainImage == $imageModel->id) {
+                /*if ($isMainImage == $imageModel->id) {
                     $imageModel->is_main_image = 1;
                 } else {
                     $imageModel->is_main_image = 0;
-                }
+                }*/
                 $imageModel->save();
             }
         }
