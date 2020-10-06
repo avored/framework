@@ -76,6 +76,9 @@ class Manager
     public function applyCoupon(string $code)
     {
         $promotionModel = $this->promotionCodeRepository->findByCode($code);
+        if($promotionModel === null) {
+            return;
+        }
         $this->promotionList->push($promotionModel);
 
        
