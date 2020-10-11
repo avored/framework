@@ -8,23 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
-
-    @if(file_exists(public_path('mix-manifest.json')))
-        <script defer src="{{ mix('vendor/avored/js/avored.js') }}"></script>
-        <script defer src="{{ mix('vendor/avored/js/app.js') }}"></script>
-    @else
-        <script defer src="{{ asset('vendor/avored/js/avored.js') }}"></script>
-        <script defer src="{{ asset('vendor/avored/js/app.js') }}"></script>
-    @endif
-    
-    
     <!-- Styles -->
     
-    @if(file_exists(public_path('mix-manifest.json')))
-        <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
-    @else
-        <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet">
-    @endif
+    <link href="/admin/css/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -116,6 +102,13 @@
             </div>
         </login-fields>
     </div>
+    @if(file_exists(public_path('mix-manifest.json')))
+        <script src="/admin/js/avored.js"></script>
+        <script src="/admin/js/app.js"></script>
+    @else
+        <script src="/admin/js/avored.js"></script>
+        <script src="/admin/js/app.js"></script>
+    @endif
     @stack('scripts')
 </body>
 </html>
