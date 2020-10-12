@@ -158,7 +158,7 @@ class CartProduct implements CartProductInterface
     public function qty($qty = null)
     {
         if ($qty === null) {
-            return $this->qty;
+            return number_format((float) $this->price, 2);
         } else {
             $this->qty = $qty;
 
