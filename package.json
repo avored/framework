@@ -25,7 +25,7 @@
     "lodash": "^4.17.19",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
-    "tailwindcss": "^1.4.6",
+    "tailwindcss": "^1.8.10",
     "vddl": "^0.7.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
