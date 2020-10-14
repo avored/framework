@@ -161,8 +161,8 @@ export default {
       cancelProduct() {
           window.location = this.baseUrl + '/product';
       },
-      uploadFileChange(path) {
-        this.productImages.push({path: path})
+      uploadFileChange(response) {
+        this.productImages.push(response.image_model)
       },
       deleteImage(id) {
         let deleteImageUrl = this.baseUrl + '/product-image/' + id;
@@ -177,7 +177,6 @@ export default {
       }
   },
   mounted() {
-  
     this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
     if (!isNil(this.product)) {
       this.type = this.product.type

@@ -227,7 +227,7 @@ class ProductController
 
         return response()->json([
             'success' => true,
-            'path' => $dbPath,
+            'image_model' => $imageModel,
             'message' => __('avored::user.notification.upload', ['attribute' => 'Image']),
         ]);
         
@@ -361,11 +361,17 @@ class ProductController
     private function saveProductImages(Product $product, $request)
     {
         $images = $request->get('images');
-       
+        $isMainImage = $request->get('is_main_image');
+
         if ($images !== null && count($images) > 0) {
             foreach ($images as $id => $data) {
                 $imageModel = $product->images()->find($id);
                 $imageModel->alt_text = $data['alt_text'] ?? '';
+                if ($isMainImage == $imageModel->id) {
+                    $imageModel->is_main_image = 1;
+                } else {
+                    $imageModel->is_main_image = 0;
+                }
                 $imageModel->save();
             }
         }
@@ -486,6 +492,7 @@ class ProductController
         $attributeOptions = Collection::make([]);
         if (array_unique($request->get('attributes')) !== null && count(array_unique($request->get('attributes'))) > 0) {
             foreach (array_unique($request->get('attributes')) as $attributeId) {
+                /** @var \AvoRed\Framework\Database\Models\Attribute $attributeModel */
                 $attributeModel = $this->attributeRepository->find($attributeId);
 
                 $this->attacheAttributeWithCategories($attributeModel, $product);

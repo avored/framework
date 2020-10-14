@@ -2,6 +2,6 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-interface ProductImageModelInterface
+interface ProductImageModelInterface extends BaseInterface
 {
 }
