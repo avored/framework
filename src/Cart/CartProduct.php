@@ -174,12 +174,16 @@ class CartProduct implements CartProductInterface
     public function price($price = null)
     {
         if ($price === null) {
-            return number_format((float) $this->price, 2);
+            return $this->formattedPrice();
         } else {
             $this->price = $price;
 
             return $this;
         }
+    }
+    public function formattedPrice()
+    {
+        return number_format((float) $this->price, 2);
     }
 
     /**
