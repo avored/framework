@@ -363,7 +363,6 @@ class ProductController
         $images = $request->get('images');
        
         if ($images !== null && count($images) > 0) {
-            $isMainImage = $request->get('is_main_image');
             foreach ($images as $id => $data) {
                 $imageModel = $product->images()->find($id);
                 $imageModel->alt_text = $data['alt_text'] ?? '';
