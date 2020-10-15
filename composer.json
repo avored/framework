@@ -41,8 +41,8 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"AvoRed\\Framework\\" : "src/"
-			 "App\\": "app/",
+			"AvoRed\\Framework\\" : "src/",
+			"App\\": "app/",
 			"Database\\Factories\\": "database/factories/",
 			"Database\\Seeders\\": "database/seeders/"
 		}
