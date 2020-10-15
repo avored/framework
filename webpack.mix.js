@@ -29,8 +29,8 @@ require('laravel-mix-alias')
  }
 
 
-// let publicPath = '../../../public'
-let publicPath = 'dist/'
+let publicPath = '../../../public'
+// let publicPath = 'dist/'
 
 mix.setPublicPath(publicPath)
 
@@ -38,8 +38,8 @@ mix.setPublicPath(publicPath)
 
 mix.alias({'@': 'resources/js'})
 
-// filePath = 'vendor/avored/'
-let filePath = ''
+filePath = 'vendor/avored/'
+// let filePath = ''
 
 /******** AVORED ADMIN JS  **********/
 
@@ -49,7 +49,7 @@ mix.js('resources/js/avored.js', filePath + 'js/avored.js')
 mix.js('resources/js/app.js', filePath + 'js/app.js')
 
 /******** AVORED COPY IMAGES  **********/
-mix.copyDirectory('resources/images', publicPath + filePath + 'images')
+mix.copyDirectory('resources/images', publicPath +  '/' + filePath + '/images')
 
 
 /******** AVORED ADMIN CSS  **********/
