@@ -42,9 +42,9 @@
 	"autoload" : {
 		"psr-4" : {
 			"AvoRed\\Framework\\" : "src/",
-			"App\\": "app/",
-			"Database\\Factories\\": "database/factories/",
-			"Database\\Seeders\\": "database/seeders/"
+			"AvoRed\\Framework\\App\\": "app/",
+			"AvoRed\\Framework\\Database\\Factories\\": "database/factories/",
+			"AvoRed\\Framework\\Database\\Seeders\\": "database/seeders/"
 		}
 	},
 	"autoload-dev" : {
