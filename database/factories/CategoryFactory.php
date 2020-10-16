@@ -1,5 +1,5 @@
 <?php
-namespace Database\Factories;
+namespace AvoRed\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
 use AvoRed\Framework\Database\Models\Category;
