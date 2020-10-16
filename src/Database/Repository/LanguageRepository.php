@@ -42,7 +42,7 @@ class LanguageRepository extends BaseRepository implements LanguageModelInterfac
      * Get all the languages from the connected database.
      * @return \Illuminate\Database\Eloquent\Collection $languages
      */
-    public function all() : Collection
+    public function all(): Collection
     {
         return Language::all();
     }

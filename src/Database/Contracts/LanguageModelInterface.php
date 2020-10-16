@@ -13,14 +13,9 @@ interface LanguageModelInterface extends BaseInterface
     public function create(array $data): Language;
 
     /**
-     * Find the language id from database
+     * Find id from database
      */
     public function find(int $id): Language;
-
-    /**
-     * Update Language into database
-     */
-    public function update(array $data): Language;
 
     /**
      * Delete language from database
