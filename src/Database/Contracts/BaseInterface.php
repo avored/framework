@@ -39,11 +39,6 @@ interface BaseInterface
     public function find(int $id);
 
     /**
-     * Update Model Resource into database
-     */
-    public function update(array $data);
-
-    /**
      * Delete Model Resource from a database.
      * @param int $id
      * @return int
