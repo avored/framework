@@ -1,5 +1,5 @@
 <?php
-namespace AvoRed\Database\Factories;
+namespace AvoRed\Framework\Database\Factories;
 use Faker\Generator as Faker;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Models\AdminUser;
