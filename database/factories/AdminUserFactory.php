@@ -1,9 +1,10 @@
 <?php
-
+namespace AvoRed\Database\Factories;
 use Faker\Generator as Faker;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory; 
 
 $factory->define(AdminUser::class, function (Faker $faker) {
     $role = factory(Role::class)->create();
