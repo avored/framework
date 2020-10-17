@@ -10,7 +10,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
     <!-- Styles -->
     
-    <link href="/admin/css/app.css" rel="stylesheet">
+    <link href="{{ route('admin.app.styles') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -103,11 +103,12 @@
         </login-fields>
     </div>
     @if(file_exists(public_path('mix-manifest.json')))
-        <script src="/admin/js/avored.js"></script>
-        <script src="/admin/js/app.js"></script>
+        <!-- Ideally, it should go mix url here -->
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
     @else
-        <script src="/admin/js/avored.js"></script>
-        <script src="/admin/js/app.js"></script>
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
     @endif
     @stack('scripts')
 </body>
