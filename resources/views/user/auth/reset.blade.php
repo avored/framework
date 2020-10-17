@@ -9,10 +9,8 @@
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
-    
     <!-- Styles -->
-    <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ route('admin.app.styles') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -53,9 +51,6 @@
                                     ></avored-input>
                                 </div>
                                 
-                          
-
-                         
                             <div class="mt-6">
                                 <button 
                                     type="submit" 
@@ -82,6 +77,14 @@
             </div>
      
     </div>
+    @if(file_exists(public_path('mix-manifest.json')))
+        <!-- Ideally, it should go mix url here -->
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
+    @else
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
+    @endif
     @stack('scripts')
 </body>
 </html>

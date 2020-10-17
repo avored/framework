@@ -9,10 +9,8 @@
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <script defer src="{{ asset('avored-admin/js/app.js') }}"></script>
-    
-    <!-- Styles -->
-    <link href="{{ asset('avored-admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ route('admin.app.styles') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -78,7 +76,7 @@
                     <input type="hidden" name="token" value="{{ $token }}" />
 
                     
-                    <div class="mt-6">
+                    <div class="mt-6 relative">
                         <button 
                             type="submit" 
                             class="w-full flex justify-center py-2 px-4 border border-red-500 text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700"
@@ -101,6 +99,14 @@
             </div>
         </div>
     </div>
+    @if(file_exists(public_path('mix-manifest.json')))
+        <!-- Ideally, it should go mix url here -->
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
+    @else
+        <script src="{{ route('admin.avored.scripts') }}"></script>
+        <script src="{{ route('admin.app.scripts') }}"></script>
+    @endif
     @stack('scripts')
 </body>
 </html>
