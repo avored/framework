@@ -109,7 +109,8 @@ class BaseTestCase extends OrchestraTestCase
             'Payment' => \AvoRed\Framework\Support\Facades\Payment::class,
             'Shipping' => \AvoRed\Framework\Support\Facades\Shipping::class,
             'Tab' => \AvoRed\Framework\Support\Facades\Tab::class,
-            'Widget' => \AvoRed\Framework\Support\Facades\Widget::class
+            'Widget' => \AvoRed\Framework\Support\Facades\Widget::class,
+            'Asset' => \AvoRed\Assets\Support\Facades\Asset::class
         ];
     }
 
