@@ -2,6 +2,8 @@
 
 namespace AvoRed\Framework;
 
+use AvoRed\Assets\AssetItem;
+use AvoRed\Assets\Support\Facades\Asset;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +36,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\ShippingProvider::class,
         \AvoRed\Framework\Support\Providers\TabProvider::class,
         \AvoRed\Framework\Support\Providers\WidgetProvider::class,
+        \AvoRed\Assets\AvoRedAssetsServiceProvider::class,
     ];
 
     /**
@@ -50,6 +53,7 @@ class AvoRedProvider extends ServiceProvider
         $this->registerConsoleCommands();
         $this->registerMigrationPath();
         $this->registerViewPath();
+        $this->registerAssets();
     }
 
     /**
@@ -175,6 +179,26 @@ class AvoRedProvider extends ServiceProvider
         View::composer('avored::layouts.app', LayoutComposer::class);
     }
 
+    /**
+     * Registering AvoRed Assets.
+     * @return void
+     */
+    public function registerAssets()
+    {
+        Asset::registerJS(function (AssetItem $item) {
+            $item->key('avored.avored.js')
+                ->path(__DIR__ . '/../dist/js/avored.js');
+        });
+        Asset::registerJS(function (AssetItem $item) {
+            $item->key('avored.app.js')
+                ->path(__DIR__ . '/../dist/js/app.js');
+        });
+        Asset::registerCSS(function (AssetItem $item) {
+            $item->key('avored.app.css')
+                ->path(__DIR__ . '/../dist/css/app.css');
+        });
+    }
+    
     /**
      * Set up the file which can be published to use the package.
      * @return void
