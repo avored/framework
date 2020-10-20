@@ -26,6 +26,7 @@
 
 <category-table
     :init-categories="{{ json_encode($categories) }}"
+    filter-url="{{ route('admin.category.filter') }}"
     base-url="{{ asset(config('avored.admin_url')) }}"
 ></category-table>
 

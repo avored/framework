@@ -3,12 +3,15 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initCategories.from"
-            :to="initCategories.to"
-            :total="initCategories.total"
-            :prev_page_url="initCategories.prev_page_url"
-            :next_page_url="initCategories.next_page_url"
-            :items="initCategories.data"
+            :from="categories.from"
+            :to="categories.to"
+            :total="categories.total"
+            :prev_page_url="categories.prev_page_url"
+            :next_page_url="categories.next_page_url"
+            :items="categories.data"
+            :filerable="true"
+            @changeFilter="filterTableData"
+            :filter-url="filterUrl"
         >
           <template slot="name" slot-scope="{item}">
               <a :href="`${baseUrl}/category/${item.id}/edit`" class="text-red-700 hover:text-red-600">
@@ -41,34 +44,58 @@
 <script>
 
 export default {
-  props: ['baseUrl', 'initCategories'],
+  props: ['baseUrl', 'initCategories', 'filterUrl'],
   data () {
     return {
         columns: [],
+        categories: []
     };
   },
   mounted() {
     this.columns = [
         {
           label: this.$t('system.id'),
-          fieldKey: "id"
+          fieldKey: "id",
+          visible: true
         },
         {
           label: this.$t('system.name'),
-          slotName: "name"
+          slotName: "name",
+          visible: true
         },
         {
           label: this.$t('system.slug'),
-          fieldKey: "slug"
+          fieldKey: "slug",
+          visible: true
+        },
+        {
+          label: this.$t('system.meta_title'),
+          fieldKey: "meta_title",
+          visible: true
+        },
+        {
+          label: this.$t('system.meta_description'),
+          fieldKey: "meta_description",
+          visible: false
         },
         {
           label: this.$t('system.actions'),
-          slotName: "action"
+          slotName: "action",
+          visible: true
         }
     ];
+    this.categories = this.initCategories
 
   },
   methods: {
+      filterTableData(e) {
+          let app = this
+          var data = {filter: e.target.value}
+          axios.post(this.filterUrl, data)
+            .then((response) => {
+              app.categories = response.data
+            })
+      },
       getEditUrl(record) {
           return this.baseUrl + '/category/' + record.id + '/edit';
       },

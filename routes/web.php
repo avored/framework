@@ -115,6 +115,11 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             [\AvoRed\Framework\Order\Controllers\OrderController::class, 'generateShippingLabel']
         )->name('order.shipping.label');
 
+        Route::post(
+            'category/filter',
+            [\AvoRed\Framework\Catalog\Controllers\CategoryController::class, 'filter']
+        )->name('category.filter');
+
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
         Route::resource('category', Catalog\Controllers\CategoryController::class);

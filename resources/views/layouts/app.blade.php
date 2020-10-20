@@ -19,9 +19,9 @@
 
 <body>
     <div id="app">
-        
         <avored-alert></avored-alert>
         <avored-confirm></avored-confirm>
+        
         <avored-layout inline-template>
             
             <div class="flex items-start">
@@ -46,12 +46,17 @@
                     </div>
                 </div>
 
-            </div>
-        </avored-layout>
+            </div></avored-layout>
     </div>
-    
-    {!! Asset::renderJS() !!}
-    @push('scripts')
+    @if(env('APP_ENV') === 'testing')
+        <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
+        @push('scripts')
+        <script src="{{ mix('/vendor/avored/js/app.js') }}"></script>
+    @else
+        <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
+        @push('scripts')
+        <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
+    @endif
     
 </body>
 

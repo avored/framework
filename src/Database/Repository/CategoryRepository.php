@@ -30,6 +30,13 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
     }
 
   
+    public function filter($filter)
+    {
+        return $this->query()
+            ->where('name', 'like', '%'. $filter .'%' )
+            ->orWhere('slug', 'like', '%'. $filter .'%' )
+            ->paginate($this->perPage);
+    }
 
     /**
      * Find Category Resource into a database.
