@@ -29,15 +29,6 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
         $this->model = new Category;   
     }
 
-  
-    public function filter($filter)
-    {
-        return $this->query()
-            ->where('name', 'like', '%'. $filter .'%' )
-            ->orWhere('slug', 'like', '%'. $filter .'%' )
-            ->paginate($this->perPage);
-    }
-
     /**
      * Find Category Resource into a database.
      * @param string $slug

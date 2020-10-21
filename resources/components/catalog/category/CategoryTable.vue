@@ -11,7 +11,6 @@
             :items="categories.data"
             :filerable="true"
             @changeFilter="filterTableData"
-            :filter-url="filterUrl"
         >
           <template slot="name" slot-scope="{item}">
               <a :href="`${baseUrl}/category/${item.id}/edit`" class="text-red-700 hover:text-red-600">

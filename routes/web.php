@@ -119,6 +119,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'category/filter',
             [\AvoRed\Framework\Catalog\Controllers\CategoryController::class, 'filter']
         )->name('category.filter');
+        Route::post(
+            'product/filter',
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'filter']
+        )->name('product.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

@@ -90,4 +90,17 @@ class ProductRepository extends BaseRepository implements ProductModelInterface
     {
         return $this->model;
     }
+
+
+    /**
+     * Filter the Data for Category Filter
+     * @string $filter
+     */
+    public function filter($filter)
+    {
+        return $this->query()
+            ->where('name', 'like', '%'. $filter .'%' )
+            ->orWhere('slug', 'like', '%'. $filter .'%' )
+            ->paginate($this->perPage);
+    }
 }

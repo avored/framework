@@ -27,15 +27,6 @@ class CategoryController
     }
 
     /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->categoryRepository->filter($request->get('filter'));
-    }
-
-    /**
      * Show Category Index Page.
      * @return \Illuminate\View\View
      */
@@ -121,5 +112,14 @@ class CategoryController
                 ['attribute' => __('avored::catalog.category.title')]
             ),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->categoryRepository->filter($request->get('filter'));
     }
 }
