@@ -64,7 +64,7 @@ class MenuProvider extends ServiceProvider
     public function registerAdminMenu()
     {
         Menu::make('catalog', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.catalog')
+            $menu->label('avored::system.admin_menus.catalog')
                 ->type(MenuItem::ADMIN)
                 ->icon('store-front')
                 ->route('#');
@@ -76,31 +76,31 @@ class MenuProvider extends ServiceProvider
         $catalogMenu->subMenu('product', function (MenuItem $menu) {
             $menu->key('product')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.product')
+                ->label('avored::system.admin_menus.product')
                 ->route('admin.product.index');
         });
         $catalogMenu->subMenu('category', function (MenuItem $menu) {
             $menu->key('category')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.category')
+                ->label('avored::system.admin_menus.category')
                 ->route('admin.category.index');
         });
         $catalogMenu->subMenu('property', function (MenuItem $menu) {
             $menu->key('property')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.property')
+                ->label('avored::system.admin_menus.property')
                 ->route('admin.property.index');
         });
 
         $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
             $menu->key('attribute')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.attribute')
+                ->label('avored::system.admin_menus.attribute')
                 ->route('admin.attribute.index');
         });
 
         Menu::make('cms', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.cms')
+            $menu->label('avored::system.admin_menus.cms')
                 ->type(MenuItem::ADMIN)
                 ->icon('news-paper')
                 ->route('#');
@@ -110,17 +110,17 @@ class MenuProvider extends ServiceProvider
         $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
             $menu->key('menu-group')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.menu')
+                ->label('avored::system.admin_menus.menu')
                 ->route('admin.menu-group.index');
         });
         $cmsMenu->subMenu('page', function (MenuItem $menu) {
             $menu->key('page')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.page')
+                ->label('avored::system.admin_menus.page')
                 ->route('admin.page.index');
         });
         Menu::make('order', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.order')
+            $menu->label('avored::system.admin_menus.order')
                 ->icon('wallet')
                 ->type(MenuItem::ADMIN)
                 ->route('#');
@@ -131,18 +131,18 @@ class MenuProvider extends ServiceProvider
         $orderMenu->subMenu('order', function (MenuItem $menu) {
             $menu->key('order')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.order')
+                ->label('avored::system.admin_menus.order')
                 ->route('admin.order.index');
         });
         $orderMenu->subMenu('order-status', function (MenuItem $menu) {
             $menu->key('order-status')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.order-status')
+                ->label('avored::system.admin_menus.order-status')
                 ->route('admin.order-status.index');
         });
 
         Menu::make('report', function (MenuItem $menu) {
-            $menu->label('avored::system.admin_menus.report')
+            $menu->label('avored::avored::system.admin_menus.report')
                 ->type(MenuItem::ADMIN)
                 ->icon('user-group')
                 ->route('#');
@@ -157,14 +157,14 @@ class MenuProvider extends ServiceProvider
         });
         
         Menu::make('user', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.user')
+            $menu->label('avored::system.admin_menus.user')
                 ->type(MenuItem::ADMIN)
                 ->icon('user-group')
                 ->route('#');
         });
 
         Menu::make('promotion', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.promotion')
+            $menu->label('avored::system.admin_menus.promotion')
                 ->icon('ticket')
                 ->type(MenuItem::ADMIN)
                 ->route('#');
@@ -174,7 +174,7 @@ class MenuProvider extends ServiceProvider
         $promotionMenu->subMenu('promotion_code', function (MenuItem $menu) {
             $menu->key('promotion_code')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.promo-code')
+                ->label('avored::system.admin_menus.promo-code')
                 ->route('admin.promotion-code.index');
         });
 
@@ -197,12 +197,12 @@ class MenuProvider extends ServiceProvider
         $userMenu->subMenu('admin-user', function (MenuItem $menu) {
             $menu->key('admin-user')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.admin-user')
+                ->label('avored::system.admin_menus.admin-user')
                 ->route('admin.admin-user.index');
         });
         
         Menu::make('system', function (MenuItem $menu) {
-            $menu->label('system.admin_menus.system')
+            $menu->label('avored::system.admin_menus.system')
                 ->type(MenuItem::ADMIN)
                 ->icon('cog')
                 ->route('#');
@@ -213,34 +213,34 @@ class MenuProvider extends ServiceProvider
         $systemMenu->subMenu('configuration', function (MenuItem $menu) {
             $menu->key('configuration')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.configuration')
+                ->label('avored::system.admin_menus.configuration')
                 ->route('admin.configuration.index');
         });
 
         $systemMenu->subMenu('currency', function (MenuItem $menu) {
             $menu->key('currency')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.currency')
+                ->label('avored::system.admin_menus.currency')
                 ->route('admin.currency.index');
         });
 
         // $systemMenu->subMenu('state', function (MenuItem $menu) {
         //     $menu->key('state')
         //         ->type(MenuItem::ADMIN)
-        //         ->label('system.admin_menus.state')
+        //         ->label('avored::system.admin_menus.state')
         //         ->route('admin.state.index');
         // });
 
         $systemMenu->subMenu('role', function (MenuItem $menu) {
             $menu->key('role')
                 ->type(MenuItem::ADMIN)
-                ->label('system.admin_menus.role')
+                ->label('avored::system.admin_menus.role')
                 ->route('admin.role.index');
         });
         // $systemMenu->subMenu('language', function (MenuItem $menu) {
         //     $menu->key('language')
         //         ->type(MenuItem::ADMIN)
-        //         ->label('system.admin_menus.language')
+        //         ->label('avored::system.admin_menus.language')
         //         ->route('admin.language.index');
         // });
     }
