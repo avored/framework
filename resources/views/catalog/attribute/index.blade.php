@@ -27,6 +27,7 @@
 <div>
     <attribute-table
         :init-attributes="{{ json_encode($attributes) }}"
+        filter-url="{{ route('admin.attribute.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></attribute-table>
 </div>

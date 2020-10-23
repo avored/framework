@@ -8,6 +8,8 @@
             :prev_page_url="initAttributes.prev_page_url"
             :next_page_url="initAttributes.next_page_url"
             :items="initAttributes.data"
+            :filerable="true"
+            @changeFilter="filterTableData"
         >
         
           <template slot="name" slot-scope="{item}">
@@ -41,33 +43,47 @@
 
 
 export default {
-  props: ['baseUrl', 'initAttributes'],
+  props: ['baseUrl', 'initAttributes', 'filterUrl'],
   data () {
     return {
         columns: [],
+        attributes: []
     };
   },
   mounted() {
       this.columns = [
           {
             label: this.$t('system.id'),
-            fieldKey: "id"
+            fieldKey: "id",
+            visible: true
           },
           {
             label: this.$t('system.name'),
-            slotName: "name"
+            slotName: "name",
+            visible: true
           },
           {
             label: this.$t('system.slug'),
-            fieldKey: "slug"
+            fieldKey: "slug",
+            visible: true
           },
           {
             label: this.$t('system.actions'),
-            slotName: "action"
+            slotName: "action",
+            visible: true
           }
       ];
+      this.attributes = this.initAttributes
   },
   methods: {
+      filterTableData(e) {
+          let app = this
+          var data = {filter: e.target.value}
+          axios.post(this.filterUrl, data)
+            .then((response) => {
+              app.attributes = response.data
+            })
+      },
       getEditUrl(record) {
           return this.baseUrl + '/attribute/' + record.id + '/edit';
       },

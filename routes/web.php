@@ -127,6 +127,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'property/filter',
             [\AvoRed\Framework\Catalog\Controllers\PropertyController::class, 'filter']
         )->name('property.filter');
+        Route::post(
+            'attribute/filter',
+            [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'filter']
+        )->name('attribute.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
