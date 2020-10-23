@@ -77,4 +77,16 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
     {
         return Property::whereUseForAllProducts(1)->get();
     }
+
+    /**
+     * Filter the Data for Category Filter
+     * @string $filter
+     */
+    public function filter($filter)
+    {
+        return $this->query()
+            ->where('name', 'like', '%'. $filter .'%' )
+            ->orWhere('slug', 'like', '%'. $filter .'%' )
+            ->paginate($this->perPage);
+    }
 }

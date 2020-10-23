@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-3">
+    <div>
          <avored-table
             :columns="columns"
             :from="categories.from"
