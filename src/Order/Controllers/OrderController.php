@@ -13,6 +13,7 @@ use AvoRed\Framework\Order\Requests\OrderTrackCodeRequest;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Order\Requests\OrderChangeStatusRequest;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use Illuminate\Http\Request;
 
 class OrderController
 {
@@ -181,5 +182,15 @@ class OrderController
         }
 
         return $path;
+    }
+
+    
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->orderRepository->filter($request->get('filter'));
     }
 }

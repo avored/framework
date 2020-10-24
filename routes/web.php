@@ -167,6 +167,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'role/filter',
             [\AvoRed\Framework\System\Controllers\RoleController::class, 'filter']
         )->name('role.filter');
+        Route::post(
+            'order/filter',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'filter']
+        )->name('order.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
