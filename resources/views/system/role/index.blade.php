@@ -25,6 +25,7 @@
 @section('content')
     <role-table
         :init-roles="{{ json_encode($roles) }}"
+        filter-url="{{ route('admin.role.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></role-table>
 @endsection

@@ -163,6 +163,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'currency/filter',
             [\AvoRed\Framework\System\Controllers\CurrencyController::class, 'filter']
         )->name('currency.filter');
+        Route::post(
+            'role/filter',
+            [\AvoRed\Framework\System\Controllers\RoleController::class, 'filter']
+        )->name('role.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);
