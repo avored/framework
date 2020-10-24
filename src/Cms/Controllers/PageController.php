@@ -7,6 +7,7 @@ use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Support\Facades\Widget;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class PageController
@@ -112,5 +113,14 @@ class PageController
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Page']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->pageRepository->filter($request->get('filter'));
     }
 }

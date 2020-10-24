@@ -26,6 +26,7 @@
 
 <page-table
     :init-pages="{{ json_encode($pages) }}"
+    filter-url="{{ route('admin.page.filter') }}"
     base-url="{{ asset(config('avored.admin_url')) }}"
 ></page-table>
 @endsection

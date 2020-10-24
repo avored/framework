@@ -5,9 +5,24 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class PageRepository extends BaseRepository implements PageModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'slug',
+        'meta_title',
+        'meta_description'
+    ];
+
+
     /**
      * @var Page $model
      */
