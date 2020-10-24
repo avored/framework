@@ -159,6 +159,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'promotion-code/filter',
             [\AvoRed\Framework\Promotion\Controllers\PromotionController::class, 'filter']
         )->name('promotion-code.filter');
+        Route::post(
+            'currency/filter',
+            [\AvoRed\Framework\System\Controllers\CurrencyController::class, 'filter']
+        )->name('currency.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

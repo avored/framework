@@ -125,4 +125,14 @@ class CurrencyController extends Controller
             'message' => __('avored::system.notification.delete', ['attribute' => __('avored::system.currency.title')]),
         ]);
     }
+
+    
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->currencyRepository->filter($request->get('filter'));
+    }
 }

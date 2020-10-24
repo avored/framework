@@ -22,7 +22,6 @@ class PageRepository extends BaseRepository implements PageModelInterface
         'meta_description'
     ];
 
-
     /**
      * @var Page $model
      */
