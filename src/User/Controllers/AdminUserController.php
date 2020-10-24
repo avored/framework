@@ -9,6 +9,7 @@ use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\User\Requests\AdminUserImageRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
@@ -137,5 +138,14 @@ class AdminUserController extends Controller
             'path' => $path,
             'message' => __('avored::user.notification.upload', ['attribute' => 'Admin User Image']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->adminUserRepository->filter($request->get('filter'));
     }
 }

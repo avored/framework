@@ -151,6 +151,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'customer-group/filter',
             [\AvoRed\Framework\User\Controllers\CustomerGroupController::class, 'filter']
         )->name('customer-group.filter');
+        Route::post(
+            'admin-user/filter',
+            [\AvoRed\Framework\User\Controllers\AdminUserController::class, 'filter']
+        )->name('admin-user.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

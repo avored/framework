@@ -25,6 +25,7 @@
 @section('content')
     <admin-user-table
         :init-admin-users="{{ json_encode($adminUsers) }}"
+        filter-url="{{ route('admin.admin-user.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></admin-user-table>
 @endsection
