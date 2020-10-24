@@ -9,6 +9,7 @@ use AvoRed\Framework\Database\Models\Menu as MenuModel;
 use AvoRed\Framework\Database\Contracts\MenuModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
+use Illuminate\Http\Request;
 
 class MenuController
 {
@@ -144,5 +145,14 @@ class MenuController
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->menuRepository->filter($request->get('filter'));
     }
 }

@@ -5,11 +5,23 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 
 class OrderRepository extends BaseRepository implements OrderModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'shipping_option',
+        'payment_option',
+    ];
+
     /**
      * @var Order $model
      */

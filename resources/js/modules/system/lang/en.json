@@ -15,6 +15,8 @@
     "sort_order": "Sort Order",
     "payment_option": "Payment Option",
     "shipping_option": "Shipping Option",
+    "meta_title": "Meta Title",
+    "meta_description": "Meta Description",
     "customer": "Customer",
     "phone": "Phone",
     "order_status": "Order Status",

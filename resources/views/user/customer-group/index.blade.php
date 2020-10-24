@@ -27,6 +27,7 @@
 <div>
     <customer-group-table
         :init-customer-groups="{{ json_encode($customerGroups) }}"
+        filter-url="{{ route('admin.customer-group.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></customer-group-table>
 </div>

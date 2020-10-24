@@ -5,14 +5,21 @@ use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
 use AvoRed\Framework\Database\Models\PromotionCode;
 use AvoRed\Framework\Promotion\Requests\PromotionCodeRequest;
 use AvoRed\Framework\Support\Facades\Tab;
+use Illuminate\Http\Request;
 
 class PromotionController
 {
+    /**
+     * Promotion Code Repository for the Install Command.
+     * @var \AvoRed\Framework\Database\Repository\PromotionCodeRepository
+     */
     protected $repository;
 
-    public function __construct()
-    {
-        $this->repository = app(PromotionCodeModelInterface::class);
+
+    public function __construct(
+        PromotionCodeModelInterface $repository
+    ) {
+        $this->repository = $repository;
     }
 
     /**
@@ -102,5 +109,15 @@ class PromotionController
                 ['attribute' => __('avored::promotion.promotion-code.title')]
             ),
         ]);
+    }
+
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->repository->filter($request->get('filter'));
     }
 }

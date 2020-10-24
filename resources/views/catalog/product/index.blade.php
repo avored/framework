@@ -25,6 +25,7 @@
 @section('content')
     <product-table
             :init-products="{{ json_encode($products) }}"
+            filter-url="{{ route('admin.product.filter') }}"
             base-url="{{ asset(config('avored.admin_url')) }}"
     ></product-table>
 @endsection

@@ -1,13 +1,15 @@
 <template>
-    <div class="mt-3">
+    <div>
          <avored-table
             :columns="columns"
-            :from="initProperties.from"
-            :to="initProperties.to"
-            :total="initProperties.total"
-            :prev_page_url="initProperties.prev_page_url"
-            :next_page_url="initProperties.next_page_url"
-            :items="initProperties.data"
+            :from="properties.from"
+            :to="properties.to"
+            :total="properties.total"
+            :prev_page_url="properties.prev_page_url"
+            :next_page_url="properties.next_page_url"
+            :items="properties.data"
+            :filerable="true"
+            @changeFilter="filterTableData"
         >
           
           <template slot="name" slot-scope="{item}">
@@ -39,34 +41,49 @@
 <script>
 
 export default {
-  props: ['baseUrl', 'initProperties'],
+  props: ['baseUrl', 'initProperties', 'filterUrl'],
   data () {
     return {
-        columns: [],    
+        columns: [],  
+        properties: []  
     };
   },
   mounted() {
       this.columns = [
           {
             label: this.$t('system.id'),
-            fieldKey: "id"
+            fieldKey: "id",
+            visible: true
           },
           {
             label: this.$t('system.name'),
-            slotName: "name"
+            slotName: "name",
+            visible: true
           },
           {
             label: this.$t('system.slug'),
-            fieldKey: "slug"
+            fieldKey: "slug",
+            visible: true
           },
           {
             label: this.$t('system.actions'),
-            slotName: "action"
+            slotName: "action",
+            visible: true
           }
       ];
 
+      this.properties = this.initProperties
+
   },
   methods: {
+      filterTableData(e) {
+          let app = this
+          var data = {filter: e.target.value}
+          axios.post(this.filterUrl, data)
+            .then((response) => {
+              app.properties = response.data
+            })
+      },
       getEditUrl(record) {
           return this.baseUrl + '/property/' + record.id + '/edit';
       },

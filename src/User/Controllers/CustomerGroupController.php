@@ -6,6 +6,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\CustomerGroup;
 use AvoRed\Framework\User\Requests\CustomerGroupRequest;
 use AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface;
+use Illuminate\Http\Request;
 
 class CustomerGroupController
 {
@@ -118,5 +119,14 @@ class CustomerGroupController
                 ['attribute' => __('avored::customer_group')]
             ),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->customerGroupRepository->filter($request->get('filter'));
     }
 }

@@ -6,6 +6,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Order\Requests\OrderStatusRequest;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use Illuminate\Http\Request;
 
 class OrderStatusController
 {
@@ -111,5 +112,14 @@ class OrderStatusController
                 ['attribute' => __('avored::order.order-status.title')]
             ),
         ];
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->orderStatusRepository->filter($request->get('filter'));
     }
 }

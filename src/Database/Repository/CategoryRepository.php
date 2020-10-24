@@ -11,14 +11,29 @@ use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Models\Attribute;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class CategoryRepository extends BaseRepository implements CategoryModelInterface
 {
+    use FilterTrait;
+   
     /**
-     * 
+     * Eloquent Model Instant for the Repository
      * @var \AvoRed\Framework\Database\Models\Category $model
      */
     protected $model;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'slug',
+        'meta_title',
+        'meta_description'
+    ];
+
 
     /**
      * Construct for the Category Repository
@@ -28,8 +43,6 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
     {
         $this->model = new Category;   
     }
-
-  
 
     /**
      * Find Category Resource into a database.

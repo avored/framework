@@ -5,13 +5,25 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\CustomerGroup;
 use AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class CustomerGroupRepository extends BaseRepository implements CustomerGroupModelInterface
 {
+    use FilterTrait;
+    
     /**
      * @var CustomerGroup $model
      */
     protected $model;
+
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+    ];
 
     /**
      * Construct for the CustomerGroup Repository

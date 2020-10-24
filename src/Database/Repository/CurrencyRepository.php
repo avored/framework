@@ -6,9 +6,22 @@ use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Currency;
 use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class CurrencyRepository extends BaseRepository implements CurrencyModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'code',
+        'conversation_rate' 
+    ];
+
 
     /**
      * @var Currency $model

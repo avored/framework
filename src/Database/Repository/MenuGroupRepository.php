@@ -6,9 +6,22 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\MenuGroup;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class MenuGroupRepository extends BaseRepository implements MenuGroupModelInterface
 {
+
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'identifier',
+    ];
+
     /**
      * @var MenuGroup $model
      */
