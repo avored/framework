@@ -143,6 +143,14 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'menu/filter',
             [\AvoRed\Framework\Cms\Controllers\MenuController::class, 'filter']
         )->name('menu.filter');
+        Route::post(
+            'order-status/filter',
+            [\AvoRed\Framework\Order\Controllers\OrderStatusController::class, 'filter']
+        )->name('order-status.filter');
+        Route::post(
+            'customer-group/filter',
+            [\AvoRed\Framework\User\Controllers\CustomerGroupController::class, 'filter']
+        )->name('customer-group.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

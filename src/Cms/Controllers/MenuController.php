@@ -147,7 +147,6 @@ class MenuController
         ]);
     }
 
-
     /**
      * Filter for Category Table.
      * @return \Illuminate\View\View

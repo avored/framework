@@ -25,6 +25,7 @@
 @section('content')
     <order-status-table
         :init-order-statuses="{{ json_encode($orderStatuses) }}"
+        filter-url="{{ route('admin.order-status.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></order-status-table>
 @endsection
