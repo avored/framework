@@ -155,6 +155,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'admin-user/filter',
             [\AvoRed\Framework\User\Controllers\AdminUserController::class, 'filter']
         )->name('admin-user.filter');
+        Route::post(
+            'promotion-code/filter',
+            [\AvoRed\Framework\Promotion\Controllers\PromotionController::class, 'filter']
+        )->name('promotion-code.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

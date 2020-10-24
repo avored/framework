@@ -26,6 +26,7 @@
 @section('content')
     <promotion-code-table
         :init-promotion-codes="{{ json_encode($promotionCodes) }}"
+        filter-url="{{ route('admin.promotion-code.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></promotion-code-table>
 @endsection

@@ -5,9 +5,23 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\PromotionCode;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class PromotionCodeRepository extends BaseRepository implements PromotionCodeModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'code',
+        'active_from',
+        'active_till'
+    ];
+
 
     /**
      * @var PromotionCode $model
