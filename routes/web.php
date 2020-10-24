@@ -139,6 +139,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'page/filter',
             [\AvoRed\Framework\Cms\Controllers\PageController::class, 'filter']
         )->name('page.filter');
+        Route::post(
+            'menu/filter',
+            [\AvoRed\Framework\Cms\Controllers\MenuController::class, 'filter']
+        )->name('menu.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

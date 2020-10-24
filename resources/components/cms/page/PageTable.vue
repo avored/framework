@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3">
+    <div>
         <avored-table
             :columns="columns"
             :from="pages.from"

@@ -5,45 +5,42 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Menu;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\MenuModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
-class MenuRepository implements MenuModelInterface
+class MenuRepository extends BaseRepository implements MenuModelInterface
 {
+    use FilterTrait;
+
     /**
-     * Create Menu Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Menu $menu
+     * Filterable Fields
+     * @var array $filterType
      */
-    public function create(array $data): Menu
+    protected $filterFields = [
+        'name',
+        'type',
+        'sort_order'
+    ];
+
+
+    /**
+     * @var Menu $model
+     */
+    protected $model;
+
+    /**
+     * Construct for the Attribute Repository
+     */
+    public function __construct()
     {
-        return Menu::create($data);
+        $this->model = new Menu();
     }
 
     /**
-     * Find Menu Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Menu $menu
+     * Get the model for the repository
+     * @return Menu 
      */
-    public function find(int $id): Menu
+    public function model(): Menu
     {
-        return Menu::find($id);
-    }
-
-    /**
-     * Delete Menu Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return Menu::destroy($id);
-    }
-
-    /**
-     * Get all the categories from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $menus
-     */
-    public function all() : Collection
-    {
-        return Menu::all();
+        return $this->model;
     }
 }
