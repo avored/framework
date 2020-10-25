@@ -24,12 +24,12 @@ const columns = [{
   slotName: "variableProductAction"
 }];
 
-import VueSimplemde from 'vue-simplemde'
+import vueEasyMde from 'vue-easymde'
 
 export default {
   props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
   components: {
-    'vue-simplemde': VueSimplemde,
+    'vue-simplemde': vueEasyMde,
   },
   data () {
     return {
