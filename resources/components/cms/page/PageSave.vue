@@ -1,13 +1,13 @@
 <script>
 import isNil from 'lodash/isNil'
 import { Widget } from './widget'
-import VueSimplemde from 'vue-simplemde'
+import VueEasyMde from 'vue-easymde'
 
  
 export default {
   props: ['page', 'baseUrl'],
   components: {
-    'vue-simplemde': VueSimplemde
+    'vue-simplemde': VueEasyMde
   },
   data () {
     return {
@@ -59,5 +59,5 @@ export default {
 </script>
 
 <style>
-  @import '~simplemde/dist/simplemde.min.css';
+  @import "~easymde/dist/easymde.min.css";
 </style>

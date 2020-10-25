@@ -6,6 +6,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Catalog\Requests\PropertyRequest;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
+use Illuminate\Http\Request;
 
 class PropertyController
 {
@@ -151,5 +152,15 @@ class PropertyController
                 }
             }
         }
+    }
+
+    
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->propertyRepository->filter($request->get('filter'));
     }
 }

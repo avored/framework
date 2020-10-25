@@ -40,6 +40,7 @@
                 :init-menus="{{ json_encode($menus) }}"
                 :menu-group="{{ json_encode($menuGroup) }}"
                 base-url="{{ asset(config('avored.admin_url')) }}"
+                filter-url="{{ route('admin.menu.filter') }}"
             ></menu-table>
         </div>
     </div>

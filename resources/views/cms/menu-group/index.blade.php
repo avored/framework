@@ -25,6 +25,7 @@
 @section('content')
     <menu-group-table
         :init-menu-groups="{{ json_encode($menuGroups) }}"
+        filter-url="{{ route('admin.menu-group.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></menu-group-table>
 

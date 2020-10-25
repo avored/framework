@@ -25,6 +25,7 @@
 @section('content')
     <currency-table
         :init-currencies="{{ json_encode($currencies) }}"
+        filter-url="{{ route('admin.currency.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></currency-table>
 @endsection

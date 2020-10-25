@@ -9,6 +9,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 abstract class BaseRepository
 {
     /**
+     * Per Page
+     * @var int $perPage
+     */
+    public $perPage = 10;
+    /**
      * All the Repository class must have an model method which should return the Model Class
      * 
      */
@@ -32,6 +37,7 @@ abstract class BaseRepository
      */
     public function paginate($perPage = 10, array $with = []) : LengthAwarePaginator
     {
+        $this->perPage = $perPage;
         $query = $this->query();
         if (count($with) > 0) {
             return $query->with($with)->paginate($perPage);

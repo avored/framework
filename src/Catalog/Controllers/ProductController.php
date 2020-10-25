@@ -565,4 +565,13 @@ class ProductController
 
         return $all;
     }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->productRepository->filter($request->get('filter'));
+    }
 }

@@ -5,9 +5,20 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Role;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class RoleRepository extends BaseRepository implements RoleModelInterface
 {
+    use FilterTrait;
+
+     /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+    ];
+
     /**
      * @var Role $model
      */

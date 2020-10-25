@@ -7,6 +7,7 @@ use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
 use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use Illuminate\Http\Request;
 
 class AttributeController
 {
@@ -163,5 +164,14 @@ class AttributeController
             'path' => $path,
             'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->attributeRepository->filter($request->get('filter'));
     }
 }

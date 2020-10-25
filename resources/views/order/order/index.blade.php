@@ -16,6 +16,7 @@
 <order-table
     :init-orders="{{ json_encode($orders) }}"
     :order-statuses="{{ json_encode($orderStatuses) }}"
+    filter-url="{{ route('admin.order.filter') }}"
     base-url="{{ asset(config('avored.admin_url')) }}"
 ></order-table>
 @endsection

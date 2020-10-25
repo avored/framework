@@ -12,20 +12,16 @@
 
     <!-- Styles -->
    
-    @if(file_exists(public_path('mix-manifest.json')))
-        <link href="/admin/css/app.css" type="text/css" rel="stylesheet">
-        {{-- <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet"> --}}
-    @else
-        <link href="/admin/css/app.css" rel="stylesheet">
-        {{-- <link href="{{ asset('vendor/avored/css/app.css') }}" rel="stylesheet"> --}}
-    @endif
+    {!! Asset::renderCSS() !!}
+    @push('styles')
+
 </head>
 
 <body>
     <div id="app">
-        
         <avored-alert></avored-alert>
         <avored-confirm></avored-confirm>
+        
         <avored-layout inline-template>
             
             <div class="flex items-start">
@@ -50,28 +46,16 @@
                     </div>
                 </div>
 
-            </div>
-        </avored-layout>
+            </div></avored-layout>
     </div>
-    
-    
-    {{-- <script src="{{ asset('vendor/avored/js/manifest.js') }}"></script>
-    <script src="{{ asset('vendor/avored/js/vendor.js') }}"></script> --}}
-    @if(file_exists(public_path('mix-manifest.json')))
-        <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
-        {{-- <script src="/admin/js/avored.js"></script> --}}
+    @if(env('APP_ENV') === 'testing' && false)
+        <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
+        @push('scripts')
+        <script src="{{ mix('/vendor/avored/js/app.js') }}"></script>
     @else
-        <script src="/admin/js/avored.js"></script>
-    @endif
-    
-    {{-- <script src="{{ asset('vendor/avored/cash-on-delivery/js/cash-on-delivery.js') }}"></script> --}}
-    @stack('scripts')
-    
-    @if(file_exists(public_path('mix-manifest.json')))
-        <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
-        {{-- <script src="/admin/js/app.js"></script> --}}
-    @else
-        <script src="/admin/js/app.js"></script>
+        <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
+        @push('scripts')
+        <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
     @endif
     
 </body>

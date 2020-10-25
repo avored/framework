@@ -19,14 +19,6 @@ Route::middleware(['web'])
     ->namespace('AvoRed\\Framework')
     ->name('admin.')
     ->group(function () {
-
-        Route::get('js/avored.js', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'avoredJs'])
-            ->name('avored.scripts');
-        Route::get('js/app.js', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'appJs'])
-            ->name('app.scripts');
-        Route::get('css/app.css', [\AvoRed\Framework\System\Controllers\AvoRedController::class, 'appStyles'])
-            ->name('app.styles');
-
             
         /***************** LOGIN ROUTE *****************/
         Route::get('login', [\AvoRed\Framework\User\Controllers\LoginController::class, 'loginForm'])
@@ -122,6 +114,63 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'order-shipping-label/{order}',
             [\AvoRed\Framework\Order\Controllers\OrderController::class, 'generateShippingLabel']
         )->name('order.shipping.label');
+
+        Route::post(
+            'category/filter',
+            [\AvoRed\Framework\Catalog\Controllers\CategoryController::class, 'filter']
+        )->name('category.filter');
+        Route::post(
+            'product/filter',
+            [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'filter']
+        )->name('product.filter');
+        Route::post(
+            'property/filter',
+            [\AvoRed\Framework\Catalog\Controllers\PropertyController::class, 'filter']
+        )->name('property.filter');
+        Route::post(
+            'attribute/filter',
+            [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'filter']
+        )->name('attribute.filter');
+        Route::post(
+            'menu-group/filter',
+            [\AvoRed\Framework\Cms\Controllers\MenuGroupController::class, 'filter']
+        )->name('menu-group.filter');
+        Route::post(
+            'page/filter',
+            [\AvoRed\Framework\Cms\Controllers\PageController::class, 'filter']
+        )->name('page.filter');
+        Route::post(
+            'menu/filter',
+            [\AvoRed\Framework\Cms\Controllers\MenuController::class, 'filter']
+        )->name('menu.filter');
+        Route::post(
+            'order-status/filter',
+            [\AvoRed\Framework\Order\Controllers\OrderStatusController::class, 'filter']
+        )->name('order-status.filter');
+        Route::post(
+            'customer-group/filter',
+            [\AvoRed\Framework\User\Controllers\CustomerGroupController::class, 'filter']
+        )->name('customer-group.filter');
+        Route::post(
+            'admin-user/filter',
+            [\AvoRed\Framework\User\Controllers\AdminUserController::class, 'filter']
+        )->name('admin-user.filter');
+        Route::post(
+            'promotion-code/filter',
+            [\AvoRed\Framework\Promotion\Controllers\PromotionController::class, 'filter']
+        )->name('promotion-code.filter');
+        Route::post(
+            'currency/filter',
+            [\AvoRed\Framework\System\Controllers\CurrencyController::class, 'filter']
+        )->name('currency.filter');
+        Route::post(
+            'role/filter',
+            [\AvoRed\Framework\System\Controllers\RoleController::class, 'filter']
+        )->name('role.filter');
+        Route::post(
+            'order/filter',
+            [\AvoRed\Framework\Order\Controllers\OrderController::class, 'filter']
+        )->name('order.filter');
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

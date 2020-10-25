@@ -5,9 +5,22 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class AdminUserRepository extends BaseRepository implements AdminUserModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'first_name',
+        'last_name',
+        'email',    
+    ];
+
     /**
      * @var AdminUser $model
      */

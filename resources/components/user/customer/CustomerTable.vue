@@ -2,12 +2,14 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initCustomers.from"
-            :to="initCustomers.to"
-            :total="initCustomers.total"
-            :prev_page_url="initCustomers.prev_page_url"
-            :next_page_url="initCustomers.next_page_url"
-            :items="initCustomers.data"
+            :from="customers.from"
+            :to="customers.to"
+            :total="customers.total"
+            :prev_page_url="customers.prev_page_url"
+            :next_page_url="customers.next_page_url"
+            :items="customers.data"
+            :filerable="true"
+            @changeFilter="filterTableData"
         >
           <template slot="first_name" slot-scope="{item}">
               <a :href="`${baseUrl}/customer/${item.id}/edit`" class="text-red-700 hover:text-red-600">
@@ -42,38 +44,53 @@
 </template>
 <script>
 export default {
-  props: ['baseUrl', 'initCustomers'],
+  props: ['baseUrl', 'initCustomers', 'filterUrl'],
   data () {
     return {
-        columns: [],    
+        columns: [],   
+        customers: [] 
     };
   },
   mounted() {
       this.columns = [
           {
             label: this.$t('system.id'),
-            fieldKey: "id"
+            fieldKey: "id",
+            visible: true
           },
           {
             label: this.$t('system.first_name'),
-            slotName: "first_name"
+            slotName: "first_name",
+            visible: true
           },
           {
             label: this.$t('system.last_name'),
-            slotName: "last_name"
+            slotName: "last_name",
+            visible: true
           },
           {
             label: this.$t('system.email'),
-            fieldKey: "email"
+            fieldKey: "email",
+            visible: true
           },
           {
             label: this.$t('system.actions'),
-            slotName: "action"
+            slotName: "action",
+            visible: true
           }
     ];
 
+    this.customers = this.initCustomers
+
   },
   methods: {
+     filterTableData(e) {
+            let app = this;
+            var data = { filter: e.target.value };
+            axios.post(this.filterUrl, data).then(response => {
+                app.customers = response.data;
+            });
+        },
       getEditUrl(record) {
           return this.baseUrl + '/customer/' + record.id + '/edit';
       },
@@ -81,8 +98,8 @@ export default {
           return this.baseUrl + '/customer/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/customer/' + record.id;
-        var app = this;
+        var url = this.getDeleteUrl(record)
+        var app = this
         this.$confirm({
             title: 'Do you Want to delete ' + record.name + ' customer?',
             okType: 'danger',

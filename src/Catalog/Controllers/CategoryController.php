@@ -6,6 +6,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Catalog\Requests\CategoryRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use Illuminate\Http\Request;
 
 class CategoryController
 {
@@ -111,5 +112,14 @@ class CategoryController
                 ['attribute' => __('avored::catalog.category.title')]
             ),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->categoryRepository->filter($request->get('filter'));
     }
 }

@@ -25,6 +25,7 @@
 @section('content')
     <property-table
         :init-properties="{{ json_encode($properties) }}"
+        filter-url="{{ route('admin.property.filter') }}"
         base-url="{{ asset(config('avored.admin_url')) }}"
     ></property-table>
 

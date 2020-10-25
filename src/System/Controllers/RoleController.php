@@ -151,4 +151,13 @@ class RoleController extends Controller
             $role->permissions()->sync($ids);
         }
     }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->roleRepository->filter($request->get('filter'));
+    }
 }

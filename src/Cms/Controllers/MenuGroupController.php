@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Cms\Controllers;
 use AvoRed\Framework\Cms\Requests\MenuGroupRequest;
 use AvoRed\Framework\Database\Models\MenuGroup;
 use AvoRed\Framework\Database\Contracts\MenuGroupModelInterface;
+use Illuminate\Http\Request;
 
 class MenuGroupController
 {
@@ -99,5 +100,14 @@ class MenuGroupController
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->menuGroupRepository->filter($request->get('filter'));
     }
 }

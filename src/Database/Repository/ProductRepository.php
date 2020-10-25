@@ -5,10 +5,23 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use AvoRed\Framework\Database\Traits\FilterTrait;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductRepository extends BaseRepository implements ProductModelInterface
 {
+    use FilterTrait;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'slug',
+        'type'
+    ];
+
     /**
      * 
      * @var \AvoRed\Framework\Database\Models\Product $model
