@@ -142,9 +142,9 @@ class MenuProvider extends ServiceProvider
         });
 
         Menu::make('report', function (MenuItem $menu) {
-            $menu->label('avored::avored::system.admin_menus.report')
+            $menu->label('avored::system.admin_menus.report')
                 ->type(MenuItem::ADMIN)
-                ->icon('user-group')
+                ->icon('book-reference')
                 ->route('#');
         });
         $reportMenu = Menu::get('report');
