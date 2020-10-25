@@ -48,7 +48,7 @@
 
             </div></avored-layout>
     </div>
-    @if(env('APP_ENV') === 'testing' && false)
+    @if(env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
         @push('scripts')
         <script src="{{ mix('/vendor/avored/js/app.js') }}"></script>
