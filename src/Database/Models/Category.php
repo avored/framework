@@ -8,7 +8,13 @@ class Category extends BaseModel
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'meta_title', 'meta_description'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'parent_id'
+    ];
 
     /**
      * Category belongs to many products.

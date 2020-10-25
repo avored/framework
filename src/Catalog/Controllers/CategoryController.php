@@ -44,10 +44,11 @@ class CategoryController
      */
     public function create()
     {
+        $categoryOptions = $this->categoryRepository->options();
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.create')
-            ->with(compact('tabs'));
+            ->with(compact('tabs', 'categoryOptions'));
     }
 
     /**
@@ -73,10 +74,15 @@ class CategoryController
      */
     public function edit(Category $category)
     {
+        $categoryOptions = $this->categoryRepository
+            ->options()
+            ->filter(function ($option) use ($category) {
+                return $option !== $category->name;
+            });
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.edit')
-            ->with(compact('category', 'tabs'));
+            ->with(compact('category', 'tabs', 'categoryOptions'));
     }
 
     /**
