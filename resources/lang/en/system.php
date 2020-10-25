@@ -136,6 +136,7 @@ return [
         ],
     ],
 
+    'parent_id' => 'Parent ID',
     'customer_group' => 'Customer Group',
     'failed' => 'These credentials do not match our records.',
     'password' => 'Passwords must be at least eight characters and match the confirmation.',
