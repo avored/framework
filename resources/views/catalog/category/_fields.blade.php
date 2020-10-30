@@ -1,4 +1,16 @@
-<div class="mt-3 flex w-full">
+<div class="flex w-full">
+    <avored-select
+        label-text="{{ __('avored::system.parent_id') }}"
+        field-name="parent_id"
+        :options="{{ $categoryOptions }}"
+        init-value="{{ $category->parent_id ?? '' }}" 
+        error-text="{{ $errors->first('parent_id') }}"
+        :has-empty="true"
+    >
+    </avored-select>
+</div>
+
+<div class="flex w-full">
     <avored-input
         label-text="{{ __('avored::system.fields.name') }}"
         field-name="name"

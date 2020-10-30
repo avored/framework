@@ -17,6 +17,9 @@
                   {{ item.name }}
               </a>
           </template>
+          <template slot="parent" slot-scope="{item}">
+              {{ item.parent ? item.parent.name : '' }}
+          </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
                 <a :href="getEditUrl(item)">
@@ -55,6 +58,11 @@ export default {
         {
           label: this.$t('system.id'),
           fieldKey: "id",
+          visible: true
+        },
+        {
+          label: this.$t('system.parent'),
+          slotName: "parent",
           visible: true
         },
         {
