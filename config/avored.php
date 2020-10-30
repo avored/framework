@@ -8,6 +8,7 @@
 
 return [
     'admin_url' => 'admin',
+    'admin_api_url' => 'admin/api',
     'symlink_storage_folder' => 'storage',
     'cart' => ['session_key' => 'cart_products', 'promotion_key' => 'cart_discount'],
     'model' => [

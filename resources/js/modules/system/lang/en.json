@@ -1,5 +1,6 @@
 {
     "id": "ID",
+    "parent": "Parent",
     "name": "Name",
     "slug": "Slug",
     "actions": "Actions",

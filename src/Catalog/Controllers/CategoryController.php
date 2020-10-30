@@ -32,7 +32,9 @@ class CategoryController
      */
     public function index()
     {
-        $categories = $this->categoryRepository->paginate();
+        $perPage = 10;
+        $with = ['parent'];
+        $categories = $this->categoryRepository->paginate($perPage, $with);
 
         return view('avored::catalog.category.index')
             ->with(compact('categories'));
