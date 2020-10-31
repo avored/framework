@@ -4,6 +4,7 @@ namespace AvoRed\Framework;
 
 use AvoRed\Assets\AssetItem;
 use AvoRed\Assets\Support\Facades\Asset;
+use AvoRed\Framework\Support\Providers\BladeProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +37,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\ShippingProvider::class,
         \AvoRed\Framework\Support\Providers\TabProvider::class,
         \AvoRed\Framework\Support\Providers\WidgetProvider::class,
+        \AvoRed\Framework\Support\Providers\BladeProvider::class,
         \AvoRed\Assets\AvoRedAssetsServiceProvider::class,
     ];
 
@@ -198,7 +200,7 @@ class AvoRedProvider extends ServiceProvider
                 ->path(__DIR__ . '/../dist/css/app.css');
         });
     }
-    
+
     /**
      * Set up the file which can be published to use the package.
      * @return void
