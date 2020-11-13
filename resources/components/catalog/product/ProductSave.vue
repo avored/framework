@@ -34,7 +34,6 @@ export default {
   data () {
     return {
         type: null,
-        headers: {},
         description: null,
         status: 0,
         track_stock: 0,
@@ -177,7 +176,6 @@ export default {
       }
   },
   mounted() {
-    this.headers = { 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content};
     if (!isNil(this.product)) {
       this.type = this.product.type
       this.description = this.product.description
