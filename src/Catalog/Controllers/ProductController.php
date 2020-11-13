@@ -188,6 +188,7 @@ class ProductController
             $varitions = $product->attributeProductValues->pluck('variation_id');
 
             foreach ($varitions as $varitionId) {
+                dd($varitionId);
                 $variableProduct = $this->productRepository->find($varitionId);
                 if ($variableProduct !== null) {
                     $variableProduct->delete();
@@ -317,6 +318,9 @@ class ProductController
         $propertyIds = Collection::make([]);
         if ($request->get('property') !== null && count($request->get('property')) > 0) {
             foreach ($request->get('property') as $propertyId => $propertyValue) {
+                if ($propertyValue === null) {
+                    continue;
+                }
                 $propertyModel = $this->propertyRepository->find($propertyId);
                 $propertyIds->push($propertyId);
                 $this->attachePropertyWithCategories($propertyModel, $product);
