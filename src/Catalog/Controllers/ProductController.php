@@ -303,7 +303,7 @@ class ProductController
     private function saveProductCategory(Product $product, $request)
     {
         if ($request->get('category') !== null && count($request->get('category')) > 0) {
-            $product->categories()->sync($request->get('catepgory'));
+            $product->categories()->sync($request->get('category'));
         }
     }
 
