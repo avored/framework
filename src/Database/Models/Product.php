@@ -51,6 +51,7 @@ class Product extends BaseModel
     const PRODUCT_TYPES_BASIC = 'BASIC';
     const PRODUCT_TYPES_DOWNLOADABLE = 'DOWNLOADABLE';
     const PRODUCT_TYPES_VARIABLE_PRODUCT = 'VARIABLE_PRODUCT';
+    const PRODUCT_TYPES_VARIATION = 'VARIATION';
 
     /**
      * Belongs to Many Categories.
@@ -291,6 +292,6 @@ class Product extends BaseModel
      */
     public function scopeWithoutVariation($query)
     {
-        return $query->where('type', '!=', self::PRODUCT_TYPES_VARIABLE_PRODUCT);
+        return $query->where('type', '!=', self::PRODUCT_TYPES_VARIATION);
     }
 }

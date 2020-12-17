@@ -323,12 +323,13 @@ class ProductController
                 }
                 $propertyModel = $this->propertyRepository->find($propertyId);
                 $propertyIds->push($propertyId);
+                //var_dump($propertyId);
                 $this->attachePropertyWithCategories($propertyModel, $product);
 
                 switch ($propertyModel->field_type) {
                     case 'SELECT':
                     case 'RADIO':
-                        $propertyModel->saveIntegerProperty($product, $propertyValue);
+                        $propertyModel->saveIntegerProperty($product, $propertyId);
                         break;
 
                     case 'SWITCH':
