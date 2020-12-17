@@ -5,19 +5,18 @@
     <div class="p-5">
         <p>
             <avored-select
-                    @change="changeVariation"
+                    @input="changeVariation"
                     label-text="{{ __('avored::system.select_attribute') }}"
                     field-name="variable_product_attributes[]"
                     :multiple=true
                     :options="{{ json_encode($attributes->pluck('name', 'id')) }}"
-                    :init-value="attributeIds"
-                >
-                </avored-select>
+                    :init-value="attributeIds"></avored-select>
             
             <div class="add-on-button">
-                <button type="button" @click="handleVariationBtnClick" t
-                    class="px-6 py-2 font-semibold leading-5 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
-                >
+                <button type="button" 
+                    :disabled="attributeIds.length<=0" 
+                    @click="handleVariationBtnClick"
+                    class="px-6 py-2 font-semibold leading-5 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                     </svg>
