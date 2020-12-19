@@ -51,11 +51,11 @@
     </div>
     @if(env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
-        @push('scripts')
+        @stack('scripts')
         <script src="{{ mix('/vendor/avored/js/app.js') }}"></script>
     @else
         <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
-        @push('scripts')
+        @stack('scripts')
         <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
     @endif
     
