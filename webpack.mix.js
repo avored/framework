@@ -29,8 +29,8 @@ require('laravel-mix-alias')
  }
 
 
-// let publicPath = '../../../public'
-let publicPath = 'dist/'
+let publicPath = '../../../public'
+// let publicPath = 'dist/'
 
 mix.setPublicPath(publicPath)
 
@@ -38,8 +38,8 @@ mix.setPublicPath(publicPath)
 
 mix.alias({'@': 'resources/js'})
 
-// filePath = 'vendor/avored/'
-let filePath = ''
+filePath = 'vendo   r/avored/'
+// let filePath = ''
 
 /******** AVORED ADMIN JS  **********/
 
