@@ -1,36 +1,43 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::system.language.edit.title') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.pages.title.edit', ['attribute' => __('avored::system.terms.language')]) }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
-    {{ __('avored::system.language.edit.title') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::system.pages.title.edit', ['attribute' => __('avored::system.terms.language')]) }}
+        </div>
+    </div>
+
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
-    <a-col :span="24">
-        <language-save base-url="{{ asset(config('avored.admin_url')) }}" :language="{{ $language }}" inline-template>
-        <div>
+<div class="items-center flex">
+        <language-save
+            base-url="{{ asset(config('avored.admin_url')) }}"
+            language="{{ $language }}" inline-template>
+        <div class="w-full block">
             <form 
                 method="post"
                 action="{{ route('admin.language.update', $language->id) }}"                    
                 @submit="handleSubmit"
             >
-                @csrf
-                @method('put')
-                <avored-tabs>
-                    @foreach ($tabs as $tab)
-                        <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
-                            @php
-                                $path = $tab->view();
-                            @endphp
-                            @include($path)
-                        </avored-tab>
-                    @endforeach
-                </avored-tabs>
+                    @csrf
+                    @method('put')
 
+                    <avored-tabs>
+                        @foreach ($tabs as $tab)
+                            <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
+                                @php
+                                    $path = $tab->view();
+                                @endphp
+                                @include($path)
+                            </avored-tab>
+                        @endforeach
+                    </avored-tabs>
+                
                 
                 <div class="mt-3 py-3">
                     <button type="submit"
@@ -50,8 +57,7 @@
                     </a>
                 </div>
             </form>
-            </div>
-        </language-save>
-    </a-col>
-</a-row>
+        </div>
+    </language-save>
+</div>
 @endsection

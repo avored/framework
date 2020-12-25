@@ -7,6 +7,7 @@ use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Models\Language;
 use AvoRed\Framework\System\Requests\LanguageRequest;
 use AvoRed\Framework\Database\Contracts\LanguageModelInterface;
+use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
@@ -57,6 +58,9 @@ class LanguageController extends Controller
      */
     public function store(LanguageRequest $request)
     {
+        if (!$request->filled('is_default')) {
+            $request->merge(['is_default' => false]);
+        }
         $this->languageRepository->create($request->all());
 
         return redirect()->route('admin.language.index')
@@ -84,6 +88,9 @@ class LanguageController extends Controller
      */
     public function update(LanguageRequest $request, Language $language)
     {
+        if (!$request->filled('is_default')) {
+            $request->merge(['is_default' => false]);
+        }
         $language->update($request->all());
 
         return redirect()->route('admin.language.index')
@@ -103,5 +110,14 @@ class LanguageController extends Controller
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Language']),
         ]);
+    }
+
+    /**
+     * Filter for Category Table.
+     * @return \Illuminate\View\View
+     */
+    public function filter(Request $request)
+    {
+        return $this->languageRepository->filter($request->get('filter'));
     }
 }

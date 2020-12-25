@@ -82,6 +82,7 @@ return [
     ],
     'terms' => [
         'category' => 'Category',
+        'language' => 'Language',
         'dashboard' => 'Dashboard',
         'product' => 'Product',
         'property' => 'Property',
@@ -136,6 +137,7 @@ return [
         ],
     ],
 
+    'multiple_language' => 'Multiple Language',
     'parent_id' => 'Parent ID',
     'customer_group' => 'Customer Group',
     'failed' => 'These credentials do not match our records.',

@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
+use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Menu\MenuItem;
 use AvoRed\Framework\Menu\MenuBuilder;
 use Illuminate\Support\ServiceProvider;
@@ -237,11 +238,17 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.admin_menus.role')
                 ->route('admin.role.index');
         });
-        // $systemMenu->subMenu('language', function (MenuItem $menu) {
-        //     $menu->key('language')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.language')
-        //         ->route('admin.language.index');
-        // });
+        $systemMenu->subMenu('language', function (MenuItem $menu) {
+            $menu->key('language')
+                ->type(MenuItem::ADMIN)
+                ->beforeRender(function () {
+                    $repository = app(ConfigurationModelInterface::class);
+                    $val = $repository->getValueByCode('is_app_has_multiple_language');
+
+                    return $val === 'ENABLED';
+                })
+                ->label('avored::system.admin_menus.language')
+                ->route('admin.language.index');
+        });
     }
 }

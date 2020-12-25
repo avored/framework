@@ -122,24 +122,33 @@ class MenuBuilder
 
 
         $result = $adminMenus->map(function ($item, $index) {
-            $routeName = $item->route();
-            if ($item->hasSubMenu()) {
-                
-                
-                $subMenus = collect($item->subMenu)->map(function ($item) {
-                    $routeName = $item->route();
-                    return [
-                        'name' => $item->label(),
-                        'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
-                    ];
-                });
+            if ($item->beforeRender()) {
+                $routeName = $item->route();
+                if ($item->hasSubMenu()) {
+                    
+                    
+                    $subMenus = collect($item->subMenu)->map(function ($item) {
+                        if ($item->beforeRender()) {
+                            $routeName = $item->route();
+                            return [
+                                'name' => $item->label(),
+                                'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
+                            ];
+                        }
+                    })->reject( function ($item) {
+                        return empty ($item);
+                    });
+                }
+                return [
+                    'name' => $item->label(),
+                    'icon' => $item->icon(),
+                    'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
+                    'submenus' => $subMenus
+                ];
             }
-            return [
-                'name' => $item->label(),
-                'icon' => $item->icon(),
-                'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
-                'submenus' => $subMenus
-            ];
+        })
+        ->reject( function ($item) {
+            return empty ($item);
         });
         
 

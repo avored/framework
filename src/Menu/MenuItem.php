@@ -34,6 +34,11 @@ class MenuItem implements MenuInterface
     public $icon;
 
     /**
+     * @var string
+     */
+    public $beforeRender;
+
+    /**
      * @var array
      */
     public $attributes;
@@ -101,6 +106,22 @@ class MenuItem implements MenuInterface
         }
 
         return $this->type;
+    }
+
+    /**
+     * Get/Set Admin Menu Before Render Check.
+     * @return mixed
+     */
+    public function beforeRender($beforeRender = null)
+    {
+        if (null !== $beforeRender) {
+            $this->beforeRender = $beforeRender;
+
+            return $this;
+        }
+
+        $callable = $this->beforeRender;
+        return is_callable($callable) ? $callable($this) : true;
     }
 
     /**

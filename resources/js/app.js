@@ -63,6 +63,9 @@ Vue.component('admin-user-save', require('../components/system/admin-user/AdminU
 Vue.component('promotion-code-table', require('../components/promotion/promotion-code/PromotionCodeTable.vue').default)
 Vue.component('promotion-code-save', require('../components/promotion/promotion-code/PromotionCodeSave.vue').default)
 
+Vue.component('language-table', require('../components/system/language/LanguageTable.vue').default)
+Vue.component('language-save', require('../components/system/language/LanguageSave.vue').default)
+
 Vue.component('avored-layout', require('../components/system/Layout.vue').default)
 Vue.component('avored-flash', require('../components/system/Flash.vue').default)
 Vue.component('login-fields', require('../components/system/LoginFields.vue').default)

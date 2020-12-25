@@ -2,14 +2,24 @@
     <div class="mt-3">
          <avored-table
             :columns="columns"
-            :from="initLanguages.from"
-            :to="initLanguages.to"
-            :total="initLanguages.total"
-            :prev_page_url="initLanguages.prev_page_url"
-            :next_page_url="initLanguages.next_page_url"
-            :items="initLanguages.data"
+            :from="languages.from"
+            :to="languages.to"
+            :total="languages.total"
+            :prev_page_url="languages.prev_page_url"
+            :next_page_url="languages.next_page_url"
+            :items="languages.data"
+            :filerable="true"
+            @changeFilter="filterTableData"
         >
           >
+          <template slot="name" slot-scope="{ item }">
+                <a
+                    :href="`${baseUrl}/language/${item.id}/edit`"
+                    class="text-red-700 hover:text-red-600"
+                >
+                    {{ item.name }}
+                </a>
+            </template>
           <template slot="action" slot-scope="{item}">
             <div class="flex items-center">
             <a :href="getEditUrl(item)">
@@ -33,33 +43,48 @@
 </template>
 <script>
 
-const columns = [
-  {
-    label: "ID",
-    fieldKey: "id"
-  },
-  {
-    label: "Name",
-    fieldKey: "name"
-  },
-  {
-    label: "Code",
-    fieldKey: "code"
-  },
-  {
-    label: "Actions",
-    slotName: "action"
-  }
-];
-
 export default {
-  props: ['baseUrl', 'initLanguages'],
+  props: ['baseUrl', 'initLanguages', 'filterUrl'],
   data () {
     return {
-        columns,    
+        columns: [],  
+        languages: []  
     };
   },
+  mounted() {
+        this.columns = [
+            {
+                label: this.$t("system.id"),
+                fieldKey: "id",
+                visible: true
+            },
+            {
+                label: this.$t("system.name"),
+                slotName: "name",
+                visible: true
+            },
+            {
+                label: this.$t("system.code"),
+                fieldKey: "code",
+                visible: true
+            },
+            {
+                label: this.$t("system.actions"),
+                slotName: "action",
+                visible: true
+            }
+        ];
+
+        this.languages = this.initLanguages
+    },
   methods: {
+      filterTableData(e) {
+            let app = this;
+            var data = { filter: e.target.value };
+            axios.post(this.filterUrl, data).then(response => {
+                app.languages = response.data;
+            }); 
+      },
       getEditUrl(record) {
           return this.baseUrl + '/language/' + record.id + '/edit';
       },
@@ -67,34 +92,25 @@ export default {
           return this.baseUrl + '/language/' + record.id;
       },
       deleteOnClick(record) {
-        var url = this.baseUrl  + '/language/' + record.id;
-        var app = this;
-        this.$confirm({
-            title: 'Do you Want to delete ' + record.name + ' language?',
-            okType: 'danger',
-            onOk() {    
-                axios.delete(url)
-                    .then(response =>  {
-                        if (response.data.success === true) {
-                            app.$notification.error({
-                                key: 'language.delete.success',
-                                message: response.data.message,
-                            });
-                        }
-                        window.location.reload();
-                    })
-                    .catch(errors => {
-                        app.$notification.error({
-                            key: 'language.delete.error',
-                            message: errors.message
+            var url = this.getDeleteUrl(record)
+            var app = this
+            this.$confirm({
+                message: `Do you Want to delete ${record.name} language?`,
+                callback: () => {
+                    axios
+                        .delete(url)
+                        .then(response => {
+                            if (response.data.success === true) {
+                                app.$alert(response.data.message);
+                            }
+                            window.location.reload();
+                        })
+                        .catch(errors => {
+                            app.$alert(errors.message);
                         });
-                    });
-            },
-            onCancel() {
-                // Do nothing
-            },
-        });
-    },
+                }
+            });
+      },
   }
 };
 </script>

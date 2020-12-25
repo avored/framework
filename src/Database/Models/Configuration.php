@@ -11,4 +11,12 @@ class Configuration extends Model
      * @var array
      */
     protected $fillable = ['code', 'value'];
+
+    const ENABLED = 'ENABLED';
+    const DISABLED = 'DISABLED';
+
+    const BOOLEAN_OPTIONS = [
+        self::ENABLED => 'Enabled',
+        self::DISABLED => 'DISABLED'
+    ];
 }

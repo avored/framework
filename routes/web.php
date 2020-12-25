@@ -140,6 +140,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             [\AvoRed\Framework\Cms\Controllers\PageController::class, 'filter']
         )->name('page.filter');
         Route::post(
+            'language/filter',
+            [\AvoRed\Framework\System\Controllers\LanguageController::class, 'filter']
+        )->name('language.filter');
+        Route::post(
             'menu/filter',
             [\AvoRed\Framework\Cms\Controllers\MenuController::class, 'filter']
         )->name('menu.filter');

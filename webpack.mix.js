@@ -38,7 +38,7 @@ mix.setPublicPath(publicPath)
 
 mix.alias({'@': 'resources/js'})
 
-filePath = 'vendo   r/avored/'
+filePath = 'vendor/avored/'
 // let filePath = ''
 
 /******** AVORED ADMIN JS  **********/

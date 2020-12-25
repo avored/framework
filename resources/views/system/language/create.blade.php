@@ -1,18 +1,22 @@
 @extends('avored::layouts.app')
 
+
 @section('meta_title')
-    {{ __('avored::system.language.create.title') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.pages.title.create', ['attribute' => __('avored::system.terms.language')]) }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
-    {{ __('avored::system.language.create.title') }}
+    <div class="text-gray-800 flex items-center">
+        <div class="text-xl text-red-700 font-semibold">
+            {{ __('avored::system.pages.title.create', ['attribute' => __('avored::system.terms.language')]) }}
+        </div>
+    </div>
 @endsection
 
 @section('content')
-<a-row type="flex" justify="center">
-    <a-col :span="24">
-        <language-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
-        <div>
+<div class="flex items-center">
+    <language-save base-url="{{ asset(config('avored.admin_url')) }}" inline-template>
+        <div class="w-full block">
             <form 
                 method="post"
                 action="{{ route('admin.language.store') }}"                    
@@ -30,7 +34,6 @@
                         </avored-tab>
                     @endforeach
                 </avored-tabs>
-                
                 
                 <div class="mt-3 py-3">
                     <button type="submit"
@@ -50,8 +53,7 @@
                     </a>
                 </div>
             </form>
-            </div>
-        </language-save>
-    </a-col>
-</a-row>
+        </div>
+    </language-save>
+</div>
 @endsection
