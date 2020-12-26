@@ -102,8 +102,10 @@ export default {
                         .then(response => {
                             if (response.data.success === true) {
                                 app.$alert(response.data.message);
+                                window.location.reload();
+                            } else {
+                              app.$alert(response.data.message)
                             }
-                            window.location.reload();
                         })
                         .catch(errors => {
                             app.$alert(errors.message);

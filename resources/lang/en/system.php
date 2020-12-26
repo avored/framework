@@ -137,6 +137,7 @@ return [
         ],
     ],
 
+    'default_language_destroy' => 'Sorry, You cannot destroy an default language. First make other language as default then try again',
     'multiple_language' => 'Multiple Language',
     'parent_id' => 'Parent ID',
     'customer_group' => 'Customer Group',

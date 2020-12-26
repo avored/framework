@@ -61,6 +61,9 @@ class LanguageController extends Controller
         if (!$request->filled('is_default')) {
             $request->merge(['is_default' => false]);
         }
+        if ($request->get('is_default')  == 1 || $request->get('is_default')  == true) {
+            $this->languageRepository->makeAllDisabled();
+        }
         $this->languageRepository->create($request->all());
 
         return redirect()->route('admin.language.index')
@@ -91,6 +94,10 @@ class LanguageController extends Controller
         if (!$request->filled('is_default')) {
             $request->merge(['is_default' => false]);
         }
+        if ($request->get('is_default')  == 1 || $request->get('is_default')  == true) {
+            $this->languageRepository->makeAllDisabled();
+        }
+
         $language->update($request->all());
 
         return redirect()->route('admin.language.index')
@@ -104,11 +111,20 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language)
     {
-        $language->delete();
-
+        $success = true;
+        if ($language->is_default  == 1 || $language->is_default  == true) {
+            $success = false;
+            $message = __('avored::system.default_language_destroy');
+        } else {
+            $language->delete();
+            $message = __(  
+                'avored::system.notification.delete', 
+                ['attribute' => strtolower(__('avored::system.terms.language'))]
+            );
+        }
         return response()->json([
-            'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Language']),
+            'success' => $success,
+            'message' => $message,
         ]);
     }
 

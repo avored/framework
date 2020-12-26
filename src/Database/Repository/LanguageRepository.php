@@ -24,8 +24,6 @@ class LanguageRepository extends BaseRepository implements LanguageModelInterfac
         $this->model = new Language();
     }
 
-    
-
     /**
      * Filterable Fields
      * @var array $filterType
@@ -41,5 +39,17 @@ class LanguageRepository extends BaseRepository implements LanguageModelInterfac
     public function model(): Language
     {
         return $this->model;
+    }
+
+    /**
+     * Make All Language Status to Disabled
+     * 
+     * @return bool
+     */
+    public function makeAllDisabled(): bool
+    {
+        return $this->query()
+            ->where('is_default', 1)
+            ->update(['is_default' => 0]);
     }
 }
