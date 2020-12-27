@@ -20,7 +20,6 @@ class AvoredFrameworkSchema extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->string('code')->nullable()->default(null);
-            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
 

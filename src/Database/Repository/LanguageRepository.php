@@ -40,16 +40,4 @@ class LanguageRepository extends BaseRepository implements LanguageModelInterfac
     {
         return $this->model;
     }
-
-    /**
-     * Make All Language Status to Disabled
-     * 
-     * @return bool
-     */
-    public function makeAllDisabled(): bool
-    {
-        return $this->query()
-            ->where('is_default', 1)
-            ->update(['is_default' => 0]);
-    }
 }

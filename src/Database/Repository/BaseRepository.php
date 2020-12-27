@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection as SupportCollection;
 
 abstract class BaseRepository
 {
@@ -63,6 +64,17 @@ abstract class BaseRepository
     public function find(int $id)
     {
         return $this->model()->find($id);
+    }
+
+    /**
+     * Get All Model Options to use as dropdown from the database.
+     * @param string $label
+     * @param string $value
+     * @return \Illuminate\Database\Eloquent\Collection $models
+     */
+    public function options($label, $value = 'id') : SupportCollection
+    {
+        return $this->all()->pluck($label, $value);
     }
 
     /**

@@ -18,13 +18,3 @@
     >
     </avored-input>
 </div>
-
-<div class="mt-3 flex w-full">
-    <avored-toggle
-        label-text="{{ __('avored::system.language.is_default') }}"
-        error-text="{{ $errors->first('is_default') }}"
-        field-name="is_default"
-        init-value="{{ $language->is_default ?? '' }}"
-    >
-    </avored-toggle>
-</div>
