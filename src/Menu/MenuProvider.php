@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Support\Providers;
+namespace AvoRed\Framework\Menu;
 
 use AvoRed\Framework\Menu\MenuItem;
 use AvoRed\Framework\Menu\MenuBuilder;
@@ -31,7 +31,7 @@ class MenuProvider extends ServiceProvider
     public function register()
     {
         $this->registerServices();
-        $this->app->alias('menu', 'AvoRed\Framework\Menu\MenuBuilder');
+        $this->app->alias('menu', MenuBuilder::class);
     }
 
     /**
@@ -54,7 +54,7 @@ class MenuProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['menu', 'AvoRed\Framework\Menu\MenuBuilder'];
+        return ['menu', MenuBuilder::class];
     }
 
     /**

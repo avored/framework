@@ -4,7 +4,6 @@ namespace AvoRed\Framework;
 
 use AvoRed\Assets\AssetItem;
 use AvoRed\Assets\Support\Facades\Asset;
-use AvoRed\Framework\Support\Providers\BladeProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -12,11 +11,9 @@ use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\AvoRedCore;
 use AvoRed\Framework\Support\Console\InstallCommand;
 use AvoRed\Framework\Support\Console\AdminMakeCommand;
-use AvoRed\Framework\Support\Directive\AvoRedDirective;
 use AvoRed\Framework\Support\Middleware\Permission;
 use AvoRed\Framework\System\ViewComposers\LayoutComposer;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
-use Illuminate\Support\Facades\Blade;
 
 class AvoRedProvider extends ServiceProvider
 {
@@ -30,7 +27,7 @@ class AvoRedProvider extends ServiceProvider
         \AvoRed\Framework\Support\Providers\CartProvider::class,
         \AvoRed\Framework\Support\Providers\EventServiceProvider::class,
         \AvoRed\Framework\Support\Providers\GraphqlProvider::class,
-        \AvoRed\Framework\Support\Providers\MenuProvider::class,
+        \AvoRed\Framework\Menu\MenuProvider::class,
         \AvoRed\Framework\Support\Providers\ModelProvider::class,
         \AvoRed\Framework\Support\Providers\PaymentProvider::class,
         \AvoRed\Framework\Support\Providers\PermissionProvider::class,

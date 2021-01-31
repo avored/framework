@@ -1,11 +1,11 @@
 <script>
-import VueSimplemde from 'vue-simplemde'
+import VueEasymde from 'vue-easymde'
 
 
 export default {
   props: [],
   components: {
-    'vue-simplemde': VueSimplemde
+    'vue-easymde': VueEasymde
   },
   data() {
     return {
