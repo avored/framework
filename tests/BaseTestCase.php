@@ -10,7 +10,7 @@ use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Models\Currency;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
-class BaseTestCase extends OrchestraTestCase
+abstract class BaseTestCase extends OrchestraTestCase
 {
     /**
      * Admin User.
