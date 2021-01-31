@@ -46,7 +46,7 @@ class CategoryController
      */
     public function create()
     {
-        $categoryOptions = $this->categoryRepository->options();
+        $categoryOptions = $this->categoryRepository->options('name');
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.create')
@@ -77,7 +77,7 @@ class CategoryController
     public function edit(Category $category)
     {
         $categoryOptions = $this->categoryRepository
-            ->options()
+            ->options('name')
             ->filter(function ($option) use ($category) {
                 return $option !== $category->name;
             });

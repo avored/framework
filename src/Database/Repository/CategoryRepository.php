@@ -111,17 +111,6 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
     }
 
     /**
-     * Get all the categories options to use in dropdown.
-     * @param string $label
-     * @param mixed $value
-     * @return \Illuminate\Database\Eloquent\Collectionp $categoryOptions
-     */
-    public function options($label = 'name', $value = 'id') : SupportCollection
-    {
-        return Category::all()->pluck($label, $value);
-    }
-
-    /**
      * filter properties via builder.
      * @return \Illuminate\Database\Eloquent\Builder $builder
      */

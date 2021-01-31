@@ -147,7 +147,7 @@ class ProductController
         $product->images;
 
         $typeOptions = Product::PRODUCT_TYPES;
-        $categoryOptions = $this->categoryRepository->options();
+        $categoryOptions = $this->categoryRepository->options('name');
         $properties = $this->propertyRepository->allPropertyToUseInProduct();
         $attributes = $this->attributeRepository->all();
 

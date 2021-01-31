@@ -29,12 +29,4 @@ interface CategoryModelInterface extends BaseInterface
      * @return \Illuminate\Support\Collection $categories
      */
     public function getCategoryOptionForMenuBuilder() : SupportCollection;
-
-    /**
-     * Get All Category from the database.
-     * @param string $label
-     * @param mixed $value
-     * @return \Illuminate\Support\Collection $categoryOptions
-     */
-    public function options(string $label = 'name', $value = 'id' ) : SupportCollection;
 }
