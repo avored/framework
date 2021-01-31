@@ -165,7 +165,7 @@
                                 {{ __('avored::system.comment') }}
                             </label>
                             <div class="mt-1">
-                                <vue-simplemde name="content" ref="markdownEditor" />
+                                <vue-easymde name="content" ref="markdownEditor" />
                             </div>
                         </div>
                         <div class="mt-3">
