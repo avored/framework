@@ -63,7 +63,7 @@ class Property extends BaseModel
     public function getDropdownAttribute()
     {
         if ($this->field_type === 'SELECT' || $this->field_type === 'RADIO') {
-            return $this->dropdownOptions;
+            return $this->dropdownOptions()->remember()->get();
         }
     }
 
