@@ -1,5 +1,8 @@
+import Vue from 'vue'
 
-window.Vue = require('vue')
+window.Vue = Vue
+
+window.EventBus = new Vue()
 
 window.AvoRed = (function() {
     return {
@@ -9,7 +12,4 @@ window.AvoRed = (function() {
     };
 })();
 
-
-window.EventBus = new Vue()
-
-exports = module.exports = AvoRed;
+module.AvoRed = AvoRed;
