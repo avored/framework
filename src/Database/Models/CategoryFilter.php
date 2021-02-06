@@ -40,9 +40,9 @@ class CategoryFilter extends Model
     public function getFilterAttribute()
     {
         if (self::PROPERTY_FILTER_TYPE === $this->type) {
-            return Property::find($this->filter_id);
+            return Property::remember()->find($this->filter_id);
         } else {
-            return Attribute::find($this->filter_id);
+            return Attribute::remember()->find($this->filter_id);
         }
     }
 }

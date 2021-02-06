@@ -57,7 +57,7 @@ class MenuGroupRepository extends BaseRepository implements MenuGroupModelInterf
         if ($menuGroup !== null) {
             $modelMenus = $menuGroup->menus()->whereNull('parent_id')->get();
             foreach ($modelMenus as $modelMenu) {
-                $modelMenu->submenus;
+                $modelMenu->submenus()->remember()->get();
                 $menus->push($modelMenu);
             }
         }
