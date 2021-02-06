@@ -49,10 +49,10 @@
             </div>
         </avored-layout>
     </div>
-    @if(env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
-        <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
+    @if(env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
+        <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
         @stack('scripts')
-        <script src="{{ mix('/vendor/avored/js/app.js') }}"></script>
+        <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @else
         <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
         @stack('scripts')
