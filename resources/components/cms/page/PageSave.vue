@@ -26,7 +26,6 @@ export default {
                 action: this.widgetClick,
                 className: 'fa fa-star',
                 title: 'Widget'
-              
               }
             ]
         }

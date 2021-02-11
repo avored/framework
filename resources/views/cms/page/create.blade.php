@@ -19,7 +19,6 @@
             <form 
                 method="post"
                 action="{{ route('admin.page.store') }}"                    
-                @submit="handleSubmit"
             >
                 @csrf
                 <avored-tabs>
