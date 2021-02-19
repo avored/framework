@@ -12,7 +12,12 @@
 
     <!-- Styles -->
    
-    {!! Asset::renderCSS() !!}
+   @if(true || env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
+        <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
+    @else
+        {!! Asset::renderCSS() !!}
+    @endif
+
     @push('styles')
 
 </head>
@@ -25,7 +30,7 @@
         <avored-layout inline-template>
             
             <div class="flex items-start">
-                <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
+                <div v-bind:class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
                     @include('avored::partials.sidebar')
                 </div>
                 <div class="w-full">

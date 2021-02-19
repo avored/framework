@@ -4,15 +4,13 @@
 export default {
     data() {
         return {
-            collapsed: false,
-            isVisible: false,
-            leftSideNavMenu: false,
-            sidebar: false
+            sidebar: false,
+            //isVisible: false
         }
     },
     methods: {
         open() {
-            this.leftSideNavMenu = ! this.leftSideNavMenu
+            // this.leftSideNavMenu = ! this.leftSideNavMenu
         }
     },
     mounted() {

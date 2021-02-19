@@ -24,8 +24,6 @@ Vue.component('avored-tab', AvoRedTab)
 Vue.component('avored-modal', AvoRedModal)
 Vue.component('avored-dropdown', AvoRedDropdown)
 
-Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').default)
-
 Vue.use(AvoRedAlert)
 Vue.use(AvoRedConfirm)
 

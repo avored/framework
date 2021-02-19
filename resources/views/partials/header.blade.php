@@ -4,14 +4,17 @@
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     class="w-5 h-5"
-                    @click="sidebar = !sidebar"
+                    v-on:click="sidebar = !sidebar"
                 ><path d="M1 1h18v2H1V1zm6 8h12v2H7V9zm-6 8h18v2H1v-2zM7 5h12v2H7V5zm0 8h12v2H7v-2zM1 6l4 4-4 4V6z"/>
                 </svg>
             </div>
             
             <div class="ml-auto flex items-center mr-3">
-                <div class="relative inset-0" @click="isVisible = false">
-                    <div class="relative inline-block" @mouseover="isVisible = true" @mouseleave="isVisible = false" @keydown.enter="isVisible = !isVisible">
+                {{-- <div class="relative inset-0" @click="isVisible = false">
+                    <div class="relative inline-block" 
+                        @mouseover="isVisible = true" 
+                        @mouseleave="isVisible = false" 
+                        @keydown.enter="isVisible = !isVisible">
                         <button type="button" class="inline-flex items-center justify-between px-2 py-1 font-medium text-gray-700 transition-all duration-500 rounded-md focus:outline-none focus:text-brand-900 sm:focus:shadow-outline">
                         <span class="flex-shrink-0">
                             {{ Auth::guard('admin')->user()->full_name }}
@@ -38,7 +41,7 @@
                             </div>
                         </transition>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         

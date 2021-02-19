@@ -7,3 +7,16 @@
 .CodeMirror {
     z-index: 0 !important;
 }
+.sidebar-collapsed .menu-item .menu-label,
+.sidebar-collapsed .menu-item .menu-chevron-icon,
+.sidebar-collapsed .menu-item .sub-menu {
+    display: none;
+    opacity: 0;
+}
+.sidebar-collapsed .menu-item:hover .sub-menu {
+    left: 4rem;
+    top: 0px;
+    display: block;
+    opacity: 1;
+    width: 16rem;
+}

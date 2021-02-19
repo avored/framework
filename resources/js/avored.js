@@ -12,4 +12,4 @@ window.AvoRed = (function() {
     };
 })();
 
-module.AvoRed = AvoRed;
+export default AvoRed
