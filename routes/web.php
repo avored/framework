@@ -115,7 +115,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             [\AvoRed\Framework\Order\Controllers\OrderController::class, 'generateShippingLabel']
         )->name('order.shipping.label');
 
-        Route::post(
+        Route::get(
             'category/filter',
             [\AvoRed\Framework\Catalog\Controllers\CategoryController::class, 'filter']
         )->name('category.filter');

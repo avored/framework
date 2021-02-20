@@ -129,6 +129,9 @@ class CategoryController
      */
     public function filter(Request $request)
     {
-        return $this->categoryRepository->filter($request->get('filter'));
+        $categories = $this->categoryRepository->filter($request->get('filter'));
+
+        return view('avored::catalog.category.index')
+            ->with(compact('categories'));
     }
 }
