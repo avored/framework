@@ -27,7 +27,7 @@
 		"barryvdh/laravel-dompdf": "^0.8.4",
 		"laravel/helpers": "^1.1",
 		"laravel/framework" : "6.*|7.*|8.*",
-		"avored/assets" : "^1.0",
+		"avored/assets" : "^1.0.2",
 		"rebing/graphql-laravel": "^5.1",
 		"laravel/ui": "^2.0|^1.0",
 		"doctrine/dbal": "^2.10",
