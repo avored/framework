@@ -20,3 +20,7 @@
     opacity: 1;
     width: 16rem;
 }
+
+.text-primary {
+    @apply text-red-700;
+}

@@ -106,20 +106,21 @@ class CategoryController
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Category  $category
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Category $category)
+    public function destroy(int $id)
     {
-        $category->delete();
+        Category::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.category.title')]
-            ),
-        ]);
+        return redirect()
+            ->route('admin.category.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.category')]
+                ),
+            ]);
     }
 
     /**

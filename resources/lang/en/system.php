@@ -12,6 +12,51 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
+    'id' => 'ID',
+    'name' => 'Name',
+    'slug' => 'Slug',
+    'meta_title' => 'Meta Title',
+    'meta_description' => 'Meta Description',
+    'actions' => 'Actions',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'deleted_notification' => ':attribute deleted successfully!',
+    'category' => 'Category',
+    'list' => 'List',
+    'create' => 'Create',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     'fields' => [
         'name' => 'Name',
         'slug' => 'Slug',
@@ -135,7 +180,7 @@ return [
             'submit_btn' => 'Change Password'
         ],
     ],
-
+    'id' => 'ID',
     'parent_id' => 'Parent ID',
     'customer_group' => 'Customer Group',
     'failed' => 'These credentials do not match our records.',
