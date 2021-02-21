@@ -75,7 +75,11 @@
                 },
                 optionClicked(val) {
                     this.dropdownIsOpen = false
+                    this.fieldValue = val
                     this.selectedLabel = this.options[val]
+                },
+                isCheckboxVisible(val) {
+                    return (this.fieldValue == val) ? 'text-primary' : 'hidden'
                 }
             }
         }
