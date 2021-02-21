@@ -49,7 +49,6 @@
                     @include('avored::partials.footer')
                     </div>
                 </div>
-
             </div>
         </avored-layout>
     </div>
@@ -64,7 +63,23 @@
     @endif
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
     @stack('bottom-scripts')
-    
+    <script>
+        function avoredDropdownHandler(value, options) {
+            return {
+                dropdownIsOpen: false,
+                fieldValue: value,
+                options: JSON.parse(options),
+                selectedLabel: '',
+                dropdownInit() {
+                    this.selectedLabel = this.options[this.fieldValue]
+                },
+                optionClicked(val) {
+                    this.dropdownIsOpen = false
+                    this.selectedLabel = this.options[val]
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

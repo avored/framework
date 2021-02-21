@@ -1,49 +1,50 @@
 <div class="flex w-full">
-    <avored-select
+    {{-- <avored-select
         label-text="{{ __('avored::system.parent_id') }}"
         field-name="parent_id"
         :options="{{ $categoryOptions }}"
         init-value="{{ $category->parent_id ?? '' }}" 
         error-text="{{ $errors->first('parent_id') }}"
         :has-empty="true"
-    >
-    </avored-select>
+    ></avored-select> --}}
+
+    @include('avored::system.form.select', [
+        'name' => 'parent_id',
+        'label' => __('avored::system.parent_id'),
+        'value' => $category->parent_id ?? '',
+        'options' => $categoryOptions
+    ])
+
 </div>
 
-<div class="flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.name') }}"
-        field-name="name"
-        init-value="{{ $category->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'name',
+        'label' => __('avored::system.name'),
+        'value' => $category->name ?? ''
+    ])
 </div>
 
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.slug') }}"
-        field-name="slug"
-        init-value="{{ $category->slug ?? '' }}" 
-        error-text="{{ $errors->first('slug') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'slug',
+        'label' => __('avored::system.slug'),
+        'value' => $category->slug ?? ''
+    ])
 </div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.meta_title') }}"
-        field-name="meta_title"
-        init-value="{{ $category->meta_title ?? '' }}" 
-        error-text="{{ $errors->first('meta_title') }}"
-    >
-    </avored-input>
+
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'meta_title',
+        'label' => __('avored::system.meta_title'),
+        'value' => $category->meta_title ?? ''
+    ])
 </div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.meta_description') }}"
-        field-name="meta_description"
-        init-value="{{ $category->meta_description ?? '' }}" 
-        error-text="{{ $errors->first('meta_description') }}"
-    >
-    </avored-input>
+
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'meta_description',
+        'label' => __('avored::system.meta_description'),
+        'value' => $category->meta_description ?? ''
+    ])
 </div>
