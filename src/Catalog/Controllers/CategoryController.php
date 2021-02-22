@@ -30,11 +30,15 @@ class CategoryController
      * Show Category Index Page.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $perPage = 10;
         $with = ['parent'];
-        $categories = $this->categoryRepository->paginate($perPage, $with);
+        if ($request->get('filter')) {
+            $categories = $this->categoryRepository->filter($request->get('filter'));
+        } else {
+            $categories = $this->categoryRepository->paginate($perPage, $with);
+        }
 
         return view('avored::catalog.category.index')
             ->with(compact('categories'));
@@ -121,17 +125,5 @@ class CategoryController
                     ['attribute' => __('avored::system.category')]
                 ),
             ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        $categories = $this->categoryRepository->filter($request->get('filter'));
-
-        return view('avored::catalog.category.index')
-            ->with(compact('categories'));
     }
 }

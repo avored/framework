@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-<div class="block w-full" x-data="avoredTable()">
+<div class="block w-full" x-data="avoredTable('{{ request()->get('filter', '') }}')">
     <div class="flex mb-3 w-full">
         <div class="ml-auto">
             <div x-on:click.away="filterBtnClicked=false" class="mb-2 relative flex sm:flex-row flex-col">
@@ -36,7 +36,8 @@
                         </svg>
                     </span>
                     <input placeholder="Search"
-                        x-on:change="filterData('{{ route('admin.category.filter') }}', $event)"
+                        x-model="filterText"
+                        x-on:change="filterData('{{ route('admin.category.index') }}', $event)"
                         class="appearance-none rounded-l border-2 border-gray-400 block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                 </div>
                 <div class="flex flex-row mb-1 sm:mb-0">
@@ -212,7 +213,7 @@
 @push('bottom-scripts')
 
 <script>
-    function avoredTable() {
+    function avoredTable(filterText = '') {
         return {
             columns: {
                 id: true,
@@ -222,14 +223,16 @@
                 meta_title: true,
                 meta_description : false,
             },
+            filterText: filterText,
             filterBtnClicked: false,
             toggleHiddenColumn(name) {
                 this.columns[name] = !this.columns[name]
             },
             filterData(url, e) {
+                this.filterText = e.target.value
                 const params = new URLSearchParams({
-                                filter: e.target.value
-                            })
+                    filter: e.target.value
+                })
                 
                 location.href = url + '?' + params.toString()
             }
