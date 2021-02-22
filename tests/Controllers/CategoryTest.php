@@ -67,7 +67,7 @@ class CategoryTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.category.destroy', $category->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.category.index'));
 
         $this->assertDatabaseMissing('categories', ['id' => $category->id]);
     }
