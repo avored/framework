@@ -83,6 +83,16 @@
                 }
             }
         }
+
+        function avoredEasyMde ()  {
+            return {
+                value: '',
+                easyMdeInit() {
+                    console.log('here')
+                }
+            }
+        }
+@endpush
     </script>
 </body>
 

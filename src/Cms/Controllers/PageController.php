@@ -30,11 +30,17 @@ class PageController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pages = $this->pageRepository->paginate();
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $pages = $this->pageRepository->filter($request->get('filter'));
+        } else {
+            $pages = $this->pageRepository->paginate($perPage);
+        }
 
         return view('avored::cms.page.index')
             ->with(compact('pages'));
@@ -102,25 +108,20 @@ class PageController
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Page  $page
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Page $page)
+    public function destroy(int $id)
     {
-        $page->delete();
+        Page::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Page']),
-        ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->pageRepository->filter($request->get('filter'));
+        return redirect()
+            ->route('admin.page.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.page')]
+                ),
+            ]);
     }
 }

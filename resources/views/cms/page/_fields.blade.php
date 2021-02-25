@@ -1,77 +1,81 @@
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::cms.page.name') }}"
-        field-name="name"
-        init-value="{{ $page->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div class="flex w-full">
+    @include('avored::system.form.input', [
+        'name' => 'name',
+        'label' => __('avored::system.name'),
+        'value' => $page->name ?? ''
+    ])
 </div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::cms.page.slug') }}"
-        field-name="slug"
-        init-value="{{ $page->slug ?? '' }}" 
-        error-text="{{ $errors->first('slug') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'slug',
+        'label' => __('avored::system.slug'),
+        'value' => $page->slug ?? ''
+    ])
 </div>
+
 
 <div class="mt-3">
     <div class="">
         <label class="block text-sm leading-5 text-gray-500" 
-            for="page-content" title="{{ __('avored::cms.page.content') }}">
-            {{ __('avored::cms.page.content') }}
+            for="page-content" title="{{ __('avored::system.content') }}">
+            {{ __('avored::system.content') }}
         </label>
     </div>
     
-    <div class="mt-1">
-        {{-- <content-builder :avored-components="{{ $components }}"
-        ></content-builder> --}}
-        <vue-simplemde name="content" :configs="configs" v-model="content" ref="markdownEditor" />
+    <div x-data="avoredEasyMde()" x-init="easyMdeInit()" class="mt-1">
+       
+        <textarea id="page-content"></textarea>
+        {{-- <vue-easymde name="content" :configs="{
+          toolbar: [
+              'bold',
+              'italic',
+              'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
+              {
+                name: 'custom',
+                action: this.widgetClick,
+                className: 'fa fa-star',
+                title: 'Widget'
+              }
+            ]
+        }" value="{{ $page->content ?? '' }}" ref="markdownEditor" /> --}}
     </div>
 </div>
 
-
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::cms.page.meta_title') }}"
-        field-name="meta_title"
-        init-value="{{ $page->meta_title ?? '' }}" 
-        error-text="{{ $errors->first('meta_title') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'meta_title',
+        'label' => __('avored::system.meta_title'),
+        'value' => $page->meta_title ?? ''
+    ])
+</div>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'meta_description',
+        'label' => __('avored::system.meta_description'),
+        'value' => $page->meta_description ?? ''
+    ])
 </div>
 
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::cms.page.meta_description') }}"
-        field-name="meta_description"
-        init-value="{{ $page->meta_description ?? '' }}" 
-        error-text="{{ $errors->first('meta_description') }}"
-    >
-    </avored-input>
-</div>
 
 <avored-modal modal-title="{{__('avored::system.widget_modal_title') }}" 
-    @close="widgetModalVisible=false" 
-    :is-visible="widgetModalVisible">
+    x-on:close="widgetModalVisible=false" 
+    x-bind:is-visible="widgetModalVisible">
     <div class="block z-30">
         <avored-select
             label-text="Please Select Widget"
             field-name="selected_widget"
-            v-model="selectedWidget"
-            :options="{{ $widgets }}"
+            x-model="selectedWidget"
+            x-bind:options="{{ $widgets }}"
         >
         </avored-select>
         <div class="mt-3 py-3">
-            <button type="button" @click="handleWidgetOk"
+            <button type="button" x-on:click="handleWidgetOk"
                 class="px-3 py-2 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
             >   
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                 </svg>
-                <span class="ml-3">Save</span>
+                <span class="ml-3">{{ __('avored::system.save') }}</span>
             </button>
         </div>
     

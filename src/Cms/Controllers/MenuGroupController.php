@@ -79,11 +79,10 @@ class MenuGroupController
             $filter = $request->get('filter');
 
             $query = $menuGroup->menus();
-            $query->where('name', 'like', '%' . $filter . '%' );
-            $query->orWhere('type', 'like', '%' . $filter . '%' );
+            $query->where('name', 'like', '%' . $filter . '%');
+            $query->orWhere('type', 'like', '%' . $filter . '%');
 
             $menus =  $query->paginate($perPage);
-            
         } else {
             $menus = $menuGroup->menus()->paginate(10);
         }
@@ -108,16 +107,20 @@ class MenuGroupController
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\MenuGroup  $menuGroup
+     * @param int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(MenuGroup $menuGroup)
+    public function destroy(int $id)
     {
-        $menuGroup->delete();
+        MenuGroup::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
-        ]);
+        return redirect()
+            ->route('admin.menu-group.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.menu-group')]
+                ),
+            ]);
     }
 }

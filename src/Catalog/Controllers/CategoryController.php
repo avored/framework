@@ -68,8 +68,8 @@ class CategoryController
 
         return redirect()->route('admin.category.index')
             ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.category.title')]
+                'avored::system.created_notification',
+                ['attribute' => __('avored::system.category')]
             ));
     }
 
@@ -103,8 +103,8 @@ class CategoryController
 
         return redirect()->route('admin.category.index')
             ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.category.title')]
+                'avored::system.updated_notification',
+                ['attribute' => __('avored::system.category')]
             ));
     }
 

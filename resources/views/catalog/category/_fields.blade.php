@@ -5,7 +5,6 @@
         'value' => $category->parent_id ?? '',
         'options' => $categoryOptions
     ])
-
 </div>
 
 <div class="flex mt-3 w-full">

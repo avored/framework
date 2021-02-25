@@ -21,6 +21,8 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'deleted_notification' => ':attribute deleted successfully!',
+    'created_notification' => ':attribute created successfully!',
+    'updated_notification' => ':attribute updated successfully!',
     'category' => 'Category',
     'list' => 'List',
     'create' => 'Create',
@@ -31,6 +33,8 @@ return [
     'cancel' => 'Cancel',
     'type' => 'Type',
     'sort_order' => 'Sort Order',
+    'page' => 'Page',
+    'content' => 'Content',
 
 
 

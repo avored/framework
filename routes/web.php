@@ -127,14 +127,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'attribute/filter',
             [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'filter']
         )->name('attribute.filter');
-        Route::post(
-            'page/filter',
-            [\AvoRed\Framework\Cms\Controllers\PageController::class, 'filter']
-        )->name('page.filter');
-        Route::post(
-            'menu/filter',
-            [\AvoRed\Framework\Cms\Controllers\MenuController::class, 'filter']
-        )->name('menu.filter');
+       
         Route::post(
             'order-status/filter',
             [\AvoRed\Framework\Order\Controllers\OrderStatusController::class, 'filter']

@@ -7,7 +7,7 @@ import VueEasyMde from 'vue-easymde'
 export default {
   props: ['page', 'baseUrl'],
   components: {
-    'vue-simplemde': VueEasyMde
+    'vue-easyemd': VueEasyMde
   },
   data () {
     return {

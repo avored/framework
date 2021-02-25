@@ -146,13 +146,4 @@ class MenuController
             'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
         ]);
     }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->menuRepository->filter($request->get('filter'));
-    }
 }

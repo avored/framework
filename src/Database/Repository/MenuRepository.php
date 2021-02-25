@@ -9,19 +9,6 @@ use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class MenuRepository extends BaseRepository implements MenuModelInterface
 {
-    use FilterTrait;
-
-    /**
-     * Filterable Fields
-     * @var array $filterType
-     */
-    protected $filterFields = [
-        'name',
-        'type',
-        'sort_order'
-    ];
-
-
     /**
      * @var Menu $model
      */
