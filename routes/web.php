@@ -128,10 +128,6 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'filter']
         )->name('attribute.filter');
         Route::post(
-            'menu-group/filter',
-            [\AvoRed\Framework\Cms\Controllers\MenuGroupController::class, 'filter']
-        )->name('menu-group.filter');
-        Route::post(
             'page/filter',
             [\AvoRed\Framework\Cms\Controllers\PageController::class, 'filter']
         )->name('page.filter');

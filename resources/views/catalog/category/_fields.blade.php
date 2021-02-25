@@ -1,13 +1,4 @@
 <div class="flex w-full">
-    {{-- <avored-select
-        label-text="{{ __('avored::system.parent_id') }}"
-        field-name="parent_id"
-        :options="{{ $categoryOptions }}"
-        init-value="{{ $category->parent_id ?? '' }}" 
-        error-text="{{ $errors->first('parent_id') }}"
-        :has-empty="true"
-    ></avored-select> --}}
-
     @include('avored::system.form.select', [
         'name' => 'parent_id',
         'label' => __('avored::system.parent_id'),

@@ -1,14 +1,14 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::system.common.create') . ' ' . __('avored::system.terms.category') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.create') . ' ' . __('avored::system.terms.category') }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::system.pages.title.create', ['attribute' => __('avored::system.terms.category')]) }}
+            {{ __('avored::system.create') . ' ' . __('avored::system.terms.category') }}
         </div>
     </div>
 @endsection
@@ -36,13 +36,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                 </svg>
-                <span class="ml-3">{{ __('avored::system.btn.save') }}</span>
+                <span class="ml-3">{{ __('avored::system.save') }}</span>
             </button>
             
             <a href="{{ route('admin.category.index') }}"
                 class="px-6 py-3 font-semibold inline-block text-white leading-7 hover:text-white bg-gray-500 rounded hover:bg-gray-600">
                 <span class="leading-7">
-                    {{ __('avored::system.btn.cancel') }}
+                    {{ __('avored::system.cancel') }}
                 </span>
             </a>
         </div>

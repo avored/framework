@@ -47,7 +47,9 @@
                         <svg class="h-6 pt-1 w-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 12l8-8V0H0v4l8 8v8l4-4v-4z"  fill-rule="evenodd"/>
                         </svg>
-                        <span class="ml-1 text-gray-700">Filter</span>
+                        <span class="ml-1 text-gray-700">
+                            {{ __('avored::system.filter') }}
+                        </span>
                     </button>
                 </div>
                 <div x-show="filterBtnClicked" class="absolute z-10 right-0" style="top:100%">
@@ -206,7 +208,6 @@
         {{ $categories->render('avored::partials.paginate') }}
     </div>
 </div>
-
 @endsection
 
 

@@ -29,9 +29,14 @@ class MenuGroupController
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $menuGroups = $this->menuGroupRepository->paginate();
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $menuGroups = $this->menuGroupRepository->filter($request->get('filter'));
+        } else {
+            $menuGroups = $this->menuGroupRepository->paginate($perPage);
+        }
 
         return view('avored::cms.menu-group.index')
             ->with(compact('menuGroups'));
@@ -63,11 +68,25 @@ class MenuGroupController
     /**
      * Show the form for editing the specified resource.
      * @param \AvoRed\Framework\Database\Models\MenuGroup $menuGroup
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function edit(MenuGroup $menuGroup)
+    public function edit(MenuGroup $menuGroup, Request $request)
     {
-        $menus = $menuGroup->menus()->paginate(10);
+        $perPage = 10;
+        $with = ['parent'];
+        if ($request->has('filter')) {
+            $filter = $request->get('filter');
+
+            $query = $menuGroup->menus();
+            $query->where('name', 'like', '%' . $filter . '%' );
+            $query->orWhere('type', 'like', '%' . $filter . '%' );
+
+            $menus =  $query->paginate($perPage);
+            
+        } else {
+            $menus = $menuGroup->menus()->paginate(10);
+        }
 
         return view('avored::cms.menu-group.edit')
             ->with(compact('menus', 'menuGroup'));
@@ -100,14 +119,5 @@ class MenuGroupController
             'success' => true,
             'message' => __('avored::system.notification.delete', ['attribute' => 'Menu']),
         ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->menuGroupRepository->filter($request->get('filter'));
     }
 }

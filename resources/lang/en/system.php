@@ -24,6 +24,13 @@ return [
     'category' => 'Category',
     'list' => 'List',
     'create' => 'Create',
+    'menu-group' => 'Menu Group',
+    'filter' => 'Filter',
+    'identifier' => 'Identifier',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'type' => 'Type',
+    'sort_order' => 'Sort Order',
 
 
 
