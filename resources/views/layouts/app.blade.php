@@ -83,16 +83,37 @@
                 }
             }
         }
-
-        function avoredEasyMde ()  {
-            return {
-                value: '',
-                easyMdeInit() {
-                    console.log('here')
-                }
+        function avoredEditor() {
+        return {
+            value: null,
+            easymde: null,
+            widgetClick() {
+                alert('fire modal show event')
+            },
+            initEditor(initialValue) {
+                var app = this
+                this.value = initialValue
+                this.easymde = new EasyMDE({
+                    element: document.getElementById('content'),
+                    initialValue : initialValue,
+                    toolbar: [
+                        'bold',
+                        'italic',
+                        'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
+                        {
+                            name: 'custom',
+                            action: app.widgetClick,
+                            className: 'fa fa-star',
+                            title: 'Widget'
+                        }
+                    ]
+                });
+                this.easymde.codemirror.on("change", function() {
+                    app.value = app.easymde.value()
+                });
             }
         }
-@endpush
+    }
     </script>
 </body>
 

@@ -5,7 +5,7 @@ export default {
     data() {
         return {
             sidebar: false,
-            //isVisible: false
+            isVisible: false
         }
     },
     methods: {

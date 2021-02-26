@@ -22,7 +22,7 @@ import Vddl from 'vddl'
 Vue.use(Vddl)
 
 
-import 'easymde'
+window.EasyMDE = require('easymde')
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)

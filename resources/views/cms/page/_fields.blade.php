@@ -22,22 +22,14 @@
         </label>
     </div>
     
-    <div x-data="avoredEasyMde()" x-init="easyMdeInit()" class="mt-1">
-       
-        <textarea id="page-content"></textarea>
-        {{-- <vue-easymde name="content" :configs="{
-          toolbar: [
-              'bold',
-              'italic',
-              'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
-              {
-                name: 'custom',
-                action: this.widgetClick,
-                className: 'fa fa-star',
-                title: 'Widget'
-              }
-            ]
-        }" value="{{ $page->content ?? '' }}" ref="markdownEditor" /> --}}
+    <div
+        x-data="avoredEditor()" 
+        x-init="initEditor('{{ $page->content ?? '' }}')" 
+        class="mt-1">
+        <textarea id="content"></textarea>
+        <input type="hidden" name="content" x-model="value" />
+
+
     </div>
 </div>
 
@@ -59,7 +51,7 @@
 
 <avored-modal modal-title="{{__('avored::system.widget_modal_title') }}" 
     x-on:close="widgetModalVisible=false" 
-    x-bind:is-visible="widgetModalVisible">
+    x-bind:is-visible="widgetModalVisible || false">
     <div class="block z-30">
         <avored-select
             label-text="Please Select Widget"
