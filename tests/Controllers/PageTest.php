@@ -67,7 +67,7 @@ class PageTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.page.destroy', $page->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.page.index'));
 
         $this->assertDatabaseMissing('pages', ['id' => $page->id]);
     }

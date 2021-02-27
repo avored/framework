@@ -18,6 +18,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
      * @var array $filterType
      */
     protected $filterFields = [
+        'id',
         'shipping_option',
         'payment_option',
     ];

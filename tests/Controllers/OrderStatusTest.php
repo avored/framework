@@ -67,7 +67,7 @@ class OrderStatusTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.order-status.destroy', $orderStatus->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.order-status.index'));
 
         $this->assertDatabaseMissing('order_statuses', ['id' => $orderStatus->id]);
     }

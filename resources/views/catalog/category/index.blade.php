@@ -212,7 +212,6 @@
 
 
 @push('bottom-scripts')
-
 <script>
     function avoredTable(filterText = '') {
         return {

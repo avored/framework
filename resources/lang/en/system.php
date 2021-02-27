@@ -35,6 +35,11 @@ return [
     'sort_order' => 'Sort Order',
     'page' => 'Page',
     'content' => 'Content',
+    'shipping_option' => 'Shipping Option',
+    'payment_option' => 'Payment Option',
+    'order_status' => 'Order Status',
+    'show' => 'Show',
+    'change_status' => 'Change Status',
 
 
 

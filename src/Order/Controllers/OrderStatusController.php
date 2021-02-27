@@ -28,11 +28,17 @@ class OrderStatusController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orderStatuses = $this->orderStatusRepository->paginate();
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $orderStatuses = $this->orderStatusRepository->filter($request->get('filter'));
+        } else {
+            $orderStatuses = $this->orderStatusRepository->paginate($perPage);
+        }
 
         return view('avored::order.order-status.index')
             ->with(compact('orderStatuses'));
@@ -98,28 +104,21 @@ class OrderStatusController
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\OrderStatus  $orderStatus
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderStatus $orderStatus)
+    public function destroy(int $id)
     {
-        $orderStatus->delete();
+        OrderStatus::destroy($id);
 
-        return [
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::order.order-status.title')]
-            ),
-        ];
-    }
+        return redirect()
+            ->route('admin.order-status.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.category')]
+                ),
+            ]);
 
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->orderStatusRepository->filter($request->get('filter'));
     }
 }

@@ -43,12 +43,19 @@ class OrderController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = $this->orderRepository->paginate(10, ['customer', 'orderStatus']);
         $orderStatuses = $this->orderStatusRepository->all()->pluck('name', 'id');
+        
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $orders = $this->orderRepository->filter($request->get('filter'));
+        } else {
+            $orders = $this->orderRepository->paginate($perPage, ['customer', 'orderStatus']);
+        }
 
         return view('avored::order.order.index')
             ->with('orderStatuses', $orderStatuses)
@@ -182,15 +189,5 @@ class OrderController
         }
 
         return $path;
-    }
-
-    
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->orderRepository->filter($request->get('filter'));
     }
 }

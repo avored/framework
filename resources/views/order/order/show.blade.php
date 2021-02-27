@@ -1,13 +1,13 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::system.pages.title.show', ['attribute' => __('avored::system.terms.order')]) }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.show') }} {{ __('avored::system.terms.order') }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl px-5 text-red-700 font-semibold">
-            {{ __('avored::system.pages.title.show', ['attribute' => __('avored::system.terms.order')]) }}
+            {{ __('avored::system.show') }} {{ __('avored::system.terms.order') }}
         </div>
     </div>
 @endsection
