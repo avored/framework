@@ -72,7 +72,7 @@
                                     type="checkbox" />
                                 <label for="checkbox-column-parent-id" 
                                     class="ml-3 text-xs">
-                                    {{ __('avored::system.parent_id') }}
+                                    {{ __('avored::system.parent-id') }}
                                 </label>
                             </li>
                             <li class="z-50 py-2">
@@ -131,7 +131,7 @@
                         {{ __('avored::system.id') }}
                     </th>
                     <th x-show="columns.parent_id" class="px-6 py-3 border-b text-left border-gray-200 text-xs font-medium uppercase">
-                        {{ __('avored::system.parent_id') }}
+                        {{ __('avored::system.parent-id') }}
                     </th>
                     <th x-show="columns.name" class="px-6 py-3 border-b text-left border-gray-200 text-xs font-medium uppercase">
                         {{ __('avored::system.name') }}

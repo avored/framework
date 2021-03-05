@@ -147,6 +147,7 @@ return [
     'reset-password' => 'Reset Password',
     'sent-reset-password-link' => 'Sent reset password link',
     'set-new-password' => 'Set new password',
-    'change-password' => 'Change password'
+    'change-password' => 'Change password',
+    'parent-id' => 'Parent id',
 
 ];

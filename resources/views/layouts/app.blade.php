@@ -11,7 +11,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <!-- Styles -->
-   
+   <script src="https://unpkg.com/feather-icons"></script>
    @if(env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
         <link href="{{ mix('vendor/avored/css/app.css') }}" rel="stylesheet">
     @else
@@ -24,33 +24,31 @@
 
 <body>
     @include('avored::partials.notification')
-    <div id="app">
-        <avored-alert></avored-alert>
-        <avored-confirm></avored-confirm>
-        <avored-layout inline-template>
-            
-            <div class="flex items-start">
-                <div v-bind:class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
-                    @include('avored::partials.sidebar')
-                </div>
+    <div id="app">    
+        <div class="flex items-start" 
+            x-data="avoredLayout()" 
+            x-init="$watch('sidebar', val => $dispatch('sidebar-init', val))"
+        >
+            <div x-bind:class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
+                @include('avored::partials.sidebar')
+            </div>
+            <div class="w-full">
                 <div class="w-full">
-                    <div class="w-full">
-                    @include('avored::partials.header')
-                    @include('avored::partials.breadcrumb')
+                @include('avored::partials.header')
+                @include('avored::partials.breadcrumb')
 
-                    <h1 class="mx-4 px-4 my-3">
-                        @yield('page_title')
-                    </h1>
-                    <div class="rounded p-5 mx-3 my-3 bg-white">
-                        <router-view></router-view>
-                        @yield('content')
-                    </div>
+                <h1 class="mx-4 px-4 my-3">
+                    @yield('page_title')
+                </h1>
+                <div class="rounded p-5 mx-3 my-3 bg-white">
+                    <router-view></router-view>
+                    @yield('content')
+                </div>
 
-                    @include('avored::partials.footer')
-                    </div>
+                @include('avored::partials.footer')
                 </div>
             </div>
-        </avored-layout>
+        </div>
     </div>
     @if(env('APP_ENV') === 'testing' && file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('/vendor/avored/js/avored.js') }}"></script>
@@ -64,6 +62,24 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
     @stack('bottom-scripts')
     <script>
+        feather.replace()
+        function avoredTabs() {
+            return {
+                tab: window.location.hash ? window.location.hash.substring(1) : null,
+                tabInit(tab) {
+                    this.tab = tab
+                }
+            }
+        }
+        function avoredLayout() {
+            return {
+                sidebar: false,
+                toggleSidebar (dispatch) {
+                    this.sidebar = ! this.sidebar
+                    dispatch('sidebar-init', this.sidebar)
+                }
+            }
+        }
         function avoredDropdownHandler(value, options) {
             return {
                 dropdownIsOpen: false,

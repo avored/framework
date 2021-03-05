@@ -1,12 +1,9 @@
 <div class="bg-white z-1 shadow p-0">
     <div class="flex px-3 py-2 h-16 items-center">
         <div class="mr-auto ml-3 cursor-pointer">
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                class="w-5 h-5"
-                v-on:click="sidebar = !sidebar"
-            ><path d="M1 1h18v2H1V1zm6 8h12v2H7V9zm-6 8h18v2H1v-2zM7 5h12v2H7V5zm0 8h12v2H7v-2zM1 6l4 4-4 4V6z"/>
-            </svg>
+            <div class="block w-full" x-on:click="toggleSidebar($dispatch)">
+                <i data-feather="menu"></i>
+            </div>
         </div>
         
         <div x-data="{ isVisible: false }" class="ml-auto flex items-center mr-3">

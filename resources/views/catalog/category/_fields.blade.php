@@ -1,7 +1,7 @@
 <div class="flex w-full">
     @include('avored::system.form.select', [
         'name' => 'parent_id',
-        'label' => __('avored::system.parent_id'),
+        'label' => __('avored::system.parent-id'),
         'value' => $category->parent_id ?? '',
         'options' => $categoryOptions
     ])

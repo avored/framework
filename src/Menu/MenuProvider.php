@@ -66,7 +66,7 @@ class MenuProvider extends ServiceProvider
         Menu::make('catalog', function (MenuItem $menu) {
             $menu->label('avored::system.catalog')
                 ->type(MenuItem::ADMIN)
-                ->icon('store-front')
+                ->icon('shopping-bag')
                 ->route('#');
         });
 
@@ -102,7 +102,7 @@ class MenuProvider extends ServiceProvider
         Menu::make('cms', function (MenuItem $menu) {
             $menu->label('avored::system.cms')
                 ->type(MenuItem::ADMIN)
-                ->icon('news-paper')
+                ->icon('layout')
                 ->route('#');
         });
         $cmsMenu = Menu::get('cms');
@@ -121,7 +121,7 @@ class MenuProvider extends ServiceProvider
         });
         Menu::make('order', function (MenuItem $menu) {
             $menu->label('avored::system.order')
-                ->icon('wallet')
+                ->icon('truck')
                 ->type(MenuItem::ADMIN)
                 ->route('#');
         });
@@ -144,7 +144,7 @@ class MenuProvider extends ServiceProvider
         Menu::make('report', function (MenuItem $menu) {
             $menu->label('avored::system.report')
                 ->type(MenuItem::ADMIN)
-                ->icon('book-reference')
+                ->icon('book-open')
                 ->route('#');
         });
         $reportMenu = Menu::get('report');
@@ -159,13 +159,13 @@ class MenuProvider extends ServiceProvider
         Menu::make('user', function (MenuItem $menu) {
             $menu->label('avored::system.user')
                 ->type(MenuItem::ADMIN)
-                ->icon('user-group')
+                ->icon('users')
                 ->route('#');
         });
 
         Menu::make('promotion', function (MenuItem $menu) {
             $menu->label('avored::system.promotion')
-                ->icon('ticket')
+                ->icon('dollar-sign')
                 ->type(MenuItem::ADMIN)
                 ->route('#');
         });
@@ -204,7 +204,7 @@ class MenuProvider extends ServiceProvider
         Menu::make('system', function (MenuItem $menu) {
             $menu->label('avored::system.system')
                 ->type(MenuItem::ADMIN)
-                ->icon('cog')
+                ->icon('settings')
                 ->route('#');
         });
 

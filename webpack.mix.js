@@ -37,9 +37,6 @@ if (mix.inProduction()) {
 mix.setPublicPath(publicPath)
 
 
-
-mix.alias({'@': 'resources/js'})
-
 filePath = 'vendor/avored/'
 // let filePath = ''
 
@@ -52,11 +49,17 @@ mix.js('resources/js/app.js', filePath + 'js/app.js')
 
 /******** AVORED COPY IMAGES  **********/
 mix.copyDirectory('resources/images', publicPath +  '/' + filePath + '/images')
+mix.copyDirectory('./node_modules/zondicons-css/src/svg', publicPath +  '/' + filePath + '/images')
 
 
 /******** AVORED ADMIN CSS  **********/
-mix.sass('resources/sass/app.scss', filePath + 'css/app.css')
-    .options({
-        processCssUrls: false,
-        postCss: [ tailwindcss('tailwind.config.js') ],
-    })
+mix.postCss("resources/css/app.css", filePath + 'css/app.css', [
+    require("tailwindcss"),
+   ]);
+
+
+// mix.sass('resources/sass/app.scss', filePath + 'css/app.css')
+//     .options({
+//         processCssUrls: false,
+//         postCss: [ tailwindcss('tailwind.config.js') ],
+//     })

@@ -76,7 +76,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.category.index',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.category.index')
+                $breadcrumb->label('avored::system.category')
                     ->parent('admin.dashboard');
             }
         );
@@ -84,7 +84,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.category.create',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.category.create')
+                $breadcrumb->label('avored::system.create')
                     ->parent('admin.dashboard')
                     ->parent('admin.category.index');
             }
@@ -93,7 +93,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.category.edit',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.category.edit')
+                $breadcrumb->label('avored::system.edit')
                     ->parent('admin.dashboard')
                     ->parent('admin.category.index');
             }
