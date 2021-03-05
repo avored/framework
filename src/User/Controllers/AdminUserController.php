@@ -40,11 +40,19 @@ class AdminUserController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $adminUsers = $this->adminUserRepository->paginate();
+        
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $categories = $this->adminUserRepository->filter($request->get('filter'));
+        } else {
+            $adminUsers = $this->adminUserRepository->paginate($perPage);
+        }
+
 
         return view('avored::user.admin-user.index')
             ->with(compact('adminUsers'));
@@ -110,17 +118,21 @@ class AdminUserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\AdminUser  $adminUser
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(AdminUser $adminUser)
+    public function destroy(int $id)
     {
-        $adminUser->delete();
+        AdminUser::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __('avored::user.notification.delete', ['attribute' => 'AdminUser']),
-        ]);
+        return redirect()
+            ->route('admin.admin-user.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.admin-user')]
+                ),
+            ]);
     }
 
     /**
@@ -138,14 +150,5 @@ class AdminUserController extends Controller
             'path' => $path,
             'message' => __('avored::user.notification.upload', ['attribute' => 'Admin User Image']),
         ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->adminUserRepository->filter($request->get('filter'));
     }
 }

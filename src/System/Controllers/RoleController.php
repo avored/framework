@@ -41,11 +41,19 @@ class RoleController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = $this->roleRepository->paginate();
+          
+        $perPage = 10;
+        if ($request->has('filter')) {
+            $roles = $this->roleRepository->filter($request->get('filter'));
+        } else {
+            $roles = $this->roleRepository->paginate($perPage);
+        }
+
 
         return view('avored::system.role.index')
             ->with(compact('roles'));

@@ -1,22 +1,17 @@
 
- <div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.name') }}"
-        field-name="name"
-        init-value="{{ $role->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'name',
+        'label' => __('avored::system.name'),
+        'value' => $role->name ?? ''
+    ])
 </div>
-
- <div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.description') }}"
-        field-name="description"
-        init-value="{{ $role->description ?? '' }}" 
-        error-text="{{ $errors->first('description') }}"
-    >
-    </avored-input>
+<div class="flex mt-3 w-full">
+    @include('avored::system.form.input', [
+        'name' => 'description',
+        'label' => __('avored::system.description'),
+        'value' => $role->description ?? ''
+    ])
 </div>
 
 
@@ -30,14 +25,13 @@
                 <div class="p-5">
                     @foreach ($group->permissionList as $permission)
                         <div class="mt-1 flex w-full">
-                            <avored-toggle
-                                label-text="{{ $permission->label() }}"
-                                field-name="permissions[{{ $permission->routes() }}]"
-                                {{-- toggle-on-value="ENABLED"
-                                toggle-off-value="DISABLED" --}}
-                                init-value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0 }}"
-                            >
-                            </avored-toggle>
+                            @include('avored::system.form.toggle', [
+                                'name' => 'permissions[{{ $permission->routes() }}]',
+                                'label' => $permission->label(),
+                                'value' => (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0,
+                                'checkedValue' => 1,
+                                'unCheckedValue' => 0,
+                            ])
                         </div>
                     @endforeach
                 </div>

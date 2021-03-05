@@ -28,11 +28,18 @@ class CustomerGroupController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customerGroups = $this->customerGroupRepository->paginate();
+        
+        $perPage = 10;
+        if ($request->has('filter')) {
+            $customerGroups = $this->customerGroupRepository->filter($request->get('filter'));
+        } else {
+            $customerGroups = $this->customerGroupRepository->paginate($perPage);
+        }
 
         return view('avored::user.customer-group.index')
             ->with(compact('customerGroups'));
@@ -61,8 +68,8 @@ class CustomerGroupController
 
         return redirect()->route('admin.customer-group.index')
             ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::system.customer_group')]
+                'avored::system.created_notification',
+                ['attribute' => __('avored::system.customer-group')]
             ));
     }
 
@@ -92,41 +99,33 @@ class CustomerGroupController
         }
 
         $customerGroup->name = $request->get('name');
-        $customerGroup->is_default = $request->get('is_default') ? 1: 0;
+        $customerGroup->is_default = $request->has('is_default') ? 1: 0;
 
         $customerGroup->save();
 
         return redirect()->route('admin.customer-group.index')
             ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::system.customer_group')]
+                'avored::system.updated_notification',
+                ['attribute' => __('avored::system.customer-group')]
             ));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\CustomerGroup  $customerGroup
+     * @param int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(CustomerGroup $customerGroup)
+    public function destroy(int $id)
     {
-        $customerGroup->delete();
+        CustomerGroup::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::customer_group')]
-            ),
-        ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->customerGroupRepository->filter($request->get('filter'));
+        return redirect()
+            ->route('admin.customer-group.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.customer-group')]
+                ),
+            ]);
     }
 }

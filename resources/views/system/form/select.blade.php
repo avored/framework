@@ -29,7 +29,7 @@
         @foreach ($options as $optionValue => $optionLabel)
             <li id="listbox-item-0" 
                 role="option" 
-                x-on:click="optionClicked('{{ $optionValue }}')"
+                x-on:click="optionClicked('{{ $optionValue }}', $dispatch)"
                 class="text-gray-900 hover:text-white hover:bg-primary select-none relative py-2 pl-3 pr-9">
                 <div class="flex items-center">
                     {{ $optionLabel }}

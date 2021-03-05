@@ -1,77 +1,117 @@
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.name') }}"
-        field-name="name"
-        init-value="{{ $property->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div x-data="avoredPropertySave()" x-on:change="changeFieldType">
+    <div class="flex mt-3 w-full">
+        @include('avored::system.form.input', [
+            'name' => 'name',
+            'label' => __('avored::system.name'),
+            'value' => $property->name ?? ''
+        ])
+    </div>
+
+    <div class="flex mt-3 w-full">
+        @include('avored::system.form.input', [
+            'name' => 'slug',
+            'label' => __('avored::system.slug'),
+            'value' => $property->slug ?? ''
+        ])
+    </div>
+
+    <div class="flex mt-3 w-full">
+        @include('avored::system.form.select', [
+            'name' => 'data_type',
+            'label' => __('avored::system.data-type'),
+            'value' => $property->data_type ?? '',
+            'options' => $dataTypeOptions
+        ])
+    </div>
+
+    <div class="flex mt-3 w-full">
+        @include('avored::system.form.select', [
+            'name' => 'field_type',
+            'label' => __('avored::system.field-type'),
+            'value' => $property->field_type ?? '',
+            'options' => $fieldTypeOptions,
+            'attrs' => [
+                'x-model' => 'fieldType'
+            ]
+        ])
+    </div>
+
+    <div class="mt-1 flex w-full">
+        @include('avored::system.form.toggle', [
+            'name' => 'use_for_all_products',
+            'label' => __('avored::system.use-for-all-products'),
+            'value' => $property->use_for_all_products ?? 0,
+            'checkedValue' => 1,
+            'unCheckedValue' => 0,
+        ])
+    </div>
+
+    <div class="mt-1 flex w-full">
+        @include('avored::system.form.toggle', [
+            'name' => 'is_visible_frontend',
+            'label' => __('avored::system.is-visible-frontend'),
+            'value' => $property->is_visible_frontend ?? 0,
+            'checkedValue' => 1,
+            'unCheckedValue' => 0,
+        ])
+    </div>
+
+    <div class="flex mt-3 w-full">
+        @include('avored::system.form.input', [
+            'name' => 'sort_order',
+            'label' => __('avored::system.sort_order'),
+            'value' => $property->sort_order ?? ''
+        ])
+    </div>
+
+    <template x-if="fieldType === 'SELECT'">
+        <template x-for="dropdownOption in dropdownOptions">
+            <div class="flex mt-3 w-full">
+                <div class="w-full">
+                    <label for="{{ $name }}"
+                        class="block text-sm leading-5 text-gray-500">
+                        {{ $label }}
+                    </label>
+                    <div class="mt-1">
+                        <div class="relative flex items-center">
+                            <input
+                                id="{{ $name }}"
+                                type="{{ $type ?? 'text' }}"
+                                @foreach ($attrs as $attrKey => $attrVal)
+                                    {{ $attrKey }}="{{ $attrVal }}"
+                                @endforeach
+                                name="{{ $name }}"
+                                value="{{ $value }}"
+                                placeholder="{{ $placeholder ?? '' }}"
+                                class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
+                                {{ isset($isDisabled) ? 'disabled' : '' }} />
+                        </div>
+
+                        @if ($errors->has($name))
+                            <p class="text-sm italic text-red-500">
+                                {{ $errors->first($name) }}
+                            </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
 </div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.slug') }}"
-        field-name="slug"
-        init-value="{{ $property->slug ?? '' }}" 
-        error-text="{{ $errors->first('slug') }}"
-    >
-    </avored-input>
-</div>
-
-<div class="mt-3 flex w-full">
-    <avored-select
-        label-text="{{ __('avored::system.fields.data_type') }}"
-        field-name="data_type"
-        error-text="{{ $errors->first('data_type') }}"
-        :options="{{ json_encode($dataTypeOptions) }}"
-        init-value="{{ $property->data_type ?? '' }}"
-    >
-    </avored-select>
-</div>
-
-<div class="mt-3 flex w-full">
-    <avored-select
-        label-text="{{ __('avored::system.fields.field_type') }}"
-        error-text="{{ $errors->first('field_type') }}"
-        field-name="field_type"
-        :options="{{ json_encode($fieldTypeOptions) }}"
-        init-value="{{ $property->field_type ?? '' }}"
-    >
-    </avored-select>
-</div>
-
-<div class="mt-3 flex w-full">
-    <avored-toggle
-        label-text="{{ __('avored::system.fields.use_for_all_products') }}"
-        error-text="{{ $errors->first('use_for_all_products') }}"
-        field-name="use_for_all_products"
-        init-value="{{ $property->use_for_all_products ?? '' }}"
-    >
-    </avored-toggle>
-</div>
-
-<div class="mt-3 flex w-full">
-    <avored-toggle
-        label-text="{{ __('avored::system.fields.is_visible_frontend') }}"
-        error-text="{{ $errors->first('is_visible_frontend') }}"
-        field-name="is_visible_frontend"
-        init-value="{{ $property->is_visible_frontend ?? '' }}"
-    >
-    </avored-toggle>
-</div>
-
-
-
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.sort_order') }}"
-        field-name="sort_order"
-        init-value="{{ $property->sort_order ?? '' }}" 
-        error-text="{{ $errors->first('sort_order') }}"
-    >
-    </avored-input>
-</div>
-
-<template v-if="processDropdownOptionStatus">
+@push('bottom-scripts')
+<script>
+    function avoredPropertySave() {
+        return {
+            fieldType: null,
+            dropdownOptions : [{id: 1 , value : null}],
+            changeFieldType(e) {
+                this.fieldType = e.detail.val
+            }
+        }
+    }
+</script>
+@endpush
+{{-- <template v-if="processDropdownOptionStatus">
     <div class="mt-3 flex w-full"
 
         v-for="(k, index) in dropdownOptions"
@@ -95,4 +135,4 @@
             </template>
         </avored-input>
     </div>
-</template>
+</template> --}}

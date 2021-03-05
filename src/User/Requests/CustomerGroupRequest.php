@@ -24,7 +24,6 @@ class CustomerGroupRequest extends FormRequest
     public function rules()
     {
         $rules['name'] = 'required';
-        $rules['is_default'] = 'required';
 
         return $rules;
     }

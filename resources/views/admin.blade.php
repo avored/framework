@@ -7,7 +7,7 @@
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::system.terms.dashboard') }}
+            {{ __('avored::system.dashboard') }}
         </div>
     </div>
 @endsection

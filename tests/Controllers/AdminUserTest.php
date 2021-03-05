@@ -80,7 +80,7 @@ class AdminUserTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.admin-user.destroy', $adminUser->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.admin-user.index'));
 
         $this->assertDatabaseMissing('admin_users', ['id' => $adminUser->id]);
     }

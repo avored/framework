@@ -1,3 +1,7 @@
+@php
+    $attrs = (isset($attrs)) ? $attrs : [];
+    $value = $value ?? null;
+@endphp
 <div class="w-full">
     <label for="{{ $name }}"
         class="block text-sm leading-5 text-gray-500">
@@ -8,6 +12,9 @@
             <input
                 id="{{ $name }}"
                 type="{{ $type ?? 'text' }}"
+                @foreach ($attrs as $attrKey => $attrVal)
+                    {{ $attrKey }}="{{ $attrVal }}"
+                @endforeach
                 name="{{ $name }}"
                 value="{{ $value }}"
                 placeholder="{{ $placeholder ?? '' }}"

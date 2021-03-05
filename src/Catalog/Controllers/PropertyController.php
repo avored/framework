@@ -28,11 +28,17 @@ class PropertyController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $properties = $this->propertyRepository->paginate();
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $properties = $this->propertyRepository->filter($request->get('filter'));
+        } else {
+            $properties = $this->propertyRepository->paginate($perPage);
+        }
 
         return view('avored::catalog.property.index')
             ->with(compact('properties'));
@@ -64,8 +70,8 @@ class PropertyController
 
         return redirect()->route('admin.property.index')
             ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.property.title')]
+                'avored::system.created_notification',
+                ['attribute' => __('avored::system.property')]
             ));
     }
 
@@ -101,27 +107,25 @@ class PropertyController
 
         return redirect()->route('admin.property.index')
             ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.property.title')]
+                'avored::system.updated_notification',
+                ['attribute' => __('avored::system.property')]
             ));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Property  $property
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Property $property)
+    public function destroy(int $id)
     {
-        $property->delete();
+        Property::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.property.title')]
-            ),
-        ]);
+        return redirect()->route('admin.property.index')
+            ->with('successNotification', __(
+                'avored::system.deleted_notification',
+                ['attribute' => __('avored::system.property')]
+            ));
     }
 
     /**
@@ -152,15 +156,5 @@ class PropertyController
                 }
             }
         }
-    }
-
-    
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->propertyRepository->filter($request->get('filter'));
     }
 }

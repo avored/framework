@@ -73,10 +73,12 @@
                 dropdownInit() {
                     this.selectedLabel = this.options[this.fieldValue]
                 },
-                optionClicked(val) {
+                optionClicked(val, $dispatch) {
                     this.dropdownIsOpen = false
                     this.fieldValue = val
                     this.selectedLabel = this.options[val]
+                    console.log($dispatch)
+                    $dispatch('change', {val: val})
                 },
                 isCheckboxVisible(val) {
                     return (this.fieldValue == val) ? 'text-primary' : 'hidden'
@@ -84,36 +86,56 @@
             }
         }
         function avoredEditor() {
-        return {
-            value: null,
-            easymde: null,
-            widgetClick() {
-                alert('fire modal show event')
-            },
-            initEditor(initialValue) {
-                var app = this
-                this.value = initialValue
-                this.easymde = new EasyMDE({
-                    element: document.getElementById('content'),
-                    initialValue : initialValue,
-                    toolbar: [
-                        'bold',
-                        'italic',
-                        'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
-                        {
-                            name: 'custom',
-                            action: app.widgetClick,
-                            className: 'fa fa-star',
-                            title: 'Widget'
-                        }
-                    ]
-                });
-                this.easymde.codemirror.on("change", function() {
-                    app.value = app.easymde.value()
-                });
+            return {
+                value: null,
+                easymde: null,
+                widgetClick() {
+                    alert('fire modal show event')
+                },
+                initEditor(initialValue) {
+                    var app = this
+                    this.value = initialValue
+                    this.easymde = new EasyMDE({
+                        element: document.getElementById('content'),
+                        initialValue : initialValue,
+                        toolbar: [
+                            'bold',
+                            'italic',
+                            'heading', '|', 'quote', 'unordered-list', 'ordered-list',  '|',  'image', 'link', '|', 'table', 'preview', '|', 'side-by-side', 
+                            {
+                                name: 'custom',
+                                action: app.widgetClick,
+                                className: 'fa fa-star',
+                                title: 'Widget'
+                            }
+                        ]
+                    });
+                    this.easymde.codemirror.on("change", function() {
+                        app.value = app.easymde.value()
+                    });
+                }
             }
         }
-    }
+
+        function avoredToggle() {
+            return {
+                value: null,
+                checkedValue: null,
+                uncheckedValue: null,
+                initToggle(checkedValue, uncheckedValue, value) {
+                    this.checkedValue = checkedValue
+                    this.uncheckedValue = uncheckedValue
+                    this.value = value
+                },
+                toggleChangeEvent (e) {
+                    if (e.target.checked) {
+                        this.value = this.checkedValue
+                    } else {
+                        this.value = this.uncheckedValue
+                    }
+                }
+            }
+        }
     </script>
 </body>
 

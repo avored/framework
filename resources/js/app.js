@@ -24,13 +24,13 @@ Vue.use(Vddl)
 
 window.EasyMDE = require('easymde')
 
-Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
+// Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)
 
 Vue.component('address-table', require('../components/user/customer/AddressTable.vue').default)
 
-Vue.component('customer-group-table', require('../components/user/customer-group/CustomerGroupTable.vue').default)
-Vue.component('customer-group-save', require('../components/user/customer-group/CustomerGroupSave.vue').default)
+// Vue.component('customer-group-table', require('../components/user/customer-group/CustomerGroupTable.vue').default)
+// Vue.component('customer-group-save', require('../components/user/customer-group/CustomerGroupSave.vue').default)
 
 Vue.component('attribute-table', require('../components/catalog/attribute/AttributeTable.vue').default)
 Vue.component('attribute-save', require('../components/catalog/attribute/AttributeSave.vue').default)
@@ -43,7 +43,7 @@ Vue.component('product-save', require('../components/catalog/product/ProductSave
 Vue.component('currency-table', require('../components/system/currency/CurrencyTable.vue').default)
 Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default)
 
-Vue.component('category-table', require('../components/catalog/category/CategoryTable.vue').default)
+// Vue.component('category-table', require('../components/catalog/category/CategoryTable.vue').default)
 
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default)
 
@@ -51,11 +51,11 @@ Vue.component('menu-save', require('../components/cms/menu/MenuSave.vue').defaul
 Vue.component('menu-group-table', require('../components/cms/menu/MenuGroupTable.vue').default)
 Vue.component('menu-table', require('../components/cms/menu/MenuTable.vue').default)
 
-Vue.component('page-table', require('../components/cms/page/PageTable.vue').default)
-Vue.component('page-save', require('../components/cms/page/PageSave.vue').default)
+// Vue.component('page-table', require('../components/cms/page/PageTable.vue').default)
+// Vue.component('page-save', require('../components/cms/page/PageSave.vue').default)
 
-Vue.component('order-status-table', require('../components/order/order-status/OrderStatusTable.vue').default)
-Vue.component('order-status-save', require('../components/order/order-status/OrderStatusSave.vue').default)
+// Vue.component('order-status-table', require('../components/order/order-status/OrderStatusTable.vue').default)
+// Vue.component('order-status-save', require('../components/order/order-status/OrderStatusSave.vue').default)
 
 Vue.component('role-table', require('../components/system/role/RoleTable.vue').default)
 Vue.component('system-role-save', require('../components/system/role/RoleSave.vue').default)

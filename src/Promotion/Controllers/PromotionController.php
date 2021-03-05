@@ -24,11 +24,19 @@ class PromotionController
 
     /**
      * Show available promotion list of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $promotionCodes = $this->repository->paginate();
+       
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $promotionCodes = $this->repository->filter($request->get('filter'));
+        } else {
+            $promotionCodes = $this->repository->paginate($perPage);
+        }
+
         return view('avored::promotion.promotion-code.index')
             ->with('promotionCodes', $promotionCodes);
     }
@@ -57,8 +65,8 @@ class PromotionController
 
         return redirect()->route('admin.promotion-code.index')
             ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::promotion.promotion-code.title')]
+                'avored::system.created_notification',
+                ['attribute' => __('avored::system.promo-code')]
             ));
     }
 
@@ -86,38 +94,26 @@ class PromotionController
     {
         $promotionCode->update($request->all());
 
-        return redirect()->route('admin.category.index')
+        return redirect()->route('admin.promotion-code.index')
             ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::promotion.promotion-code.title')]
+                'avored::system.updated_notification',
+                ['attribute' => __('avored::system.promo-code')]
             ));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\PromotionCode  $promotionCode
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(PromotionCode $promotionCode)
+    public function destroy(int $id)
     {
-        $promotionCode->delete();
+        PromotionCode::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::promotion.promotion-code.title')]
-            ),
-        ]);
-    }
-
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->repository->filter($request->get('filter'));
+        return redirect()->route('admin.promotion-code.index')
+            ->with('successNotification', __(
+                'avored::system.deleted_notification',
+                ['attribute' => __('avored::system.promo-code')]
+            ));
     }
 }

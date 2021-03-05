@@ -39,11 +39,18 @@ class CurrencyController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $currencies = $this->currencyRepository->paginate();
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $currencies = $this->currencyRepository->filter($request->get('filter'));
+        } else {
+            $currencies = $this->currencyRepository->paginate($perPage);
+        }
+
 
         return view('avored::system.currency.index')
             ->with(compact('currencies'));
@@ -73,10 +80,12 @@ class CurrencyController extends Controller
         $this->currencyRepository->create($request->all());
 
         return redirect()->route('admin.currency.index')
-            ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::system.currency.title')]
-            ));
+            ->with([
+                'successNotification' => __(
+                    'avored::system.created_notification',
+                    ['attribute' => __('avored::system.currency')]
+                ),
+            ]);
     }
 
     /**
@@ -105,34 +114,31 @@ class CurrencyController extends Controller
         $currency->update($request->all());
 
         return redirect()->route('admin.currency.index')
-            ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::system.currency.title')]
-            ));
+            ->with([
+                'successNotification' => __(
+                    'avored::system.updated_notification',
+                    ['attribute' => __('avored::system.currency')]
+                ),
+            ]);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Currency  $currency
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Currency $currency)
+    public function destroy(int $id)
     {
-        $currency->delete();
+        Currency::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => __('avored::system.currency.title')]),
-        ]);
-    }
 
-    
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->currencyRepository->filter($request->get('filter'));
+        return redirect()
+            ->route('admin.currency.index')
+            ->with([
+                'successNotification' => __(
+                    'avored::system.deleted_notification',
+                    ['attribute' => __('avored::system.currency')]
+                ),
+            ]);
     }
 }

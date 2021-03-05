@@ -119,37 +119,12 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             'product/filter',
             [\AvoRed\Framework\Catalog\Controllers\ProductController::class, 'filter']
         )->name('product.filter');
-        Route::post(
-            'property/filter',
-            [\AvoRed\Framework\Catalog\Controllers\PropertyController::class, 'filter']
-        )->name('property.filter');
+       
         Route::post(
             'attribute/filter',
             [\AvoRed\Framework\Catalog\Controllers\AttributeController::class, 'filter']
         )->name('attribute.filter');
-       
-       
-        Route::post(
-            'customer-group/filter',
-            [\AvoRed\Framework\User\Controllers\CustomerGroupController::class, 'filter']
-        )->name('customer-group.filter');
-        Route::post(
-            'admin-user/filter',
-            [\AvoRed\Framework\User\Controllers\AdminUserController::class, 'filter']
-        )->name('admin-user.filter');
-        Route::post(
-            'promotion-code/filter',
-            [\AvoRed\Framework\Promotion\Controllers\PromotionController::class, 'filter']
-        )->name('promotion-code.filter');
-        Route::post(
-            'currency/filter',
-            [\AvoRed\Framework\System\Controllers\CurrencyController::class, 'filter']
-        )->name('currency.filter');
-        Route::post(
-            'role/filter',
-            [\AvoRed\Framework\System\Controllers\RoleController::class, 'filter']
-        )->name('role.filter');
-     
+    
 
         Route::resource('admin-user', User\Controllers\AdminUserController::class);
         Route::resource('attribute', Catalog\Controllers\AttributeController::class);

@@ -1,13 +1,13 @@
 @extends('avored::layouts.app')
 
 @section('meta_title')
-    {{ __('avored::system.edit') . ' ' . __('avored::system.terms.category') }}: AvoRed E commerce Admin Dashboard
+    {{ __('avored::system.edit') . ' ' . __('avored::system.category') }}: AvoRed E commerce Admin Dashboard
 @endsection
 
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::system.edit') . ' ' . __('avored::system.terms.category') }}
+            {{ __('avored::system.edit') . ' ' . __('avored::system.category') }}
         </div>
     </div>
 @endsection
