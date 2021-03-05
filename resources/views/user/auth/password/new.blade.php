@@ -24,7 +24,7 @@
                             alt="AvoRed Ecommerce" />
                     </a>
                     <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-                        {{ __('avored::system.auth.password.title') }}
+                        {{ __('avored::system.set-new-password') }}
                     </h2>
                     <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
                     </p>
@@ -35,42 +35,37 @@
                     <input type="hidden" name="remember" value="true" />
                     <div class="rounded-md shadow-sm">
                         <div class="mt-3">
-                            <avored-input
-                                label-text="{{ __('avored::system.auth.form.email') }}"
-                                label-class="w-full block"
-                                input-class="w-full block"
-                                field-name="email"
-                                input-type="email"
-                                error-text="{{ $errors->first('email') }}"
-                            ></avored-input>
+                            @include('avored::system.form.input', [
+                                'name' => 'email',
+                                'label' => __('avored::system.email'),
+                                'value' => ''
+                            ])
                         </div>
                         
                     </div>
 
                     <div class="rounded-md shadow-sm">
                         <div class="mt-3">
-                            <avored-input
-                                label-text="{{ __('avored::system.auth.form.password') }}"
-                                label-class="w-full block"
-                                input-class="w-full block"
-                                field-name="password"
-                                input-type="password"
-                                error-text="{{ $errors->first('password') }}"
-                            ></avored-input>
+                            @include('avored::system.form.input', [
+                                'name' => 'password',
+                                'type' => 'password',
+                                'label' => __('avored::system.password'),
+                                'value' => ''
+                            ])
+                            
                         </div>
                         
                     </div>
 
                     <div class="rounded-md shadow-sm">
                         <div class="mt-3">
-                            <avored-input
-                                label-text="{{ __('avored::system.auth.form.password_confirmation') }}"
-                                label-class="w-full block"
-                                input-class="w-full block"
-                                field-name="password_confirmation"
-                                input-type="password_confirmation"
-                                error-text="{{ $errors->first('password_confirmation') }}"
-                            ></avored-input>
+                            @include('avored::system.form.input', [
+                                'name' => 'password_confirmation',
+                                'type' => 'password',
+                                'label' => __('avored::system.confirm-password'),
+                                'value' => ''
+                            ])
+                            
                         </div>
                         
                     </div>
@@ -93,7 +88,7 @@
                                 />
                             </svg>
                         </span>
-                            {{ __('avored::system.auth.password.submit_btn') }}
+                            {{ __('avored::system.change-password') }}
                         </button>
                     </div>
                 </form>

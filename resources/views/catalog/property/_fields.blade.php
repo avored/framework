@@ -65,33 +65,27 @@
     </div>
 
     <template x-if="fieldType === 'SELECT'">
-        <template x-for="dropdownOption in dropdownOptions">
+        <template x-for="(dropdownOption, index) in dropdownOptions" x-bind:key="index">
             <div class="flex mt-3 w-full">
                 <div class="w-full">
-                    <label for="{{ $name }}"
+                    <label x-bind:id="dropdownOptionFieldIdentifier('test')"
+                        x-bind:data="index"
                         class="block text-sm leading-5 text-gray-500">
-                        {{ $label }}
+                        {{ __('avored::system.option-label') }}
                     </label>
                     <div class="mt-1">
                         <div class="relative flex items-center">
                             <input
-                                id="{{ $name }}"
+                                x-bind:id="dropdownOptionFieldIdentifier('test')"
                                 type="{{ $type ?? 'text' }}"
-                                @foreach ($attrs as $attrKey => $attrVal)
-                                    {{ $attrKey }}="{{ $attrVal }}"
-                                @endforeach
-                                name="{{ $name }}"
-                                value="{{ $value }}"
-                                placeholder="{{ $placeholder ?? '' }}"
+                                x-bind:name="dropdownOptionFieldName('test')"
+                                value=""
+                                placeholder=""
                                 class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
-                                {{ isset($isDisabled) ? 'disabled' : '' }} />
+                                />
                         </div>
 
-                        @if ($errors->has($name))
-                            <p class="text-sm italic text-red-500">
-                                {{ $errors->first($name) }}
-                            </p>
-                        @endif
+                       
                     </div>
                 </div>
             </div>
@@ -106,6 +100,12 @@
             dropdownOptions : [{id: 1 , value : null}],
             changeFieldType(e) {
                 this.fieldType = e.detail.val
+            },
+            dropdownOptionFieldIdentifier (option) {
+                console.log('test')
+            },
+            dropdownOptionFieldName(option) {
+                console.log(option)
             }
         }
     }

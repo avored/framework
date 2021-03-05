@@ -14,8 +14,7 @@
     @push('styles')
 </head>
 <body>
-    <div id="app">
-        
+    <div id="app">  
             <div>
                 <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
                     <div class="max-w-md w-full bg-white rounded-md shadow-md p-6">
@@ -26,7 +25,7 @@
                                     alt="AvoRed Ecommerce" />
                             </a>
                             <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-                                {{ __('avored::system.auth.reset.title') }}
+                                {{ __('avored::system.reset-password') }}
                             </h2>
                             <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
                             </p>
@@ -42,14 +41,13 @@
                             <input type="hidden" name="remember" value="true" />
                            
                                 <div class="mt-3">
-                                    <avored-input
-                                        label-text="{{ __('avored::system.auth.form.email') }}"
-                                        label-class="w-full block"
-                                        input-class="w-full block"
-                                        field-name="email"
-                                        input-type="email"
-                                        error-text="{{ $errors->first('email') }}"
-                                    ></avored-input>
+                                    <div class="flex mt-3 w-full">
+                                        @include('avored::system.form.input', [
+                                            'name' => 'email',
+                                            'label' => __('avored::system.email'),
+                                            'value' => ''
+                                        ])
+                                    </div>
                                 </div>
                                 
                             <div class="mt-6">
@@ -69,7 +67,7 @@
                                         />
                                     </svg>
                                 </span>
-                                    {{ __('avored::system.auth.reset.btn_sent_password_reset_link') }}
+                                    {{ __('avored::system.sent-reset-password-link') }}
                                 </button>
                             </div>
                         </form>

@@ -40,6 +40,7 @@
         'value' => $page->meta_title ?? ''
     ])
 </div>
+
 <div class="flex mt-3 w-full">
     @include('avored::system.form.input', [
         'name' => 'meta_description',

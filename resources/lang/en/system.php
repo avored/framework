@@ -49,7 +49,7 @@ return [
     'role-id' => 'Role',
     'image-file' => 'Image File',
     'password' => 'Password',
-    'password-confirmation' => 'Confirm Password',
+    'confirm-password' => 'Confirm Password',
     'catalog' => 'Catalog',
     'cms' => 'CMS',
     'report' => 'Report',
@@ -143,6 +143,10 @@ return [
     'data-type' => 'Data Type',
     'field-type' => 'Field Type',
     'use-for-all-products' => 'Use for all products',
-    'is-visible-frontend' => 'Is visible frontend?'
+    'is-visible-frontend' => 'Is visible frontend?',
+    'reset-password' => 'Reset Password',
+    'sent-reset-password-link' => 'Sent reset password link',
+    'set-new-password' => 'Set new password',
+    'change-password' => 'Change password'
 
 ];
