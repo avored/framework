@@ -18,7 +18,7 @@
                 name="{{ $name }}"
                 value="{{ $value }}"
                 placeholder="{{ $placeholder ?? '' }}"
-                class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
+                class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-200"
                 {{ isset($isDisabled) ? 'disabled' : '' }} />
         </div>
 

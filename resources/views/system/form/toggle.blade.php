@@ -16,7 +16,8 @@ $value = (isset($value)) ? $value : $unCheckedValue;
                 type="checkbox" 
                 name="{{ $name }}"
                 x-on:change="toggleChangeEvent($event)"
-                x-modal="value"
+                x-bind:value="value"
+                x-bind:checked="(value === checkedValue)"
                 x-bind:class="(value === checkedValue) ? 'bg-primary right-0' : ''"
                 id="toggle" 
                 class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 border-red-500 outline-none appearance-none cursor-pointer"/>

@@ -17,16 +17,8 @@
     <form method="post" action="{{ route('admin.category.update', $category->id) }}">
         @csrf
         @method('put')
-        <avored-tabs>
-            @foreach ($tabs as $tab)
-                <avored-tab identifier="{{ $tab->key() }}" name="{{ $tab->label() }}">
-                    @php
-                        $path = $tab->view();
-                    @endphp
-                    @include($path)
-                </avored-tab>
-            @endforeach
-        </avored-tabs>
+        
+        @include('avored::system.form.tabs')
         
         <div class="mt-3 py-3">
             @include('avored::partials.forms.action-buttons', ['url' => route('admin.category.index')])

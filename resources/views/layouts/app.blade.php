@@ -80,10 +80,11 @@
                 }
             }
         }
-        function avoredDropdownHandler(value, options) {
+        function avoredDropdownHandler(value, options, name) {
             return {
                 dropdownIsOpen: false,
                 fieldValue: value,
+                name: name,
                 options: JSON.parse(options),
                 selectedLabel: '',
                 dropdownInit() {
@@ -93,8 +94,7 @@
                     this.dropdownIsOpen = false
                     this.fieldValue = val
                     this.selectedLabel = this.options[val]
-                    console.log($dispatch)
-                    $dispatch('change', {val: val})
+                    $dispatch('change-dropdown', {name: this.name, value: val})
                 },
                 isCheckboxVisible(val) {
                     return (this.fieldValue == val) ? 'text-primary' : 'hidden'

@@ -149,5 +149,7 @@ return [
     'set-new-password' => 'Set new password',
     'change-password' => 'Change password',
     'parent-id' => 'Parent id',
+    'option-label' => 'Option Label',
+    'dropdown-options' => 'DropdownOptions'
 
 ];
