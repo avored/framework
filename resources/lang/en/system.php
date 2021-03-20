@@ -150,6 +150,8 @@ return [
     'change-password' => 'Change password',
     'parent-id' => 'Parent id',
     'option-label' => 'Option Label',
-    'dropdown-options' => 'DropdownOptions'
+    'dropdown-options' => 'DropdownOptions',
+    'delete_confirmation_message' => 'Are you sure you want to delete this :attribute? All of your data will be permanently removed. This action cannot be undone.',
+    
 
 ];
