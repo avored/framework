@@ -80,7 +80,7 @@ class AttributeTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.attribute.destroy', $attribute->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.attribute.index'));
 
         $this->assertDatabaseMissing('attributes', ['id' => $attribute->id]);
     }

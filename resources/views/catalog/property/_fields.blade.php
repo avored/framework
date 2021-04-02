@@ -1,6 +1,6 @@
 <div x-data="avoredPropertySave()" 
     x-init="init('{{ $property ?? json_encode (json_decode ("{}")) }}')" 
-    x-on:change-dropdown.window="fieldType =  ($event.detail.name === 'field_type') ?  $event.detail.value: fieldType"">
+    x-on:change-dropdown.window="fieldType =  ($event.detail.name === 'field_type') ?  $event.detail.value: fieldType">
     <div class="flex mt-3 w-full">
         @include('avored::system.form.input', [
             'name' => 'name',
@@ -118,7 +118,7 @@
             init(property) {
                 this.property = JSON.parse(property)
                 this.fieldType = this.property.field_type
-                if (_.size(_.get(this.property, 'dropdown_options')).length > 0) {
+                if (_.size(_.get(this.property, 'dropdown_options')) > 0) {
                     this.dropdownOptions = this.property.dropdown_options
 
                 } else {

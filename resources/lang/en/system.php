@@ -152,6 +152,6 @@ return [
     'option-label' => 'Option Label',
     'dropdown-options' => 'DropdownOptions',
     'delete_confirmation_message' => 'Are you sure you want to delete this :attribute? All of your data will be permanently removed. This action cannot be undone.',
-    
+    'display-as' => 'Display as',
 
 ];

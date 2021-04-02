@@ -102,7 +102,6 @@ class PropertyController
      */
     public function update(PropertyRequest $request, Property $property)
     {
-        dd($request->all());
         $property->update($request->all());
         $this->savePropertyDropdownOptions($property, $request);
 

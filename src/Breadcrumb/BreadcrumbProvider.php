@@ -332,7 +332,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.attribute.index',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.attribute.index')
+                $breadcrumb->label('avored::system.attribute')
                     ->parent('admin.dashboard');
             }
         );
@@ -340,7 +340,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.attribute.create',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.attribute.create')
+                $breadcrumb->label('avored::system.create')
                     ->parent('admin.dashboard')
                     ->parent('admin.attribute.index');
             }
@@ -349,7 +349,7 @@ class BreadcrumbProvider extends ServiceProvider
         BreadcrumbFacade::make(
             'admin.attribute.edit',
             function (Breadcrumb $breadcrumb) {
-                $breadcrumb->label('avored::system.attribute.edit')
+                $breadcrumb->label('avored::system.edit')
                     ->parent('admin.dashboard')
                     ->parent('admin.attribute.index');
             }

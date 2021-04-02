@@ -29,12 +29,18 @@ class AttributeController
 
     /**
      * Show Dashboard of an AvoRed Admin.
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $attributes = $this->attributeRepository->paginate();
-        
+        $perPage = 10;
+        if ($request->get('filter')) {
+            $attributes = $this->attributeRepository->filter($request->get('filter'));
+        } else {
+            $attributes = $this->attributeRepository->paginate($perPage);
+        }
+
         return view('avored::catalog.attribute.index')
             ->with(compact('attributes'));
     }
@@ -101,23 +107,20 @@ class AttributeController
                 ['attribute' => __('avored::catalog.attribute.title')]
             ));
     }
-
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Attribute  $attribute
+     * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Attribute $attribute)
+    public function destroy(int $id)
     {
-        $attribute->delete();
+        Attribute::destroy($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.attribute.title')]
-            ),
-        ]);
+        return redirect()->route('admin.attribute.index')
+            ->with('successNotification', __(
+                'avored::system.deleted_notification',
+                ['attribute' => __('avored::system.attribute')]
+            ));
     }
 
     /**
@@ -164,14 +167,5 @@ class AttributeController
             'path' => $path,
             'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image']),
         ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->attributeRepository->filter($request->get('filter'));
     }
 }

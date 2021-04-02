@@ -75,7 +75,7 @@ class PropertyTest extends BaseTestCase
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->delete(route('admin.property.destroy', $property->id))
-            ->assertStatus(200);
+            ->assertRedirect(route('admin.property.index'));
 
         $this->assertDatabaseMissing('properties', ['id' => $property->id]);
     }
