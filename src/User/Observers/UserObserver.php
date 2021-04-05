@@ -2,38 +2,37 @@
 
 namespace AvoRed\Framework\User\Observers;
 
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
-use AvoRed\Framework\Database\Contracts\UserGroupModelInterface;
-use AvoRed\Framework\Widget\TotalCustomer;
+use AvoRed\Framework\Database\Contracts\CustomerGroupModelInterface;
+use AvoRed\Framework\Database\Repository\CustomerGroupRepository;
 
 class UserObserver
 {
     /**
      * UserGroup Repository for controller.
-     * @var \AvoRed\Framework\Database\Repository\UserGroupRepository
+     * @var CustomerGroupRepository
      */
-    protected $userGroupRepository;
-    
+    protected $customerGroupRepository;
+
     /**
      * Construct for the AvoRed user group controller.
-     * @param \AvoRed\Framework\Database\Repository\UserGroupRepository $userGroupRepository
+     * @param CustomerGroupModelInterface $customerGroupRepository
      */
     public function __construct(
-        UserGroupModelInterface $userGroupRepository
+        CustomerGroupModelInterface $customerGroupRepository
     ) {
-        $this->userGroupRepository = $userGroupRepository;
+        $this->customerGroupRepository = $customerGroupRepository;
     }
 
     /**
      * Handle the User "created" event.
      *
-     * @param mixed $user
+     * @param mixed $customer
      * @return void
      */
-    public function created($user)
+    public function created($customer)
     {
-        $userGroup = $this->userGroupRepository->getIsDefault();
-        $user->user_group_id = $userGroup->id;
-        $user->save();
+        $customerGroup = $this->customerGroupRepository->getIsDefault();
+        $customer->customer_group_id = $customerGroup->id;
+        $customer->save();
     }
 }
