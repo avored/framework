@@ -35,12 +35,12 @@ class Attribute extends BaseModel
     }
 
     /**
-     * Attribute Belongs to many Products.
+     * Attribute Belongs to many Product Values.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function attributeProductValues()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(AttributeProductValue::class);
     }
 
     /**

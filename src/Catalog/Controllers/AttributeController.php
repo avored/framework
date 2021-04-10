@@ -97,7 +97,6 @@ class AttributeController
      */
     public function update(AttributeRequest $request, Attribute $attribute)
     {
-       
         $attribute->update($request->all());
         $this->saveAttributeDropdownOptions($attribute, $request);
 
@@ -132,19 +131,28 @@ class AttributeController
     public function saveAttributeDropdownOptions(Attribute $attribute, AttributeRequest $request)
     {
         if ($request->get('dropdown_options') !== null && count($request->get('dropdown_options')) > 0) {
-            $attribute->dropdownOptions()->delete();
+            $options = collect();
+            $beforeAttributeIds = $attribute->dropdownOptions()->pluck('id');
             foreach ($request->get('dropdown_options') as $key => $option) {
                 if (empty($option['display_text'])) {
                     continue;
                 }
-                
-                // $optionModel = $attribute->dropdownOptions()->find($key);
+                $attributeDropdownOption = $attribute->dropdownOptions()->where('id', $key)->first();
+                unset($option['id']);
+                if ($attributeDropdownOption !== null) {
+                    $attributeDropdownOption->save($option);
+                } else {
+                    $attribute->dropdownOptions()->create($option);
+                }
+                $options->push($key);
+            }
+            $deletedIds = $beforeAttributeIds->filter(function ($attributeId) use ($options) {
+                return !$options->contains($attributeId);
+            });
 
-                // if ($optionModel === null) {
-                $attribute->dropdownOptions()->create($option);
-                // } else {
-                //     $optionModel->update($option);
-                // }
+            foreach ($deletedIds as $key => $deletedId) {
+                $attribute->attributeProductValues()->where('id', $deletedId)->delete();
+                $attribute->dropdownOptions()->where('id', $deletedId)->delete();
             }
         }
     }
@@ -161,7 +169,7 @@ class AttributeController
         $path = $files->store('uploads/catalog/attributes', 'avored');
         // }
 
-        
+    
         return response()->json([
             'success' => true,
             'path' => $path,

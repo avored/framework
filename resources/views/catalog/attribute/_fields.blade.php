@@ -46,7 +46,7 @@
                                 <input
                                     x-bind:id="`dropdown-option-${dropdownOption.id}`"
                                     type="{{ $type ?? 'text' }}"
-                                    x-bind:name="`dropdown_option[${dropdownOption.id}]`"
+                                    x-bind:name="`dropdown_options[${dropdownOption.id}][display_text]`"
                                     x-model="dropdownOption.display_text"
                                     placeholder=""
                                     class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-r-0 border-gray-300"
@@ -93,8 +93,8 @@
                 let random_string = "";
                 let random_ascii;
                 for (let i = 0; i < 6; i++) {
-                    random_ascii = Math.floor(Math.random() * 25 + 97);
-                    random_string += String.fromCharCode(random_ascii);
+                    random_ascii = Math.floor(Math.random() * 25 + 97)
+                    random_string += String.fromCharCode(random_ascii)
                 }
                 return random_string;
             },
