@@ -200,6 +200,9 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             ->name('report.index');
         Route::post('report/{identifier}', [\AvoRed\Framework\Report\Controllers\ReportController::class, 'results'])
             ->name('report.post');
+
+        Route::get('/{vue_capture?}', [\AvoRed\Framework\System\Controllers\SpaController::class, 'index'])->where('vue_capture', '[\/\w\.-]*');
+        
     // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class
