@@ -1,33 +1,38 @@
 /*************** AVORED VUE COMPONENTS ***************/
 
-import { 
-    AvoRedInput,
-    AvoRedTable,
-    AvoRedUpload,
-    AvoRedSelect,
-    AvoRedToggle,
-    AvoRedTabs,
-    AvoRedTab,
-    AvoRedModal,
-    AvoRedAlert,
-    AvoRedConfirm,
-    AvoRedDropdown
-} from 'avored-components'
 
-Vue.component('avored-table', AvoRedTable)
-Vue.component('avored-input', AvoRedInput)
-Vue.component('avored-upload', AvoRedUpload)
-Vue.component('avored-select', AvoRedSelect)
-Vue.component('avored-toggle', AvoRedToggle)
-Vue.component('avored-tabs', AvoRedTabs)
-Vue.component('avored-tab', AvoRedTab)
-Vue.component('avored-modal', AvoRedModal)
-Vue.component('avored-dropdown', AvoRedDropdown)
+window.EventBus = new Vue()
+
+Vue.component('avored-table', require('./components/AvoRedTable').default)
+Vue.component('avored-input', require('./components/AvoRedInput').default)
+Vue.component('avored-upload', require('./components/AvoRedUpload').default)
+Vue.component('avored-select', require('./components/AvoRedSelect').default)
+Vue.component('avored-toggle', require('./components/AvoRedToggle').default)
+Vue.component('avored-tabs', require('./components/AvoRedTabs').default)
+Vue.component('avored-tab', require('./components/AvoRedTab').default)
+Vue.component('avored-modal', require('./components/AvoRedModal').default)
+Vue.component('avored-dropdown', require('./components/AvoRedDropdown').default)
 
 Vue.component('avored-menu', require('../modules/system/components/layout/Menu').default)
 
-Vue.use(AvoRedAlert)
-Vue.use(AvoRedConfirm)
+
+Vue.component('avored-alert', require('./components/AvoRedAlert').default)
+Vue.component('avored-confirm', require('./components/AvoRedConfirm').default)
+
+const confirm = params => {
+    window.EventBus.$emit('confirmOpen', params)
+}
+
+Vue.prototype.$confirm = confirm
+Vue['$confirm'] = confirm
+
+
+const alert = params => {
+    window.EventBus.$emit('open', params)
+}
+
+Vue.prototype.$alert = alert
+Vue['$alert'] = alert
 
 
 Vue.component('avored-new-customer-report', require('../modules/system/components/report/NewCustomer.vue').default)
