@@ -89,7 +89,6 @@ export default {
             }
         }).then(({data}) => {
           this.$emit('upload-response', data)
-          console.log('test')
           if (typeof data === 'object') {
             app.changeValue = data.path
           } else {

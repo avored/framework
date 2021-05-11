@@ -131,7 +131,7 @@ class ProductController
         return redirect()->route('admin.product.edit', ['product' => $product->id])
             ->with('successNotification', __(
                 'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.product.title')]
+                ['attribute' => __('avored::system.terms.product')]
             ));
     }
 
@@ -173,7 +173,7 @@ class ProductController
             ->route('admin.product.index')
             ->with('successNotification', __(
                 'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.product.title')]
+                ['attribute' => __('avored::system.terms.product')]
             ));
     }
 
@@ -229,7 +229,7 @@ class ProductController
         return response()->json([
             'success' => true,
             'image_model' => $imageModel,
-            'message' => __('avored::user.notification.upload', ['attribute' => 'Image']),
+            'message' => __('avored::system.notification.upload', ['attribute' => 'Image']),
         ]);
         
         // return response()->json(['image' => $imageModel]);
