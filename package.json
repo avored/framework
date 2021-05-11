@@ -6,26 +6,25 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --https --key ~/.config/valet/Certificates/laravel-ecommerce.test.key --cert ~/.config/valet/Certificates/laravel-ecommerce.test.crt --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "development": "mix",
+    "dev": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
   },
   "dependencies": {
-    "avored-components": "^0.1",
-    "axios": "^0.19.2",
+    "avored-components": "^0.1.16",
+    "axios": "^0.21.1",
     "chart.js": "^2.9.3",
     "chartjs": "^0.3.24",
     "cross-env": "^7.0.2",
-    "laravel-mix": "^5.0.4",
+    "laravel-mix": "^6.0.19",
     "laravel-mix-alias": "^1.0.2",
     "lodash": "^4.17.19",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
-    "tailwindcss": "^1.8.10",
+    "tailwindcss": "^2.1.2",
     "vddl": "^0.7.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
@@ -35,5 +34,8 @@
     "vue-template-compiler": "^2.6.11",
     "vue-zondicons": "^0.1.10",
     "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "vue-loader": "^15.9.6"
   }
 }

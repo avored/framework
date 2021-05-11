@@ -24,13 +24,13 @@ Vue.component('avored-tab', AvoRedTab)
 Vue.component('avored-modal', AvoRedModal)
 Vue.component('avored-dropdown', AvoRedDropdown)
 
-Vue.component('avored-menu', require('@/modules/system/components/layout/Menu').default)
+Vue.component('avored-menu', require('../modules/system/components/layout/Menu').default)
 
 Vue.use(AvoRedAlert)
 Vue.use(AvoRedConfirm)
 
 
-Vue.component('avored-new-customer-report', require('@/modules/system/components/report/NewCustomer.vue').default)
+Vue.component('avored-new-customer-report', require('../modules/system/components/report/NewCustomer.vue').default)
 
 import Zondicon from 'vue-zondicons'
 Vue.component('zondicon', Zondicon)

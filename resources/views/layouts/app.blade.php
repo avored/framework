@@ -49,7 +49,7 @@
             </div>
         </avored-layout>
     </div>
-    @if(env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
+    @if(true || env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
         @stack('scripts')
         <script src="{{ mix('vendor/avored/js/app.js') }}"></script>

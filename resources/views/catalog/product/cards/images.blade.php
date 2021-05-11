@@ -3,39 +3,13 @@
 <avored-upload
     label-text="{{ __('avored::system.btn.upload') }}"
     field-name="images"
-    @input="uploadFileChange"
+    v-on:upload-response="uploadFileChange"
     :display-preview="false"
     error-text="{{ $errors->first('images') }}"
     upload-url="{{ route('admin.product.image.upload', ['product' => $product]) }}"
 ></avored-upload>
-{{-- 
-<div class="mt-5">
-    <div class="rounded-md mb-5 p-5 border" v-for="item in productImages" :key="item.id">
-        <div class="flex items-center">
-            <div class="w-2/6">
-                <img src="https://placehold.it/250x250" class="w-32 h-32 rounded-full" />
-            </div>
-            <div class="w-1/6">
-                <avored-input
-                    label-text="{{ __('avored::system.fields.alt_text') }}"
-                    :field-name="`images[${item.id}][alt_text]`"
-                    :init-value="item.alt_text" 
-                    error-text="{{ $errors->first('alt_text') }}"
-                ></avored-input>
-            </div>
-            <div class="w-1/6">
-                <avored-input
-                    label-text="{{ __('avored::system.fields.alt_text') }}"
-                    :field-name="`images[${item.id}][alt_text]`"
-                    :init-value="item.alt_text" 
-                    error-text="{{ $errors->first('alt_text') }}"
-                ></avored-input>
-            </div>
-        </div>
-    </div>
-</div> --}}
+
 <div class="mt-5 rounded-md border" v-for="item in productImages" :key="item.id">
-    {{-- <div class="border-b p-5"> Image List</div> --}}
     <div class="p-5">
         <div class="flex items-center justify-center">
              <div class="w-1/6">
@@ -47,7 +21,6 @@
                     :value="item.id"
                     :id="`images[${item.id}][id]`"
                 />
-                {{-- <label :for="`images[${item.id}][id]`">{{ __('Is main image') }}</label> --}}
                 <input type="hidden" :name="`images[${item.id}][id]`"  v-model="item.id" />
             </div>
             <div class="w-2/6">

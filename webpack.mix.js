@@ -1,7 +1,8 @@
+const { vue } = require('laravel-mix');
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss')
 
-require('laravel-mix-alias')
+// require('laravel-mix-alias')
 
 /*
  |--------------------------------------------------------------------------
@@ -15,18 +16,6 @@ require('laravel-mix-alias')
  */
 
 
- let appUrl = process.env.APP_URL
-
- 
- if (typeof appUrl !== 'undefinded') {
-    let url = appUrl.replace(/(^\w+:|^)\/\//, '');
-    mix.options({
-        hmrOptions: {
-            host: url,
-            port: 8082
-        }
-    })
- }
 
  let publicPath = '../../../public'
 
@@ -38,17 +27,17 @@ mix.setPublicPath(publicPath)
 
 
 
-mix.alias({'@': 'resources/js'})
+// mix.alias({'@': 'resources/js'})
 
 filePath = 'vendor/avored/'
 // let filePath = ''
 
 /******** AVORED ADMIN JS  **********/
 
-mix.js('resources/js/avored.js', filePath + 'js/avored.js')
+mix.js('resources/js/avored.js', filePath + 'js/avored.js').vue()
     // .extract(['vue', 'ant-design-vue'])
 
-mix.js('resources/js/app.js', filePath + 'js/app.js')
+mix.js('resources/js/app.js', filePath + 'js/app.js').vue()
 
 /******** AVORED COPY IMAGES  **********/
 mix.copyDirectory('resources/images', publicPath +  '/' + filePath + '/images')
