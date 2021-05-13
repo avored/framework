@@ -12,7 +12,13 @@
 
     <!-- Styles -->
    
-    {!! Asset::renderCSS() !!}
+   @if(true || env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
+        <link rel="stylesheet" href="{{ mix('vendor/avored/css/app.css') }}"></link>
+    @else
+        {!! Asset::renderCSS() !!}
+    @endif
+    
+    
     @push('styles')
 
 </head>

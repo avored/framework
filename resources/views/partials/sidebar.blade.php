@@ -5,11 +5,9 @@
             <div class="text-xl text-red-600" :class="sidebar ? 'hidden' : ''">AvoRed</div>
         </a>
     </div>
-
     <nav class="mt-10">
         @foreach ($adminMenus as $key => $adminMenu)
             <avored-menu :sidebar="sidebar" :menu="{{ json_encode($adminMenu) }}"></avored-menu>
         @endforeach
     </nav>
-
 </div>

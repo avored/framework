@@ -11,7 +11,7 @@ use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
-use Zend\Diactoros\ServerRequest;
+use Nyholm\Psr7\ServerRequest;
 
 class LoginMutation extends Mutation
 {
@@ -41,6 +41,7 @@ class LoginMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+       
         $data = [];
         $user = $this->getUser($args);
         $client = $user->getPassportClient();
@@ -74,7 +75,8 @@ class LoginMutation extends Mutation
      */
     protected function createRequest($client, $userId, $data, array $scopes)
     {
-        return (new ServerRequest)->withParsedBody([
+        //string $method, $uri, array $headers = [], $body = null, string $version = '1.1', array $serverParams = []
+        return (new ServerRequest('POST', 'not-important'))->withParsedBody([
             'grant_type' => 'password',
             'client_id' => $client->id,
             'client_secret' => $client->secret,

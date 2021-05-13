@@ -30,7 +30,6 @@ return [
                 'mutation' => [
                     'login' => \AvoRed\Framework\Graphql\Mutations\Auth\LoginMutation::class,
                     'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
-                    'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                     'adminCategoryCreate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryCreateMutation::class,
                     'adminCategoryUpdate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryUpdateMutation::class,
                     'adminCategoryDelete' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryDeleteMutation::class,
@@ -46,6 +45,16 @@ return [
                     // 'example_mutation'  => ExampleMutation::class,
                 ],
                 'middleware' => ['auth:api'],
+                'method'     => ['get', 'post'],
+            ],
+            'admin' => [
+                'query' => [
+                ],
+                'mutation' => [
+                    // 'example_mutation'  => ExampleMutation::class,
+                    'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
+                ],
+                'middleware' => ['web'],
                 'method'     => ['get', 'post'],
             ],
         ],
