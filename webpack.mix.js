@@ -34,10 +34,10 @@ filePath = 'vendor/avored/'
 
 /******** AVORED ADMIN JS  **********/
 
-mix.js('resources/js/avored.js', filePath + 'js/avored.js').vue()
+mix.js('resources/js/avored.js', filePath + 'js/avored.js').vue({version: 2})
     // .extract(['vue', 'ant-design-vue'])
 
-mix.js('resources/js/app.js', filePath + 'js/app.js').vue()
+mix.js('resources/js/app.js', filePath + 'js/app.js').vue({version: 2})
 
 /******** AVORED COPY IMAGES  **********/
 mix.copyDirectory('resources/images', publicPath +  '/' + filePath + '/images')

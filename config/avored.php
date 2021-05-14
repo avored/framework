@@ -47,14 +47,24 @@ return [
                 'middleware' => ['auth:api'],
                 'method'     => ['get', 'post'],
             ],
-            'admin' => [
+            'admin_guest' => [
                 'query' => [
                 ],
                 'mutation' => [
                     // 'example_mutation'  => ExampleMutation::class,
                     'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                 ],
-                'middleware' => ['web'],
+                'middleware' => [],
+                'method'     => ['get', 'post'],
+            ],
+            'admin' => [
+                'query' => [
+                    'adminAllCategories' => \AvoRed\Framework\Graphql\Queries\Admin\Catalog\Category\AdminAllCategories::class
+                ],
+                'mutation' => [
+                    // 'example_mutation'  => ExampleMutation::class,
+                ],
+                'middleware' => ['auth:admin_api'],
                 'method'     => ['get', 'post'],
             ],
         ],

@@ -37,11 +37,11 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
 
     /**
      * Construct for the Category Repository
-     * 
+     *
      */
     public function __construct()
     {
-        $this->model = new Category;   
+        $this->model = new Category;
     }
 
     /**

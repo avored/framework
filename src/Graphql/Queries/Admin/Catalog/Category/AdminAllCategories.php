@@ -10,10 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class CategoryTableQuery extends Query
+class AdminAllCategories extends Query
 {
+    /**
+     * Default Per Page
+     * @var int $perPage
+     */
+    protected $perPage = 10;
+
     protected $attributes = [
-        'name' => 'adminCategoryTable',
+        'name' => 'adminAllCategories',
         'description' => 'A query'
     ];
 
@@ -39,7 +45,7 @@ class CategoryTableQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('category'));
+        return GraphQL::paginate('category');
     }
 
     /**
@@ -67,6 +73,6 @@ class CategoryTableQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        return $this->categoryRepository->all();
+        return $this->categoryRepository->paginate($this->perPage);
     }
 }

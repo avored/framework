@@ -72,10 +72,26 @@ Vue.component('password-new-page', require('../components/system/PasswordNewPage
 Vue.component('blog-card', require('../components/content/BlogCard.vue').default)
 Vue.component('content-builder', require('../components/content/Builder.vue').default)
 
+
+import { useClient } from 'villus'
+console.log(useClient)
+// const clientOptions = {
+//     url: 'https://site1.laravel-ecommerce.test/graphql/admin_guest', // Your endpoint
+//   };
+
+// const AppWithClient = withProvider(App, clientOptions);
+
+import VueCompositionApi from "@vue/composition-api"
+Vue.use(VueCompositionApi)
+
 const app = new Vue({
     el: '#app',
     router: Router,
     i18n,
     store: Store,
-    //apolloProvider
+    setup() {
+        useClient({
+          url: "https://site1.laravel-ecommerce.test/graphql/admin_guest"
+        })
+    },
 });
