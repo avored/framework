@@ -10,6 +10,7 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+import Vue from 'vue'
 import i18n from './services/i18n'
 // import apolloProvider from './services/apollo'
 // import Router from './services/router'

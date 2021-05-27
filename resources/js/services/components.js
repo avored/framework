@@ -1,6 +1,7 @@
 /*************** AVORED VUE COMPONENTS ***************/
 
-import { 
+import Vue from 'vue'
+import {
     AvoRedInput,
     AvoRedTable,
     AvoRedUpload,

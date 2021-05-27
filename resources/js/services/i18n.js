@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import * as system from '@/modules/system/lang/en.json'
 Vue.use(VueI18n)
