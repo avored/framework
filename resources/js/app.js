@@ -73,8 +73,8 @@ Vue.component('blog-card', require('../components/content/BlogCard.vue').default
 Vue.component('content-builder', require('../components/content/Builder.vue').default)
 
 
-import { useClient } from 'villus'
-console.log(useClient)
+// import { useClient } from 'villus'
+// console.log(useClient)
 // const clientOptions = {
 //     url: 'https://site1.laravel-ecommerce.test/graphql/admin_guest', // Your endpoint
 //   };
@@ -89,9 +89,9 @@ const app = new Vue({
     router: Router,
     i18n,
     store: Store,
-    setup() {
-        useClient({
-          url: "https://site1.laravel-ecommerce.test/graphql/admin_guest"
-        })
-    },
+    // setup() {
+    //     useClient({
+    //       url: "https://site1.laravel-ecommerce.test/graphql/admin_guest"
+    //     })
+    // },
 });
