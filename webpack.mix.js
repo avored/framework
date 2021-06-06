@@ -25,7 +25,16 @@ if (mix.inProduction()) {
 
 mix.setPublicPath(publicPath)
 
-
+mix.webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.mjs$/i,
+          resolve: { byDependency: { esm: { fullySpecified: false } } },
+        },
+      ],
+    },
+  })
 
 // mix.alias({'@': 'resources/js'})
 

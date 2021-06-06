@@ -64,7 +64,7 @@ return [
                 'mutation' => [
                     // 'example_mutation'  => ExampleMutation::class,
                 ],
-                'middleware' => ['auth:admin_api'],
+                'middleware' => [],
                 'method'     => ['get', 'post'],
             ],
         ],

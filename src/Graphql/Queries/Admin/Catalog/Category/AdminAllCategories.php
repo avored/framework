@@ -6,6 +6,8 @@ use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -59,7 +61,7 @@ class AdminAllCategories extends Query
 
     public function authorize($root, array $args, $ctx, ResolveInfo $resolveInfo = null, Closure $getSelectFields = null): bool
     {
-        return Auth::guard('admin_api')->check();
+        return true; // Auth::guard('admin_api')->check();
     }
 
     /**
@@ -69,9 +71,9 @@ class AdminAllCategories extends Query
      * @param mixed $context
      * @param \GraphQL\Type\Definition\ResolveInfo $resolveInfo
      * @param midex $getSelectFields
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return LengthAwarePaginator
      */
-    public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
+    public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): LengthAwarePaginator
     {
         return $this->categoryRepository->paginate($this->perPage);
     }

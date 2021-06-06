@@ -1,4 +1,5 @@
-window.axios = require('axios');
+window._ = require('lodash')
+window.axios = require('axios')
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -73,7 +74,7 @@ Vue.component('blog-card', require('../components/content/BlogCard.vue').default
 Vue.component('content-builder', require('../components/content/Builder.vue').default)
 
 
-// import { useClient } from 'villus'
+import { useClient } from 'villus'
 // console.log(useClient)
 // const clientOptions = {
 //     url: 'https://site1.laravel-ecommerce.test/graphql/admin_guest', // Your endpoint
@@ -89,9 +90,9 @@ const app = new Vue({
     router: Router,
     i18n,
     store: Store,
-    // setup() {
-    //     useClient({
-    //       url: "https://site1.laravel-ecommerce.test/graphql/admin_guest"
-    //     })
-    // },
+    setup() {
+        useClient({
+          url: "/graphql/admin_guest"
+        })
+    },
 });

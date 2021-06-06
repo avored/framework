@@ -1,14 +1,10 @@
 <template>
   <div>
-    <div>
+     
+    <div v-if="categories.data">
          <avored-table
             :columns="columns"
-            :from="categories.from"
-            :to="categories.to"
-            :total="categories.total"
-            :prev_page_url="categories.prev_page_url"
-            :next_page_url="categories.next_page_url"
-            :items="categories.data"
+            :items="categories.data.adminAllCategories.data"
             :filerable="true"
             @changeFilter="filterTableData"
         >
@@ -44,88 +40,194 @@
 </template>
 
 <script>
+import { useQuery, useClient, fetch } from 'villus'
+import { ref } from '@vue/composition-api'
+import { Provider } from 'villus'
 
 export default {
-  props: ['baseUrl', 'initCategories', 'filterUrl'],
-  data () {
-    return {
-        columns: [],
-        categories: []
-    };
-  },
-  mounted() {
-    this.columns = [
-        {
-          label: this.$t('system.id'),
-          fieldKey: "id",
-          visible: true
-        },
-        {
-          label: this.$t('system.parent'),
-          slotName: "parent",
-          visible: true
-        },
-        {
-          label: this.$t('system.name'),
-          slotName: "name",
-          visible: true
-        },
-        {
-          label: this.$t('system.slug'),
-          fieldKey: "slug",
-          visible: true
-        },
-        {
-          label: this.$t('system.meta_title'),
-          fieldKey: "meta_title",
-          visible: true
-        },
-        {
-          label: this.$t('system.meta_description'),
-          fieldKey: "meta_description",
-          visible: false
-        },
-        {
-          label: this.$t('system.actions'),
-          slotName: "action",
-          visible: true
-        }
-    ];
-    this.categories = this.initCategories
+  
+    props: ['baseUrl', 'initCategories', 'filterUrl'],
+    components: {
+        Provider,
+    },
+    setup(props) {
+        const client = useClient({
+          url: '/graphql/admin', // your endpoint.
+        })
 
-  },
-  methods: {
-      filterTableData(e) {
+        const columns = ref([
+            {
+              label: 'id',
+              fieldKey: "id",
+              visible: true
+            },
+            {
+              label: 'Parent',
+              slotName: "parent",
+              visible: true
+            },
+            {
+              label: 'Name',
+              slotName: "name",
+              visible: true
+            },
+            {
+              label: 'Slug',
+              fieldKey: "slug",
+              visible: true
+            },
+            {
+              label: 'Meta Title',
+              fieldKey: "meta_title",
+              visible: true
+            },
+            {
+              label: 'Meta Description',
+              fieldKey: "meta_description",
+              visible: false
+            },
+            {
+              label: 'Actions',
+              slotName: "action",
+              visible: true
+            }
+        ])
+        
+        const AdminAllCategories = `
+            query {
+                adminAllCategories {
+                    data {
+                        id
+                        name
+                        slug
+                        meta_title
+                        meta_description
+                        created_at
+                        updated_at
+                    },
+                }
+            }
+        `;
+        const result = useQuery({
+            query: AdminAllCategories,
+        })
+        const categories = ref(result)
+        
+        const filterTableData = (e)  => {
           let app = this
           var data = {filter: e.target.value}
           axios.post(this.filterUrl, data)
             .then((response) => {
               app.categories = response.data
             })
-      },
-      getEditUrl(record) {
-          return this.baseUrl + '/category/' + record.id + '/edit';
-      },
-      getDeleteUrl(record) {
-          return this.baseUrl + '/category/' + record.id;
-      },
-      deleteOnClick(record) {
-        var url = this.baseUrl  + '/category/' + record.id;
-        var app = this;
-        this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
-            axios.delete(url)
-              .then(response =>  {
-                  if (response.data.success === true) {
-                      app.$alert(response.data.message)
-                  }
-                  window.location.reload();
-              })
-              .catch(errors => {
-                  app.$alert(errors.message)
-              });
-        }})
+        }
+
+        const getEditUrl = (record) => {
+              return props.baseUrl + '/category/' + record.id + '/edit';
+        }
+
+        const getDeleteUrl = (record) => {
+          return props.baseUrl + '/category/' + record.id
+        }
+
+        const deleteOnClick = (record) => {
+          var url = props.baseUrl  + '/category/' + record.id;
+            var app = this;
+            this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
+                axios.delete(url)
+                  .then(response =>  {
+                      if (response.data.success === true) {
+                          app.$alert(response.data.message)
+                      }
+                      window.location.reload();
+                  })
+                  .catch(errors => {
+                      app.$alert(errors.message)
+                  });
+            }})
+        }
+        return {
+            columns,
+            categories,
+            filterTableData,
+            getEditUrl,
+            getDeleteUrl,
+            deleteOnClick
+
+        }
+    }
+  // mounted() {
+  //   this.columns = [
+  //       {
+  //         label: this.$t('system.id'),
+  //         fieldKey: "id",
+  //         visible: true
+  //       },
+  //       {
+  //         label: this.$t('system.parent'),
+  //         slotName: "parent",
+  //         visible: true
+  //       },
+  //       {
+  //         label: this.$t('system.name'),
+  //         slotName: "name",
+  //         visible: true
+  //       },
+  //       {
+  //         label: this.$t('system.slug'),
+  //         fieldKey: "slug",
+  //         visible: true
+  //       },
+  //       {
+  //         label: this.$t('system.meta_title'),
+  //         fieldKey: "meta_title",
+  //         visible: true
+  //       },
+  //       {
+  //         label: this.$t('system.meta_description'),
+  //         fieldKey: "meta_description",
+  //         visible: false
+  //       },
+  //       {
+  //         label: this.$t('system.actions'),
+  //         slotName: "action",
+  //         visible: true
+  //       }
+  //   ];
+  //   this.categories = this.initCategories
+  // },
+  // methods: {
+  //     filterTableData(e) {
+  //         let app = this
+  //         var data = {filter: e.target.value}
+  //         axios.post(this.filterUrl, data)
+  //           .then((response) => {
+  //             app.categories = response.data
+  //           })
+  //     },
+  //     getEditUrl(record) {
+  //         return this.baseUrl + '/category/' + record.id + '/edit';
+  //     },
+  //     getDeleteUrl(record) {
+  //         return this.baseUrl + '/category/' + record.id;
+  //     },
+  //     deleteOnClick(record) {
+  //       var url = this.baseUrl  + '/category/' + record.id;
+  //       var app = this;
+  //       this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
+  //           axios.delete(url)
+  //             .then(response =>  {
+  //                 if (response.data.success === true) {
+  //                     app.$alert(response.data.message)
+  //                 }
+  //                 window.location.reload();
+  //             })
+  //             .catch(errors => {
+  //                 app.$alert(errors.message)
+  //             });
+  //       }})
      
-    },
-  }
+  //   },
+  // }
 };
 </script>
