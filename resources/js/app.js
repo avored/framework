@@ -21,6 +21,10 @@ import './services/components'
 import Vddl from 'vddl'
 Vue.use(Vddl)
 
+import VueCompositionApi from "@vue/composition-api"
+Vue.use(VueCompositionApi)
+
+
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)
 
@@ -74,6 +78,9 @@ Vue.component('blog-card', require('../components/content/BlogCard.vue').default
 Vue.component('content-builder', require('../components/content/Builder.vue').default)
 
 
+Vue.component('page-title', require('./modules/system/components/layout/PageTitle.vue').default)
+
+
 import { useClient } from 'villus'
 // console.log(useClient)
 // const clientOptions = {
@@ -82,8 +89,7 @@ import { useClient } from 'villus'
 
 // const AppWithClient = withProvider(App, clientOptions);
 
-import VueCompositionApi from "@vue/composition-api"
-Vue.use(VueCompositionApi)
+
 
 const app = new Vue({
     el: '#app',
