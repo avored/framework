@@ -26,7 +26,7 @@
                         <div>
                             <a href="https://avored.com" target="_blank">
                                 <img class="mx-auto h-12 w-auto" 
-                                    src="{{ asset('/images/logo.svg') }}" 
+                                    src="{{ asset('/vendor/avored/images/logo_only.svg') }}" 
                                     alt="AvoRed Ecommerce" />
                             </a>
                             <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
