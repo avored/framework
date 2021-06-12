@@ -1,6 +1,5 @@
 <template>
   <div>
-     
     <div v-if="categories.data">
          <avored-table
             :columns="columns"
@@ -8,17 +7,17 @@
             :filerable="true"
             @changeFilter="filterTableData"
         >
-          <template slot="name" slot-scope="{item}">
-              <a :href="`${baseUrl}/category/${item.id}/edit`" class="text-red-700 hover:text-red-600">
-                  {{ item.name }}
+          <template v-slot:name="slotProps">
+              <a :href="`${baseUrl}/category/${slotProps.item.id}/edit`" class="text-red-700 hover:text-red-600">
+                  {{ slotProps.item.name }}
               </a>
           </template>
-          <template slot="parent" slot-scope="{item}">
-              {{ item.parent ? item.parent.name : '' }}
+          <template v-slot:parent="slotProps">
+              {{ slotProps.item.parent ? slotProps.item.parent.name : '' }}
           </template>
-          <template slot="action" slot-scope="{item}">
+          <template v-slot:action="slotProps">
             <div class="flex items-center">
-                <a :href="getEditUrl(item)">
+                <a :href="getEditUrl(slotProps.item)">
                   <svg class="h-6 w-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
                       class="heroicon-ui"
@@ -27,7 +26,7 @@
                   </svg>
                 </a>
 
-                <button type="button" @click.prevent="deleteOnClick(item)">
+                <button type="button" @click.prevent="deleteOnClick(slotProps.item)">
                   <svg class="h-6 w-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path class="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 012 2v2h5a1 1 0 010 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8H3a1 1 0 110-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 011 1v6a1 1 0 01-2 0v-6a1 1 0 011-1zm4 0a1 1 0 011 1v6a1 1 0 01-2 0v-6a1 1 0 011-1z"/>
                   </svg>
@@ -46,7 +45,7 @@ import { Provider } from 'villus'
 
 export default {
   
-    props: ['baseUrl', 'initCategories', 'filterUrl'],
+    props: ['initCategories', 'filterUrl'],
     components: {
         Provider,
     },
@@ -54,6 +53,7 @@ export default {
         const client = useClient({
           url: '/graphql/admin', // your endpoint.
         })
+        const baseUrl = '/admin'
 
         const columns = ref([
             {
@@ -123,15 +123,15 @@ export default {
         }
 
         const getEditUrl = (record) => {
-              return props.baseUrl + '/category/' + record.id + '/edit';
+              return baseUrl + '/category/' + record.id + '/edit';
         }
 
         const getDeleteUrl = (record) => {
-          return props.baseUrl + '/category/' + record.id
+          return baseUrl + '/category/' + record.id
         }
 
         const deleteOnClick = (record) => {
-          var url = props.baseUrl  + '/category/' + record.id;
+          var url = baseUrl  + '/category/' + record.id;
             var app = this;
             this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
                 axios.delete(url)
@@ -147,6 +147,7 @@ export default {
             }})
         }
         return {
+            baseUrl,
             columns,
             categories,
             filterTableData,
@@ -156,78 +157,5 @@ export default {
 
         }
     }
-  // mounted() {
-  //   this.columns = [
-  //       {
-  //         label: this.$t('system.id'),
-  //         fieldKey: "id",
-  //         visible: true
-  //       },
-  //       {
-  //         label: this.$t('system.parent'),
-  //         slotName: "parent",
-  //         visible: true
-  //       },
-  //       {
-  //         label: this.$t('system.name'),
-  //         slotName: "name",
-  //         visible: true
-  //       },
-  //       {
-  //         label: this.$t('system.slug'),
-  //         fieldKey: "slug",
-  //         visible: true
-  //       },
-  //       {
-  //         label: this.$t('system.meta_title'),
-  //         fieldKey: "meta_title",
-  //         visible: true
-  //       },
-  //       {
-  //         label: this.$t('system.meta_description'),
-  //         fieldKey: "meta_description",
-  //         visible: false
-  //       },
-  //       {
-  //         label: this.$t('system.actions'),
-  //         slotName: "action",
-  //         visible: true
-  //       }
-  //   ];
-  //   this.categories = this.initCategories
-  // },
-  // methods: {
-  //     filterTableData(e) {
-  //         let app = this
-  //         var data = {filter: e.target.value}
-  //         axios.post(this.filterUrl, data)
-  //           .then((response) => {
-  //             app.categories = response.data
-  //           })
-  //     },
-  //     getEditUrl(record) {
-  //         return this.baseUrl + '/category/' + record.id + '/edit';
-  //     },
-  //     getDeleteUrl(record) {
-  //         return this.baseUrl + '/category/' + record.id;
-  //     },
-  //     deleteOnClick(record) {
-  //       var url = this.baseUrl  + '/category/' + record.id;
-  //       var app = this;
-  //       this.$confirm({message: this.$t('system.delete_modal_message', {name: record.name, term: this.$t('system.category')}), callback: () => {
-  //           axios.delete(url)
-  //             .then(response =>  {
-  //                 if (response.data.success === true) {
-  //                     app.$alert(response.data.message)
-  //                 }
-  //                 window.location.reload();
-  //             })
-  //             .catch(errors => {
-  //                 app.$alert(errors.message)
-  //             });
-  //       }})
-     
-  //   },
-  // }
 };
 </script>
