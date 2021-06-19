@@ -3,7 +3,7 @@
     <div v-if="categories.data">
       <avored-table
         :columns="columns"
-        :items="categories.data.adminAllCategories.data"
+        :items="categories.data.AllCategories.data"
         :filerable="true"
         @changeFilter="filterTableData"
       >
