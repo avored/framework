@@ -19,7 +19,7 @@ Route::middleware(['web'])
     ->namespace('AvoRed\\Framework')
     ->name('admin.')
     ->group(function () {
-            
+
         /***************** LOGIN ROUTE *****************/
         Route::get('login', [\AvoRed\Framework\User\Controllers\LoginController::class, 'loginForm'])
             ->name('login');
@@ -51,7 +51,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
     ->namespace('AvoRed\Framework')
     ->name('admin.')
     ->group(function () {
-        
+
         Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class, 'index'])
             ->name('dashboard');
 
@@ -186,7 +186,9 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('menu-group/{menuGroup}/menu', Cms\Controllers\MenuController::class);
         Route::resource('page', Cms\Controllers\PageController::class);
         Route::resource('property', Catalog\Controllers\PropertyController::class);
-        Route::resource('product', Catalog\Controllers\ProductController::class);
+        Route::get('product/create', [\AvoRed\Framework\System\Controllers\SpaController::class, 'index'])
+            ->name('product.create');
+        Route::resource('product', Catalog\Controllers\ProductController::class)->except(['create']);
         Route::resource('role', System\Controllers\RoleController::class);
         Route::resource('state', System\Controllers\StateController::class);
         Route::resource('customer', User\Controllers\CustomerController::class);
@@ -203,7 +205,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
             ->name('report.post');
 
         Route::get('/{vue_capture?}', [\AvoRed\Framework\System\Controllers\SpaController::class, 'index'])->where('vue_capture', '[\/\w\.-]*');
-        
+
     // Route::get(
         //     'promotion-code-edit/{promotionCode?}',
         //     Promotion\Controllers\PromotionCode\EditController::class

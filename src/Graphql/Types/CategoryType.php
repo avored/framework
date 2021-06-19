@@ -23,7 +23,7 @@ class CategoryType extends GraphQLType
         'description' => 'A type'
     ];
 
-     /**
+    /**
      * Fields for Category Type
      * @return array $fields
      */
@@ -96,6 +96,7 @@ class CategoryType extends GraphQLType
      */
     protected function getNoOfPaginateItem(): int
     {
+        // This can be argument as well
         return $this->perPage;
     }
 }

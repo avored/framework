@@ -11,14 +11,14 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <!-- Styles -->
-   
-   @if(true || env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
-        <link rel="stylesheet" href="{{ mix('vendor/avored/css/app.css') }}"></link>
+
+   @if(true || env('APP_ENV') === 'local')
+        <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
     @else
         {!! Asset::renderCSS() !!}
     @endif
-    
-    
+
+
     @push('styles')
 
 </head>
@@ -27,9 +27,9 @@
     <div id="app">
         <avored-alert></avored-alert>
         <avored-confirm></avored-confirm>
-        
+
         <avored-layout inline-template>
-            
+
             <div class="flex items-start">
                 <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
                     @include('avored::partials.sidebar')
@@ -55,16 +55,16 @@
             </div>
         </avored-layout>
     </div>
-    @if(true || env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
-        <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
+    @if(true || env('APP_ENV') === 'local')
+        <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
         @stack('scripts')
-        <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
+        <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
     @else
         <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
         @stack('scripts')
         <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
     @endif
-    
+
 </body>
 
 </html>

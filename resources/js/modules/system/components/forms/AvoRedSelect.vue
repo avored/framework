@@ -46,7 +46,7 @@
                         class="dropdown-options w-full mt-1 z-10 bg-white border border-gray-500 absolute overflow-y-scroll rounded shadow text-gray-700">
                         
                         <template v-for="(optionLabel, optionValue) in options">
-                            <li :key="optionValue" :value="optionValue"
+                            <li :key="getOptionValue(optionLabel, optionValue)" :value="getOptionValue(optionLabel, optionValue)"
                                 class="px-2 py-1 hover:bg-gray-300 cursor-pointer">
                                 {{ optionLabel }}
                             </li>
@@ -96,6 +96,9 @@ export default {
         };
     },
     methods: {
+        getOptionValue(label, value) {
+            console.log(label, value)
+        },
         selectedOption(event) {
             const val = event.target.getAttribute('value')
             var findVal = false

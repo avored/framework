@@ -5,14 +5,12 @@ use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class AdminAllCategories extends Query
+class AllCategories extends Query
 {
     /**
      * Default Per Page
@@ -21,7 +19,7 @@ class AdminAllCategories extends Query
     protected $perPage = 10;
 
     protected $attributes = [
-        'name' => 'adminAllCategories',
+        'name' => 'AllCategories',
         'description' => 'A query'
     ];
 

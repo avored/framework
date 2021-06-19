@@ -9,7 +9,7 @@
         <div class="text-xl text-red-700 font-semibold">
             {{ __('avored::system.pages.title.create', ['attribute' => __('avored::system.terms.product')]) }}
         </div>
-       
+
     </div>
 @endsection
 
@@ -25,7 +25,7 @@
                         <avored-input
                             label-text="{{ __('avored::system.fields.name') }}"
                             field-name="name"
-                            init-value="{{ $category->name ?? '' }}" 
+                            init-value="{{ $category->name ?? '' }}"
                             error-text="{{ $errors->first('name') }}"
                         >
                         </avored-input>
@@ -34,13 +34,13 @@
                         <avored-input
                             label-text="{{ __('avored::system.fields.slug') }}"
                             field-name="slug"
-                            init-value="{{ $category->slug ?? '' }}" 
+                            init-value="{{ $category->slug ?? '' }}"
                             error-text="{{ $errors->first('slug') }}"
                         >
                         </avored-input>
                     </div>
                 </div>
-                
+
                 <div class="mt-3 flex w-full">
                     <avored-select
                         label-text="{{ __('avored::system.fields.type') }}"
@@ -60,7 +60,7 @@
                         </svg>
                         <span class="ml-3">{{ __('avored::system.btn.save') }}</span>
                     </button>
-                    
+
                     <a href="{{ route('admin.product.index') }}"
                         class="px-6 py-2 font-semibold inline-block text-white leading-7 hover:text-white bg-gray-500 rounded hover:bg-gray-600">
                         <span class="leading-7">
@@ -69,7 +69,7 @@
                     </a>
                 </div>
             </form>
-            </div>
-        </product-save>
+        </div>
+    </product-save>
 </div>
 @endsection

@@ -10,19 +10,21 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+import VueCompositionApi from "@vue/composition-api"
+Vue.use(VueCompositionApi)
+
+
+import './services/components'
 
 import i18n from './services/i18n'
-// import apolloProvider from './services/apollo'
-// import Router from './services/router'
+
+
 import Router from './services/router'
 import Store from './services/store'
-import './services/components'
 
 import Vddl from 'vddl'
 Vue.use(Vddl)
 
-import VueCompositionApi from "@vue/composition-api"
-Vue.use(VueCompositionApi)
 
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
@@ -41,11 +43,12 @@ Vue.component('property-save', require('../components/catalog/property/PropertyS
 
 Vue.component('product-table', require('../components/catalog/product/ProductTable.vue').default)
 Vue.component('product-save', require('../components/catalog/product/ProductSave.vue').default)
+Vue.component('product-create', require('./modules/catalog/product/ProductCreate.vue').default)
 
 Vue.component('currency-table', require('../components/system/currency/CurrencyTable.vue').default)
 Vue.component('currency-save', require('../components/system/currency/CurrencySave.vue').default)
 
-Vue.component('category-table', require('../components/catalog/category/CategoryTable.vue').default)
+Vue.component('category-table', require('./modules/catalog/category/CategoryTable.vue').default)
 
 Vue.component('configuration-save', require('../components/system/configuration/ConfigurationSave.vue').default)
 

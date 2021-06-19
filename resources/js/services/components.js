@@ -15,17 +15,14 @@ Vue.component('avored-dropdown', require('./components/AvoRedDropdown').default)
 
 Vue.component('avored-menu', require('../modules/system/components/layout/Menu').default)
 
-
 Vue.component('avored-alert', require('./components/AvoRedAlert').default)
 Vue.component('avored-confirm', require('./components/AvoRedConfirm').default)
 
 const confirm = params => {
     window.EventBus.$emit('confirmOpen', params)
 }
-
 Vue.prototype.$confirm = confirm
 Vue['$confirm'] = confirm
-
 
 const alert = params => {
     window.EventBus.$emit('open', params)
