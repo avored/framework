@@ -54,7 +54,12 @@ class AllCategories extends Query
      */
     public function args(): array
     {
-        return [];
+        return [
+            'page' => [
+                'name' => 'page',
+                'type' => Type::int(),
+            ],
+        ];
     }
 
     public function authorize($root, array $args, $ctx, ResolveInfo $resolveInfo = null, Closure $getSelectFields = null): bool
@@ -73,6 +78,9 @@ class AllCategories extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): LengthAwarePaginator
     {
-        return $this->categoryRepository->paginate($this->perPage);
+        $page = (int) ($args['page'] ?? request('page', 1));
+
+       
+        return $this->categoryRepository->paginate($this->perPage, [], $page);
     }
 }

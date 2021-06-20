@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 abstract class BaseRepository
 {
@@ -33,10 +34,16 @@ abstract class BaseRepository
      * Get Pagination of the model
      * @param int $perPage
      * @param array $with
+     * @param int $currentPage
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function paginate($perPage = 10, array $with = []) : LengthAwarePaginator
+    public function paginate($perPage = 10, array $with = [], int $currentPage = 1) : LengthAwarePaginator
     {
+        Paginator::currentPageResolver(function() use ($currentPage) {
+            return $currentPage;
+        });
+
+
         $this->perPage = $perPage;
         $query = $this->query();
         if (count($with) > 0) {

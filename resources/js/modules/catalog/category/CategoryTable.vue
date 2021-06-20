@@ -5,6 +5,11 @@
         :columns="columns"
         :items="categories.data.AllCategories.data"
         :filerable="true"
+        :total="categories.data.AllCategories.total"
+        :from="categories.data.AllCategories.from"
+        :to="categories.data.AllCategories.to"
+        :next_page_url="nextPageUrl()"
+        :prev_page_url="prevPageUrl()"
         @changeFilter="filterTableData"
       >
         <template v-slot:name="slotProps">
@@ -56,16 +61,17 @@
 </template>
 
 <script>
-import { useQuery, useClient } from "villus";
-import { ref } from "@vue/composition-api";
-import { Provider } from "villus";
+import { useQuery, useClient } from "villus"
+import { ref } from "@vue/composition-api"
+import { Provider } from "villus"
+import _ from 'lodash'
 
 export default {
   props: ["initCategories", "filterUrl"],
   components: {
     Provider,
   },
-  setup(props) {
+  setup(props, context) {
     const client = useClient({
       url: "/graphql/admin", // your endpoint.
     });
@@ -109,9 +115,12 @@ export default {
       },
     ]);
 
+    const route = context.root.$route
+    const page = _.get(route, 'query.page', 1)
+
     const AdminAllCategories = `
             query {
-                AllCategories {
+                AllCategories(page: ${page}) {
                     data {
                         id
                         name
@@ -121,6 +130,12 @@ export default {
                         created_at
                         updated_at
                     },
+                    total
+                    per_page
+                    to
+                    from
+                    has_more_pages
+                    current_page
                 }
             }
         `;
@@ -163,20 +178,43 @@ export default {
                 window.location.reload();
                 })
                 .catch((errors) => {
-                app.$alert(errors.message);
+                    app.$alert(errors.message);
                 });
             },
         });
-        };
-        return {
-            baseUrl,
-            columns,
-            categories,
-            filterTableData,
-            getEditUrl,
-            getDeleteUrl,
-            deleteOnClick,
-        };
+    };
+    const nextPageUrl = () => {
+        if (_.get(categories, 'value.data.AllCategories.has_more_pages')) {
+            let nextPage = _.get(categories, 'value.data.AllCategories.current_page', 1) + 1
+
+            return `${baseUrl}/category?page=${nextPage++}`
+        }
+
+        return null
+
+    }
+    const prevPageUrl = () => {
+        if (_.get(categories, 'value.data.AllCategories.current_page') > 1) {
+            let prevPage = _.get(categories, 'value.data.AllCategories.current_page', 1) - 1
+
+            return `${baseUrl}/category?page=${prevPage++}`
+        }
+
+        return null
+    }
+
+
+    return {
+        baseUrl,
+        columns,
+        categories,
+        filterTableData,
+        getEditUrl,
+        getDeleteUrl,
+        deleteOnClick,
+        nextPageUrl,
+        prevPageUrl
+    };
     },
 };
 </script>
