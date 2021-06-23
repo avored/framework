@@ -47,9 +47,9 @@
                                 {{ emptyLabel }}
                             </li>
                         <template v-for="(optionLabel, optionValue) in options">
-                            <li :key="optionValue" :value="optionValue"
+                            <li :value="optionValue" :key="optionValue"
                                 class="px-2 py-1 hover:bg-gray-300 cursor-pointer">
-                                {{ optionLabel }}
+                                {{ getOptionLabel(optionLabel, optionValue) }}
                             </li>
                         </template>
                     </ul>
@@ -83,6 +83,7 @@ export default {
         labelText: { type: [String], default: "" },
         initValue: { type: [String, Array, Number], default: "" },
         options: {type: [Array, Object], default: () =>[]},
+        optionLabelCallback: { type: [Function], default: null },
         errorText: { type: [String], default: ''},
         fieldName: { type: [String], default: ''},
         disabled: { type: [Boolean], default: false},
@@ -98,6 +99,12 @@ export default {
         };
     },
     methods: {
+        getOptionLabel(label, value) {
+            if (typeof this.optionLabelCallback === 'function') {
+                return this.optionLabelCallback(label, value, this.options)
+            }
+            return label
+        },
         isSelectedAlready(val) {
             const findIndex = this.changeValue.findIndex((el) => {
                 return el == val

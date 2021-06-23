@@ -26,6 +26,7 @@ import Vddl from 'vddl'
 Vue.use(Vddl)
 
 
+Vue.component('admin', require('./modules/system/pages/admin.vue').default)
 
 Vue.component('order-table', require('../components/order/order/OrderTable.vue').default)
 Vue.component('order-show', require('../components/order/order/OrderShow.vue').default)

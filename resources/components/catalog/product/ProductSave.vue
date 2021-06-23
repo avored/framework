@@ -34,6 +34,7 @@ export default {
   data () {
     return {
         type: null,
+        singleVariationModal: false,
         description: null,
         status: 0,
         track_stock: 0,
@@ -52,12 +53,14 @@ export default {
   },
   methods: {
       handleUploadImageChange() {
-
+      },
+      createSingleVariationModal() {
+          this.singleVariationModal = !this.singleVariationModal
       },
       clickVariationSave(e) {
         let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
         var app = this;
-        
+
         axios.post(url, this.variationModel)
           .then(res => {
             if (res.data.success) {
@@ -70,7 +73,7 @@ export default {
               alert('there is an error')
             }
           })
-         
+
       },
       deleteVariation(model) {
         let url = this.baseUrl + '/variation/' + model.variation_id;
@@ -87,7 +90,7 @@ export default {
               alert('there is an error')
             }
           })
-              
+
       },
       getVariationUploadAction() {
 
@@ -96,7 +99,7 @@ export default {
         this.variationModelVisible = true;
         this.variationModel = model.variation;
 
-     
+
         this.variationUploadImagePath = this.baseUrl + '/product-image/' + this.variationModel.id + '/upload';
 
         if (!isNil(this.variationModel.images[0])) {
@@ -105,16 +108,19 @@ export default {
         } else {
           this.variationImageList = [];
         }
-        
+
+      },
+      productOptionLabel(label, value, options) {
+          return label.display_text
       },
       handleSubmit(e) {
-       
+
       },
       handleVariationBtnClick(e) {
         let data = { attributes: this.attributeIds};
         let url = this.baseUrl + '/variation/'+ this.product.id +'/create-variation';
         var app = this;
-       
+
         axios.post(url, data)
           .then(res => {
             if (res.data.success) {
@@ -128,10 +134,16 @@ export default {
             }
           })
       },
+      handleSingleVariationModalOk() {
+          console.log('Ok')
+      },
+      handleSingleVariationModalCancel() {
+          console.log('cancel')
+      },
       changeVariation(values) {
         var app = this;
         values.forEach(val => {
-          app.attributeIds.push(val)
+          app.attributeIds.push(`${val}`)
         });
       },
       handlePropertyChange(id, val) {
@@ -153,10 +165,10 @@ export default {
             this.status = 0;
           }
       },
-      handleCategoryChange(val) {  
+      handleCategoryChange(val) {
           this.categories = val;
       },
-      
+
       cancelProduct() {
           window.location = this.baseUrl + '/product';
       },

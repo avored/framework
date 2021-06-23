@@ -11,10 +11,10 @@
                     :multiple=true
                     :options="{{ json_encode($attributes->pluck('name', 'id')) }}"
                     :init-value="attributeIds"></avored-select>
-            
+
             <div class="add-on-button">
-                <button type="button" 
-                    :disabled="attributeIds.length<=0" 
+                <button type="button"
+                    :disabled="attributeIds.length<=0"
                     @click="handleVariationBtnClick"
                     class="px-6 py-2 font-semibold leading-5 text-white hover:text-white bg-red-600 rounded hover:bg-red-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
@@ -25,7 +25,18 @@
             </div>
         </p>
 
-        <h4 class="my-4 text-xl text-red-500">{{ __('avored::system.variation_title') }}</h4>
+        <h4 class="my-4 flex w-full">
+            <span class="text-xl text-red-500">
+                {{ __('avored::system.variation_title') }}
+            </span>
+            <span class="ml-auto" @click="createSingleVariationModal">
+                <button type="button" class="px-6 py-1 bg-green-300 font-semibold text-white hover:text-white rounded">
+                    <span class="ml-3">
+                        Create Single Variation
+                    </span>
+                </button>
+            </span>
+        </h4>
 
         <avored-table :columns="columns" row-key="id" :items="productVariations">
             <template slot="variableProductName" slot-scope="{item}">
@@ -44,9 +55,26 @@
                     <a href="javascript:;" @click="deleteVariation(item)">Delete</a>
                 </div>
             </template>
-        
+
         </avored-table>
 
+
+        <avored-modal
+            modal-title="Create Single Variation"
+            @cancel="handleSingleVariationModalCancel"
+            :is-visible="singleVariationModal"
+            @ok="handleSingleVariationModalOk">
+            <div class="block">
+                <div v-for="attribute in productAttributes" :key="`product-attribute-${attribute.id}`">
+                    <avored-select
+                        :label-text="attribute.name"
+                        :field-name="`product-attribute[${attribute.id}]`"
+                        :options="attribute.dropdown_options"
+                        :option-label-callback="productOptionLabel"
+                    ></avored-select>
+                </div>
+            </div>
+        </avored-modal>
 
         <avored-modal modal-title="{{__('avored::system.variation_model_title') }}" @close="variationModelVisible=false" :is-visible="variationModelVisible">
             <div class="block">
@@ -114,7 +142,7 @@
                                     :upload-url="variationUploadImagePath"
                                 >
                             </avored-upload>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -157,18 +185,17 @@
                 <div class="mt-3 py-3">
                     <button type="button" @click="clickVariationSave"
                         class="px-3 py-2 text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
-                    >   
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"/>
                         </svg>
                         <span class="ml-3">{{__('avored::system.btn.variation_save') }}</span>
                     </button>
                 </div>
-            
+
             </div>
         </avored-modal>
 
-       
     </div>
 
 </div>
