@@ -1,207 +1,229 @@
 <script>
-import isNil from 'lodash/isNil'
-import isObject from 'lodash/isObject'
-import axios from 'axios'
+import isNil from "lodash/isNil";
+import isObject from "lodash/isObject";
+import axios from "axios";
 
-const columns = [{
-  fieldKey: 'name',
-  key: 'name',
-  label: 'Name',
-  slotName: "variableProductName"
-}, {
-  label: 'Price',
-  fieldKey: 'price',
-  key: 'price',
-  slotName: "variableProductPrice"
-}, {
-  label: 'Qty',
-  fieldKey: 'qty',
-  key: 'qty',
-  slotName: "variableProductQty"
-}, {
-  label: 'Action',
-  key: 'action',
-  slotName: "variableProductAction"
-}];
+const columns = [
+  {
+    fieldKey: "name",
+    key: "name",
+    label: "Name",
+    slotName: "variableProductName",
+  },
+  {
+    label: "Price",
+    fieldKey: "price",
+    key: "price",
+    slotName: "variableProductPrice",
+  },
+  {
+    label: "Qty",
+    fieldKey: "qty",
+    key: "qty",
+    slotName: "variableProductQty",
+  },
+  {
+    label: "Action",
+    key: "action",
+    slotName: "variableProductAction",
+  },
+];
 
-import vueEasyMde from 'vue-easymde'
+import vueEasyMde from "vue-easymde";
 
 export default {
-  props: ['product', 'baseUrl', 'productProperties', 'productAttributes', 'productVariations'],
+  props: [
+    "product",
+    "baseUrl",
+    "productProperties",
+    "productAttributes",
+    "productVariations",
+  ],
   components: {
-    'vue-simplemde': vueEasyMde,
+    "vue-simplemde": vueEasyMde,
   },
-  data () {
+  data() {
     return {
-        type: null,
-        singleVariationModal: false,
-        description: null,
-        status: 0,
-        track_stock: 0,
-        is_taxable: 0,
-        categories: [],
-        property: {},
-        productImages: [],
-        attributeIds: [],
-        variationUploadImagePath: '',
-        variationImageList: {},
-        columns,
-        variationModelVisible: false,
-        variationModel: {},
-        variationFields: ['id', 'name', 'slug', 'barcode', 'sku', 'qty', 'price', 'weight', 'length', 'width', 'height']
+      type: null,
+      singleVariationModal: false,
+      description: null,
+      status: 0,
+      track_stock: 0,
+      is_taxable: 0,
+      categories: [],
+      property: {},
+      productImages: [],
+      attributeIds: [],
+      variationUploadImagePath: "",
+      variationImageList: {},
+      columns,
+      variationModelVisible: false,
+      variationModel: {},
+      singleVariationAttributeOptions: {},
+      variationFields: [
+        "id",
+        "name",
+        "slug",
+        "barcode",
+        "sku",
+        "qty",
+        "price",
+        "weight",
+        "length",
+        "width",
+        "height",
+      ],
     };
   },
   methods: {
-      handleUploadImageChange() {
-      },
-      createSingleVariationModal() {
-          this.singleVariationModal = !this.singleVariationModal
-      },
-      clickVariationSave(e) {
-        let url = this.baseUrl + '/variation/'+ this.product.id +'/save-variation';
-        var app = this;
+    handleUploadImageChange() {},
+    createSingleVariationModal() {
+      _.each(this.productAttributes, (attribute) => {
+       this.singleVariationAttributeOptions[attribute.id] = {}
+        _.each (attribute.dropdown_options, (option) => {
+          this.singleVariationAttributeOptions[attribute.id] [option.id] = option.display_text
+        })
+      })
+      this.singleVariationModal = true
+    },
+    clickVariationSave(e) {
+      let url =
+        this.baseUrl + "/variation/" + this.product.id + "/save-variation";
+      var app = this;
 
-        axios.post(url, this.variationModel)
-          .then(res => {
-            if (res.data.success) {
-              app.$notification.success({
-                  key: 'product.save.variation.success',
-                  message: res.data.message,
-              });
-              window.location.reload();
-            } else {
-              alert('there is an error')
-            }
-          })
-
-      },
-      deleteVariation(model) {
-        let url = this.baseUrl + '/variation/' + model.variation_id;
-        var app = this;
-        axios.delete(url)
-          .then(res => {
-            if (res.data.success) {
-              app.$notification.success({
-                  key: 'product.delete.variation.success',
-                  message: res.data.message,
-              });
-              window.location.reload();
-            } else {
-              alert('there is an error')
-            }
-          })
-
-      },
-      getVariationUploadAction() {
-
-      },
-      editVariationModel(model) {
-        this.variationModelVisible = true;
-        this.variationModel = model.variation;
-
-
-        this.variationUploadImagePath = this.baseUrl + '/product-image/' + this.variationModel.id + '/upload';
-
-        if (!isNil(this.variationModel.images[0])) {
-          var fileName = this.variationModel.images[0].path.replace(/^.*[\\\/]/, '')
-          this.variationImageList = this.variationModel.images[0].path;
+      axios.post(url, this.variationModel).then((res) => {
+        if (res.data.success) {
+          app.$notification.success({
+            key: "product.save.variation.success",
+            message: res.data.message,
+          });
+          window.location.reload();
         } else {
-          this.variationImageList = [];
+          alert("there is an error");
         }
-
-      },
-      productOptionLabel(label, value, options) {
-          return label.display_text
-      },
-      handleSubmit(e) {
-
-      },
-      handleVariationBtnClick(e) {
-        let data = { attributes: this.attributeIds};
-        let url = this.baseUrl + '/variation/'+ this.product.id +'/create-variation';
-        var app = this;
-
-        axios.post(url, data)
-          .then(res => {
-            if (res.data.success) {
-              app.$notification.success({
-                  key: 'product.create.variation.success',
-                  message: res.data.message,
-              });
-              window.location.reload();
-            } else {
-              alert('there is an error')
-            }
-          })
-      },
-      handleSingleVariationModalOk() {
-          console.log('Ok')
-      },
-      handleSingleVariationModalCancel() {
-          console.log('cancel')
-      },
-      changeVariation(values) {
-        var app = this;
-        values.forEach(val => {
-          app.attributeIds.push(`${val}`)
-        });
-      },
-      handlePropertyChange(id, val) {
-        let propertyValue = ''
-        propertyValue = val
-
-        if (isObject(val)) {
-          propertyValue = val.target.value
+      });
+    },
+    deleteVariation(model) {
+      let url = this.baseUrl + "/variation/" + model.variation_id;
+      var app = this;
+      axios.delete(url).then((res) => {
+        if (res.data.success) {
+          app.$notification.success({
+            key: "product.delete.variation.success",
+            message: res.data.message,
+          });
+          window.location.reload();
+        } else {
+          alert("there is an error");
         }
-        this.property[id] = propertyValue;
-      },
-      handleTypeChange(val) {
-        this.type = val;
-      },
-      handleStatusChange(val) {
-          if (val) {
-            this.status = 1;
-          } else {
-            this.status = 0;
-          }
-      },
-      handleCategoryChange(val) {
-          this.categories = val;
-      },
+      });
+    },
+    getVariationUploadAction() {},
+    editVariationModel(model) {
+      this.variationModelVisible = true;
+      this.variationModel = model.variation;
 
-      cancelProduct() {
-          window.location = this.baseUrl + '/product';
-      },
-      uploadFileChange(response) {
-        this.productImages.push(response.image_model)
-      },
-      deleteImage(id) {
-        let deleteImageUrl = this.baseUrl + '/product-image/' + id;
-        let app = this;
-        let imageId = id;
-        axios.delete(deleteImageUrl).then(function (result) {
-          if (result.data.success) {
-            const index = app.productImages.findIndex(image => image.id === imageId);
-            app.productImages.splice(index, 1);
-          }
-        });
+      this.variationUploadImagePath =
+        this.baseUrl + "/product-image/" + this.variationModel.id + "/upload";
+
+      if (!isNil(this.variationModel.images[0])) {
+        var fileName = this.variationModel.images[0].path.replace(
+          /^.*[\\\/]/,
+          ""
+        );
+        this.variationImageList = this.variationModel.images[0].path;
+      } else {
+        this.variationImageList = [];
       }
+    },
+    handleSubmit(e) {},
+    handleVariationBtnClick(e) {
+      let data = { attributes: this.attributeIds };
+      let url =
+        this.baseUrl + "/variation/" + this.product.id + "/create-variation";
+      var app = this;
+
+      axios.post(url, data).then((res) => {
+        if (res.data.success) {
+          app.$notification.success({
+            key: "product.create.variation.success",
+            message: res.data.message,
+          });
+          window.location.reload();
+        } else {
+          alert("there is an error");
+        }
+      });
+    },
+    handleSingleVariationModalOk() {
+      console.log("Ok");
+    },
+    handleSingleVariationModalCancel() {
+      this.singleVariationModal = false
+    },
+    changeVariation(values) {
+      var app = this;
+      values.forEach((val) => {
+        app.attributeIds.push(`${val}`);
+      });
+    },
+    handlePropertyChange(id, val) {
+      let propertyValue = "";
+      propertyValue = val;
+
+      if (isObject(val)) {
+        propertyValue = val.target.value;
+      }
+      this.property[id] = propertyValue;
+    },
+    handleTypeChange(val) {
+      this.type = val;
+    },
+    handleStatusChange(val) {
+      if (val) {
+        this.status = 1;
+      } else {
+        this.status = 0;
+      }
+    },
+    handleCategoryChange(val) {
+      this.categories = val;
+    },
+
+    cancelProduct() {
+      window.location = this.baseUrl + "/product";
+    },
+    uploadFileChange(response) {
+      this.productImages.push(response.image_model);
+    },
+    deleteImage(id) {
+      let deleteImageUrl = this.baseUrl + "/product-image/" + id;
+      let app = this;
+      let imageId = id;
+      axios.delete(deleteImageUrl).then(function (result) {
+        if (result.data.success) {
+          const index = app.productImages.findIndex(
+            (image) => image.id === imageId
+          );
+          app.productImages.splice(index, 1);
+        }
+      });
+    },
   },
   mounted() {
     if (!isNil(this.product)) {
-      this.type = this.product.type
-      this.description = this.product.description
-      this.productProperties.forEach(record => {
-        this.property[record.id] = record.product_value.value
+      this.type = this.product.type;
+      this.description = this.product.description;
+      this.productProperties.forEach((record) => {
+        this.property[record.id] = record.product_value.value;
       });
-      this.productAttributes.forEach(record => {
-        this.attributeIds.push(record.id)
+      this.productAttributes.forEach((record) => {
+        this.attributeIds.push(record.id);
       });
-      this.product.images.forEach(record => {
-        this.productImages.push(record)
+      this.product.images.forEach((record) => {
+        this.productImages.push(record);
       });
-
     }
-  }
+  },
 };
 </script>
