@@ -64,6 +64,7 @@ return [
                     'ProductTypeOptions' => \AvoRed\Framework\Graphql\Queries\Admin\Catalog\Product\ProductTypeOptions::class,
                 ],
                 'mutation' => [
+                    'CreateProductVariation' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Product\CreateProductVariation::class,
                     // 'example_mutation'  => ExampleMutation::class,
                 ],
                 'middleware' => ['api'],
