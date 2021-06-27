@@ -62,19 +62,20 @@
         <avored-modal
             modal-title="Create Single Variation"
             @close="handleSingleVariationModalCancel"
-            :is-visible="singleVariationModal"
-            @ok="handleSingleVariationModalOk">
+            :is-visible="singleVariationModal">
             <div class="block">
                 <div v-for="attribute in productAttributes" :key="`product-attribute-${attribute.id}`">
                     <avored-select
                         :label-text="attribute.name"
+                        :multiple="false"
+                        @input="singleVariationAttributeChange($event, attribute.id)"
                         :field-name="`product-attribute[${attribute.id}]`"
                         :options="singleVariationAttributeOptions[attribute.id]"
                     ></avored-select>
                 </div>
             </div>
             <div class="mt-3 py-3">
-                <button type="submit"
+                <button type="button" @click="createSingleVariationSave"
                     class="px-6 py-2 font-semibold leading-7  text-white hover:text-white bg-red-600 rounded hover:bg-red-700"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 inline-flex w-4" fill="currentColor" viewBox="0 0 20 20">

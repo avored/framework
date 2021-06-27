@@ -7,6 +7,7 @@ use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Rules\Catalog\Product\CreateVariationCheckRule;
 use Closure;
+use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
@@ -72,38 +73,48 @@ class CreateProductVariation extends Mutation
                 'type' => Type::nonNull(Type::int()),
                 // 'rules' => [new CreateVariationCheckRule]
             ],
-            'attribute_id' => [
-                'name' => 'attribute_id',
-                'type' => Type::nonNull(Type::int()),
+            'attributes' => [
+                'name' => 'single_variation_attributes',
+                'type' => Type::listOf(
+                    new InputObjectType([
+                        'name' => 'single_variation_attributes',
+                        'fields' => [
+                            'attribute_id' => ['name' => 'attribute_id', 'type' => Type::nonNull(Type::int())],
+                            'attribute_dropdown_option_id' => ['name' => 'attribute_dropdown_option_id', 'type' => Type::nonNull(Type::int())],
+                        ]
+                        ])
+                )
             ],
-            'attribute_dropdown_option_id' => [
-                'name' => 'attribute_dropdown_option_id',
-                'type' => Type::nonNull(Type::int())
-            ]
         ];
     }
 
-    
+
     protected function rules(array $args = []): array
     {
         return [
-            'product_id' => [new CreateVariationCheckRule($args)],
+            'single_variation_attributes' => [new CreateVariationCheckRule($args)],
         ];
     }
 
-  
+
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $product = $this->productRepository->find($args['product_id']);
-     
-        
-        $this->generateProductData($product, [$args['attribute_dropdown_option_id']]);
-        
+
+        $options = collect();
+
+        // dd($args['SingleVariationAttributes']);
+        foreach ($args['single_variation_attributes'] as $attribute) {
+            $options->push($attribute['attribute_dropdown_option_id']);
+        }
+
+        $this->generateProductData($product, $options);
+
         return $product;
     }
-    
-    
+
+
     /**
      * Generate Product Data based on given variation id.
      * @param \AvoRed\Framework\Database\Models\Product $product
@@ -132,11 +143,10 @@ class CreateProductVariation extends Mutation
         $data['slug'] = Str::slug($data['name']);
 
         $variation = $this->productRepository->create($data);
-        $attributeId = $optionModel->attribute->id;
         $this->saveAttributeProductValue($product, $options, $variation);
     }
-    
-       /**
+
+    /**
      * Store attribute product values into database.
      * @param Product $product
      * @param Collection $attributeOptionIds

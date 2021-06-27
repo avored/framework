@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Rules\Catalog\Product;
 
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Arr;
 
 class CreateVariationCheckRule implements Rule
 {
@@ -34,19 +35,20 @@ class CreateVariationCheckRule implements Rule
      */
     public function passes($attribute, $value)
     {
-    
+
         $product =  $this->productRepository->find($this->args['product_id']);
-        $validate = true;
-      
-        if (
-            $product->attributeProductValues->pluck('attribute_id')->contains($this->args['attribute_id']) &&
-            $product->attributeProductValues->pluck('attribute_dropdown_option_id')->contains($this->args['attribute_dropdown_option_id'])
-        ) {
-            $validate = false;
+        $validate = false;
+        $attributes = Arr::get($this->args, 'single_variation_attributes', []);
+
+        foreach ($attributes as $attribute) {
+            if (
+                !($product->attributeProductValues->pluck('attribute_id')->contains($attribute['attribute_id']) &&
+                $product->attributeProductValues->pluck('attribute_dropdown_option_id')->contains($attribute['attribute_dropdown_option_id']))
+            ) {
+                $validate = true;
+            }
         }
-        
-        
-        
+
         return $validate;
     }
 

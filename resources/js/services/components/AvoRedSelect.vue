@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
         <slot>
-             <div class="relative block w-full mb-6" 
+             <div class="relative block w-full mb-6"
                 v-click-outside="()=>{dropdownToggle=false}">
                 <label
                     v-if="labelText"
@@ -16,7 +16,7 @@
                         class="border flex items-center w-full border-gray-400 py-2 px-4 rounded"
                         :class="disabled ? 'bg-gray-300 cursor-not-allowed' : ''"
                     >
-                    
+
                         <span class="flex-1 text-left" >
                             <span class="inline-flex" v-for="(displayText, index) in displayTexts" :key="index">
                                 <template v-if="multiple">
@@ -40,7 +40,7 @@
                             </svg>
                         </span>
                     </button>
-                    <ul @click="selectedOption" v-if="dropdownToggle" 
+                    <ul @click="selectedOption" v-if="dropdownToggle"
                         class="dropdown-options w-full mt-1 z-10 bg-white border border-gray-500 absolute overflow-y-scroll rounded shadow text-gray-700">
                          <li v-if="hasEmpty" value=""
                                 class="px-2 py-1 hover:bg-gray-300 cursor-pointer">
@@ -60,7 +60,7 @@
                 <span v-for="(val, index) in changeValue" :key="index">
                     <input type="hidden" :name="fieldName" :value="val" />
                 </span>
-                
+
              </div>
         </slot>
     </div>
@@ -73,7 +73,7 @@ import findKey from 'lodash/findKey'
 export default {
     name: "avored-select",
     components: {
-    
+
     },
     directives: {
         clickOutside: vClickOutside.directive
@@ -140,7 +140,7 @@ export default {
             const optionValue = findKey(this.options, function (ele) {
                 return ele == currentDisplayText
             })
-             const changeValueIndex = findKey(this.changeValue, function (ele) {
+            const changeValueIndex = findKey(this.changeValue, function (ele) {
                 return ele == optionValue
             })
             this.changeValue.splice(changeValueIndex, 1)
