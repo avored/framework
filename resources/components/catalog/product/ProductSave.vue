@@ -2,7 +2,6 @@
 import isNil from "lodash/isNil";
 import isObject from "lodash/isObject";
 import axios from "axios";
-// import { useQuery, useClient } from "villus"
 
 const columns = [
     {
@@ -61,20 +60,18 @@ export default {
         variationModelVisible: false,
         variationModel: {},
         singleVariationAttributeOptions: {},
-        singleVariationAttributes: {},
-        variationFields: [
-            "id",
-            "name",
-            "slug",
-            "barcode",
-            "sku",
-            "qty",
-            "price",
-            "weight",
-            "length",
-            "width",
-            "height",
-        ],
+        singleVariationAttributes: [],
+        variationFields: ["id",
+                            "name",
+                            "slug",
+                            "barcode",
+                            "sku",
+                            "qty",
+                            "price",
+                            "weight",
+                            "length",
+                            "width",
+                            "height"],
         };
     },
     methods: {
@@ -91,10 +88,12 @@ export default {
         },
         singleVariationAttributeChange(optionId, attributeId) {
 
-            this.singleVariationAttributes = {
-                                        attribute_id: attributeId,
-                                        attribute_dropdown_option_id: parseInt(optionId[0])
-                                    }
+            if (optionId && optionId[0]) {
+                this.singleVariationAttributes.push({
+                                            attribute_id: attributeId,
+                                            attribute_dropdown_option_id: parseInt(optionId[0])
+                                        })
+            }
         },
         clickVariationSave(e) {
             let url =
@@ -168,10 +167,10 @@ export default {
 
             createSingleVariationSave() {
                 const data = {
-                    query: `mutation CreateProductVariation($productId: Int!) {
+                    query: `mutation CreateProductVariation($productId: Int!, $single_variation_attributes: [single_variation_attributes!]) {
                                 CreateProductVariation(
                                     product_id: $productId,
-                                    single_variation_attributes: ${ JSON.stringify(this.singleVariationAttributes)}
+                                    single_variation_attributes: $single_variation_attributes
                                 ) {
                                     id
                                     name
@@ -179,7 +178,8 @@ export default {
                             },
                     `,
                     variables: {
-                        productId: this.product.id
+                        productId: this.product.id,
+                        "single_variation_attributes": this.singleVariationAttributes
                     }}
 
 
