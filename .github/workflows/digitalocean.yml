@@ -11,8 +11,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            cd /var/www
-            ls -la
+            ${{ secrets.COMMANDS }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
