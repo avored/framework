@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ls -a via OPEN SSH Private Key
+      - name: avored deployment via git actions
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
