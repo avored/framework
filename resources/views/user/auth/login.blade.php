@@ -17,7 +17,7 @@
     @endif
     @push('styles')
 </head>
-<body>
+<body>  
     <div id="app">
         <login-fields inline-template>
             <div>
