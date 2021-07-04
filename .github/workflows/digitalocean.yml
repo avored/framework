@@ -8,9 +8,9 @@ jobs:
 
     steps:
       - name: ls -a via OPEN SSH Private Key
-        uses: garygrossgarten/github-action-ssh@master
+        uses: garygrossgarten/github-action-ssh@release
         with:
-          script: |
+          command: |
             cd /var/www
             ls -la
           host: ${{ secrets.HOST }}
