@@ -56,7 +56,7 @@ abstract class BaseTestCase extends OrchestraTestCase
      */
     private function resetDatabase(): void
     {
-        $this->artisan('migrate');
+        $this->artisan('migrate:fresh');
     }
 
     /**
