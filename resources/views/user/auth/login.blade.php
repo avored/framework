@@ -17,7 +17,7 @@
     @endif
     @push('styles')
 </head>
-<body>  
+<body>
     <div id="app">
         <login-fields inline-template>
             <div>
@@ -107,7 +107,7 @@
             </div>
         </login-fields>
     </div>
-    @if(true || env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
+    @if(env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
         <script src="{{ mix('vendor/avored/js/avored.js') }}"></script>
         @stack('scripts')
         <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
