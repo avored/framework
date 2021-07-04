@@ -1,6 +1,6 @@
 name: AvoRed Deployment via SSH
 
-on: pull_request
+on: push
 
 jobs:
   build:
