@@ -10,11 +10,12 @@ jobs:
       - name: ls -a via OPEN SSH Private Key
         uses: garygrossgarten/github-action-ssh@release
         with:
+          script: |
+            cd /var/www
+            ls -la
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
-          script: |
-            whoami
-            ls -al
+          
         env:
           CI: true
