@@ -13,7 +13,7 @@
     @if(env('APP_ENV') === 'local' && file_exists(public_path('mix-manifest.json')))
         <link rel="stylesheet" href="{{ mix('vendor/avored/css/app.css') }}"></link>
     @else
-        {!! Asset::renderCSS() !!}
+        <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
     @endif
     @push('styles')
 </head>
@@ -112,9 +112,9 @@
         @stack('scripts')
         <script src="{{ mix('vendor/avored/js/app.js') }}"></script>
     @else
-        <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
+        <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
         @stack('scripts')
-        <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
+        <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
     @endif
     @push('scripts')
 </body>
