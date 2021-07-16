@@ -1,0 +1,20 @@
+name: AvoRed Deployment via SSH
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: avored deployment via git actions
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            ${{ secrets.COMMANDS }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
+          privateKey: ${{ secrets.PRIVATE_KEY}}
+          
+        env:
+          CI: true
