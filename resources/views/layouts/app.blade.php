@@ -1,70 +1,64 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        @if(env('APP_ENV') === 'local')
+            <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
+        @else
+            {!! Asset::renderCSS() !!}
+        @endif
 
-    <title>@yield('meta_title', 'AvoRed E commerce')</title>
+        @push('styles')
 
-    <!-- Styles -->
+    </head>
+    <body>
+        <div id="app">
+            <avored-alert></avored-alert>
+            <avored-confirm></avored-confirm>
 
-   @if(true || env('APP_ENV') === 'local')
-        <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
-    @else
-        {!! Asset::renderCSS() !!}
-    @endif
+            <avored-layout inline-template>
 
-
-    @push('styles')
-
-</head>
-
-<body>
-    <div id="app">
-        <avored-alert></avored-alert>
-        <avored-confirm></avored-confirm>
-
-        <avored-layout inline-template>
-
-            <div class="flex items-start">
-                <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
-                    @include('avored::partials.sidebar')
-                </div>
-                <div class="w-full">
+                <div class="flex items-start">
+                    <div :class="sidebar ? 'w-16 z-0 transition sidebar-collapsed duration-500' : 'w-64'">
+                        @include('avored::partials.sidebar')
+                    </div>
                     <div class="w-full">
-                    @include('avored::partials.header')
-                    @include('avored::partials.flash')
-                    @include('avored::partials.breadcrumb')
+                        <div class="w-full">
+                        @include('avored::partials.header')
+                        @include('avored::partials.flash')
+                        @include('avored::partials.breadcrumb')
 
-                    <h1 class="mx-4 px-4 my-3">
-                        @yield('page_title')
-                    </h1>
-                    <div class="rounded p-5 mx-3 my-3 bg-white">
-                        <router-view></router-view>
-                        @yield('content')
+                        <h1 class="mx-4 px-4 my-3">
+                            @yield('page_title')
+                        </h1>
+                        <div class="rounded p-5 mx-3 my-3 bg-white">
+                            <router-view></router-view>
+                            @yield('content')
+                        </div>
+
+                        @include('avored::partials.footer')
+                        </div>
                     </div>
 
-                    @include('avored::partials.footer')
-                    </div>
                 </div>
+            </avored-layout>
+        </div>
 
-            </div>
-        </avored-layout>
-    </div>
-    @if(true || env('APP_ENV') === 'local')
-        <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
-        @stack('scripts')
-        <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
-    @else
-        <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
-        @stack('scripts')
-        <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
-    @endif
+        @if(true)
+            <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
+            @stack('scripts')
+            <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
+        @else
+            <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
+            @stack('scripts')
+            <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
+        @endif
 
-</body>
+    </body>
 
 </html>

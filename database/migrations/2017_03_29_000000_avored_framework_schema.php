@@ -23,20 +23,17 @@ class AvoredFrameworkSchema extends Migration
             $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
-
         Schema::create('admin_password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
         });
-
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('admin_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('is_super_admin')->nullable()->default(null);
@@ -53,7 +50,6 @@ class AvoredFrameworkSchema extends Migration
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
-
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('first_name')->nullable();
@@ -65,7 +61,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
-
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -74,13 +69,11 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
         });
-
         Schema::create('permission_role', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('permission_id')->unsigned();
@@ -90,7 +83,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
-
         Schema::create('pages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -100,21 +92,18 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('configurations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code')->nullable()->default(null);
             $table->text('value')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
-
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -125,7 +114,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('lang_code')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('states', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id');
@@ -136,7 +124,6 @@ class AvoredFrameworkSchema extends Migration
                 ->references('id')->on('countries')
                 ->onDelete('cascade');
         });
-
         Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -146,7 +133,6 @@ class AvoredFrameworkSchema extends Migration
             $table->enum('status', ['ENABLED', 'DISABLED'])->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('properties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -172,7 +158,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('property_id')
                 ->references('id')->on('properties')->onDelete('cascade');
         });
-
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -189,14 +174,12 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_id')
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
-
         Schema::create('customer_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
             $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
-
         Schema::create('tax_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);
@@ -232,7 +215,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
         });
-
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('type', ['BASIC', 'VARIATION', 'DOWNLOADABLE', 'VARIABLE_PRODUCT'])->default('BASIC');
@@ -256,7 +238,6 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
         });
-
         Schema::create('product_images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
@@ -266,7 +247,6 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
-
         Schema::create('product_property', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('property_id');
@@ -277,7 +257,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')
                 ->references('id')->on('products')->onDelete('cascade');
         });
-
         Schema::create('product_property_varchar_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('property_id');
@@ -344,7 +323,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')
                 ->references('id')->on('products')->onDelete('cascade');
         });
-
         Schema::create('category_product', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
@@ -353,7 +331,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
-
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
@@ -372,7 +349,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
-
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('shipping_option');
@@ -391,7 +367,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
             $table->foreign('customer_id')->references('id')->on('customers');
         });
-
         Schema::create('order_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
@@ -403,7 +378,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
         });
-
         Schema::create('order_product_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_product_id');
@@ -415,7 +389,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_id')->references('id')->on('attributes');
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
         });
-
         Schema::create('category_filters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
@@ -425,7 +398,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
-
         Schema::create('attribute_product', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('attribute_id');
@@ -435,7 +407,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
-
         Schema::create('attribute_product_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('attribute_id');
@@ -449,7 +420,6 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_dropdown_option_id')->references('id')->on('attribute_dropdown_options');
             $table->timestamps();
         });
-
         Schema::create('promotion_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable()->default(null);

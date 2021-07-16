@@ -31,10 +31,8 @@
                 fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  class="heroicon-ui"
-                  d="M6.3 12.3l10-10a1 1 0 011.4 0l4 4a1 1 0 010 1.4l-10 10a1 1 0 01-.7.3H7a1 1 0 01-1-1v-4a1 1 0 01.3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 012 0v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6c0-1.1.9-2 2-2h6a1 1 0 010 2H4v14h14v-6z"
-                />
+                <path class="heroicon-ui"
+                    d="M6.3 12.3l10-10a1 1 0 011.4 0l4 4a1 1 0 010 1.4l-10 10a1 1 0 01-.7.3H7a1 1 0 01-1-1v-4a1 1 0 01.3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 012 0v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6c0-1.1.9-2 2-2h6a1 1 0 010 2H4v14h14v-6z"/>
               </svg>
             </a>
 
@@ -61,10 +59,10 @@
 </template>
 
 <script>
-import { useQuery, useClient } from "villus"
-import { ref } from "@vue/composition-api"
-import { Provider } from "villus"
-import _ from 'lodash'
+import { useQuery, useClient } from "villus";
+import { ref } from "@vue/composition-api";
+import { Provider } from "villus";
+import _ from "lodash";
 
 export default {
   props: ["initCategories", "filterUrl"],
@@ -115,8 +113,8 @@ export default {
       },
     ]);
 
-    const route = context.root.$route
-    const page = _.get(route, 'query.page', 1)
+    const route = context.root.$route;
+    const page = _.get(route, "query.page", 1);
 
     const AdminAllCategories = `
             query {
@@ -140,81 +138,81 @@ export default {
             }
         `;
     const result = useQuery({
-        query: AdminAllCategories,
+      query: AdminAllCategories,
     });
     const categories = ref(result);
 
     const filterTableData = (e) => {
-        let app = this;
-        var data = { filter: e.target.value };
-        axios.post(this.filterUrl, data).then((response) => {
-            app.categories = response.data;
-        });
+      let app = this;
+      var data = { filter: e.target.value };
+      axios.post(this.filterUrl, data).then((response) => {
+        app.categories = response.data;
+      });
     };
 
     const getEditUrl = (record) => {
-        return baseUrl + "/category/" + record.id + "/edit";
+      return baseUrl + "/category/" + record.id + "/edit";
     };
 
     const getDeleteUrl = (record) => {
-        return baseUrl + "/category/" + record.id;
+      return baseUrl + "/category/" + record.id;
     };
 
     const deleteOnClick = (record) => {
-        var url = baseUrl + "/category/" + record.id;
-        var app = this;
-        this.$confirm({
-            message: this.$t("system.delete_modal_message", {
-            name: record.name,
-            term: this.$t("system.category"),
-            }),
-            callback: () => {
-            axios
-                .delete(url)
-                .then((response) => {
-                if (response.data.success === true) {
-                    app.$alert(response.data.message);
-                }
-                window.location.reload();
-                })
-                .catch((errors) => {
-                    app.$alert(errors.message);
-                });
-            },
-        });
+      var url = baseUrl + "/category/" + record.id;
+      var app = this;
+      this.$confirm({
+        message: this.$t("system.delete_modal_message", {
+          name: record.name,
+          term: this.$t("system.category"),
+        }),
+        callback: () => {
+          axios
+            .delete(url)
+            .then((response) => {
+              if (response.data.success === true) {
+                app.$alert(response.data.message);
+              }
+              window.location.reload();
+            })
+            .catch((errors) => {
+              app.$alert(errors.message);
+            });
+        },
+      });
     };
     const nextPageUrl = () => {
-        if (_.get(categories, 'value.data.AllCategories.has_more_pages')) {
-            let nextPage = _.get(categories, 'value.data.AllCategories.current_page', 1) + 1
+      if (_.get(categories, "value.data.AllCategories.has_more_pages")) {
+        let nextPage =
+          _.get(categories, "value.data.AllCategories.current_page", 1) + 1;
 
-            return `${baseUrl}/category?page=${nextPage++}`
-        }
+        return `${baseUrl}/category?page=${nextPage++}`;
+      }
 
-        return null
-
-    }
+      return null;
+    };
     const prevPageUrl = () => {
-        if (_.get(categories, 'value.data.AllCategories.current_page') > 1) {
-            let prevPage = _.get(categories, 'value.data.AllCategories.current_page', 1) - 1
+      if (_.get(categories, "value.data.AllCategories.current_page") > 1) {
+        let prevPage =
+          _.get(categories, "value.data.AllCategories.current_page", 1) - 1;
 
-            return `${baseUrl}/category?page=${prevPage++}`
-        }
+        return `${baseUrl}/category?page=${prevPage++}`;
+      }
 
-        return null
-    }
-
+      return null;
+    };
 
     return {
-        baseUrl,
-        columns,
-        categories,
-        filterTableData,
-        getEditUrl,
-        getDeleteUrl,
-        deleteOnClick,
-        nextPageUrl,
-        prevPageUrl
+      baseUrl,
+      columns,
+      categories,
+      filterTableData,
+      getEditUrl,
+      getDeleteUrl,
+      deleteOnClick,
+      nextPageUrl,
+      prevPageUrl,
     };
-    },
+  },
 };
 </script>

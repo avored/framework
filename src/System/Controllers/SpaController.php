@@ -1,7 +1,6 @@
 <?php
 
 namespace AvoRed\Framework\System\Controllers;
-
 class SpaController
 {
     /**

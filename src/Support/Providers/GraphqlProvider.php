@@ -1,6 +1,7 @@
 <?php
 namespace AvoRed\Framework\Support\Providers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use Rebing\GraphQL\GraphQL;
@@ -14,8 +15,7 @@ class GraphqlProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfigData();
-        $this->registerRebingGraphqlProvider();
-        // $this->registerMiddleware();
+        $this->registerMiddleware();
         $this->registerGraphqlData();
     }
 
@@ -25,7 +25,7 @@ class GraphqlProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        $this->registerRebingGraphqlProvider();
     }
 
     /**
@@ -35,10 +35,10 @@ class GraphqlProvider extends ServiceProvider
      */
     public function registerGraphqlData(): void
     {
-        // $this->app->afterResolving('graphql', function (GraphQL $graphql) {
-        //     $this->bootSchemas($graphql);
-        //     $this->bootTypes($graphql);
-        // });
+        $this->app->afterResolving('graphql', function (GraphQL $graphql) {
+            $this->bootSchemas($graphql);
+            $this->bootTypes($graphql);
+        });
     }
 
     /**
@@ -80,7 +80,6 @@ class GraphqlProvider extends ServiceProvider
      */
     protected function registerMiddleware()
     {
-        $router = $this->app['router'];
         // $router->aliasMiddleware('admin.auth', AdminAuth::class);
         // $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
         // $router->aliasMiddleware('avored', AvoRedCore::class);
@@ -93,6 +92,43 @@ class GraphqlProvider extends ServiceProvider
     public function registerConfigData()
     {
         $avoredConfigData = include __DIR__ . '/../../../config/avored.php';
-        $this->app['config']->set('graphql', $avoredConfigData['graphql']);
+        $defaultGraphqlData = $this->app['config']->get('graphql', []);
+
+        // dd($defaultGraphqlData, $avoredConfigData['graphql']);
+        // dd($this->mergeConfigFrom($defaultGraphqlData, $avoredConfigData['graphql']));
+        // $mergedConfig = $this->mergeConfigFrom($defaultGraphqlData, $avoredConfigData['graphql']);
+
+        $mergedConfig = array_merge($defaultGraphqlData, $avoredConfigData['graphql']);
+        $this->app['config']->set('graphql', $mergedConfig);
+    }
+
+    /**
+     * Merges the configs together and takes multi-dimensional arrays into account.
+     *
+     * @param  array  $original
+     * @param  array  $merging
+     * @return array
+     */
+    protected function mergeConfigs(array $original, array $merging)
+    {
+        $array = array_merge($original, $merging);
+
+        foreach ($original as $key => $value) {
+            if (! is_array($value)) {
+                continue;
+            }
+
+            if (! Arr::exists($merging, $key)) {
+                continue;
+            }
+
+            if (is_numeric($key)) {
+                continue;
+            }
+
+            $array[$key] = $this->mergeConfigs($value, $merging[$key]);
+        }
+
+        return $array;
     }
 }
