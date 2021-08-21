@@ -24,6 +24,7 @@ class AvoRedProvider extends ServiceProvider
     protected $providers = [
         \AvoRed\Framework\Support\Providers\ModuleProvider::class,
         \AvoRed\Framework\Support\Providers\BreadcrumbProvider::class,
+        \AvoRed\Framework\Support\Providers\ComponentsProvider::class,
         \AvoRed\Framework\Support\Providers\CartProvider::class,
         \AvoRed\Framework\Support\Providers\EventServiceProvider::class,
         \AvoRed\Framework\Support\Providers\GraphqlProvider::class,

@@ -13,10 +13,6 @@ return [
     |
     */
     'fields' => [
-        'name' => 'Name',
-        'slug' => 'Slug',
-        'meta_title' => 'Meta Title',
-        'meta_description' => 'Meta Description',
         'sort_order' => 'Sort Order',
         'dropdown_option' => 'Dropdown Option',
         'sku' => 'SKU',
@@ -100,7 +96,7 @@ return [
         'address' => 'Customer Address',
         'shipping_address' => 'Customer Shipping Address',
         'billing_address' => 'Customer Billing Address',
-        
+
     ],
     'pages' => [
         'title' => [
@@ -659,4 +655,23 @@ return [
         ],
     ],
 
+
+
+
+
+
+
+
+
+    'name' => 'Name',
+    'slug' => 'Slug',
+    'meta_title' => 'Meta Title',
+    'meta_description' => 'Meta Description',
+    'actions' => 'Actions',
+    'email_address' => 'Email Address',
+    'password' => 'Password',
+    'sign_in_to_admin_account' => 'Sign in to admin account',
+    'remember_me' => 'Remember me',
+    'forgot_password' => 'Forgot Password?',
+    'sign_in' => 'Sign In'
 ];

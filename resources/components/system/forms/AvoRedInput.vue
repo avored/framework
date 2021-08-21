@@ -13,15 +13,15 @@
         <input
             :id="fieldName"
             :type="inputType"
-            :name="fieldName"   
-            class="px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
+            :name="fieldName"
+            class=" px-3 flex-1 w-full py-2 outline-none shadow-sm focus:shadow focus:border rounded border block border-gray-400"
             :class="extraClass"
             :disabled="isDisabled"
             v-model="changeValue"
         />
         <slot name="addOnAfter" />
       </div>
-      
+
       <p class="text-sm italic text-red-500" v-if="errorText">{{ errorText }}</p>
     </div>
   </div>

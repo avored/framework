@@ -7,7 +7,7 @@
 @section('page_title')
     <div class="text-gray-800 flex items-center">
         <div class="text-xl text-red-700 font-semibold">
-            {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.category')]) }}
+            Test {{ __('avored::system.pages.title.list', ['attribute' => __('avored::system.terms.category')]) }}
         </div>
         <div class="ml-auto">
             <a href="{{ route('admin.category.create') }}"
@@ -23,11 +23,9 @@
 @endsection
 
 @section('content')
-
-<category-table
-    :init-categories="{{ json_encode($categories) }}"
-    filter-url="{{ route('admin.category.filter') }}"
-    base-url="{{ asset(config('avored.admin_url')) }}"
-></category-table>
-
+    <?php
+        $table = new stdClass;
+        $table->test = 'foo';
+    ?>
+    @livewire('avored-data-table', ['table' => $categories])
 @endsection

@@ -1,9 +1,11 @@
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
 
-.CodeMirror {
-    z-index: 0 !important;
+.avored-table thead th:first-child {
+    @apply rounded-l;
+}
+
+.avored-table thead th:last-child {
+    @apply rounded-r;
 }

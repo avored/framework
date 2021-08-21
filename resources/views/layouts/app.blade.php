@@ -51,10 +51,12 @@
 
         @if(true)
             <script src="{{ asset('vendor/avored/js/avored.js') }}"></script>
+            @livewireScripts
             @stack('scripts')
             <script src="{{ asset('vendor/avored/js/app.js') }}"></script>
         @else
             <script src="{{ route('admin.script', 'avored.avored.js') }}"></script>
+            @livewireScripts
             @stack('scripts')
             <script src="{{ route('admin.script', 'avored.app.js') }}"></script>
         @endif

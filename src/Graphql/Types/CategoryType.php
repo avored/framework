@@ -59,7 +59,7 @@ class CategoryType extends GraphQLType
                 'description' => 'Category updated at'
             ],
             'filter' => [
-                'type' => Type::listOf(GraphQL::type('filter')),
+                'type' => Type::listOf( pGraphQL::type('filter')),
                 'description' => 'Category Filter'
             ],
             'product' => [
