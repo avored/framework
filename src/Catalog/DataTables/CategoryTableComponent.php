@@ -3,7 +3,6 @@ namespace AvoRed\Framework\Catalog\DataTables;
 
 use AvoRed\Framework\Support\Components\Column;
 use Livewire\Component;
-use stdClass;
 use Illuminate\Support\Str;
 
 class CategoryTableComponent extends Component

@@ -8,6 +8,7 @@ class Column
     protected $identifier;
     protected $label;
     protected $visible;
+    protected $isRenderable = false;
 
 
     public function identifier($identifier = null)
@@ -40,10 +41,13 @@ class Column
 
         return $this;
     }
+
     public function render($item)
     {
         if (is_callable($item)) {
-            return $this;
+            $this->isRenderable = true;
+            
+            return $item();
         }
         $identifier= $this->identifier();
 
