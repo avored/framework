@@ -18,9 +18,9 @@ class Table extends Component
      * @return void
      */
     public function __construct(
-        array $columns
+        // array $columns
     ) {
-        $this->columns = $columns;
+        // $this->columns = $columns;
     }
 
     /**

@@ -19,21 +19,21 @@ class TableCell  extends Component
      * @return void
      */
     public function __construct(
-        $column = null,
-        $item = null
+        // $column = null,
+        // $item = null
     ) {
-        $this->column = $column;
-        $this->item = $item;
+        // $this->column = $column;
+        // $this->item = $item;
 
     }
 
-    public function value()
-    {
-        if ($this->column->identifier() === 'actions') {
-            dd($this->column, $this->item);
-        }
-        return $this->column->render($this->item);
-    }
+    // public function value()
+    // {
+    //     if ($this->column->identifier() === 'actions') {
+    //         dd($this->column, $this->item);
+    //     }
+    //     return $this->column->render($this->item);
+    // }
     /**
      * Get the view / contents that represent the component.
      *
@@ -41,7 +41,8 @@ class TableCell  extends Component
      */
     public function render()
     {
-        $value = $this->value();
-        return view('avored::system.components.form.table-cell', ['value' => $value]);
+        // $value = $this->value();
+        // return view('avored::system.components.form.table-cell', ['value' => $value]);
+        return view('avored::system.components.form.table-cell');
     }
 }

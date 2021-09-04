@@ -30,11 +30,11 @@ class CategoryController
      * Show Category Index Page.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $perPage = 10;
         $with = ['parent'];
-        $categories = $this->categoryRepository->paginate($perPage, $with);
+        $categories = $this->categoryRepository->paginate($perPage, $with, $request->get('page', 1));
 
         return view('avored::catalog.category.index')
             ->with(compact('categories'));
@@ -113,13 +113,11 @@ class CategoryController
     {
         $category->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => __(
+        return redirect()->route('admin.category.index')
+            ->with('successNotification', __(
                 'avored::system.notification.delete',
                 ['attribute' => __('avored::catalog.category.title')]
-            ),
-        ]);
+            ));
     }
 
     /**

@@ -663,6 +663,7 @@ return [
 
 
 
+    'id' => 'Id',
     'name' => 'Name',
     'slug' => 'Slug',
     'meta_title' => 'Meta Title',
