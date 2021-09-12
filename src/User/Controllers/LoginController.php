@@ -1,16 +1,15 @@
 <?php
-
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\User\Requests\AdminUserLoginRequest;
+use AvoRed\Framework\User\Requests\AdminLoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 
-class LoginController extends BaseController
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ class LoginController extends BaseController
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-
     /**
      * Create a new controller instance.
      * @return void
@@ -31,15 +29,15 @@ class LoginController extends BaseController
         $this->middleware('admin.guest')->except('logout');
     }
 
-      /**
+    /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @param  AdminLoginRequest  $request
+     * @return RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(AdminUserLoginRequest $request)
+    public function login(AdminLoginRequest $request)
     {
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
@@ -48,13 +46,13 @@ class LoginController extends BaseController
         return $this->sendFailedLoginResponse($request);
     }
 
-     /**
+    /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param AdminLoginRequest $request
+     * @return RedirectResponse
      */
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(AdminLoginRequest $request): RedirectResponse
     {
         $request->session()->regenerate();
 
@@ -69,13 +67,14 @@ class LoginController extends BaseController
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param AdminLoginRequest $request
      * @return bool
      */
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(AdminLoginRequest $request)
     {
         return $this->guard()->attempt(
-            $request->only('email', 'password'), $request->filled('remember')
+            $request->only('email', 'password'),
+            $request->filled('remember')
         );
     }
 
@@ -84,9 +83,9 @@ class LoginController extends BaseController
      * Show the AvoRed Login Form to the User.
      * @return \Illuminate\View\View
      */
-    public function loginForm()
+    public function loginForm(): View
     {
-        return view('avored::user.auth.login');
+        return view('avored::user.auth.login-form');
     }
 
     /**
@@ -100,11 +99,11 @@ class LoginController extends BaseController
 
     /**
      * Get the failed login response instance.
-     * @param  \Illuminate\Http\Request  $request
+     * @param  AdminLoginRequest $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws ValidationException
      */
-    protected function sendFailedLoginResponse(Request $request)
+    protected function sendFailedLoginResponse(AdminLoginRequest $request)
     {
         throw ValidationException::withMessages(
             ['email' => [trans('avored::system.failed')]]
@@ -113,6 +112,7 @@ class LoginController extends BaseController
 
     /**
      * Redirect Path after login and logout.
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)

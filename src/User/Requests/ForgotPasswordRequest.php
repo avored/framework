@@ -23,7 +23,7 @@ class ForgotPasswordRequest extends FormRequest
      */
     public function rules()
     {
-       
+
         $rules['email'] = 'required|email';
 
         return $rules;

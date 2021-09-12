@@ -5,13 +5,10 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Role;
 use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
-use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class RoleRepository extends BaseRepository implements RoleModelInterface
 {
-    use FilterTrait;
-
-     /**
+    /**
      * Filterable Fields
      * @var array $filterType
      */
@@ -34,7 +31,7 @@ class RoleRepository extends BaseRepository implements RoleModelInterface
 
     /**
      * Get the model for the repository
-     * @return Role 
+     * @return Role
      */
     public function model()
     {
@@ -55,7 +52,7 @@ class RoleRepository extends BaseRepository implements RoleModelInterface
      * get role options to use as dropdown options.
      * @return \Illuminate\Support\Collection $roles
      */
-    public function options() : SupportCollection
+    public function options(): SupportCollection
     {
         return Role::all()->pluck('name', 'id');
     }

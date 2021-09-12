@@ -1,6 +1,5 @@
-/vendor
-composer.lock
-.phpunit.result.cache
-/node_modules
-.env
+
 .DS_Store
+/build/
+/vendor/
+/node_modules/
