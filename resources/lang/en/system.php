@@ -23,4 +23,5 @@ return [
     'reset' => 'Reset',
     'password_confirmation' => 'Password Confirmation',
     'submit' => 'Submit',
+    'logout' => 'Logout'
 ];

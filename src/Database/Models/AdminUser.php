@@ -62,8 +62,8 @@ class AdminUser extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
-        if ($this->attributes['image_path'] === null) {
-            return 'https://placehold.it/250x250';
+        if (empty($this->attributes['image_path'])) {
+            return 'https://place-hold.it/250x250';
         }
         return asset('storage/' . $this->attributes['image_path']);
     }
