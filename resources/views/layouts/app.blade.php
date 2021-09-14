@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <div class="flex h-full">
+    <div class="flex h-full" x-data="{ isSideBarOpen: false }">
 		@include('avored::partials.sidebar')
 
 		<div class="w-full">
@@ -22,6 +22,6 @@
             @yield('content')
         </div>
     </div>
-    
+
 </body>
 </html>

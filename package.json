@@ -12,10 +12,8 @@
     "devDependencies": {
         "autoprefixer": "^10.3.4",
         "laravel-mix": "^6.0.6",
-        "postcss": "^8.3.6",
-        "tailwindcss": "^2.2.15"
-    },
-    "dependencies": {
+        "postc  ss": "^8.3.6",
+        "tailwindcss": "^2.2.15",
         "alpinejs": "^3.3.3"
     }
 }
