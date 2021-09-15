@@ -15,12 +15,13 @@
     }],
     "require": {
         "php": "^8.0",
-        "illuminate/routing": "^8.0",
         "illuminate/auth": "^8.0",
         "illuminate/contracts": "^8.0",
         "illuminate/database": "^8.0",
+        "illuminate/routing": "^8.0",
+        "illuminate/support": "^8.0",
         "illuminate/view": "^8.0",
-        "illuminate/support": "^8.0"
+        "ramsey/uuid": "^4.2"
     },
     "require-dev": {
         "brianium/paratest": "^6.0",
@@ -54,7 +55,10 @@
         "laravel": {
             "providers": [
                 "AvoRed\\Framework\\AvoRedServiceProvider"
-            ]
+            ],
+            "aliases" : {
+				"Menu" : "AvoRed\\Framework\\Menu\\Menu"
+            }
         }
     },
     "minimum-stability": "dev",

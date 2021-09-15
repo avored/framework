@@ -23,5 +23,7 @@ return [
     'reset' => 'Reset',
     'password_confirmation' => 'Password Confirmation',
     'submit' => 'Submit',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'product' => 'Product',
+    'catalog' => 'Catalog'
 ];

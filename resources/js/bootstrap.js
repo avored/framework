@@ -8,8 +8,10 @@
 
 // window.axios = require('axios');
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+import feather from 'feather-icons'
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
 console.log('all apline')
 Alpine.start()
+feather.replace()

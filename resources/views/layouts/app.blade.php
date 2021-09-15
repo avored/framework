@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <div class="flex h-full" x-data="{ isSideBarOpen: false }">
+    <div class="flex h-full" x-data="{ isSideBarOpen: true }">
 		@include('avored::partials.sidebar')
 
 		<div class="w-full">

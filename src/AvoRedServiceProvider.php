@@ -1,13 +1,17 @@
 <?php
 namespace AvoRed\Framework;
 
+use AvoRed\Framework\Menu\Menu;
+use AvoRed\Framework\Menu\MenuProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
+use AvoRed\Framework\System\Composers\LayoutComposer;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AvoRedServiceProvider extends ServiceProvider
@@ -18,6 +22,7 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     protected $providers = [
         ComponentsProvider::class,
+        MenuProvider::class,
         ModelsProvider::class,
     ];
 
@@ -46,6 +51,8 @@ class AvoRedServiceProvider extends ServiceProvider
     {
         $this->registerTranslationPath();
         $this->setupPublishFiles();
+
+       
     }
 
     /**
@@ -151,7 +158,7 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     public function registerViewComposerData()
     {
-        // View::composer('avored::layouts.app', LayoutComposer::class);
+        View::composer('avored::layouts.app', LayoutComposer::class);
     }
 
     /**

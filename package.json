@@ -10,10 +10,13 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "alpinejs": "^3.3.3",
         "autoprefixer": "^10.3.4",
         "laravel-mix": "^6.0.6",
-        "postc  ss": "^8.3.6",
-        "tailwindcss": "^2.2.15",
-        "alpinejs": "^3.3.3"
+        "postcss": "^8.3.6",
+        "tailwindcss": "^2.2.15"
+    },
+    "dependencies": {
+        "feather-icons": "^4.28.0"
     }
 }

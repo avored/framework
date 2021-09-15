@@ -20,16 +20,16 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamp('created_at');
         });
         Schema::create('roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('name')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
 
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->tinyInteger('is_super_admin')->nullable()->default(null);
-            $table->bigInteger('role_id')->nullable()->unsigned()->default(null);
+            $table->uuid('role_id')->nullable()->default(null);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();

@@ -69,6 +69,20 @@ class TestCase extends Orchestra
     }
 
     /**
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    protected function getPackageAliases($app): array
+    {
+        return [
+            'Menu' => \AvoRed\Framework\Menu\Menu::class,
+        ];
+    }
+
+    /**
      * Undocumented function
      *
      * @param string $routeName
