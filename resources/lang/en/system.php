@@ -25,5 +25,14 @@ return [
     'submit' => 'Submit',
     'logout' => 'Logout',
     'product' => 'Product',
-    'catalog' => 'Catalog'
+    'catalog' => 'Catalog',
+    'category' => 'Category',
+    'list' => 'List',
+    'create' => 'Create',
+    'name' => 'Name',
+    'slug' => 'Slug',
+    'meta_title' => 'Meta Title',
+    'meta_description' => 'Meta Description',
+    'actions' => 'Actions',
+    'parent' => 'Parent',
 ];

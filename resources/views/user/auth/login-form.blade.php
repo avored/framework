@@ -27,23 +27,23 @@
                     <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
                     </p>
                 </div>
-                <x-avored-form action="{{ route('admin.login.post') }}" method="POST">
+                <x-avored::form.form action="{{ route('admin.login.post') }}" method="POST">
 
                     <div class="mt-3">
-                        <x-avored-input
+                        <x-avored::form.input
                             name="email"
                             type="email"
                             autofocus
                             label="{{ __('avored::system.email_address') }}"
-                        ></x-avored-input>
+                        ></x-avored::form.input>
                     </div>
 
                     <div class="mt-3">
-                        <x-avored-input
+                        <x-avored::form.input
                             name="password"
                             type="password"
                             label="{{ __('avored::system.password') }}"
-                        ></x-avored-input>
+                        ></x-avored::form.input>
                     </div>
 
                     <div class="mt-6 flex items-center justify-between">
@@ -83,7 +83,7 @@
                             {{ __('avored::system.sign_in') }}
                         </button>
                     </div>
-                </x-avored-form>
+                </x-avored::form.form>
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ class AvoRedServiceProvider extends ServiceProvider
         $this->registerConfigData();
         $this->registerRoutePath();
         $this->registerMiddleware();
-        $this->registerViewComposerData();
+        // $this->registerViewComposerData();
         $this->registerConsoleCommands();
         $this->registerMigrationPath();
         $this->registerViewPath();

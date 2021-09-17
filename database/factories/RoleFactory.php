@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Database\Factories;
 
-use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

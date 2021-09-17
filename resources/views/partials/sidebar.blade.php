@@ -29,7 +29,7 @@
                     </a>
                     <div role="menu" x-show="open" class="mt-2 ml-2 space-y-2 px-8" aria-label="{{ $adminMenu->label() }}">
                         @foreach ($adminMenu->subMenu as $subMenu)
-                            <a href="#" role="menuitem"
+                            <a href="{{ route($subMenu->route(), $subMenu->params()) }}" role="menuitem"
                                 class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-white">
                                 {{ $subMenu->label() }}
                             </a>

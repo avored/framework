@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\System\Components\Form;
+namespace AvoRed\Framework\System\Components;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;

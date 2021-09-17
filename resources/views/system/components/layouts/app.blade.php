@@ -10,7 +10,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
-    <script defer src="{{ asset('vendor/avored/js/app.js')  }}"></script>
+    
 </head>
 <body>
 
@@ -18,10 +18,11 @@
 		@include('avored::partials.sidebar')
 
 		<div class="w-full">
-           @include('avored::partials.header')
-            @yield('content')
+            @include('avored::partials.header')
+            {{ $slot }}
         </div>
     </div>
-
+    <script defer src="{{ asset('vendor/avored/js/app.js')  }}"></script>
+    @stack('scripts')
 </body>
 </html>

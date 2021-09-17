@@ -1,4 +1,4 @@
-<form action="{{ $action }}" method="{{ (strtoupper($method) === 'GET') ? 'GET' : 'POST' }}">
+<form {{ $attributes }} action="{{ $action }}" method="{{ (strtoupper($method) === 'GET') ? 'GET' : 'POST' }}">
     @csrf
     @if (strtoupper($method) === 'PUT')
         @method('put')

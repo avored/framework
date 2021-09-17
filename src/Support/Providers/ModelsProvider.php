@@ -3,8 +3,10 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
+use AvoRed\Framework\Database\Repository\CategoryRepository;
 use AvoRed\Framework\Database\Repository\RoleRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +24,7 @@ class ModelsProvider extends ServiceProvider
      */
     protected $models = [
         AdminUserModelInterface::class => AdminUserRepository::class,
+        CategoryModelInterface::class => CategoryRepository::class,
         RoleModelInterface::class => RoleRepository::class,
     ];
 

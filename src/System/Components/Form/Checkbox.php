@@ -4,29 +4,18 @@ namespace AvoRed\Framework\System\Components\Form;
 
 use Illuminate\View\Component;
 
-class Input extends Component
+class Checkbox extends Component
 {
     /**
-     * The form input type.
-     * @var string
-     */
-    public $type;
-
-    /**
-     * The form input name.
-     * @var string
-     */
-    public $name;
-    /**
-     * The form input label.
-     * @var string
-     */
-    public $label;
-    /**
-     * The form input class.
+     * The form checkbox input class.
      * @var string
      */
     public $class;
+    /**
+     * The form checkbox input value.
+     * @var mixed
+     */
+    public $value;
 
     /**
      * Create the component instance.
@@ -37,15 +26,11 @@ class Input extends Component
      * @return void
      */
     public function __construct(
-        string $name,
-        string $type = 'text',
-        string $label = '',
-        string $class = ''
+        string $class = '',
+        $value = ''
     ) {
-        $this->name = $name;
-        $this->type = $type;
-        $this->label = $label;
         $this->class = $class;
+        $this->value = $value;
     }
 
     /**
@@ -55,6 +40,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view('avored::system.components.form.input');
+        return view('avored::system.components.form.checkbox');
     }
 }

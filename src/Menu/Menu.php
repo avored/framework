@@ -5,9 +5,10 @@ namespace AvoRed\Framework\Menu;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \AvoRed\Framework\Menu\Builer make($key, callable  $callable)
- * @method static \AvoRed\Framework\Menu\Builer get($key)
- * @method static \AvoRed\Framework\Menu\Builer all()
+ * @method static \AvoRed\Framework\Menu\MenuBuilder make($key, callable  $callable)
+ * @method static \AvoRed\Framework\Menu\MenuBuilder get($key)
+ * @method static \AvoRed\Framework\Menu\MenuBuilder all()
+ * @method static \AvoRed\Framework\Menu\MenuBuilder adminMenus()
  */
 class Menu extends Facade
 {

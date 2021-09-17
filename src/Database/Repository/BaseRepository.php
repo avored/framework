@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository
 {
@@ -60,5 +61,14 @@ abstract class BaseRepository
     public function all(): Collection
     {
         return $this->model()->all();
+    }
+
+    /**
+     * Get All Models Collection from the database.
+     * @return LengthAwarePaginator $models
+     */
+    public function paginate(): LengthAwarePaginator
+    {
+        return $this->model()->paginate();
     }
 }

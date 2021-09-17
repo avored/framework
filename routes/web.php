@@ -1,5 +1,7 @@
 <?php
 
+use AvoRed\Framework\Catalog\Controllers\CategoryController;
+use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\User\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,10 +53,14 @@ Route::middleware(['web'])
 
 Route::middleware(['web', 'admin.auth:admin'])
     ->prefix($baseAdminUrl)
-    ->namespace('AvoRed\Framework')
     ->name('admin.')
     ->group(function () {
 
-        Route::get('', [\AvoRed\Framework\System\Controllers\DashboardController::class, 'index'])
+        Route::get('', [DashboardController::class, 'index'])
             ->name('dashboard');
+
+
+
+        /***************** CATALOG ROUTES *****************/
+        Route::resource('category', CategoryController::class);
     });

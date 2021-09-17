@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Contracts;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseInterface
 {
@@ -40,4 +41,10 @@ interface BaseInterface
      * @return \Illuminate\Database\Eloquent\Collection $models
      */
     public function all(): Collection;
+
+    /**
+     * Get All Models Collection from the database.
+     * @return LengthAwarePaginator $models
+     */
+    public function paginate(): LengthAwarePaginator;
 }
