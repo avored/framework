@@ -47,6 +47,7 @@ class AvoredFrameworkSchema extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
             $table->string('meta_title')->nullable()->default(null);
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
@@ -56,7 +57,7 @@ class AvoredFrameworkSchema extends Migration
             $table->uuid('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('categories');
         });
-        
+
     }
 
     /**

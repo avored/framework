@@ -6,7 +6,7 @@
                 {{ __('avored::system.category') }} {{ __('avored::system.list') }}
             </h2>
             <span class="ml-auto">
-                <x-avored::link url="{{ route('admin.category.create') }}" style="button">
+                <x-avored::link url="{{ route('admin.category.create') }}" style="button-primary">
                     {{ __('avored::system.create') }}
                 </x-avored::link>
             </span>
@@ -69,25 +69,26 @@
                                             </td>
                                             <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="flex">
-                                                    
+
                                                     <x-avored::link url="{{ route('admin.category.edit', $category) }}">
                                                         <i class="w-5 h-5" data-feather="edit"></i>
                                                     </x-avored::link>
                                                     <span class="mx-2">|</span>
-                                                    <x-avored::link 
-                                                        x-data="{}" 
-                                                        x-on:click.prevent="toggleConfirmationDialog(true, {{ $category }})" 
+                                                    <x-avored::link
+                                                        x-data="{}"
+                                                        x-on:click.prevent="toggleConfirmationDialog(true, {{ $category }})"
                                                         url="{{ route('admin.category.destroy', $category) }}">
                                                         <i class="w-5 h-5" data-feather="trash"></i>
-                                                        <x-avored::form.form id="category-destory-{{ $category->id }}" 
-                                                            method="delete" 
+                                                        <x-avored::form.form
+                                                            id="category-destory-{{ $category->id }}"
+                                                            method="delete"
                                                             action="{{ route('admin.category.destroy', $category) }}">
-                                                        
+
                                                         </x-avored::form.form>
                                                     </x-avored::link>
                                                 </div>
                                             </td>
-                                            
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -101,8 +102,19 @@
             </div>
         </div>
     </div>
-    
-    <div x-show="showConfirmationModal" class="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"  
+    <div
+        x-show="showAlert"
+        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded absolute bottom-10 right-10"
+        role="alert">
+            <div class="flex">
+                <span class="block sm:inline" x-text="showAlertMessage"></span>
+                <span x-transition.duration.500ms x-on:click="showAlert = false" class="pl-4">
+                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+            </div>
+    </div>
+    <div x-show="showConfirmationModal"
+        class="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
         id="modal-id">
         <div class="absolute bg-black opacity-20 inset-0 z-0"></div>
             <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
@@ -120,9 +132,9 @@
                         Are you sure?
                     </h3>
                     <p class="text-sm text-gray-500 px-8" x-html="message">
-                        
-                        
-                    </p>    
+
+
+                    </p>
                 </div>
                 <!--footer-->
                 <div class="p-3  mt-2 text-center space-x-4 md:block">
@@ -150,9 +162,59 @@
             },
             confirmation() {
                 console.log(this.modal)
+                axios.delete('/admin/category/' + this.modal.id)
+                    .then((response) => {
+                        if (response.data.success) {
+                            this.showAlert = true
+                            this.showAlertMessage = response.data.message
+                        }
+                    })
+                this.showConfirmationModal = false
+
             }
         }
     }
+
+    function avoredAlertComponent() {
+        return {
+            openAlertBox: false,
+            alertBackgroundColor: '',
+            alertMessage: '',
+            showAlert(type) {
+                this.openAlertBox = true
+                switch (type) {
+                    case 'success':
+                    this.alertBackgroundColor = 'bg-green-500'
+                    this.alertMessage = `${this.successIcon} ${this.defaultSuccessMessage}`
+                    break
+                    case 'info':
+                    this.alertBackgroundColor = 'bg-blue-500'
+                    this.alertMessage = `${this.infoIcon} ${this.defaultInfoMessage}`
+                    break
+                    case 'warning':
+                    this.alertBackgroundColor = 'bg-yellow-500'
+                    this.alertMessage = `${this.warningIcon} ${this.defaultWarningMessage}`
+                    break
+                    case 'danger':
+                    this.alertBackgroundColor = 'bg-red-500'
+                    this.alertMessage = `${this.dangerIcon} ${this.defaultDangerMessage}`
+                    break
+                }
+                this.openAlertBox = true
+            },
+            successIcon: `<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2 text-white"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+            infoIcon: `<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2 text-white"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+            warningIcon: `<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2 text-white"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+            dangerIcon: `<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2 text-white"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>`,
+            defaultInfoMessage: `This alert contains info message.`,
+            defaultSuccessMessage: `This alert contains success message.`,
+            defaultWarningMessage: `This alert contains warning message.`,
+            defaultDangerMessage: `This alert contains danger message.`,
+
+        }
+    }
+
+
 </script>
 @endpush
 </x-avored::layout>

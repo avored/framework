@@ -6,12 +6,13 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-// window.axios = require('axios');
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 import feather from 'feather-icons'
+import axios from 'axios'
+
+window.axios = axios
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
-console.log('all apline')
-Alpine.start()
+
 feather.replace()

@@ -27,7 +27,7 @@ class Category extends BaseModel
     // {
     //     return $this->belongsToMany(Product::class);
     // }
-      
+    
     /**
      * Category can has many child categories.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

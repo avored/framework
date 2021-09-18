@@ -35,4 +35,8 @@ return [
     'meta_description' => 'Meta Description',
     'actions' => 'Actions',
     'parent' => 'Parent',
+    'description' => 'Description',
+    'save' => 'Save',
+    'please_select' => 'Please Select',
+    'success_delete_message' => ':attribute deleted successfully!'
 ];

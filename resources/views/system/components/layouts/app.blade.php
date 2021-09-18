@@ -10,11 +10,11 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
-    
+
 </head>
 <body>
 
-    <div class="flex h-full" x-data="{ isSideBarOpen: true }">
+    <div class="flex h-full" x-data="{ isSideBarOpen: true, showAlert : false, showAlertMessage:  ''}">
 		@include('avored::partials.sidebar')
 
 		<div class="w-full">
@@ -24,5 +24,10 @@
     </div>
     <script defer src="{{ asset('vendor/avored/js/app.js')  }}"></script>
     @stack('scripts')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            console.log('alpine init')
+        })
+    </script>
 </body>
 </html>

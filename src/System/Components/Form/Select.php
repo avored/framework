@@ -4,14 +4,8 @@ namespace AvoRed\Framework\System\Components\Form;
 
 use Illuminate\View\Component;
 
-class Input extends Component
+class Select extends Component
 {
-    /**
-     * The form input type.
-     * @var string
-     */
-    public $type;
-
     /**
      * The form input name.
      * @var string
@@ -43,13 +37,11 @@ class Input extends Component
      */
     public function __construct(
         string $name,
-        string $type = 'text',
         string $label = '',
         string $class = '',
         $value = ''
     ) {
         $this->name = $name;
-        $this->type = $type;
         $this->label = $label;
         $this->class = $class;
         $this->value = $value;
@@ -62,6 +54,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view('avored::system.components.form.input');
+        return view('avored::system.components.form.select');
     }
 }
