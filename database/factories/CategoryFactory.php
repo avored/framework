@@ -25,6 +25,7 @@ class CategoryFactory extends Factory
         $name = $this->faker->word;
 
         return [
+            'parent_id' => null,
             'name' => $name,
             'slug' => Str::slug($name),
             'meta_title' => $this->faker->sentence,

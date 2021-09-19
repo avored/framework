@@ -29,74 +29,52 @@ class CategoryControllerTest extends TestCase
     public function test_category_page_store_form()
     {
         $data = Category::factory()->make();
+        $this
+            ->postAvoRed('admin.category.store', $data->toArray())
+            ->assertStatus(302)
+            ->assertRedirect(route('admin.category.index'));
 
-        $response = $this->getAvoRed('admin.category.create');
-
-        $response->assertStatus(200)
-            ->assertViewIs('avored::catalog.category.create');
+        $this->assertDatabaseHas('categories', ['name' => $data->name, 'slug' => $data->slug]);
     }
 
-    // public function test_find_admin_user_by_email()
-    // {
-    //     $this->createAdminUser(['is_super_admin' => 1]);
+    /** @test */
+    public function test_category_page_edit_form()
+    {
+        $category = Category::factory()->create();
+        $response = $this->createAdminUser(['is_super_admin' => 1])
+            ->actingAs($this->user, 'admin')
+            ->get(route('admin.category.edit', $category));
+        $response->assertStatus(200)
+            ->assertViewIs('avored::catalog.category.edit');
+    }
 
-    //     $repository = app(AdminUserModelInterface::class);
+    /** @test */
+    public function test_category_page_update_form()
+    {
+        $category = Category::factory()->create();
+        $category->name = 'unit test update';
 
-    //     $data = $repository->findByEmail($this->user->email);
-    //     $this->assertEquals($this->user->email, $data->email);
-    // }
+        $this->createAdminUser(['is_super_admin' => 1])
+            ->actingAs($this->user, 'admin')
+            ->put(route('admin.category.update', $category), $category->toArray())
+            ->assertStatus(302)
+            ->assertRedirect(route('admin.category.index'));
 
-    // /**
-    //  * Test To check if login post form is working.
-    //  * @return void
-    //  */
-    // public function test_login_page_post_form()
-    // {
-    //     $password = 'phpunittest';
-    //     $this->createAdminUser(['is_super_admin' => 1, 'password' => $password])
-    //         ->actingAs($this->user, 'admin')
-    //         ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => $password]))
-    //         ->assertRedirect(route('admin.dashboard'));
-    // }
+        $this->assertDatabaseHas('categories', ['name' => 'unit test update', 'slug' => $category->slug]);
 
-    // public function testAdminLogoutRouteTest()
-    // {
-    //     $this
-    //         ->createAdminUser()
-    //         ->actingAs($this->user, 'admin')
-    //         ->post(route('admin.logout'))
-    //         ->assertRedirect(route('admin.login'));
-    // }
+    }
 
-    // public function testAdminLoginRedirectGuestMiddleware()
-    // {
-    //     $this->createAdminUser()
-    //         ->actingAs($this->user, 'admin')
-    //         ->get(route('admin.login'))
-    //         ->assertRedirect(route('admin.dashboard'));
-    // }
+    /** @test */
+    public function test_category_page_destroy_form()
+    {
+        $category = Category::factory()->create();
 
-    // public function testAdminLoginPostRoute()
-    // {
-    //     $password = 'phpunittest';
-    //     $this->createAdminUser(['is_super_admin' => 1, 'password' => $password])
-    //         ->actingAs($this->user, 'admin')
-    //         ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => $password]))
-    //         ->assertRedirect(route('admin.dashboard'));
-    // }
+        $this->createAdminUser(['is_super_admin' => 1])
+            ->actingAs($this->user, 'admin')
+            ->delete(route('admin.category.update', $category))
+            ->assertStatus(200);
 
-    // public function testAdminLoginPostRouteFailed()
-    // {
-    //     $password = 'phpunittest';
-    //     $this
-    //         ->createAdminUser(['is_super_admin' => 1, 'password' => $password])
-    //         ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => 'wrongpassword']))
-    //         ->assertSessionHasErrors('email');
-    // }
+        $this->assertDatabaseMissing('categories', ['name' => 'unit test update', 'slug' => $category->slug]);
 
-    // public function testGuestUserIsRedirectedToLogin()
-    // {
-    //     $this->get(route('admin.dashboard'))
-    //         ->assertRedirect(route('admin.login'));
-    // }
+    }
 }

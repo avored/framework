@@ -97,6 +97,19 @@ class TestCase extends Orchestra
             ->actingAs($this->user, 'admin')
             ->get(route($routeName));
     }
+    /**
+     * Undocumented function
+     *
+     * @param string $routeName
+     * @param mixed $data
+     * @return \Illuminate\Testing\TestResponse
+     */
+    public function postAvoRed($routeName, $data): TestResponse
+    {
+        return $this->createAdminUser(['is_super_admin' => 1])
+            ->actingAs($this->user, 'admin')
+            ->post(route($routeName), $data);
+    }
 
     /**
      * Undocumented function
