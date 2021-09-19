@@ -59,7 +59,6 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        dd($request->all());
         $this->categoryRepository->create($request->all());
 
         return redirect(route('admin.category.index'));
@@ -114,7 +113,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // $category->delete();
+        $category->delete();
 
         return new JsonResponse([
             'success' => true,
