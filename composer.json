@@ -56,8 +56,9 @@
             "providers": [
                 "AvoRed\\Framework\\AvoRedServiceProvider"
             ],
-            "aliases" : {
-				"Menu" : "AvoRed\\Framework\\Menu\\Menu"
+            "aliases": {
+                "Menu": "AvoRed\\Framework\\Menu\\Menu",
+                "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb"
             }
         }
     },

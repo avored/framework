@@ -3,13 +3,8 @@
 namespace AvoRed\Framework\Tests\Feature;
 
 use AvoRed\Framework\Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 class DashboardControllerTest extends TestCase
 {
-    use RefreshDatabase, DatabaseMigrations;
-
     /**
      * Test To check if login show form is working.
      * @return void

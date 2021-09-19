@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use AvoRed\Framework\AvoRedServiceProvider;
+use AvoRed\Framework\Breadcrumb\Breadcrumb;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
@@ -19,6 +20,7 @@ class TestCase extends Orchestra
 
     protected $faker;
 
+    protected $loadEnvironmentVariables = true;
 
     /**
      * PHP Unit Test Setup
@@ -42,7 +44,7 @@ class TestCase extends Orchestra
      */
     private function resetDatabase(): void
     {
-        $this->artisan('migrate');
+        $this->artisan('migrate:fresh');
     }
 
     /**
@@ -78,6 +80,7 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app): array
     {
         return [
+            'Breadcrumb' => \AvoRed\Framework\Breadcrumb\Breadcrumb::class,
             'Menu' => \AvoRed\Framework\Menu\Menu::class,
         ];
     }
@@ -90,7 +93,9 @@ class TestCase extends Orchestra
      */
     public function getAvoRed($routeName): TestResponse
     {
-        return $this->get(route($routeName));
+        return $this->createAdminUser(['is_super_admin' => 1])
+            ->actingAs($this->user, 'admin')
+            ->get(route($routeName));
     }
 
     /**
@@ -102,7 +107,6 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app): void
     {
         $app['config']->set('app.key', 'base64:UTyp33UhGolgzCK5CJmT+hNHcA+dJyp3+oINtX+VoPI=');
-        config()->set('database.default', 'testing');
     }
 
     /**

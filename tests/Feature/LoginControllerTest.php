@@ -1,23 +1,17 @@
 <?php
-
 namespace AvoRed\Framework\Tests\Feature;
 
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 class LoginControllerTest extends TestCase
 {
-    use RefreshDatabase, DatabaseMigrations;
-
     /**
      * Test To check if login show form is working.
      * @return void
      */
     public function test_login_page_show_form()
     {
-        $response = $this->getAvoRed('admin.login');
+        $response = $this->get(route('admin.login'));
 
         $response->assertStatus(200);
     }
