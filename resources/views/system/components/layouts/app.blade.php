@@ -19,6 +19,8 @@
 
 		<div class="w-full">
             @include('avored::partials.header')
+
+            {!! Breadcrumb::render(Route::currentRouteName()) !!}
             {{ $slot }}
         </div>
     </div>

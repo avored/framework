@@ -38,5 +38,6 @@ return [
     'description' => 'Description',
     'save' => 'Save',
     'please_select' => 'Please Select',
-    'success_delete_message' => ':attribute deleted successfully!'
+    'success_delete_message' => ':attribute deleted successfully!',
+    'dashboard' => 'Dashboard',
 ];

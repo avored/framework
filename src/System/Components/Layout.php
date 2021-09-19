@@ -2,7 +2,9 @@
 
 namespace AvoRed\Framework\System\Components;
 
+use AvoRed\Framework\Breadcrumb\Breadcrumb;
 use AvoRed\Framework\Menu\Menu;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class Layout extends Component

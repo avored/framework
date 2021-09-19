@@ -1,7 +1,7 @@
 <?php
 namespace AvoRed\Framework;
 
-use AvoRed\Framework\Menu\Menu;
+use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
 use AvoRed\Framework\Menu\MenuProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
@@ -21,6 +21,7 @@ class AvoRedServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
+        BreadcrumbProvider::class,
         ComponentsProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
@@ -51,8 +52,6 @@ class AvoRedServiceProvider extends ServiceProvider
     {
         $this->registerTranslationPath();
         $this->setupPublishFiles();
-
-       
     }
 
     /**
