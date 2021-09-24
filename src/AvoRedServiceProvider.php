@@ -3,7 +3,9 @@ namespace AvoRed\Framework;
 
 use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
 use AvoRed\Framework\Menu\MenuProvider;
+use AvoRed\Framework\Permission\PermissionProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
+use AvoRed\Framework\Support\Middleware\Permission as MiddlewarePermission;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
@@ -25,6 +27,7 @@ class AvoRedServiceProvider extends ServiceProvider
         ComponentsProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
+        PermissionProvider::class
     ];
 
     /**
@@ -120,7 +123,7 @@ class AvoRedServiceProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->aliasMiddleware('admin.auth', AdminAuth::class);
         $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
-        // $router->aliasMiddleware('permission', Permission::class);
+        $router->aliasMiddleware('permission', MiddlewarePermission::class);
         // $router->aliasMiddleware('avored', AvoRedCore::class);
     }
 

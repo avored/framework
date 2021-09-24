@@ -58,7 +58,8 @@
             ],
             "aliases": {
                 "Menu": "AvoRed\\Framework\\Menu\\Menu",
-                "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb"
+                "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb",
+                "Permission": "AvoRed\\Framework\\Permission\\Permission"
             }
         }
     },

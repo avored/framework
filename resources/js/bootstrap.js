@@ -14,5 +14,5 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
-
+console.log('here')
 feather.replace()

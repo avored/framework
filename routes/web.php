@@ -51,15 +51,13 @@ Route::middleware(['web'])
             ->name('password.update');
     });
 
-Route::middleware(['web', 'admin.auth:admin'])
+Route::middleware(['web', 'admin.auth:admin', 'permission'])
     ->prefix($baseAdminUrl)
     ->name('admin.')
     ->group(function () {
 
         Route::get('', [DashboardController::class, 'index'])
             ->name('dashboard');
-
-
 
         /***************** CATALOG ROUTES *****************/
         Route::resource('category', CategoryController::class);

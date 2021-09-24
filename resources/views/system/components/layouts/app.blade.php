@@ -24,9 +24,10 @@
             {{ $slot }}
         </div>
     </div>
-    <script defer src="{{ asset('vendor/avored/js/app.js')  }}"></script>
+    <script src="{{ asset('vendor/avored/js/app.js')  }}"></script>
     @stack('scripts')
     <script>
+        Alpine.start()
         document.addEventListener('alpine:init', () => {
             console.log('alpine init')
         })

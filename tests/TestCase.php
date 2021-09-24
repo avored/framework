@@ -82,6 +82,7 @@ class TestCase extends Orchestra
         return [
             'Breadcrumb' => \AvoRed\Framework\Breadcrumb\Breadcrumb::class,
             'Menu' => \AvoRed\Framework\Menu\Menu::class,
+            'Permission' => \AvoRed\Framework\Permission\Permission::class,
         ];
     }
 

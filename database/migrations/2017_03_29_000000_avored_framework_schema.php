@@ -58,6 +58,20 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('parent_id')->references('id')->on('categories');
         });
 
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('permission_role', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('permission_id')->nullable()->default(null);
+            $table->uuid('role_id')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
     }
 
     /**
