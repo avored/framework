@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
 
 </head>
-<body>
+<body x-data="app">
 
     <div class="flex h-full" x-data="{ isSideBarOpen: true, showAlert : false, showAlertMessage:  ''}">
 		@include('avored::partials.sidebar')
