@@ -8,7 +8,9 @@
 
 import feather from 'feather-icons'
 import axios from 'axios'
+import easymde from 'easymde'
 
+window.easymde = easymde
 window.axios = axios
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 

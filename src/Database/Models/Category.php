@@ -14,6 +14,7 @@ class Category extends BaseModel
     protected $fillable = [
         'name',
         'slug',
+        'description',
         'meta_title',
         'meta_description',
         'parent_id'
@@ -27,7 +28,7 @@ class Category extends BaseModel
     // {
     //     return $this->belongsToMany(Product::class);
     // }
-    
+
     /**
      * Category can has many child categories.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

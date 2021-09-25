@@ -1,4 +1,4 @@
-<div class="fixed md:hidden lg:static bg-red-500 min-h-screen bottom-0 w-full  text-white lg:h-full "
+<div class="lg:static bg-red-500 min-h-screen bottom-0 sm:w-16 text-white h-full "
     :class="isSideBarOpen ? 'lg:w-64 z-10' : 'lg:w-16'"
     x-transition.duration.300ms>
     <div class="bg-white text-red-700 h-16 p-2 flex items-center shadow">

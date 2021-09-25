@@ -1,5 +1,5 @@
 <x-avored::layout>
-    <div x-data="avoredConfirmationDialog()">
+    <div>
         <div class="p-5">
             <div class="flex w-full">
                 <h2 class="text-2xl text-red-700 font-semibold">
@@ -11,12 +11,25 @@
             <div class="mt-5 w-full">
                 <x-avored::form.form action="{{ route('admin.category.update', $category) }}" method="PUT">
                     @foreach ($tabs as $tab)
+                    <div class="w-full border rounded">
+                        <div class="p-4 border-b">
+                            <div class="flex w-full">
+                                <span class="text-lg text-red-500 font-semibold">
+                                    {{ $tab->label() }}
+                                </span>
+                                <span class="ml-auto">
 
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="p-4">
                             @php
                                 $path = $tab->view();
                             @endphp
                             @include($path)
-
+                        </div>
+                    </div>
                     @endforeach
 
                     <div class="mt-6 flex">
@@ -33,7 +46,5 @@
                 </x-avored::form.form>
             </div>
         </div>
-
     </div>
-
 </x-avored::layout>

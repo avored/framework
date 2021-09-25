@@ -1,6 +1,6 @@
 <div class="w-full block">
     @if ($label)
-    <label for="{{ $name }}" class="text-gray-500 text-sm block">
+    <label for="{{ $name }}" class="text-gray-600 font-semibold text-sm block">
         {{ $label }}
     </label>
     @endif
@@ -12,7 +12,7 @@
         >
             {{ $slot }}
         </select>
-        
+
         @if ($errors->has($name))
         <div class="text-xs absolute text-red-400">
             {{ $errors->first($name) }}

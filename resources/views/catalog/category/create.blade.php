@@ -11,29 +11,27 @@
             <div class="mt-5 w-full">
                 <x-avored::form.form action="{{ route('admin.category.store') }}" method="POST">
 
-                    <ul class="flex justify-center items-center my-4">
-                        @foreach ($tabs as $tab)
-                            <li class="cursor-pointer py-2 px-4 text-gray-500 border-b-8"
-                                :class="activeTab=='{{ $tab->key() }}' ? 'text-red-500 border-red-500' : ''"
-                                x-on:click="activateTab('{{ $tab->key() }}')"
-                            >{{ $tab->label() }}</li>
+                    @foreach ($tabs as $tab)
+                    <div class="w-full border rounded">
+                        <div class="p-4 border-b">
+                            <div class="flex w-full">
+                                <span class="text-lg text-red-500 font-semibold">
+                                    {{ $tab->label() }}
+                                </span>
+                                <span class="ml-auto">
 
-                        @endforeach
-                    </ul>
-
-                        <div class="w-full bg-white p-16 text-center mx-auto border">
-                            @foreach ($tabs as $tab)
-                                <div x-show="activeTab=='{{ $tab->key() }}'">
-                                    @php
-                                        $path = $tab->view();
-                                    @endphp
-                                    @include($path)
-                                </div>
-                            @endforeach
+                                </span>
+                            </div>
 
                         </div>
-
-
+                        <div class="p-4">
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+                        </div>
+                    </div>
+                    @endforeach
 
                     <div class="mt-6 flex">
                         <button type="submit"
