@@ -40,4 +40,5 @@ return [
     'please_select' => 'Please Select',
     'success_delete_message' => ':attribute deleted successfully!',
     'dashboard' => 'Dashboard',
+    'basic_info' => 'Basic Information',
 ];

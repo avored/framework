@@ -12,6 +12,7 @@ use AvoRed\Framework\Support\Providers\ModelsProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
 use AvoRed\Framework\System\Composers\LayoutComposer;
+use AvoRed\Framework\Tab\TabProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,7 +28,8 @@ class AvoRedServiceProvider extends ServiceProvider
         ComponentsProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
-        PermissionProvider::class
+        PermissionProvider::class,
+        TabProvider::class
     ];
 
     /**

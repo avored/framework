@@ -10,7 +10,14 @@
 
             <div class="mt-5 w-full">
                 <x-avored::form.form action="{{ route('admin.category.update', $category) }}" method="PUT">
-                    @include('avored::catalog.category._field')
+                    @foreach ($tabs as $tab)
+
+                            @php
+                                $path = $tab->view();
+                            @endphp
+                            @include($path)
+
+                    @endforeach
 
                     <div class="mt-6 flex">
                         <button type="submit"

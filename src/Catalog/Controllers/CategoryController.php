@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Catalog\Requests\CategoryRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Models\Category;
+use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
@@ -46,9 +47,11 @@ class CategoryController extends Controller
     public function create()
     {
         $options = $this->categoryRepository->options();
+        $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.create')
-            ->with('options', $options);
+            ->with('options', $options)
+            ->with('tabs', $tabs);
     }
 
     /**
@@ -72,12 +75,15 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $tabs = Tab::get('catalog.category');
+
         $options = $this->categoryRepository
             ->options();
         $options->pull($category->id);
         return view('avored::catalog.category.edit')
             ->with('category', $category)
-            ->with('options', $options);
+            ->with('options', $options)
+            ->with('tabs', $tabs);
     }
 
     /**

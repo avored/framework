@@ -31,6 +31,10 @@ Alpine.data('app', () => ({
     defaultSuccessMessage: `This alert contains success message.`,
     defaultWarningMessage: `This alert contains warning message.`,
     defaultDangerMessage: `This alert contains danger message.`,
+    activeTab: 'catalog.category.info',
+    activateTab(key) {
+        this.activeTab = key
+    },
     showAlert(type) {
         this.openAlertBox = true
         switch (type) {
