@@ -154,13 +154,6 @@ class MenuProvider extends ServiceProvider
         //         ->route('admin.report.index')
         //         ->params(['identifier' => 'new-customer']);
         // });
-        
-        // Menu::make('user', function (MenuItem $menu) {
-        //     $menu->label('avored::system.admin_menus.user')
-        //         ->type(MenuItem::ADMIN)
-        //         ->icon('user-group')
-        //         ->route('#');
-        // });
 
         // Menu::make('promotion', function (MenuItem $menu) {
         //     $menu->label('avored::system.admin_menus.promotion')
@@ -177,8 +170,15 @@ class MenuProvider extends ServiceProvider
         //         ->route('admin.promotion-code.index');
         // });
 
-        // $userMenu = Menu::get('user');
-    
+        Menu::make('user', function (MenuItem $menu) {
+            $menu->label('avored::system.user')
+            ->type(MenuItem::ADMIN)
+                ->icon('users')
+                ->route('#');
+        });
+        /** @var $userMenu \AvoRed\Framework\Menu\MenuBuilder */
+        $userMenu = Menu::get('user');
+
         // $userMenu->subMenu('customer_group', function (MenuItem $menu) {
         //     $menu->key('customer_group')
         //         ->type(MenuItem::ADMIN)
@@ -186,13 +186,13 @@ class MenuProvider extends ServiceProvider
         //         ->route('admin.customer-group.index');
         // });
 
-        // $userMenu->subMenu('admin-user', function (MenuItem $menu) {
-        //     $menu->key('admin-user')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.admin-user')
-        //         ->route('admin.admin-user.index');
-        // });
-        
+        $userMenu->subMenu('staff', function (MenuItem $menu) {
+            $menu->key('staff')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.staff')
+                ->route('admin.staff.index');
+        });
+
         // Menu::make('system', function (MenuItem $menu) {
         //     $menu->label('avored::system.admin_menus.system')
         //         ->type(MenuItem::ADMIN)
@@ -222,6 +222,6 @@ class MenuProvider extends ServiceProvider
         //         ->label('avored::system.admin_menus.role')
         //         ->route('admin.role.index');
         // });
-      
+
     }
 }

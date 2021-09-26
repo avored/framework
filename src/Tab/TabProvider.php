@@ -155,10 +155,10 @@ class TabProvider extends ServiceProvider
         });
 
         /******USER ADMIN USER TABS  *******/
-        Tab::put('user.admin-user', function (TabItem $tab) {
-            $tab->key('user.admin-user.info')
-                ->label('avored::system.tab.basic_info')
-                ->view('avored::user.admin-user._fields');
+        Tab::put('user.staff', function (TabItem $tab) {
+            $tab->key('user.staff.info')
+                ->label('avored::system.basic_info')
+                ->view('avored::user.staff._fields');
         });
 
         /******SYSTEM CURRENCY TABS  *******/

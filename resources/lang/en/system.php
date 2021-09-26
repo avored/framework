@@ -41,4 +41,13 @@ return [
     'success_delete_message' => ':attribute deleted successfully!',
     'dashboard' => 'Dashboard',
     'basic_info' => 'Basic Information',
+    'user' => 'User',
+    'staff' => 'Staff',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'email' => 'Email',
+    'confirm_password' => 'Confirm Password',
+    'role' => 'Role',
+    'edit' => 'Edit',
+    'edit_profile' => 'Edit Profile',
 ];

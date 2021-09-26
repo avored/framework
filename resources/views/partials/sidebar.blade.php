@@ -8,11 +8,10 @@
 
     <div class="space-x-8 p-2 overflow-hidden">
         <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2">
-
             @foreach ($adminMenus as $adminMenu)
                 <div x-data="{ isActive: false, open: false}" class="space-x-2">
                     <a href="#" x-on:click="$event.preventDefault(); open = !open"
-                        class="flex items-center ml-3 pr-2 text-white transition-colors rounded-md"
+                        class="flex items-center my-5 ml-3 pr-2 text-white transition-colors rounded-md"
                         role="button" aria-haspopup="true"
                         :aria-expanded="(open || isActive) ? 'true' : 'false'">
                         <span aria-hidden="true">
