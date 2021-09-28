@@ -2,6 +2,7 @@
 
 use AvoRed\Framework\Catalog\Controllers\CategoryController;
 use AvoRed\Framework\System\Controllers\DashboardController;
+use AvoRed\Framework\System\Controllers\RoleController;
 use AvoRed\Framework\User\Controllers\LoginController;
 use AvoRed\Framework\User\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -67,4 +68,8 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         /***************** USER ROUTES *****************/
         Route::resource('staff', StaffController::class);
+
+
+        /***************** SYSTEM ROUTES *****************/
+        Route::resource('role', RoleController::class);
     });

@@ -3,10 +3,10 @@
     <div class="p-5">
         <div class="flex w-full">
             <h2 class="text-2xl text-red-700 font-semibold">
-                {{ __('avored::system.staff') }} {{ __('avored::system.list') }}
+                {{ __('avored::system.role') }} {{ __('avored::system.list') }}
             </h2>
             <span class="ml-auto">
-                <x-avored::link url="{{ route('admin.staff.create') }}" style="button-primary">
+                <x-avored::link url="{{ route('admin.role.create') }}" style="button-primary">
                     {{ __('avored::system.create') }}
                 </x-avored::link>
             </span>
@@ -19,13 +19,7 @@
                     <x-slot name="header">
                         <x-avored::table.row class="bg-gray-300">
                             <x-avored::table.header>
-                                {{ __('avored::system.first_name') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header>
-                                {{ __('avored::system.last_name') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header>
-                                {{ __('avored::system.email') }}
+                                {{ __('avored::system.name') }}
                             </x-avored::table.header>
                             <x-avored::table.header class="rounded-tr">
                                 {{ __('avored::system.actions') }}
@@ -33,35 +27,30 @@
                         </x-avored::table.row>
                     </x-slot>
                     <x-slot name="body">
-                        @foreach ($staffs as $staff)
+                        @foreach ($roles as $role)
                             <x-avored::table.row class="{{ ($loop->index % 2 == 0) ? '' : 'bg-gray-200'  }}">
                                 <x-avored::table.cell>
-                                    {{ $staff->first_name ?? '' }}
+                                    {{ $role->name ?? '' }}
                                 </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    {{ $staff->last_name ?? '' }}
-                                </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    {{ $staff->email ?? '' }}
-                                </x-avored::table.cell>
+                                
                                 <x-avored::table.cell>
                                     <div class="flex">
-                                        <x-avored::link url="{{ route('admin.staff.edit', $staff) }}">
+                                        <x-avored::link url="{{ route('admin.role.edit', $role) }}">
                                             <i class="w-5 h-5" data-feather="edit"></i>
                                         </x-avored::link>
                                         <span class="mx-2">|</span>
                                         <x-avored::link
                                             x-on:click.prevent="toggleConfirmationDialog(
                                                 true, 
-                                                {{ $staff }}, 
-                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $staff->full_name, 'attribute' => strtolower(__('avored::system.staff'))]) }}'
+                                                {{ $role }},
+                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $role->name, 'attribute' => strtolower(__('avored::system.category'))]) }}'
                                             )"
-                                            url="{{ route('admin.staff.destroy', $staff) }}">
+                                            url="{{ route('admin.role.destroy', $role) }}">
                                             <i class="w-5 h-5" data-feather="trash"></i>
                                             <x-avored::form.form
-                                                id="staff-destory-{{ $staff->id }}"
+                                                id="role-destory-{{ $role->id }}"
                                                 method="delete"
-                                                action="{{ route('admin.staff.destroy', $staff) }}">
+                                                action="{{ route('admin.role.destroy', $role) }}">
                                             </x-avored::form.form>
                                         </x-avored::link>
                                     </div>
@@ -71,7 +60,7 @@
                     </x-slot>
                 </x-avored::table>
                 <div class="w-full">
-                    {{ $staffs->render() }}
+                    {{ $roles->render() }}
                 </div>
             </div>
         </div>
@@ -106,6 +95,8 @@
                         Are you sure?
                     </h3>
                     <p class="text-sm text-gray-500 px-8" x-html="message">
+
+
                     </p>
                 </div>
                 <!--footer-->

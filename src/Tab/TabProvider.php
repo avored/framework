@@ -178,7 +178,7 @@ class TabProvider extends ServiceProvider
         /******SYSTEM ROLE TABS  *******/
         Tab::put('system.role', function (TabItem $tab) {
             $tab->key('system.role.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::system.role._fields');
         });
 

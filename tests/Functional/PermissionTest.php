@@ -33,9 +33,8 @@ class PermissionTest extends TestCase
      */
     protected function createPermissionForUser(AdminUser $user, string $name)
     {
-        $this->markTestIncomplete('model is not implemented');
-        // $permission = new Permission(['name' => $name]);
-        // $user->role->permissions()->save($permission);
-        // $user->load('role.permissions');
+        $permission = new Permission(['name' => $name]);
+        $user->role->permissions()->save($permission);
+        $user->load('role.permissions');
     }
 }

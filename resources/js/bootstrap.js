@@ -58,10 +58,10 @@ Alpine.data('app', () => ({
         }
         this.openAlertBox = true
     },
-    toggleConfirmationDialog(val, modal = null) {
+    toggleConfirmationDialog(val, modal = null, message = '') {
         if (modal) {
             this.modal = modal
-            this.message = 'Do you really want to delete ' + modal.name + ' category \n' + 'This process cannot be undone'
+            this.message = message
         }
         this.showConfirmationModal = val
     },

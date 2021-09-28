@@ -65,7 +65,6 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('permission_role', function (Blueprint $table) {
-            $table->uuid('id')->primary();
             $table->uuid('permission_id')->nullable()->default(null);
             $table->uuid('role_id')->nullable()->default(null);
             $table->timestamps();

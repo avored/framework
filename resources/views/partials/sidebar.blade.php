@@ -15,7 +15,7 @@
                         role="button" aria-haspopup="true"
                         :aria-expanded="(open || isActive) ? 'true' : 'false'">
                         <span aria-hidden="true">
-                            <i data-feather="{{ $adminMenu->icon() }}"></i>
+                            <i class="h-5 w-5" data-feather="{{ $adminMenu->icon() }}"></i>
                         </span>
                         <span class="ml-3 text-sm">{{ $adminMenu->label() }}</span>
                         <span class="ml-auto" aria-hidden="true">

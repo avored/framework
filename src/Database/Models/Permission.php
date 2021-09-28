@@ -2,10 +2,9 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Permission extends Model
+class Permission extends BaseModel
 {
+    
     /**
      * The attributes that are mass assignable.
      * @var array

@@ -3,13 +3,13 @@
         <div class="p-5">
             <div class="flex w-full">
                 <h2 class="text-2xl text-red-700 font-semibold">
-                    {{ __('avored::system.edit') }} {{ __('avored::system.category') }}
+                    {{ __('avored::system.edit') }} {{ __('avored::system.role') }}
                 </h2>
 
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.category.update', $category) }}" method="PUT">
+                <x-avored::form.form action="{{ route('admin.role.update', $role) }}" method="PUT">
                     @foreach ($tabs as $tab)
                     <div class="w-full border rounded">
                         <div class="p-4 border-b">
@@ -39,7 +39,7 @@
                             {{ __('avored::system.save') }}
                         </button>
 
-                        <x-avored::link url="{{ route('admin.category.index') }}" class="ml-3" style="button-default">
+                        <x-avored::link url="{{ route('admin.role.index') }}" class="ml-3" style="button-default">
                             {{ __('avored::system.cancel') }}
                         </x-avored::link>
                     </div>

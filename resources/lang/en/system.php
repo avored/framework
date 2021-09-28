@@ -50,4 +50,7 @@ return [
     'role' => 'Role',
     'edit' => 'Edit',
     'edit_profile' => 'Edit Profile',
+    'confirmation_delete_message' => 'Do you really want to delete :attribute_value :attribute \n This process cannot be undone',
+    'system' => 'System',
+    'cancel' => 'Cancel'
 ];

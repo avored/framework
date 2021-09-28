@@ -193,14 +193,15 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.staff.index');
         });
 
-        // Menu::make('system', function (MenuItem $menu) {
-        //     $menu->label('avored::system.admin_menus.system')
-        //         ->type(MenuItem::ADMIN)
-        //         ->icon('cog')
-        //         ->route('#');
-        // });
+        Menu::make('system', function (MenuItem $menu) {
+            $menu->label('avored::system.system')
+                ->type(MenuItem::ADMIN)
+                ->icon('settings')
+                ->route('#');
+        });
 
-        // $systemMenu = Menu::get('system');
+        /** @var $systemMenu \AvoRed\Framework\Menu\MenuBuilder */
+        $systemMenu = Menu::get('system');
         // /** @var Builder $systemMenu */
         // $systemMenu->subMenu('configuration', function (MenuItem $menu) {
         //     $menu->key('configuration')
@@ -216,12 +217,12 @@ class MenuProvider extends ServiceProvider
         //         ->route('admin.currency.index');
         // });
 
-        // $systemMenu->subMenu('role', function (MenuItem $menu) {
-        //     $menu->key('role')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.role')
-        //         ->route('admin.role.index');
-        // });
+        $systemMenu->subMenu('role', function (MenuItem $menu) {
+            $menu->key('role')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.role')
+                ->route('admin.role.index');
+        });
 
     }
 }
