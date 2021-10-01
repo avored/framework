@@ -5,6 +5,7 @@ namespace AvoRed\Framework\System\Controllers;
 use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Permission\Permission;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -46,10 +47,12 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $permissions = Permission::all();
         $tabs = Tab::get('system.role');
 
         return view('avored::system.role.create')
-            ->with('tabs', $tabs);
+            ->with('tabs', $tabs)
+            ->with('permissions', $permissions);
     }
 
     /**
@@ -60,7 +63,8 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $this->roleRepository->create($request->all());
+        $role = $this->roleRepository->create($request->all());
+        $this->roleRepository->saveRolePermissions($request, $role);
 
         return redirect(route('admin.role.index'));
     }
@@ -73,11 +77,13 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $permissions = Permission::all();
         $tabs = Tab::get('system.role');
 
         return view('avored::system.role.edit')
             ->with('role', $role)
-            ->with('tabs', $tabs);
+            ->with('tabs', $tabs)
+            ->with('permissions', $permissions);
     }
 
     /**
@@ -90,6 +96,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->all());
+        $this->roleRepository->saveRolePermissions($request, $role);
 
         return redirect(route('admin.role.index'));
     }

@@ -21,7 +21,7 @@ Alpine.data('app', () => ({
     showConfirmationModal: false,
     message: {},
     showConfirmationModal: false,
-    message: {},
+    modal: {},
     openAlertBox: false,
     alertBackgroundColor: '',
     alertMessage: '',
@@ -58,15 +58,16 @@ Alpine.data('app', () => ({
         }
         this.openAlertBox = true
     },
-    toggleConfirmationDialog(val, modal = null, message = '') {
+    toggleConfirmationDialog(val, modal = null, message = '', url = '') {
         if (modal) {
             this.modal = modal
+            this.deleteUrl = url
             this.message = message
         }
         this.showConfirmationModal = val
     },
     confirmation() {
-        axios.delete('/admin/category/' + this.modal.id)
+        axios.delete(this.deleteUrl)
             .then((response) => {
                 if (response.data.success) {
                     location.reload()

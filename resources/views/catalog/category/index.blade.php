@@ -65,9 +65,10 @@
                                         <span class="mx-2">|</span>
                                         <x-avored::link
                                             x-on:click.prevent="toggleConfirmationDialog(
-                                                true, 
+                                                true,
                                                 {{ $category }},
-                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $category->name, 'attribute' => strtolower(__('avored::system.category'))]) }}'
+                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $category->name, 'attribute' => strtolower(__('avored::system.category'))]) }}',
+                                                '{{ route('admin.category.destroy', $category) }}'
                                             )"
                                             url="{{ route('admin.category.destroy', $category) }}">
                                             <i class="w-5 h-5" data-feather="trash"></i>
@@ -96,7 +97,11 @@
             <div class="flex">
                 <span class="block sm:inline" x-text="showAlertMessage"></span>
                 <span x-transition.duration.500ms x-on:click="showAlert = false" class="pl-4">
-                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <title>Close</title><
+                        path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+                    </svg>
                 </span>
             </div>
     </div>
@@ -109,11 +114,19 @@
             <div class="">
                 <!--body-->
                 <div class="text-center p-5 flex-auto justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                            fill-rule="evenodd"
+                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
                     </svg>
                     <h2 class="text-xl font-bold py-4 ">
                         Are you sure?
@@ -126,9 +139,11 @@
                 <!--footer-->
                 <div class="p-3  mt-2 text-center space-x-4 md:block">
                     <button x-on:click="toggleConfirmationDialog(false)" class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
-                        Cancel
+                        {{ __('avored::system.cancel') }}
                     </button>
-                    <button x-on:click="confirmation" class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Delete</button>
+                    <button x-on:click="confirmation" class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">
+                        {{ __('avored::system.delete' }}
+                    </button>
                 </div>
             </div>
         </div>

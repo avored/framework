@@ -3,13 +3,13 @@
         <div class="p-5">
             <div class="flex w-full">
                 <h2 class="text-2xl text-red-700 font-semibold">
-                    {{ __('avored::system.create') }} {{ __('avored::system.category') }}
+                    {{ __('avored::system.create') }} {{ __('avored::system.role') }}
                 </h2>
 
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.category.store') }}" method="POST">
+                <x-avored::form.form action="{{ route('admin.role.store') }}" method="POST">
 
                     @foreach ($tabs as $tab)
                     <div class="w-full border rounded">

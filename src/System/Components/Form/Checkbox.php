@@ -12,6 +12,21 @@ class Checkbox extends Component
      */
     public $class;
     /**
+     * The form checkbox input name.
+     * @var string
+     */
+    public $name;
+    /**
+     * The form checkbox input checked value.
+     * @var string
+     */
+    public $checkedValue;
+    /**
+     * The form checkbox input label.
+     * @var string
+     */
+    public $label;
+    /**
      * The form checkbox input value.
      * @var mixed
      */
@@ -26,9 +41,15 @@ class Checkbox extends Component
      * @return void
      */
     public function __construct(
+        string $name,
+        $checkedValue = 1,
+        string $label = '',
         string $class = '',
         $value = ''
     ) {
+        $this->name = $name;
+        $this->checkedValue = $checkedValue;
+        $this->label = $label;
         $this->class = $class;
         $this->value = $value;
     }

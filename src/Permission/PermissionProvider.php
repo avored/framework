@@ -61,13 +61,13 @@ class PermissionProvider extends ServiceProvider
         $group = Permission::add(
             'dashboard',
             function (PermissionGroup $group) {
-                $group->label('avored::system.permissions.dashboard');
+                $group->label('avored::system.dashboard');
             }
         );
         $group->addPermission(
             'admin-dashboard',
             function (PermissionItem $permission) {
-                $permission->label('avored::system.permissions.dashboard')
+                $permission->label('avored::system.dashboard')
                     ->routes('admin.dashboard');
             }
         );
@@ -634,7 +634,7 @@ class PermissionProvider extends ServiceProvider
         //             ->routes('admin.promotion.code.destroy');
         //     }
         // );
-       
+
 
         Blade::if(
             'hasPermission',

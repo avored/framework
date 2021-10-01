@@ -32,18 +32,22 @@
                                 <x-avored::table.cell>
                                     {{ $role->name ?? '' }}
                                 </x-avored::table.cell>
-                                
+
                                 <x-avored::table.cell>
                                     <div class="flex">
                                         <x-avored::link url="{{ route('admin.role.edit', $role) }}">
                                             <i class="w-5 h-5" data-feather="edit"></i>
                                         </x-avored::link>
                                         <span class="mx-2">|</span>
+
+
+
                                         <x-avored::link
                                             x-on:click.prevent="toggleConfirmationDialog(
-                                                true, 
+                                                true,
                                                 {{ $role }},
-                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $role->name, 'attribute' => strtolower(__('avored::system.category'))]) }}'
+                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $role->name, 'attribute' => strtolower(__('avored::system.role'))]) }}',
+                                                '{{ route('admin.role.destroy', $role) }}'
                                             )"
                                             url="{{ route('admin.role.destroy', $role) }}">
                                             <i class="w-5 h-5" data-feather="trash"></i>
@@ -92,12 +96,9 @@
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                     </svg>
                     <h2 class="text-xl font-bold py-4 ">
-                        Are you sure?
+                        {{ __('avored::system.are_you_sure') }}
                     </h3>
-                    <p class="text-sm text-gray-500 px-8" x-html="message">
-
-
-                    </p>
+                    <p class="text-sm text-gray-500 px-8" x-html="message"></p>
                 </div>
                 <!--footer-->
                 <div class="p-3  mt-2 text-center space-x-4 md:block">
