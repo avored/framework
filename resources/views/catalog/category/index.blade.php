@@ -129,7 +129,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <h2 class="text-xl font-bold py-4 ">
-                        Are you sure?
+                        {{ __('avored::system.are_you_sure') }}
                     </h3>
                     <p class="text-sm text-gray-500 px-8" x-html="message">
 
@@ -142,7 +142,7 @@
                         {{ __('avored::system.cancel') }}
                     </button>
                     <button x-on:click="confirmation" class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">
-                        {{ __('avored::system.delete' }}
+                        {{ __('avored::system.delete') }}
                     </button>
                 </div>
             </div>
