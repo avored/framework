@@ -1,6 +1,7 @@
 <?php
 
 use AvoRed\Framework\Catalog\Controllers\CategoryController;
+use AvoRed\Framework\Cms\Controllers\PageController;
 use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\System\Controllers\RoleController;
 use AvoRed\Framework\User\Controllers\LoginController;
@@ -61,13 +62,17 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::get('', [DashboardController::class, 'index'])
             ->name('dashboard');
 
+
         /***************** CATALOG ROUTES *****************/
         Route::resource('category', CategoryController::class);
 
 
-
         /***************** USER ROUTES *****************/
         Route::resource('staff', StaffController::class);
+
+
+        /***************** CMS ROUTES *****************/
+        Route::resource('page', PageController::class);
 
 
         /***************** SYSTEM ROUTES *****************/

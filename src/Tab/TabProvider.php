@@ -113,7 +113,7 @@ class TabProvider extends ServiceProvider
         /******CMS PAGES TABS  *******/
         Tab::put('cms.page', function (TabItem $tab) {
             $tab->key('cms.page.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::cms.page._fields');
         });
 

@@ -71,7 +71,19 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
+
+        Schema::create('pages', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
+            $table->text('content')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+        });
     }
+
+
 
     /**
      * Uninstall the AvoRed Address Module Schema.
@@ -80,6 +92,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('pages');
         Schema::table('categories', function (Blueprint $table) {
             $table->dropForeign('categories_parent_id_foreign');
             $table->dropColumn('parent_id');

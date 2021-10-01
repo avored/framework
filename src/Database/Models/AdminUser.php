@@ -87,7 +87,7 @@ class AdminUser extends BaseModel
         $this->attributes['password'] = Hash::make($val);
     }
 
-       
+
     /**
      * To check if user has permission to access the given route name.
      * @return \Illuminate\Database\Eloquent\Collection $permissions
@@ -97,7 +97,7 @@ class AdminUser extends BaseModel
         dd($this->role->permissions);
     }
 
-    
+
     public function role()
     {
         return $this->belongsTo(Role::class);

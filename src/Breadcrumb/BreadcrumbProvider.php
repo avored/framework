@@ -122,31 +122,31 @@ class BreadcrumbProvider extends ServiceProvider
     //         }
     //     );
 
-    //     Breadcrumb::make(
-    //         'admin.role.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.role.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.role.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.role')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.role.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.role.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.role.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.role.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.role.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.role.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.role.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.role.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.role.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.role.index');
+            }
+        );
 
     //     Breadcrumb::make(
     //         'admin.language.index',
@@ -301,31 +301,31 @@ class BreadcrumbProvider extends ServiceProvider
     //         }
     //     );
 
-    //     Breadcrumb::make(
-    //         'admin.page.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.page.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.page.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.page')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.page.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.page.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.page.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.page.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.page.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.page.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.page.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.page.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.page.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.page.index');
+            }
+        );
     //     Breadcrumb::make(
     //         'admin.attribute.index',
     //         function (BreadcrumbItem $breadcrumb) {

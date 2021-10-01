@@ -55,4 +55,7 @@ return [
     'cancel' => 'Cancel',
     'destroy' => 'Destroy',
     'are_you_sure' => 'Are you sure?',
+    'page' => 'Page',
+    'cms' => 'CMS',
+    'content' => 'Content',
 ];

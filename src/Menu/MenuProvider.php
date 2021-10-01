@@ -98,26 +98,26 @@ class MenuProvider extends ServiceProvider
         //         ->route('admin.attribute.index');
         // });
 
-        // Menu::make('cms', function (MenuItem $menu) {
-        //     $menu->label('avored::system.admin_menus.cms')
-        //         ->type(MenuItem::ADMIN)
-        //         ->icon('news-paper')
-        //         ->route('#');
-        // });
-        // $cmsMenu = Menu::get('cms');
-        // /** @var Builder $cmsMenu */
+        Menu::make('cms', function (MenuItem $menu) {
+            $menu->label('avored::system.cms')
+                ->type(MenuItem::ADMIN)
+                ->icon('book-open')
+                ->route('#');
+        });
+        $cmsMenu = Menu::get('cms');
+        /** @var Builder $cmsMenu */
         // $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
         //     $menu->key('menu-group')
         //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.menu')
+        //         ->label('avored::system.menu')
         //         ->route('admin.menu-group.index');
         // });
-        // $cmsMenu->subMenu('page', function (MenuItem $menu) {
-        //     $menu->key('page')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.page')
-        //         ->route('admin.page.index');
-        // });
+        $cmsMenu->subMenu('page', function (MenuItem $menu) {
+            $menu->key('page')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.page')
+                ->route('admin.page.index');
+        });
         // Menu::make('order', function (MenuItem $menu) {
         //     $menu->label('avored::system.admin_menus.order')
         //         ->icon('wallet')
