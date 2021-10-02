@@ -4,11 +4,13 @@ namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
+use AvoRed\Framework\Database\Repository\OrderStatusRepository;
 use AvoRed\Framework\Database\Repository\PageRepository;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
 use AvoRed\Framework\Database\Repository\RoleRepository;
@@ -29,6 +31,7 @@ class ModelsProvider extends ServiceProvider
     protected $models = [
         AdminUserModelInterface::class => AdminUserRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
+        OrderStatusModelInterface::class => OrderStatusRepository::class,
         PageModelInterface::class => PageRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         RoleModelInterface::class => RoleRepository::class,

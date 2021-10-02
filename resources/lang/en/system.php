@@ -58,4 +58,7 @@ return [
     'page' => 'Page',
     'cms' => 'CMS',
     'content' => 'Content',
+    'order' => 'Order',
+    'order-status' => 'Order Status',
+    'delete' => 'Delete',
 ];

@@ -104,8 +104,8 @@ class MenuProvider extends ServiceProvider
                 ->icon('book-open')
                 ->route('#');
         });
-        $cmsMenu = Menu::get('cms');
         /** @var Builder $cmsMenu */
+        $cmsMenu = Menu::get('cms');
         // $cmsMenu->subMenu('menu-group', function (MenuItem $menu) {
         //     $menu->key('menu-group')
         //         ->type(MenuItem::ADMIN)
@@ -118,14 +118,14 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.page')
                 ->route('admin.page.index');
         });
-        // Menu::make('order', function (MenuItem $menu) {
-        //     $menu->label('avored::system.admin_menus.order')
-        //         ->icon('wallet')
-        //         ->type(MenuItem::ADMIN)
-        //         ->route('#');
-        // });
-
-        // $orderMenu = Menu::get('order');
+        Menu::make('order', function (MenuItem $menu) {
+            $menu->label('avored::system.order')
+                ->icon('dollar-sign')
+                ->type(MenuItem::ADMIN)
+                ->route('#');
+        });
+        /** @var Builder $orderMenu */
+        $orderMenu = Menu::get('order');
         // /** @var Builder $orderMenu */
         // $orderMenu->subMenu('order', function (MenuItem $menu) {
         //     $menu->key('order')
@@ -133,12 +133,12 @@ class MenuProvider extends ServiceProvider
         //         ->label('avored::system.admin_menus.order')
         //         ->route('admin.order.index');
         // });
-        // $orderMenu->subMenu('order-status', function (MenuItem $menu) {
-        //     $menu->key('order-status')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.order-status')
-        //         ->route('admin.order-status.index');
-        // });
+        $orderMenu->subMenu('order-status', function (MenuItem $menu) {
+            $menu->key('order-status')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.order-status')
+                ->route('admin.order-status.index');
+        });
 
         // Menu::make('report', function (MenuItem $menu) {
         //     $menu->label('avored::system.admin_menus.report')

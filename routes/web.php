@@ -2,6 +2,7 @@
 
 use AvoRed\Framework\Catalog\Controllers\CategoryController;
 use AvoRed\Framework\Cms\Controllers\PageController;
+use AvoRed\Framework\Order\Controllers\OrderStatusController;
 use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\System\Controllers\RoleController;
 use AvoRed\Framework\User\Controllers\LoginController;
@@ -69,6 +70,10 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         /***************** USER ROUTES *****************/
         Route::resource('staff', StaffController::class);
+
+
+        /***************** ORDER ROUTES *****************/
+        Route::resource('order-status', OrderStatusController::class);
 
 
         /***************** CMS ROUTES *****************/

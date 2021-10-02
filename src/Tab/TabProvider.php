@@ -120,7 +120,7 @@ class TabProvider extends ServiceProvider
         /******ORDER ORDER STATUS TABS  *******/
         Tab::put('order.order-status', function (TabItem $tab) {
             $tab->key('order.order-status.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::order.order-status._fields');
         });
 

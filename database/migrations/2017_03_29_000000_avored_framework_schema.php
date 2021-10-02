@@ -81,6 +81,13 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::create('order_statuses', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->boolean('is_default')->default(0);
+            $table->timestamps();
+        });
     }
 
 
@@ -92,6 +99,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('pages');
         Schema::table('categories', function (Blueprint $table) {
             $table->dropForeign('categories_parent_id_foreign');
