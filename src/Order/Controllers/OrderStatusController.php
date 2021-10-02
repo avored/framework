@@ -60,6 +60,9 @@ class OrderStatusController extends Controller
      */
     public function store(OrderStatusRequest $request)
     {
+        if ($request->has('is_default')) {
+            $this->orderStatusRepository->updateDefaultOrderStatusToNull();
+        }
         $this->orderStatusRepository->create($request->all());
 
         return redirect(route('admin.order-status.index'));
@@ -89,6 +92,9 @@ class OrderStatusController extends Controller
      */
     public function update(OrderStatusRequest $request, OrderStatus $orderStatus)
     {
+        if ($request->has('is_default')) {
+            $this->orderStatusRepository->updateDefaultOrderStatusToNull();
+        }
         $orderStatus->update($request->all());
 
         return redirect(route('admin.order-status.index'));

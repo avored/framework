@@ -22,6 +22,9 @@
                             <x-avored::table.header>
                                 {{ __('avored::system.name') }}
                             </x-avored::table.header>
+                            <x-avored::table.header>
+                                {{ __('avored::system.is_default') }}
+                            </x-avored::table.header>
 
                             <x-avored::table.header class="rounded-tr">
                                 {{ __('avored::system.actions') }}
@@ -33,6 +36,9 @@
                             <x-avored::table.row class="{{ ($loop->index % 2 == 0) ? '' : 'bg-gray-200'  }}">
                                 <x-avored::table.cell>
                                     {{ $orderStatus->name ?? '' }}
+                                </x-avored::table.cell>
+                                <x-avored::table.cell>
+                                    {{ $orderStatus->is_default ? 'Default' : '' }}
                                 </x-avored::table.cell>
 
                                 <x-avored::table.cell>

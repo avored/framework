@@ -61,4 +61,5 @@ return [
     'order' => 'Order',
     'order-status' => 'Order Status',
     'delete' => 'Delete',
+    'is_default' => 'Is Default',
 ];

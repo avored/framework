@@ -12,4 +12,11 @@ interface OrderStatusModelInterface extends BaseInterface
      * @return \AvoRed\Framework\Database\Models\OrderStatus $orderStatus
      */
     public function findDefault(): OrderStatus;
+
+    /**
+     * Update existing is default status to zero so new one can be marked
+     *
+     * @return bool
+     */
+    public function updateDefaultOrderStatusToNull(): bool;
 }
