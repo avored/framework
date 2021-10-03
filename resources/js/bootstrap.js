@@ -8,6 +8,7 @@
 
 import feather from 'feather-icons'
 import axios from 'axios'
+import _ from 'lodash'
 import easymde from 'easymde'
 
 window.easymde = easymde

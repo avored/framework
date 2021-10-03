@@ -62,4 +62,12 @@ return [
     'order-status' => 'Order Status',
     'delete' => 'Delete',
     'is_default' => 'Is Default',
+    'property' => 'Property',
+    'data_type' => 'Data Type',
+    'field_type' => 'Field Type',
+    'use_for_all_products' => 'Use for all products',
+    'use_for_category_filter' => 'Use for category filter',
+    'sort_order' => 'Sort order',
+    'dropdown_options' => 'Dropdown options',
+    'option_label' => 'Option label',
 ];

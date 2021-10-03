@@ -84,12 +84,12 @@ class MenuProvider extends ServiceProvider
                 ->label('avored::system.category')
                 ->route('admin.category.index');
         });
-        // $catalogMenu->subMenu('property', function (MenuItem $menu) {
-        //     $menu->key('property')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.property')
-        //         ->route('admin.property.index');
-        // });
+        $catalogMenu->subMenu('property', function (MenuItem $menu) {
+            $menu->key('property')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.property')
+                ->route('admin.property.index');
+        });
 
         // $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
         //     $menu->key('attribute')

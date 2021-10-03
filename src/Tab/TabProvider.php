@@ -99,7 +99,7 @@ class TabProvider extends ServiceProvider
         /****** CATALOG PROPERTY TABS *******/
         Tab::put('catalog.property', function (TabItem $tab) {
             $tab->key('catalog.property.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::catalog.property._fields');
         });
 

@@ -88,6 +88,32 @@ class AvoredFrameworkSchema extends Migration
             $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('properties', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->enum('data_type', ['INTEGER', 'DECIMAL', 'DATETIME', 'VARCHAR', 'BOOLEAN', 'TEXT'])
+                ->nullable()
+                ->default(null);
+            $table->enum(
+                'field_type',
+                ['TEXT', 'TEXTAREA', 'CKEDITOR', 'SELECT', 'FILE', 'DATETIME', 'RADIO', 'SWITCH']
+            );
+            $table->tinyInteger('use_for_all_products')->default(0);
+            $table->tinyInteger('use_for_category_filter')->default(0);
+            $table->integer('sort_order')->nullable()->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('property_dropdown_options', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('property_id');
+            $table->string('display_text');
+            $table->timestamps();
+            $table->foreign('property_id')
+                ->references('id')->on('properties')->onDelete('cascade');
+        });
     }
 
 
@@ -99,6 +125,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('properties');
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('pages');
         Schema::table('categories', function (Blueprint $table) {
