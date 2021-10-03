@@ -3,13 +3,13 @@
         <div class="p-5">
             <div class="flex w-full">
                 <h2 class="text-2xl text-red-700 font-semibold">
-                    {{ __('avored::system.edit') }} {{ __('avored::system.property') }}
+                    {{ __('avored::system.edit') }} {{ __('avored::system.attribute') }}
                 </h2>
 
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.property.update', $property) }}" method="PUT">
+                <x-avored::form.form action="{{ route('admin.attribute.update', $attribute) }}" method="PUT">
                     @foreach ($tabs as $tab)
                     <div class="w-full border rounded">
                         <div class="p-4 border-b">

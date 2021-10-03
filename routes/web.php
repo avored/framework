@@ -1,5 +1,6 @@
 <?php
 
+use AvoRed\Framework\Catalog\Controllers\AttributeController;
 use AvoRed\Framework\Catalog\Controllers\CategoryController;
 use AvoRed\Framework\Catalog\Controllers\PropertyController;
 use AvoRed\Framework\Cms\Controllers\PageController;
@@ -68,6 +69,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         /***************** CATALOG ROUTES *****************/
         Route::resource('category', CategoryController::class);
         Route::resource('property', PropertyController::class);
+        Route::resource('attribute', AttributeController::class);
 
 
         /***************** USER ROUTES *****************/

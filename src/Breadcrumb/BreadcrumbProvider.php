@@ -174,31 +174,31 @@ class BreadcrumbProvider extends ServiceProvider
     //         }
     //     );
 
-    //     Breadcrumb::make(
-    //         'admin.property.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.property.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.property.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.property')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.property.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.property.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.property.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.property.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.property.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.property.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.property.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.property.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.property.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.property.index');
+            }
+        );
 
     //     Breadcrumb::make(
     //         'admin.order-status.index',
@@ -326,31 +326,31 @@ class BreadcrumbProvider extends ServiceProvider
                     ->parent('admin.page.index');
             }
         );
-    //     Breadcrumb::make(
-    //         'admin.attribute.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.attribute.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.attribute.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.attribute')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.attribute.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.attribute.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.attribute.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.attribute.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.attribute.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.attribute.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.attribute.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.attribute.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.attribute.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.attribute.index');
+            }
+        );
     //     Breadcrumb::make(
     //         'admin.user-group.index',
     //         function (BreadcrumbItem $breadcrumb) {

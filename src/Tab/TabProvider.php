@@ -106,7 +106,7 @@ class TabProvider extends ServiceProvider
         /****** CATALOG ATTRIBUTE TABS *******/
         Tab::put('catalog.attribute', function (TabItem $tab) {
             $tab->key('catalog.attribute.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::catalog.attribute._fields');
         });
 

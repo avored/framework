@@ -91,12 +91,12 @@ class MenuProvider extends ServiceProvider
                 ->route('admin.property.index');
         });
 
-        // $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
-        //     $menu->key('attribute')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.attribute')
-        //         ->route('admin.attribute.index');
-        // });
+        $catalogMenu->subMenu('attribute', function (MenuItem $menu) {
+            $menu->key('attribute')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.attribute')
+                ->route('admin.attribute.index');
+        });
 
         Menu::make('cms', function (MenuItem $menu) {
             $menu->label('avored::system.cms')

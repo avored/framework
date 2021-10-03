@@ -114,6 +114,22 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('property_id')
                 ->references('id')->on('properties')->onDelete('cascade');
         });
+        Schema::create('attributes', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->enum('display_as', ['IMAGE', 'TEXT'])->default('TEXT');
+            $table->timestamps();
+        });
+        Schema::create('attribute_dropdown_options', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('attribute_id');
+            $table->string('display_text');
+            $table->string('path')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('attribute_id')
+                ->references('id')->on('attributes')->onDelete('cascade');
+        });
     }
 
 
@@ -125,6 +141,9 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('attribute_dropdown_options');
+        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('property_dropdown_options');
         Schema::dropIfExists('properties');
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('pages');

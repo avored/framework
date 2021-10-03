@@ -465,77 +465,77 @@ class PermissionProvider extends ServiceProvider
         //     }
         // );
 
-        // $group = Permission::add(
-        //     'property',
-        //     function (PermissionGroup $group) {
-        //         $group->label('avored::system.permissions.property.title');
-        //     }
-        // );
+        $group = Permission::add(
+            'property',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.property');
+            }
+        );
 
-        // $group->addPermission(
-        //     'admin-property-list',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.property.list')
-        //             ->routes('admin.property.index');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-property-create',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.property.create')
-        //             ->routes('admin.property.create,admin.property.store');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-property-update',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.property.edit')
-        //             ->routes('admin.property.edit,admin.property.update');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-property-destroy',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.property.destroy')
-        //             ->routes('admin.property.destroy');
-        //     }
-        // );
+        $group->addPermission(
+            'admin-property-list',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.list')
+                    ->routes('admin.property.index');
+            }
+        );
+        $group->addPermission(
+            'admin-property-create',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.create')
+                    ->routes('admin.property.create,admin.property.store');
+            }
+        );
+        $group->addPermission(
+            'admin-property-update',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.edit')
+                    ->routes('admin.property.edit,admin.property.update');
+            }
+        );
+        $group->addPermission(
+            'admin-property-destroy',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.destroy')
+                    ->routes('admin.property.destroy');
+            }
+        );
 
-        // $group = Permission::add(
-        //     'attribute',
-        //     function (PermissionGroup $group) {
-        //         $group->label('avored::system.permissions.attribute.title');
-        //     }
-        // );
+        $group = Permission::add(
+            'attribute',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.attribute');
+            }
+        );
 
-        // $group->addPermission(
-        //     'admin-attribute-list',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.attribute.list')
-        //             ->routes('admin.attribute.index');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-attribute-create',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.attribute.create')
-        //             ->routes('admin.attribute.create,admin.attribute.store');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-attribute-update',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.attribute.edit')
-        //             ->routes('admin.attribute.edit,admin.attribute.update');
-        //     }
-        // );
-        // $group->addPermission(
-        //     'admin-attribute-destroy',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.attribute.destroy')
-        //             ->routes('admin.attribute.destroy');
-        //     }
-        // );
+        $group->addPermission(
+            'admin-attribute-list',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.list')
+                    ->routes('admin.attribute.index');
+            }
+        );
+        $group->addPermission(
+            'admin-attribute-create',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.create')
+                    ->routes('admin.attribute.create,admin.attribute.store');
+            }
+        );
+        $group->addPermission(
+            'admin-attribute-update',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.edit')
+                    ->routes('admin.attribute.edit,admin.attribute.update');
+            }
+        );
+        $group->addPermission(
+            'admin-attribute-destroy',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.destroy')
+                    ->routes('admin.attribute.destroy');
+            }
+        );
         // $group = Permission::add(
         //     'user-group',
         //     function (PermissionGroup $group) {

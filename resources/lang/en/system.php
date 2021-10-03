@@ -70,4 +70,6 @@ return [
     'sort_order' => 'Sort order',
     'dropdown_options' => 'Dropdown options',
     'option_label' => 'Option label',
+    'attribute' => 'Attribute',
+    'display_as' => 'Display as',
 ];
