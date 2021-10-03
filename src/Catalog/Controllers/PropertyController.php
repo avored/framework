@@ -65,8 +65,8 @@ class PropertyController extends Controller
     public function store(PropertyRequest $request)
     {
         $property = $this->propertyRepository->create($request->all());
-        $this->savePropertyDropdownOptions($property, $request);
-
+        $this->propertyRepository->savePropertyDropdown($request, $property);
+        
         return redirect(route('admin.property.index'));
     }
 
@@ -103,9 +103,7 @@ class PropertyController extends Controller
     public function update(PropertyRequest $request, Property $property)
     {
         $property->update($request->all());
-
-        $this->savePropertyDropdownOptions($property, $request);
-
+        $this->propertyRepository->savePropertyDropdown($request, $property);
         return redirect(route('admin.property.index'));
     }
 
@@ -123,36 +121,5 @@ class PropertyController extends Controller
             'success' => true,
             'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.property')])
         ]);
-    }
-
-
-    /**
-     * Save Property Dropdown options.
-     * @param \\AvoRed\Framework\Database\Models\Property  $property
-     * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
-     * @return void
-     */
-    private function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
-    {
-        if (($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
-            $property->dropdownOptions()->delete();
-        }
-        if (($request->get('field_type') === 'RADIO' ||
-            $request->get('field_type') === 'SELECT') &&
-            count($request->get('dropdown_option')) > 0
-        ) {
-            foreach ($request->get('dropdown_option') as $key => $option) {
-                if (empty($option)) {
-                    continue;
-                }
-
-                if (is_string($key)) {
-                    $property->dropdownOptions()->create(['display_text' => $option]);
-                } else {
-                    $optionModel = $property->dropdownOptions()->find($key);
-                    $optionModel->update(['display_text' => $option]);
-                }
-            }
-        }
     }
 }

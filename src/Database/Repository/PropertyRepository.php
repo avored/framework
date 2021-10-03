@@ -42,4 +42,29 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
         return $this->model;
     }
 
+
+    public function savePropertyDropdown($request , $property)
+    {
+        if (($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
+            $property->dropdownOptions()->delete();
+        }
+        if (($request->get('field_type') === 'RADIO' ||
+            $request->get('field_type') === 'SELECT') &&
+            count($request->get('dropdown_option')) > 0
+        ) {
+            foreach ($request->get('dropdown_option') as $key => $option) {
+                if (empty($option)) {
+                    continue;
+                }
+
+                if (is_string($key)) {
+                    $property->dropdownOptions()->create(['display_text' => $option]);
+                } else {
+                    $optionModel = $property->dropdownOptions()->find($key);
+                    $optionModel->update(['display_text' => $option]);
+                }
+            }
+        }
+    }
+
 }
