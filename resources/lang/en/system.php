@@ -72,4 +72,9 @@ return [
     'option_label' => 'Option label',
     'attribute' => 'Attribute',
     'display_as' => 'Display as',
+    'configuration' => 'Configuration',
+    'system_configuration' => 'System Configuration',
+    'basic_configuration' => 'Basic Configuration',
+    'site_name' => 'Site Name',
+    'order_email_address' => 'Order from email address',
 ];

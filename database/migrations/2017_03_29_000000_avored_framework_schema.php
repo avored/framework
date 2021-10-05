@@ -130,6 +130,12 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('attribute_id')
                 ->references('id')->on('attributes')->onDelete('cascade');
         });
+        Schema::create('configurations', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('code')->nullable()->default(null);
+            $table->text('value')->nullable()->default(null);
+            $table->timestamps();
+        });
     }
 
 
@@ -141,6 +147,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('configurations');
         Schema::dropIfExists('attribute_dropdown_options');
         Schema::dropIfExists('attributes');
         Schema::dropIfExists('property_dropdown_options');

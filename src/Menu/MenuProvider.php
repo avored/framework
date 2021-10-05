@@ -202,13 +202,13 @@ class MenuProvider extends ServiceProvider
 
         /** @var $systemMenu \AvoRed\Framework\Menu\MenuBuilder */
         $systemMenu = Menu::get('system');
-        // /** @var Builder $systemMenu */
-        // $systemMenu->subMenu('configuration', function (MenuItem $menu) {
-        //     $menu->key('configuration')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.configuration')
-        //         ->route('admin.configuration.index');
-        // });
+        /** @var Builder $systemMenu */
+        $systemMenu->subMenu('configuration', function (MenuItem $menu) {
+            $menu->key('configuration')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.configuration')
+                ->route('admin.configuration.index');
+        });
 
         // $systemMenu->subMenu('currency', function (MenuItem $menu) {
         //     $menu->key('currency')

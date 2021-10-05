@@ -192,7 +192,7 @@ class TabProvider extends ServiceProvider
         /******SYSTEM CONFIGURATION TABS  *******/
         Tab::put('system.configuration', function (TabItem $tab) {
             $tab->key('system.configuration.basic')
-                ->label('avored::system.tab.basic_configuration')
+                ->label('avored::system.basic_configuration')
                 ->view('avored::system.configuration.cards.basic');
         });
 
@@ -201,11 +201,11 @@ class TabProvider extends ServiceProvider
         //         ->label('avored::system.tab.user_configuration')
         //         ->view('avored::system.configuration.cards.user');
         // });
-        Tab::put('system.configuration', function (TabItem $tab) {
-            $tab->key('system.configuration.tax')
-                ->label('avored::system.tab.tax_configuration')
-                ->view('avored::system.configuration.cards.tax');
-        });
+        // Tab::put('system.configuration', function (TabItem $tab) {
+        //     $tab->key('system.configuration.tax')
+        //         ->label('avored::system.tax_configuration')
+        //         ->view('avored::system.configuration.cards.tax');
+        // });
 
         // Tab::put('system.configuration', function (TabItem $tab) {
         //     $tab->key('system.configuration.shipping')

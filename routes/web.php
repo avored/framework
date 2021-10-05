@@ -86,4 +86,8 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         /***************** SYSTEM ROUTES *****************/
         Route::resource('role', RoleController::class);
+        Route::get('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class, 'index'])
+            ->name('configuration.index');
+        Route::post('configuration', [\AvoRed\Framework\System\Controllers\ConfigurationController::class, 'store'])
+            ->name('configuration.store');
     });
