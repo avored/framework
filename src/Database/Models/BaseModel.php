@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
+use AvoRed\Framework\Database\Traits\UuidTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -16,5 +17,5 @@ class BaseModel extends Model implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, UuidTrait;
 }

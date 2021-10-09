@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Traits\FilterTrait;
@@ -10,7 +9,7 @@ use AvoRed\Framework\Database\Traits\FilterTrait;
 class PropertyRepository extends BaseRepository implements PropertyModelInterface
 {
     use FilterTrait;
-    
+
     /**
      * Filterable Fields
      * @var array $filterType
@@ -26,8 +25,6 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
      */
     protected $model;
 
-    
-
     /**
      * Construct for the Property Repository
      */
@@ -38,58 +35,36 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
 
     /**
      * Get the model for the repository
-     * @return Property 
+     * @return Property
      */
     public function model(): Property
     {
         return $this->model;
     }
 
-    /**
-     * Create Property Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Property $property
-     */
-    public function create(array $data): Property
+
+    public function savePropertyDropdown($request , $property)
     {
-        return Property::create($data);
+        if (($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
+            $property->dropdownOptions()->delete();
+        }
+        if (($request->get('field_type') === 'RADIO' ||
+            $request->get('field_type') === 'SELECT') &&
+            count($request->get('dropdown_option')) > 0
+        ) {
+            foreach ($request->get('dropdown_option') as $key => $option) {
+                if (empty($option)) {
+                    continue;
+                }
+
+                if (is_string($key)) {
+                    $property->dropdownOptions()->create(['display_text' => $option]);
+                } else {
+                    $optionModel = $property->dropdownOptions()->find($key);
+                    $optionModel->update(['display_text' => $option]);
+                }
+            }
+        }
     }
 
-    /**
-     * Find Property Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Property $property
-     */
-    public function find(int $id): Property
-    {
-        return Property::find($id);
-    }
-
-    /**
-     * Delete Property Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return Property::destroy($id);
-    }
-
-    /**
-     * Get all the properties from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $properties
-     */
-    public function all() : Collection
-    {
-        return Property::all();
-    }
-
-    /**
-     * Get all the properties from the connected database which is used in all products.
-     * @return \Illuminate\Database\Eloquent\Collection $properties
-     */
-    public function allPropertyToUseInProduct() : Collection
-    {
-        return Property::whereUseForAllProducts(1)->get();
-    }
 }

@@ -1,49 +1,68 @@
-<div class="flex w-full">
-    <avored-select
-        label-text="{{ __('avored::system.parent_id') }}"
-        field-name="parent_id"
-        :options="{{ $categoryOptions }}"
-        init-value="{{ $category->parent_id ?? '' }}" 
-        error-text="{{ $errors->first('parent_id') }}"
-        :has-empty="true"
+<div class="mt-3">
+    <x-avored::form.select
+        name="parent_id"
+        autofocus
+        label="{{ __('avored::system.parent') }}"
     >
-    </avored-select>
+
+        <option value="">{{ __('avored::system.please_select') }}</option>
+        @foreach ($options as $optionValue => $optionLabel)
+            <option {{ (isset($category) && $category->parent_id === $optionValue)  ? 'selected' : ''}} value="{{ $optionValue }}">
+                {{ $optionLabel }}
+            </option>
+        @endforeach
+
+    </x-avored::form.select>
 </div>
 
 <div class="flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.name') }}"
-        field-name="name"
-        init-value="{{ $category->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+    <div class="w-1/2">
+        <div class="mt-3">
+            <x-avored::form.input
+                name="name"
+                value="{{ $category->name ?? '' }}"
+                label="{{ __('avored::system.name') }}"
+            ></x-avored::form.input>
+        </div>
+    </div>
+    <div class="ml-3 w-1/2">
+        <div class="mt-3">
+            <x-avored::form.input
+                name="slug"
+                value="{{ $category->slug ?? '' }}"
+                label="{{ __('avored::system.slug') }}"
+            ></x-avored::form.input>
+        </div>
+    </div>
 </div>
 
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.slug') }}"
-        field-name="slug"
-        init-value="{{ $category->slug ?? '' }}" 
-        error-text="{{ $errors->first('slug') }}"
-    >
-    </avored-input>
+
+<div class="mt-3">
+    <x-avored::form.easymde
+        name="description"
+        value="{{ $category->description ?? '' }}"
+        label="{{ __('avored::system.description') }}"
+    ></x-avored::form.easymde>
 </div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.meta_title') }}"
-        field-name="meta_title"
-        init-value="{{ $category->meta_title ?? '' }}" 
-        error-text="{{ $errors->first('meta_title') }}"
-    >
-    </avored-input>
-</div>
-<div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.meta_description') }}"
-        field-name="meta_description"
-        init-value="{{ $category->meta_description ?? '' }}" 
-        error-text="{{ $errors->first('meta_description') }}"
-    >
-    </avored-input>
+
+<div class="flex w-full">
+    <div class="w-1/2">
+        <div class="mt-3">
+            <x-avored::form.input
+                name="meta_title"
+                value="{{ $category->meta_title ?? '' }}"
+                label="{{ __('avored::system.meta_title') }}"
+            ></x-avored::form.input>
+        </div>
+    </div>
+
+    <div class="w-1/2 ml-3">
+        <div class="mt-3">
+            <x-avored::form.input
+                name="meta_description"
+                value="{{ $category->meta_description ?? '' }}"
+                label="{{ __('avored::system.meta_description') }}"
+            ></x-avored::form.input>
+        </div>
+    </div>
 </div>

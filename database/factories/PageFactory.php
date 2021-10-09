@@ -1,16 +1,35 @@
 <?php
 
-use Illuminate\Support\Str;
-use Faker\Generator as Faker;
+namespace AvoRed\Framework\Database\Factories;
+
 use AvoRed\Framework\Database\Models\Page;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(Page::class, function (Faker $faker) {
-    $name = $faker->word;
-    $slug = Str::slug($name);
+class PageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Page::class;
 
-    return [
-        'name' => $name,
-        'slug' => $slug,
-        'content' => $faker->text(rand(50, 60)),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $name = $this->faker->word;
+
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'content' => $this->faker->sentence,
+            'meta_title' => $this->faker->sentence,
+            'meta_description' => $this->faker->sentence,
+        ];
+    }
+}

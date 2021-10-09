@@ -6,17 +6,30 @@ use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Permission;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 
-class PermissionRepository implements PermissionModelInterface
+class PermissionRepository extends BaseRepository implements PermissionModelInterface
 {
     /**
-     * Create Permission Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\Permission $permission
+     * @var Permission $model
      */
-    public function create(array $data): Permission
+    protected $model;
+
+    /**
+     * Construct for the Permission Repository
+     */
+    public function __construct()
     {
-        return Permission::create($data);
+        $this->model = new Permission();
     }
+
+    /**
+     * Get the model for the repository
+     * @return Permission
+     */
+    public function model()
+    {
+        return $this->model;
+    }
+
 
     /**
      * find Permission by given name from database.
@@ -28,22 +41,4 @@ class PermissionRepository implements PermissionModelInterface
         return Permission::whereName($name)->first();
     }
 
-    /**
-     * find Permission by given id from database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\Permission $permission
-     */
-    public function find(int $id): Permission
-    {
-        return Permission::find($id);
-    }
-
-    /**
-     * Get all the permissions.
-     * @return \Illuminate\Database\Eloquent\Collection $permissions
-     */
-    public function all() : Collection
-    {
-        return Permission::all();
-    }
 }

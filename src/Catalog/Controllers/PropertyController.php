@@ -2,165 +2,124 @@
 
 namespace AvoRed\Framework\Catalog\Controllers;
 
-use AvoRed\Framework\Support\Facades\Tab;
-use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Catalog\Requests\PropertyRequest;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
-use Illuminate\Http\Request;
+use AvoRed\Framework\Database\Models\Property;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
-class PropertyController
+class PropertyController extends Controller
 {
+
     /**
-     * Property Repository for the Property Controller.
-     * @var \AvoRed\Framework\Database\Repository\PropertyRepository
+     * @var PropertyRepository $propertyRepository
      */
     protected $propertyRepository;
-
     /**
-     * Construct for the AvoRed property controller.
-     * @param \AvoRed\Framework\Database\Contracts\PropertyModelInterface $propertyRepository
+     *
+     * @param PropertyRepositroy $repository
      */
     public function __construct(
-        PropertyModelInterface $propertyRepository
+        PropertyModelInterface $repository
     ) {
-        $this->propertyRepository = $propertyRepository;
+        $this->propertyRepository = $repository;
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin.
-     * @return \Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $properties = $this->propertyRepository->paginate();
 
         return view('avored::catalog.property.index')
-            ->with(compact('properties'));
+        ->with('properties', $properties);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $tabs = Tab::get('catalog.property');
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
+        $tabs = Tab::get('catalog.property');
 
         return view('avored::catalog.property.create')
-            ->with(compact('dataTypeOptions', 'fieldTypeOptions', 'tabs'));
+            ->with('dataTypeOptions', $dataTypeOptions)
+            ->with('fieldTypeOptions', $fieldTypeOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param PropertyRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function store(PropertyRequest $request)
     {
         $property = $this->propertyRepository->create($request->all());
-        $this->savePropertyDropdownOptions($property, $request);
-
-        return redirect()->route('admin.property.index')
-            ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.property.title')]
-            ));
+        $this->propertyRepository->savePropertyDropdown($request, $property);
+        
+        return redirect(route('admin.property.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Property $property
-     * @return \Illuminate\View\View
+     *
+     * @param Property  $property
+     * @return \Illuminate\Http\Response
      */
     public function edit(Property $property)
     {
-        if ($property->field_type === 'SELECT' || $property->field_type === 'RADIO') {
-            $property->load('dropdownOptions');
-        }
-        
         $tabs = Tab::get('catalog.property');
+
         $dataTypeOptions = Property::PROPERTY_DATATYPES;
         $fieldTypeOptions = Property::PROPERTY_FIELDTYPES;
+        $tabs = Tab::get('catalog.property');
+
+        $property->load('dropdownOptions');
 
         return view('avored::catalog.property.edit')
-            ->with(compact('property', 'dataTypeOptions', 'fieldTypeOptions', 'tabs'));
+            ->with('dataTypeOptions', $dataTypeOptions)
+            ->with('fieldTypeOptions', $fieldTypeOptions)
+            ->with('tabs', $tabs)
+            ->with('property', $property);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
-     * @param \AvoRed\Framework\Database\Models\Property  $property
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param PropertyRequest  $request
+     * @param Property $property
+     * @return \Illuminate\Http\Response
      */
     public function update(PropertyRequest $request, Property $property)
     {
         $property->update($request->all());
-        $this->savePropertyDropdownOptions($property, $request);
-
-        return redirect()->route('admin.property.index')
-            ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.property.title')]
-            ));
+        $this->propertyRepository->savePropertyDropdown($request, $property);
+        return redirect(route('admin.property.index'));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Property  $property
-     * @return \Illuminate\Http\JsonResponse
+     *
+     * @param Property $property
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Property $property)
     {
         $property->delete();
 
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.property.title')]
-            ),
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.property')])
         ]);
-    }
-
-    /**
-     * Save Property Dropdown options.
-     * @param \\AvoRed\Framework\Database\Models\Property  $property
-     * @param \AvoRed\Framework\Catalog\Requests\PropertyRequest $request
-     * @return void
-     */
-    private function savePropertyDropdownOptions(Property $property, PropertyRequest $request)
-    {
-        if (! ($request->get('field_type') === 'RADIO' || $request->get('field_type') === 'SELECT')) {
-            $property->dropdownOptions()->delete();
-        }
-        if (($request->get('field_type') === 'RADIO' ||
-            $request->get('field_type') === 'SELECT') &&
-            count($request->get('dropdown_option')) > 0
-        ) {
-            foreach ($request->get('dropdown_option') as $key => $option) {
-                if (empty($option)) {
-                    continue;
-                }
-
-                if (is_string($key)) {
-                    $property->dropdownOptions()->create(['display_text' => $option]);
-                } else {
-                    $optionModel = $property->dropdownOptions()->find($key);
-                    $optionModel->update(['display_text' => $option]);
-                }
-            }
-        }
-    }
-
-    
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->propertyRepository->filter($request->get('filter'));
     }
 }

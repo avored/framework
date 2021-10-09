@@ -1,47 +1,33 @@
 
- <div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.name') }}"
-        field-name="name"
-        init-value="{{ $role->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div class="mt-3">
+    <x-avored::form.input
+        name="name"
+        autofocus
+        value="{{ $role->name ?? '' }}"
+        label="{{ __('avored::system.name') }}"
+    ></x-avored::form.input>
 </div>
 
- <div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::system.fields.description') }}"
-        field-name="description"
-        init-value="{{ $role->description ?? '' }}" 
-        error-text="{{ $errors->first('description') }}"
-    >
-    </avored-input>
-</div>
-
-
-<div class="flex flex-wrap"> 
+<div class="grid grid-cols-4 gap-5">
     @foreach ($permissions as $group)
-        <div class="mt-3 w-1/4">
-            <div class="ml-3 rounded border">
-                <div class="p-5 border-b">
+        <div class="mt-3">
+            <div class="rounded border">
+                <div class="p-3 border-b">
                     {{ $group->label() }}
                 </div>
-                <div class="p-5">
+                <div class="p-3">
                     @foreach ($group->permissionList as $permission)
-                        <div class="mt-1 flex w-full">
-                            <avored-toggle
-                                label-text="{{ $permission->label() }}"
-                                field-name="permissions[{{ $permission->routes() }}]"
-                                {{-- toggle-on-value="ENABLED"
-                                toggle-off-value="DISABLED" --}}
-                                init-value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0 }}"
+                        <div class="mt-1">
+                            <x-avored::form.checkbox
+                                name="permissions[{{ $permission->routes() }}]"
+                                value="{{ (isset($role) && $role->hasPermission($permission->routes())) ? 1 : 0  }}"
+                                label="{{ $permission->label() }}"
                             >
-                            </avored-toggle>
+                            </x-avored::form.checkbox>
                         </div>
                     @endforeach
                 </div>
             </div>
-        </div>  
+        </div>
     @endforeach
 </div>

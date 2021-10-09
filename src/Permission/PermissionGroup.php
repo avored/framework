@@ -13,7 +13,7 @@ class PermissionGroup
     protected $label;
 
     /**
-     * @var array
+     * @var Collection
      */
     public $permissionList;
 
@@ -81,12 +81,12 @@ class PermissionGroup
     public function addPermission($key, $callable = null)
     {
         if (null !== $callable) {
-            $permission = new Permission($callable);
+            $permission = new PermissionItem($callable);
             $permission->key($key);
 
             $this->permissionList->put($key, $permission);
         } else {
-            $permission = new Permission();
+            $permission = new PermissionItem();
 
             $permission->key($key);
             $this->permissionList->put($key, $permission);

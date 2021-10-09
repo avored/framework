@@ -16,7 +16,6 @@ use AvoRed\Framework\Database\Traits\FilterTrait;
 class CategoryRepository extends BaseRepository implements CategoryModelInterface
 {
     use FilterTrait;
-   
     /**
      * Eloquent Model Instant for the Repository
      * @var \AvoRed\Framework\Database\Models\Category $model
@@ -37,11 +36,11 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
 
     /**
      * Construct for the Category Repository
-     * 
+     *
      */
     public function __construct()
     {
-        $this->model = new Category;   
+        $this->model = new Category;
     }
 
     /**
@@ -81,7 +80,7 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
         return $builder->get();
     }
 
-  
+
 
     /**
      * Get all the categories option to use in Menu Builder.

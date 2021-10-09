@@ -2,176 +2,120 @@
 
 namespace AvoRed\Framework\Catalog\Controllers;
 
-use AvoRed\Framework\Support\Facades\Tab;
-use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
-use AvoRed\Framework\Catalog\Requests\AttributeImageRequest;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
-use Illuminate\Http\Request;
+use AvoRed\Framework\Database\Models\Attribute;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
-class AttributeController
+class AttributeController extends Controller
 {
+
     /**
-     * Attribute Repository for the Attribute Controller.
-     * @var \AvoRed\Framework\Database\Repository\AttributeRepository
+     * @var AvoRed\Framework\Database\Repository\AttributeRepository $attributeRepository
      */
     protected $attributeRepository;
-
     /**
-     * Construct for the AvoRed install command.
-     * @param \AvoRed\Framework\Database\Contracts\AttributeModelInterface $attributeRepository
+     *
+     * @param AttributeRepositroy $repository
      */
     public function __construct(
-        AttributeModelInterface $attributeRepository
+        AttributeModelInterface $repository
     ) {
-        $this->attributeRepository = $attributeRepository;
+        $this->attributeRepository = $repository;
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin.
-     * @return \Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $attributes = $this->attributeRepository->paginate();
-        
+
         return view('avored::catalog.attribute.index')
-            ->with(compact('attributes'));
+        ->with('attributes', $attributes);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $tabs = Tab::get('catalog.attribute');
         $displayAsOptions = Attribute::DISPLAY_AS;
+        $tabs = Tab::get('catalog.attribute');
 
         return view('avored::catalog.attribute.create')
-            ->with(compact('displayAsOptions', 'tabs'));
+            ->with('displayAsOptions', $displayAsOptions)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param AttributeRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function store(AttributeRequest $request)
     {
         $attribute = $this->attributeRepository->create($request->all());
-        $this->saveAttributeDropdownOptions($attribute, $request);
-
-        return redirect()->route('admin.attribute.index')
-            ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.attribute.title')]
-            ));
+        $this->attributeRepository->saveAttributeDropdownOptions($request, $attribute);
+        
+        return redirect(route('admin.attribute.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Attribute $attribute
-     * @return \Illuminate\View\View
+     *
+     * @param Attribute  $attribute
+     * @return \Illuminate\Http\Response
      */
     public function edit(Attribute $attribute)
     {
         $tabs = Tab::get('catalog.attribute');
+
         $displayAsOptions = Attribute::DISPLAY_AS;
+        $tabs = Tab::get('catalog.attribute');
+
+        $attribute->load('dropdownOptions');
 
         return view('avored::catalog.attribute.edit')
-            ->with(compact('attribute', 'displayAsOptions', 'tabs'));
+            ->with('displayAsOptions', $displayAsOptions)
+            ->with('tabs', $tabs)
+            ->with('attribute', $attribute);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
-     * @param \AvoRed\Framework\Database\Models\Attribute  $attribute
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param AttributeRequest  $request
+     * @param Attribute $attribute
+     * @return \Illuminate\Http\Response
      */
     public function update(AttributeRequest $request, Attribute $attribute)
     {
-       
         $attribute->update($request->all());
-        $this->saveAttributeDropdownOptions($attribute, $request);
-
-        return redirect()->route('admin.attribute.index')
-            ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.attribute.title')]
-            ));
+        $this->attributeRepository->saveAttributeDropdownOptions($request, $attribute);
+        return redirect(route('admin.attribute.index'));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Attribute  $attribute
-     * @return \Illuminate\Http\JsonResponse
+     *
+     * @param Attribute $attribute
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Attribute $attribute)
     {
         $attribute->delete();
 
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.attribute.title')]
-            ),
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.attribute')])
         ]);
-    }
-
-    /**
-     * Save Attribute Dropdown options.
-     * @param \\AvoRed\Framework\Database\Models\Attribute  $attribute
-     * @param \AvoRed\Framework\Catalog\Requests\AttributeRequest $request
-     * @return void
-     */
-    public function saveAttributeDropdownOptions(Attribute $attribute, AttributeRequest $request)
-    {
-        if ($request->get('dropdown_options') !== null && count($request->get('dropdown_options')) > 0) {
-            $attribute->dropdownOptions()->delete();
-            foreach ($request->get('dropdown_options') as $key => $option) {
-                if (empty($option['display_text'])) {
-                    continue;
-                }
-                
-                // $optionModel = $attribute->dropdownOptions()->find($key);
-
-                // if ($optionModel === null) {
-                $attribute->dropdownOptions()->create($option);
-                // } else {
-                //     $optionModel->update($option);
-                // }
-            }
-        }
-    }
-
-    /**
-     * upload user image to file system.
-     * @param \AvoRed\Framework\System\Requests\AdminUserImageRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function upload(AttributeImageRequest $request)
-    {
-        $files = $request->file('files');
-        // foreach ($files as $file) {
-        $path = $files->store('uploads/catalog/attributes', 'avored');
-        // }
-
-        
-        return response()->json([
-            'success' => true,
-            'path' => $path,
-            'message' => __('avored::system.notification.upload', ['attribute' => 'Attribute Image']),
-        ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->attributeRepository->filter($request->get('filter'));
     }
 }

@@ -2,8 +2,11 @@
 
 namespace AvoRed\Framework\Database\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Category extends BaseModel
 {
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      * @var array
@@ -11,20 +14,21 @@ class Category extends BaseModel
     protected $fillable = [
         'name',
         'slug',
+        'description',
         'meta_title',
         'meta_description',
         'parent_id'
     ];
 
-    /**
-     * Category belongs to many products.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function products()
-    {
-        return $this->belongsToMany(Product::class);
-    }
-      
+    // /**
+    //  * Category belongs to many products.
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    //  */
+    // public function products()
+    // {
+    //     return $this->belongsToMany(Product::class);
+    // }
+
     /**
      * Category can has many child categories.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

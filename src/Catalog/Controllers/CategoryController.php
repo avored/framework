@@ -2,132 +2,117 @@
 
 namespace AvoRed\Framework\Catalog\Controllers;
 
-use AvoRed\Framework\Support\Facades\Tab;
-use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Catalog\Requests\CategoryRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
-use Illuminate\Http\Request;
+use AvoRed\Framework\Database\Models\Category;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
-class CategoryController
+class CategoryController extends Controller
 {
+
     /**
-     * Category Repository for the Install Command.
-     * @var \AvoRed\Framework\Database\Repository\CategoryRepository
+     * @var CategoryRepository $categoryRepository
      */
     protected $categoryRepository;
-
     /**
-     * Construct for the AvoRed install command.
-     * @param \AvoRed\Framework\Database\Contracts\CategoryModelInterface $categoryRepository
+     *
+     * @param CategoryRepositroy $repository
      */
     public function __construct(
-        CategoryModelInterface $categoryRepository
+        CategoryModelInterface $repository
     ) {
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryRepository = $repository;
     }
 
     /**
-     * Show Category Index Page.
-     * @return \Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $perPage = 10;
-        $with = ['parent'];
-        $categories = $this->categoryRepository->paginate($perPage, $with);
+        $categories = $this->categoryRepository->paginate();
 
         return view('avored::catalog.category.index')
-            ->with(compact('categories'));
+        ->with('categories', $categories);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $categoryOptions = $this->categoryRepository->options();
+        $options = $this->categoryRepository->options();
         $tabs = Tab::get('catalog.category');
 
         return view('avored::catalog.category.create')
-            ->with(compact('tabs', 'categoryOptions'));
+            ->with('options', $options)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\CategoryRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param CategoryRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
     {
         $this->categoryRepository->create($request->all());
 
-        return redirect()->route('admin.category.index')
-            ->with('successNotification', __(
-                'avored::system.notification.store',
-                ['attribute' => __('avored::catalog.category.title')]
-            ));
+        return redirect(route('admin.category.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Category $category
-     * @return \Illuminate\View\View
+     *
+     * @param Category  $category
+     * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
-        $categoryOptions = $this->categoryRepository
-            ->options()
-            ->filter(function ($option) use ($category) {
-                return $option !== $category->name;
-            });
         $tabs = Tab::get('catalog.category');
 
+        $options = $this->categoryRepository
+            ->options();
+        $options->pull($category->id);
         return view('avored::catalog.category.edit')
-            ->with(compact('category', 'tabs', 'categoryOptions'));
+            ->with('category', $category)
+            ->with('options', $options)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Catalog\Requests\CategoryRequest $request
-     * @param \AvoRed\Framework\Database\Models\Category  $category
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param CategoryRequest  $request
+     * @param Category $category
+     * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->all());
 
-        return redirect()->route('admin.category.index')
-            ->with('successNotification', __(
-                'avored::system.notification.updated',
-                ['attribute' => __('avored::catalog.category.title')]
-            ));
+        return redirect(route('admin.category.index'));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Category  $category
-     * @return \Illuminate\Http\JsonResponse
+     *
+     * @param Category $category
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
-            'message' => __(
-                'avored::system.notification.delete',
-                ['attribute' => __('avored::catalog.category.title')]
-            ),
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.category')])
         ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->categoryRepository->filter($request->get('filter'));
     }
 }

@@ -2,162 +2,118 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Collection;
-use AvoRed\Framework\Support\Facades\Tab;
-use AvoRed\Framework\Database\Models\Role;
-use AvoRed\Framework\Support\Facades\Permission;
 use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
-use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
+use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\Permission\Permission;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 class RoleController extends Controller
 {
+
     /**
-     * Role Repository for the Install Command.
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository
+     * @var RoleRepository $roleRepository
      */
     protected $roleRepository;
-
     /**
-     * Permission Repository for the Install Command.
-     * @var \AvoRed\Framework\Database\Repository\PermissionRepository
-     */
-    protected $permissionRepository;
-
-    /**
-     * Construct for the AvoRed role controller.
-     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
-     * @param \AvoRed\Framework\Database\Contracts\PermissionModelInterface $permissionRepository
+     *
+     * @param RoleRepositroy $repository
      */
     public function __construct(
-        RoleModelInterface $roleRepository,
-        PermissionModelInterface $permissionRepository
+        RoleModelInterface $repository
     ) {
-        $this->roleRepository = $roleRepository;
-        $this->permissionRepository = $permissionRepository;
+        $this->roleRepository = $repository;
     }
 
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $roles = $this->roleRepository->paginate();
 
         return view('avored::system.role.index')
-            ->with(compact('roles'));
+        ->with('roles', $roles);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $tabs = Tab::get('system.role');
         $permissions = Permission::all();
+        $tabs = Tab::get('system.role');
 
         return view('avored::system.role.create')
-            ->with(compact('permissions', 'tabs'));
+            ->with('tabs', $tabs)
+            ->with('permissions', $permissions);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param RoleRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request)
     {
         $role = $this->roleRepository->create($request->all());
-        $this->saveRolePermissions($request, $role);
+        $this->roleRepository->saveRolePermissions($request, $role);
 
-        return redirect()->route('admin.role.index')
-            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Role']));
+        return redirect(route('admin.role.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Role $role
-     * @return \Illuminate\View\View
+     *
+     * @param Role  $role
+     * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
     {
-        $tabs = Tab::get('system.role');
         $permissions = Permission::all();
+        $tabs = Tab::get('system.role');
 
         return view('avored::system.role.edit')
-            ->with(compact('role', 'permissions', 'tabs'));
+            ->with('role', $role)
+            ->with('tabs', $tabs)
+            ->with('permissions', $permissions);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
-     * @param \AvoRed\Framework\Database\Models\Role  $role
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param RoleRequest  $request
+     * @param Role $role
+     * @return \Illuminate\Http\Response
      */
     public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->all());
-        $this->saveRolePermissions($request, $role);
+        $this->roleRepository->saveRolePermissions($request, $role);
 
-        return redirect()->route('admin.role.index')
-            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Role']));
+        return redirect(route('admin.role.index'));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Role  $role
-     * @return \Illuminate\Http\JsonResponse
+     *
+     * @param Role $role
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
         $role->delete();
 
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Role']),
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.role')])
         ]);
-    }
-
-    /**
-     * Save Role Permission for the Users.
-     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
-     * @param \AvoRed\Framework\Models\Database\Role $rolet
-     *
-     * @return void
-     */
-    private function saveRolePermissions($request, $role)
-    {
-        $permissionIds = Collection::make([]);
-
-        if ($request->get('permissions') !== null && count($request->get('permissions')) > 0) {
-            foreach ($request->get('permissions') as $key => $value) {
-                if ($value != 1) {
-                    continue;
-                }
-                $permissions = explode(',', $key);
-                foreach ($permissions as $permissionName) {
-                    $permissionModel = $this->permissionRepository->findByName($permissionName);
-                    if ($permissionModel === null) {
-                        $permissionModel = $this->permissionRepository->create(['name' => $permissionName]);
-                    }
-                    $permissionIds->push($permissionModel->id);
-                }
-            }
-            $ids = $permissionIds->unique();
-            $role->permissions()->sync($ids);
-        }
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->roleRepository->filter($request->get('filter'));
     }
 }

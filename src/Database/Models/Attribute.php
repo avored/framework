@@ -2,15 +2,18 @@
 
 namespace AvoRed\Framework\Database\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Attribute extends BaseModel
 {
+    use HasFactory;
     /**
      * The available display as enum options.
      * @var array
      */
     const DISPLAY_AS = [
         'IMAGE' => 'Image',
-        'Text' => 'Text',
+        'TEXT' => 'Text',
     ];
 
     /**

@@ -1,19 +1,17 @@
- <div class="mt-3 flex w-full">
-    <avored-input
-        label-text="{{ __('avored::order.order-status.name') }}"
-        field-name="name"
-        init-value="{{ $orderStatus->name ?? '' }}" 
-        error-text="{{ $errors->first('name') }}"
-    >
-    </avored-input>
+<div class="mt-3">
+    <x-avored::form.input
+        name="name"
+        autofocus
+        value="{{ $orderStatus->name ?? '' }}"
+        label="{{ __('avored::system.name') }}"
+    ></x-avored::form.input>
 </div>
 
-<div class="mt-3 flex w-full">
-    <avored-toggle
-        label-text="{{ __('avored::order.order-status.is_default') }}"
-        error-text="{{ $errors->first('is_default') }}"
-        field-name="is_default"
-        init-value="{{ $orderStatus->is_default ?? '' }}"
-    >
-    </avored-toggle>
+
+<div class="mt-3">
+    <x-avored::form.checkbox
+        name="is_default"
+        value="{{ $orderStatus->is_default ?? '' }}"
+        label="{{ __('avored::system.is_default') }}"
+    ></x-avored::form.checkbox>
 </div>

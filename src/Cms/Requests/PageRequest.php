@@ -23,9 +23,9 @@ class PageRequest extends FormRequest
      */
     public function rules()
     {
-        $rules['name'] = 'required';
-        $rules['slug'] = 'required';
-
-        return $rules;
+        return [
+            'name' => 'required',
+            'slug' => 'required'
+        ];
     }
 }

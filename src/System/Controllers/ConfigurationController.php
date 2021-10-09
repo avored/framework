@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
-use Illuminate\Http\Request;
-use AvoRed\Framework\Support\Facades\Tab;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
-use AvoRed\Framework\Database\Contracts\CurrencyModelInterface;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class ConfigurationController
+class ConfigurationController extends Controller
 {
-    /**
+     /**
      * Configuration Repository for the Install Command.
      * @var \AvoRed\Framework\Database\Repository\ConfigurationRepository
      */
@@ -25,11 +25,11 @@ class ConfigurationController
      * @param \AvoRed\Framework\Database\Contracts\ConfigurationModelInterface $configurationRepository
      */
     public function __construct(
-        ConfigurationModelInterface $configurationRepository,
-        CurrencyModelInterface $currencyRepository
+        ConfigurationModelInterface $configurationRepository
+        // CurrencyModelInterface $currencyRepository
     ) {
         $this->configurationRepository = $configurationRepository;
-        $this->currencyRepository = $currencyRepository;
+        // $this->currencyRepository = $currencyRepository;
     }
 
     /**
@@ -38,14 +38,15 @@ class ConfigurationController
      */
     public function index()
     {
-        $currencyOptions = $this->currencyRepository->all()->pluck('name', 'id');
+        // $currencyOptions = $this->currencyRepository->all()->pluck('name', 'id');
        
         $tabs = Tab::get('system.configuration');
 
         return view('avored::system.configuration.index')
             ->with('tabs', $tabs)
             ->with('repository', $this->configurationRepository)
-            ->with('currencyOptions', $currencyOptions);
+            // ->with('currencyOptions', $currencyOptions)
+            ;
     }
 
     /**
@@ -66,7 +67,7 @@ class ConfigurationController
 
         return redirect()->route('admin.configuration.index')
             ->with(
-                'successNotification',
+                'message',
                 __('avored::system.notification.save', ['attribute' => __('avored::system.configuration.title')])
             );
     }

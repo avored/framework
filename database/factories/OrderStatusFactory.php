@@ -1,11 +1,31 @@
 <?php
 
-use Faker\Generator as Faker;
-use AvoRed\Framework\Database\Models\OrderStatus;
+namespace AvoRed\Framework\Database\Factories;
 
-$factory->define(OrderStatus::class, function (Faker $faker) {
-    return [
-        'name' => $faker->sentence,
-        'is_default' => rand(0, 1),
-    ];
-});
+use AvoRed\Framework\Database\Models\OrderStatus;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class OrderStatusFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = OrderStatus::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $name = $this->faker->word;
+
+        return [
+            'name' => $name,
+            'is_default' => rand(0, 1),
+        ];
+    }
+}

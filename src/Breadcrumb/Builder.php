@@ -35,7 +35,7 @@ class Builder
      */
     public function make($name, callable $callable)
     {
-        $breadcrumb = new Breadcrumb($callable);
+        $breadcrumb = new BreadcrumbItem($callable);
         $breadcrumb->route($name);
 
         $this->collection->put($name, $breadcrumb);
@@ -54,9 +54,8 @@ class Builder
         if (null === $breadcrumb) {
             return '';
         }
-
         return view('avored::breadcrumb.index')
-                ->with(compact('breadcrumb'));
+            ->with(compact('breadcrumb'));
     }
 
     /**

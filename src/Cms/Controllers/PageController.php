@@ -2,125 +2,112 @@
 
 namespace AvoRed\Framework\Cms\Controllers;
 
-use AvoRed\Framework\Support\Facades\Tab;
-use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
-use AvoRed\Framework\Support\Facades\Widget;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
+use AvoRed\Framework\Database\Models\Page;
+use AvoRed\Framework\Permission\Permission;
+use AvoRed\Framework\Tab\Tab;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
-class PageController
+class PageController extends Controller
 {
+
     /**
-     * Page Repository for the Install Command.
-     * @var \AvoRed\Framework\Database\Repository\PageRepository
+     * @var PageRepository $pageRepository
      */
     protected $pageRepository;
-
     /**
-     * Construct for the AvoRed install command.
-     * @param \AvoRed\Framework\Database\Contracts\PageModelInterface $pageRepository
+     *
+     * @param PageRepositroy $repository
      */
     public function __construct(
-        PageModelInterface $pageRepository
+        PageModelInterface $repository
     ) {
-        $this->pageRepository = $pageRepository;
+        $this->pageRepository = $repository;
     }
 
     /**
-     * Show Dashboard of an AvoRed Admin.
-     * @return \Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $pages = $this->pageRepository->paginate();
 
         return view('avored::cms.page.index')
-            ->with(compact('pages'));
+        ->with('pages', $pages);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return \Illuminate\View\View
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $widgets = Widget::options();
         $tabs = Tab::get('cms.page');
-        $components = Collection::make(['blog-card']);
 
         return view('avored::cms.page.create')
-            ->with(compact('tabs'))
-            ->with('components', $components)
-            ->with('widgets', $widgets);
+            ->with('tabs', $tabs);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param PageRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function store(PageRequest $request)
     {
-        $this->pageRepository->create($request->all());
+        $page = $this->pageRepository->create($request->all());
 
-        return redirect()->route('admin.page.index')
-            ->with('successNotification', __('avored::system.notification.store', ['attribute' => 'Page']));
+        return redirect(route('admin.page.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param \AvoRed\Framework\Database\Models\Page $page
-     * @return \Illuminate\View\View
+     *
+     * @param Page  $page
+     * @return \Illuminate\Http\Response
      */
     public function edit(Page $page)
     {
         $tabs = Tab::get('cms.page');
-        $widgets = Widget::options();
-        $components = Collection::make(['blog-card']);
 
         return view('avored::cms.page.edit')
-            ->with(compact('page', 'tabs'))
-            ->with('components', $components)
-            ->with(compact('widgets'));
+            ->with('page', $page)
+            ->with('tabs', $tabs);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \AvoRed\Framework\Cms\Requests\PageRequest $request
-     * @param \AvoRed\Framework\Database\Models\Page  $page
-     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @param PageRequest  $request
+     * @param Page $page
+     * @return \Illuminate\Http\Response
      */
     public function update(PageRequest $request, Page $page)
     {
         $page->update($request->all());
 
-        return redirect()->route('admin.page.index')
-            ->with('successNotification', __('avored::system.notification.updated', ['attribute' => 'Page']));
+        return redirect(route('admin.page.index'));
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param \AvoRed\Framework\Database\Models\Page  $page
-     * @return \Illuminate\Http\JsonResponse
+     *
+     * @param Page $page
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Page $page)
     {
         $page->delete();
 
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.notification.delete', ['attribute' => 'Page']),
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.page')])
         ]);
-    }
-
-    /**
-     * Filter for Category Table.
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        return $this->pageRepository->filter($request->get('filter'));
     }
 }

@@ -23,14 +23,9 @@ class PropertyRequest extends FormRequest
      */
     public function rules()
     {
-        $rules['name'] = 'required|max:255';
-        $rules['slug'] = 'required|max:255';
-        $rules['data_type'] = 'required';
-        $rules['field_type'] = 'required';
-        $rules['use_for_all_products'] = 'required';
-        $rules['is_visible_frontend'] = 'required';
-        $rules['sort_order'] = 'required:integer';
-
-        return $rules;
+        return [
+            'name' => 'required',
+            'slug' => 'required'
+        ];
     }
 }

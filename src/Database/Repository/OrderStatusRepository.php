@@ -2,16 +2,16 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Traits\FilterTrait;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderStatusRepository extends BaseRepository implements OrderStatusModelInterface
 {
 
     use FilterTrait;
-    
+
     /**
      * Filterable Fields
      * @var array $filterType
@@ -36,7 +36,7 @@ class OrderStatusRepository extends BaseRepository implements OrderStatusModelIn
 
     /**
      * Get the model for the repository
-     * @return OrderStatus 
+     * @return OrderStatus
      */
     public function model(): OrderStatus
     {
@@ -51,5 +51,15 @@ class OrderStatusRepository extends BaseRepository implements OrderStatusModelIn
     public function findDefault(): OrderStatus
     {
         return OrderStatus::whereIsDefault(1)->first();
+    }
+
+    /**
+     * Update existing is default status to zero so new one can be marked
+     *
+     * @return bool
+     */
+    public function updateDefaultOrderStatusToNull(): bool
+    {
+        return OrderStatus::whereIsDefault(1)->update(['is_default' => 0]);
     }
 }

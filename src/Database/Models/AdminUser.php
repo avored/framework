@@ -2,20 +2,19 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Passport\ClientRepository;
 
 class AdminUser extends BaseModel
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'role_id', 'is_super_admin', 'image_path',
@@ -54,7 +53,7 @@ class AdminUser extends BaseModel
      */
     public function getFullNameAttribute()
     {
-        return $this->attributes['first_name'].' '.$this->attributes['last_name'];
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
 
     /**
@@ -63,10 +62,10 @@ class AdminUser extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
-        if ($this->attributes['image_path'] === null) {
-            return 'https://placehold.it/250x250';
+        if (empty($this->attributes['image_path'])) {
+            return 'https://place-hold.it/250x250';
         }
-        return asset('storage/'. $this->attributes['image_path']);
+        return asset('storage/' . $this->attributes['image_path']);
     }
 
     /**
@@ -85,9 +84,24 @@ class AdminUser extends BaseModel
      */
     public function setPasrdAttribute($val)
     {
-        $this->attributes['password'] = bcrypt($val);
+        $this->attributes['password'] = Hash::make($val);
     }
 
+
+    /**
+     * To check if user has permission to access the given route name.
+     * @return \Illuminate\Database\Eloquent\Collection $permissions
+     */
+    public function permissions()
+    {
+        dd($this->role->permissions);
+    }
+
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
     /**
      * To check if user has permission to access the given route name.
      * @return bool
@@ -103,54 +117,5 @@ class AdminUser extends BaseModel
         }
 
         return true;
-    }
-
-    /**
-     * Get the Passport Client for User and If it doesnot exist then create a new one
-     * @return \Laravel\Passport\Client $client
-     */
-    public function getPassportClient()
-    {
-        $client = $this->clients->first();
-        if (null === $client) {
-            $clientRepository = app(ClientRepository::class);
-            $redirectUri = asset('');
-            $client = $clientRepository->createPasswordGrantClient($this->id, $this->full_name, $redirectUri);
-        }
-        
-        return $client;
-    }
-    
-    /**
-     * To check if user has permission to access the given route name.
-     * @return \Illuminate\Database\Eloquent\Collection $permissions
-     */
-    public function permissions()
-    {
-        dd($this->role->permissions);
-    }
-
-    /**
-     * Validate the password of the user for the Passport password grant.
-     *
-     * @param  string  $password
-     * @return bool
-     */
-    public function validateForPassportPasswordGrant($password)
-    {
-        return Hash::check($password, $this->password);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    /**
-     * Get the order comments.
-     */
-    public function orderComments()
-    {
-        return $this->morphMany(OrderComment::class, 'commentable');
     }
 }

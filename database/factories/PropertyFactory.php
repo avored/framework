@@ -1,19 +1,35 @@
 <?php
 
-use Illuminate\Support\Str;
-use Faker\Generator as Faker;
+namespace AvoRed\Framework\Database\Factories;
+
 use AvoRed\Framework\Database\Models\Property;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(Property::class, function (Faker $faker) {
-    $name = $faker->sentence;
+class PropertyFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Property::class;
 
-    return [
-        'name' => $name,
-        'slug' => Str::slug($name),
-        'data_type' => 'VARCHAR',
-        'field_type' => 'TEXT',
-        'is_visible_frontend' => rand(0, 1),
-        'use_for_all_products' => rand(0, 1),
-        'sort_order' => rand(0, 100),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $name = $this->faker->word;
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'data_type' => 'VARCHAR',
+            'field_type' => 'TEXT',
+            'use_for_all_products' => rand(0, 1),
+            'sort_order' => rand(0, 100),
+        ];
+    }
+}

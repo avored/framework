@@ -118,7 +118,7 @@ class MenuBuilder
      */
     public function adminMenus()
     {
-        $adminMenus = $this->all(true);
+        return $adminMenus = $this->all(true);
 
 
         $result = $adminMenus->map(function ($item, $index) {

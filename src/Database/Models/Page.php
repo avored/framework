@@ -3,9 +3,11 @@
 namespace AvoRed\Framework\Database\Models;
 
 use AvoRed\Framework\Support\Facades\Widget;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Page extends BaseModel
 {
+    use HasFactory;
     /**
      * Widget Content Tag
      * @var array
@@ -28,14 +30,14 @@ class Page extends BaseModel
         $pattern = sprintf('/(@)?%s\s*(.+?)\s*%s(\r?\n)?/s', $this->contentTags[0], $this->contentTags[1]);
         $callback = function ($matches) {
             $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
-            $widget = Widget::get($matches[2]);
-            
-            if (method_exists($widget, 'render')) {
-                $widgetContent = $widget->render();
-            } else {
-                $widgetContent = '';
-            }
-            return $matches[1] ? substr($matches[0], 1) : "{$widgetContent}{$whitespace}";
+            // $widget = Widget::get($matches[2]);
+
+            // if (method_exists($widget, 'render')) {
+            //     $widgetContent = $widget->render();
+            // } else {
+            //     $widgetContent = '';
+            // }
+            // return $matches[1] ? substr($matches[0], 1) : "{$widgetContent}{$whitespace}";
         };
         return preg_replace_callback($pattern, $callback, $content);
     }

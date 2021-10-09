@@ -1,11 +1,14 @@
 module.exports = {
-	theme: {
-		extend: {
-			colors: {
-				"modal-700": "rgba(0, 0, 0, 0.70)",
-			},
-		},
-	},
-	variants: {},
-	plugins: [],
+    purge: [
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+    ],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+        extend: {},
+    },
+    variants: {
+        extend: {},
+    },
+    plugins: [],
 }

@@ -50,6 +50,11 @@ class ResetPasswordController extends Controller
         );
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return Illuminate\Support\Facades\Auth
+     */
     protected function guard()
     {
         return Auth::guard('admin');
@@ -88,7 +93,8 @@ class ResetPasswordController extends Controller
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
+            $this->credentials($request),
+            function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );
@@ -97,28 +103,28 @@ class ResetPasswordController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $response == Password::PASSWORD_RESET
-                    ? $this->sendResetResponse($request, $response)
-                    : $this->sendResetFailedResponse($request, $response);
+            ? $this->sendResetResponse($request, $response)
+            : $this->sendResetFailedResponse($request, $response);
     }
 
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param AdminUser $user
      * @param  string  $password
      * @return void
      */
     protected function resetPassword($user, $password)
     {
         $this->setUserPassword($user, $password);
-        $user->setRememberToken(Str::random(60));
+        // $user->setRememberToken(Str::random(60));
         $user->save();
         event(new PasswordReset($user));
 
         $this->guard()->login($user);
     }
 
-      /**
+    /**
      * Set the user's password.
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
@@ -139,7 +145,10 @@ class ResetPasswordController extends Controller
     protected function credentials(Request $request)
     {
         return $request->only(
-            'email', 'password', 'password_confirmation', 'token'
+            'email',
+            'password',
+            'password_confirmation',
+            'token'
         );
     }
 
@@ -154,7 +163,7 @@ class ResetPasswordController extends Controller
     protected function sendResetResponse(Request $request, $response)
     {
         return redirect($this->redirectPath())
-                            ->with('status', trans($response));
+            ->with('status', trans($response));
     }
 
     /**
@@ -167,7 +176,7 @@ class ResetPasswordController extends Controller
     protected function sendResetFailedResponse(Request $request, $response)
     {
         return redirect()->back()
-                    ->withInput($request->only('email'))
-                    ->withErrors(['email' => trans($response)]);
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => trans($response)]);
     }
 }

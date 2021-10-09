@@ -2,48 +2,40 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\AttributeDropdownOption;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
 
-class AttributeDropdownOptionRepository implements AttributeDropdownOptionModelInterface
+class AttributeDropdownOptionRepository extends BaseRepository implements AttributeDropdownOptionModelInterface
 {
+
     /**
-     * Create AttributeDropdownOption Resource into a database.
-     * @param array $data
-     * @return \AvoRed\Framework\Database\Models\AttributeDropdownOption $attributeDropdownOption
+     * @var AttributeDropdownOption $model
      */
-    public function create(array $data): AttributeDropdownOption
+    protected $model;
+
+    /**
+     * Filterable Fields
+     * @var array $filterType
+     */
+    protected $filterFields = [
+        'name',
+        'slug',
+    ];
+
+    /**
+     * Construct for the Attribute dropdown option Repository
+     */
+    public function __construct()
     {
-        return AttributeDropdownOption::create($data);
+        $this->model = new AttributeDropdownOption();
     }
 
     /**
-     * Find AttributeDropdownOption Resource into a database.
-     * @param int $id
-     * @return \AvoRed\Framework\Database\Models\AttributeDropdownOption $attributeDropdownOption
+     * Get the model for the repository
+     * @return Attribute 
      */
-    public function find(int $id): AttributeDropdownOption
+    public function model(): AttributeDropdownOption
     {
-        return AttributeDropdownOption::find($id);
-    }
-
-    /**
-     * Delete AttributeDropdownOption Resource from a database.
-     * @param int $id
-     * @return int
-     */
-    public function delete(int $id): int
-    {
-        return AttributeDropdownOption::destroy($id);
-    }
-
-    /**
-     * Get all the attributes from the connected database.
-     * @return \Illuminate\Database\Eloquent\Collection $attributeDropdownOptions
-     */
-    public function all() : Collection
-    {
-        return AttributeDropdownOption::all();
+        return $this->model;
     }
 }

@@ -2,21 +2,17 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
-use AvoRed\Framework\Support\Facades\Widget;
+use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 
-class DashboardController
+class DashboardController extends Controller
 {
     /**
      * Show Dashboard of an AvoRed Admin.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index() : View
     {
-        $orderWidget = Widget::get('avored-total-order');
-        $customerWidget = Widget::get('avored-total-customer');
-        $revenueWidget = Widget::get('avored-total-revenue');
-      
-        
-        return view('avored::admin', compact('orderWidget', 'customerWidget', 'revenueWidget'));
+        return view('avored::admin');
     }
 }

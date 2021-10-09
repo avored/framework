@@ -4,10 +4,10 @@ namespace AvoRed\Framework\Tests\Functional;
 
 use Illuminate\View\View;
 use AvoRed\Framework\Breadcrumb\Builder;
-use AvoRed\Framework\Tests\BaseTestCase;
+use AvoRed\Framework\Tests\TestCase;
 
 /** @runInSeparateProcess */
-class BreadcrumbTest extends BaseTestCase
+class BreadcrumbTest extends TestCase
 {
     public function testBreadcrumbBuilder()
     {
