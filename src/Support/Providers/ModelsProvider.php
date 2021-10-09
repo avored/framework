@@ -9,6 +9,7 @@ use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
+use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
@@ -18,6 +19,7 @@ use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 use AvoRed\Framework\Database\Repository\OrderStatusRepository;
 use AvoRed\Framework\Database\Repository\PageRepository;
 use AvoRed\Framework\Database\Repository\PermissionRepository;
+use AvoRed\Framework\Database\Repository\ProductRepository;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
 use AvoRed\Framework\Database\Repository\RoleRepository;
 use Illuminate\Support\ServiceProvider;
@@ -41,6 +43,7 @@ class ModelsProvider extends ServiceProvider
         ConfigurationModelInterface::class => ConfigurationRepository::class,
         OrderStatusModelInterface::class => OrderStatusRepository::class,
         PageModelInterface::class => PageRepository::class,
+        ProductModelInterface::class => ProductRepository::class,
         PropertyModelInterface::class => PropertyRepository::class,
         PermissionModelInterface::class => PermissionRepository::class,
         RoleModelInterface::class => RoleRepository::class,

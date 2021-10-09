@@ -136,6 +136,30 @@ class AvoredFrameworkSchema extends Migration
             $table->text('value')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::create('products', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->enum('type', ['BASIC', 'VARIATION', 'DOWNLOADABLE', 'VARIABLE_PRODUCT'])->default('BASIC');
+            $table->string('name')->nullable()->default(null);
+            $table->string('slug')->nullable()->default(null);
+            $table->string('sku')->nullable()->default(null);
+            $table->string('barcode')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
+            $table->tinyInteger('status')->nullable()->default(null);
+            $table->tinyInteger('in_stock')->nullable()->default(null);
+            $table->tinyInteger('track_stock')->nullable()->default(null);
+            $table->decimal('qty', 10, 6)->nullable();
+            $table->tinyInteger('is_taxable')->nullable()->default(null);
+            $table->decimal('price', 10, 6)->nullable()->default(null);
+            $table->decimal('cost_price', 10, 6)->nullable()->default(null);
+            $table->float('weight')->nullable()->default(null);
+            $table->float('width')->nullable()->default(null);
+            $table->float('height')->nullable()->default(null);
+            $table->float('length')->nullable()->default(null);
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->timestamps();
+        });
     }
 
 
@@ -147,6 +171,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('products');
         Schema::dropIfExists('configurations');
         Schema::dropIfExists('attribute_dropdown_options');
         Schema::dropIfExists('attributes');

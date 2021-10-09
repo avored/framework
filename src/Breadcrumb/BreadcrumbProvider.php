@@ -517,31 +517,31 @@ class BreadcrumbProvider extends ServiceProvider
     //         }
     //     );
 
-    //     Breadcrumb::make(
-    //         'admin.product.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.product.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.product.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.product')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.product.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.product.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.product.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.product.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.product.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.product.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.product.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.product.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.product.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.product.index');
+            }
+        );
 
     //     Breadcrumb::make(
     //         'admin.state.index',

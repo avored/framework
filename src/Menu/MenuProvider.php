@@ -72,12 +72,12 @@ class MenuProvider extends ServiceProvider
         $catalogMenu = Menu::get('catalog');
 
         /** @var Builder $catalogMenu */
-        // $catalogMenu->subMenu('product', function (MenuItem $menu) {
-        //     $menu->key('product')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.product')
-        //         ->route('admin.dashboard');
-        // });
+        $catalogMenu->subMenu('product', function (MenuItem $menu) {
+            $menu->key('product')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.product')
+                ->route('admin.product.index');
+        });
         $catalogMenu->subMenu('category', function (MenuItem $menu) {
             $menu->key('category')
                 ->type(MenuItem::ADMIN)
