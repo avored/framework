@@ -2,6 +2,7 @@
 
 use AvoRed\Framework\Catalog\Controllers\AttributeController;
 use AvoRed\Framework\Catalog\Controllers\CategoryController;
+use AvoRed\Framework\Catalog\Controllers\ProductController;
 use AvoRed\Framework\Catalog\Controllers\PropertyController;
 use AvoRed\Framework\Cms\Controllers\PageController;
 use AvoRed\Framework\Order\Controllers\OrderStatusController;
@@ -70,6 +71,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('category', CategoryController::class);
         Route::resource('property', PropertyController::class);
         Route::resource('attribute', AttributeController::class);
+        Route::resource('product', ProductController::class);
 
 
         /***************** USER ROUTES *****************/

@@ -94,41 +94,41 @@ class PermissionProvider extends ServiceProvider
         //     }
         // );
 
-        // $productGroup = Permission::add(
-        //     'product',
-        //     function (PermissionGroup $group) {
-        //         $group->label('avored::system.permissions.product.title');
-        //     }
-        // );
+        $productGroup = Permission::add(
+            'product',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.product');
+            }
+        );
 
-        // $productGroup->addPermission(
-        //     'admin-product-index',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.product.list')
-        //             ->routes('admin.product.index');
-        //     }
-        // );
-        // $productGroup->addPermission(
-        //     'admin-product-create',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.product.create')
-        //             ->routes('admin.product.create,admin.product.store');
-        //     }
-        // );
-        // $productGroup->addPermission(
-        //     'admin-product-edit',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.product.edit')
-        //             ->routes('admin.product.edit,admin.product.update');
-        //     }
-        // );
-        // $productGroup->addPermission(
-        //     'admin-product-destroy',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.product.destroy')
-        //             ->routes('admin.product.edit,admin.product.destroy');
-        //     }
-        // );
+        $productGroup->addPermission(
+            'admin-product-index',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.list')
+                    ->routes('admin.product.index');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-create',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.create')
+                    ->routes('admin.product.create,admin.product.store');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-edit',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.edit')
+                    ->routes('admin.product.edit,admin.product.update');
+            }
+        );
+        $productGroup->addPermission(
+            'admin-product-destroy',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.destroy')
+                    ->routes('admin.product.edit,admin.product.destroy');
+            }
+        );
 
         // $orderGroup = Permission::add(
         //     'order',
