@@ -10,12 +10,11 @@ class AttributeControllerTest extends TestCase
 
     public function testAttributeIndexRouteTest()
     {
-        $attribute = factory(Attribute::class)->create();
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.attribute.index'))
             ->assertStatus(200)
-            ->assertSee($attribute->name);
+            ->assertViewIs('avored::catalog.attribute.index');
     }
 
     public function testAttributeCreateRouteTest()
@@ -32,10 +31,7 @@ class AttributeControllerTest extends TestCase
         $data = [
             'name' => 'test attribute name',
             'slug' => 'test-attribute-name',
-            // 'dropdown_options' => [
-            //     'abc' => ['display_text' => 'option 1'],
-            //     'xyz' => ['display_text' => 'option 2']
-            // ]
+            'display_as' => 'TEXT'
         ];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
