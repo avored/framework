@@ -1,12 +1,11 @@
 <?php
-
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends BaseModel
 {
+    use HasFactory;
     /**
      * Tax Percentage Configuration Constant.
      * @var string

@@ -46,11 +46,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // $displayAsOptions = Product::DISPLAY_AS;
+        $typeOptions = Product::PRODUCT_TYPES;
         $tabs = Tab::get('catalog.product');
 
         return view('avored::catalog.product.create')
-            // ->with('displayAsOptions', $displayAsOptions)
+            ->with('typeOptions', $typeOptions)
             ->with('tabs', $tabs);
     }
 
@@ -63,7 +63,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $product = $this->productRepository->create($request->all());
-        $this->productRepository->saveProductDropdownOptions($request, $product);
+        // $this->productRepository->saveProductDropdownOptions($request, $product);
 
         return redirect(route('admin.product.index'));
     }
@@ -81,8 +81,6 @@ class ProductController extends Controller
         // $displayAsOptions = Product::DISPLAY_AS;
         $tabs = Tab::get('catalog.product');
 
-        $product->load('dropdownOptions');
-
         return view('avored::catalog.product.edit')
             // ->with('displayAsOptions', $displayAsOptions)
             ->with('tabs', $tabs)
@@ -99,7 +97,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->all());
-        $this->productRepository->saveProductDropdownOptions($request, $product);
+        // $this->productRepository->saveProductDropdownOptions($request, $product);
         return redirect(route('admin.product.index'));
     }
 

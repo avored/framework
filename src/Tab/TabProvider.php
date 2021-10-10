@@ -71,23 +71,23 @@ class TabProvider extends ServiceProvider
                 ->view('avored::catalog.product._fields');
         });
 
-        Tab::put('catalog.product', function (TabItem $tab) {
-            $tab->key('catalog.product.image')
-                ->label('avored::system.tab.images')
-                ->view('avored::catalog.product.cards.images');
-        });
+        // Tab::put('catalog.product', function (TabItem $tab) {
+        //     $tab->key('catalog.product.image')
+        //         ->label('avored::system.tab.images')
+        //         ->view('avored::catalog.product.cards.images');
+        // });
 
-        Tab::put('catalog.product', function (TabItem $tab) {
-            $tab->key('catalog.product.property')
-                ->label('avored::system.tab.property')
-                ->view('avored::catalog.product.cards.property');
-        });
+        // Tab::put('catalog.product', function (TabItem $tab) {
+        //     $tab->key('catalog.product.property')
+        //         ->label('avored::system.tab.property')
+        //         ->view('avored::catalog.product.cards.property');
+        // });
 
-        Tab::put('catalog.product', function (TabItem $tab) {
-            $tab->key('catalog.product.attribute')
-                ->label('avored::system.tab.attribute')
-                ->view('avored::catalog.product.cards.attribute');
-        });
+        // Tab::put('catalog.product', function (TabItem $tab) {
+        //     $tab->key('catalog.product.attribute')
+        //         ->label('avored::system.tab.attribute')
+        //         ->view('avored::catalog.product.cards.attribute');
+        // });
 
         /****** CATALOG CATEGORY TABS *******/
         Tab::put('catalog.category', function (TabItem $tab) {
