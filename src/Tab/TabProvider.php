@@ -67,7 +67,7 @@ class TabProvider extends ServiceProvider
 
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.info')
-                ->label('avored::system.tab.basic_info')
+                ->label('avored::system.basic_info')
                 ->view('avored::catalog.product._fields');
         });
 
