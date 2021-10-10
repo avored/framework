@@ -9,14 +9,13 @@
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.category.store') }}" method="POST">
+                <x-avored::form.form action="{{ route('admin.product.store') }}" method="POST">
 
-                    @foreach ($tabs as $tab)
                     <div class="w-full border rounded">
                         <div class="p-4 border-b">
                             <div class="flex w-full">
                                 <span class="text-lg text-red-500 font-semibold">
-                                    {{ $tab->label() }}
+                                    {{ __('avored::system.basic_info') }}
                                 </span>
                                 <span class="ml-auto">
 
@@ -25,13 +24,46 @@
 
                         </div>
                         <div class="p-4">
-                            @php
-                                $path = $tab->view();
-                            @endphp
-                            @include($path)
+                            <div class="flex w-full">
+                                <div class="w-1/2">
+                                    <div class="mt-3">
+                                        <x-avored::form.input
+                                            name="name"
+                                            label="{{ __('avored::system.name') }}"
+                                        ></x-avored::form.input>
+                                    </div>
+                                </div>
+                                <div class="ml-3 w-1/2">
+                                    <div class="mt-3">
+                                        <x-avored::form.input
+                                            name="slug"
+                                            label="{{ __('avored::system.slug') }}"
+                                        ></x-avored::form.input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex w-full">
+                                <div class="mt-3 w-full">
+                                    <x-avored::form.select
+                                        name="type"
+                                        autofocus
+                                        label="{{ __('avored::system.type') }}"
+                                    >
+
+                                        <option value="">{{ __('avored::system.please_select') }}</option>
+                                        @foreach ($typeOptions as $typeValue => $typeLabel)
+                                            <option value="{{ $typeValue }}">
+                                                {{ $typeLabel }}
+                                            </option>
+                                        @endforeach
+
+                                    </x-avored::form.select>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    @endforeach
 
                     <div class="mt-6 flex">
                         <button type="submit"
@@ -40,7 +72,7 @@
                             {{ __('avored::system.create') }}
                         </button>
 
-                        <x-avored::link url="{{ route('admin.category.index') }}" class="ml-3" style="button-default">
+                        <x-avored::link url="{{ route('admin.product.index') }}" class="ml-3" style="button-default">
                             Cancel
                         </x-avored::link>
                     </div>
