@@ -22,7 +22,8 @@
         "illuminate/http": "^8.0",
         "illuminate/support": "^8.0",
         "illuminate/view": "^8.0",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "rebing/graphql-laravel": "^7.2"
     },
     "require-dev": {
         "brianium/paratest": "^6.0",
@@ -61,7 +62,10 @@
                 "Menu": "AvoRed\\Framework\\Menu\\Menu",
                 "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb",
                 "Permission": "AvoRed\\Framework\\Permission\\Permission"
-            }
+            },
+            "dont-discover": [
+                "rebing/graphql-laravel"
+            ]
         }
     },
     "minimum-stability": "dev",
