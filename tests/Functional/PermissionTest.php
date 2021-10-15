@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Tests\Integration;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Tests\TestCase;
 use AvoRed\Framework\Database\Models\Permission;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 
 class PermissionTest extends TestCase
@@ -25,10 +24,10 @@ class PermissionTest extends TestCase
 
     /**
      * Create and new permission for a given user.
-     * 
+     *
      * @param AvoRed\Framework\Database\Models\AdminUser $user
      * @param string $name
-     * 
+     *
      * @return void
      */
     protected function createPermissionForUser(AdminUser $user, string $name)

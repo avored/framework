@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;

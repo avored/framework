@@ -18,6 +18,28 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
+document.addEventListener('alpine:init', () => {
+    Alpine.data('toggle', () => ({
+        value: null,
+        checkedValue: null,
+        unCheckedValue: null,
+        init(value = false, checkedValue = true, unCheckedValue = false) {
+            this.checkedValue = checkedValue
+            this.unCheckedValue = unCheckedValue
+            this.value = value
+        },
+        toggle() {
+            console.log(this.value)
+            if (this.value === this.checkedValue) {
+                this.value = this.unCheckedValue
+            } else if (this.value === this.unCheckedValue) {
+                this.value = this.checkedValue
+            }
+
+        }
+    }))
+})
+
 Alpine.data('app', () => ({
     showConfirmationModal: false,
     message: {},

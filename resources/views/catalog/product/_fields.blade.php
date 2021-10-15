@@ -81,32 +81,32 @@
 
 <div class="flex w-full">
     <div class="w-1/4">
-        <x-avored::form.checkbox
+        <x-avored::form.toggle
             name="status"
-            value="{{ $product->status ?? '' }}"
+            value="{{ $product->status ?? '0' }}"
             label="{{ __('avored::system.status') }}"
-        ></x-avored::form.checkbox>
+        ></x-avored::form.toggle>
     </div>
     <div class="w-1/4">
-        <x-avored::form.checkbox
+        <x-avored::form.toggle
             name="is_taxable"
-            value="{{ $product->is_taxable ?? '' }}"
+            value="{{ $product->is_taxable ?? '0' }}"
             label="{{ __('avored::system.is_taxable') }}"
-        ></x-avored::form.checkbox>
+        ></x-avored::form.toggle>
     </div>
     <div class="ml-3 w-1/4">
-        <x-avored::form.checkbox
+        <x-avored::form.toggle
             name="in_stock"
-            value="{{ $product->in_stock ?? '' }}"
+            value="{{ $product->in_stock ?? '0' }}"
             label="{{ __('avored::system.in_stock') }}"
-        ></x-avored::form.checkbox>
+        ></x-avored::form.toggle>
     </div>
     <div class="ml-3 w-1/4">
-        <x-avored::form.checkbox
+        <x-avored::form.toggle
             name="track_stock"
-            value="{{ $product->track_stock ?? '' }}"
+            value="{{ $product->track_stock ?? '0' }}"
             label="{{ __('avored::system.track_stock') }}"
-        ></x-avored::form.checkbox>
+        ></x-avored::form.toggle>
     </div>
 </div>
 <div class="flex w-full">
