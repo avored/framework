@@ -8,6 +8,7 @@ use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\Permission as MiddlewarePermission;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
+use AvoRed\Framework\Support\Providers\GraphqlProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
@@ -26,6 +27,7 @@ class AvoRedServiceProvider extends ServiceProvider
     protected $providers = [
         BreadcrumbProvider::class,
         ComponentsProvider::class,
+        GraphqlProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
         PermissionProvider::class,
