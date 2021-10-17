@@ -36,10 +36,10 @@ abstract class BaseRepository
 
     /**
      * Find Model Resource into a database.
-     * @param int $id
+     * @param string $id
      * @return \AvoRed\Framework\Database\Models\Model $category
      */
-    public function find(int $id)
+    public function find(string $id)
     {
         return $this->model()->find($id);
     }
