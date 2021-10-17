@@ -63,7 +63,9 @@
             "aliases": {
                 "Menu": "AvoRed\\Framework\\Menu\\Menu",
                 "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb",
-                "Permission": "AvoRed\\Framework\\Permission\\Permission"
+                "Payment": "AvoRed\\Framework\\Payment\\Payment",
+                "Permission": "AvoRed\\Framework\\Permission\\Permission",
+                "Shipping": "AvoRed\\Framework\\Shipping\\Shipping"
             },
             "dont-discover": [
                 "rebing/graphql-laravel"
