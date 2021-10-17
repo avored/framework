@@ -177,7 +177,7 @@ class AvoredFrameworkSchema extends Migration
         });
 
         Schema::create('countries', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('name')->nullable()->default(null);
             $table->string('code')->nullable()->default(null);
             $table->string('phone_code')->nullable()->default(null);
@@ -185,6 +185,25 @@ class AvoredFrameworkSchema extends Migration
             $table->string('currency_symbol')->nullable()->default(null);
             $table->string('lang_code')->nullable()->default(null);
             $table->timestamps();
+        });
+
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('customer_id');
+            $table->enum('type', ['SHIPPING', 'BILLING']);
+            $table->string('first_name')->nullable()->default(null);
+            $table->string('last_name')->nullable()->default(null);
+            $table->string('company_name')->nullable()->default(null);
+            $table->string('address1')->nullable()->default(null);
+            $table->string('address2')->nullable()->default(null);
+            $table->string('postcode')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
+            $table->string('state')->nullable()->default(null);
+            $table->uuid('country_id')->nullable()->default(null);
+            $table->string('phone')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
 
         $path = __DIR__.'/../../assets/countries.json';
@@ -211,6 +230,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('addresses');
         Schema::dropIfExists('countries');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('products');

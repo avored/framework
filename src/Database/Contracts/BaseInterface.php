@@ -27,14 +27,14 @@ interface BaseInterface
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Model $model
      */
-    public function find(string $id);
+    public function find(string $id): int;
 
     /**
      * Delete Model Resource from a database.
-     * @param int $id
+     * @param string $id
      * @return int
      */
-    public function delete(int $id): int;
+    public function delete(string $id);
 
     /**
      * Get All Models Collection from the database.

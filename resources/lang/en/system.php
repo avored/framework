@@ -91,4 +91,5 @@ return [
     'width' => 'Width',
     'height' => 'Height',
     'length' => 'Length',
+    'address' => 'Address',
 ];

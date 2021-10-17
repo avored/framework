@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Support\Providers;
 
+use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
@@ -13,6 +14,7 @@ use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Repository\AddressRepository;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
@@ -39,6 +41,7 @@ class ModelsProvider extends ServiceProvider
      * @var array
      */
     protected $models = [
+        AddressModelInterface::class => AddressRepository::class,
         AdminUserModelInterface::class => AdminUserRepository::class,
         AttributeModelInterface::class => AttributeRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,

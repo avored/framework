@@ -46,12 +46,12 @@ abstract class BaseRepository
 
     /**
      * Delete Model Resource from a database.
-     * @param int $id
+     * @param string $id
      * @return int
      */
-    public function delete(int $id): int
+    public function delete(string $id): int
     {
-        return $this->model()->delete($id);
+        return $this->model()->destroy($id);
     }
 
     /**
