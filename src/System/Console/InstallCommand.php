@@ -40,10 +40,22 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->call('migrate:fresh');
+        $this->executePassportInstallCommand();
         $this->call('storage:link');
         $this->createRoleAction->handle(['name' => Role::ADMIN]);
         $this->call('avored:admin:make');
 
         $this->info('AvoRed Install Successfully!');
+    }
+
+    public function executePassportInstallCommand()
+    {
+        $provider = 'customer';
+
+        // $this->call('passport:keys');
+        $this->call('passport:keys', ['--force' => true]);
+
+        $this->call('passport:client', ['--personal' => true, '--name' => config('app.name').' Personal Access Client']);
+        $this->call('passport:client', ['--password' => true, '--name' => config('app.name').' Password Grant Client', '--provider' => $provider]);
     }
 }

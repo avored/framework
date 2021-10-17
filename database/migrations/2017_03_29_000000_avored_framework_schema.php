@@ -160,9 +160,20 @@ class AvoredFrameworkSchema extends Migration
             $table->string('meta_description')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::create('customers', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('image_path')->nullable()->default(null);
+            $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamps();
+        });
+
     }
-
-
 
     /**
      * Uninstall the AvoRed Address Module Schema.
@@ -171,6 +182,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('customers');
         Schema::dropIfExists('products');
         Schema::dropIfExists('configurations');
         Schema::dropIfExists('attribute_dropdown_options');
@@ -179,6 +191,8 @@ class AvoredFrameworkSchema extends Migration
         Schema::dropIfExists('properties');
         Schema::dropIfExists('order_statuses');
         Schema::dropIfExists('pages');
+        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('permissions');
         Schema::table('categories', function (Blueprint $table) {
             $table->dropForeign('categories_parent_id_foreign');
             $table->dropColumn('parent_id');

@@ -17,6 +17,8 @@ use AvoRed\Framework\Tab\TabProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
+use Laravel\Sanctum\Sanctum;
 
 class AvoRedServiceProvider extends ServiceProvider
 {
@@ -40,6 +42,7 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->ignorePassport();
         $this->registerProviders();
         $this->registerConfigData();
         $this->registerRoutePath();
@@ -49,6 +52,7 @@ class AvoRedServiceProvider extends ServiceProvider
         $this->registerMigrationPath();
         $this->registerViewPath();
         $this->registerAssets();
+
     }
 
     /**
@@ -59,6 +63,17 @@ class AvoRedServiceProvider extends ServiceProvider
     {
         $this->registerTranslationPath();
         $this->setupPublishFiles();
+    }
+
+    /**
+     * Register Route Path.
+     * @return void
+     */
+    public function ignorePassport()
+    {
+        Passport::ignoreMigrations();
+        Passport::setClientUuids(true);
+        Sanctum::ignoreMigrations();
     }
 
     /**
@@ -143,6 +158,11 @@ class AvoRedServiceProvider extends ServiceProvider
         );
         $avoredConfigData = include __DIR__ . '/../config/avored.php';
         $authConfig = $this->app['config']->get('auth', []);
+
+        // $this->app['config']->set(
+        //     'passport.client_uuids',
+        //     true
+        // );
 
         $this->app['config']->set(
             'auth.guards',

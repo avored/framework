@@ -20,10 +20,14 @@ return [
                 'driver' => 'session',
                 'provider' => 'admin-users',
             ],
-            // 'customer' => [
-            //     'driver' => 'session',
-            //     'provider' => 'customers',
-            // ],
+            'customer' => [
+                'driver' => 'session',
+                'provider' => 'customers',
+            ],
+            'customer_api' => [
+                'driver' => 'passport',
+                'provider' => 'customers',
+            ],
             'admin_api' => [
                 'driver' => 'session',
                 'provider' => 'admin-users',
@@ -35,10 +39,10 @@ return [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\AdminUser::class,
             ],
-            // 'customers' => [
-            //     'driver' => 'eloquent',
-            //     'model' => AvoRed\Framework\Database\Models\Customer::class,
-            // ],
+            'customers' => [
+                'driver' => 'eloquent',
+                'model' => AvoRed\Framework\Database\Models\Customer::class,
+            ],
         ],
 
         'passwords' => [
@@ -47,11 +51,11 @@ return [
                 'table' => 'admin_password_resets',
                 'expire' => 60,
             ],
-            // 'customers' => [
-            //     'provider' => 'customers',
-            //     'table' => 'customer_password_resets',
-            //     'expire' => 60,
-            // ],
+            'customers' => [
+                'provider' => 'customers',
+                'table' => 'customer_password_resets',
+                'expire' => 60,
+            ],
         ],
     ],
     'graphql' => [
@@ -61,13 +65,16 @@ return [
                 'query' => [
                     // 'menu' => \AvoRed\Framework\Graphql\Queries\MenuQuery::class,
                     'allCategory' => \AvoRed\Framework\Graphql\Queries\AllCategoryQuery::class,
+                    'customerQuery' => \AvoRed\Framework\Graphql\Queries\CustomerQuery::class,
                     // 'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
                     // 'product' => \AvoRed\Framework\Graphql\Queries\ProductQuery::class,
                     // // 'barcodeProduct' => \AvoRed\Framework\Graphql\Queries\BarcodeProductQuery::class,
                     // 'adminCategoryTable' => \AvoRed\Framework\Graphql\Queries\Admin\Catalog\Category\CategoryTableQuery::class,
                 ],
                 'mutation' => [
-                    // 'login' => \AvoRed\Framework\Graphql\Mutations\Auth\LoginMutation::class,
+                    'register' => \AvoRed\Framework\Graphql\Mutations\Auth\RegisterMutation::class,
+                    'login' => \AvoRed\Framework\Graphql\Mutations\Auth\LoginMutation::class,
+                    'customerUpdate' => \AvoRed\Framework\Graphql\Mutations\Customer\CustomerUpdateMutation::class,
                     // 'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
                     // 'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                     // 'adminCategoryCreate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryCreateMutation::class,
@@ -94,7 +101,8 @@ return [
             'category' => AvoRed\Framework\Graphql\Types\CategoryType::class,
             // 'filter' => AvoRed\Framework\Graphql\Types\FilterType::class,
             // 'product' => AvoRed\Framework\Graphql\Types\ProductType::class,
-            // 'token' => AvoRed\Framework\Graphql\Types\TokenType::class,
+            'token' => AvoRed\Framework\Graphql\Types\TokenType::class,
+            'customer' => AvoRed\Framework\Graphql\Types\CustomerType::class,
             // 'cartProduct' => AvoRed\Framework\Graphql\Types\CartProductType::class,
             // 'order' => AvoRed\Framework\Graphql\Types\OrderType::class,
             // 'address' => AvoRed\Framework\Graphql\Types\AddressType::class,
