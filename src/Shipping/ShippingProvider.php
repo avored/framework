@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Support\Providers;
+namespace AvoRed\Framework\Shipping;
 
 use AvoRed\Framework\Shipping\Manager;
 use Illuminate\Support\ServiceProvider;

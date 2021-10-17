@@ -11,7 +11,7 @@ use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\GraphqlProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
-use AvoRed\Framework\Support\Providers\ShippingProvider;
+use AvoRed\Framework\Shipping\ShippingProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
 use AvoRed\Framework\System\Composers\LayoutComposer;
