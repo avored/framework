@@ -3,6 +3,7 @@ namespace AvoRed\Framework;
 
 use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
 use AvoRed\Framework\Menu\MenuProvider;
+use AvoRed\Framework\Payment\PaymentProvider;
 use AvoRed\Framework\Permission\PermissionProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\Permission as MiddlewarePermission;
@@ -10,6 +11,7 @@ use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\GraphqlProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
+use AvoRed\Framework\Support\Providers\ShippingProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
 use AvoRed\Framework\System\Composers\LayoutComposer;
@@ -32,7 +34,9 @@ class AvoRedServiceProvider extends ServiceProvider
         GraphqlProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
+        PaymentProvider::class,
         PermissionProvider::class,
+        ShippingProvider::class,
         TabProvider::class
     ];
 
