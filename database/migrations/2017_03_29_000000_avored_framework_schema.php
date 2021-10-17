@@ -2,7 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
 
 class AvoredFrameworkSchema extends Migration
 {
@@ -173,6 +176,32 @@ class AvoredFrameworkSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('countries', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->string('name')->nullable()->default(null);
+            $table->string('code')->nullable()->default(null);
+            $table->string('phone_code')->nullable()->default(null);
+            $table->string('currency_code')->nullable()->default(null);
+            $table->string('currency_symbol')->nullable()->default(null);
+            $table->string('lang_code')->nullable()->default(null);
+            $table->timestamps();
+        });
+
+        $path = __DIR__.'/../../assets/countries.json';
+        $json = json_decode(file_get_contents($path), true);
+        foreach ($json as $country) {
+            $data['id'] = Uuid::uuid4()->toString();
+            $data['code'] = strtolower(Arr::get($country, 'alpha2Code'));
+            $data['name'] = Arr::get($country, 'name');
+            $data['phone_code'] = Arr::get($country, 'callingCodes.0');
+            $data['currency_code'] = Arr::get($country, 'currencies.0.code');
+            $data['currency_symbol'] = Arr::get($country, 'currencies.0.symbol');
+            $data['lang_code'] = Arr::get($country, 'languages.0.name');
+            $countries[] = $data;
+        }
+
+        DB::table('countries')->insert($countries);
+
     }
 
     /**
@@ -182,6 +211,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('countries');
         Schema::dropIfExists('customers');
         Schema::dropIfExists('products');
         Schema::dropIfExists('configurations');

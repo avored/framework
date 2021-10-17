@@ -2,6 +2,7 @@
 namespace AvoRed\Framework;
 
 use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
+use AvoRed\Framework\Database\Models\OauthClient;
 use AvoRed\Framework\Menu\MenuProvider;
 use AvoRed\Framework\Payment\PaymentProvider;
 use AvoRed\Framework\Permission\PermissionProvider;
@@ -78,6 +79,7 @@ class AvoRedServiceProvider extends ServiceProvider
         Passport::ignoreMigrations();
         Passport::setClientUuids(true);
         Sanctum::ignoreMigrations();
+        Passport::useClientModel(OauthClient::class);
     }
 
     /**

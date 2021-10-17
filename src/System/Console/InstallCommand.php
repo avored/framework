@@ -50,7 +50,7 @@ class InstallCommand extends Command
 
     public function executePassportInstallCommand()
     {
-        $provider = 'customer';
+        $provider = 'customers';
 
         // $this->call('passport:keys');
         $this->call('passport:keys', ['--force' => true]);
