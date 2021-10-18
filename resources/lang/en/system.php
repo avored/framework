@@ -92,4 +92,6 @@ return [
     'height' => 'Height',
     'length' => 'Length',
     'address' => 'Address',
+    'shipping_option' => 'Shipping Option',
+    'payment_option' => 'Payment Option',
 ];

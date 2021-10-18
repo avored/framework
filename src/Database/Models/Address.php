@@ -1,8 +1,11 @@
 <?php
 namespace AvoRed\Framework\Database\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Address extends BaseModel
 {
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      * @var array

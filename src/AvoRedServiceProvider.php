@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
-use Laravel\Sanctum\Sanctum;
 
 class AvoRedServiceProvider extends ServiceProvider
 {
@@ -78,7 +77,6 @@ class AvoRedServiceProvider extends ServiceProvider
     {
         Passport::ignoreMigrations();
         Passport::setClientUuids(true);
-        Sanctum::ignoreMigrations();
         Passport::useClientModel(OauthClient::class);
     }
 

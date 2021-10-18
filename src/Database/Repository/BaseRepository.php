@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository
@@ -37,9 +38,9 @@ abstract class BaseRepository
     /**
      * Find Model Resource into a database.
      * @param string $id
-     * @return \AvoRed\Framework\Database\Models\Model $category
+     * @return \AvoRed\Framework\Database\Models\Model $model
      */
-    public function find(string $id)
+    public function find(string $id): Model
     {
         return $this->model()->find($id);
     }

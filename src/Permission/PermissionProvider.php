@@ -130,19 +130,19 @@ class PermissionProvider extends ServiceProvider
             }
         );
 
-        // $orderGroup = Permission::add(
-        //     'order',
-        //     function (PermissionGroup $group) {
-        //         $group->label('avored::system.permissions.order.title');
-        //     }
-        // );
-        // $orderGroup->addPermission(
-        //     'admin-order-list',
-        //     function (PermissionItem $permission) {
-        //         $permission->label('avored::system.permissions.order.list')
-        //             ->routes('admin.order.index');
-        //     }
-        // );
+        $orderGroup = Permission::add(
+            'order',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.order');
+            }
+        );
+        $orderGroup->addPermission(
+            'admin-order-list',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.list')
+                    ->routes('admin.order.index');
+            }
+        );
         // $orderGroup->addPermission(
         //     'admin-order-change-status',
         //     function (PermissionItem $permission) {

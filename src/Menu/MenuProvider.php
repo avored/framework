@@ -126,13 +126,13 @@ class MenuProvider extends ServiceProvider
         });
         /** @var Builder $orderMenu */
         $orderMenu = Menu::get('order');
-        // /** @var Builder $orderMenu */
-        // $orderMenu->subMenu('order', function (MenuItem $menu) {
-        //     $menu->key('order')
-        //         ->type(MenuItem::ADMIN)
-        //         ->label('avored::system.admin_menus.order')
-        //         ->route('admin.order.index');
-        // });
+        
+        $orderMenu->subMenu('order', function (MenuItem $menu) {
+            $menu->key('order')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.order')
+                ->route('admin.order.index');
+        });
         $orderMenu->subMenu('order-status', function (MenuItem $menu) {
             $menu->key('order-status')
                 ->type(MenuItem::ADMIN)

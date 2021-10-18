@@ -200,31 +200,31 @@ class BreadcrumbProvider extends ServiceProvider
             }
         );
 
-    //     Breadcrumb::make(
-    //         'admin.order-status.index',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.order-status.index')
-    //                 ->parent('admin.dashboard');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.order-status.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.order-status')
+                    ->parent('admin.dashboard');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.order-status.create',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.order-status.create')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.order-status.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.order-status.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.order-status.index');
+            }
+        );
 
-    //     Breadcrumb::make(
-    //         'admin.order-status.edit',
-    //         function (BreadcrumbItem $breadcrumb) {
-    //             $breadcrumb->label('avored::system.breadcrumb.order-status.edit')
-    //                 ->parent('admin.dashboard')
-    //                 ->parent('admin.order-status.index');
-    //         }
-    //     );
+        Breadcrumb::make(
+            'admin.order-status.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                    ->parent('admin.dashboard')
+                    ->parent('admin.order-status.index');
+            }
+        );
     //     Breadcrumb::make(
     //         'admin.status.index',
     //         function (BreadcrumbItem $breadcrumb) {

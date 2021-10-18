@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Database\Contracts;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseInterface
@@ -27,7 +28,7 @@ interface BaseInterface
      * @param int $id
      * @return \AvoRed\Framework\Database\Models\Model $model
      */
-    public function find(string $id): int;
+    public function find(string $id): Model;
 
     /**
      * Delete Model Resource from a database.

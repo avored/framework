@@ -5,6 +5,7 @@ use AvoRed\Framework\Catalog\Controllers\CategoryController;
 use AvoRed\Framework\Catalog\Controllers\ProductController;
 use AvoRed\Framework\Catalog\Controllers\PropertyController;
 use AvoRed\Framework\Cms\Controllers\PageController;
+use AvoRed\Framework\Order\Controllers\OrderController;
 use AvoRed\Framework\Order\Controllers\OrderStatusController;
 use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\System\Controllers\RoleController;
@@ -80,6 +81,8 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         /***************** ORDER ROUTES *****************/
         Route::resource('order-status', OrderStatusController::class);
+        Route::get('order', [OrderController::class, 'index'])->name('order.index');
+        Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
 
 
         /***************** CMS ROUTES *****************/
