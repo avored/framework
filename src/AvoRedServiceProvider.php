@@ -13,6 +13,7 @@ use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\GraphqlProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
 use AvoRed\Framework\Shipping\ShippingProvider;
+use AvoRed\Framework\Support\Providers\EventsProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
 use AvoRed\Framework\System\Composers\LayoutComposer;
@@ -31,6 +32,7 @@ class AvoRedServiceProvider extends ServiceProvider
     protected $providers = [
         BreadcrumbProvider::class,
         ComponentsProvider::class,
+        EventsProvider::class,
         GraphqlProvider::class,
         MenuProvider::class,
         ModelsProvider::class,
