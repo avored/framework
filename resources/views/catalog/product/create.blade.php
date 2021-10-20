@@ -3,7 +3,7 @@
         <div class="p-5">
             <div class="flex w-full">
                 <h2 class="text-2xl text-red-700 font-semibold">
-                    {{ __('avored::system.create') }} {{ __('avored::system.category') }}
+                    {{ __('avored::system.create') }} {{ __('avored::system.product') }}
                 </h2>
 
             </div>
@@ -47,7 +47,6 @@
                                 <div class="mt-3 w-full">
                                     <x-avored::form.select
                                         name="type"
-                                        autofocus
                                         label="{{ __('avored::system.type') }}"
                                     >
 
@@ -60,7 +59,6 @@
 
                                     </x-avored::form.select>
                                 </div>
-
                             </div>
                         </div>
                     </div>
