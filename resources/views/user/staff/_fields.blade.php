@@ -37,6 +37,13 @@
     @endif
 </div>
 
+<div class="mt-3">
+    <x-avored::form.upload
+        name="image_path"
+        value="{{ $staff->image_path ?? '' }}"
+        label="{{ __('avored::system.image_path') }}"
+    ></x-avored::form.upload>
+</div>
 
 <div class="mt-3">
     <x-avored::form.select

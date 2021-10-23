@@ -18,6 +18,12 @@ class Form extends Component
      */
     public $method;
 
+    /**
+     * The form file.
+     * @var string
+     */
+    public $file;
+
 
     /**
      * Create the component instance.
@@ -29,10 +35,12 @@ class Form extends Component
      */
     public function __construct(
         string $method,
-        string $action
+        string $action,
+        $file = false
     ) {
         $this->method = $method;
         $this->action = $action;
+        $this->file = $file;
     }
 
     /**

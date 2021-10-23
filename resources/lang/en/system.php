@@ -94,4 +94,8 @@ return [
     'address' => 'Address',
     'shipping_option' => 'Shipping Option',
     'payment_option' => 'Payment Option',
+    'image_path' => 'Image',
+    'upload_file' => 'Upload File',
+    'drag_and_drop' => 'drag and drop',
+    'png_jpg_gif_up_to_10mb' => 'PNG, JPG, GIF up to 10MB'
 ];

@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\Database\Models;
 
 use AvoRed\Framework\Database\Traits\UuidTrait;

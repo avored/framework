@@ -6,6 +6,7 @@ use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\AdminUser;
+use AvoRed\Framework\Document\Document;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -103,6 +104,8 @@ class StaffController extends Controller
      */
     public function update(AdminUserRequest $request, AdminUser $staff)
     {
+        Document::uploadPublicly($request->file('image_path'));
+        dd($request->file('image_path'));
         $staff->update($request->all());
 
         return redirect(route('admin.staff.index'));

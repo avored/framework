@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\Database\Models;
 
 class Configuration extends BaseModel

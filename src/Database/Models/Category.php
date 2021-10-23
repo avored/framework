@@ -20,14 +20,14 @@ class Category extends BaseModel
         'parent_id'
     ];
 
-    // /**
-    //  * Category belongs to many products.
-    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    //  */
-    // public function products()
-    // {
-    //     return $this->belongsToMany(Product::class);
-    // }
+    /**
+     * Category belongs to many products.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 
     /**
      * Category can has many child categories.

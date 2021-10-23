@@ -206,7 +206,7 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
 
-        
+
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('shipping_option');
@@ -236,6 +236,15 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
         });
 
+        Schema::create('documents', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('path');
+            $table->string('mime_type')->nullable();
+            $table->integer('size')->nullable();
+            $table->string('origional_name')->nullable();
+            $table->timestamps();
+        });
+
         $path = __DIR__.'/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -260,6 +269,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('documents');
         Schema::dropIfExists('order_products');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('addresses');

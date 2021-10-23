@@ -1,10 +1,8 @@
 <?php
-
 namespace AvoRed\Framework\Database\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
-
 trait UuidTrait
 {
     public function initializeUuidTrait(): void
