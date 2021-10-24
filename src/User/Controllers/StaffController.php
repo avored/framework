@@ -86,6 +86,7 @@ class StaffController extends Controller
      */
     public function edit(AdminUser $staff)
     {
+        // dd($staff->image_path_url);
         $roles = $this->roleRepository->options();
         $tabs = Tab::get('user.staff');
 
@@ -104,11 +105,11 @@ class StaffController extends Controller
      */
     public function update(AdminUserRequest $request, AdminUser $staff)
     {
-        $document = $staff->imagePath;
-        $document = Document::uploadPublicly($request->file('image_path'), $document);
-        $staff->imagePath()->save($document);
+        if ($request->file('image_path')) {
+            $document = Document::uploadPublicly($request->file('image_path'));
+            $staff->imagePath()->updateOrCreate(optional($staff->imagePath)->toArray() ?? [], $document);
+        }
 
-        dd($document);
         $staff->update($request->all());
 
         return redirect(route('admin.staff.index'));

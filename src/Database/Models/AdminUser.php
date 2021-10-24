@@ -17,7 +17,7 @@ class AdminUser extends BaseModel
      * @var string[]
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role_id', 'is_super_admin', 'image_path',
+        'first_name', 'last_name', 'email', 'password', 'role_id', 'is_super_admin',
     ];
 
     /**
@@ -62,10 +62,10 @@ class AdminUser extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
-        if (empty($this->attributes['image_path'])) {
+        if (empty($this->imagePath)) {
             return 'https://place-hold.it/250x250';
         }
-        return asset('storage/' . $this->attributes['image_path']);
+        return asset('storage' . DIRECTORY_SEPARATOR . $this->imagePath->path);
     }
 
     /**
@@ -119,7 +119,7 @@ class AdminUser extends BaseModel
         return true;
     }
 
-      /**
+    /**
      * Get the post's image.
      */
     public function imagePath()

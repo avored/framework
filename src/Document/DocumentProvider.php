@@ -1,10 +1,7 @@
 <?php
-
 namespace AvoRed\Framework\Document;
 
-use AvoRed\Framework\Database\Contracts\DocumentModelInterface;
 use Illuminate\Support\ServiceProvider;
-
 class DocumentProvider extends ServiceProvider
 {
     /**
@@ -39,12 +36,10 @@ class DocumentProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        $repository = $this->app->get(DocumentModelInterface::class);
-
         $this->app->singleton(
             'document',
-            function () use ($repository){
-                return new Manager($repository);
+            function () {
+                return new Manager();
             }
         );
     }

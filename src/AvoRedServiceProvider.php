@@ -33,11 +33,11 @@ class AvoRedServiceProvider extends ServiceProvider
     protected $providers = [
         BreadcrumbProvider::class,
         ComponentsProvider::class,
-        ModelsProvider::class,
         DocumentProvider::class,
         EventsProvider::class,
         GraphqlProvider::class,
         MenuProvider::class,
+        ModelsProvider::class,
         PaymentProvider::class,
         PermissionProvider::class,
         ShippingProvider::class,

@@ -40,7 +40,7 @@
 <div class="mt-3">
     <x-avored::form.upload
         name="image_path"
-        value="{{ $staff->image_path ?? '' }}"
+        value="{{ optional($staff->imagePath)->url ?? '' }}"
         label="{{ __('avored::system.image_path') }}"
     ></x-avored::form.upload>
 </div>

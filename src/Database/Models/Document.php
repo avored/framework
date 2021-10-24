@@ -25,4 +25,13 @@ class Document extends BaseModel
     {
         return $this->morphTo();
     }
+
+    public function getUrlAttribute()
+    {
+        if ($this->path) {
+            return asset($this->path);
+        }
+
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-<div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border-2 border-gray-300 border-dashed rounded">
+<div x-data="dataFileDnD()" x-init="initFiles('{{ $value }}')" class="relative flex flex-col p-4 text-gray-400 border-2 border-gray-300 border-dashed rounded">
     <div x-ref="dnd"
         class="relative flex flex-col text-gray-400 rounded cursor-pointer">
         <input accept="*" type="file" {{ ($multiple) ? 'multiple' : '' }}
@@ -32,8 +32,8 @@
                         </svg>
                     </button>
 
-                        <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
-                            x-bind:src="loadFile(files[index])" />
+                    <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
+                        x-bind:src="loadFile(files[index])" />
                     <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
                         @dragleave="fileDropping = null"
                         :class="{'bg-blue-200 bg-opacity-80': fileDropping == index && fileDragging != index}">
@@ -60,6 +60,12 @@ function dataFileDnD() {
                 ["B", "kB", "MB", "GB", "TB"][i]
             );
         },
+        initFiles (files) {
+            this.files.push(files)
+
+            return
+        },
+
         remove(index) {
             let files = [...this.files];
             files.splice(index, 1);
@@ -90,6 +96,12 @@ function dataFileDnD() {
             e.dataTransfer.effectAllowed = "move";
         },
         loadFile(file) {
+            if (typeof file === 'string') {
+                console.log(file)
+                return file
+            }
+
+
             const preview = document.querySelectorAll(".preview");
             var binaryData = []
             binaryData.push(file)
@@ -105,6 +117,7 @@ function dataFileDnD() {
             return blobUrl;
         },
         addFiles(e) {
+            console.log(e.target.files)
             const files = this.createFileList([...e.target.files]);
             this.files = files;
         },

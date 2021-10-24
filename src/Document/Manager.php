@@ -21,42 +21,24 @@ class Manager
      * Public upload path constant
      * @var string PUBLIC_UPLOAD_PATH
      */
-    const PUBLIC_UPLOAD_PATH = 'public/upload';
-
-    /** Private upload path constant (ideally we should use this path for private path where file can be downloaded via url)
-     * @var string UPLOAD_PATH
-     */
-    const UPLOAD_PATH = 'upload';
-
-    /**
-     * Document manager construct
-     * @param DocumentRepository $documentRepository
-     */
-    public function __construct(
-        DocumentModelInterface $documentRepository
-    ) {
-        $this->documentRepository = $documentRepository;
-    }
+    const PUBLIC_UPLOAD_PATH = 'upload';
 
     /**
      * Upload publicly file
      *
      * @param UploadedFile $file
-     * @param mixed $document
-     * @return Document
+     * @return array
      */
-    public function uploadPublicly(UploadedFile $file, $document): Document
+    public function uploadPublicly(UploadedFile $file): array
     {
-        $data['id'] = Str::uuid();
+        $data['id'] = Str::uuid()->toString();
         $data['mime_type'] = $file->getClientMimeType();
         $data['size'] = $file->getSize();
         $data['origional_name'] = $file->getClientOriginalName();
-        $data['path'] = $this->upload($file, self::PUBLIC_UPLOAD_PATH);
-        if ($document) {
-            $document->update($data);
-            return $document;
-        }
-        return $this->documentRepository->create($data);
+        $options = ['disk' => 'public'];
+        $data['path'] = $this->upload($file, self::PUBLIC_UPLOAD_PATH, $options);
+
+        return $data;
     }
 
     /**
@@ -64,10 +46,11 @@ class Manager
      *
      * @param UploadedFile $file
      * @param string $path
+     * @param array $options
      * @return void
      */
-    protected function upload(UploadedFile $file, $path)
+    protected function upload(UploadedFile $file, $path, $options = [])
     {
-        return $file->storePublicly($path);
+        return $file->storePublicly($path, $options);
     }
 }
