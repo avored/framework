@@ -11,9 +11,18 @@ class Document extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'id',
         'path',
         'mime_type',
         'size',
         'origional_name'
     ];
+
+    /**
+     * Get the parent documentable model (user or product).
+     */
+    public function documentable()
+    {
+        return $this->morphTo();
+    }
 }

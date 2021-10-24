@@ -242,6 +242,7 @@ class AvoredFrameworkSchema extends Migration
             $table->string('mime_type')->nullable();
             $table->integer('size')->nullable();
             $table->string('origional_name')->nullable();
+            $table->nullableUuidMorphs('documentable');
             $table->timestamps();
         });
 

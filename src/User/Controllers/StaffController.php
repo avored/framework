@@ -104,8 +104,11 @@ class StaffController extends Controller
      */
     public function update(AdminUserRequest $request, AdminUser $staff)
     {
-        Document::uploadPublicly($request->file('image_path'));
-        dd($request->file('image_path'));
+        $document = $staff->imagePath;
+        $document = Document::uploadPublicly($request->file('image_path'), $document);
+        $staff->imagePath()->save($document);
+
+        dd($document);
         $staff->update($request->all());
 
         return redirect(route('admin.staff.index'));

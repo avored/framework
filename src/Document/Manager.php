@@ -4,7 +4,9 @@ namespace AvoRed\Framework\Document;
 
 use AvoRed\Framework\Database\Contracts\DocumentModelInterface;
 use AvoRed\Framework\Database\Models\Document;
+use AvoRed\Framework\Database\Repository\DocumentRepository;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 class Manager
 {
@@ -40,15 +42,20 @@ class Manager
      * Upload publicly file
      *
      * @param UploadedFile $file
+     * @param mixed $document
      * @return Document
      */
-    public function uploadPublicly(UploadedFile $file): Document
+    public function uploadPublicly(UploadedFile $file, $document): Document
     {
+        $data['id'] = Str::uuid();
         $data['mime_type'] = $file->getClientMimeType();
         $data['size'] = $file->getSize();
         $data['origional_name'] = $file->getClientOriginalName();
         $data['path'] = $this->upload($file, self::PUBLIC_UPLOAD_PATH);
-
+        if ($document) {
+            $document->update($data);
+            return $document;
+        }
         return $this->documentRepository->create($data);
     }
 

@@ -118,4 +118,12 @@ class AdminUser extends BaseModel
 
         return true;
     }
+
+      /**
+     * Get the post's image.
+     */
+    public function imagePath()
+    {
+        return $this->morphOne(Document::class, 'documentable');
+    }
 }
