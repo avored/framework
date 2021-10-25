@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
+use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Traits\FilterTrait;
@@ -64,6 +65,19 @@ class ProductRepository extends BaseRepository implements ProductModelInterface
     public function getAllWithoutVaiation(int $perPage = 10): LengthAwarePaginator
     {
         return Product::withoutVariation()->paginate($perPage);
+    }
+
+    /**
+     * Sync Product with categories.
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return bool
+     */
+    public function saveProductCategories(Product $product, ProductRequest $request): void
+    {
+        if ($request->get('category_id') !== null && count($request->get('category_id')) > 0) {
+            $product->categories()->sync($request->get('category_id'));
+        }
     }
 
     /**

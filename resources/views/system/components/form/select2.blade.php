@@ -1,9 +1,9 @@
-<div>
+<div class="">
     <select multiple class="hidden" id="select2-dropdown-select-{{ $name }}">
         {{ $slot }}
     </select>
 
-    <div x-data="select2()" x-init="loadOptions('select2-dropdown-select-{{ $name }}')" class="h-64">
+    <div x-data="select2()" x-init="loadOptions('select2-dropdown-select-{{ $name }}')">
         <template x-for="(option,index) in selected" :key="options[option].value">
             <input name="{{ $name }}" type="hidden" :value="options[option].value">
         </template>
@@ -18,8 +18,8 @@
                             <template x-for="(option,index) in selected" :key="options[option].value">
                                 <div
                                     class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
-                                    <div class="text-xs font-normal leading-none max-w-full flex-initial" 
-                                            x-model="options[option]" 
+                                    <div class="text-xs font-normal leading-none max-w-full flex-initial"
+                                            x-model="options[option]"
                                             x-text="options[option].text"></div>
                                     <div class="flex flex-auto flex-row-reverse">
                                         <div x-on:click="remove(index,option)">

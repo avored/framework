@@ -1,7 +1,9 @@
 <?php
 namespace AvoRed\Framework\Database\Models;
 
+use AvoRed\Framework\Database\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Product extends BaseModel
 {
@@ -58,7 +60,11 @@ class Product extends BaseModel
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)
+            ->using(new class extends Pivot {
+                use UuidTrait;
+            })
+            ->withTimestamps();
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
+use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -29,4 +30,12 @@ interface ProductModelInterface
      * @return \AvoRed\Framework\Database\Models\Product $product
      */
     public function findByBarcode(string $barcode): Product;
+
+    /**
+     * Sync Product with categories.
+     * @param \AvoRed\Framework\Database\Models\Product $product
+     * @param \AvoRed\Framework\Catalog\Requests\ProductRequest $request
+     * @return void
+     */
+    public function saveProductCategories(Product $product, ProductRequest $request): void;
 }

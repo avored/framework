@@ -19,6 +19,21 @@
         </div>
     </div>
 </div>
+
+<div class="mt-3">
+    <x-avored::form.select2
+        name="category_id[]"
+
+        label="{{ __('avored::system.category') }}"
+    >
+        @foreach ($options as $optionValue => $optionLabel)
+            <option {{ (isset($product) && $product->categories->contains($optionValue))  ? 'selected' : ''}} value="{{ $optionValue }}">
+                {{ $optionLabel }}
+            </option>
+        @endforeach
+
+    </x-avored::form.select2>
+</div>
 <div class="flex w-full">
     <div class="w-1/2">
         <div class="mt-3">
