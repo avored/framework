@@ -4,6 +4,8 @@ namespace AvoRed\Framework\Graphql\Types;
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+
 class CategoryType extends GraphQLType
 {
     /**
@@ -64,10 +66,10 @@ class CategoryType extends GraphQLType
             //     'type' => Type::listOf(GraphQL::type('filter')),
             //     'description' => 'Category Filter'
             // ],
-            // 'product' => [
-            //     'type' => Type::listOf(GraphQL::type('product')),
-            //     'description' => 'Category Product'
-            // ]
+            'products' => [
+                'type' => Type::listOf(GraphQL::type('product')),
+                'description' => 'Category Product'
+            ]
         ];
     }
 
