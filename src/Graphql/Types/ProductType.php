@@ -42,6 +42,62 @@ class ProductType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Product Slug'
             ],
+            'type' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'Product Type'
+            ],
+            'sku' => [
+                'type' => Type::string(),
+                'description' => 'Product SKU'
+            ],
+            'barcode' => [
+                'type' => Type::string(),
+                'description' => 'Product Barcode'
+            ],
+            'price' => [
+                'type' => Type::float(),
+                'description' => 'Product Price'
+            ],
+            'status' => [
+                'type' => Type::int(),
+                'description' => 'Product Status'
+            ],
+            'in_stock' => [
+                'type' => Type::int(),
+                'description' => 'Product in stock'
+            ],
+            'track_stock' => [
+                'type' => Type::int(),
+                'description' => 'Product track stock'
+            ],
+            'is_taxable' => [
+                'type' => Type::int(),
+                'description' => 'Product is taxable'
+            ],
+            'cost_price' => [
+                'type' => Type::float(),
+                'description' => 'Product cost price'
+            ],
+            'qty' => [
+                'type' => Type::float(),
+                'description' => 'Product Qty'
+            ],
+            'weight' => [
+                'type' => Type::float(),
+                'description' => 'Product Weight'
+            ],
+            'height' => [
+                'type' => Type::float(),
+                'description' => 'Product Height'
+            ],
+            'width' => [
+                'type' => Type::float(),
+                'description' => 'Product Width'
+            ],
+            'length' => [
+                'type' => Type::float(),
+                'description' => 'Product Length'
+            ],
             'description' => [
                 'type' => Type::string(),
                 'description' => 'Product Description'
