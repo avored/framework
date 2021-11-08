@@ -5,6 +5,7 @@ use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
 use AvoRed\Framework\Database\Models\OauthClient;
 use AvoRed\Framework\Document\DocumentProvider;
 use AvoRed\Framework\Menu\MenuProvider;
+use AvoRed\Framework\Module\ModuleProvider;
 use AvoRed\Framework\Payment\PaymentProvider;
 use AvoRed\Framework\Permission\PermissionProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
@@ -31,6 +32,7 @@ class AvoRedServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
+        ModuleProvider::class,
         BreadcrumbProvider::class,
         ComponentsProvider::class,
         DocumentProvider::class,

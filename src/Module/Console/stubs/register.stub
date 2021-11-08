@@ -1,0 +1,5 @@
+name: DummyVendor DummyName
+identifier: DummyLowerVendor-DummyLowerName
+status: active
+description: DummyVendor DummyName Module
+namespace: DummyVendor\DummyName\

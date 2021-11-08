@@ -43,6 +43,11 @@ class InstallCommand extends Command
         $this->executePassportInstallCommand();
         $this->call('storage:link');
         $this->createRoleAction->handle(['name' => Role::ADMIN]);
+
+        if ($this->confirm('Would you like to install Dummy Data?')) {
+            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
+        }
+
         $this->call('avored:admin:make');
 
         $this->info('AvoRed Install Successfully!');
