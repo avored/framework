@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Mutations\Customer;
 
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Models\Address;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -13,6 +14,8 @@ use Rebing\GraphQL\Support\Mutation;
 
 class DeleteAddressMutation extends Mutation
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'deleteAddressMutation',
         'description' => 'A mutation'

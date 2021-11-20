@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Mutations\Customer;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Models\Customer;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -12,6 +13,8 @@ use Rebing\GraphQL\Support\Mutation;
 
 class CustomerUpdateMutation extends Mutation
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'customerUpdate',
         'description' => 'A mutation'

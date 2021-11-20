@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Mutations\Customer;
 
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Models\Address;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -12,6 +13,8 @@ use Rebing\GraphQL\Support\Mutation;
 
 class CreateAddressMutation extends Mutation
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'createAddressMutation',
         'description' => 'A mutation'

@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Graphql\Queries;
 
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -11,6 +12,8 @@ use Rebing\GraphQL\Support\Query;
 
 class AllAddressQuery extends Query
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'allAddress',
         'description' => 'A query'

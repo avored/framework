@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Graphql\Queries;
 
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Models\Address;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -11,6 +12,8 @@ use Rebing\GraphQL\Support\Query;
 
 class AddressQuery extends Query
 {
+    use AuthorizedTrait;
+    
     protected $attributes = [
         'name' => 'addressQuery',
         'description' => 'A query'
@@ -65,7 +68,7 @@ class AddressQuery extends Query
      * @return Address
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Address
-    {    
+    {
         return $this->addressRepository->find($args['id']);
     }
 }

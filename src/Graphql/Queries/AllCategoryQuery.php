@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Graphql\Queries;
 
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -11,6 +12,8 @@ use Rebing\GraphQL\Support\Query;
 
 class AllCategoryQuery extends Query
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'allCategory',
         'description' => 'A query'
@@ -61,6 +64,7 @@ class AllCategoryQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
+        // dd(auth()->guard('visitor_api')->check());
         return $this->categoryRepository->all();
     }
 }

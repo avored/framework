@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Graphql\Mutations;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
 use AvoRed\Framework\Database\Models\Order;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -14,6 +15,8 @@ use Rebing\GraphQL\Support\Mutation;
 
 class PlaceOrderMutation extends Mutation
 {
+    use AuthorizedTrait;
+
     protected $attributes = [
         'name' => 'placeOrderMutation',
         'description' => 'A mutation'
@@ -68,7 +71,7 @@ class PlaceOrderMutation extends Mutation
                 'name' => 'customer_id',
                 'type' => Type::nonNull(Type::string())
             ],
-           
+
             'shipping_address_id' => [
                 'name' => 'shipping_address_id',
                 'type' => Type::nonNull(Type::string())
@@ -101,7 +104,7 @@ class PlaceOrderMutation extends Mutation
         return $order;
     }
 
-    
+
     /**
      * Sync Products and Attributes with Order Tables.
      * @param \AvoRed\Framework\Database\Models\Order $order

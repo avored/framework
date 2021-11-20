@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Graphql\Queries;
 
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Models\Category;
+use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -12,7 +13,10 @@ use Rebing\GraphQL\Support\Query;
 
 class CategoryQuery extends Query
 {
-    protected $attributes = [
+    use AuthorizedTrait;
+
+    protected
+     $attributes = [
         'name' => 'category',
         'description' => 'A query'
     ];
