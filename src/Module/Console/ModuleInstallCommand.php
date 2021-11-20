@@ -29,7 +29,6 @@ class ModuleInstallCommand extends Command
      */
     protected $description = 'Install a module';
 
-   
     /**
      * The migrator instance.
      *

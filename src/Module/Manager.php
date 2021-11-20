@@ -68,10 +68,10 @@ class Manager
             $iterator = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator($modulePath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS)
             );
-            
+
             $iterator->setMaxDepth(2);
             $iterator->rewind();
-            
+
             while ($iterator->valid()) {
                 if (($iterator->getDepth() > 1) &&
                     $iterator->isFile() &&
@@ -99,7 +99,7 @@ class Manager
             }
             // Sort modules based on its declared dependency
             $this->moduleList = $this->sortByDependency($this->moduleList);
-            
+
             $this->moduleList->each(function ($module) {
                 $composerLoader = require base_path('vendor/autoload.php');
                 if (strtolower($module->status()) == 'active') {
@@ -107,6 +107,7 @@ class Manager
                     $composerLoader->addPsr4($module->namespace(), $path);
                     $moduleProvider = $module->namespace() . 'Module';
                     App::register($moduleProvider);
+
                 }
             });
 

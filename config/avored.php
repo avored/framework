@@ -13,6 +13,7 @@ return [
     |
     */
     'admin_url' => 'admin',
+    'guest_prefix' => 'AvoRed_Guest_',
 
     'auth' => [
         'guards' => [
@@ -20,18 +21,9 @@ return [
                 'driver' => 'session',
                 'provider' => 'admin-users',
             ],
-            'customer' => [
-                'driver' => 'session',
-                'provider' => 'customers',
-            ],
-            'customer_api' => [
+            'visitor_api' => [
                 'driver' => 'passport',
-                'provider' => 'customers',
-            ],
-            'admin_api' => [
-                'driver' => 'session',
-                'provider' => 'admin-users',
-                'hash' => false,
+                'provider' => 'visitors',
             ],
         ],
         'providers' => [
@@ -39,9 +31,9 @@ return [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\AdminUser::class,
             ],
-            'customers' => [
+            'visitors' => [
                 'driver' => 'eloquent',
-                'model' => AvoRed\Framework\Database\Models\Customer::class,
+                'model' => AvoRed\Framework\Database\Models\Visitor::class,
             ],
         ],
 
@@ -49,11 +41,6 @@ return [
             'adminusers' => [
                 'provider' => 'admin-users',
                 'table' => 'admin_password_resets',
-                'expire' => 60,
-            ],
-            'customers' => [
-                'provider' => 'customers',
-                'table' => 'customer_password_resets',
                 'expire' => 60,
             ],
         ],

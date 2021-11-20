@@ -254,6 +254,15 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
         });
 
+        Schema::create('visitors', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('customer_id')->nullable()->default(null);
+            $table->string('username')->uniqid();
+            $table->string('password');
+            $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customers');
+        });
+
         $path = __DIR__.'/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {

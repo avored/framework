@@ -1,7 +1,6 @@
 <?php
 namespace AvoRed\Framework\Graphql\Types;
 
-use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
