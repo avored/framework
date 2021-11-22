@@ -28,7 +28,7 @@ class Page extends BaseModel
         $pattern = sprintf('/(@)?%s\s*(.+?)\s*%s(\r?\n)?/s', $this->contentTags[0], $this->contentTags[1]);
         $callback = function ($matches) {
             $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
-            $widget = Widget::get($matches[2]);
+            $widget = Widget::get($matches[2]) ?? '';
             
             if (method_exists($widget, 'render')) {
                 $widgetContent = $widget->render();
