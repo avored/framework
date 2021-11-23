@@ -2,6 +2,7 @@
 namespace AvoRed\Framework;
 
 use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
+use AvoRed\Framework\Cart\CartProvider;
 use AvoRed\Framework\Database\Models\OauthClient;
 use AvoRed\Framework\Document\DocumentProvider;
 use AvoRed\Framework\Menu\MenuProvider;
@@ -33,6 +34,7 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     protected $providers = [
         ModuleProvider::class,
+        CartProvider::class,
         BreadcrumbProvider::class,
         ComponentsProvider::class,
         DocumentProvider::class,

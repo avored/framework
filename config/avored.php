@@ -68,7 +68,7 @@ return [
                     'updateAddress' => \AvoRed\Framework\Graphql\Mutations\Customer\UpdateAddressMutation::class,
                     'deleteAddress' => \AvoRed\Framework\Graphql\Mutations\Customer\DeleteAddressMutation::class,
                     'placeOrder' => \AvoRed\Framework\Graphql\Mutations\PlaceOrderMutation::class,
-                    // 'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
+                     'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
                     // 'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
                     // 'adminCategoryCreate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryCreateMutation::class,
                     // 'adminCategoryUpdate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryUpdateMutation::class,

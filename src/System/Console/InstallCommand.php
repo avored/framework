@@ -45,7 +45,7 @@ class InstallCommand extends Command
         $this->createRoleAction->handle(['name' => Role::ADMIN]);
 
         if ($this->confirm('Would you like to install Dummy Data?')) {
-            $this->call('avored:module:install', ['identifier' => 'avored-dummy-data']);
+            $this->call('avored:module:install', ['identifier' => 'avored-demodata']);
         }
 
         $this->call('avored:admin:make');

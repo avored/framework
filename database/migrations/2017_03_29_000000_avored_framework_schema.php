@@ -263,6 +263,16 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
         });
 
+        Schema::create('cart_products', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('visitor_id');
+            $table->uuid('product_id');
+            $table->string('price')->nullable()->default(null);
+            $table->timestamps();
+            $table->foreign('visitor_id')->references('id')->on('visitors');
+            $table->foreign('product_id')->references('id')->on('products');
+        });
+
         $path = __DIR__.'/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -287,6 +297,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('visitors');
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('documents');
         Schema::dropIfExists('order_products');
