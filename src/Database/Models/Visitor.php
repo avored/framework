@@ -28,7 +28,14 @@ class Visitor extends BaseModel
         return $this->belongsTo(Customer::class);
     }
 
-
+    /**
+     * Visitor Belongs to a Customer if registered.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cartProducts()
+    {
+        return $this->hasMany(CartProduct::class);
+    }
 
     /**
      * Get the Passport Client for User and If it doesnot exist then create a new one

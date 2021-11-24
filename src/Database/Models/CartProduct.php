@@ -17,6 +17,7 @@ class CartProduct extends BaseModel
         'visitor_id',
         'product_id',
         'price',
+        'qty'
     ];
 
     /**

@@ -25,7 +25,7 @@ class PaymentProvider extends ServiceProvider
     public function register()
     {
         $this->registerManager();
-        $this->app->singleton('payment', 'AvoRed\Framework\Payment\Manager');
+        $this->app->alias('payment', Manager::class);
     }
 
     /**
@@ -48,6 +48,6 @@ class PaymentProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['payment', 'AvoRed\Framework\Payment\Manager'];
+        return ['payment', Manager::class];
     }
 }

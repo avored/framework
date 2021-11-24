@@ -3,11 +3,13 @@
 namespace AvoRed\Framework\Graphql\Mutations\Cart;
 
 use AvoRed\Framework\Cart\Cart;
+use AvoRed\Framework\Cart\CartManager;
 use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -31,7 +33,7 @@ class AddToCartMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('product');
+        return Type::listOf(GraphQL::type('cartProduct'));
     }
 
     public function args(): array
@@ -46,6 +48,9 @@ class AddToCartMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        return Cart::add($args['slug']);
+        Cart::add($args['slug']);
+        $visitor = Auth::guard('visitor_api')->user();
+
+        return $visitor->cartProducts;
     }
 }

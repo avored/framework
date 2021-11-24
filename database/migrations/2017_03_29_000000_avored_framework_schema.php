@@ -267,7 +267,8 @@ class AvoredFrameworkSchema extends Migration
             $table->uuid('id')->primary();
             $table->uuid('visitor_id');
             $table->uuid('product_id');
-            $table->string('price')->nullable()->default(null);
+            $table->decimal('price', 10, 6)->nullable()->default(null);
+            $table->decimal('qty', 10, 6)->nullable()->default(null);
             $table->timestamps();
             $table->foreign('visitor_id')->references('id')->on('visitors');
             $table->foreign('product_id')->references('id')->on('products');

@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Cart;
 
+use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Database\Models\Product;
@@ -9,6 +10,8 @@ use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
 use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
 use AvoRed\Framework\Database\Models\PromotionCode;
+use Illuminate\Support\Facades\Auth;
+use AvoRed\Framework\Database\Models\CartProduct;
 
 class CartManager
 {
@@ -19,20 +22,27 @@ class CartManager
     protected $productRepository;
 
     /**
+     * Cart Product Repository.
+     * @var \AvoRed\Framework\Database\Repository\CartProductRepository
+     */
+    protected $cartProductRepository;
+
+    /**
      * Cart Product collection.
      * @var \Illuminate\Support\Collection
      */
     protected $cartCollection;
 
-
     /**
      * Cart Manager Construct.
      */
     public function __construct(
-        ProductModelInterface $productRepository
+        ProductModelInterface $productRepository,
+        CartProductModelInterface  $cartProductRepository
     )
     {
         $this->productRepository = $productRepository;
+        $this->cartProductRepository = $cartProductRepository;
     }
 
     /**
@@ -60,34 +70,28 @@ class CartManager
      * @param string $slug
      * @param int $qty
      * @param array $attributes
-     * @return array
+     * @return CartProduct
      */
-    public function add(string $slug, $qty = 1, $attributes = [])
+    public function add(string $slug, float $qty = 1, array $attributes = []): CartProduct
     {
-        dd('here');
+        /** @var Product $product  */
         $product = $this->productRepository->findBySlug($slug);
+        $visitor = Auth::guard('visitor_api')->user();
 
-        dd($product);
-    }
+        $cartProduct = $visitor->cartProducts()->where('product_id', $product->id)->first();
 
-    /**
-     * Create Cart Product From slug.
-     * @param \AvoRed\Framework\Database\Models\Product $product
-     * @param mixed $attributes
-     * @return \AvoRed\Framework\Cart\CartProduct $cartProduct
-     */
-    public function createCartProductFromSlug(Product $product, $attributes = null): CartProduct
-    {
-        $cartProduct = new CartProduct;
-
-        $cartProduct->name($product->name)
-            ->id($product->id)
-            ->slug($product->slug)
-            ->price($product->getPrice())
-            ->taxAmount($product->getTaxAmount())
-            ->attributes($attributes ?? [])
-            ->image($product->main_image_url);
-
+        if ($cartProduct !== null) {
+            $cartProduct->qty = $cartProduct->qty + $qty;
+            $cartProduct->save();
+        } else {
+            $data = [
+                'visitor_id' => $visitor->id,
+                'product_id' => $product->id,
+                'price' => $product->price,
+                'qty' => $qty
+            ];
+            $cartProduct = $this->cartProductRepository->create($data);
+        }
         return $cartProduct;
     }
 

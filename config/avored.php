@@ -100,6 +100,7 @@ return [
             'order' => AvoRed\Framework\Graphql\Types\OrderType::class,
             'address' => AvoRed\Framework\Graphql\Types\AddressType::class,
             'delete' => AvoRed\Framework\Graphql\Types\DeleteType::class,
+            'cartProduct' => AvoRed\Framework\Graphql\Types\CartProductType::class,
         ],
     ],
 ];

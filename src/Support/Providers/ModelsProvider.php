@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Support\Providers;
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
@@ -21,6 +22,7 @@ use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use AvoRed\Framework\Database\Repository\AddressRepository;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
 use AvoRed\Framework\Database\Repository\AttributeRepository;
+use AvoRed\Framework\Database\Repository\CartProductRepository;
 use AvoRed\Framework\Database\Repository\CategoryRepository;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
 use AvoRed\Framework\Database\Repository\CustomerRepository;
@@ -54,6 +56,7 @@ class ModelsProvider extends ServiceProvider
         AttributeModelInterface::class => AttributeRepository::class,
         CategoryModelInterface::class => CategoryRepository::class,
         ConfigurationModelInterface::class => ConfigurationRepository::class,
+        CartProductModelInterface::class => CartProductRepository::class,
         CustomerModelInterface::class => CustomerRepository::class,
         DocumentModelInterface::class => DocumentRepository::class,
         OrderModelInterface::class => OrderRepository::class,

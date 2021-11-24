@@ -17,7 +17,6 @@ class CartProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->registerCart();
     }
 
     /**
@@ -27,7 +26,6 @@ class CartProvider extends ServiceProvider
     public function register()
     {
         $this->registerServices();
-        $this->app->alias('cart', CartManager::class);
     }
 
     /**
