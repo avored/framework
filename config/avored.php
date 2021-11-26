@@ -1,5 +1,8 @@
 <?php
 
+use AvoRed\Framework\Graphql\Queries\CartItems;
+use AvoRed\Framework\Graphql\Queries\CartItemsQuery;
+
 return [
 
     /*
@@ -55,6 +58,7 @@ return [
                     'customerQuery' => \AvoRed\Framework\Graphql\Queries\CustomerQuery::class,
                     'addressQuery' => \AvoRed\Framework\Graphql\Queries\AddressQuery::class,
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
+                    'cartItems' => CartItemsQuery::class,
                     // customer order query api
                 ],
                 'mutation' => [
