@@ -52,8 +52,10 @@ class CartManager
      */
     public function destroy(string $slug)
     {
-//        $this->cartCollection->pull($slug);
-        return $this;
+        $product = $this->getProductBySlug($slug);
+        $visitor = Auth::guard('visitor_api')->user();
+
+        $this->cartProductRepository->query()->where('product_id', $product->id)->delete();
     }
     /**
      * update Product from Cart By Given Slug.
@@ -74,8 +76,7 @@ class CartManager
      */
     public function add(string $slug, float $qty = 1, array $attributes = []): CartProduct
     {
-        /** @var Product $product  */
-        $product = $this->productRepository->findBySlug($slug);
+        $product = $this->getProductBySlug($slug);
         $visitor = Auth::guard('visitor_api')->user();
 
         $cartProduct = $visitor->cartProducts()->where('product_id', $product->id)->first();
@@ -95,6 +96,10 @@ class CartManager
         return $cartProduct;
     }
 
+    public function getProductBySlug(string $slug): Product
+    {
+        return $this->productRepository->findBySlug($slug);
+    }
     /**
      * To check if the Product Existing in the Cart
      * @param string $slug

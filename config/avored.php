@@ -50,15 +50,12 @@ return [
         'schemas' => [
             'default' => [
                 'query' => [
-                    // 'menu' => \AvoRed\Framework\Graphql\Queries\MenuQuery::class,
                     'allCategory' => \AvoRed\Framework\Graphql\Queries\AllCategoryQuery::class,
                     'allAddress' => \AvoRed\Framework\Graphql\Queries\AllAddressQuery::class,
                     'customerQuery' => \AvoRed\Framework\Graphql\Queries\CustomerQuery::class,
                     'addressQuery' => \AvoRed\Framework\Graphql\Queries\AddressQuery::class,
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
-                    // 'product' => \AvoRed\Framework\Graphql\Queries\ProductQuery::class,
-                    // // 'barcodeProduct' => \AvoRed\Framework\Graphql\Queries\BarcodeProductQuery::class,
-                    // 'adminCategoryTable' => \AvoRed\Framework\Graphql\Queries\Admin\Catalog\Category\CategoryTableQuery::class,
+                    // customer order query api
                 ],
                 'mutation' => [
                     'register' => \AvoRed\Framework\Graphql\Mutations\Auth\RegisterMutation::class,
@@ -68,11 +65,8 @@ return [
                     'updateAddress' => \AvoRed\Framework\Graphql\Mutations\Customer\UpdateAddressMutation::class,
                     'deleteAddress' => \AvoRed\Framework\Graphql\Mutations\Customer\DeleteAddressMutation::class,
                     'placeOrder' => \AvoRed\Framework\Graphql\Mutations\PlaceOrderMutation::class,
-                     'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
-                    // 'adminLogin' => \AvoRed\Framework\Graphql\Mutations\Admin\User\LoginMutation::class,
-                    // 'adminCategoryCreate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryCreateMutation::class,
-                    // 'adminCategoryUpdate' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryUpdateMutation::class,
-                    // 'adminCategoryDelete' => \AvoRed\Framework\Graphql\Mutations\Admin\Catalog\Category\CategoryDeleteMutation::class,
+                    'addToCart' => \AvoRed\Framework\Graphql\Mutations\Cart\AddToCartMutation::class,
+                    'deleteCart' => \AvoRed\Framework\Graphql\Mutations\Cart\DeleteCartMutation::class,
                 ],
                 'middleware' => [],
                 'method'     => ['get', 'post'],
@@ -81,9 +75,7 @@ return [
                 'query' => [
                     'order' => \AvoRed\Framework\Graphql\Queries\OrderQuery::class,
                 ],
-                'mutation' => [
-                    // 'example_mutation'  => ExampleMutation::class,
-                ],
+                'mutation' => [],
                 'middleware' => ['auth:api'],
                 'method'     => ['get', 'post'],
             ],
