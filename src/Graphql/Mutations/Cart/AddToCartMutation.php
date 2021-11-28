@@ -42,13 +42,18 @@ class AddToCartMutation extends Mutation
             'slug' => [
                 'name' => 'slug',
                 'type' => Type::nonNull(Type::string()),
+            ],
+            'qty' => [
+                'name' => 'qty',
+                'type' => Type::float(),
             ]
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        Cart::add($args['slug']);
+        $qty = $args['qty'] ?? 1;
+        Cart::add($args['slug'], $qty);
         $visitor = Auth::guard('visitor_api')->user();
 
         return $visitor->cartProducts;

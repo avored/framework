@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Cart;
 
 use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Session\SessionManager;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
@@ -15,6 +14,12 @@ use AvoRed\Framework\Database\Models\CartProduct;
 
 class CartManager
 {
+    /**
+     * Visitor
+     * @var \AvoRed\Framework\Database\Model\Visitor
+     */
+    protected $visitor;
+
     /**
      * Product Repository.
      * @var \AvoRed\Framework\Database\Repository\ProductRepository
@@ -43,6 +48,7 @@ class CartManager
     {
         $this->productRepository = $productRepository;
         $this->cartProductRepository = $cartProductRepository;
+        $this->visitor = Auth::guard('visitor_api')->user();
     }
 
     /**
@@ -76,17 +82,16 @@ class CartManager
      */
     public function add(string $slug, float $qty = 1, array $attributes = []): CartProduct
     {
-        $product = $this->getProductBySlug($slug);
-        $visitor = Auth::guard('visitor_api')->user();
-
-        $cartProduct = $visitor->cartProducts()->where('product_id', $product->id)->first();
+        /** @var Product $product  */
+        $product = $this->productRepository->findBySlug($slug);
+        $cartProduct = $this->getCartProduct($product->id);
 
         if ($cartProduct !== null) {
             $cartProduct->qty = $cartProduct->qty + $qty;
             $cartProduct->save();
         } else {
             $data = [
-                'visitor_id' => $visitor->id,
+                'visitor_id' => $this->visitor->id,
                 'product_id' => $product->id,
                 'price' => $product->price,
                 'qty' => $qty
@@ -99,6 +104,15 @@ class CartManager
     public function getProductBySlug(string $slug): Product
     {
         return $this->productRepository->findBySlug($slug);
+    }
+    /**
+     *
+     * @param string $productId
+     * @return CartProduct|null $cartProduct
+     */
+    public function getCartProduct(string $productId): ?CartProduct
+    {
+        return $this->visitor->cartProducts()->where('product_id', $productId)->first();
     }
     /**
      * To check if the Product Existing in the Cart
