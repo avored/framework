@@ -24,22 +24,7 @@ class ShippingProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerManager();
         $this->app->singleton('shipping', 'AvoRed\Framework\Shipping\Manager');
-    }
-
-    /**
-     * Register the shipping Manager Instance.
-     * @return void
-     */
-    protected function registerManager()
-    {
-        $this->app->singleton(
-            'shipping',
-            function () {
-                new Manager();
-            }
-        );
     }
 
     /**

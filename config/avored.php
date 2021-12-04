@@ -60,6 +60,8 @@ return [
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
                     'cartItems' => CartItemsQuery::class,
                     // customer order query api
+                    'paymentQuery' => \AvoRed\Framework\Graphql\Queries\PaymentQuery::class,
+                    'shippingQuery' => \AvoRed\Framework\Graphql\Queries\ShippingQuery::class,
                 ],
                 'mutation' => [
                     'register' => \AvoRed\Framework\Graphql\Mutations\Auth\RegisterMutation::class,
@@ -97,6 +99,8 @@ return [
             'address' => AvoRed\Framework\Graphql\Types\AddressType::class,
             'delete' => AvoRed\Framework\Graphql\Types\DeleteType::class,
             'cartProduct' => AvoRed\Framework\Graphql\Types\CartProductType::class,
+            'payment' => AvoRed\Framework\Graphql\Types\PaymentType::class,
+            'shipping' => AvoRed\Framework\Graphql\Types\ShippingType::class,
         ],
     ],
 ];

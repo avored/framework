@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Payment;
 
-use AvoRed\Framework\Payment\Manager;
 use Illuminate\Support\ServiceProvider;
-
 class PaymentProvider extends ServiceProvider
 {
     /**
@@ -24,22 +22,7 @@ class PaymentProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerManager();
-        $this->app->alias('payment', Manager::class);
-    }
-
-    /**
-     * Register the payment Manager Instance.
-     * @return void
-     */
-    protected function registerManager()
-    {
-        $this->app->singleton(
-            'payment',
-            function () {
-                new Manager();
-            }
-        );
+        $this->app->singleton('payment', PaymentManager::class);
     }
 
     /**
@@ -48,6 +31,6 @@ class PaymentProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['payment', Manager::class];
+        return ['payment', PaymentManager::class];
     }
 }

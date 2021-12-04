@@ -1,10 +1,9 @@
 <?php
-
 namespace AvoRed\Framework\Payment;
 
 use Illuminate\Support\Collection;
 
-class Manager
+class PaymentManager
 {
     /**
      * Payment Options collection.
