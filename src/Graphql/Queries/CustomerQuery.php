@@ -74,6 +74,6 @@ class CustomerQuery extends Query
             return $this->customerRepository->find($args['id']);
         }
 
-        return Auth::guard('visitor_api')->user();
+        return $this->customerRepository->find(Auth::guard('visitor_api')->user()->customer_id);
     }
 }
