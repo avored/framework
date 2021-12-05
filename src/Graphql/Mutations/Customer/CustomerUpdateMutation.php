@@ -8,6 +8,7 @@ use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -44,10 +45,6 @@ class CustomerUpdateMutation extends Mutation
     public function args(): array
     {
         return [
-            'id' => [
-                'name' => 'id',
-                'type' => Type::nonNull(Type::string()),
-            ],
             'first_name' => [
                 'name' => 'first_name',
                 'type' => Type::nonNull(Type::string()),
@@ -61,7 +58,10 @@ class CustomerUpdateMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $customer = $this->customerRepository->find($args['id']);
+      
+        // $customer = $this->customerRepository->find($args['id']);
+        $customer = Auth::guard('visitor_api')->user()->customer;
+
         $customer->update($args);
 
         return $customer;
