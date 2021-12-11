@@ -55,6 +55,7 @@ return [
                 'query' => [
                     'allCategory' => \AvoRed\Framework\Graphql\Queries\AllCategoryQuery::class,
                     'allAddress' => \AvoRed\Framework\Graphql\Queries\AllAddressQuery::class,
+                    'allOrders' => \AvoRed\Framework\Graphql\Queries\AllOrdersQuery::class,
                     'customerQuery' => \AvoRed\Framework\Graphql\Queries\CustomerQuery::class,
                     'addressQuery' => \AvoRed\Framework\Graphql\Queries\AddressQuery::class,
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,

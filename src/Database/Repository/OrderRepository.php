@@ -37,13 +37,13 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
 
     /**
      * Get the model for the repository
-     * @return Order 
+     * @return Order
      */
     public function model(): Order
     {
         return $this->model;
     }
-  
+
     /**
      * Find Orders of a given user Id.
      * @param string $id
@@ -62,7 +62,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
     {
         $firstDay = $this->getFirstDay();
         $totalOrder = Order::select('id')->where('created_at', '>', $firstDay)->count();
-        
+
         return $totalOrder;
     }
     /**
@@ -83,7 +83,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
                 $total += ($product->qty * $product->price) + $product->tax_amount;
             }
         }
-        
+
         return $total;
     }
 
