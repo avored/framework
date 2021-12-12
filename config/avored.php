@@ -53,6 +53,7 @@ return [
         'schemas' => [
             'default' => [
                 'query' => [
+                    'latestProductQuery' => \AvoRed\Framework\Graphql\Queries\LatestProductQuery::class,
                     'allCategory' => \AvoRed\Framework\Graphql\Queries\AllCategoryQuery::class,
                     'allAddress' => \AvoRed\Framework\Graphql\Queries\AllAddressQuery::class,
                     'allOrders' => \AvoRed\Framework\Graphql\Queries\AllOrdersQuery::class,
