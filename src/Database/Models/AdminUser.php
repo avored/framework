@@ -120,7 +120,7 @@ class AdminUser extends BaseModel
     }
 
     /**
-     * Get the post's image.
+     * Get the staff profile image.
      */
     public function imagePath()
     {

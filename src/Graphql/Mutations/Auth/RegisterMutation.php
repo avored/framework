@@ -66,6 +66,7 @@ class RegisterMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $data = [];
+        $args['password'] = bcrypt($args['password']);
         $customer = $this->customerRepository->create($args);
         $client = $customer->getPassportClient();
 

@@ -5,10 +5,11 @@ use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\CustomerResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
 
 class Customer extends BaseModel
 {
-    use Notifiable, HasFactory;
+    use Notifiable, HasFactory, HasApiTokens;
     /**
      * The attributes that are mass assignable.
      *

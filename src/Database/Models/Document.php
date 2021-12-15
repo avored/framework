@@ -15,7 +15,9 @@ class Document extends BaseModel
         'path',
         'mime_type',
         'size',
-        'origional_name'
+        'origional_name',
+        'documentable_id',
+        'documentable_type',
     ];
 
     /**

@@ -67,23 +67,12 @@ class Product extends BaseModel
             ->withTimestamps();
     }
 
-
-    /**
-     * Belongs to Many Properties.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     /**
+     * Get the product image.
      */
-    public function properties()
+    public function document()
     {
-        return $this->belongsToMany(Property::class);
-    }
-
-    /**
-     * Product has many Product Text Property Values.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function attributes()
-    {
-        return $this->belongsToMany(Attribute::class);
+        return $this->morphOne(Document::class, 'documentable');
     }
 
     /**

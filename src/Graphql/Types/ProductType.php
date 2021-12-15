@@ -37,6 +37,10 @@ class ProductType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Product Name'
             ],
+            'main_image_url' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'Product Main Image Url'
+            ],
             'slug' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Product Slug'
@@ -119,4 +123,17 @@ class ProductType extends GraphQLType
             ],
         ];
     }
+
+    /**
+     * @param mixed $product
+     * @param array $args
+     * @return string
+     */
+    protected function resolveMainImageUrlField($product, $args)
+    {
+        $document = $product->document()->first();
+
+        return asset('storage/' . $document->path);
+    }
+
 }
