@@ -3,15 +3,18 @@
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
+use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use AvoRed\Framework\Database\Models\Customer;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Str;
 use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 use Nyholm\Psr7\ServerRequest;
+use stdClass;
 
 class RegisterMutation extends Mutation
 {
@@ -25,15 +28,25 @@ class RegisterMutation extends Mutation
      * @var AvoRed\Framework\Database\Repository\CustomerRepository
      */
     protected $customerRepository;
+    /**
+     * Visitor Repository
+     * @var AvoRed\Framework\Database\Repository\VisitorRepository
+     */
+    protected $visitorRepository;
 
     /**
      * All Customer construct
      * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
+     * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
      * @return void
      */
-    public function __construct(CustomerModelInterface $customerRepository)
+    public function __construct(
+        CustomerModelInterface $customerRepository,
+        VisitorModelInterface $visitorRepository
+    )
     {
         $this->customerRepository = $customerRepository;
+        $this->visitorRepository = $visitorRepository;
     }
 
     public function type(): Type
@@ -66,21 +79,31 @@ class RegisterMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $data = [];
+        $data = $this->createVisitorData();
+        $visitor = $this->visitorRepository->create($data);
+
         $args['password'] = bcrypt($args['password']);
         $customer = $this->customerRepository->create($args);
-        $client = $customer->getPassportClient();
+        $visitor->customer_id = $customer->id;
+        $visitor->save();
+
+        $data['email'] = $visitor->username;
+        $data['password'] = $visitor->password;
+
+        $client = $visitor->getPassportClient();
 
         if (null !== $client && $client instanceof Client) {
-            $serverRequest = $this->createRequest($client, $customer->id, $args, $scope = []);
+            $serverRequest = $this->createRequest($client, $visitor->id, $data, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
             $data = json_decode($reponse->content(), true);
 
-            $customer->token_type = $data['token_type'];
-            $customer->expires_in = $data['expires_in'];
-            $customer->access_token = $data['access_token'];
-            $customer->refresh_token = $data['refresh_token'];
+            $token = new stdClass;
+            $token->token_type = $data['token_type'];
+            $token->expires_in = $data['expires_in'];
+            $token->access_token = $data['access_token'];
+            $token->refresh_token = $data['refresh_token'];
 
-            return $customer;
+            return $token;
         }
 
         return null;
@@ -96,6 +119,7 @@ class RegisterMutation extends Mutation
      */
     protected function createRequest($client, $userId, $data, array $scopes)
     {
+        // dd($data);
         return (new ServerRequest('POST', 'not-important'))->withParsedBody([
             'grant_type' => 'password',
             'client_id' => $client->id,
@@ -107,4 +131,12 @@ class RegisterMutation extends Mutation
         ]);
     }
 
+    public function createVisitorData()
+    {
+        $guestPrefix = config('avored.guest_prefix', 'Guest');
+        return [
+            'username' => $guestPrefix . Str::random(),
+            'password' => Str::random(32)
+        ];
+    }
 }

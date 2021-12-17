@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
-use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
-use AvoRed\Framework\Database\Models\Visitor;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
