@@ -38,7 +38,7 @@ class ProductType extends GraphQLType
                 'description' => 'Product Name'
             ],
             'main_image_url' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'Product Main Image Url'
             ],
             'slug' => [
@@ -133,6 +133,9 @@ class ProductType extends GraphQLType
     {
         $document = $product->document()->first();
 
+        if (is_null($document)) {
+            return 'https://placehold.it/250x250';
+        }
         return asset('storage/' . $document->path);
     }
 
