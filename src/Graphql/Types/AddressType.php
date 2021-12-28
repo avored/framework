@@ -21,7 +21,7 @@ class AddressType extends GraphQLType
         'description' => 'A type'
     ];
 
-     /**
+    /**
      * Fields for Address Type
      * @return array $fields
      */
@@ -32,7 +32,7 @@ class AddressType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The id of the address'
             ],
-            'user_id' => [
+            'customer_id' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The user id of the address'
             ],
@@ -88,7 +88,7 @@ class AddressType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The updated_at of the address'
             ],
-            
+
         ];
     }
 }
