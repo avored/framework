@@ -11,6 +11,7 @@ use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\System\Controllers\RoleController;
 use AvoRed\Framework\User\Controllers\LoginController;
 use AvoRed\Framework\User\Controllers\StaffController;
+use AvoRed\Framework\User\Controllers\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,6 +78,7 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
 
         /***************** USER ROUTES *****************/
         Route::resource('staff', StaffController::class);
+        Route::resource('subscriber', SubscriberController::class);
 
 
         /***************** ORDER ROUTES *****************/

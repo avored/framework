@@ -148,6 +148,58 @@ class BreadcrumbProvider extends ServiceProvider
             }
         );
 
+        Breadcrumb::make(
+            'admin.subscriber.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.subscriber')
+                ->parent('admin.dashboard');
+            }
+        );
+
+        Breadcrumb::make(
+            'admin.subscriber.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                ->parent('admin.dashboard')
+                ->parent('admin.subscriber.index');
+            }
+        );
+
+        Breadcrumb::make(
+            'admin.subscriber.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.subscriber.index');
+            }
+        );
+
+        Breadcrumb::make(
+            'admin.staff.index',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.staff')
+                ->parent('admin.dashboard');
+            }
+        );
+
+        Breadcrumb::make(
+            'admin.staff.create',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.create')
+                ->parent('admin.dashboard')
+                ->parent('admin.staff.index');
+            }
+        );
+
+        Breadcrumb::make(
+            'admin.staff.edit',
+            function (BreadcrumbItem $breadcrumb) {
+                $breadcrumb->label('avored::system.edit')
+                ->parent('admin.dashboard')
+                ->parent('admin.staff.index');
+            }
+        );
+
     //     Breadcrumb::make(
     //         'admin.language.index',
     //         function (BreadcrumbItem $breadcrumb) {

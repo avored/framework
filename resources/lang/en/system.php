@@ -97,5 +97,8 @@ return [
     'image_path' => 'Image',
     'upload_file' => 'Upload File',
     'drag_and_drop' => 'drag and drop',
-    'png_jpg_gif_up_to_10mb' => 'PNG, JPG, GIF up to 10MB'
+    'png_jpg_gif_up_to_10mb' => 'PNG, JPG, GIF up to 10MB',
+    'subscriber' => 'Subscriber',
+    'enabled' => 'Enabled',
+    'disabled' => 'Disabled',
 ];

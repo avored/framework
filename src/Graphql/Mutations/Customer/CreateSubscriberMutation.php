@@ -1,0 +1,63 @@
+<?php
+
+namespace AvoRed\Framework\Graphql\Mutations\Customer;
+
+use AvoRed\Framework\Database\Contracts\SubscriberModelInterface;
+use Closure;
+use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Mutation;
+
+class CreateSubscriberMutation extends Mutation
+{
+    protected $attributes = [
+        'name' => 'CreateSubscriberMutation',
+        'description' => 'A mutation'
+    ];
+
+    /**
+     * Subscriber Repository
+     * @var AvoRed\Framework\Database\Repository\SubscriberRepository
+     */
+    protected $subscriberRepository;
+
+    /**
+     * All Subscriber construct
+     * @param \AvoRed\Framework\Database\Contracts\SubscriberModelInterface $subscriberRepository
+     * @return void
+     */
+    public function __construct(SubscriberModelInterface $subscriberRepository)
+    {
+        $this->subscriberRepository = $subscriberRepository;
+    }
+
+    public function type(): Type
+    {
+        return GraphQL::type('subscriber');
+    }
+
+    public function args(): array
+    {
+        return [
+            'email' => [
+                'name' => 'email',
+                'type' => Type::nonNull(Type::string()),
+            ]
+        ];
+    }
+
+    public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
+    {
+        if (Auth::guard('visitor_api')->check()) {
+            $visitor = Auth::guard('visitor_api')->user();
+            $customerId = Arr::get($visitor, 'customer_id', null);
+            $args['customer_id'] = $customerId;
+        }
+        $args['status'] = 'ENABLED';
+        
+        return $this->subscriberRepository->create($args);
+    }
+}

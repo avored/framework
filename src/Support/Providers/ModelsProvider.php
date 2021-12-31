@@ -18,6 +18,7 @@ use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
+use AvoRed\Framework\Database\Contracts\SubscriberModelInterface;
 use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use AvoRed\Framework\Database\Repository\AddressRepository;
 use AvoRed\Framework\Database\Repository\AdminUserRepository;
@@ -35,6 +36,7 @@ use AvoRed\Framework\Database\Repository\PermissionRepository;
 use AvoRed\Framework\Database\Repository\ProductRepository;
 use AvoRed\Framework\Database\Repository\PropertyRepository;
 use AvoRed\Framework\Database\Repository\RoleRepository;
+use AvoRed\Framework\Database\Repository\SubscriberRepository;
 use AvoRed\Framework\Database\Repository\VisitorRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -68,6 +70,7 @@ class ModelsProvider extends ServiceProvider
         PermissionModelInterface::class => PermissionRepository::class,
         VisitorModelInterface::class => VisitorRepository::class,
         RoleModelInterface::class => RoleRepository::class,
+        SubscriberModelInterface::class => SubscriberRepository::class,
     ];
 
     /**

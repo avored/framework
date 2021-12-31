@@ -289,6 +289,41 @@ class PermissionProvider extends ServiceProvider
                     ->routes('admin.admin-user.destroy');
             }
         );
+
+        $group = Permission::add(
+            'subscriber',
+            function (PermissionGroup $group) {
+                $group->label('avored::system.subscriber');
+            }
+        );
+        $group->addPermission(
+            'admin-subscriber-list',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.list')
+                ->routes('admin.subscriber.index');
+            }
+        );
+        $group->addPermission(
+            'admin-subscriber-create',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.create')
+                ->routes('admin.subscriber.create,admin.subscriber.store');
+            }
+        );
+        $group->addPermission(
+            'admin-subscriber-update',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.edit')
+                ->routes('admin.subscriber.edit,admin.subscriber.update');
+            }
+        );
+        $group->addPermission(
+            'admin-subscriber-destroy',
+            function (PermissionItem $permission) {
+                $permission->label('avored::system.destroy')
+                ->routes('admin.subscriber.destroy');
+            }
+        );
         // $group = Permission::add(
         //     'currency',
         //     function (PermissionGroup $group) {

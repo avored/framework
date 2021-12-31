@@ -12,7 +12,7 @@ use Rebing\GraphQL\Support\Query;
 
 class AllCategoryQuery extends Query
 {
-    use AuthorizedTrait;
+    // use AuthorizedTrait;
 
     protected $attributes = [
         'name' => 'allCategory',

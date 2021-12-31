@@ -126,7 +126,7 @@ class MenuProvider extends ServiceProvider
         });
         /** @var Builder $orderMenu */
         $orderMenu = Menu::get('order');
-        
+
         $orderMenu->subMenu('order', function (MenuItem $menu) {
             $menu->key('order')
                 ->type(MenuItem::ADMIN)
@@ -191,6 +191,12 @@ class MenuProvider extends ServiceProvider
                 ->type(MenuItem::ADMIN)
                 ->label('avored::system.staff')
                 ->route('admin.staff.index');
+        });
+        $userMenu->subMenu('subscriber', function (MenuItem $menu) {
+            $menu->key('subscriber')
+                ->type(MenuItem::ADMIN)
+                ->label('avored::system.subscriber')
+                ->route('admin.subscriber.index');
         });
 
         Menu::make('system', function (MenuItem $menu) {

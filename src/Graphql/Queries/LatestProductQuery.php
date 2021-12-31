@@ -12,7 +12,7 @@ use Rebing\GraphQL\Support\Query;
 
 class LatestProductQuery extends Query
 {
-    use AuthorizedTrait;
+    // use AuthorizedTrait;
 
     protected $attributes = [
         'name' => 'latestProductQuery',

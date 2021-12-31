@@ -160,6 +160,11 @@ class TabProvider extends ServiceProvider
                 ->label('avored::system.basic_info')
                 ->view('avored::user.staff._fields');
         });
+        Tab::put('user.subscriber', function (TabItem $tab) {
+            $tab->key('user.subscriber.info')
+                ->label('avored::system.basic_info')
+                ->view('avored::user.subscriber._fields');
+        });
 
         /******SYSTEM CURRENCY TABS  *******/
         Tab::put('system.currency', function (TabItem $tab) {

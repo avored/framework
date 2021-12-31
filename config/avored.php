@@ -1,7 +1,9 @@
 <?php
 
+use AvoRed\Framework\Graphql\Mutations\Customer\CreateSubscriberMutation;
 use AvoRed\Framework\Graphql\Queries\CartItems;
 use AvoRed\Framework\Graphql\Queries\CartItemsQuery;
+use AvoRed\Framework\Graphql\Types\SubscriberType;
 
 return [
 
@@ -66,6 +68,7 @@ return [
                     'shippingQuery' => \AvoRed\Framework\Graphql\Queries\ShippingQuery::class,
                 ],
                 'mutation' => [
+                    'CreateSubscriberMutation' => CreateSubscriberMutation::class,
                     'register' => \AvoRed\Framework\Graphql\Mutations\Auth\RegisterMutation::class,
                     'login' => \AvoRed\Framework\Graphql\Mutations\Auth\LoginMutation::class,
                     'customerUpdate' => \AvoRed\Framework\Graphql\Mutations\Customer\CustomerUpdateMutation::class,
@@ -103,6 +106,7 @@ return [
             'cartProduct' => AvoRed\Framework\Graphql\Types\CartProductType::class,
             'payment' => AvoRed\Framework\Graphql\Types\PaymentType::class,
             'shipping' => AvoRed\Framework\Graphql\Types\ShippingType::class,
+            'subscriber' => SubscriberType::class,
         ],
     ],
 ];

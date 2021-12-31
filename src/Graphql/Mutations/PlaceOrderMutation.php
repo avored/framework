@@ -79,18 +79,6 @@ class PlaceOrderMutation extends Mutation
             'billing_address_id' => [
                 'name' => 'billing_address_id',
                 'type' => Type::nonNull(Type::string())
-            ],
-            'products' => [
-                'name' => 'products',
-                'type' => Type::listOf(new InputObjectType([
-                    'name' => 'order_products',
-                    'fields' => [
-                        'product_id' => ['name' => 'product_id', 'type' => Type::nonNull(Type::string())],
-                        'qty' => ['name' => 'qty', 'type' => Type::nonNull(Type::float())],
-                        'price' => ['name' => 'price', 'type' => Type::nonNull(Type::float())],
-                        'tax_amount' => ['name' => 'tax_amount', 'type' => Type::nonNull(Type::float())],
-                    ]
-                ]))
             ]
         ];
     }
@@ -99,7 +87,7 @@ class PlaceOrderMutation extends Mutation
     {
 
         $order = $this->orderRepository->create($args);
-        $this->syncProducts($order, $args);
+        // $this->syncProducts($order, $args);
 
         return $order;
     }
@@ -113,7 +101,6 @@ class PlaceOrderMutation extends Mutation
      */
     private function syncProducts(Order $order, $args)
     {
-
         foreach ($args['products'] as $product) {
             $orderProductData = [
                 'product_id' => $product['product_id'],

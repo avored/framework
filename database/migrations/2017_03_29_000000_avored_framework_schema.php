@@ -274,6 +274,15 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
         });
 
+        Schema::create('subscribers', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('customer_id')->nullable()->default(null);
+            $table->string('email')->nullable()->default(null)->unique();
+            $table->enum('status', ['ENABLED', 'DISABLED'])->default('ENABLED');
+            $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+        });
+
         $path = __DIR__.'/../../assets/countries.json';
         $json = json_decode(file_get_contents($path), true);
         foreach ($json as $country) {
@@ -298,6 +307,7 @@ class AvoredFrameworkSchema extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('subscribers');
         Schema::dropIfExists('visitors');
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('documents');
