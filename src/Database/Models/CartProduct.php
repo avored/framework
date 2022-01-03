@@ -3,8 +3,6 @@ namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Passport\ClientRepository;
-use Laravel\Passport\HasApiTokens;
-
 class CartProduct extends BaseModel
 {
     use HasFactory;
@@ -16,7 +14,6 @@ class CartProduct extends BaseModel
     protected $fillable = [
         'visitor_id',
         'product_id',
-        'price',
         'qty'
     ];
 
@@ -29,7 +26,14 @@ class CartProduct extends BaseModel
         return $this->belongsTo(Visitor::class);
     }
 
-
+    /**
+     * CartProduct Belongs to a  visitor if registered.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     /**
      * Get the Passport Client for User and If it doesnot exist then create a new one

@@ -6,9 +6,6 @@ use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use Illuminate\Support\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
-use AvoRed\Framework\Database\Contracts\AttributeProductValueModelInterface;
-use AvoRed\Framework\Database\Contracts\PromotionCodeModelInterface;
-use AvoRed\Framework\Database\Models\PromotionCode;
 use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Database\Models\CartProduct;
 
@@ -93,7 +90,6 @@ class CartManager
             $data = [
                 'visitor_id' => $this->visitor->id,
                 'product_id' => $product->id,
-                'price' => $product->price,
                 'qty' => $qty
             ];
             $cartProduct = $this->cartProductRepository->create($data);

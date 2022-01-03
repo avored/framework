@@ -134,7 +134,8 @@ class ProductType extends GraphQLType
         $document = $product->document()->first();
 
         if (is_null($document)) {
-            return 'https://placehold.it/250x250';
+            $color = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+            return 'https://place-hold.it/250/' . $color . '&text=' . str_replace(' ', '-', $product->slug);
         }
         return asset('storage/' . $document->path);
     }

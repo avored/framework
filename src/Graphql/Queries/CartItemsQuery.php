@@ -1,7 +1,6 @@
 <?php
 namespace AvoRed\Framework\Graphql\Queries;
 
-use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;

@@ -35,9 +35,9 @@ class CartProductType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'CartProduct product id'
             ],
-            'price' => [
-                'type' => Type::float(),
-                'description' => 'CartProduct price'
+            'product' => [
+                'type' => Type::nonNull(GraphQL::type('product')),
+                'description' => 'CartProduct product model'
             ],
             'qty' => [
                 'type' => Type::float(),
