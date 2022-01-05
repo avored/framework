@@ -2,10 +2,13 @@
 
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
+use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
@@ -28,13 +31,22 @@ class LoginMutation extends Mutation
     protected $visitorRepository;
 
     /**
+     * Customer Repository
+     * @var AvoRed\Framework\Database\Repository\CustomerRepository
+     */
+    protected $customerRepository;
+
+    /**
      * All Visitor construct
      * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
      * @return void
      */
-    public function __construct(VisitorModelInterface $visitorRepository)
-    {
+    public function __construct(
+        VisitorModelInterface $visitorRepository,
+        CustomerModelInterface $customerRepository
+    ) {
         $this->visitorRepository = $visitorRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     public function type(): Type
@@ -61,6 +73,15 @@ class LoginMutation extends Mutation
         $data = [];
         $data = $this->createVisitorData();
         $visitor = $this->visitorRepository->create($data);
+
+        if (!empty($args['email']) && !empty($args['password'])) {
+            $customer = $this->customerRepository->findByEmail($args['email']);
+
+            if (Hash::check($args['password'], $customer->password)) {
+                $visitor->customer_id = $customer->id;
+                $visitor->save();
+            }
+        }
 
         $args['email'] = $visitor->username;
         $args['password'] = $visitor->password;

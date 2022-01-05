@@ -23,19 +23,19 @@ class CustomerType extends GraphQLType
     {
         return [
             'first_name' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'The customer for the first name'
             ],
             'last_name' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'The customer for the last name'
             ],
             'email' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'The customer for the email'
             ],
             'id' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'The customer for the id'
             ],
             'created_at' => [

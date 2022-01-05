@@ -84,6 +84,10 @@ class Customer extends BaseModel
     {
         return $this->attributes['password'] = bcrypt($value);
     }
+    public function getPasswordAttribute($value)
+    {
+        return $this->attributes['password'];
+    }
     /**
      * To check if user has permission to access the given route name.
      * @return bool
