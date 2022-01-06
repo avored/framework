@@ -8,13 +8,14 @@ use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
 class UpdateAddressMutation extends Mutation
 {
     use AuthorizedTrait;
-    
+
     protected $attributes = [
         'name' => 'updateAddressMutation',
         'description' => 'A mutation'
@@ -51,10 +52,6 @@ class UpdateAddressMutation extends Mutation
             'type' => [
                 'name' => 'type',
                 'type' => Type::nonNull(Type::string()),
-            ],
-            'customer_id' => [
-                'name' => 'customer_id',
-                'type' => Type::nonNull(Type::string())
             ],
             'first_name' => [
                 'name' => 'first_name',
@@ -101,6 +98,8 @@ class UpdateAddressMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $args['customer_id'] = Auth::guard('visitor_api')->user()->customer->id;
+
         $address = $this->addressRepository->find($args['id']);
         $address->update($args);
 
