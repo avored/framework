@@ -3,6 +3,8 @@
 use AvoRed\Framework\Graphql\Mutations\Customer\CreateSubscriberMutation;
 use AvoRed\Framework\Graphql\Queries\CartItems;
 use AvoRed\Framework\Graphql\Queries\CartItemsQuery;
+use AvoRed\Framework\Graphql\Queries\CountryOptionsQuery;
+use AvoRed\Framework\Graphql\Types\OptionType;
 use AvoRed\Framework\Graphql\Types\SubscriberType;
 
 return [
@@ -63,6 +65,7 @@ return [
                     'addressQuery' => \AvoRed\Framework\Graphql\Queries\AddressQuery::class,
                     'category' => \AvoRed\Framework\Graphql\Queries\CategoryQuery::class,
                     'cartItems' => CartItemsQuery::class,
+                    'countryOptions' => CountryOptionsQuery::class,
                     // customer order query api
                     'paymentQuery' => \AvoRed\Framework\Graphql\Queries\PaymentQuery::class,
                     'shippingQuery' => \AvoRed\Framework\Graphql\Queries\ShippingQuery::class,
@@ -107,6 +110,7 @@ return [
             'payment' => AvoRed\Framework\Graphql\Types\PaymentType::class,
             'shipping' => AvoRed\Framework\Graphql\Types\ShippingType::class,
             'subscriber' => SubscriberType::class,
+            'option' => OptionType::class,
         ],
     ],
 ];

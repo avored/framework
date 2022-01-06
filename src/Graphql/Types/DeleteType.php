@@ -18,7 +18,7 @@ class DeleteType extends GraphQLType
         'description' => 'A type'
     ];
 
-     /**
+    /**
      * Fields for Delete Type
      * @return array $fields
      */
