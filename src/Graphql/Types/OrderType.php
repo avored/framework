@@ -41,6 +41,10 @@ class OrderType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Order Status Id'
             ],
+            'order_status_name' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'Order Status Name'
+            ],
             'shipping_address_id' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Order Shipping Address Id'
@@ -100,5 +104,15 @@ class OrderType extends GraphQLType
     protected function resolveShippingAddressField(Order $order, $args)
     {
         return $order->shippingAddress;
+    }
+
+    /**
+     * @param \AvoRed\Framework\Database\Models\Order $order
+     * @param array $args
+     * @return string $taxAmount
+     */
+    protected function resolveOrderStatusNameField(Order $order, $args)
+    {
+        return $order->orderStatus->name;
     }
 }
