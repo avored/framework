@@ -64,6 +64,6 @@ class LatestProductQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        return $this->productRepository->all()->random(8);
+        return $this->productRepository->query()->orderBy('updated_at', 'desc')->get();
     }
 }
