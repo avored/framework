@@ -15,8 +15,7 @@ class CategoryQuery extends Query
 {
     use AuthorizedTrait;
 
-    protected
-     $attributes = [
+    protected $attributes = [
         'name' => 'category',
         'description' => 'A query'
     ];
