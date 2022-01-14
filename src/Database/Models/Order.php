@@ -65,7 +65,7 @@ class Order extends BaseModel
     }
 
     /**
-     * Order Billing Address.
+     * Order has many Order Products.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()
