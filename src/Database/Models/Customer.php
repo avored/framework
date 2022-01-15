@@ -43,7 +43,7 @@ class Customer extends BaseModel
      */
     public function sendPasswordResetNotification($token)
     {
-        // $this->notify(new CustomerResetPassword($token));
+         $this->notify(new CustomerResetPassword($token));
     }
 
     /**

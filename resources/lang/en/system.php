@@ -101,4 +101,6 @@ return [
     'subscriber' => 'Subscriber',
     'enabled' => 'Enabled',
     'disabled' => 'Disabled',
+    'customer_reset_password_link' => 'Customer Reset Password Link',
+    'success_sent_password_reset_email_message' => 'Successfully Password Reset Email has been sent to customer'
 ];

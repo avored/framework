@@ -6,7 +6,7 @@ use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 
-class DeleteType extends GraphQLType
+class NotificationType extends GraphQLType
 {
 
     /**

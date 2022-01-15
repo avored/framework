@@ -26,7 +26,7 @@ use AvoRed\Framework\Graphql\Types\AddressType;
 use AvoRed\Framework\Graphql\Types\CartProductType;
 use AvoRed\Framework\Graphql\Types\CategoryType;
 use AvoRed\Framework\Graphql\Types\CustomerType;
-use AvoRed\Framework\Graphql\Types\DeleteType;
+use AvoRed\Framework\Graphql\Types\NotificationType;
 use AvoRed\Framework\Graphql\Types\OptionType;
 use AvoRed\Framework\Graphql\Types\OrderType;
 use AvoRed\Framework\Graphql\Types\PaymentType;
@@ -34,6 +34,7 @@ use AvoRed\Framework\Graphql\Types\ProductType;
 use AvoRed\Framework\Graphql\Types\ShippingType;
 use AvoRed\Framework\Graphql\Types\SubscriberType;
 use AvoRed\Framework\Graphql\Types\TokenType;
+use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
 
 return [
 
@@ -70,12 +71,21 @@ return [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\Visitor::class,
             ],
+            'customer' => [
+                'driver' => 'eloquent',
+                'model' => AvoRed\Framework\Database\Models\Customer::class,
+            ],
         ],
 
         'passwords' => [
             'adminusers' => [
                 'provider' => 'admin-users',
                 'table' => 'admin_password_resets',
+                'expire' => 60,
+            ],
+            'customers' => [
+                'provider' => 'customer',
+                'table' => 'customer_password_resets',
                 'expire' => 60,
             ],
         ],
@@ -100,6 +110,7 @@ return [
                 'mutation' => [
                     'login' => LoginMutation::class,
                     'register' => RegisterMutation::class,
+                    'forgotPassword' => ForgotPasswordMutation::class,
                     'customerUpdate' => CustomerUpdateMutation::class,
                     'createAddress' => CreateAddressMutation::class,
                     'updateAddress' =>  UpdateAddressMutation::class,
@@ -121,7 +132,7 @@ return [
             'customer' => CustomerType::class,
             'order' => OrderType::class,
             'address' => AddressType::class,
-            'delete' => DeleteType::class,
+            'notification' => NotificationType::class,
             'cartProduct' => CartProductType::class,
             'payment' => PaymentType::class,
             'shipping' => ShippingType::class,

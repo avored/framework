@@ -39,7 +39,7 @@ class DeleteAddressMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('delete');
+        return GraphQL::type('notification');
     }
 
     public function args(): array
