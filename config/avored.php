@@ -35,6 +35,7 @@ use AvoRed\Framework\Graphql\Types\ShippingType;
 use AvoRed\Framework\Graphql\Types\SubscriberType;
 use AvoRed\Framework\Graphql\Types\TokenType;
 use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
+use AvoRed\Framework\Graphql\Mutations\Auth\ResetPasswordMutation;
 
 return [
 
@@ -111,6 +112,7 @@ return [
                     'login' => LoginMutation::class,
                     'register' => RegisterMutation::class,
                     'forgotPassword' => ForgotPasswordMutation::class,
+                    'resetPassword' => ResetPasswordMutation::class,
                     'customerUpdate' => CustomerUpdateMutation::class,
                     'createAddress' => CreateAddressMutation::class,
                     'updateAddress' =>  UpdateAddressMutation::class,
