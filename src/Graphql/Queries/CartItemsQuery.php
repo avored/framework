@@ -1,19 +1,19 @@
 <?php
 namespace AvoRed\Framework\Graphql\Queries;
 
+use AvoRed\Framework\Cart\Cart;
 use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
 class CartItemsQuery extends Query
 {
-    use AuthorizedTrait;
+    // use AuthorizedTrait;
 
     protected $attributes = [
         'name' => 'cartItems',
@@ -26,6 +26,23 @@ class CartItemsQuery extends Query
         return Type::listOf(GraphQL::type('cartProduct'));
     }
 
+
+
+    /**
+     * Passed arguments for this query
+     * @return array
+     */
+    public function args(): array
+    {
+        return [
+            'visitor_id' => [
+                'name' => 'visitor_id',
+                'type' => Type::nonNull(Type::string())
+            ],
+        ];
+    }
+
+
     /**
      * Resolve Query to get pass an information
      * @param mixed $root
@@ -37,7 +54,6 @@ class CartItemsQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        dd('fixed this one');
-        return $visitor->cartProducts;
+        return Cart::visitor($args['visitor_id'])->all();
     }
 }
