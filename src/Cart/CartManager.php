@@ -54,7 +54,7 @@ class CartManager
     public function destroy(string $slug)
     {
         $product = $this->getProductBySlug($slug);
-        $this->cartProductRepository->query()->where('product_id', $product->id)->delete();
+        $this->cartProductRepository->query()->where('product_id', $product->id)->where('visitor_id', $this->visitor())->delete();
     }
     /**
      * update Product from Cart By Given Slug.

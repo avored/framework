@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Graphql\Mutations\Cart;
 
 use AvoRed\Framework\Cart\Cart;
-use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -12,8 +11,6 @@ use Rebing\GraphQL\Support\Mutation;
 
 class DeleteCartMutation extends Mutation
 {
-    use AuthorizedTrait;
-
     protected $attributes = [
         'name' => 'DeleteCart',
         'description' => 'A mutation'
