@@ -3,14 +3,10 @@
 namespace AvoRed\Framework\Graphql\Mutations\Cart;
 
 use AvoRed\Framework\Cart\Cart;
-use AvoRed\Framework\Cart\CartManager;
-use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
-use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -34,15 +30,19 @@ class DeleteCartMutation extends Mutation
             'slug' => [
                 'name' => 'slug',
                 'type' => Type::nonNull(Type::string()),
+            ],
+            'visitor_id' => [
+                'name' => 'visitor_id',
+                'type' => Type::nonNull(Type::string()),
             ]
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        Cart::visitor($args['visitor_id']);
         Cart::destroy($args['slug']);
-        dd('fix this one');
 
-        return $visitor->cartProducts;
+        return Cart::all();
     }
 }
