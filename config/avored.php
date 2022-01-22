@@ -36,6 +36,7 @@ use AvoRed\Framework\Graphql\Types\SubscriberType;
 use AvoRed\Framework\Graphql\Types\TokenType;
 use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Auth\ResetPasswordMutation;
+use AvoRed\Framework\Graphql\Mutations\Cart\UpdateCartMutation;
 
 return [
 
@@ -115,6 +116,7 @@ return [
                     'deleteAddress' => DeleteAddressMutation::class,
                     'placeOrder' => PlaceOrderMutation::class,
                     'addToCart' => AddToCartMutation::class,
+                    'updateCart' => UpdateCartMutation::class,
                     'deleteCart' => DeleteCartMutation::class,
                     'CreateSubscriberMutation' => CreateSubscriberMutation::class,
                 ],

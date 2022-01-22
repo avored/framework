@@ -10,12 +10,12 @@ use Ramsey\Uuid\Uuid;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class AddToCartMutation extends Mutation
+class UpdateCartMutation extends Mutation
 {
     // use AuthorizedTrait;
 
     protected $attributes = [
-        'name' => 'addToCart',
+        'name' => 'updateCart',
         'description' => 'A mutation'
     ];
 
@@ -55,9 +55,8 @@ class AddToCartMutation extends Mutation
     {
         $qty = $args['qty'] ?? 1;
 
-        $visitor = $args['visitor_id'] ?? Uuid::uuid4()->__toString();
-        Cart::visitor($visitor);
-        Cart::add($args['slug'], $qty);
+        Cart::visitor($args['visitor_id']);
+        Cart::update($args['slug'], $qty);
 
         return Cart::all();
     }

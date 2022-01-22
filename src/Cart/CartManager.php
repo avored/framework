@@ -63,7 +63,12 @@ class CartManager
      */
     public function update(string $slug, $qty)
     {
+        /** @var Product $product  */
+        $product = $this->productRepository->findBySlug($slug);
+        $cartProduct = $this->getCartProduct($product->id);
 
+        $cartProduct->qty = $qty;
+        $cartProduct->save();
         return $this;
     }
     /**
