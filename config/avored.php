@@ -58,9 +58,9 @@ return [
                 'driver' => 'session',
                 'provider' => 'admin-users',
             ],
-            'visitor_api' => [
+            'customer' => [
                 'driver' => 'passport',
-                'provider' => 'visitors',
+                'provider' => 'customers',
             ],
         ],
         'providers' => [
@@ -68,11 +68,7 @@ return [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\AdminUser::class,
             ],
-            'visitors' => [
-                'driver' => 'eloquent',
-                'model' => AvoRed\Framework\Database\Models\Visitor::class,
-            ],
-            'customer' => [
+            'customers' => [
                 'driver' => 'eloquent',
                 'model' => AvoRed\Framework\Database\Models\Customer::class,
             ],
@@ -85,7 +81,7 @@ return [
                 'expire' => 60,
             ],
             'customers' => [
-                'provider' => 'customer',
+                'provider' => 'customers',
                 'table' => 'customer_password_resets',
                 'expire' => 60,
             ],

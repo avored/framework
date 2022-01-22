@@ -51,13 +51,10 @@ class CreateSubscriberMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        if (Auth::guard('visitor_api')->check()) {
-            $visitor = Auth::guard('visitor_api')->user();
-            $customerId = Arr::get($visitor, 'customer_id', null);
-            $args['customer_id'] = $customerId;
-        }
+
+        dd('fixed this one');
         $args['status'] = 'ENABLED';
-        
+
         return $this->subscriberRepository->create($args);
     }
 }

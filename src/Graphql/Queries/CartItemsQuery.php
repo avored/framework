@@ -37,8 +37,7 @@ class CartItemsQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        $visitor = Auth::guard('visitor_api')->user();
-
+        dd('fixed this one');
         return $visitor->cartProducts;
     }
 }

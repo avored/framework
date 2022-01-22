@@ -13,7 +13,7 @@ use Rebing\GraphQL\Support\Query;
 
 class CategoryQuery extends Query
 {
-    use AuthorizedTrait;
+    // use AuthorizedTrait;
 
     protected $attributes = [
         'name' => 'category',

@@ -64,7 +64,6 @@ class AllCategoryQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        // dd(auth()->guard('visitor_api')->check());
         return $this->categoryRepository->all();
     }
 }

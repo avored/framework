@@ -260,22 +260,12 @@ class AvoredFrameworkSchema extends Migration
             $table->foreign('product_id')->references('id')->on('products');
         });
 
-        Schema::create('visitors', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('customer_id')->nullable()->default(null);
-            $table->string('username')->uniqid();
-            $table->string('password');
-            $table->timestamps();
-            $table->foreign('customer_id')->references('id')->on('customers');
-        });
-
         Schema::create('cart_products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('visitor_id');
             $table->uuid('product_id');
             $table->decimal('qty', 10, 6)->nullable()->default(null);
             $table->timestamps();
-            $table->foreign('visitor_id')->references('id')->on('visitors');
             $table->foreign('product_id')->references('id')->on('products');
         });
 
@@ -313,7 +303,6 @@ class AvoredFrameworkSchema extends Migration
     public function down()
     {
         Schema::dropIfExists('subscribers');
-        Schema::dropIfExists('visitors');
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('documents');
         Schema::dropIfExists('order_products');

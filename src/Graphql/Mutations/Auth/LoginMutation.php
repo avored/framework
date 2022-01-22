@@ -3,11 +3,9 @@
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
-use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Passport\Client;
@@ -25,27 +23,19 @@ class LoginMutation extends Mutation
     ];
 
     /**
-     * Visitor Repository
-     * @var AvoRed\Framework\Database\Repository\VisitorRepository
-     */
-    protected $visitorRepository;
-
-    /**
      * Customer Repository
      * @var AvoRed\Framework\Database\Repository\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * All Visitor construct
-     * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
+     * All Customer construct
+     * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
      * @return void
      */
     public function __construct(
-        VisitorModelInterface $visitorRepository,
         CustomerModelInterface $customerRepository
     ) {
-        $this->visitorRepository = $visitorRepository;
         $this->customerRepository = $customerRepository;
     }
 

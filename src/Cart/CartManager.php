@@ -6,14 +6,13 @@ use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
 use Illuminate\Support\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
-use Illuminate\Support\Facades\Auth;
 use AvoRed\Framework\Database\Models\CartProduct;
 
 class CartManager
 {
     /**
-     * Visitor
-     * @var \AvoRed\Framework\Database\Model\Visitor
+     * Visitor token
+     * @var string $visitor
      */
     protected $visitor;
 
@@ -45,7 +44,6 @@ class CartManager
     {
         $this->productRepository = $productRepository;
         $this->cartProductRepository = $cartProductRepository;
-        $this->visitor = Auth::guard('visitor_api')->user();
     }
 
     /**
@@ -56,8 +54,6 @@ class CartManager
     public function destroy(string $slug)
     {
         $product = $this->getProductBySlug($slug);
-        $visitor = Auth::guard('visitor_api')->user();
-
         $this->cartProductRepository->query()->where('product_id', $product->id)->delete();
     }
     /**
@@ -88,12 +84,13 @@ class CartManager
             $cartProduct->save();
         } else {
             $data = [
-                'visitor_id' => $this->visitor->id,
+                'visitor_id' => $this->visitor,
                 'product_id' => $product->id,
                 'qty' => $qty
             ];
             $cartProduct = $this->cartProductRepository->create($data);
         }
+
         return $cartProduct;
     }
 
@@ -108,7 +105,11 @@ class CartManager
      */
     public function getCartProduct(string $productId): ?CartProduct
     {
-        return $this->visitor->cartProducts()->where('product_id', $productId)->first();
+        return $this->cartProductRepository
+            ->query()
+            ->where('visitor_id', $this->visitor())
+            ->where('product_id', $productId)
+            ->first();
     }
     /**
      * To check if the Product Existing in the Cart
@@ -142,9 +143,14 @@ class CartManager
      * Get the Session Key for the Session Manager.
      * @return string $sessionKey
      */
-    public function getSessionKey()
+    public function visitor($visitor = null)
     {
+        if ($visitor) {
+            $this->visitor = $visitor;
+            return $this;
+        }
 
+        return $this->visitor;
     }
 
 
@@ -164,7 +170,7 @@ class CartManager
      */
     public function all()
     {
-        return $this;
+        return $this->cartProductRepository->query()->where('visitor_id', $this->visitor())->get();
     }
 
     /**

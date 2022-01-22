@@ -98,8 +98,7 @@ class UpdateAddressMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $args['customer_id'] = Auth::guard('visitor_api')->user()->customer->id;
-
+        dd('fixed this one');
         $address = $this->addressRepository->find($args['id']);
         $address->update($args);
 

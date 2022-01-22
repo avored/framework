@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 trait AuthorizedTrait
 {
     /**
-     * To check if user has at least visitor api token or not?
+     * To check if user has at least customer api token or not?
      * @param [type] $root
      * @param array $args
      * @param [type] $ctx
@@ -19,6 +19,6 @@ trait AuthorizedTrait
      */
     public function authorize($root, array $args, $ctx, ?ResolveInfo $resolveInfo = null, ?Closure $getSelectFields = null): bool
     {
-        return Auth::guard('visitor_api')->check();
+        return Auth::guard('customer')->check();
     }
 }

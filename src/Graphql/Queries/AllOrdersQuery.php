@@ -66,7 +66,6 @@ class AllOrdersQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): LengthAwarePaginator
     {
-        $customer = Auth::guard('visitor_api')->user();
 
         return $this->orderRepository->findByCustomerId($customer->customer_id);
     }

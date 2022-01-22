@@ -28,25 +28,18 @@ class RegisterMutation extends Mutation
      * @var AvoRed\Framework\Database\Repository\CustomerRepository
      */
     protected $customerRepository;
-    /**
-     * Visitor Repository
-     * @var AvoRed\Framework\Database\Repository\VisitorRepository
-     */
-    protected $visitorRepository;
+
 
     /**
      * All Customer construct
      * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
-     * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
      * @return void
      */
     public function __construct(
-        CustomerModelInterface $customerRepository,
-        VisitorModelInterface $visitorRepository
+        CustomerModelInterface $customerRepository
     )
     {
         $this->customerRepository = $customerRepository;
-        $this->visitorRepository = $visitorRepository;
     }
 
     public function type(): Type

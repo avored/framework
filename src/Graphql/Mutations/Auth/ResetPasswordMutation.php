@@ -26,8 +26,8 @@ class ResetPasswordMutation extends Mutation
     protected $customerRepository;
 
     /**
-     * All Visitor construct
-     * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
+     * All Customer construct
+     * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
      * @return void
      */
     public function __construct(
@@ -71,7 +71,7 @@ class ResetPasswordMutation extends Mutation
             }
         );
 
-      
+
 
         if ($response === Password::PASSWORD_RESET) {
             return ['success' => true,

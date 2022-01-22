@@ -3,21 +3,13 @@
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
-use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Laravel\Passport\Client;
-use Laravel\Passport\Http\Controllers\AccessTokenController;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
-use Nyholm\Psr7\ServerRequest;
-use stdClass;
 
 class ForgotPasswordMutation extends Mutation
 {
@@ -33,8 +25,8 @@ class ForgotPasswordMutation extends Mutation
     protected $customerRepository;
 
     /**
-     * All Visitor construct
-     * @param \AvoRed\Framework\Database\Contracts\VisitorModelInterface $visitorRepository
+     * All Customer construct
+     * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
      * @return void
      */
     public function __construct(

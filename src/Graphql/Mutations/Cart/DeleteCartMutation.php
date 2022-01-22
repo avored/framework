@@ -41,7 +41,7 @@ class DeleteCartMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         Cart::destroy($args['slug']);
-        $visitor = Auth::guard('visitor_api')->user();
+        dd('fix this one');
 
         return $visitor->cartProducts;
     }

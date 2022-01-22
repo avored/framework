@@ -5,17 +5,18 @@ namespace AvoRed\Framework\Graphql\Mutations\Cart;
 use AvoRed\Framework\Cart\Cart;
 use AvoRed\Framework\Cart\CartManager;
 use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
-use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
 class AddToCartMutation extends Mutation
 {
-    use AuthorizedTrait;
+    // use AuthorizedTrait;
 
     protected $attributes = [
         'name' => 'addToCart',
@@ -39,6 +40,10 @@ class AddToCartMutation extends Mutation
     public function args(): array
     {
         return [
+            'visitor_id' => [
+                'name' => 'visitor_id',
+                'type' => Type::string(),
+            ],
             'slug' => [
                 'name' => 'slug',
                 'type' => Type::nonNull(Type::string()),
@@ -53,9 +58,11 @@ class AddToCartMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $qty = $args['qty'] ?? 1;
-        Cart::add($args['slug'], $qty);
-        $visitor = Auth::guard('visitor_api')->user();
 
-        return $visitor->cartProducts;
+        $visitor = $args['visitor_id'] ?? Uuid::uuid4()->__toString();
+        Cart::visitor($visitor);
+        Cart::add($args['slug'], $qty);
+
+        return Cart::all();
     }
 }
