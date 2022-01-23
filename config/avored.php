@@ -37,6 +37,7 @@ use AvoRed\Framework\Graphql\Types\TokenType;
 use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Auth\ResetPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Cart\UpdateCartMutation;
+use AvoRed\Framework\Graphql\Queries\ProductQuery;
 
 return [
 
@@ -96,6 +97,7 @@ return [
                     'latestProductQuery' => LatestProductQuery::class,
                     'allCategory' => AllCategoryQuery::class,
                     'category' => CategoryQuery::class,
+                    'product' => ProductQuery::class,
                     'shippingQuery' => ShippingQuery::class,
                     'paymentQuery' => PaymentQuery::class,
                     'countryOptions' => CountryOptionsQuery::class,
