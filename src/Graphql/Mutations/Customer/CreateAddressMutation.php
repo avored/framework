@@ -94,9 +94,7 @@ class CreateAddressMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-
-        dd('fixded this one');
-
+        $args ['customer_id'] = Auth::guard('customer')->user()->id;
         return $this->addressRepository->create($args);
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\CustomerResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\ClientRepository;
 use Laravel\Passport\HasApiTokens;
 
 class Customer extends BaseModel
@@ -74,6 +75,22 @@ class Customer extends BaseModel
     public function getImagePathNameAttribute()
     {
         return basename($this->image_path);
+    }
+
+        /**
+     * Get the Passport Client for User and If it doesnot exist then create a new one
+     * @return \Laravel\Passport\Client $client
+     */
+    public function getPassportClient()
+    {
+        $client = $this->clients()->first();
+        if (null === $client) {
+            $clientRepository = app(ClientRepository::class);
+            $redirectUri = asset('');
+            $client = $clientRepository->createPasswordGrantClient($this->id, $this->full_name, $redirectUri, 'customers');
+        }
+
+        return $client;
     }
 
     public function addresses()

@@ -98,7 +98,6 @@ class UpdateAddressMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        dd('fixed this one');
         $address = $this->addressRepository->find($args['id']);
         $address->update($args);
 

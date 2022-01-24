@@ -7,6 +7,7 @@ use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -64,6 +65,8 @@ class AllAddressQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        return $this->addressRepository->all();
+        $customer = Auth::guard('customer')->user();
+
+        return $customer->addresses;
     }
 }

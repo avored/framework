@@ -71,22 +71,14 @@ class RegisterMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $data = [];
-        $data = $this->createVisitorData();
-        $visitor = $this->visitorRepository->create($data);
-
-        $args['password'] = bcrypt($args['password']);
+        
         $customer = $this->customerRepository->create($args);
-        $visitor->customer_id = $customer->id;
-        $visitor->save();
+       
 
-        $data['email'] = $visitor->username;
-        $data['password'] = $visitor->password;
-
-        $client = $visitor->getPassportClient();
+        $client = $customer->getPassportClient();
 
         if (null !== $client && $client instanceof Client) {
-            $serverRequest = $this->createRequest($client, $visitor->id, $data, $scope = []);
+            $serverRequest = $this->createRequest($client, $customer->id, $args, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
             $data = json_decode($reponse->content(), true);
 
@@ -112,7 +104,6 @@ class RegisterMutation extends Mutation
      */
     protected function createRequest($client, $userId, $data, array $scopes)
     {
-        // dd($data);
         return (new ServerRequest('POST', 'not-important'))->withParsedBody([
             'grant_type' => 'password',
             'client_id' => $client->id,
@@ -122,14 +113,5 @@ class RegisterMutation extends Mutation
             'user_id' => $userId,
             'scope' => implode(' ', $scopes),
         ]);
-    }
-
-    public function createVisitorData()
-    {
-        $guestPrefix = config('avored.guest_prefix', 'Guest');
-        return [
-            'username' => $guestPrefix . Str::random(),
-            'password' => Str::random(32)
-        ];
     }
 }
