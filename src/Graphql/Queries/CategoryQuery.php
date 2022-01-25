@@ -56,6 +56,10 @@ class CategoryQuery extends Query
                 'name' => 'slug',
                 'type' => Type::nonNull(Type::string())
             ],
+            'page' => [
+                'name' => 'page',
+                'type' => Type::int()
+            ],
         ];
     }
 

@@ -12,7 +12,7 @@ class CategoryType extends GraphQLType
      * Per Page Item
      * @var int
      */
-    protected $perPage = 10;
+    protected $perPage = 1;
 
     /**
      * Attribute for Category Type
@@ -67,7 +67,7 @@ class CategoryType extends GraphQLType
             //     'description' => 'Category Filter'
             // ],
             'products' => [
-                'type' => Type::listOf(GraphQL::type('product')),
+                'type' => GraphQL::paginate('product'),
                 'description' => 'Category Product'
             ]
         ];
@@ -89,7 +89,7 @@ class CategoryType extends GraphQLType
      * @param array $args
      * @return \Illuminate\Support\Collection $categoryProducts
      */
-    protected function resolveProductField($category, $args)
+    protected function resolveProductsField($category, $args)
     {
         return $category->products()->paginate($this->getNoOfPaginateItem());
     }
