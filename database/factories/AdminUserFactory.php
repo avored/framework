@@ -30,8 +30,7 @@ class AdminUserFactory extends Factory
             'email' => $this->faker->email,
             'password' => Hash::make('secret'),
             'role_id' => $role->id,
-            'is_super_admin' => rand(0, 1),
-            'image_path' => null,
+            'is_super_admin' => rand(0, 1)
         ];
     }
 }
