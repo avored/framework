@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Graphql\Types;
 
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
+use GraphQL\Type\Definition\ResolveInfo;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
@@ -12,7 +13,7 @@ class CategoryType extends GraphQLType
      * Per Page Item
      * @var int
      */
-    protected $perPage = 1;
+    protected $perPage = 6;
 
     /**
      * Attribute for Category Type
@@ -87,11 +88,15 @@ class CategoryType extends GraphQLType
     /**
      * @param \AvoRed\Framework\Database\Models\Category $category
      * @param array $args
+     * @param mixed $content
+     * @param ResolveInfo $resolveInfo
      * @return \Illuminate\Support\Collection $categoryProducts
      */
-    protected function resolveProductsField($category, $args)
+    protected function resolveProductsField($category, $args, $context, ResolveInfo $resolveInfo)
     {
-        return $category->products()->paginate($this->getNoOfPaginateItem());
+        $args = $resolveInfo->variableValues;
+        $page = isset($args['page']) ? $args['page'] : 1;
+        return $category->products()->paginate($this->getNoOfPaginateItem(), ['*'], 'page', $page);
     }
 
     /**
