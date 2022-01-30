@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use AvoRed\Framework\AvoRedServiceProvider;
-use AvoRed\Framework\Breadcrumb\Breadcrumb;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
