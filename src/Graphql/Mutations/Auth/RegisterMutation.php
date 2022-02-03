@@ -3,12 +3,9 @@
 namespace AvoRed\Framework\Graphql\Mutations\Auth;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
-use AvoRed\Framework\Database\Contracts\VisitorModelInterface;
-use AvoRed\Framework\Database\Models\Customer;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Str;
 use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Rebing\GraphQL\Support\Facades\GraphQL;
@@ -47,6 +44,18 @@ class RegisterMutation extends Mutation
         return GraphQL::type('token');
     }
 
+    /**
+     * Setup the Validation rules for register mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'first_name' => ['required', 'min:64'],
+        ];
+    }
+
     public function args(): array
     {
         return [
@@ -71,9 +80,8 @@ class RegisterMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        
+
         $customer = $this->customerRepository->create($args);
-       
 
         $client = $customer->getPassportClient();
 
