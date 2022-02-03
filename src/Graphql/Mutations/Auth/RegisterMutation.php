@@ -52,7 +52,10 @@ class RegisterMutation extends Mutation
     protected function rules(array $rules = []): array
     {
         return [
-            'first_name' => ['required', 'min:64'],
+            'first_name' => ['required', 'max:255'],
+            'last_name' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required', 'confirmed', 'max:255'],
         ];
     }
 
@@ -75,12 +78,15 @@ class RegisterMutation extends Mutation
                 'name' => 'password',
                 'type' => Type::nonNull(Type::string())
             ],
+            'password_confirmation' => [
+                'name' => 'password_confirmation',
+                'type' => Type::nonNull(Type::string())
+            ],
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-
         $customer = $this->customerRepository->create($args);
 
         $client = $customer->getPassportClient();
