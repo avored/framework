@@ -1,5 +1,4 @@
 <?php
-
 namespace AvoRed\Framework\User\Controllers;
 
 use AvoRed\Framework\User\Requests\ResetAdminUserRequest;
@@ -8,9 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
-
 class ResetPasswordController extends Controller
 {
     /*
@@ -51,9 +48,9 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Laravel auth guard that is used to support the admin user
      *
-     * @return Illuminate\Support\Facades\Auth
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
      */
     protected function guard()
     {
@@ -110,14 +107,13 @@ class ResetPasswordController extends Controller
     /**
      * Reset the given user's password.
      *
-     * @param AdminUser $user
-     * @param  string  $password
+     * @param \AvoRed\Framework\Database\Models\AdminUser $user
+     * @param string $password
      * @return void
      */
     protected function resetPassword($user, $password)
     {
         $this->setUserPassword($user, $password);
-        // $user->setRememberToken(Str::random(60));
         $user->save();
         event(new PasswordReset($user));
 
@@ -127,7 +123,7 @@ class ResetPasswordController extends Controller
     /**
      * Set the user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param \AvoRed\Framework\Database\Models\AdminUser $user
      * @param  string  $password
      * @return void
      */

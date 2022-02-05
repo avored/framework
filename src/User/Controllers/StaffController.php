@@ -15,19 +15,19 @@ class StaffController extends Controller
 {
 
     /**
-     * @var AdminUserRepository $adminUserRepository
+     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
      */
     protected $adminUserRepository;
 
     /**
-     * @var RoleRepository $roleRepository
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
 
     /**
      *
-     * @param AdminUserRepositroy $repository
-     * @param RoleRepositroy $roleRepository
+     * @param \AvoRed\Framework\Database\Contracts\AdminUserModelInterface $repository
+     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $roleRepository
      */
     public function __construct(
         AdminUserModelInterface $repository,
@@ -40,7 +40,7 @@ class StaffController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
@@ -53,7 +53,7 @@ class StaffController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
@@ -69,7 +69,7 @@ class StaffController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AdminUserRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(AdminUserRequest $request)
     {
@@ -82,11 +82,10 @@ class StaffController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param AdminUser  $staff
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(AdminUser $staff)
     {
-        // dd($staff->image_path_url);
         $roles = $this->roleRepository->options();
         $tabs = Tab::get('user.staff');
 
@@ -101,7 +100,7 @@ class StaffController extends Controller
      *
      * @param AdminUserRequest  $request
      * @param AdminUser $staff
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(AdminUserRequest $request, AdminUser $staff)
     {
@@ -119,7 +118,7 @@ class StaffController extends Controller
      * Remove the specified resource from storage.
      *
      * @param AdminUser $staff
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(AdminUser $staff)
     {

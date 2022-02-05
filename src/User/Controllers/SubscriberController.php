@@ -13,14 +13,13 @@ class SubscriberController extends Controller
 {
 
     /**
-     * @var SubscriberRepository $subscriberRepository
+     * @var \AvoRed\Framework\Database\Repository\SubscriberRepository $subscriberRepository
      */
     protected $subscriberRepository;
 
     /**
      *
-     * @param SubscriberRepositroy $repository
-     * @param SubscriberRepositroy $repository
+     * @param \AvoRed\Framework\Database\Repository\SubscriberRepository $repository
      */
     public function __construct(
         SubscriberModelInterface $repository,
@@ -31,7 +30,7 @@ class SubscriberController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
@@ -44,7 +43,7 @@ class SubscriberController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
@@ -58,7 +57,7 @@ class SubscriberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param SubscriberRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(SubscriberRequest $request)
     {
@@ -71,7 +70,7 @@ class SubscriberController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Subscriber  $subscriber
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(Subscriber $subscriber)
     {
@@ -87,9 +86,9 @@ class SubscriberController extends Controller
      *
      * @param SubscriberRequest  $request
      * @param Subscriber $subscriber
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(SubscriberRequest $request, Subscriber $subscriber) : RedirectResponse
+    public function update(SubscriberRequest $request, Subscriber $subscriber)
     {
         $subscriber->update($request->all());
 

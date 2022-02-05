@@ -94,8 +94,8 @@ class ResetPasswordMutation extends Mutation
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
+     * @param \AvoRed\Framework\Database\Models\AdminUser  $user
+     * @param string $password
      * @return void
      */
     protected function resetPassword($user, $password)
@@ -108,8 +108,8 @@ class ResetPasswordMutation extends Mutation
     /**
      * Set the user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
+     * @param \AvoRed\Framework\Database\Models\AdminUser  $user
+     * @param string $password
      * @return void
      */
     protected function setUserPassword($user, $password)
