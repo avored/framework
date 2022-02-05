@@ -7,6 +7,7 @@
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/downloads" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/v/stable" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/license" alt="License"></a>
+    <a href="https://packagist.org/packages/avored/framework"><img src="https://raw.githubusercontent.com/avored/framework/develop/badge-coverage.svg" alt="Test Coverage"></a>
 </p>
 
 
