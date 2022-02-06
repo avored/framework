@@ -64,6 +64,6 @@ class AllCategoryQuery extends Query
      */
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Collection
     {
-        return $this->categoryRepository->all();
+        return $this->categoryRepository->query()->whereNull('parent_id')->get();
     }
 }

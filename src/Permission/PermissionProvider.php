@@ -675,7 +675,7 @@ class PermissionProvider extends ServiceProvider
             'hasPermission',
             function ($routeName) {
                 $condition = false;
-                /** @var AdminUser */
+                /** @var \AvoRed\Framework\Database\Models\AdminUser $user */
                 $user = Auth::guard('admin')->user();
                 if (! $user) {
                     $condition = $user->hasPermission($routeName) ?: false;

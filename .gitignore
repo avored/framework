@@ -1,6 +1,8 @@
 
 .DS_Store
-/build/
+/build/coverage
+/build/coverage.txt
+/build/report.junit.xml
 /vendor/
 /node_modules/
 .phpunit.result.cache

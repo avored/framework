@@ -70,7 +70,11 @@ class CategoryType extends GraphQLType
             'products' => [
                 'type' => GraphQL::paginate('product'),
                 'description' => 'Category Product'
-            ]
+            ],
+            'children' => [
+                'type' =>  Type::listOf(GraphQL::type('category')),
+                'description' => 'Child Category'
+            ],
         ];
     }
 
@@ -83,6 +87,16 @@ class CategoryType extends GraphQLType
     {
         $categoryFilterRepository = app(CategoryFilterModelInterface::class);
         return $categoryFilterRepository->findByCategoryId($category->id);
+    }
+
+    /**
+     * @param \AvoRed\Framework\Database\Models\Category $category
+     * @param array $args
+     * @return \Illuminate\Support\Collection $titleCollection
+     */
+    protected function resolveChildrenField($category, $args)
+    {
+        return $category->children;
     }
 
     /**

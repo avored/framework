@@ -7,6 +7,7 @@
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/downloads" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/v/stable" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/avored/framework"><img src="https://poser.pugx.org/avored/framework/license" alt="License"></a>
+    <a href="https://packagist.org/packages/avored/framework"><img src="https://raw.githubusercontent.com/avored/framework/develop/badge-coverage.svg" alt="Test Coverage"></a>
 </p>
 
 
@@ -26,7 +27,7 @@ Once this is finished, you will need to run a few commands to finish up and then
 ## Publish the files
 Publish the AvoRed E-commerce framework config file and assets (JS/CSS and images):
 
-    php artisan vendor:publish --provider="AvoRed\Framework\AvoRedProvider"
+    php artisan vendor:publish --provider="AvoRed\Framework\AvoRedServiceProvider"
 
 Once all the files are published, we can run the command to install the required database tables.
 

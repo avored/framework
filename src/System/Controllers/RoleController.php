@@ -14,12 +14,12 @@ class RoleController extends Controller
 {
 
     /**
-     * @var RoleRepository $roleRepository
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
      */
     protected $roleRepository;
     /**
      *
-     * @param RoleRepositroy $repository
+     * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $repository
      */
     public function __construct(
         RoleModelInterface $repository
@@ -30,20 +30,20 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
         $roles = $this->roleRepository->paginate();
 
         return view('avored::system.role.index')
-        ->with('roles', $roles);
+            ->with('roles', $roles);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
@@ -58,8 +58,8 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param RoleRequest $request
-     * @return \Illuminate\Http\Response
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(RoleRequest $request)
     {
@@ -72,8 +72,8 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Role  $role
-     * @return \Illuminate\Http\Response
+     * @param \AvoRed\Framework\Database\Models\Role $role
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(Role $role)
     {
@@ -89,9 +89,9 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param RoleRequest  $request
-     * @param Role $role
-     * @return \Illuminate\Http\Response
+     * @param \AvoRed\Framework\System\Requests\RoleRequest $request
+     * @param \AvoRed\Framework\Database\Models\Role $role
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(RoleRequest $request, Role $role)
     {
@@ -105,7 +105,7 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Role $role
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Role $role)
     {

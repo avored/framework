@@ -32,13 +32,18 @@ class ForgotPasswordController extends Controller
 
     /**
      * Show Password Reset Form.
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function linkRequestForm()
     {
         return view('avored::user.auth.reset');
     }
 
+    /**
+     * Set up the admin user guard
+     *
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard $guard
+     */
     protected function guard()
     {
         return Auth::guard('admin');
@@ -57,7 +62,7 @@ class ForgotPasswordController extends Controller
     /**
      * Send a reset link to the given user.
      *
-     * @param  AvoRed\Framework\User\Requests\ForgotPasswordRequest  $request
+     * @param \AvoRed\Framework\User\Requests\ForgotPasswordRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function sendResetLinkEmail(ForgotPasswordRequest $request)
@@ -76,8 +81,8 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a successful password reset link.
      *
-     * @param  AvoRed\Framework\User\Requests\ForgotPasswordRequest  $request
-     * @param  string  $response
+     * @param \AvoRed\Framework\User\Requests\ForgotPasswordRequest  $request
+     * @param string $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetLinkResponse(ForgotPasswordRequest $request, $response)
@@ -88,8 +93,8 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a failed password reset link.
      *
-     * @param  AvoRed\Framework\User\Requests\ForgotPasswordRequest  $request
-     * @param  string  $response
+     * @param \AvoRed\Framework\User\Requests\ForgotPasswordRequest  $request
+     * @param string $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetLinkFailedResponse(ForgotPasswordRequest $request, $response)

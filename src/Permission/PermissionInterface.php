@@ -23,5 +23,5 @@ interface PermissionInterface
      * @param  string $routes
      * @return $routes|self
      */
-    public function routes($icon = null);
+    public function routes($route = null);
 }
