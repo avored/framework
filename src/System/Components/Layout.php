@@ -2,11 +2,8 @@
 
 namespace AvoRed\Framework\System\Components;
 
-use AvoRed\Framework\Breadcrumb\Breadcrumb;
 use AvoRed\Framework\Menu\Menu;
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
-
 class Layout extends Component
 {
 
@@ -18,7 +15,7 @@ class Layout extends Component
 
     /**
      * The admin Menus.
-     * @var collection
+     * @var \Illuminate\Support\Collection
      */
     public $adminMenus;
 

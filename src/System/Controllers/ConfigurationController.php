@@ -9,16 +9,11 @@ use Illuminate\Routing\Controller;
 
 class ConfigurationController extends Controller
 {
-     /**
+    /**
      * Configuration Repository for the Install Command.
      * @var \AvoRed\Framework\Database\Repository\ConfigurationRepository
      */
     protected $configurationRepository;
-    /**
-     * Currency Repository for the Install Command.
-     * @var \AvoRed\Framework\Database\Repository\CurrencyRepository
-     */
-    protected $currencyRepository;
 
     /**
      * Construct for the AvoRed configuration controller.
@@ -26,32 +21,27 @@ class ConfigurationController extends Controller
      */
     public function __construct(
         ConfigurationModelInterface $configurationRepository
-        // CurrencyModelInterface $currencyRepository
     ) {
         $this->configurationRepository = $configurationRepository;
-        // $this->currencyRepository = $currencyRepository;
     }
 
     /**
      * Show Configuration  of an AvoRed Admin.
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
-        // $currencyOptions = $this->currencyRepository->all()->pluck('name', 'id');
-       
         $tabs = Tab::get('system.configuration');
 
         return view('avored::system.configuration.index')
             ->with('tabs', $tabs)
             ->with('repository', $this->configurationRepository)
-            // ->with('currencyOptions', $currencyOptions)
             ;
     }
 
     /**
      * Show Configuration  of an AvoRed Admin.
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {

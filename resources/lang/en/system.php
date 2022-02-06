@@ -14,6 +14,7 @@ return [
     */
 
     'login_to_avored_admin' => 'Login to avored admin',
+    'failed' => 'These credentials do not match our records.',
     'forgot_password' => 'Forgot your password?',
     'remember_me' => 'Remember me',
     'email_address' => 'Email Address',

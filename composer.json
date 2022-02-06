@@ -62,11 +62,15 @@
                 "AvoRed\\Framework\\AvoRedServiceProvider"
             ],
             "aliases": {
-                "Menu": "AvoRed\\Framework\\Menu\\Menu",
+                "Module": "AvoRed\\Framework\\Module\\Module",
+                "Cart": "AvoRed\\Framework\\Cart\\Cart",
                 "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb",
+                "Document": "AvoRed\\Framework\\Document\\Document",
+                "Menu": "AvoRed\\Framework\\Menu\\Menu",
                 "Payment": "AvoRed\\Framework\\Payment\\Payment",
                 "Permission": "AvoRed\\Framework\\Permission\\Permission",
-                "Shipping": "AvoRed\\Framework\\Shipping\\Shipping"
+                "Shipping": "AvoRed\\Framework\\Shipping\\Shipping",
+                "Tab": "AvoRed\\Framework\\Tab\\Tab"
             },
             "dont-discover": [
                 "rebing/graphql-laravel"
