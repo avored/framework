@@ -230,7 +230,7 @@ class AvoRedServiceProvider extends ServiceProvider
         ], 'avored-config');
 
         $this->publishes([
-            __DIR__ . '/../assets/avored-admin' => public_path('avored-admin'),
+            __DIR__ . '/../dist' => public_path(),
         ], 'avored-public');
     }
 
