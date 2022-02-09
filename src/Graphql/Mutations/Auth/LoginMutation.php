@@ -39,6 +39,19 @@ class LoginMutation extends Mutation
         $this->customerRepository = $customerRepository;
     }
 
+    /**
+     * Setup the Validation rules for register mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'email' => ['required', 'max:255'],
+            'password' => ['required', 'max:255']
+        ];
+    }
+
     public function type(): Type
     {
         return GraphQL::type('token');
@@ -61,25 +74,12 @@ class LoginMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $data = [];
-        $data = $this->createVisitorData();
-        $visitor = $this->visitorRepository->create($data);
 
-        if (!empty($args['email']) && !empty($args['password'])) {
-            $customer = $this->customerRepository->findByEmail($args['email']);
-
-            if (Hash::check($args['password'], $customer->password)) {
-                $visitor->customer_id = $customer->id;
-                $visitor->save();
-            }
-        }
-
-        $args['email'] = $visitor->username;
-        $args['password'] = $visitor->password;
-
-        $client = $visitor->getPassportClient();
+        $customer = $this->customerRepository->findByEmail($args['email']);
+        $client = $customer->getPassportClient();
 
         if (null !== $client && $client instanceof Client) {
-            $serverRequest = $this->createRequest($client, $visitor->id, $args, $scope = []);
+            $serverRequest = $this->createRequest($client, $customer->id, $args, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
             $data = json_decode($reponse->content(), true);
 
@@ -105,7 +105,6 @@ class LoginMutation extends Mutation
      */
     protected function createRequest($client, $userId, $data, array $scopes)
     {
-        // dd($data);
         return (new ServerRequest('POST', 'not-important'))->withParsedBody([
             'grant_type' => 'password',
             'client_id' => $client->id,
@@ -115,14 +114,5 @@ class LoginMutation extends Mutation
             'user_id' => $userId,
             'scope' => implode(' ', $scopes),
         ]);
-    }
-
-    public function createVisitorData()
-    {
-        $guestPrefix = config('avored.guest_prefix', 'Guest');
-        return [
-            'username' => $guestPrefix . Str::random(),
-            'password' => Str::random(32)
-        ];
     }
 }
