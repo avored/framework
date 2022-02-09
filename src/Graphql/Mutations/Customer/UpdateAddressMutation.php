@@ -8,7 +8,6 @@ use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -20,6 +19,29 @@ class UpdateAddressMutation extends Mutation
         'name' => 'updateAddressMutation',
         'description' => 'A mutation'
     ];
+
+    /**
+     * Setup the Validation rules for create address mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'id' => ['required', 'max:255'],
+            'type' => ['required', 'in:' . Address::BILLING . ',' . Address::SHIPPING],
+            'first_name' => ['required', 'max:255'],
+            'last_name' => ['required', 'max:255'],
+            'company_name' => ['max:255'],
+            'phone' => ['max:255'],
+            'address1' => ['required', 'max:255'],
+            'address2' => ['max:255'],
+            'postcode' => ['required', 'max:255'],
+            'city' => ['required', 'max:255'],
+            'state' => ['required', 'max:255'],
+            'country_id' => ['required', 'max:255'],
+        ];
+    }
 
     /**
      * Address Repository

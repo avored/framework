@@ -40,7 +40,7 @@ class LoginMutation extends Mutation
     }
 
     /**
-     * Setup the Validation rules for register mutation
+     * Setup the Validation rules for login mutation
      *
      * @return array $rules
      */
