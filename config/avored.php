@@ -33,7 +33,6 @@ use AvoRed\Framework\Graphql\Types\PaymentType;
 use AvoRed\Framework\Graphql\Types\ProductType;
 use AvoRed\Framework\Graphql\Types\ShippingType;
 use AvoRed\Framework\Graphql\Types\SubscriberType;
-use AvoRed\Framework\Graphql\Types\TokenType;
 use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Auth\ResetPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Cart\UpdateCartMutation;
@@ -130,7 +129,6 @@ return [
         'types' => [
             'category' => CategoryType::class,
             'product' => ProductType::class,
-            'token' => TokenType::class,
             'customer' => CustomerType::class,
             'order' => OrderType::class,
             'address' => AddressType::class,

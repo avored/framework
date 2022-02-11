@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Mutations;
 
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
+use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
@@ -32,6 +33,11 @@ class PlaceOrderMutation extends Mutation
      * @var AvoRed\Framework\Database\Repository\OrderProductRepository
      */
     protected $orderProductRepository;
+    /**
+     * OrderStatus Repository
+     * @var AvoRed\Framework\Database\Repository\OrderStatusRepository
+     */
+    protected $orderStatusRepository;
 
     /**
      * All Order construct
@@ -41,10 +47,12 @@ class PlaceOrderMutation extends Mutation
      */
     public function __construct(
         OrderModelInterface $orderRepository,
-        OrderProductModelInterface $orderProductRepository
+        OrderProductModelInterface $orderProductRepository,
+        OrderStatusModelInterface $orderStatusRepository
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderProductRepository = $orderProductRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
     }
 
     public function type(): Type
@@ -61,10 +69,6 @@ class PlaceOrderMutation extends Mutation
             ],
             'payment_option' => [
                 'name' => 'payment_option',
-                'type' => Type::nonNull(Type::string())
-            ],
-            'order_status_id' => [
-                'name' => 'order_status_id',
                 'type' => Type::nonNull(Type::string())
             ],
             'customer_id' => [
@@ -85,7 +89,8 @@ class PlaceOrderMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-
+        $orderStatus = $this->orderStatusRepository->findDefault();
+        $args['order_status_id'] = $orderStatus->id;
         $order = $this->orderRepository->create($args);
         // $this->syncProducts($order, $args);
 
@@ -101,7 +106,9 @@ class PlaceOrderMutation extends Mutation
      */
     private function syncProducts(Order $order, $args)
     {
-        foreach ($args['products'] as $product) {
+        //@todo add args to be with visitor id
+        $products = Cart::all();
+        foreach ($products as $product) {
             $orderProductData = [
                 'product_id' => $product['product_id'],
                 'order_id' => $order->id,

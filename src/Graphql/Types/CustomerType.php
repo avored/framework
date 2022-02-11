@@ -46,6 +46,22 @@ class CustomerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'Customer updated at'
             ],
+            'token_type' => [
+                'type' => Type::string(),
+                'description' => 'Customer updated at'
+            ],
+            'expires_in' => [
+                'type' => Type::int(),
+                'description' => 'Customer updated at'
+            ],
+            'access_token' => [
+                'type' => Type::string(),
+                'description' => 'Customer updated at'
+            ],
+            'refresh_token' => [
+                'type' => Type::string(),
+                'description' => 'Customer updated at'
+            ],
         ];
     }
 }
