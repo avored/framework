@@ -11,6 +11,7 @@ use Closure;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -71,11 +72,10 @@ class PlaceOrderMutation extends Mutation
                 'name' => 'payment_option',
                 'type' => Type::nonNull(Type::string())
             ],
-            'customer_id' => [
-                'name' => 'customer_id',
-                'type' => Type::nonNull(Type::string())
-            ],
-
+//            'customer_id' => [
+//                'name' => 'customer_id',
+//                'type' => Type::nonNull(Type::string())
+//            ],
             'shipping_address_id' => [
                 'name' => 'shipping_address_id',
                 'type' => Type::nonNull(Type::string())
@@ -89,8 +89,10 @@ class PlaceOrderMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $customer = Auth::guard('customer')->user();
         $orderStatus = $this->orderStatusRepository->findDefault();
         $args['order_status_id'] = $orderStatus->id;
+        $args['customer_id'] = $customer->id;
         $order = $this->orderRepository->create($args);
         // $this->syncProducts($order, $args);
 
