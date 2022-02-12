@@ -175,7 +175,11 @@ class CartManager
      */
     public function all()
     {
-        return $this->cartProductRepository->query()->where('visitor_id', $this->visitor())->get();
+        return $this->cartProductRepository
+            ->query()
+            ->where('visitor_id', $this->visitor())
+            ->where('status', CartProduct::WAITING_TO_BE_PLACED_ORDER)
+            ->get();
     }
 
     /**

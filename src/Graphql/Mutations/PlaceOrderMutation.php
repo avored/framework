@@ -2,6 +2,7 @@
 
 namespace AvoRed\Framework\Graphql\Mutations;
 
+use AvoRed\Framework\Database\Models\CartProduct;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
@@ -94,8 +95,8 @@ class PlaceOrderMutation extends Mutation
         $args['order_status_id'] = $orderStatus->id;
         $args['customer_id'] = $customer->id;
         $order = $this->orderRepository->create($args);
-         $this->syncProducts($order, $customer, $args);
-
+        $this->syncProducts($order, $customer, $args);
+//        dd($customer->cartProducts()->update(['status' => CartProduct::PLACED_ORDER]));
         return $order;
     }
 
@@ -109,15 +110,19 @@ class PlaceOrderMutation extends Mutation
      */
     private function syncProducts(Order $order, $customer, $args)
     {
-        $products = $customer->cartProducts;
+        $products = $customer->cartProducts()
+            ->where('status', CartProduct::WAITING_TO_BE_PLACED_ORDER)
+            ->get();
         foreach ($products as $cartProduct) {
             $product = $cartProduct->product;
+
+            $cartProduct->update(['status' => CartProduct::PLACED_ORDER]);
             $orderProductData = [
                 'product_id' => $product->id,
                 'order_id' => $order->id,
                 'qty' => $cartProduct->qty,
                 'price' => $product->price,
-                'tax_amount' => $product->tax_amount,
+                'tax_amount' => $product->tax_amount ?? 0,
             ];
             $this->orderProductRepository->create($orderProductData);
         }
