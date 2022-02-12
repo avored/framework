@@ -76,6 +76,10 @@ class AddressType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The country id of the address'
             ],
+            'country_name' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The country id of the address'
+            ],
             'phone' => [
                 'type' => Type::string(),
                 'description' => 'The phone of the address'
@@ -90,5 +94,15 @@ class AddressType extends GraphQLType
             ],
 
         ];
+    }
+
+    /**
+     * @param \AvoRed\Framework\Database\Models\Address  $address
+     * @param array $args
+     * @return string $taxAmount
+     */
+    protected function resolveCountryNameField($address, $args)
+    {
+        return $address->country->name;
     }
 }

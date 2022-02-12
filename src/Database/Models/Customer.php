@@ -4,7 +4,6 @@ namespace AvoRed\Framework\Database\Models;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\CustomerResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\ClientRepository;
 use Laravel\Passport\HasApiTokens;
 
@@ -44,7 +43,7 @@ class Customer extends BaseModel
      */
     public function sendPasswordResetNotification($token)
     {
-         $this->notify(new CustomerResetPassword($token));
+        $this->notify(new CustomerResetPassword($token));
     }
 
     /**

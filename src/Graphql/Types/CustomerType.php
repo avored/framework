@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Graphql\Types;
 
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
 
 class CustomerType extends GraphQLType
 {
@@ -62,6 +63,20 @@ class CustomerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'Customer updated at'
             ],
+            'addresses' => [
+                'type' => Type::listOf(GraphQL::type('address')),
+                'description' => 'Customer updated at'
+            ],
         ];
+    }
+
+    /**
+     * @param \AvoRed\Framework\Database\Models\Customer  $customer
+     * @param array $args
+     * @return string $taxAmount
+     */
+    protected function resolveAddressesField($customer, $args)
+    {
+        return $customer->addresses;
     }
 }
