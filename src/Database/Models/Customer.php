@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Passport\ClientRepository;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @property \Illuminate\Support\Collection $cartProducts
+ */
 class Customer extends BaseModel
 {
     use Notifiable, HasFactory, HasApiTokens;
@@ -133,6 +136,11 @@ class Customer extends BaseModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function cartProducts()
+    {
+        return $this->hasMany(CartProduct::class, 'visitor_id', 'id');
     }
 
     /**

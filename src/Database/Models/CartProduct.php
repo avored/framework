@@ -25,4 +25,13 @@ class CartProduct extends BaseModel
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * CartProduct Belongs to a  product.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'visitor_id');
+    }
 }

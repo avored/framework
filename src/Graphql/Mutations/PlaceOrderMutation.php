@@ -94,7 +94,7 @@ class PlaceOrderMutation extends Mutation
         $args['order_status_id'] = $orderStatus->id;
         $args['customer_id'] = $customer->id;
         $order = $this->orderRepository->create($args);
-        // $this->syncProducts($order, $args);
+         $this->syncProducts($order, $customer, $args);
 
         return $order;
     }
@@ -103,22 +103,23 @@ class PlaceOrderMutation extends Mutation
     /**
      * Sync Products and Attributes with Order Tables.
      * @param \AvoRed\Framework\Database\Models\Order $order
+     * @param \AvoRed\Framework\Database\Models\Customer $customer
      * @param array $args
      * @return void
      */
-    private function syncProducts(Order $order, $args)
+    private function syncProducts(Order $order, $customer, $args)
     {
-        //@todo add args to be with visitor id
-        $products = Cart::all();
-        foreach ($products as $product) {
+        $products = $customer->cartProducts;
+        foreach ($products as $cartProduct) {
+            $product = $cartProduct->product;
             $orderProductData = [
-                'product_id' => $product['product_id'],
+                'product_id' => $product->id,
                 'order_id' => $order->id,
-                'qty' => $product['qty'],
-                'price' => $product['price'],
-                'tax_amount' => $product['tax_amount'],
+                'qty' => $cartProduct->qty,
+                'price' => $product->price,
+                'tax_amount' => $product->tax_amount,
             ];
-            $orderProductModel = $this->orderProductRepository->create($orderProductData);
+            $this->orderProductRepository->create($orderProductData);
         }
     }
 }
