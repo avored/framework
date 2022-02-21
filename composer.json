@@ -32,7 +32,7 @@
         "brianium/paratest": "^6.0",
         "friendsofphp/php-cs-fixer": "^3.1",
         "nunomaduro/collision": "^5.3",
-        "orchestra/testbench": "^6.15",
+        "orchestra/testbench": "^6.15|^v7.0",
         "phpunit/phpunit": "^9.3",
         "vimeo/psalm": "^4.8"
     },
