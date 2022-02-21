@@ -14,19 +14,19 @@
         "role": "Developer"
     }],
     "require": {
-        "php": "^8.0",
-        "illuminate/auth": "^8.0",
-        "illuminate/contracts": "^8.0",
-        "illuminate/database": "^8.0",
-        "illuminate/routing": "^8.0",
-        "illuminate/http": "^8.0",
-        "illuminate/support": "^8.0",
-        "illuminate/view": "^8.0",
+        "php": "^8.0|^8.1",
+        "illuminate/auth": "^8.0|^9.0",
+        "illuminate/contracts": "^8.0|^9.0",
+        "illuminate/database": "^8.0|^9.0",
+        "illuminate/routing": "^8.0|^9.0",
+        "illuminate/http": "^8.0|^9.0",
+        "illuminate/support": "^8.0|^9.0",
+        "illuminate/view": "^8.0|^9.0",
         "ramsey/uuid": "^4.2",
-        "rebing/graphql-laravel": "^7.2",
+        "rebing/graphql-laravel": "^7.2|^8.2",
         "nyholm/psr7": "^1.4",
         "laravel/passport": "^10.1",
-        "symfony/yaml": "^5.3"
+        "symfony/yaml": "^5.3|^6.0"
     },
     "require-dev": {
         "brianium/paratest": "^6.0",
