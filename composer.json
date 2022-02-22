@@ -14,7 +14,7 @@
         "role": "Developer"
     }],
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^7.3|^7.4|^8.0|^8.1",
         "illuminate/auth": "^8.2|^9.0",
         "illuminate/contracts": "^8.2|^9.0",
         "illuminate/database": "^8.2|^9.0",
