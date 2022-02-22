@@ -15,7 +15,7 @@
     }],
     "require": {
         "php": "^8.0|^8.1",
-        "illuminate/auth": "8.*|9.*",
+        "illuminate/auth": "8.*|^8.2|9.*",
         "illuminate/contracts": "8.*|9.*",
         "illuminate/database": "8.*|9.*",
         "illuminate/routing": "8.*|9.*",
