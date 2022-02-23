@@ -54,7 +54,8 @@ jobs:
       - name: Install dependencies
         run: |
 
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "laravel/passport:${{ matrix.passport }}" "rebing/graphql-laravel:${{ matrix.graphql }}"  --dev  --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "laravel/passport:${{ matrix.passport }}" "rebing/graphql-laravel:${{ matrix.graphql }}"  --no-interaction --no-update
+          composer require-dev "orchestra/testbench:${{ matrix.testbench }}"
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
