@@ -15,7 +15,6 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0]
         laravel: [9.*]
-        stability: [prefer-stable]
         include:
           # - laravel: '^8.0'
           #   testbench: '^6.0'
@@ -25,7 +24,7 @@ jobs:
             passport: 10.*
             graphql: 8.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
     services:
       mysql:
