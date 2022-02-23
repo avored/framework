@@ -62,7 +62,6 @@ jobs:
           composer require "illuminate/view:${{ matrix.laravel }}" --no-interaction
           composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction
           composer require "laravel/passport:${{ matrix.passport }}" --no-interaction 
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
         env:
