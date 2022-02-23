@@ -53,7 +53,15 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Install dependencies
         run: |
-          composer require "illuminate/auth:${{ matrix.laravel }}" "illuminate/contracts:${{ matrix.laravel }}" "illuminate/database:${{ matrix.laravel }}" "illuminate/routing:${{ matrix.laravel }}" "illuminate/http:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}"  "illuminate/view:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "laravel/passport:${{ matrix.passport }}" --no-interaction --no-update
+          composer require "illuminate/auth:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/database:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/routing:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/http:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/support:${{ matrix.laravel }}" --no-interaction
+          composer require "illuminate/view:${{ matrix.laravel }}" --no-interaction
+          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction
+          composer require "laravel/passport:${{ matrix.passport }}" --no-interaction 
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
