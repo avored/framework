@@ -20,10 +20,10 @@ jobs:
           # - laravel: '^8.0'
           #   testbench: '^6.0'
           #   passport: '^10.1'
-          - laravel: 9.*
-            testbench: 7.*
+          - laravel: 9.1
+            testbench: 7.1
             passport: 10.3
-            graphql: 8.*
+            graphql: 8.2
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
