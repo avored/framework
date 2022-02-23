@@ -22,7 +22,7 @@ jobs:
           #   passport: '^10.1'
           - laravel: 9.*
             testbench: 7.*
-            passport: 10.*
+            passport: 10.3
             graphql: 8.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
