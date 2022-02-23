@@ -13,16 +13,14 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.0, 8.1]
-        laravel: ['8.0', '9.0']
+        php: [8.0]
+        laravel: [8.0, 9.0]
         stability: [prefer-stable]
         include:
-          - laravel: '^8.0'
+          - laravel: 8.0
             testbench: ^6.0
-            passport: ^10.1
-          - laravel: '^9.0'
+          - laravel: 9.0
             testbench: ^7.0
-            passport: ^10.3
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -53,15 +51,8 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Install dependencies
         run: |
-          composer require "illuminate/auth:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/database:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/routing:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/http:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/support:${{ matrix.laravel }}" --no-interaction
-          composer require "illuminate/view:${{ matrix.laravel }}" --no-interaction
-          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction
-          composer require "laravel/passport:${{ matrix.passport }}" --no-interaction 
+          composer require "illuminate/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
         env:
