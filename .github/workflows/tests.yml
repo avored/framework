@@ -22,7 +22,8 @@ jobs:
           #   passport: '^10.1'
           - laravel: 9.*
             testbench: 7.*
-            passport: 10.3
+            passport: 10.*
+            graphql: 8.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -53,7 +54,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "laravel/passport:${{ matrix.passport }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "laravel/passport:${{ matrix.passport }}" "rebing/graphql-laravel:${{ matrix.graphql }}"  --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
