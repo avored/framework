@@ -1,3 +1,5 @@
+## act -P ubuntu-latest=shivammathur/node:latest
+
 name: run-tests
 
 on:
@@ -14,15 +16,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [9.1]
+        laravel: ['8.*']
         include:
-          # - laravel: '^8.0'
-          #   testbench: '^6.0'
-          #   passport: '^10.1'
-          - laravel: '9.1'
-            testbench: 7.*
-            passport: 10.*
-            graphql: 8.*
+          - laravel: '8.*'
+            testbench: '6.*'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
@@ -53,9 +50,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Install dependencies
         run: |
-
-          composer require "laravel/framework:${{ matrix.laravel }}" "laravel/passport:${{ matrix.passport }}" "rebing/graphql-laravel:${{ matrix.graphql }}"  --no-interaction --no-update
-          composer require "orchestra/testbench:${{ matrix.testbench }}" --dev
+          composer require laravel/framework:${{ matrix.laravel }} orchestra/testbench:${{ matrix.testbench }} --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
