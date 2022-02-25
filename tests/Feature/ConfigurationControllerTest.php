@@ -6,7 +6,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class ConfigurationControllerTest extends TestCase
 {
-    public function testConfigurationIndexRouteTest()
+    /** @test */
+    public function test_configuration_index_route_test()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -15,7 +16,7 @@ class ConfigurationControllerTest extends TestCase
             ;
     }
 
-    public function testCategoryStoreRouteTest()
+    public function test_category_store_route_test()
     {
         $data = ['site_title' => 'test site title'];
         $this->createAdminUser()
