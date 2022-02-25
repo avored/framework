@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Tests\Integration;
+namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Tests\TestCase;

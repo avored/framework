@@ -7,7 +7,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class OrderStatusControllerTest extends TestCase
 {
-    public function testOrderStatusIndexRouteTest()
+    /** @test */
+    public function test_order_status_index_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -15,7 +16,8 @@ class OrderStatusControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testOrderStatusCreateRouteTest()
+    /** @test */
+    public function test_order_status_create_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -23,13 +25,13 @@ class OrderStatusControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testOrderStatusStoreRouteTest()
+    /** @test */
+    public function test_order_status_store_route()
     {
         $data = ['name' => 'test order-status name', 'is_default' => 1];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->post(route('admin.order-status.store', $data))
-            ->assertRedirect(route('admin.order-status.index'));
 
         $this->assertDatabaseHas('order_statuses', ['name' => 'test order-status name']);
     }
