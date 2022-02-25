@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 
 class PermissionTest extends TestCase
 {
-    public function testPermission()
+    public function test_permission()
     {
         $this->createAdminUser(['is_super_admin' => 0])
             ->actingAs($this->user, 'admin')
@@ -30,7 +30,7 @@ class PermissionTest extends TestCase
      *
      * @return void
      */
-    protected function createPermissionForUser(AdminUser $user, string $name)
+    protected function create_permission_for_user(AdminUser $user, string $name)
     {
         $permission = new Permission(['name' => $name]);
         $user->role->permissions()->save($permission);
