@@ -31,7 +31,7 @@ class OrderStatusControllerTest extends TestCase
         $data = ['name' => 'test order-status name', 'is_default' => 1];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
-            ->post(route('admin.order-status.store', $data))
+            ->post(route('admin.order-status.store', $data));
 
         $this->assertDatabaseHas('order_statuses', ['name' => 'test order-status name']);
     }
