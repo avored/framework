@@ -7,7 +7,7 @@ use AvoRed\Framework\Tests\TestCase;
 
 class ProductModelTest extends TestCase
 {
-    public function testProductFindBySlugMethod()
+    public function test_product_find_by_slug_method()
     {
         $slug = 'test-slug';
         $expectedProduct = Product::factory()->create(['slug' => $slug]);
@@ -18,7 +18,7 @@ class ProductModelTest extends TestCase
         $this->assertEquals($returnModel->toArray(), $expectedProduct->toArray());
     }
 
-    public function testProductFindByBarcodeMethod()
+    public function test_product_find_by_barcode_method()
     {
         $barcode = 123456789;
         $expectedProduct = Product::factory()->create(['barcode' => $barcode]);
