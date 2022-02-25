@@ -8,7 +8,8 @@ use AvoRed\Framework\Tests\TestCase;
 class ProductControllerTest extends TestCase
 {
 
-    public function testProductIndexRouteTest()
+    /** @test */
+    public function test_product_index_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -16,14 +17,17 @@ class ProductControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testProductCreateRouteTest()
+    /** @test */
+    public function test_product_createRoute()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
             ->get(route('admin.product.create'))
             ->assertStatus(200);
     }
-    public function testProductStoreRouteTest()
+
+    /** @test */
+    public function test_product_store_route()
     {
         $data = [
             'name' => 'test product',
@@ -34,9 +38,10 @@ class ProductControllerTest extends TestCase
             ->actingAs($this->user, 'admin')
             ->post(route('admin.product.store', $data))
             ->assertRedirect(route('admin.product.index'));
-            $this->assertDatabaseHas('products', ['name' => 'test product']);
+        $this->assertDatabaseHas('products', ['name' => 'test product']);
     }
-    public function testProductEditRouteTest()
+    /** @test */
+    public function test_product_edit_route()
     {
         $product = Product::factory()->create();
         $this->createAdminUser()
@@ -45,7 +50,9 @@ class ProductControllerTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('avored::catalog.product.edit');
     }
-    public function testProductUpdateRouteTest()
+
+    /** @test */
+    public function test_product_update_route()
     {
         $product = Product::factory()->create();
         $product->name = 'update product name';
@@ -56,7 +63,8 @@ class ProductControllerTest extends TestCase
             $this->assertDatabaseHas('products', ['name' => 'update product name']);
     }
 
-    public function testProductDestroyRouteTest()
+    /** @test */
+    public function test_product_destroy_route()
     {
         $product = Product::factory()->create();
 
