@@ -60,7 +60,7 @@ class ProductControllerTest extends TestCase
             ->actingAs($this->user, 'admin')
             ->put(route('admin.product.update', $product), $product->toArray())
             ->assertRedirect(route('admin.product.index'));
-            $this->assertDatabaseHas('products', ['name' => 'update product name']);
+        $this->assertDatabaseHas('products', ['name' => 'update product name']);
     }
 
     /** @test */

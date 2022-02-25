@@ -23,8 +23,7 @@ class PermissionTest extends TestCase
             ->assertStatus(Response::HTTP_OK);
     }
 
-    /** @test */
-    protected function create_permission_for_user(AdminUser $user, string $name)
+    protected function createPermissionForUser(AdminUser $user, string $name)
     {
         $permission = new Permission(['name' => $name]);
         $user->role->permissions()->save($permission);
