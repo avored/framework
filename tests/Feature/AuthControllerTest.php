@@ -6,7 +6,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    public function testAdminLoginRouteTest()
+    /** @test */
+    public function test_admin_login_route_test()
     {
         $this->get(route('admin.login'))
         ->assertStatus(200)

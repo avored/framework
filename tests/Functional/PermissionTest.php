@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 
 class PermissionTest extends TestCase
 {
+    /** @test */
     public function test_permission()
     {
         $this->createAdminUser(['is_super_admin' => 0])
@@ -22,14 +23,7 @@ class PermissionTest extends TestCase
             ->assertStatus(Response::HTTP_OK);
     }
 
-    /**
-     * Create and new permission for a given user.
-     *
-     * @param AvoRed\Framework\Database\Models\AdminUser $user
-     * @param string $name
-     *
-     * @return void
-     */
+    /** @test */
     protected function create_permission_for_user(AdminUser $user, string $name)
     {
         $permission = new Permission(['name' => $name]);

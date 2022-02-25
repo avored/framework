@@ -7,6 +7,7 @@ use AvoRed\Framework\Tests\TestCase;
 
 class ProductModelTest extends TestCase
 {
+    /** @test */
     public function test_product_find_by_slug_method()
     {
         $slug = 'test-slug';
@@ -18,6 +19,7 @@ class ProductModelTest extends TestCase
         $this->assertEquals($returnModel->toArray(), $expectedProduct->toArray());
     }
 
+    /** @test */
     public function test_product_find_by_barcode_method()
     {
         $barcode = 123456789;
