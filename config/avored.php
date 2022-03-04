@@ -14,6 +14,7 @@ use AvoRed\Framework\Graphql\Queries\AddressQuery;
 use AvoRed\Framework\Graphql\Queries\AllAddressQuery;
 use AvoRed\Framework\Graphql\Queries\AllCategoryQuery;
 use AvoRed\Framework\Graphql\Queries\AllOrdersQuery;
+use AvoRed\Framework\Graphql\Queries\OrderQuery;
 use AvoRed\Framework\Graphql\Queries\CartItems;
 use AvoRed\Framework\Graphql\Queries\CartItemsQuery;
 use AvoRed\Framework\Graphql\Queries\CategoryQuery;
@@ -105,6 +106,7 @@ return [
                     'addressQuery' => AddressQuery::class,
                     'customerQuery' => CustomerQuery::class,
                     'allOrders' => AllOrdersQuery::class,
+                    'order' => OrderQuery::class,
                 ],
                 'mutation' => [
                     'login' => LoginMutation::class,
