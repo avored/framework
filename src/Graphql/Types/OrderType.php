@@ -53,6 +53,10 @@ class OrderType extends GraphQLType
                 'type' => Type::nonNull(GraphQL::type('address')),
                 'description' => 'Order Shipping Address'
             ],
+            'customer' => [
+                'type' => Type::nonNull(GraphQL::type('customer')),
+                'description' => 'Order Customer'
+            ],
             'billing_address_id' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Order Billing Address Id'
