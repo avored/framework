@@ -7,7 +7,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class OrderControllerTest extends TestCase
 {
-    public function testOrderIndexRouteTest()
+    /** @test */
+    public function test_order_index_route_test()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -15,7 +16,9 @@ class OrderControllerTest extends TestCase
             ->assertStatus(200)
             ->assertSee(__('avored::system.order'));
     }
-    public function testOrderIndexRouteWithFactoryDataTest()
+
+    /** @test */
+    public function test_order_index_route_with_factory_data()
     {
         $order = Order::factory()->create();
         $this->createAdminUser()

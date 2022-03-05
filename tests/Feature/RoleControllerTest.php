@@ -8,7 +8,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class RoleControllerTest extends TestCase
 {
-    public function testRoleIndexRouteTest()
+    /** @test */
+    public function test_role_index_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -16,7 +17,8 @@ class RoleControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testRoleCreateRouteTest()
+    /** @test */
+    public function test_role_create_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -24,7 +26,8 @@ class RoleControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testRoleStoreRouteTest()
+    /** @test */
+    public function test_role_store_route()
     {
         $data = ['name' => 'test role name'];
         $this->createAdminUser()
@@ -35,7 +38,8 @@ class RoleControllerTest extends TestCase
         $this->assertDatabaseHas('roles', ['name' => 'test role name']);
     }
 
-    public function testRoleEditRouteTest()
+    /** @test */
+    public function test_role_edit_route()
     {
         $role = Role::factory()->create();
         $this->createAdminUser()
@@ -44,7 +48,8 @@ class RoleControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testRoleUpdateRouteTest()
+    /** @test */
+    public function test_role_update_route()
     {
         $role = Role::factory()->create();
         $role->name = 'updated role name';
@@ -58,7 +63,8 @@ class RoleControllerTest extends TestCase
         $this->assertDatabaseHas('roles', ['name' => 'updated role name']);
     }
 
-    public function testRoleDestroyRouteTest()
+    /** @test */
+    public function test_role_destroy_route()
     {
         $role = Role::factory()->create();
 

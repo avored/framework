@@ -26,7 +26,6 @@ class RegisterMutation extends Mutation
      */
     protected $customerRepository;
 
-
     /**
      * All Customer construct
      * @param \AvoRed\Framework\Database\Contracts\CustomerModelInterface $customerRepository
@@ -41,7 +40,7 @@ class RegisterMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('token');
+        return GraphQL::type('customer');
     }
 
     /**
@@ -96,13 +95,12 @@ class RegisterMutation extends Mutation
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
             $data = json_decode($reponse->content(), true);
 
-            $token = new stdClass;
-            $token->token_type = $data['token_type'];
-            $token->expires_in = $data['expires_in'];
-            $token->access_token = $data['access_token'];
-            $token->refresh_token = $data['refresh_token'];
+            $customer->token_type = $data['token_type'];
+            $customer->expires_in = $data['expires_in'];
+            $customer->access_token = $data['access_token'];
+            $customer->refresh_token = $data['refresh_token'];
 
-            return $token;
+            return $customer;
         }
 
         return null;

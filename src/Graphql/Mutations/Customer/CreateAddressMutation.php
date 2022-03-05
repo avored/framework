@@ -42,6 +42,28 @@ class CreateAddressMutation extends Mutation
         return GraphQL::type('address');
     }
 
+    /**
+     * Setup the Validation rules for create address mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'type' => ['required', 'in:' . Address::BILLING . ',' . Address::SHIPPING],
+            'first_name' => ['required', 'max:255'],
+            'last_name' => ['required', 'max:255'],
+            'company_name' => ['max:255'],
+            'phone' => ['max:255'],
+            'address1' => ['required', 'max:255'],
+            'address2' => ['max:255'],
+            'postcode' => ['required', 'max:255'],
+            'city' => ['required', 'max:255'],
+            'state' => ['required', 'max:255'],
+            'country_id' => ['required', 'max:255'],
+        ];
+    }
+
     public function args(): array
     {
         return [
@@ -59,6 +81,10 @@ class CreateAddressMutation extends Mutation
             ],
             'company_name' => [
                 'name' => 'company_name',
+                'type' => Type::string()
+            ],
+            'phone' => [
+                'name' => 'phone',
                 'type' => Type::string()
             ],
             'address1' => [
@@ -84,10 +110,6 @@ class CreateAddressMutation extends Mutation
             'country_id' => [
                 'name' => 'country_id',
                 'type' => Type::nonNull(Type::string())
-            ],
-            'phone' => [
-                'name' => 'phone',
-                'type' => Type::string()
             ],
         ];
     }

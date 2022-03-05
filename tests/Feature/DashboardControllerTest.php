@@ -5,10 +5,7 @@ namespace AvoRed\Framework\Tests\Feature;
 use AvoRed\Framework\Tests\TestCase;
 class DashboardControllerTest extends TestCase
 {
-    /**
-     * Test To check if login show form is working.
-     * @return void
-     */
+    /** @test */
     public function test_dashboard_route()
     {
         $response = $this->createAdminUser()

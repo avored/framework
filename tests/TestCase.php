@@ -2,14 +2,15 @@
 
 namespace AvoRed\Framework\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use AvoRed\Framework\AvoRedServiceProvider;
 use AvoRed\Framework\Database\Models\AdminUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use Faker\Generator as FakerGenerator;
-class TestCase extends Orchestra
+
+class TestCase extends OrchestraTestCase
 {
     /**
      * Admin User.
@@ -52,7 +53,7 @@ class TestCase extends Orchestra
      */
     protected function setUpDatabase(): void
     {
-        $this->loadLaravelMigrations();
+        // $this->loadLaravelMigrations();
         $this->resetDatabase();
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Tests\Integration;
+namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Tests\TestCase;
@@ -9,7 +9,8 @@ use Illuminate\Http\Response;
 
 class PermissionTest extends TestCase
 {
-    public function testPermission()
+    /** @test */
+    public function test_permission()
     {
         $this->createAdminUser(['is_super_admin' => 0])
             ->actingAs($this->user, 'admin')
@@ -22,14 +23,6 @@ class PermissionTest extends TestCase
             ->assertStatus(Response::HTTP_OK);
     }
 
-    /**
-     * Create and new permission for a given user.
-     *
-     * @param AvoRed\Framework\Database\Models\AdminUser $user
-     * @param string $name
-     *
-     * @return void
-     */
     protected function createPermissionForUser(AdminUser $user, string $name)
     {
         $permission = new Permission(['name' => $name]);

@@ -5,10 +5,7 @@ use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Tests\TestCase;
 class LoginControllerTest extends TestCase
 {
-    /**
-     * Test To check if login show form is working.
-     * @return void
-     */
+    /** @test */
     public function test_login_page_show_form()
     {
         $response = $this->get(route('admin.login'));
@@ -16,6 +13,7 @@ class LoginControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /** @test */
     public function test_find_admin_user_by_email()
     {
         $this->createAdminUser(['is_super_admin' => 1]);
@@ -26,10 +24,7 @@ class LoginControllerTest extends TestCase
         $this->assertEquals($this->user->email, $data->email);
     }
 
-    /**
-     * Test To check if login post form is working.
-     * @return void
-     */
+    /** @test */
     public function test_login_page_post_form()
     {
         $password = 'phpunittest';
@@ -40,7 +35,8 @@ class LoginControllerTest extends TestCase
 
     }
 
-    public function testAdminLogoutRouteTest()
+    /** @test */
+    public function test_admin_logout_route_test()
     {
         $this
             ->createAdminUser()
@@ -49,7 +45,8 @@ class LoginControllerTest extends TestCase
             ->assertRedirect(route('admin.login'));
     }
 
-    public function testAdminLoginRedirectGuestMiddleware()
+    /** @test */
+    public function test_admin_login_redirect_guest_middleware()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -57,7 +54,8 @@ class LoginControllerTest extends TestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    public function testAdminLoginPostRoute()
+    /** @test */
+    public function test_admin_login_post_route()
     {
         $password = 'phpunittest';
         $this->createAdminUser(['is_super_admin' => 1, 'password' => $password])
@@ -66,7 +64,8 @@ class LoginControllerTest extends TestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    public function testAdminLoginPostRouteFailed()
+    /** @test */
+    public function test_admin_login_post_route_failed()
     {
         $password = 'phpunittest';
         $this
@@ -75,7 +74,8 @@ class LoginControllerTest extends TestCase
             ->assertSessionHasErrors('email');
     }
 
-    public function testGuestUserIsRedirectedToLogin()
+    /** @test */
+    public function test_guest_user_is_redirected_to_login()
     {
         $this->get(route('admin.dashboard'))
         ->assertRedirect(route('admin.login'));

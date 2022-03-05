@@ -7,7 +7,9 @@ use AvoRed\Framework\Tests\TestCase;
 
 class PageControllerTest extends TestCase
 {
-    public function testPageIndexRouteTest()
+    
+    /** @test */
+    public function test_page_index_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -15,7 +17,8 @@ class PageControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testPageCreateRouteTest()
+    /** @test */
+    public function test_page_create_route()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -23,7 +26,8 @@ class PageControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testPageStoreRouteTest()
+    /** @test */
+    public function test_page_store_route()
     {
         $data = ['name' => 'test page name', 'slug' => 'test-page-name', 'content' => 'test content', ''];
         $this->createAdminUser()
@@ -34,7 +38,8 @@ class PageControllerTest extends TestCase
         $this->assertDatabaseHas('pages', ['name' => 'test page name']);
     }
 
-    public function testPageEditRouteTest()
+    /** @test */
+    public function test_pageedit_route_test()
     {
         $page = Page::factory()->create();
         $this->createAdminUser()
@@ -43,7 +48,8 @@ class PageControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testPageUpdateRouteTest()
+    /** @test */
+    public function test_pageupdate_route()
     {
         $page = Page::factory()->create();
         $page->name = 'updated page name';
@@ -57,7 +63,8 @@ class PageControllerTest extends TestCase
         $this->assertDatabaseHas('pages', ['name' => 'updated page name']);
     }
 
-    public function testPageDestroyRouteTest()
+    /** @test */
+    public function test_page_destroy_route()
     {
         $page = Page::factory()->create();
 

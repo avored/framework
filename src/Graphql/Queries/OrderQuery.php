@@ -2,6 +2,7 @@
 namespace AvoRed\Framework\Graphql\Queries;
 
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\Type;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class AllOrdersQuery extends Query
+class OrderQuery extends Query
 {
     use AuthorizedTrait;
 
@@ -43,7 +44,7 @@ class AllOrdersQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('order'));
+        return GraphQL::type('order');
     }
 
     /**
@@ -52,7 +53,12 @@ class AllOrdersQuery extends Query
      */
     public function args(): array
     {
-        return [];
+        return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::nonNull(Type::string())
+            ]
+        ];
     }
 
     /**
@@ -61,12 +67,11 @@ class AllOrdersQuery extends Query
      * @param array $args
      * @param mixed $context
      * @param \GraphQL\Type\Definition\ResolveInfo $resolveInfo
-     * @param midex $getSelectFields
-     * @return LengthAwarePaginator
+     * @param mixed $getSelectFields
+     * @return Orderr
      */
-    public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): LengthAwarePaginator
+    public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields): Order
     {
-        $customer = Auth::guard('customer')->user();
-        return $this->orderRepository->findByCustomerId($customer->id);
+        return $this->orderRepository->find($args['id']);
     }
 }

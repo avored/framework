@@ -39,9 +39,22 @@ class LoginMutation extends Mutation
         $this->customerRepository = $customerRepository;
     }
 
+    /**
+     * Setup the Validation rules for login mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'email' => ['required', 'max:255'],
+            'password' => ['required', 'max:255']
+        ];
+    }
+
     public function type(): Type
     {
-        return GraphQL::type('token');
+        return GraphQL::type('customer');
     }
 
     public function args(): array
@@ -61,35 +74,21 @@ class LoginMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $data = [];
-        $data = $this->createVisitorData();
-        $visitor = $this->visitorRepository->create($data);
 
-        if (!empty($args['email']) && !empty($args['password'])) {
-            $customer = $this->customerRepository->findByEmail($args['email']);
-
-            if (Hash::check($args['password'], $customer->password)) {
-                $visitor->customer_id = $customer->id;
-                $visitor->save();
-            }
-        }
-
-        $args['email'] = $visitor->username;
-        $args['password'] = $visitor->password;
-
-        $client = $visitor->getPassportClient();
+        $customer = $this->customerRepository->findByEmail($args['email']);
+        $client = $customer->getPassportClient();
 
         if (null !== $client && $client instanceof Client) {
-            $serverRequest = $this->createRequest($client, $visitor->id, $args, $scope = []);
+            $serverRequest = $this->createRequest($client, $customer->id, $args, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
             $data = json_decode($reponse->content(), true);
 
-            $token = new stdClass;
-            $token->token_type = $data['token_type'];
-            $token->expires_in = $data['expires_in'];
-            $token->access_token = $data['access_token'];
-            $token->refresh_token = $data['refresh_token'];
+            $customer->token_type = $data['token_type'];
+            $customer->expires_in = $data['expires_in'];
+            $customer->access_token = $data['access_token'];
+            $customer->refresh_token = $data['refresh_token'];
 
-            return $token;
+            return $customer;
         }
 
         return null;
@@ -105,7 +104,6 @@ class LoginMutation extends Mutation
      */
     protected function createRequest($client, $userId, $data, array $scopes)
     {
-        // dd($data);
         return (new ServerRequest('POST', 'not-important'))->withParsedBody([
             'grant_type' => 'password',
             'client_id' => $client->id,
@@ -115,14 +113,5 @@ class LoginMutation extends Mutation
             'user_id' => $userId,
             'scope' => implode(' ', $scopes),
         ]);
-    }
-
-    public function createVisitorData()
-    {
-        $guestPrefix = config('avored.guest_prefix', 'Guest');
-        return [
-            'username' => $guestPrefix . Str::random(),
-            'password' => Str::random(32)
-        ];
     }
 }

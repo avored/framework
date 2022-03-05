@@ -9,7 +9,8 @@ use AvoRed\Framework\Tests\TestCase;
 /** @runInSeparateProcess */
 class BreadcrumbTest extends TestCase
 {
-    public function testBreadcrumbBuilder()
+    /** @test */
+    public function test_breadcrumb_builder()
     {
         $builder = new Builder();
         $builder->make('test.route', function ($breadcrumb) {
@@ -19,7 +20,8 @@ class BreadcrumbTest extends TestCase
         $this->assertEquals($testRoute->route(), 'test.route');
     }
 
-    public function testBreadcrumbBuilderRender()
+    /** @test */
+    public function test_breadcrumb_builder_render()
     {
         $builder = new Builder();
         $builder->make('test.route', function ($breadcrumb) {
@@ -29,7 +31,8 @@ class BreadcrumbTest extends TestCase
         $this->assertInstanceOf(View::class, $builder->render('test.route'));
     }
 
-    public function testBreadcrumbLabel()
+    /** @test */
+    public function test_breadcrumb_label()
     {
         $builder = new Builder();
         $builder->make('test.route', function ($breadcrumb) {
@@ -39,7 +42,8 @@ class BreadcrumbTest extends TestCase
         $this->assertEquals($testRoute->label(), 'test label');
     }
 
-    public function testBreadcrumbParent()
+    /** @test */
+    public function test_breadcrumb_parent()
     {
         $builder = new Builder();
         $builder->make('test.route', function ($breadcrumb) {

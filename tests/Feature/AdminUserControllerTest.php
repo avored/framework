@@ -8,7 +8,8 @@ use AvoRed\Framework\Tests\TestCase;
 
 class AdminUserControllerTest extends TestCase
 {
-    public function testAdminUserIndexRouteTest()
+    /** @test */
+    public function test_admin_user_index_route_test()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -17,7 +18,8 @@ class AdminUserControllerTest extends TestCase
             ->assertSee(__('avored::system.staff'));
     }
 
-    public function testAdminUserCreateRouteTest()
+    /** @test */
+    public function test_admin_user_create_route_test()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -25,7 +27,8 @@ class AdminUserControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testAdminUserStoreRouteTest()
+    /** @test */
+    public function test_admin_user_store_route_test()
     {
         $role = Role::factory()->create();
         $data = [
@@ -46,7 +49,8 @@ class AdminUserControllerTest extends TestCase
         $this->assertDatabaseHas('admin_users', ['first_name' => 'test staff name']);
     }
 
-    public function testAdminUserEditRouteTest()
+    /** @test */
+    public function test_admin_user_edit_route_test()
     {
         $adminUser = AdminUser::factory()->create();
         $this->createAdminUser()
@@ -55,7 +59,8 @@ class AdminUserControllerTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testAdminUserUpdateRouteTest()
+    /** @test */
+    public function test_admin_user_update_route_test()
     {
         $adminUser = AdminUser::factory()->create();
         $adminUser->first_name = 'updated staff name';
@@ -70,7 +75,8 @@ class AdminUserControllerTest extends TestCase
         $this->assertDatabaseHas('admin_users', ['first_name' => 'updated staff name']);
     }
 
-    public function testAdminUserDestroyRouteTest()
+    /** @test */
+    public function test_admin_user_destroy_route_test()
     {
         $adminUser = AdminUser::factory()->create();
 

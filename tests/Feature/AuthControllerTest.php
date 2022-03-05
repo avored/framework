@@ -6,14 +6,16 @@ use AvoRed\Framework\Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    public function testAdminLoginRouteTest()
+    /** @test */
+    public function test_admin_login_route_test()
     {
         $this->get(route('admin.login'))
         ->assertStatus(200)
             ->assertViewIs('avored::user.auth.login-form');
     }
 
-    public function testAdminLogoutRouteTest()
+    /** @test */
+    public function test_admin_logout_route_test()
     {
         $this
             ->createAdminUser()
@@ -22,7 +24,8 @@ class AuthControllerTest extends TestCase
             ->assertRedirect(route('admin.login'));
     }
 
-    public function testAdminLoginRedirectGuestMiddleware()
+    /** @test */
+    public function test_admin_login_redirect_guest_middleware()
     {
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -30,7 +33,8 @@ class AuthControllerTest extends TestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    public function testAdminLoginPostRoute()
+    /** @test */
+    public function test_admin_login_post_route()
     {
         $password = 'phpunittest';
         $this->createAdminUser(['is_super_admin' => 1, 'password' => $password])
@@ -39,7 +43,8 @@ class AuthControllerTest extends TestCase
             ->assertRedirect(route('admin.dashboard'));
     }
 
-    public function testAdminLoginPostRouteFailed()
+    /** @test */
+    public function test_admin_login_post_route_failed()
     {
         $password = 'phpunittest';
         $this
@@ -48,7 +53,8 @@ class AuthControllerTest extends TestCase
             ->assertSessionHasErrors('email');
     }
 
-    public function testGuestUserIsRedirectedToLogin()
+    /** @test */
+    public function test_guest_user_is_redirected_to_login()
     {
         $this->get(route('admin.dashboard'))
         ->assertRedirect(route('admin.login'));

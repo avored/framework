@@ -4,10 +4,12 @@ namespace AvoRed\Framework\Database\Models;
 use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\CustomerResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\ClientRepository;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @property \Illuminate\Support\Collection $cartProducts
+ */
 class Customer extends BaseModel
 {
     use Notifiable, HasFactory, HasApiTokens;
@@ -44,7 +46,7 @@ class Customer extends BaseModel
      */
     public function sendPasswordResetNotification($token)
     {
-         $this->notify(new CustomerResetPassword($token));
+        $this->notify(new CustomerResetPassword($token));
     }
 
     /**
@@ -134,6 +136,11 @@ class Customer extends BaseModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function cartProducts()
+    {
+        return $this->hasMany(CartProduct::class, 'visitor_id', 'id');
     }
 
     /**
