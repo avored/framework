@@ -38,6 +38,7 @@ use AvoRed\Framework\Graphql\Mutations\Auth\ForgotPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Auth\ResetPasswordMutation;
 use AvoRed\Framework\Graphql\Mutations\Cart\UpdateCartMutation;
 use AvoRed\Framework\Graphql\Queries\ProductQuery;
+use AvoRed\Framework\System\Controllers\AvoRedGraphQLController;
 
 return [
 
@@ -52,7 +53,6 @@ return [
     |
     */
     'admin_url' => 'admin',
-    'guest_prefix' => 'AvoRed_Guest_',
 
     'auth' => [
         'guards' => [
@@ -90,7 +90,7 @@ return [
         ],
     ],
     'graphql' => [
-        'default_schema' => 'default',
+        'route' => [],
         'schemas' => [
             'default' => [
                 'query' => [

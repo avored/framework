@@ -171,11 +171,6 @@ class AvoRedServiceProvider extends ServiceProvider
         $avoredConfigData = include __DIR__ . '/../config/avored.php';
         $authConfig = $this->app['config']->get('auth', []);
 
-        // $this->app['config']->set(
-        //     'passport.client_uuids',
-        //     true
-        // );
-
         $this->app['config']->set(
             'auth.guards',
             array_merge($authConfig['guards'], $avoredConfigData['auth']['guards'])
@@ -205,18 +200,7 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     public function registerAssets()
     {
-        // Asset::registerJS(function (AssetItem $item) {
-        //     $item->key('avored.avored.js')
-        //     ->path(__DIR__ . '/../dist/js/avored.js');
-        // });
-        // Asset::registerJS(function (AssetItem $item) {
-        //     $item->key('avored.app.js')
-        //     ->path(__DIR__ . '/../dist/js/app.js');
-        // });
-        // Asset::registerCSS(function (AssetItem $item) {
-        //     $item->key('avored.app.css')
-        //     ->path(__DIR__ . '/../dist/css/app.css');
-        // });
+        //@todo implement
     }
 
     /**

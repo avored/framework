@@ -7,6 +7,7 @@ use AvoRed\Framework\Catalog\Controllers\PropertyController;
 use AvoRed\Framework\Cms\Controllers\PageController;
 use AvoRed\Framework\Order\Controllers\OrderController;
 use AvoRed\Framework\Order\Controllers\OrderStatusController;
+use AvoRed\Framework\System\Controllers\AvoRedGraphQLController;
 use AvoRed\Framework\System\Controllers\DashboardController;
 use AvoRed\Framework\System\Controllers\RoleController;
 use AvoRed\Framework\User\Controllers\LoginController;
@@ -27,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 
 
 $baseAdminUrl = config('avored.admin_url');
+
+Route::post('graphql', [AvoRedGraphQLController::class, 'query'])
+    ->name('avored.graphql');
+
 
 Route::middleware(['web'])
     ->prefix($baseAdminUrl)
