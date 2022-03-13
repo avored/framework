@@ -1,25 +1,12 @@
+
 <x-avored::table>
     <x-slot name="header">
         <x-avored::table.row class="bg-gray-300">
-            <x-avored::table.header class="rounded-tl">
-                {{ __('avored::system.parent') }}
-            </x-avored::table.header>
-
-            <x-avored::table.header>
-                {{ __('avored::system.name') }}
-            </x-avored::table.header>
-            <x-avored::table.header>
-                {{ __('avored::system.slug') }}
-            </x-avored::table.header>
-            <x-avored::table.header>
-                {{ __('avored::system.meta_title') }}
-            </x-avored::table.header>
-            <x-avored::table.header>
-                {{ __('avored::system.meta_description') }}
-            </x-avored::table.header>
-            <x-avored::table.header class="rounded-tr">
-                {{ __('avored::system.actions') }}
-            </x-avored::table.header>
+            @foreach ($columns as $column)
+                <x-avored::table.header class="rounded-tl">
+                    {{ __('avored::system.' . $column['identifier']) }}
+                </x-avored::table.header>
+            @endforeach
         </x-avored::table.row>
     </x-slot>
     <x-slot name="body">
