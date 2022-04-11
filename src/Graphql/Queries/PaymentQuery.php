@@ -43,7 +43,7 @@ class PaymentQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('payment'));
+        return Type::listOf(GraphQL::type('Payment'));
     }
 
     /**

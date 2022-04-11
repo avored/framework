@@ -34,7 +34,7 @@ class CountryOptionsQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('option'));
+        return Type::listOf(GraphQL::type('Option'));
     }
 
     /**

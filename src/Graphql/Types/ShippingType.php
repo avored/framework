@@ -11,7 +11,7 @@ class ShippingType extends GraphQLType
      * @var array
      */
     protected $attributes = [
-        'name' => 'Shipping Type',
+        'name' => 'Shipping',
         'description' => 'A type'
     ];
 

@@ -38,7 +38,7 @@ class ProductQuery extends Query
      */
     public function type(): Type
     {
-        return GraphQL::type('product');
+        return GraphQL::type('Product');
     }
 
     /**

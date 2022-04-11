@@ -41,7 +41,7 @@ class AllCategoryQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('category'));
+        return Type::listOf(GraphQL::type('Category'));
     }
 
     /**

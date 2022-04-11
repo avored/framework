@@ -43,7 +43,7 @@ class ShippingQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('shipping'));
+        return Type::listOf(GraphQL::type('Shipping'));
     }
 
     /**
