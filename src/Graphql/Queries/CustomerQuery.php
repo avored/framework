@@ -42,7 +42,7 @@ class CustomerQuery extends Query
      */
     public function type(): Type
     {
-        return GraphQL::type('customer');
+        return GraphQL::type('Customer');
     }
 
     /**

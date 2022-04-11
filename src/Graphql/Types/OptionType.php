@@ -11,7 +11,7 @@ class OptionType extends GraphQLType
      * @var array
      */
     protected $attributes = [
-        'name' => 'option',
+        'name' => 'Option',
         'description' => 'A type'
     ];
 

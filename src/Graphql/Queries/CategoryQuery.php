@@ -42,7 +42,7 @@ class CategoryQuery extends Query
      */
     public function type(): Type
     {
-        return GraphQL::type('category');
+        return GraphQL::type('Category');
     }
 
     /**
