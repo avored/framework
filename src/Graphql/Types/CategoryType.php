@@ -68,11 +68,11 @@ class CategoryType extends GraphQLType
             //     'description' => 'Category Filter'
             // ],
             'products' => [
-                'type' => GraphQL::paginate('product'),
+                'type' => GraphQL::paginate('Product'),
                 'description' => 'Category Product'
             ],
             'children' => [
-                'type' =>  Type::listOf(GraphQL::type('category')),
+                'type' =>  Type::listOf(GraphQL::type('Category')),
                 'description' => 'Child Category'
             ],
         ];

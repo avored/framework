@@ -40,7 +40,7 @@ class RegisterMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('customer');
+        return GraphQL::type('Customer');
     }
 
     /**
