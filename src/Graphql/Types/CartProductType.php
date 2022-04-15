@@ -36,7 +36,7 @@ class CartProductType extends GraphQLType
                 'description' => 'CartProduct product id'
             ],
             'product' => [
-                'type' => Type::nonNull(GraphQL::type('product')),
+                'type' => Type::nonNull(GraphQL::type('Product')),
                 'description' => 'CartProduct product model'
             ],
             'qty' => [

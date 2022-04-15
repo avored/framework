@@ -54,7 +54,7 @@ class LoginMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('customer');
+        return GraphQL::type('Customer');
     }
 
     public function args(): array
