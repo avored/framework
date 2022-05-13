@@ -4,7 +4,7 @@ name: run-tests
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, fresh]
   pull_request:
     branches: [main, develop]
 
