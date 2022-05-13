@@ -1,10 +1,10 @@
 <?php
 namespace AvoRed\Framework\Tests;
 
-use Orchestra\Testbench\TestCase;
 use AvoRed\Framework\AvoRedServiceProvider;
-use Illuminate\Support\Facades\Notification;
 use Faker\Generator as FakerGenerator;
+use Illuminate\Support\Facades\Notification;
+use Orchestra\Testbench\TestCase;
 
 class AvoRedBaseTestCase extends TestCase
 {
