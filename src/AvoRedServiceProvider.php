@@ -1,4 +1,5 @@
 <?php
+
 namespace AvoRed\Framework;
 
 use AvoRed\Framework\System\Console\InstallCommand;
