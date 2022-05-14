@@ -21,10 +21,12 @@ class AvoRedServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
+
     public function registerConfig()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/avored.php', 'avored');
     }
+
     public function registerConsoleCommands()
     {
         $this->commands([InstallCommand::class]);
