@@ -7,3 +7,4 @@
 /node_modules/
 .phpunit.result.cache
 .phpunit.result.cache
+phpunit.xml

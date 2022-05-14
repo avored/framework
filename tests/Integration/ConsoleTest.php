@@ -1,14 +1,11 @@
 <?php
 
-namespace AvoRed\Framework\Tests;
+namespace AvoRed\Framework\Tests\Integration;
 
-class ExampleTest extends AvoRedBaseTestCase
+use AvoRed\Framework\Tests\AvoRedBaseTestCase;
+
+class ConsoleTest extends AvoRedBaseTestCase
 {
-    public function test_the_application_returns_a_successful_response()
-    {
-        $this->assertTrue(true);
-    }
-
     public function test_console_command()
     {
         $this->artisan('avored:install')
