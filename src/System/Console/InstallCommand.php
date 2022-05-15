@@ -2,51 +2,38 @@
 
 namespace AvoRed\Framework\System\Console;
 
+use AvoRed\Framework\Database\Models\Role;
+use AvoRed\Framework\User\Actions\CreateRoleAction;
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
     /** @var \AvoRed\Framework\User\Actions\CreateRoleAction */
-    // private $createRoleAction;
+    private $createRoleAction;
 
     public function __construct(
-        // CreateRoleAction $action
+        CreateRoleAction $action
     ) {
-        // $this->createRoleAction = $action;
+        $this->createRoleAction = $action;
         parent::__construct();
     }
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'avored:install';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Install AvoRed e commerce an Laravel Shopping Cart';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
     public function handle()
     {
         $this->call('migrate:fresh');
         $this->executePassportInstallCommand();
         $this->call('storage:link');
-        // $this->createRoleAction->handle(['name' => Role::ADMIN]);
+        $this->createRoleAction->handle(['name' => Role::ADMIN]);
 
         if ($this->confirm('Would you like to install Dummy Data?')) {
             // $this->call('avored:module:install', ['identifier' => 'avored-dummy-data']);
         }
 
-        // $this->call('avored:admin:make');
+        $this->call('avored:admin:make');
 
         $this->info('AvoRed Install Successfully!');
     }

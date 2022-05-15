@@ -1,39 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652499444">
-  <project timestamp="1652499444">
+<coverage generated="1652583899">
+  <project timestamp="1652583899">
     <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/AvoRedServiceProvider.php">
       <class name="AvoRed\Framework\AvoRedServiceProvider" namespace="global">
-        <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
+        <metrics complexity="8" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="19" coveredelements="19"/>
       </class>
-      <line num="9" type="method" name="register" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="11" type="stmt" count="3"/>
-      <line num="12" type="stmt" count="3"/>
-      <line num="15" type="method" name="boot" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="17" type="stmt" count="3"/>
-      <line num="20" type="method" name="registerRoutes" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="22" type="stmt" count="3"/>
-      <line num="24" type="method" name="registerConfig" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="26" type="stmt" count="3"/>
-      <line num="28" type="method" name="registerConsoleCommands" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="30" type="stmt" count="3"/>
-      <metrics loc="34" ncloc="33" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
+      <line num="17" type="method" name="register" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="19" type="stmt" count="12"/>
+      <line num="20" type="stmt" count="12"/>
+      <line num="21" type="stmt" count="12"/>
+      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="26" type="stmt" count="12"/>
+      <line num="27" type="stmt" count="12"/>
+      <line num="30" type="method" name="registerProviders" visibility="public" complexity="2" crap="2" count="12"/>
+      <line num="32" type="stmt" count="12"/>
+      <line num="33" type="stmt" count="12"/>
+      <line num="37" type="method" name="registerRoutes" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="39" type="stmt" count="12"/>
+      <line num="42" type="method" name="registerConfig" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="44" type="stmt" count="12"/>
+      <line num="47" type="method" name="registerConsoleCommands" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="49" type="stmt" count="12"/>
+      <line num="50" type="stmt" count="12"/>
+      <line num="53" type="method" name="registerMigrationPath" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="55" type="stmt" count="12"/>
+      <metrics loc="58" ncloc="58" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="19" coveredelements="19"/>
     </file>
-    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/System/Console/InstallCommand.php">
-      <class name="AvoRed\Framework\System\Console\InstallCommand" namespace="global">
-        <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Contracts/AdminUserModelInterface.php">
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Contracts/BaseInterface.php">
+      <metrics loc="24" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Contracts/RoleModelInterface.php">
+      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Models/AdminUser.php">
+      <class name="AvoRed\Framework\Database\Models\AdminUser" namespace="global">
+        <metrics complexity="6" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="3" elements="12" coveredelements="4"/>
       </class>
-      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="16" type="stmt" count="3"/>
-      <line num="38" type="method" name="handle" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="37" type="method" name="getFullNameAttribute" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="42" type="method" name="getImagePathUrlAttribute" visibility="public" complexity="2" crap="2.15" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="50" type="method" name="getImagePathNameAttribute" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="55" type="method" name="setPasrdAttribute" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="57" type="stmt" count="0"/>
+      <line num="65" type="method" name="role" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="67" type="stmt" count="0"/>
+      <metrics loc="88" ncloc="65" classes="1" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="3" elements="12" coveredelements="4"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Models/BaseModel.php">
+      <class name="AvoRed\Framework\Database\Models\BaseModel" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="26" ncloc="26" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Models/Role.php">
+      <class name="AvoRed\Framework\Database\Models\Role" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="47" ncloc="20" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Repository/AdminUserRepository.php">
+      <class name="AvoRed\Framework\Database\Repository\AdminUserRepository" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+      </class>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="20" type="stmt" count="12"/>
+      <line num="23" type="method" name="model" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="25" type="stmt" count="8"/>
+      <line num="28" type="method" name="findByEmail" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="30" type="stmt" count="1"/>
+      <metrics loc="33" ncloc="33" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Repository/BaseRepository.php">
+      <class name="AvoRed\Framework\Database\Repository\BaseRepository" namespace="global">
+        <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="12" coveredelements="12"/>
+      </class>
+      <line num="14" type="method" name="query" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="19" type="method" name="create" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="21" type="stmt" count="3"/>
+      <line num="24" type="method" name="find" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <line num="29" type="method" name="delete" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="34" type="method" name="all" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="39" type="method" name="paginate" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <metrics loc="44" ncloc="44" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Repository/RoleRepository.php">
+      <class name="AvoRed\Framework\Database\Repository\RoleRepository" namespace="global">
+        <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+      </class>
+      <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="24" type="stmt" count="12"/>
+      <line num="27" type="method" name="model" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="29" type="stmt" count="1"/>
+      <line num="32" type="method" name="findAdminRole" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="37" type="method" name="options" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <metrics loc="66" ncloc="40" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Database/Traits/UuidTrait.php">
+      <class name="AvoRed\Framework\Database\Traits\UuidTrait" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </class>
+      <line num="10" type="method" name="initializeUuidTrait" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="12" type="stmt" count="12"/>
+      <line num="13" type="stmt" count="12"/>
+      <line num="21" type="method" name="bootUuidTrait" visibility="protected" complexity="1" crap="1" count="12"/>
+      <line num="23" type="stmt" count="12"/>
+      <line num="24" type="stmt" count="11"/>
+      <metrics loc="28" ncloc="23" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/Support/Providers/ModelsProvider.php">
+      <class name="AvoRed\Framework\Support\Providers\ModelsProvider" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+      </class>
+      <line num="28" type="method" name="register" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="30" type="stmt" count="12"/>
+      <line num="33" type="method" name="registerModelContracts" visibility="protected" complexity="2" crap="2" count="12"/>
+      <line num="35" type="stmt" count="12"/>
+      <line num="36" type="stmt" count="12"/>
+      <metrics loc="40" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/System/Console/AdminMakeCommand.php">
+      <class name="AvoRed\Framework\System\Console\AdminMakeCommand" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
+      </class>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="22" type="stmt" count="12"/>
+      <line num="23" type="stmt" count="12"/>
+      <line num="24" type="stmt" count="12"/>
+      <line num="31" type="method" name="handle" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
       <line num="40" type="stmt" count="2"/>
       <line num="41" type="stmt" count="2"/>
       <line num="42" type="stmt" count="2"/>
-      <line num="45" type="stmt" count="2"/>
-      <line num="51" type="stmt" count="2"/>
-      <line num="54" type="method" name="executePassportInstallCommand" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="56" type="stmt" count="2"/>
-      <metrics loc="65" ncloc="40" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+      <line num="44" type="stmt" count="2"/>
+      <line num="46" type="stmt" count="2"/>
+      <metrics loc="49" ncloc="47" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
     </file>
-    <metrics files="2" loc="99" ncloc="73" classes="2" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="21" coveredelements="21"/>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/System/Console/InstallCommand.php">
+      <class name="AvoRed\Framework\System\Console\InstallCommand" namespace="global">
+        <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+      </class>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="17" type="stmt" count="12"/>
+      <line num="18" type="stmt" count="12"/>
+      <line num="25" type="method" name="handle" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="28" type="stmt" count="1"/>
+      <line num="29" type="stmt" count="1"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="41" type="method" name="executePassportInstallCommand" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <metrics loc="52" ncloc="46" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/User/Actions/AuthAdminUserAction.php">
+      <class name="AvoRed\Framework\User\Actions\AuthAdminUserAction" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      </class>
+      <line num="13" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="18" type="method" name="__invoke" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <metrics loc="26" ncloc="24" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/User/Actions/CreateAdminUserAction.php">
+      <class name="AvoRed\Framework\User\Actions\CreateAdminUserAction" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </class>
+      <line num="13" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="15" type="stmt" count="12"/>
+      <line num="18" type="method" name="handle" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <metrics loc="23" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+    </file>
+    <file name="/Users/purveshpatel/code/9laravel/packages/avored/framework/src/User/Actions/CreateRoleAction.php">
+      <class name="AvoRed\Framework\User\Actions\CreateRoleAction" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </class>
+      <line num="13" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="15" type="stmt" count="12"/>
+      <line num="18" type="method" name="handle" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <metrics loc="23" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+    </file>
+    <metrics files="17" loc="652" ncloc="550" classes="12" methods="40" coveredmethods="34" conditionals="0" coveredconditionals="0" statements="70" coveredstatements="63" elements="110" coveredelements="97"/>
   </project>
 </coverage>

@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Tests;
 
 use AvoRed\Framework\AvoRedServiceProvider;
 use Faker\Generator as FakerGenerator;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
 use Orchestra\Testbench\TestCase;
 
@@ -21,9 +22,9 @@ class AvoRedBaseTestCase extends TestCase
     {
         parent::setUp();
         $this->faker = $this->app->make(FakerGenerator::class);
-        // Factory::guessFactoryNamesUsing(
-        //     fn (string $modelName) => 'AvoRed\\Framework\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
-        // );
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName) => 'AvoRed\\Framework\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+        );
         $this->setUpDatabase();
         Notification::fake();
     }

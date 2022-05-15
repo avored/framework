@@ -8,11 +8,4 @@ class ExampleTest extends AvoRedBaseTestCase
     {
         $this->assertTrue(true);
     }
-
-    public function test_console_command()
-    {
-        $this->artisan('avored:install')
-            ->expectsQuestion('Would you like to install Dummy Data?', 'Yes')
-            ->assertExitCode(0);
-    }
 }

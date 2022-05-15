@@ -2,13 +2,21 @@
 
 namespace AvoRed\Framework;
 
+use AvoRed\Framework\Support\Providers\ModelsProvider;
+use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AvoRedServiceProvider extends ServiceProvider
 {
+    protected $providers = [
+        ModelsProvider::class,
+    ];
+
     public function register()
     {
+        $this->registerProviders();
         $this->registerConfig();
         $this->registerConsoleCommands();
     }
@@ -16,6 +24,14 @@ class AvoRedServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerRoutes();
+        $this->registerMigrationPath();
+    }
+
+    public function registerProviders()
+    {
+        foreach ($this->providers as $provider) {
+            App::register($provider);
+        }
     }
 
     public function registerRoutes()
@@ -31,6 +47,11 @@ class AvoRedServiceProvider extends ServiceProvider
     public function registerConsoleCommands()
     {
         $this->commands([InstallCommand::class]);
-        // $this->commands([AdminMakeCommand::class]);
+        $this->commands([AdminMakeCommand::class]);
+    }
+
+    public function registerMigrationPath()
+    {
+        $this->loadMigrationsFrom(__DIR__. '/../database/migrations');
     }
 }
