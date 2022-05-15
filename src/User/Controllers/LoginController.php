@@ -39,11 +39,11 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-
     public function redirectPath()
     {
         return route('admin.dashboard');
     }
+
     /**
      * Attempt to log the user into the application.
      *
@@ -57,7 +57,6 @@ class LoginController extends Controller
             $request->filled('remember')
         );
     }
-
 
     /**
      * Show the AvoRed Login Form to the User.
