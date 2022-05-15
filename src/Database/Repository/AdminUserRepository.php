@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use AvoRed\Framework\Database\Models\AdminUser;
 
 class AdminUserRepository extends BaseRepository implements AdminUserModelInterface
 {

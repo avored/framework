@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository
 {
-    abstract function model();
+    abstract public function model();
 
     public function query(): Builder
     {

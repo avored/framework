@@ -3,15 +3,15 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
+use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\Role;
 use Illuminate\Support\Collection as SupportCollection;
-use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 
 class RoleRepository extends BaseRepository implements RoleModelInterface
 {
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
