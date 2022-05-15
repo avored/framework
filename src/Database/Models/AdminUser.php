@@ -68,18 +68,18 @@ class AdminUser extends BaseModel
         return $this->belongsTo(Role::class);
     }
 
-    // public function hasPermission($routeName): bool
-    // {
-    //     if ($this->is_super_admin) {
-    //         return true;
-    //     }
-    //     $role = $this->role;
-    //     if ($role->permissions->pluck('name')->contains($routeName) == false) {
-    //         return false;
-    //     }
+    public function hasPermission($routeName): bool
+    {
+        if ($this->is_super_admin) {
+            return true;
+        }
+        $role = $this->role;
+        if ($role->permissions->pluck('name')->contains($routeName) == false) {
+            return false;
+        }
 
-    //     return true;
-    // }
+        return true;
+    }
 
     // public function imagePath()
     // {

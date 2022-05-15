@@ -2,6 +2,10 @@
 
 namespace AvoRed\Framework;
 
+use AvoRed\Framework\Support\Middleware\AdminAuth;
+use AvoRed\Framework\Support\Middleware\Permission;
+use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
+use AvoRed\Framework\Support\Providers\ComponentsProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
@@ -11,6 +15,7 @@ use Illuminate\Support\ServiceProvider;
 class AvoRedServiceProvider extends ServiceProvider
 {
     protected $providers = [
+        ComponentsProvider::class,
         ModelsProvider::class,
     ];
 
@@ -19,6 +24,9 @@ class AvoRedServiceProvider extends ServiceProvider
         $this->registerProviders();
         $this->registerConfig();
         $this->registerConsoleCommands();
+        $this->registerViewPath();
+        $this->registerTranslationPath();
+        $this->registerMiddleware();
     }
 
     public function boot()
@@ -42,6 +50,21 @@ class AvoRedServiceProvider extends ServiceProvider
     public function registerConfig()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/avored.php', 'avored');
+        $avoredConfigData = include __DIR__ . '/../config/avored.php';
+        $authConfig = $this->app['config']->get('auth', []);
+
+        $this->app['config']->set(
+            'auth.guards',
+            array_merge($authConfig['guards'], $avoredConfigData['auth']['guards'])
+        );
+        $this->app['config']->set(
+            'auth.providers',
+            array_merge($authConfig['providers'], $avoredConfigData['auth']['providers'])
+        );
+        $this->app['config']->set(
+            'auth.passwords',
+            array_merge($authConfig['passwords'], $avoredConfigData['auth']['passwords'])
+        );
     }
 
     public function registerConsoleCommands()
@@ -53,5 +76,23 @@ class AvoRedServiceProvider extends ServiceProvider
     public function registerMigrationPath()
     {
         $this->loadMigrationsFrom(__DIR__. '/../database/migrations');
+    }
+
+    public function registerViewPath()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'avored');
+    }
+
+    public function registerTranslationPath()
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'avored');
+    }
+
+    protected function registerMiddleware()
+    {
+        $router = $this->app['router'];
+        $router->aliasMiddleware('admin.auth', AdminAuth::class);
+        $router->aliasMiddleware('admin.guest', RedirectIfAdminAuth::class);
+        $router->aliasMiddleware('permission', Permission::class);
     }
 }

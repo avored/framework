@@ -14,5 +14,40 @@ return [
     */
     'admin_url' => 'admin',
 
+    'auth' => [
+        'guards' => [
+            'admin' => [
+                'driver' => 'session',
+                'provider' => 'admin-users',
+            ],
+            'customer' => [
+                'driver' => 'passport',
+                'provider' => 'customers',
+            ],
+        ],
+        'providers' => [
+            'admin-users' => [
+                'driver' => 'eloquent',
+                'model' => AvoRed\Framework\Database\Models\AdminUser::class,
+            ],
+            // 'customers' => [
+            //     'driver' => 'eloquent',
+            //     'model' => AvoRed\Framework\Database\Models\Customer::class,
+            // ],
+        ],
+
+        'passwords' => [
+            'adminusers' => [
+                'provider' => 'admin-users',
+                'table' => 'admin_password_resets',
+                'expire' => 60,
+            ],
+            'customers' => [
+                'provider' => 'customers',
+                'table' => 'customer_password_resets',
+                'expire' => 60,
+            ],
+        ],
+    ],
 
 ];

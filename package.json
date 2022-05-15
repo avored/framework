@@ -1,0 +1,39 @@
+{
+    "name": "avored",
+    "version": "1.0.0",
+    "description": "AvoRed a laravel ecommerce framework",
+    "directories": {
+        "test": "tests"
+    },
+    "keywords": [
+        "AvoRed",
+        "laravel",
+        "framework"
+    ],
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/avored/framework.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/avored/laravel-ecommerce/issues"
+    },
+    "homepage": "https://avored",
+    "dependencies": {
+        "alpinejs": "^3.10.2",
+        "laravel-mix": "^6.0.43",
+        "tailwindcss": "^3.0.24"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.1"
+    }
+}
