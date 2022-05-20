@@ -57,7 +57,7 @@ class MenuItem implements MenuInterface
     public $callback;
 
     /**
-     * @var array $subMenu
+     * @var array
      */
     public $subMenu;
 

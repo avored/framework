@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Menu;
 
-use stdClass;
 use Illuminate\Support\Collection;
+use stdClass;
 
 class MenuBuilder
 {
@@ -126,17 +126,19 @@ class MenuBuilder
             if ($item->hasSubMenu()) {
                 $subMenus = collect($item->subMenu)->map(function ($item) {
                     $routeName = $item->route();
+
                     return [
                         'name' => $item->label(),
                         'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
                     ];
                 });
             }
+
             return [
                 'name' => $item->label(),
                 'icon' => $item->icon(),
                 'url' => $routeName === '#' ? '#' : route($routeName, $item->params()),
-                'submenus' => $subMenus
+                'submenus' => $subMenus,
             ];
         });
 

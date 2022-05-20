@@ -54,6 +54,7 @@ class Builder
         if (null === $breadcrumb) {
             return '';
         }
+
         return view('avored::breadcrumb.index')
             ->with(compact('breadcrumb'));
     }

@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Menu;
 
-use AvoRed\Framework\Menu\MenuItem;
-use AvoRed\Framework\Menu\MenuBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class MenuProvider extends ServiceProvider
