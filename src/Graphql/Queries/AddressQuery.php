@@ -6,8 +6,8 @@ use AvoRed\Framework\Database\Contracts\AddressModelInterface;
 use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -17,7 +17,7 @@ class AddressQuery extends Query
 
     protected $attributes = [
         'name' => 'addressQuery',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -54,7 +54,7 @@ class AddressQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }

@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Document;
 
-use AvoRed\Framework\Database\Contracts\DocumentModelInterface;
 use AvoRed\Framework\Database\Models\Document;
 use AvoRed\Framework\Database\Repository\DocumentRepository;
 use Illuminate\Http\UploadedFile;

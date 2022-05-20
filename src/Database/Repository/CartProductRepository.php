@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\CartProduct;
 use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
+use AvoRed\Framework\Database\Models\CartProduct;
 
 class CartProductRepository extends BaseRepository implements CartProductModelInterface
 {
     /**
-     * @var CartProduct $model
+     * @var CartProduct
      */
     protected $model;
 

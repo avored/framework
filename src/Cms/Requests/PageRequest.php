@@ -25,7 +25,7 @@ class PageRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
         ];
     }
 }

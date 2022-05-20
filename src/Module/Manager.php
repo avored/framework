@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Module;
 
-use RecursiveIteratorIterator;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use League\Flysystem\MountManager;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use Illuminate\Filesystem\Filesystem;
-use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
+use League\Flysystem\Filesystem as Flysystem;
+use League\Flysystem\MountManager;
+use RecursiveIteratorIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\Yaml\Yaml;
 
@@ -134,6 +134,7 @@ class Manager
                 return 1;
             }
         });
+
         return $modules;
     }
 
@@ -177,6 +178,7 @@ class Manager
 
             if ($path1 == $path2) {
                 $actualModule = $this->moduleList[$module];
+
                 break;
             }
         }

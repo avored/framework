@@ -18,7 +18,7 @@ class CreateAddressMutation extends Mutation
 
     protected $attributes = [
         'name' => 'createAddressMutation',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -73,43 +73,43 @@ class CreateAddressMutation extends Mutation
             ],
             'first_name' => [
                 'name' => 'first_name',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'last_name' => [
                 'name' => 'last_name',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'company_name' => [
                 'name' => 'company_name',
-                'type' => Type::string()
+                'type' => Type::string(),
             ],
             'phone' => [
                 'name' => 'phone',
-                'type' => Type::string()
+                'type' => Type::string(),
             ],
             'address1' => [
                 'name' => 'address1',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'address2' => [
                 'name' => 'address2',
-                'type' => Type::string()
+                'type' => Type::string(),
             ],
             'postcode' => [
                 'name' => 'postcode',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'city' => [
                 'name' => 'city',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'state' => [
                 'name' => 'state',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'country_id' => [
                 'name' => 'country_id',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }
@@ -117,6 +117,7 @@ class CreateAddressMutation extends Mutation
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
         $args ['customer_id'] = Auth::guard('customer')->user()->id;
+
         return $this->addressRepository->create($args);
     }
 }

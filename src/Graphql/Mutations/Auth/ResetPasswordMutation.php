@@ -16,7 +16,7 @@ class ResetPasswordMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'resetPassword',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -68,19 +68,18 @@ class ResetPasswordMutation extends Mutation
         $response = $this->broker()->reset(
             $args,
             function ($user, $password) {
-            $this->resetPassword($user, $password);
-        }
+                $this->resetPassword($user, $password);
+            }
         );
 
 
 
         if ($response === Password::PASSWORD_RESET) {
             return ['success' => true,
-                'message' => __('avored::system.success_reset_password_message')
+                'message' => __('avored::system.success_reset_password_message'),
             ];
         }
     }
-
 
     /**
      * Get the broker to be used during password reset.

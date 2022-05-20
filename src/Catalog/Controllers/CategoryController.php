@@ -12,9 +12,10 @@ use Illuminate\Routing\Controller;
 class CategoryController extends Controller
 {
     /**
-     * @var CategoryRepository $categoryRepository
+     * @var CategoryRepository
      */
     protected $categoryRepository;
+
     /**
      *
      * @param CategoryRepositroy $repository
@@ -79,6 +80,7 @@ class CategoryController extends Controller
         $options = $this->categoryRepository
             ->options();
         $options->pull($category->id);
+
         return view('avored::catalog.category.edit')
             ->with('category', $category)
             ->with('options', $options)
@@ -111,7 +113,7 @@ class CategoryController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.category')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.category')]),
         ]);
     }
 }

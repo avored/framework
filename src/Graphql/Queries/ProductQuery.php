@@ -5,8 +5,8 @@ namespace AvoRed\Framework\Graphql\Queries;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Models\Product;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -14,7 +14,7 @@ class ProductQuery extends Query
 {
     protected $attributes = [
         'name' => 'product',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -51,7 +51,7 @@ class ProductQuery extends Query
         return [
             'slug' => [
                 'name' => 'slug',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }

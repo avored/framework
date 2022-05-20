@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\OrderProduct;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
+use AvoRed\Framework\Database\Models\OrderProduct;
 use AvoRed\Framework\Order\Events\OrderProductCreated;
 
 class OrderProductRepository extends BaseRepository implements OrderProductModelInterface
 {
     /**
-     * @var OrderProduct $model
+     * @var OrderProduct
      */
     protected $model;
 

@@ -14,7 +14,7 @@ class OauthClient extends Client
      * @var array
      */
     protected $fillable = [
-        'name', 'secret', 'provider', 'redirect', 'personal_access_client', 'password_client', 'revoked'
+        'name', 'secret', 'provider', 'redirect', 'personal_access_client', 'password_client', 'revoked',
     ];
 
 

@@ -10,17 +10,17 @@ use AvoRed\Framework\Menu\MenuProvider;
 use AvoRed\Framework\Module\ModuleProvider;
 use AvoRed\Framework\Payment\PaymentProvider;
 use AvoRed\Framework\Permission\PermissionProvider;
+use AvoRed\Framework\Shipping\ShippingProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\Permission as MiddlewarePermission;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
 use AvoRed\Framework\Support\Providers\ComponentsProvider;
+use AvoRed\Framework\Support\Providers\EventsProvider;
 use AvoRed\Framework\Support\Providers\GraphqlProvider;
 use AvoRed\Framework\Support\Providers\ModelsProvider;
-use AvoRed\Framework\Shipping\ShippingProvider;
-use AvoRed\Framework\Support\Providers\EventsProvider;
+use AvoRed\Framework\System\Composers\LayoutComposer;
 use AvoRed\Framework\System\Console\AdminMakeCommand;
 use AvoRed\Framework\System\Console\InstallCommand;
-use AvoRed\Framework\System\Composers\LayoutComposer;
 use AvoRed\Framework\Tab\TabProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
@@ -46,7 +46,7 @@ class AvoRedServiceProvider extends ServiceProvider
         PaymentProvider::class,
         PermissionProvider::class,
         ShippingProvider::class,
-        TabProvider::class
+        TabProvider::class,
     ];
 
     /**

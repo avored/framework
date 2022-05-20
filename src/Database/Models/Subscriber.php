@@ -14,7 +14,7 @@ class Subscriber extends BaseModel
     protected $fillable = [
         'customer_id',
         'email',
-        'status'
+        'status',
     ];
 
     /**

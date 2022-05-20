@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Tests;
 
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use AvoRed\Framework\AvoRedServiceProvider;
 use AvoRed\Framework\Database\Models\AdminUser;
+use Faker\Generator as FakerGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
-use Faker\Generator as FakerGenerator;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
@@ -100,6 +100,7 @@ class TestCase extends OrchestraTestCase
             ->actingAs($this->user, 'admin')
             ->get(route($routeName));
     }
+
     /**
      * Undocumented function
      *

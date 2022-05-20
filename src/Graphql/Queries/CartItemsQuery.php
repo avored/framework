@@ -6,8 +6,8 @@ use AvoRed\Framework\Cart\Cart;
 use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Collection;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -18,16 +18,13 @@ class CartItemsQuery extends Query
 
     protected $attributes = [
         'name' => 'cartItems',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
-
 
     public function type(): Type
     {
         return Type::listOf(GraphQL::type('CartProduct'));
     }
-
-
 
     /**
      * Passed arguments for this query
@@ -38,11 +35,10 @@ class CartItemsQuery extends Query
         return [
             'visitor_id' => [
                 'name' => 'visitor_id',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }
-
 
     /**
      * Resolve Query to get pass an information

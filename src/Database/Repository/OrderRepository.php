@@ -2,9 +2,8 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Order;
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
+use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Database\Traits\FilterTrait;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
@@ -15,7 +14,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'shipping_option',
@@ -23,7 +22,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
     ];
 
     /**
-     * @var Order $model
+     * @var Order
      */
     protected $model;
 
@@ -65,6 +64,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
 
         return $totalOrder;
     }
+
     /**
      * Get Total Revenue of current month
      * @return int $totalOrders
@@ -90,6 +90,7 @@ class OrderRepository extends BaseRepository implements OrderModelInterface
     private function getFirstDay()
     {
         $startDay = Carbon::now();
+
         return $startDay->firstOfMonth();
     }
 }

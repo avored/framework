@@ -6,9 +6,8 @@ use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Models\Category;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
-use Illuminate\Database\Eloquent\Collection;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -18,7 +17,7 @@ class CategoryQuery extends Query
 
     protected $attributes = [
         'name' => 'category',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -55,11 +54,11 @@ class CategoryQuery extends Query
         return [
             'slug' => [
                 'name' => 'slug',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'page' => [
                 'name' => 'page',
-                'type' => Type::int()
+                'type' => Type::int(),
             ],
         ];
     }

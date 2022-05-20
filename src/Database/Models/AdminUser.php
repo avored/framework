@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUser extends BaseModel
@@ -66,6 +66,7 @@ class AdminUser extends BaseModel
         if (empty($this->imagePath)) {
             return 'https://place-hold.it/250x250';
         }
+
         return asset('storage' . DIRECTORY_SEPARATOR . $this->imagePath->path);
     }
 
@@ -88,7 +89,6 @@ class AdminUser extends BaseModel
         $this->attributes['password'] = Hash::make($val);
     }
 
-
     /**
      * To check if user has permission to access the given route name.
      * @return \Illuminate\Database\Eloquent\Collection $permissions
@@ -98,11 +98,11 @@ class AdminUser extends BaseModel
         dd($this->role->permissions);
     }
 
-
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
+
     /**
      * To check if user has permission to access the given route name.
      * @return bool

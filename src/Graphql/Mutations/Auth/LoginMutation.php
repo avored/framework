@@ -6,20 +6,17 @@ use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Nyholm\Psr7\ServerRequest;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
-use Nyholm\Psr7\ServerRequest;
-use stdClass;
 
 class LoginMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'login',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -48,7 +45,7 @@ class LoginMutation extends Mutation
     {
         return [
             'email' => ['required', 'max:255'],
-            'password' => ['required', 'max:255']
+            'password' => ['required', 'max:255'],
         ];
     }
 
@@ -66,7 +63,7 @@ class LoginMutation extends Mutation
             ],
             'password' => [
                 'name' => 'password',
-                'type' => Type::string()
+                'type' => Type::string(),
             ],
         ];
     }

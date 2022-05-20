@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Configuration;
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
+use AvoRed\Framework\Database\Models\Configuration;
 
 class ConfigurationRepository extends BaseRepository implements ConfigurationModelInterface
 {
     /**
     * Eloquent Model Instant for the Repository
-    * @var \AvoRed\Framework\Database\Models\Configuration $model
+    * @var \AvoRed\Framework\Database\Models\Configuration
     */
     protected $model;
 
@@ -21,7 +21,6 @@ class ConfigurationRepository extends BaseRepository implements ConfigurationMod
     {
         $this->model = new Configuration();
     }
-
 
     /**
      * Model object for the repository

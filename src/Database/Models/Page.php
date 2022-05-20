@@ -39,6 +39,7 @@ class Page extends BaseModel
             // }
             // return $matches[1] ? substr($matches[0], 1) : "{$widgetContent}{$whitespace}";
         };
+
         return preg_replace_callback($pattern, $callback, $content);
     }
 }

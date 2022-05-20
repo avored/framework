@@ -3,8 +3,8 @@
 namespace AvoRed\Framework\Database\Repository;
 
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
-use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Database\Contracts\AttributeModelInterface;
+use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class AttributeRepository extends BaseRepository implements AttributeModelInterface
@@ -12,13 +12,13 @@ class AttributeRepository extends BaseRepository implements AttributeModelInterf
     use FilterTrait;
 
     /**
-     * @var Attribute $model
+     * @var Attribute
      */
     protected $model;
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
@@ -67,7 +67,7 @@ class AttributeRepository extends BaseRepository implements AttributeModelInterf
                 $options->push($key);
             }
             $deletedIds = $beforeAttributeIds->filter(function ($attributeId) use ($options) {
-                return !$options->contains($attributeId);
+                return ! $options->contains($attributeId);
             });
 
             foreach ($deletedIds as $key => $deletedId) {

@@ -2,14 +2,13 @@
 
 namespace AvoRed\Framework\Graphql\Mutations;
 
-use AvoRed\Framework\Database\Models\CartProduct;
 use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderProductModelInterface;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use AvoRed\Framework\Database\Models\CartProduct;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +21,7 @@ class PlaceOrderMutation extends Mutation
 
     protected $attributes = [
         'name' => 'placeOrderMutation',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -71,7 +70,7 @@ class PlaceOrderMutation extends Mutation
             ],
             'payment_option' => [
                 'name' => 'payment_option',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
 //            'customer_id' => [
 //                'name' => 'customer_id',
@@ -79,12 +78,12 @@ class PlaceOrderMutation extends Mutation
 //            ],
             'shipping_address_id' => [
                 'name' => 'shipping_address_id',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'billing_address_id' => [
                 'name' => 'billing_address_id',
-                'type' => Type::nonNull(Type::string())
-            ]
+                'type' => Type::nonNull(Type::string()),
+            ],
         ];
     }
 
@@ -99,7 +98,6 @@ class PlaceOrderMutation extends Mutation
 //        dd($customer->cartProducts()->update(['status' => CartProduct::PLACED_ORDER]));
         return $order;
     }
-
 
     /**
      * Sync Products and Attributes with Order Tables.

@@ -18,7 +18,7 @@ class DeleteAddressMutation extends Mutation
 
     protected $attributes = [
         'name' => 'deleteAddressMutation',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -57,6 +57,7 @@ class DeleteAddressMutation extends Mutation
         if ($this->addressRepository->delete($args['id'])) {
             return ['success' => true, 'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.address')])];
         }
+
         throw new Exception('There is an error while deleting an address model with given id:'. $args['id']);
     }
 }

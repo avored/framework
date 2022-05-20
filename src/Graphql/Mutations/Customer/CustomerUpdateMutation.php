@@ -8,7 +8,6 @@ use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -18,7 +17,7 @@ class CustomerUpdateMutation extends Mutation
 
     protected $attributes = [
         'name' => 'customerUpdate',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -51,7 +50,7 @@ class CustomerUpdateMutation extends Mutation
             ],
             'last_name' => [
                 'name' => 'last_name',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }

@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class CartProductType extends GraphQLType
 {
@@ -14,7 +14,7 @@ class CartProductType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'CartProduct',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -26,31 +26,31 @@ class CartProductType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Product Id'
+                'description' => 'Product Id',
             ],
             'visitor_id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'CartProduct Visitor Id'
+                'description' => 'CartProduct Visitor Id',
             ],
             'product_id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'CartProduct product id'
+                'description' => 'CartProduct product id',
             ],
             'product' => [
                 'type' => Type::nonNull(GraphQL::type('Product')),
-                'description' => 'CartProduct product model'
+                'description' => 'CartProduct product model',
             ],
             'qty' => [
                 'type' => Type::float(),
-                'description' => 'CartProduct qty'
+                'description' => 'CartProduct qty',
             ],
             'created_at' => [
                 'type' => Type::string(),
-                'description' => 'Product created at'
+                'description' => 'Product created at',
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'Product updated at'
+                'description' => 'Product updated at',
             ],
         ];
     }

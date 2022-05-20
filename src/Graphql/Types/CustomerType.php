@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class CustomerType extends GraphQLType
 {
@@ -14,7 +14,7 @@ class CustomerType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Customer',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -26,47 +26,47 @@ class CustomerType extends GraphQLType
         return [
             'first_name' => [
                 'type' => Type::string(),
-                'description' => 'The customer for the first name'
+                'description' => 'The customer for the first name',
             ],
             'last_name' => [
                 'type' => Type::string(),
-                'description' => 'The customer for the last name'
+                'description' => 'The customer for the last name',
             ],
             'email' => [
                 'type' => Type::string(),
-                'description' => 'The customer for the email'
+                'description' => 'The customer for the email',
             ],
             'id' => [
                 'type' => Type::string(),
-                'description' => 'The customer for the id'
+                'description' => 'The customer for the id',
             ],
             'created_at' => [
                 'type' => Type::string(),
-                'description' => 'Customer created at'
+                'description' => 'Customer created at',
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
             'token_type' => [
                 'type' => Type::string(),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
             'expires_in' => [
                 'type' => Type::int(),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
             'access_token' => [
                 'type' => Type::string(),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
             'refresh_token' => [
                 'type' => Type::string(),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
             'addresses' => [
                 'type' => Type::listOf(GraphQL::type('Address')),
-                'description' => 'Customer updated at'
+                'description' => 'Customer updated at',
             ],
         ];
     }

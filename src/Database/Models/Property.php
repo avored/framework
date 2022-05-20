@@ -2,9 +2,7 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use AvoRed\Framework\Database\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Collection;
 
 class Property extends BaseModel

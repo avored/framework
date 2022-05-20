@@ -9,7 +9,7 @@ class Header extends Component
     /**
      * Custom class for table header
      *
-     * @var string $class
+     * @var string
      */
     public $class;
 

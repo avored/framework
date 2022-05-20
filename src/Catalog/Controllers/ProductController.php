@@ -13,14 +13,15 @@ use Illuminate\Routing\Controller;
 class ProductController extends Controller
 {
     /**
-     * @var AvoRed\Framework\Database\Repository\ProductRepository $productRepository
+     * @var AvoRed\Framework\Database\Repository\ProductRepository
      */
     protected $productRepository;
 
     /**
-     * @var AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
+     * @var AvoRed\Framework\Database\Repository\CategoryRepository
      */
     protected $categoryRepository;
+
     /**
      *
      * @param ProductRepositroy $repository
@@ -109,6 +110,7 @@ class ProductController extends Controller
     {
         $product->update($request->all());
         $this->productRepository->saveProductCategories($product, $request);
+
         return redirect(route('admin.product.index'));
     }
 
@@ -124,7 +126,7 @@ class ProductController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['product' => __('avored::system.product')])
+            'message' => __('avored::system.success_delete_message', ['product' => __('avored::system.product')]),
         ]);
     }
 }

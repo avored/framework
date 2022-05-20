@@ -3,6 +3,7 @@
 namespace AvoRed\Framework\Tests\Feature;
 
 use AvoRed\Framework\Tests\TestCase;
+
 class DashboardControllerTest extends TestCase
 {
     /** @test */

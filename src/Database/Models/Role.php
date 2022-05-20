@@ -19,7 +19,6 @@ class Role extends BaseModel
      */
     protected $fillable = ['name', 'description'];
 
-
     public function hasPermission($routes)
     {
         $modelPermissions = $this->permissions->pluck('name');

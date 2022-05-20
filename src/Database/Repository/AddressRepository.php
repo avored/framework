@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
-use AvoRed\Framework\Database\Models\Address;
 use AvoRed\Framework\Database\Contracts\AddressModelInterface;
+use AvoRed\Framework\Database\Models\Address;
+use Illuminate\Database\Eloquent\Collection;
 
 class AddressRepository extends BaseRepository implements AddressModelInterface
 {
     /**
-     * @var Address $model
+     * @var Address
      */
     protected $model;
 
@@ -29,7 +29,6 @@ class AddressRepository extends BaseRepository implements AddressModelInterface
     {
         return $this->model;
     }
-
 
     /**
      * Get All Addresses from Database via User Id.

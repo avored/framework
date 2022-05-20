@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Subscriber;
 use AvoRed\Framework\Database\Contracts\SubscriberModelInterface;
+use AvoRed\Framework\Database\Models\Subscriber;
 
 class SubscriberRepository extends BaseRepository implements SubscriberModelInterface
 {
     /**
-     * @var Subscriber $model
+     * @var Subscriber
      */
     protected $model;
 

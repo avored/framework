@@ -15,7 +15,6 @@ class GraphqlProvider extends ServiceProvider
      */
     protected $defer = true;
 
-
     /**
      * Register the service provider.
      *
@@ -36,7 +35,6 @@ class GraphqlProvider extends ServiceProvider
     {
         App::register(GraphQLServiceProvider::class);
     }
-
 
     /**
      * Register config data for AvoRed E commerce Framework

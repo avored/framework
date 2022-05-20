@@ -162,6 +162,7 @@ class ModuleItem
         }
 
         $this->dependencies = $dependencies;
+
         return $this;
     }
 

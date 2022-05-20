@@ -5,8 +5,8 @@ namespace AvoRed\Framework\Graphql\Queries;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Database\Eloquent\Collection;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -17,7 +17,7 @@ class AllCategoryQuery extends Query
 
     protected $attributes = [
         'name' => 'allCategory',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**

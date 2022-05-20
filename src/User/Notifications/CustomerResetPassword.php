@@ -4,8 +4,8 @@ namespace AvoRed\Framework\User\Notifications;
 
 use AvoRed\Framework\Database\Contracts\ConfigurationModelInterface;
 use AvoRed\Framework\Database\Repository\ConfigurationRepository;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class CustomerResetPassword extends Notification
 {
@@ -49,12 +49,12 @@ class CustomerResetPassword extends Notification
         $repositroy = $this->getConfigurationRepository();
         $resetLink = $repositroy->getValueByCode('customer_reset_password_link');
         $url = $resetLink . "?token=" . $this->token;
+
         return (new MailMessage())
             ->line('You are receiving this email because we received a password reset request for your account.')
             ->action('Reset Password', $url)
             ->line('If you did not request a password reset, no further action is required.');
     }
-
 
     /**
      * Get the instance of an Configuration repository

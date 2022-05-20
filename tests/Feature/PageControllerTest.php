@@ -7,7 +7,6 @@ use AvoRed\Framework\Tests\TestCase;
 
 class PageControllerTest extends TestCase
 {
-    
     /** @test */
     public function test_page_index_route()
     {

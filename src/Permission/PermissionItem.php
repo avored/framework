@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Permission;
 
 use Illuminate\Support\Facades\Lang;
-use AvoRed\Framework\Permission\PermissionInterface;
 
 class PermissionItem implements PermissionInterface
 {

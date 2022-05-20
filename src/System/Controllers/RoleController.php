@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\System\Controllers;
 
-use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\Role;
 use AvoRed\Framework\Permission\Permission;
+use AvoRed\Framework\System\Requests\RoleRequest;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -13,9 +13,10 @@ use Illuminate\Routing\Controller;
 class RoleController extends Controller
 {
     /**
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
+
     /**
      *
      * @param \AvoRed\Framework\Database\Contracts\RoleModelInterface $repository
@@ -112,7 +113,7 @@ class RoleController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.role')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.role')]),
         ]);
     }
 }

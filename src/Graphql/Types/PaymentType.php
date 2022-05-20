@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class PaymentType extends GraphQLType
 {
@@ -13,7 +13,7 @@ class PaymentType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Payment',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -25,15 +25,15 @@ class PaymentType extends GraphQLType
         return [
             'name' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Payment Name'
+                'description' => 'Payment Name',
             ],
             'identifier' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Payment Identifier'
+                'description' => 'Payment Identifier',
             ],
             'view' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Payment View'
+                'description' => 'Payment View',
             ],
         ];
     }

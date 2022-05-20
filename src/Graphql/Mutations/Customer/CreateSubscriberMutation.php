@@ -6,8 +6,6 @@ use AvoRed\Framework\Database\Contracts\SubscriberModelInterface;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -15,7 +13,7 @@ class CreateSubscriberMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'CreateSubscriberMutation',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -45,7 +43,7 @@ class CreateSubscriberMutation extends Mutation
             'email' => [
                 'name' => 'email',
                 'type' => Type::nonNull(Type::string()),
-            ]
+            ],
         ];
     }
 

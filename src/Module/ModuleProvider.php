@@ -4,8 +4,6 @@ namespace AvoRed\Framework\Module;
 
 use AvoRed\Framework\Module\Console\Provider;
 use Illuminate\Support\ServiceProvider;
-use AvoRed\Framework\Module\Module;
-use AvoRed\Framework\Module\Manager;
 
 class ModuleProvider extends ServiceProvider
 {

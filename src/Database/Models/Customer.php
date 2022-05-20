@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Database\Models;
 
-use Illuminate\Notifications\Notifiable;
 use AvoRed\Framework\User\Notifications\CustomerResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\ClientRepository;
 use Laravel\Passport\HasApiTokens;
 
@@ -70,6 +70,7 @@ class Customer extends BaseModel
         if ($this->attributes['image_path'] === null) {
             return 'https://placehold.it/250x250';
         }
+
         return asset('storage/'.$this->attributes['image_path']);
     }
 
@@ -102,14 +103,17 @@ class Customer extends BaseModel
     {
         return $this->hasMany(Address::class);
     }
+
     public function setPasswordAttribute($value)
     {
         return $this->attributes['password'] = bcrypt($value);
     }
+
     public function getPasswordAttribute($value)
     {
         return $this->attributes['password'];
     }
+
     /**
      * To check if user has permission to access the given route name.
      * @return bool

@@ -12,9 +12,10 @@ use Illuminate\Routing\Controller;
 class AttributeController extends Controller
 {
     /**
-     * @var AvoRed\Framework\Database\Repository\AttributeRepository $attributeRepository
+     * @var AvoRed\Framework\Database\Repository\AttributeRepository
      */
     protected $attributeRepository;
+
     /**
      *
      * @param AttributeRepositroy $repository
@@ -99,6 +100,7 @@ class AttributeController extends Controller
     {
         $attribute->update($request->all());
         $this->attributeRepository->saveAttributeDropdownOptions($request, $attribute);
+
         return redirect(route('admin.attribute.index'));
     }
 
@@ -114,7 +116,7 @@ class AttributeController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.attribute')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.attribute')]),
         ]);
     }
 }

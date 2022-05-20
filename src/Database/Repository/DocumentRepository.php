@@ -2,13 +2,13 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Document;
 use AvoRed\Framework\Database\Contracts\DocumentModelInterface;
+use AvoRed\Framework\Database\Models\Document;
 
 class DocumentRepository extends BaseRepository implements DocumentModelInterface
 {
     /**
-     * @var Document $model
+     * @var Document
      */
     protected $model;
 

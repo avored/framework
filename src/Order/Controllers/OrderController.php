@@ -8,9 +8,10 @@ use Illuminate\Routing\Controller;
 class OrderController extends Controller
 {
     /**
-     * @var OrderRepository $orderRepository
+     * @var OrderRepository
      */
     protected $orderRepository;
+
     /**
      *
      * @param OrderRepositroy $repository

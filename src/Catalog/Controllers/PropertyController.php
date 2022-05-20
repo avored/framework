@@ -12,9 +12,10 @@ use Illuminate\Routing\Controller;
 class PropertyController extends Controller
 {
     /**
-     * @var PropertyRepository $propertyRepository
+     * @var PropertyRepository
      */
     protected $propertyRepository;
+
     /**
      *
      * @param PropertyRepositroy $repository
@@ -103,6 +104,7 @@ class PropertyController extends Controller
     {
         $property->update($request->all());
         $this->propertyRepository->savePropertyDropdown($request, $property);
+
         return redirect(route('admin.property.index'));
     }
 
@@ -118,7 +120,7 @@ class PropertyController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.property')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.property')]),
         ]);
     }
 }

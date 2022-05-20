@@ -26,7 +26,7 @@ class AttributeRequest extends FormRequest
         return [
             'name' => 'required',
             'slug' => 'required',
-            'display_as' => 'required'
+            'display_as' => 'required',
         ];
     }
 }

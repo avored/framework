@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
+use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class PropertyRepository extends BaseRepository implements PropertyModelInterface
@@ -12,16 +12,16 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
-        'slug'
+        'slug',
     ];
 
 
     /**
-     * @var Property $model
+     * @var Property
      */
     protected $model;
 
@@ -41,7 +41,6 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
     {
         return $this->model;
     }
-
 
     public function savePropertyDropdown($request, $property)
     {

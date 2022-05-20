@@ -3,16 +3,16 @@
 namespace AvoRed\Framework\Cart;
 
 use AvoRed\Framework\Database\Contracts\CartProductModelInterface;
-use Illuminate\Support\Collection;
-use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Models\CartProduct;
+use AvoRed\Framework\Database\Models\Product;
+use Illuminate\Support\Collection;
 
 class CartManager
 {
     /**
      * Visitor token
-     * @var string $visitor
+     * @var string
      */
     protected $visitor;
 
@@ -55,6 +55,7 @@ class CartManager
         $product = $this->getProductBySlug($slug);
         $this->cartProductRepository->query()->where('product_id', $product->id)->where('visitor_id', $this->visitor())->delete();
     }
+
     /**
      * update Product from Cart By Given Slug.
      * @param string $slug
@@ -62,14 +63,16 @@ class CartManager
      */
     public function update(string $slug, $qty)
     {
-        /** @var Product $product  */
+        /** @var Product $product */
         $product = $this->productRepository->findBySlug($slug);
         $cartProduct = $this->getCartProduct($product->id);
 
         $cartProduct->qty = $qty;
         $cartProduct->save();
+
         return $this;
     }
+
     /**
      * Add Product to Cart By Given Slug.
      * @param string $slug
@@ -79,7 +82,7 @@ class CartManager
      */
     public function add(string $slug, float $qty = 1, array $attributes = []): CartProduct
     {
-        /** @var Product $product  */
+        /** @var Product $product */
         $product = $this->productRepository->findBySlug($slug);
         $cartProduct = $this->getCartProduct($product->id);
 
@@ -90,7 +93,7 @@ class CartManager
             $data = [
                 'visitor_id' => $this->visitor,
                 'product_id' => $product->id,
-                'qty' => $qty
+                'qty' => $qty,
             ];
             $cartProduct = $this->cartProductRepository->create($data);
         }
@@ -102,6 +105,7 @@ class CartManager
     {
         return $this->productRepository->findBySlug($slug);
     }
+
     /**
      *
      * @param string $productId
@@ -115,10 +119,11 @@ class CartManager
             ->where('product_id', $productId)
             ->first();
     }
+
     /**
      * To check if the Product Existing in the Cart
      * @param string $slug
-     * @return boolean
+     * @return bool
      */
     protected function exist($slug): bool
     {
@@ -149,12 +154,12 @@ class CartManager
     {
         if ($visitor) {
             $this->visitor = $visitor;
+
             return $this;
         }
 
         return $this->visitor;
     }
-
 
     /**
      * Update the Session Collection.

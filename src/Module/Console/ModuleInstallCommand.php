@@ -58,7 +58,7 @@ class ModuleInstallCommand extends Command
     {
         $identifier = strtolower($this->getIdentifierInput());
 
-        /** @var $module \AvoRed\Framework\Module\ModuleItem  */
+        /** @var $module \AvoRed\Framework\Module\ModuleItem */
         $module = Module::get($identifier);
         $provider = $module->namespace().'Module';
         $this->call('vendor:publish', ['--provider' => $provider]);

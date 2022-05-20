@@ -2,11 +2,10 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use AvoRed\Framework\Database\Models\Order;
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class OrderType extends GraphQLType
 {
@@ -16,7 +15,7 @@ class OrderType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Order',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -28,55 +27,55 @@ class OrderType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Id'
+                'description' => 'Order Id',
             ],
             'shipping_option' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Shipping Option'
+                'description' => 'Order Shipping Option',
             ],
             'payment_option' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Payment Option'
+                'description' => 'Order Payment Option',
             ],
             'order_status_id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Status Id'
+                'description' => 'Order Status Id',
             ],
             'order_status_name' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Status Name'
+                'description' => 'Order Status Name',
             ],
             'shipping_address_id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Shipping Address Id'
+                'description' => 'Order Shipping Address Id',
             ],
             'shipping_address' => [
                 'type' => Type::nonNull(GraphQL::type('Address')),
-                'description' => 'Order Shipping Address'
+                'description' => 'Order Shipping Address',
             ],
             'customer' => [
                 'type' => Type::nonNull(GraphQL::type('Customer')),
-                'description' => 'Order Customer'
+                'description' => 'Order Customer',
             ],
             'billing_address_id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order Billing Address Id'
+                'description' => 'Order Billing Address Id',
             ],
             'billing_address' => [
                 'type' => GraphQL::type('Address'),
-                'description' => 'Order Billing Address'
+                'description' => 'Order Billing Address',
             ],
             'track_code' => [
                 'type' => Type::string(),
-                'description' => 'Order Tracking Code'
+                'description' => 'Order Tracking Code',
             ],
             'created_at' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order created at'
+                'description' => 'Order created at',
             ],
             'updated_at' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Order updated at '
+                'description' => 'Order updated at ',
             ],
         ];
     }

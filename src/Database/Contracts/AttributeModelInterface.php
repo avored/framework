@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-use AvoRed\Framework\Database\Models\Attribute;
 use AvoRed\Framework\Catalog\Requests\AttributeRequest;
+use AvoRed\Framework\Database\Models\Attribute;
 
 interface AttributeModelInterface extends BaseInterface
 {

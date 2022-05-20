@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Order\Controllers;
 
-use AvoRed\Framework\Order\Requests\OrderStatusRequest;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
 use AvoRed\Framework\Database\Models\OrderStatus;
+use AvoRed\Framework\Order\Requests\OrderStatusRequest;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -12,9 +12,10 @@ use Illuminate\Routing\Controller;
 class OrderStatusController extends Controller
 {
     /**
-     * @var OrderStatusRepository $orderStatusRepository
+     * @var OrderStatusRepository
      */
     protected $orderStatusRepository;
+
     /**
      *
      * @param OrderStatusRepositroy $repository
@@ -111,7 +112,7 @@ class OrderStatusController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.order-status')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.order-status')]),
         ]);
     }
 }

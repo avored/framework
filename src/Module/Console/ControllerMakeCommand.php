@@ -2,10 +2,10 @@
 
 namespace AvoRed\Framework\Module\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
-use Illuminate\Filesystem\Filesystem;
 use AvoRed\Framework\Module\Module;
+use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\App;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ControllerMakeCommand extends Command

@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class ShippingType extends GraphQLType
 {
@@ -13,7 +13,7 @@ class ShippingType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Shipping',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -25,15 +25,15 @@ class ShippingType extends GraphQLType
         return [
             'name' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shipping Name'
+                'description' => 'Shipping Name',
             ],
             'identifier' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shipping Identifier'
+                'description' => 'Shipping Identifier',
             ],
             'view' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shipping View'
+                'description' => 'Shipping View',
             ],
         ];
     }

@@ -2,15 +2,15 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Support\Collection;
-use AvoRed\Framework\Database\Models\Customer;
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
+use AvoRed\Framework\Database\Models\Customer;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class CustomerRepository extends BaseRepository implements CustomerModelInterface
 {
     /**
-     * @var Customer $model
+     * @var Customer
      */
     protected $model;
 
@@ -58,15 +58,19 @@ class CustomerRepository extends BaseRepository implements CustomerModelInterfac
                 switch ($groupBy) {
                     case "DAY":
                         return Carbon::parse($customer->created_at)->format('d-M-Y');
+
                     break;
                     case "WEEK":
                         return $customer->created_at->startOfWeek()->format('d-M-Y') . ':'. $customer->created_at->endOfWeek()->format('d-M-Y');
+
                     break;
                     case "MONTH":
                         return Carbon::parse($customer->created_at)->format('M-Y');
+
                     break;
                     case "YEAR":
                         return Carbon::parse($customer->created_at)->format('Y');
+
                     break;
                 }
             });

@@ -2,14 +2,13 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use Illuminate\Database\Eloquent\Collection;
-use AvoRed\Framework\Database\Models\Permission;
 use AvoRed\Framework\Database\Contracts\PermissionModelInterface;
+use AvoRed\Framework\Database\Models\Permission;
 
 class PermissionRepository extends BaseRepository implements PermissionModelInterface
 {
     /**
-     * @var Permission $model
+     * @var Permission
      */
     protected $model;
 
@@ -29,7 +28,6 @@ class PermissionRepository extends BaseRepository implements PermissionModelInte
     {
         return $this->model;
     }
-
 
     /**
      * find Permission by given name from database.

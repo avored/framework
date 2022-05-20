@@ -2,19 +2,19 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\AttributeDropdownOption;
 use AvoRed\Framework\Database\Contracts\AttributeDropdownOptionModelInterface;
+use AvoRed\Framework\Database\Models\AttributeDropdownOption;
 
 class AttributeDropdownOptionRepository extends BaseRepository implements AttributeDropdownOptionModelInterface
 {
     /**
-     * @var AttributeDropdownOption $model
+     * @var AttributeDropdownOption
      */
     protected $model;
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',

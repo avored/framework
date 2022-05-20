@@ -2,8 +2,6 @@
 
 namespace AvoRed\Framework\Tab;
 
-use AvoRed\Framework\Tab\Manager;
-use AvoRed\Framework\Tab\TabItem;
 use Illuminate\Support\ServiceProvider;
 
 class TabProvider extends ServiceProvider

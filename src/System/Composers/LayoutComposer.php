@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\System\Composers;
 
-use Illuminate\View\View;
 use AvoRed\Framework\Menu\Menu;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 class LayoutComposer
 {

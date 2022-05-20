@@ -2,10 +2,9 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Database\Contracts\OrderStatusModelInterface;
+use AvoRed\Framework\Database\Models\OrderStatus;
 use AvoRed\Framework\Database\Traits\FilterTrait;
-use Illuminate\Database\Eloquent\Collection;
 
 class OrderStatusRepository extends BaseRepository implements OrderStatusModelInterface
 {
@@ -13,7 +12,7 @@ class OrderStatusRepository extends BaseRepository implements OrderStatusModelIn
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
@@ -21,7 +20,7 @@ class OrderStatusRepository extends BaseRepository implements OrderStatusModelIn
 
 
     /**
-     * @var OrderStatus $model
+     * @var OrderStatus
      */
     protected $model;
 

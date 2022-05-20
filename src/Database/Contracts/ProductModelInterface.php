@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Database\Contracts;
 
 use AvoRed\Framework\Catalog\Requests\ProductRequest;
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
 

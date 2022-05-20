@@ -3,7 +3,6 @@
 namespace AvoRed\Framework\Database\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Laravel\Passport\ClientRepository;
 
 class CartProduct extends BaseModel
 {
@@ -26,7 +25,7 @@ class CartProduct extends BaseModel
         'visitor_id',
         'product_id',
         'qty',
-        'status'
+        'status',
     ];
 
     /**

@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 use AvoRed\Framework\Database\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection as SupportCollection;
 
 interface CategoryModelInterface extends BaseInterface
@@ -15,7 +15,6 @@ interface CategoryModelInterface extends BaseInterface
      * @return \AvoRed\Framework\Database\Models\Category $category
      */
     public function findBySlug(string $slug): Category;
-
 
     /**
      * Get All Category from the database.

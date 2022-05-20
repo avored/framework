@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class NotificationType extends GraphQLType
 {
@@ -13,7 +13,7 @@ class NotificationType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Notification',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -25,12 +25,12 @@ class NotificationType extends GraphQLType
         return [
             'success' => [
                 'type' => Type::nonNull(Type::boolean()),
-                'description' => 'Success'
+                'description' => 'Success',
             ],
             'message' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Message'
-            ]
+                'description' => 'Message',
+            ],
         ];
     }
 }

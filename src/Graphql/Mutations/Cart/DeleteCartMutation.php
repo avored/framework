@@ -13,7 +13,7 @@ class DeleteCartMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'DeleteCart',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     public function type(): Type
@@ -31,7 +31,7 @@ class DeleteCartMutation extends Mutation
             'visitor_id' => [
                 'name' => 'visitor_id',
                 'type' => Type::nonNull(Type::string()),
-            ]
+            ],
         ];
     }
 

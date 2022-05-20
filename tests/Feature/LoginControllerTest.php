@@ -3,6 +3,7 @@ namespace AvoRed\Framework\Tests\Feature;
 
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Tests\TestCase;
+
 class LoginControllerTest extends TestCase
 {
     /** @test */
@@ -32,7 +33,6 @@ class LoginControllerTest extends TestCase
             ->actingAs($this->user, 'admin')
             ->post(route('admin.login.post', ['email' => $this->user->email, 'password' => $password]))
             ->assertRedirect(route('admin.dashboard'));
-
     }
 
     /** @test */

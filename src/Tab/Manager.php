@@ -48,7 +48,7 @@ class Manager
     public function put(string $key, callable $tab)
     {
         $tabObject = new TabItem($tab);
-        if (!$this->collection->has($key)) {
+        if (! $this->collection->has($key)) {
             $collection = Collection::make([]);
             $collection->push($tabObject);
         } else {

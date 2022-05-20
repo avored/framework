@@ -7,7 +7,6 @@ use AvoRed\Framework\Tests\TestCase;
 
 class ProductControllerTest extends TestCase
 {
-
     /** @test */
     public function test_product_index_route()
     {
@@ -32,7 +31,7 @@ class ProductControllerTest extends TestCase
         $data = [
             'name' => 'test product',
             'slug' => 'test-product',
-            'type' => 'BASIC'
+            'type' => 'BASIC',
         ];
         $this->createAdminUser()
             ->actingAs($this->user, 'admin')
@@ -40,6 +39,7 @@ class ProductControllerTest extends TestCase
             ->assertRedirect(route('admin.product.index'));
         $this->assertDatabaseHas('products', ['name' => 'test product']);
     }
+
     /** @test */
     public function test_product_edit_route()
     {

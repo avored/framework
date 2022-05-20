@@ -2,9 +2,9 @@
 
 namespace AvoRed\Framework\Tests\Functional;
 
-use Illuminate\View\View;
 use AvoRed\Framework\Breadcrumb\Builder;
 use AvoRed\Framework\Tests\TestCase;
+use Illuminate\View\View;
 
 /** @runInSeparateProcess */
 class BreadcrumbTest extends TestCase

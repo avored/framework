@@ -16,7 +16,7 @@ class AddToCartMutation extends Mutation
 
     protected $attributes = [
         'name' => 'addToCart',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -47,7 +47,7 @@ class AddToCartMutation extends Mutation
             'qty' => [
                 'name' => 'qty',
                 'type' => Type::float(),
-            ]
+            ],
         ];
     }
 

@@ -17,7 +17,7 @@ class Category extends BaseModel
         'description',
         'meta_title',
         'meta_description',
-        'parent_id'
+        'parent_id',
     ];
 
     /**

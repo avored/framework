@@ -3,12 +3,12 @@
 namespace AvoRed\Framework\User\Controllers;
 
 use AvoRed\Framework\User\Requests\ResetAdminUserRequest;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -68,7 +68,6 @@ class ResetPasswordController extends Controller
     {
         return Password::broker('adminusers');
     }
-
 
     /**
      * Redirect Path after login and logout.
@@ -149,7 +148,6 @@ class ResetPasswordController extends Controller
             'token'
         );
     }
-
 
     /**
      * Get the response for a successful password reset.

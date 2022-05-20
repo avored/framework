@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Shipping;
 
-use AvoRed\Framework\Shipping\Manager;
 use Illuminate\Support\ServiceProvider;
 
 class ShippingProvider extends ServiceProvider

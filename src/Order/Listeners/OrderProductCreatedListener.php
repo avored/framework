@@ -3,8 +3,6 @@
 namespace AvoRed\Framework\Order\Listeners;
 
 use AvoRed\Framework\Order\Events\OrderProductCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class OrderProductCreatedListener
 {

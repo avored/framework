@@ -2,37 +2,36 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use stdClass;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
-use AvoRed\Framework\Database\Models\Product;
-use AvoRed\Framework\Database\Models\Category;
-use AvoRed\Framework\Database\Models\Property;
-use AvoRed\Framework\Database\Models\Attribute;
-use Illuminate\Support\Collection as SupportCollection;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
+use AvoRed\Framework\Database\Models\Attribute;
+use AvoRed\Framework\Database\Models\Category;
+use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Traits\FilterTrait;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection as SupportCollection;
+use stdClass;
 
 class CategoryRepository extends BaseRepository implements CategoryModelInterface
 {
     use FilterTrait;
     /**
      * Eloquent Model Instant for the Repository
-     * @var \AvoRed\Framework\Database\Models\Category $model
+     * @var \AvoRed\Framework\Database\Models\Category
      */
     protected $model;
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
         'slug',
         'meta_title',
-        'meta_description'
+        'meta_description',
     ];
-
 
     /**
      * Construct for the Category Repository
@@ -79,8 +78,6 @@ class CategoryRepository extends BaseRepository implements CategoryModelInterfac
 
         return $builder->get();
     }
-
-
 
     /**
      * Get all the categories option to use in Menu Builder.

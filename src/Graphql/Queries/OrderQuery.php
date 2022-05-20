@@ -6,11 +6,8 @@ use AvoRed\Framework\Database\Contracts\OrderModelInterface;
 use AvoRed\Framework\Database\Models\Order;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -20,7 +17,7 @@ class OrderQuery extends Query
 
     protected $attributes = [
         'name' => 'allOrders',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -57,8 +54,8 @@ class OrderQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::nonNull(Type::string())
-            ]
+                'type' => Type::nonNull(Type::string()),
+            ],
         ];
     }
 

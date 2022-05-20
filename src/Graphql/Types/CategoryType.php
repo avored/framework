@@ -4,9 +4,9 @@ namespace AvoRed\Framework\Graphql\Types;
 
 use AvoRed\Framework\Database\Contracts\CategoryFilterModelInterface;
 use GraphQL\Type\Definition\ResolveInfo;
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class CategoryType extends GraphQLType
 {
@@ -22,7 +22,7 @@ class CategoryType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Category',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -34,35 +34,35 @@ class CategoryType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Category Id'
+                'description' => 'Category Id',
             ],
             'name' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Category Name'
+                'description' => 'Category Name',
             ],
             'slug' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Category Slug'
+                'description' => 'Category Slug',
             ],
             'description' => [
                 'type' => Type::string(),
-                'description' => 'Category Description'
+                'description' => 'Category Description',
             ],
             'meta_title' => [
                 'type' => Type::string(),
-                'description' => 'Category Meta title'
+                'description' => 'Category Meta title',
             ],
             'meta_description' => [
                 'type' => Type::string(),
-                'description' => 'Category Meta Description'
+                'description' => 'Category Meta Description',
             ],
             'created_at' => [
                 'type' => Type::string(),
-                'description' => 'Category created at'
+                'description' => 'Category created at',
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'Category updated at'
+                'description' => 'Category updated at',
             ],
             // 'filter' => [
             //     'type' => Type::listOf(GraphQL::type('filter')),
@@ -70,11 +70,11 @@ class CategoryType extends GraphQLType
             // ],
             'products' => [
                 'type' => GraphQL::paginate('Product'),
-                'description' => 'Category Product'
+                'description' => 'Category Product',
             ],
             'children' => [
-                'type' =>  Type::listOf(GraphQL::type('Category')),
-                'description' => 'Child Category'
+                'type' => Type::listOf(GraphQL::type('Category')),
+                'description' => 'Child Category',
             ],
         ];
     }
@@ -87,6 +87,7 @@ class CategoryType extends GraphQLType
     protected function resolveFilterField($category, $args)
     {
         $categoryFilterRepository = app(CategoryFilterModelInterface::class);
+
         return $categoryFilterRepository->findByCategoryId($category->id);
     }
 
@@ -111,6 +112,7 @@ class CategoryType extends GraphQLType
     {
         $args = $resolveInfo->variableValues;
         $page = isset($args['page']) ? $args['page'] : 1;
+
         return $category->products()->paginate($this->getNoOfPaginateItem(), ['*'], 'page', $page);
     }
 

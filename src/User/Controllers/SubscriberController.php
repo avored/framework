@@ -2,18 +2,17 @@
 
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\User\Requests\SubscriberRequest;
 use AvoRed\Framework\Database\Contracts\SubscriberModelInterface;
 use AvoRed\Framework\Database\Models\Subscriber;
 use AvoRed\Framework\Tab\Tab;
+use AvoRed\Framework\User\Requests\SubscriberRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 
 class SubscriberController extends Controller
 {
     /**
-     * @var \AvoRed\Framework\Database\Repository\SubscriberRepository $subscriberRepository
+     * @var \AvoRed\Framework\Database\Repository\SubscriberRepository
      */
     protected $subscriberRepository;
 
@@ -107,7 +106,7 @@ class SubscriberController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.subscriber')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.subscriber')]),
         ]);
     }
 }

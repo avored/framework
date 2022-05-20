@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class SubscriberType extends GraphQLType
 {
@@ -13,7 +13,7 @@ class SubscriberType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Subscriber',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -25,27 +25,27 @@ class SubscriberType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The id of the subscriber'
+                'description' => 'The id of the subscriber',
             ],
             'customer_id' => [
                 'type' => Type::string(),
-                'description' => 'The customer id of the subscriber'
+                'description' => 'The customer id of the subscriber',
             ],
             'email' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The email of the subscriber'
+                'description' => 'The email of the subscriber',
             ],
             'status' => [
                 'type' => Type::string(),
-                'description' => 'The status of the subscriber'
+                'description' => 'The status of the subscriber',
             ],
             'created_at' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The created_at of the subscriber'
+                'description' => 'The created_at of the subscriber',
             ],
             'updated_at' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The updated_at of the subscriber'
+                'description' => 'The updated_at of the subscriber',
             ],
 
         ];

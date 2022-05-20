@@ -5,7 +5,6 @@ namespace AvoRed\Framework\Cms\Controllers;
 use AvoRed\Framework\Cms\Requests\PageRequest;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
 use AvoRed\Framework\Database\Models\Page;
-use AvoRed\Framework\Permission\Permission;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -13,9 +12,10 @@ use Illuminate\Routing\Controller;
 class PageController extends Controller
 {
     /**
-     * @var PageRepository $pageRepository
+     * @var PageRepository
      */
     protected $pageRepository;
+
     /**
      *
      * @param PageRepositroy $repository
@@ -106,7 +106,7 @@ class PageController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.page')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.page')]),
         ]);
     }
 }

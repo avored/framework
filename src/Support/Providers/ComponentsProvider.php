@@ -6,8 +6,8 @@ use AvoRed\Framework\System\Components\Alert;
 use AvoRed\Framework\System\Components\Form\Checkbox;
 use AvoRed\Framework\System\Components\Form\Form;
 use AvoRed\Framework\System\Components\Form\Input;
-use AvoRed\Framework\System\Components\Layout;
 use AvoRed\Framework\System\Components\Form\Link;
+use AvoRed\Framework\System\Components\Layout;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 

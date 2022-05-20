@@ -2,14 +2,14 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
+use AvoRed\Framework\Database\Models\AdminUser;
 
 class AdminUserRepository extends BaseRepository implements AdminUserModelInterface
 {
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'first_name',
@@ -18,7 +18,7 @@ class AdminUserRepository extends BaseRepository implements AdminUserModelInterf
     ];
 
     /**
-     * @var AdminUser $model
+     * @var AdminUser
      */
     protected $model;
 

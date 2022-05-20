@@ -7,7 +7,6 @@ use AvoRed\Framework\Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-
     /** @test */
     public function test_category_page_index_form()
     {
@@ -16,6 +15,7 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertViewIs('avored::catalog.category.index');
     }
+
     /** @test */
     public function test_category_page_create_form()
     {
@@ -61,7 +61,6 @@ class CategoryControllerTest extends TestCase
             ->assertRedirect(route('admin.category.index'));
 
         $this->assertDatabaseHas('categories', ['name' => 'unit test update', 'slug' => $category->slug]);
-
     }
 
     /** @test */
@@ -75,6 +74,5 @@ class CategoryControllerTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('categories', ['name' => 'unit test update', 'slug' => $category->slug]);
-
     }
 }

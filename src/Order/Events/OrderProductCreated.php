@@ -11,9 +11,10 @@ class OrderProductCreated
 
     /**
      * Order Product model
-     * @var OrderProduct $orderProduct
+     * @var OrderProduct
      */
     public $orderProduct;
+
     /**
      * Create a new event instance.
      *

@@ -6,7 +6,6 @@ use AvoRed\Framework\Cart\Cart;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Ramsey\Uuid\Uuid;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
@@ -16,7 +15,7 @@ class UpdateCartMutation extends Mutation
 
     protected $attributes = [
         'name' => 'updateCart',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -47,7 +46,7 @@ class UpdateCartMutation extends Mutation
             'qty' => [
                 'name' => 'qty',
                 'type' => Type::float(),
-            ]
+            ],
         ];
     }
 

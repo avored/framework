@@ -8,16 +8,15 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Laravel\Passport\Client;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Nyholm\Psr7\ServerRequest;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
-use Nyholm\Psr7\ServerRequest;
-use stdClass;
 
 class RegisterMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'register',
-        'description' => 'A mutation'
+        'description' => 'A mutation',
     ];
 
     /**
@@ -74,11 +73,11 @@ class RegisterMutation extends Mutation
             ],
             'password' => [
                 'name' => 'password',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
             'password_confirmation' => [
                 'name' => 'password_confirmation',
-                'type' => Type::nonNull(Type::string())
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }

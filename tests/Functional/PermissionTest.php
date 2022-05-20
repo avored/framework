@@ -3,8 +3,8 @@
 namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Database\Models\AdminUser;
-use AvoRed\Framework\Tests\TestCase;
 use AvoRed\Framework\Database\Models\Permission;
+use AvoRed\Framework\Tests\TestCase;
 use Illuminate\Http\Response;
 
 class PermissionTest extends TestCase

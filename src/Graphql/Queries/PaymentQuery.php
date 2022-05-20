@@ -5,8 +5,8 @@ namespace AvoRed\Framework\Graphql\Queries;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use AvoRed\Framework\Payment\Payment;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Collection;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -17,7 +17,7 @@ class PaymentQuery extends Query
 
     protected $attributes = [
         'name' => 'paymentQuery',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**

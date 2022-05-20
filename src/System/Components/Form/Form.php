@@ -24,7 +24,6 @@ class Form extends Component
      */
     public $file;
 
-
     /**
      * Create the component instance.
      *

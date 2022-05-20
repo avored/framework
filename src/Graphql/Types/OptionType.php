@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Graphql\Types;
 
-use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class OptionType extends GraphQLType
 {
@@ -13,7 +13,7 @@ class OptionType extends GraphQLType
      */
     protected $attributes = [
         'name' => 'Option',
-        'description' => 'A type'
+        'description' => 'A type',
     ];
 
     /**
@@ -25,15 +25,14 @@ class OptionType extends GraphQLType
         return [
             'value' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The value of the option'
+                'description' => 'The value of the option',
             ],
             'label' => [
                 'type' => Type::string(),
-                'description' => 'The label of the option'
+                'description' => 'The label of the option',
             ],
         ];
     }
-
 
     /**
      * @param  $country

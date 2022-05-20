@@ -6,8 +6,8 @@ use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Models\Customer;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -18,7 +18,7 @@ class CustomerQuery extends Query
 
     protected $attributes = [
         'name' => 'customerQuery',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -55,7 +55,7 @@ class CustomerQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::string()
+                'type' => Type::string(),
             ],
         ];
     }

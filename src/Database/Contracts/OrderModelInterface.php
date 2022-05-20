@@ -2,7 +2,6 @@
 
 namespace AvoRed\Framework\Database\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface OrderModelInterface extends BaseInterface

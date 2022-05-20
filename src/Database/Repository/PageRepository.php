@@ -2,8 +2,8 @@
 
 namespace AvoRed\Framework\Database\Repository;
 
-use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Database\Contracts\PageModelInterface;
+use AvoRed\Framework\Database\Models\Page;
 use AvoRed\Framework\Database\Traits\FilterTrait;
 
 class PageRepository extends BaseRepository implements PageModelInterface
@@ -12,17 +12,17 @@ class PageRepository extends BaseRepository implements PageModelInterface
 
     /**
      * Filterable Fields
-     * @var array $filterType
+     * @var array
      */
     protected $filterFields = [
         'name',
         'slug',
         'meta_title',
-        'meta_description'
+        'meta_description',
     ];
 
     /**
-     * @var Page $model
+     * @var Page
      */
     protected $model;
 

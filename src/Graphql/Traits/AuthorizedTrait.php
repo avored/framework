@@ -15,7 +15,7 @@ trait AuthorizedTrait
      * @param [type] $ctx
      * @param ResolveInfo|null $resolveInfo
      * @param Closure|null $getSelectFields
-     * @return boolean
+     * @return bool
      */
     public function authorize($root, array $args, $ctx, ?ResolveInfo $resolveInfo = null, ?Closure $getSelectFields = null): bool
     {

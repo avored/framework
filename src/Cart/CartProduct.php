@@ -181,6 +181,7 @@ class CartProduct implements CartProductInterface
             return $this;
         }
     }
+
     public function formattedPrice()
     {
         return number_format((float) $this->price, 2);

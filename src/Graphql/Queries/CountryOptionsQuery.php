@@ -2,14 +2,11 @@
 
 namespace AvoRed\Framework\Graphql\Queries;
 
-use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Models\Customer;
-use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -18,7 +15,7 @@ class CountryOptionsQuery extends Query
 {
     protected $attributes = [
         'name' => 'countryOptions',
-        'description' => 'A query'
+        'description' => 'A query',
     ];
 
     /**
@@ -26,7 +23,6 @@ class CountryOptionsQuery extends Query
      * @var AvoRed\Framework\Database\Repository\CustomerRepository
      */
     protected $customerRepository;
-
 
     /**
      * Return type for these query

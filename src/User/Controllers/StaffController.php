@@ -2,24 +2,24 @@
 
 namespace AvoRed\Framework\User\Controllers;
 
-use AvoRed\Framework\User\Requests\AdminUserRequest;
 use AvoRed\Framework\Database\Contracts\AdminUserModelInterface;
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\AdminUser;
 use AvoRed\Framework\Document\Document;
 use AvoRed\Framework\Tab\Tab;
+use AvoRed\Framework\User\Requests\AdminUserRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
 class StaffController extends Controller
 {
     /**
-     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository $adminUserRepository
+     * @var \AvoRed\Framework\Database\Repository\AdminUserRepository
      */
     protected $adminUserRepository;
 
     /**
-     * @var \AvoRed\Framework\Database\Repository\RoleRepository $roleRepository
+     * @var \AvoRed\Framework\Database\Repository\RoleRepository
      */
     protected $roleRepository;
 
@@ -125,7 +125,7 @@ class StaffController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.staff')])
+            'message' => __('avored::system.success_delete_message', ['attribute' => __('avored::system.staff')]),
         ]);
     }
 }
