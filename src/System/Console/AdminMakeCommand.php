@@ -24,10 +24,26 @@ class AdminMakeCommand extends Command
         parent::__construct();
     }
 
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
     protected $name = 'avored:admin:make';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'AvoRed create an admin user account';
 
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
     public function handle()
     {
         $data['first_name'] = $this->ask('What is your First Name?');

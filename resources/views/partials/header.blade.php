@@ -27,7 +27,7 @@
                 <div x-show="dropdownOpen" x-on:click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
                 <div x-show="dropdownOpen" x-transition.duration.300ms class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                    <a href="{{ route('admin.dashboard', auth()->guard('admin')->user()) }}" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-red-500 rounded hover:text-white">
+                    <a href="{{ route('admin.staff.edit', auth()->guard('admin')->user()) }}" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-red-500 rounded hover:text-white">
                         {{ __('avored::system.edit_profile') }}
                     </a>
 

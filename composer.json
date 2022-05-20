@@ -17,7 +17,9 @@
     ],
     "require": {
         "php": "^8.0|^8.1",
-        "illuminate/support": "^9.0"
+        "illuminate/support": "^9.0",
+        "laravel/passport": "^10.4",
+        "rebing/graphql-laravel": "^8.2"
     },
     "require-dev": {
         "brianium/paratest": "^6.4",

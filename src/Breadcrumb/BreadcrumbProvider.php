@@ -28,7 +28,7 @@ class BreadcrumbProvider extends ServiceProvider
     public function register()
     {
         $this->registerServices();
-        $this->app->alias('breadcrumb', Builder::class);
+        $this->app->alias('breadcrumb', 'AvoRed\Framework\Breadcrumb\Builder');
     }
 
     /**
@@ -53,7 +53,7 @@ class BreadcrumbProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['breadcrumb', Builder::class];
+        return ['breadcrumb', 'AvoRed\Framework\Breadcrumb\Builder'];
     }
 
     /**
