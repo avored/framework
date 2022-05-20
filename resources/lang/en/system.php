@@ -18,4 +18,8 @@ return [
     'forgot_password' => 'Forgot Password',
     'sign_in' => 'Sign In',
     'login_to_avored_admin' => 'Login to AvoRed Admin',
+    'dashboard' => 'Dashboard',
+    'edit_profile' => 'Edit Profile',
+    'logout' => 'Logout',
+    'settings' => 'Settings',
 ];

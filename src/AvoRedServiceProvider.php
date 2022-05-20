@@ -2,6 +2,8 @@
 
 namespace AvoRed\Framework;
 
+use AvoRed\Framework\Breadcrumb\BreadcrumbProvider;
+use AvoRed\Framework\Menu\MenuProvider;
 use AvoRed\Framework\Support\Middleware\AdminAuth;
 use AvoRed\Framework\Support\Middleware\Permission;
 use AvoRed\Framework\Support\Middleware\RedirectIfAdminAuth;
@@ -15,8 +17,10 @@ use Illuminate\Support\ServiceProvider;
 class AvoRedServiceProvider extends ServiceProvider
 {
     protected $providers = [
+        BreadcrumbProvider::class,
         ComponentsProvider::class,
         ModelsProvider::class,
+        MenuProvider::class,
     ];
 
     public function register()
