@@ -17,9 +17,18 @@
     ],
     "require": {
         "php": "^8.0|^8.1",
-        "illuminate/support": "^9.0",
-        "laravel/passport": "^10.4",
-        "rebing/graphql-laravel": "^8.2"
+        "illuminate/auth": "^8.2|^9.0",
+        "illuminate/contracts": "^8.2|^9.0",
+        "illuminate/database": "^8.2|^9.0",
+        "illuminate/routing": "^8.2|^9.0",
+        "illuminate/http": "^8.2|^9.0",
+        "illuminate/support": "^8.2|^9.0",
+        "illuminate/view": "^8.2|^9.0",
+        "ramsey/uuid": "^4.2",
+        "rebing/graphql-laravel": "^8.2",
+        "nyholm/psr7": "^1.4",
+        "laravel/passport": "^10.1|^10.2|^10.3",
+        "symfony/yaml": "^5.3|^6.0"
     },
     "require-dev": {
         "brianium/paratest": "^6.4",
@@ -53,6 +62,20 @@
         "laravel": {
             "providers": [
                 "AvoRed\\Framework\\AvoRedServiceProvider"
+            ],
+            "aliases": {
+                "Module": "AvoRed\\Framework\\Module\\Module",
+                "Cart": "AvoRed\\Framework\\Cart\\Cart",
+                "Breadcrumb": "AvoRed\\Framework\\Breadcrumb\\Breadcrumb",
+                "Document": "AvoRed\\Framework\\Document\\Document",
+                "Menu": "AvoRed\\Framework\\Menu\\Menu",
+                "Payment": "AvoRed\\Framework\\Payment\\Payment",
+                "Permission": "AvoRed\\Framework\\Permission\\Permission",
+                "Shipping": "AvoRed\\Framework\\Shipping\\Shipping",
+                "Tab": "AvoRed\\Framework\\Tab\\Tab"
+            },
+            "dont-discover": [
+                "rebing/graphql-laravel"
             ]
         }
     },

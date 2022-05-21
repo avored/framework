@@ -45,7 +45,7 @@ class InstallCommand extends Command
         $this->createRoleAction->handle(['name' => Role::ADMIN]);
 
         if ($this->confirm('Would you like to install Dummy Data?')) {
-            $this->call('avored:module:install', ['identifier' => 'avored-dummy-data']);
+            // $this->call('avored:module:install', ['identifier' => 'avored-dummy-data']);
         }
 
         $this->call('avored:admin:make');
@@ -57,7 +57,6 @@ class InstallCommand extends Command
     {
         $provider = 'customers';
 
-        // $this->call('passport:keys');
         $this->call('passport:keys', ['--force' => true]);
 
         $this->call('passport:client', ['--personal' => true, '--name' => config('app.name').' Personal Access Client']);

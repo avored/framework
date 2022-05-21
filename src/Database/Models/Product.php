@@ -62,7 +62,7 @@ class Product extends BaseModel
     public function categories()
     {
         return $this->belongsToMany(Category::class)
-            ->using(new class() extends Pivot {
+            ->using(new class () extends Pivot {
                 use UuidTrait;
             })
             ->withTimestamps();

@@ -8,6 +8,7 @@ use Faker\Generator as FakerGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
+use Laravel\Passport\PassportServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
@@ -67,6 +68,7 @@ class TestCase extends OrchestraTestCase
     {
         return [
             AvoRedServiceProvider::class,
+            PassportServiceProvider::class
         ];
     }
 
