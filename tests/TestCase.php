@@ -68,7 +68,7 @@ class TestCase extends OrchestraTestCase
     {
         return [
             AvoRedServiceProvider::class,
-            PassportServiceProvider::class
+            PassportServiceProvider::class,
         ];
     }
 
