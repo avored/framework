@@ -83,10 +83,11 @@ class CategoryControllerTest extends TestCase
             ->assertSuccessful()
             ->assertJsonFragment(['id' => $category->id]);
     }
+
     public function test_graphql_query_category()
     {
         $category = Category::factory()->create();
-        $this->query('category', ['slug' => $category->slug],['id'])
+        $this->query('category', ['slug' => $category->slug], ['id'])
             ->assertSuccessful()
             ->assertJsonFragment(['id' => $category->id]);
     }
