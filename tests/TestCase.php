@@ -13,6 +13,9 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
+    use \MarvinRabe\LaravelGraphQLTest\TestGraphQL;
+
+    public $graphQLEndpoint = 'graphql';
     /**
      * Admin User.
      * @var \AvoRed\Framework\Database\Models\AdminUser

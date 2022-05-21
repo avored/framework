@@ -7,7 +7,7 @@
     <div class="relative mb-5">
         <input id="{{ $name }}" type="{{ $type }}" name="{{ $name }}" value="{{ $value }}" {{ $attributes->merge([
                 'autofocus' => false,
-            ]) }} class="avored-input {{ ($errors->has($name)) ? 'ring-red-400' : '' }} {{ $class }}" />
+            ]) }} class="w-full rounded {{ ($errors->has($name)) ? 'ring-red-400' : '' }} {{ $class }}" />
         @if ($errors->has($name))
         <div class="text-xs absolute text-red-400">
             {{ $errors->first($name) }}

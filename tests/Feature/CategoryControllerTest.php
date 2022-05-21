@@ -75,4 +75,12 @@ class CategoryControllerTest extends TestCase
 
         $this->assertDatabaseMissing('categories', ['name' => 'unit test update', 'slug' => $category->slug]);
     }
+
+    public function test_graphql_query_all_categories()
+    {
+        $category = Category::factory()->create();
+        $this->query('allCategory', [],['id'])
+            ->assertSuccessful()
+            ->assertJsonFragment(['id' => $category->id]);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace AvoRed\Framework\Tests\UnitTests;
+namespace AvoRed\Framework\Tests\Functional;
 
 use AvoRed\Framework\Database\Contracts\RoleModelInterface;
 use AvoRed\Framework\Database\Models\Role;

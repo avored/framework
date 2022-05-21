@@ -111,6 +111,7 @@ class Manager
                 }
             });
 
+
             $this->moduleLoaded = true;
         }
 

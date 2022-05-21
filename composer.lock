@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1864262debcf30fc4fcab1e48a485273",
+    "content-hash": "ea4f178dc9289cba5680c70c294a4cc0",
     "packages": [
         {
             "name": "brick/math",
@@ -7256,6 +7256,61 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "marvinrabe/laravel-graphql-test",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marvinrabe/laravel-graphql-test.git",
+                "reference": "63bd90139b479a4d02042661caf31e9b6df27ae0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marvinrabe/laravel-graphql-test/zipball/63bd90139b479a4d02042661caf31e9b6df27ae0",
+                "reference": "63bd90139b479a4d02042661caf31e9b6df27ae0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": ">=8.0.0",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MarvinRabe\\LaravelGraphQLTest\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marvin Rabe",
+                    "email": "marvin@rabe.pro",
+                    "homepage": "https://www.rabe.pro",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides you with a simple GraphQL testing trait.",
+            "homepage": "https://github.com/marvinrabe/laravel-graphql-test",
+            "keywords": [
+                "graphql",
+                "laravel",
+                "php",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/marvinrabe/laravel-graphql-test/issues",
+                "source": "https://github.com/marvinrabe/laravel-graphql-test/tree/0.4.1"
+            },
+            "time": "2021-08-16T14:51:19+00:00"
         },
         {
             "name": "mockery/mockery",

@@ -33,6 +33,7 @@
     "require-dev": {
         "brianium/paratest": "^6.4",
         "friendsofphp/php-cs-fixer": "^3.8",
+        "marvinrabe/laravel-graphql-test": "^0.4.1",
         "nunomaduro/collision": "^6.2",
         "orchestra/testbench": "7.5",
         "phpunit/phpunit": "^9.5",
