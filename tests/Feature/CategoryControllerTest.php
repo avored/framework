@@ -79,7 +79,7 @@ class CategoryControllerTest extends TestCase
     public function test_graphql_query_all_categories()
     {
         $category = Category::factory()->create();
-        $this->query('allCategory', [],['id'])
+        $this->query('allCategory', [], ['id'])
             ->assertSuccessful()
             ->assertJsonFragment(['id' => $category->id]);
     }
