@@ -9,17 +9,15 @@
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.product.update', $product) }}" method="PUT">
+                <x-avored::form.form file action="{{ route('admin.product.update', $product) }}" method="PUT">
                     @foreach ($tabs as $tab)
-                    <div class="w-full border rounded">
+                    <div class="w-full mt-5 border rounded">
                         <div class="p-4 border-b">
                             <div class="flex w-full">
                                 <span class="text-lg text-red-500 font-semibold">
                                     {{ $tab->label() }}
                                 </span>
-                                <span class="ml-auto">
-
-                                </span>
+                                <span class="ml-auto"></span>
                             </div>
 
                         </div>

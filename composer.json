@@ -20,14 +20,15 @@
         "illuminate/auth": "^8.2|^9.0",
         "illuminate/contracts": "^8.2|^9.0",
         "illuminate/database": "^8.2|^9.0",
-        "illuminate/routing": "^8.2|^9.0",
         "illuminate/http": "^8.2|^9.0",
+        "illuminate/routing": "^8.2|^9.0",
         "illuminate/support": "^8.2|^9.0",
         "illuminate/view": "^8.2|^9.0",
+        "laravel/passport": "^10.1|^10.2|^10.3",
+        "livewire/livewire": "^2.10",
+        "nyholm/psr7": "^1.4",
         "ramsey/uuid": "^4.2",
         "rebing/graphql-laravel": "^8.2",
-        "nyholm/psr7": "^1.4",
-        "laravel/passport": "^10.1|^10.2|^10.3",
         "symfony/yaml": "^5.3|^6.0"
     },
     "require-dev": {

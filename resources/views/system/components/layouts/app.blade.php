@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
-
+    @livewireStyles
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
 
 </head>
@@ -24,6 +24,7 @@
             {{ $slot }}
         </div>
     </div>
+    @livewireScripts
     <script src="{{ asset('vendor/avored/js/app.js')  }}"></script>
     @stack('scripts')
     <script>

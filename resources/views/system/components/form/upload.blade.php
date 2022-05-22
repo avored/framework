@@ -1,4 +1,4 @@
-<div x-data="dataFileDnD()" x-init="initFiles('{{ $value }}')" class="relative flex flex-col p-4 text-gray-400 border-2 border-gray-300 border-dashed rounded">
+<div x-data="dataFileDnD()" x-init="initFiles('{!! $value !!}', '{{ $multiple }}')" class="relative flex flex-col p-4 text-gray-400 border-2 border-gray-300 border-dashed rounded">
     <div x-ref="dnd"
         class="relative flex flex-col text-gray-400 rounded cursor-pointer">
         <input accept="*" type="file" {{ ($multiple) ? 'multiple' : '' }}
@@ -51,6 +51,7 @@ function dataFileDnD() {
     return {
         files: [],
         fileDragging: null,
+        multiple: false,
         fileDropping: null,
         humanFileSize(size) {
             const i = Math.floor(Math.log(size) / Math.log(1024));
@@ -60,9 +61,13 @@ function dataFileDnD() {
                 ["B", "kB", "MB", "GB", "TB"][i]
             );
         },
-        initFiles (files) {
-            this.files.push(files)
+        initFiles (files, multiple) {
+            //fileObj = JSON.parse(files);
 
+            //console.log(fileObj, 'here')
+
+            this.files.push(JSON.parse(files))
+            this.multiple = multiple
             return
         },
 
@@ -96,10 +101,15 @@ function dataFileDnD() {
             e.dataTransfer.effectAllowed = "move";
         },
         loadFile(file) {
-            if (typeof file === 'string') {
-                console.log(file)
-                return file
-            }
+            //console.log(file, 'here')
+            //if (this.multiple) {
+                //files = JSON.parse(file);
+            //} else {
+                //fileObj = JSON.parse(file);
+            //    files = []
+            //    files.push(fileObj)
+            //}
+
 
 
             const preview = document.querySelectorAll(".preview");
@@ -117,7 +127,6 @@ function dataFileDnD() {
             return blobUrl;
         },
         addFiles(e) {
-            console.log(e.target.files)
             const files = this.createFileList([...e.target.files]);
             this.files = files;
         },

@@ -6,6 +6,7 @@ use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Models\Product;
+use AvoRed\Framework\Document\Document;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -92,6 +93,7 @@ class ProductController extends Controller
         // $displayAsOptions = Product::DISPLAY_AS;
         $tabs = Tab::get('catalog.product');
 
+        // dd($product->document);
         return view('avored::catalog.product.edit')
             // ->with('displayAsOptions', $displayAsOptions)
             ->with('tabs', $tabs)
@@ -110,6 +112,12 @@ class ProductController extends Controller
     {
         $product->update($request->all());
         $this->productRepository->saveProductCategories($product, $request);
+
+        dd($product->document);
+        if ($request->file('images')) {
+            $document = Document::uploadPublicly($request->file('images'));
+            $product->document()->updateOrCreate(optional($product->document)->toArray() ?? [], $document);
+        }
 
         return redirect(route('admin.product.index'));
     }

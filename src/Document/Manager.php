@@ -20,7 +20,7 @@ class Manager
      * Public upload path constant
      * @var string PUBLIC_UPLOAD_PATH
      */
-    public const PUBLIC_UPLOAD_PATH = 'upload';
+    public const PUBLIC_UPLOAD_PATH = 'uploads';
 
     /**
      * Upload publicly file

@@ -9,7 +9,7 @@
             </div>
 
             <div class="mt-5 w-full">
-                <x-avored::form.form action="{{ route('admin.staff.store') }}" method="POST">
+                <x-avored::form.form file action="{{ route('admin.staff.store') }}" method="POST">
 
                     @foreach ($tabs as $tab)
                     <div class="w-full border rounded">
