@@ -12,7 +12,10 @@ class CategoryTable extends Component
     {
         $columns = Collection::make([]);
         $columns->push([
-            'identifier' => 'parent'
+            'identifier' => 'parent',
+            'render' => function ($row) {
+                return ($row->parent) ? $row->parent->name : '';
+            }
         ]);
         $columns->push([
             'identifier' => 'name'
@@ -27,7 +30,11 @@ class CategoryTable extends Component
             'identifier' => 'meta_description'
         ]);
         $columns->push([
-            'identifier' => 'actions'
+            'identifier' => 'actions',
+            'render' => function ($row) {
+                return view('avored::catalog.category._actions')
+                    ->with('category', $row);
+            }
         ]);
         return $columns;
     }
@@ -37,7 +44,7 @@ class CategoryTable extends Component
     public function render()
     {
         return view('avored::system.datatable')
-            ->with('categories', Category::all())
+            ->with('rows', Category::all())
             ->with('columns', $this->columns())
             ;
     }

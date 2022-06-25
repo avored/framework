@@ -10,9 +10,21 @@
         </x-avored::table.row>
     </x-slot>
     <x-slot name="body">
-        @foreach ($categories as $category)
+        @foreach ($rows as $row)
+
             <x-avored::table.row class="{{ ($loop->index % 2 == 0) ? '' : 'bg-gray-200'  }}">
-                <x-avored::table.cell>
+                @foreach ($columns as $column)
+                    <x-avored::table.cell>
+                        @if (isset ($column['render']) && is_callable($column['render']))
+                            @php $renderFunc = $column['render']; @endphp
+                            {!! $renderFunc($row) !!}
+                        @else
+                            @php $identifier = $column['identifier']; @endphp
+                            {{ $row->$identifier ?? '' }}
+                        @endif
+                    </x-avored::table.cell>
+                @endforeach
+                {{--  <x-avored::table.cell>
                     {{ $category->parent->name ?? '' }}
                 </x-avored::table.cell>
                 <x-avored::table.cell>
@@ -49,7 +61,7 @@
                             </x-avored::form.form>
                         </x-avored::link>
                     </div>
-                </x-avored::table.cell>
+                </x-avored::table.cell>  --}}
             </x-avored::table.row>
         @endforeach
     </x-slot>
