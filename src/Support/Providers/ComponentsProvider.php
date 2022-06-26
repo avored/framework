@@ -2,12 +2,7 @@
 namespace AvoRed\Framework\Support\Providers;
 
 use AvoRed\Framework\Catalog\Tables\CategoryTable;
-use AvoRed\Framework\System\Components\Alert;
-use AvoRed\Framework\System\Components\Form\Checkbox;
-use AvoRed\Framework\System\Components\Form\Form;
-use AvoRed\Framework\System\Components\Form\Input;
-use AvoRed\Framework\System\Components\Layout;
-use AvoRed\Framework\System\Components\Form\Link;
+use AvoRed\Framework\Catalog\Tables\ProductTable;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -28,12 +23,13 @@ class ComponentsProvider extends ServiceProvider
     public function registerBlades()
     {
         Blade::componentNamespace('AvoRed\\Framework\\System\\Components', 'avored');
-        
-        
+
+
         // Blade::component('avored::system.components.livewire.table.table', 'avored-table::tailwind.table');
 
 
         Livewire::component('avored-category-table', CategoryTable::class);
+        Livewire::component('avored-product-table', ProductTable::class);
 
 
 

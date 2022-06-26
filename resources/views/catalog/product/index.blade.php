@@ -15,69 +15,7 @@
         <div class="w-full mt-5">
             <!-- component -->
             <div class="overflow-x-auto">
-                <x-avored::table>
-                    <x-slot name="header">
-                        <x-avored::table.row class="bg-gray-300">
-                            
-                            <x-avored::table.header>
-                                {{ __('avored::system.name') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header>
-                                {{ __('avored::system.slug') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header>
-                                {{ __('avored::system.meta_title') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header>
-                                {{ __('avored::system.meta_description') }}
-                            </x-avored::table.header>
-                            <x-avored::table.header class="rounded-tr">
-                                {{ __('avored::system.actions') }}
-                            </x-avored::table.header>
-                        </x-avored::table.row>
-                    </x-slot>
-                    <x-slot name="body">
-                        @foreach ($products as $product)
-                            <x-avored::table.row class="{{ ($loop->index % 2 == 0) ? '' : 'bg-gray-200'  }}">
-                                <x-avored::table.cell>
-                                    {{ $product->name ?? '' }}
-                                </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    {{ $product->slug ?? '' }}
-                                </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    {{ $product->meta_title ?? '' }}
-                                </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    {{ $product->meta_description ?? '' }}
-                                </x-avored::table.cell>
-                                <x-avored::table.cell>
-                                    <div class="flex">
-                                        <x-avored::link url="{{ route('admin.product.edit', $product) }}">
-                                            <i class="w-5 h-5" data-feather="edit"></i>
-                                        </x-avored::link>
-                                        <span class="mx-2">|</span>
-                                        <x-avored::link
-                                            x-on:click.prevent="toggleConfirmationDialog(
-                                                true,
-                                                {{ $product }},
-                                                '{{ __('avored::system.confirmation_delete_message', ['attribute_value' => $product->name, 'attribute' => strtolower(__('avored::system.product'))]) }}',
-                                                '{{ route('admin.product.destroy', $product) }}'
-                                            )"
-                                            url="{{ route('admin.product.destroy', $product) }}">
-                                            <i class="w-5 h-5" data-feather="trash"></i>
-                                            <x-avored::form.form
-                                                id="product-destory-{{ $product->id }}"
-                                                method="delete"
-                                                action="{{ route('admin.product.destroy', $product) }}">
-                                            </x-avored::form.form>
-                                        </x-avored::link>
-                                    </div>
-                                </x-avored::table.cell>
-                            </x-avored::table.row>
-                        @endforeach
-                    </x-slot>
-                </x-avored::table>
+                @livewire('avored-product-table')
                 <div class="w-full">
                     {{ $products->render() }}
                 </div>

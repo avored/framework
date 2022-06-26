@@ -256,8 +256,8 @@ class AvoredFrameworkSchema extends Migration
             $table->uuid('product_id');
             $table->uuid('category_id');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
 
         Schema::create('cart_products', function (Blueprint $table) {

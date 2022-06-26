@@ -121,6 +121,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // delete category product reference
         $product->delete();
 
         return new JsonResponse([
