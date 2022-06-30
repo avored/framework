@@ -49,14 +49,15 @@ class AvoRedServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register services.
+     * Register any application services.
+     *
      * @return void
      */
     public function register()
     {
         $this->ignorePassport();
-        $this->registerProviders();
         $this->registerConfigData();
+        $this->registerProviders();
         $this->registerRoutePath();
         $this->registerMiddleware();
         // $this->registerViewComposerData();
@@ -68,7 +69,8 @@ class AvoRedServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap services.
+     * Bootstrap any package services.
+     *
      * @return void
      */
     public function boot()
@@ -164,17 +166,10 @@ class AvoRedServiceProvider extends ServiceProvider
      */
     public function registerConfigData()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/avored.php',
-            'avored'
-        );
-        $avoredConfigData = include __DIR__ . '/../config/avored.php';
-        $authConfig = $this->app['config']->get('auth', []);
+        $this->mergeConfigFrom(__DIR__ . '/../config/avored.php', 'avored');
 
-        // $this->app['config']->set(
-        //     'passport.client_uuids',
-        //     true
-        // );
+        $avoredConfigData = $this->app['config']->get('avored', []);
+        $authConfig = $this->app['config']->get('auth', []);
 
         $this->app['config']->set(
             'auth.guards',
