@@ -23,8 +23,8 @@ class GraphqlProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerConfigData();
         $this->registerRebingLaravelGraphQlProvider();
+        $this->registerConfigData();
     }
 
     /**
@@ -37,14 +37,15 @@ class GraphqlProvider extends ServiceProvider
         App::register(GraphQLServiceProvider::class);
     }
 
-
     /**
      * Register config data for AvoRed E commerce Framework
      * @return void
      */
     public function registerConfigData()
     {
-        $avoredConfigData = include __DIR__ . '/../../../config/avored.php';
-        $this->app['config']->set('graphql', $avoredConfigData['graphql']);
+        $graphql_conf = $this->app['config']->get('graphql', []);
+        $avored_conf = $this->app['config']->get('avored', []);
+
+        $this->app['config']->set('graphql', array_merge_recursive($graphql_conf, $avored_conf['graphql']));
     }
 }

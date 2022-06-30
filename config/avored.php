@@ -15,7 +15,6 @@ use AvoRed\Framework\Graphql\Queries\AllAddressQuery;
 use AvoRed\Framework\Graphql\Queries\AllCategoryQuery;
 use AvoRed\Framework\Graphql\Queries\AllOrdersQuery;
 use AvoRed\Framework\Graphql\Queries\OrderQuery;
-use AvoRed\Framework\Graphql\Queries\CartItems;
 use AvoRed\Framework\Graphql\Queries\CartItemsQuery;
 use AvoRed\Framework\Graphql\Queries\CategoryQuery;
 use AvoRed\Framework\Graphql\Queries\CountryOptionsQuery;
@@ -75,7 +74,6 @@ return [
                 'model' => AvoRed\Framework\Database\Models\Customer::class,
             ],
         ],
-
         'passwords' => [
             'adminusers' => [
                 'provider' => 'admin-users',
@@ -90,7 +88,6 @@ return [
         ],
     ],
     'graphql' => [
-        'default_schema' => 'default',
         'schemas' => [
             'default' => [
                 'query' => [
@@ -121,13 +118,10 @@ return [
                     'addToCart' => AddToCartMutation::class,
                     'updateCart' => UpdateCartMutation::class,
                     'deleteCart' => DeleteCartMutation::class,
-                    'CreateSubscriberMutation' => CreateSubscriberMutation::class,
+                    'createSubscriberMutation' => CreateSubscriberMutation::class,
                 ],
-                'middleware' => [],
-                'method'     => ['GET', 'POST'],
             ],
         ],
-
         'types' => [
             'Category' => CategoryType::class,
             'Product' => ProductType::class,
