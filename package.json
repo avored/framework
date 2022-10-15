@@ -13,7 +13,7 @@
         "alpinejs": "^3.3.3",
         "autoprefixer": "^10.3.4",
         "axios": "^0.21.4",
-        "easymde": "^2.15.0",
+        "easymde": "^2.18.0",
         "feather-icons": "^4.28.0",
         "laravel-mix": "^6.0.6",
         "postcss": "^8.3.6",
