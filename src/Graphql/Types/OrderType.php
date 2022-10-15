@@ -50,11 +50,11 @@ class OrderType extends GraphQLType
                 'description' => 'Order Shipping Address Id'
             ],
             'shipping_address' => [
-                'type' => Type::nonNull(GraphQL::type('address')),
+                'type' => Type::nonNull(GraphQL::type('Address')),
                 'description' => 'Order Shipping Address'
             ],
             'customer' => [
-                'type' => Type::nonNull(GraphQL::type('customer')),
+                'type' => Type::nonNull(GraphQL::type('Customer')),
                 'description' => 'Order Customer'
             ],
             'billing_address_id' => [
@@ -62,7 +62,7 @@ class OrderType extends GraphQLType
                 'description' => 'Order Billing Address Id'
             ],
             'billing_address' => [
-                'type' => GraphQL::type('address'),
+                'type' => GraphQL::type('Address'),
                 'description' => 'Order Billing Address'
             ],
             'track_code' => [

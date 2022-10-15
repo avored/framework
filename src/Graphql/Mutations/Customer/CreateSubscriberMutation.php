@@ -36,7 +36,7 @@ class CreateSubscriberMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('subscriber');
+        return GraphQL::type('Subscriber');
     }
 
     public function args(): array

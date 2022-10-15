@@ -41,7 +41,7 @@ class LatestProductQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('product'));
+        return Type::listOf(GraphQL::type('Product'));
     }
 
     /**

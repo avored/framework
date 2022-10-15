@@ -61,7 +61,7 @@ class UpdateAddressMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('address');
+        return GraphQL::type('Address');
     }
 
     public function args(): array

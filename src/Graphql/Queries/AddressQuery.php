@@ -41,7 +41,7 @@ class AddressQuery extends Query
      */
     public function type(): Type
     {
-        return GraphQL::type('address');
+        return GraphQL::type('Address');
     }
 
     /**

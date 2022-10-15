@@ -59,7 +59,7 @@ class PlaceOrderMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('order');
+        return GraphQL::type('Order');
     }
 
     public function args(): array

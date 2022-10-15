@@ -44,7 +44,7 @@ class OrderQuery extends Query
      */
     public function type(): Type
     {
-        return GraphQL::type('order');
+        return GraphQL::type('Order');
     }
 
     /**

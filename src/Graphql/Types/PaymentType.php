@@ -11,7 +11,7 @@ class PaymentType extends GraphQLType
      * @var array
      */
     protected $attributes = [
-        'name' => 'Payment Type',
+        'name' => 'Payment',
         'description' => 'A type'
     ];
 

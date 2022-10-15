@@ -11,7 +11,7 @@ class SubscriberType extends GraphQLType
      * @var array
      */
     protected $attributes = [
-        'name' => 'subscriber',
+        'name' => 'Subscriber',
         'description' => 'A type'
     ];
 

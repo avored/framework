@@ -42,7 +42,7 @@ class AllAddressQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('address'));
+        return Type::listOf(GraphQL::type('Address'));
     }
 
     /**

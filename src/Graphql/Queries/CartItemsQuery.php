@@ -23,7 +23,7 @@ class CartItemsQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('cartProduct'));
+        return Type::listOf(GraphQL::type('CartProduct'));
     }
 
 

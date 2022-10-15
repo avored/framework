@@ -38,7 +38,7 @@ class ResetPasswordMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('notification');
+        return GraphQL::type('Notification');
     }
 
     public function args(): array

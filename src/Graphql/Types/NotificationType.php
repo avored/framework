@@ -11,7 +11,7 @@ class NotificationType extends GraphQLType
      * @var array
      */
     protected $attributes = [
-        'name' => 'DeleteType',
+        'name' => 'Notification',
         'description' => 'A type'
     ];
 

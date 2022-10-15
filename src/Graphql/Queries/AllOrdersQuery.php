@@ -43,7 +43,7 @@ class AllOrdersQuery extends Query
      */
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('order'));
+        return Type::listOf(GraphQL::type('Order'));
     }
 
     /**

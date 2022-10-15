@@ -64,7 +64,7 @@ class CustomerType extends GraphQLType
                 'description' => 'Customer updated at'
             ],
             'addresses' => [
-                'type' => Type::listOf(GraphQL::type('address')),
+                'type' => Type::listOf(GraphQL::type('Address')),
                 'description' => 'Customer updated at'
             ],
         ];
