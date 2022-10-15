@@ -68,14 +68,14 @@ class TabProvider extends ServiceProvider
         Tab::put('catalog.product', function (TabItem $tab) {
             $tab->key('catalog.product.info')
                 ->label('avored::system.basic_info')
-                ->view('avored::catalog.product._fields');
+                ->view('avored::catalog.product.cards._fields');
         });
 
-        // Tab::put('catalog.product', function (TabItem $tab) {
-        //     $tab->key('catalog.product.image')
-        //         ->label('avored::system.tab.images')
-        //         ->view('avored::catalog.product.cards.images');
-        // });
+        Tab::put('catalog.product', function (TabItem $tab) {
+            $tab->key('catalog.product.image')
+                ->label('avored::system.images')
+                ->view('avored::catalog.product.cards.images');
+        });
 
         // Tab::put('catalog.product', function (TabItem $tab) {
         //     $tab->key('catalog.product.property')

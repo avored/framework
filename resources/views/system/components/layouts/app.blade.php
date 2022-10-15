@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
 
+    <livewire:styles />
+    <livewire:scripts />
 </head>
 <body x-data="app">
 
@@ -24,6 +26,7 @@
             {{ $slot }}
         </div>
     </div>
+    
     <script src="{{ asset('vendor/avored/js/app.js')  }}"></script>
     @stack('scripts')
     <script>
