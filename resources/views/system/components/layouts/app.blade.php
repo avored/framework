@@ -10,6 +10,7 @@
     <title>@yield('meta_title', 'AvoRed E commerce')</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/avored/css/app.css') }}"></link>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 
     <livewire:styles />
     <livewire:scripts />

@@ -72,7 +72,7 @@ class Product extends BaseModel
      */
     public function document()
     {
-        return $this->morphOne(Document::class, 'documentable');
+        return $this->morphMany(Document::class, 'documentable');
     }
 
     /**

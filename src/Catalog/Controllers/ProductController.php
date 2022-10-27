@@ -8,6 +8,7 @@ use AvoRed\Framework\Database\Contracts\ProductModelInterface;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class ProductController extends Controller
@@ -126,6 +127,33 @@ class ProductController extends Controller
         return new JsonResponse([
             'success' => true,
             'message' => __('avored::system.success_delete_message', ['product' => __('avored::system.product')])
+        ]);
+    }
+
+    /**
+     * Upload a product image.
+     *
+     * @param Product $product
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upload(Product $product, Request $request)
+    {
+        $image = $request->file('image');
+       
+        $path = $image->store('uploads/catalog', 'public');
+        $product->document()->create([
+            'path' => $path,
+            'mime_type' => $image->getClientMimeType(),
+            'size' => $image->getSize(),
+            'origional_name' => $image->getClientOriginalName(),
+        ]);
+        
+
+        return new JsonResponse([
+            'success' => true,
+            'data' => $product->document,
+            'message' => __('avored::system.product_success_upload_message', ['product' => __('avored::system.product')])
         ]);
     }
 }
