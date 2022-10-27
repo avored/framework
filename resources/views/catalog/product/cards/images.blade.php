@@ -1,4 +1,4 @@
-<div>
+<div x-data="fileupload" x-init="fileuploadinit">
     <label
         class="flex bg-white justify-center w-full h-32 p-4 transition border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
         <span class="flex items-center space-x-2">
@@ -12,6 +12,33 @@
                 <span class="text-blue-600 underline">browse</span>
             </span>
         </span>
-        <input type="file" name="file_upload" class="hidden">
+        <input type="file" x-on:change="fileOnChange" name="file_upload" class="hidden">
     </label>
 </div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('fileupload', () => ({
+            open: false,
+         
+            fileuploadinit() {
+                console.log('init')
+            },
+            fileOnChange (e) {
+                console.log(e.target.files)
+
+                var formData = new FormData();
+                formData.append("image", e.target.files[0]);
+                axios.post('/admin/product-image/10981be7-ac5b-485a-8ef6-de03584be21e', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(({data}) => {
+
+
+                })
+            }
+        }))
+    })
+</script>
+

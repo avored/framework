@@ -80,6 +80,8 @@ Route::middleware(['web', 'admin.auth:admin', 'permission'])
         Route::resource('attribute', AttributeController::class);
         Route::resource('product', ProductController::class);
 
+        Route::post('product-image/{product}', [ProductController::class, 'upload']);
+
 
         /***************** USER ROUTES *****************/
         Route::resource('staff', StaffController::class);
