@@ -70,9 +70,9 @@ class Product extends BaseModel
      /**
      * Get the product image.
      */
-    public function document()
+    public function documents()
     {
-        return $this->morphOne(Document::class, 'documentable');
+        return $this->morphMany(Document::class, 'documentable');
     }
 
     /**

@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~easymde/dist/easymde.min.css';
 
 .avored-input {
     @apply w-full px-3 py-2 ring-gray-300 ring-1 rounded shadow-sm appearance-none text-gray-700;
