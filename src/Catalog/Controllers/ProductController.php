@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use AvoRed\Framework\Database\Models\Document;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Tab\Tab;
 use Illuminate\Http\JsonResponse;
@@ -137,12 +138,12 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function upload(Product $product, Request $request)
+    public function uploadDocument(Product $product, Request $request)
     {
         $image = $request->file('image');
        
         $path = $image->store('uploads/catalog', 'public');
-        $product->document()->create([
+        $product->documents()->create([
             'path' => $path,
             'mime_type' => $image->getClientMimeType(),
             'size' => $image->getSize(),
@@ -152,8 +153,27 @@ class ProductController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'data' => $product->document,
+            'data' => $product->documents,
             'message' => __('avored::system.product_success_upload_message', ['product' => __('avored::system.product')])
+        ]);
+    }
+
+    /**
+     * Delete a product image.
+     *
+     * @param Product $product
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteDocument(Document $document)
+    {
+        $product = $document->documentable;
+        $document->delete();
+
+        return new JsonResponse([
+            'success' => true,
+            'data' => $product->documents,
+            'message' => __('avored::system.product_success_delete_message', ['product' => __('avored::system.product')])
         ]);
     }
 }
