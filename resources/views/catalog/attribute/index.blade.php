@@ -62,7 +62,7 @@
                                                 '{{ route('admin.attribute.destroy', $attribute) }}'
                                             )"
                                             url="{{ route('admin.attribute.destroy', $attribute) }}">
-                                            <i class="w-5 h-5" data-feather="trash"></i>
+                                                <i class="w-5 h-5" data-feather="trash"></i>
                                             <x-avored::form.form
                                                 id="category-destory-{{ $attribute->id }}"
                                                 method="delete"
