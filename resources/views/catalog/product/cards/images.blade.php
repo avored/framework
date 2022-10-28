@@ -9,18 +9,18 @@
             </svg>
             
             <span class="font-medium text-gray-600">
-                Drop files to Attach, or
-                <span class="text-blue-600 underline">browse</span>
+                {{ __('avored::system.drag_drop_attached_file') }}
+                <span class="text-blue-600 underline">{{ __('avored::system.browse') }}</span>
             </span>
         </span>
-        <input type="file" x-on:change="documentOnChange" name="file_upload" class="hidden">
+        <input type="file" x-on:change="documentOnChange($event, '{{$product->id}}')" name="file_upload" class="hidden">
     </label>
     <div class="mt-5">
         <div class="grid gap-4 grid-cols-6">
             <template x-for="document in documents">
                 <div class="text-center">
-                    <div class="object-fill h-48 w-96">
-                        <img x-bind:src="`/storage/${document.path}`" class="w-32 rounded-md" alt="product image" />
+                    <div class="rounded-md">
+                        <img x-bind:src="`/storage/${document.path}`" class="object-fill h-32 w-48 rounded-md" alt="product image" />
                     </div>
                     <div class="flex mt-3 justify-center w-full" >
                         <a href="#" x-on:click.prevent="documentDelete(document.id)">
@@ -44,15 +44,13 @@
             documents: [],
          
             fileuploadinit(documents) {
-                console.log(documents)
                 this.documents = documents
             },
-            documentOnChange (e) {
-                console.log(e.target.documents)
-
+            documentOnChange (e, id) {
+               
                 var formData = new FormData();
                 formData.append("image", e.target.files[0]);
-                axios.post('/admin/product-document-upload/10981be7-ac5b-485a-8ef6-de03584be21e', formData, {
+                axios.post('/admin/product-document-upload/' + id, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

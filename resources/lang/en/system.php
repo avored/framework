@@ -106,5 +106,7 @@ return [
     'success_sent_password_reset_email_message' => 'Successfully Password Reset Email has been sent to customer',
     'images' => 'Images',
     'product_success_upload_message' => 'Product Document Uploaded successfully',
-    'product_success_delete_message' => 'Product Document Deleted successfully'
+    'product_success_delete_message' => 'Product Document Deleted successfully',
+    'drag_drop_attached_file' => 'Drop files to Attach, or',
+    'browse' => 'browse',
 ];
