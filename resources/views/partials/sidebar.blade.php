@@ -3,7 +3,7 @@
     x-transition.duration.300ms>
     <div class="bg-white text-red-700 h-16 p-2 flex items-center shadow">
         <img class="h-8 w-8 ml-4" src="{{ asset('/vendor/avored/images/logo_only.svg') }}" alt="AvoRed Ecommerce" />
-        <span class="font-bold ml-2">AvoRed</span>
+        <span class="hidden lg:block font-bold ml-2">AvoRed</span>
     </div>
 
     <div class="space-x-8 p-2 overflow-hidden">
@@ -17,7 +17,7 @@
                         <span aria-hidden="true">
                             <i class="h-5 w-5" data-feather="{{ $adminMenu->icon() }}"></i>
                         </span>
-                        <span class="ml-3 text-sm">{{ $adminMenu->label() }}</span>
+                        <span class="ml-3 pl-1 text-sm">{{ $adminMenu->label() }}</span>
                         <span class="ml-auto" aria-hidden="true">
                             <!-- active class 'rotate-180' -->
                             <svg class="w-4 h-4 transition-transform transform" :class="{ 'rotate-180': open }"
@@ -33,7 +33,6 @@
                                 {{ $subMenu->label() }}
                             </a>
                         @endforeach
-
                     </div>
                 </div>
             @endforeach

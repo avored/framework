@@ -111,6 +111,9 @@ Alpine.data('app', () => ({
     },
     showAlert(type) {
         this.openAlertBox = true
+        this.showAlert = true
+        this.showAlertMessage = 'test message'
+        console.log(type)
         switch (type) {
             case 'success':
                 this.alertBackgroundColor = 'bg-green-500'
@@ -149,6 +152,9 @@ Alpine.data('app', () => ({
                 }
             })
         this.showConfirmationModal = false
+    }
+    init() {
+        console.log('sdfds')
     }
 }))
 

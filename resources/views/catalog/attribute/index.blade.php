@@ -5,6 +5,10 @@
             <h2 class="text-2xl text-red-700 font-semibold">
                 {{ __('avored::system.attribute') }} {{ __('avored::system.list') }}
             </h2>
+            
+              
+
+            
             <span class="ml-auto">
                 <x-avored::link url="{{ route('admin.attribute.create') }}" style="button-primary">
                     {{ __('avored::system.create') }}

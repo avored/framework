@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
+use Livewire\LivewireServiceProvider;
 
 class AvoRedServiceProvider extends ServiceProvider
 {
@@ -45,7 +46,8 @@ class AvoRedServiceProvider extends ServiceProvider
         PaymentProvider::class,
         PermissionProvider::class,
         ShippingProvider::class,
-        TabProvider::class
+        TabProvider::class,
+        LivewireServiceProvider::class
     ];
 
     /**
