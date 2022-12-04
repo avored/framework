@@ -77,11 +77,11 @@ class TabProvider extends ServiceProvider
                 ->view('avored::catalog.product.cards.images');
         });
 
-        // Tab::put('catalog.product', function (TabItem $tab) {
-        //     $tab->key('catalog.product.property')
-        //         ->label('avored::system.tab.property')
-        //         ->view('avored::catalog.product.cards.property');
-        // });
+        Tab::put('catalog.product', function (TabItem $tab) {
+            $tab->key('catalog.product.property')
+                ->label('avored::system.property')
+                ->view('avored::catalog.product.cards.property');
+        });
 
         // Tab::put('catalog.product', function (TabItem $tab) {
         //     $tab->key('catalog.product.attribute')

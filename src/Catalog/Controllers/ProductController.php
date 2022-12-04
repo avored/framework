@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Catalog\Controllers;
 use AvoRed\Framework\Catalog\Requests\ProductRequest;
 use AvoRed\Framework\Database\Contracts\CategoryModelInterface;
 use AvoRed\Framework\Database\Contracts\ProductModelInterface;
+use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Models\Document;
 use AvoRed\Framework\Database\Models\Product;
 use AvoRed\Framework\Tab\Tab;
@@ -24,17 +25,26 @@ class ProductController extends Controller
      * @var AvoRed\Framework\Database\Repository\CategoryRepository $categoryRepository
      */
     protected $categoryRepository;
+
+    /**
+     * @var AvoRed\Framework\Database\Repository\PropertyRepository $propertyRepository
+     */
+    protected $propertyRepository;
+
     /**
      *
      * @param ProductRepositroy $repository
      * @param CategoryRepositroy $categoryRepository
+     * @param PropertyRepositroy $propertyRepository
      */
     public function __construct(
         ProductModelInterface $repository,
-        CategoryModelInterface $categoryRepository
+        CategoryModelInterface $categoryRepository,
+        PropertyModelInterface $propertyRepository
     ) {
         $this->productRepository = $repository;
         $this->categoryRepository = $categoryRepository;
+        $this->propertyRepository = $propertyRepository;
     }
 
     /**
@@ -91,13 +101,17 @@ class ProductController extends Controller
     {
         $tabs = Tab::get('catalog.product');
         $options = $this->categoryRepository->options();
+        $productProperties = $this->propertyRepository->getAllProductProperties();
+        
         // $displayAsOptions = Product::DISPLAY_AS;
         $tabs = Tab::get('catalog.product');
+
 
         return view('avored::catalog.product.edit')
             // ->with('displayAsOptions', $displayAsOptions)
             ->with('tabs', $tabs)
             ->with('options', $options)
+            ->with('productProperties', $productProperties)
             ->with('product', $product);
     }
 
@@ -112,6 +126,8 @@ class ProductController extends Controller
     {
         $product->update($request->all());
         $this->productRepository->saveProductCategories($product, $request);
+
+        dd($request->all());
         return redirect(route('admin.product.index'));
     }
 
