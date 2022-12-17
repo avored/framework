@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Types;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
+use stdClass;
 
 class CustomerType extends GraphQLType
 {
@@ -35,6 +36,10 @@ class CustomerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The customer for the email'
             ],
+            'image_path' => [
+                'type' => Type::string(),
+                'description' => 'The customer for the image path'
+            ],
             'id' => [
                 'type' => Type::string(),
                 'description' => 'The customer for the id'
@@ -47,25 +52,13 @@ class CustomerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'Customer updated at'
             ],
-            'token_type' => [
-                'type' => Type::string(),
-                'description' => 'Customer updated at'
-            ],
-            'expires_in' => [
-                'type' => Type::int(),
-                'description' => 'Customer updated at'
-            ],
-            'access_token' => [
-                'type' => Type::string(),
-                'description' => 'Customer updated at'
-            ],
-            'refresh_token' => [
-                'type' => Type::string(),
-                'description' => 'Customer updated at'
+            'token_info' => [
+                'type' => GraphQL::type('Token'),
+                'description' => 'Customer Token Information'
             ],
             'addresses' => [
                 'type' => Type::listOf(GraphQL::type('Address')),
-                'description' => 'Customer updated at'
+                'description' => 'Customer Address List'
             ],
         ];
     }
