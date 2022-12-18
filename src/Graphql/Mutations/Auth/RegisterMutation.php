@@ -93,12 +93,7 @@ class RegisterMutation extends Mutation
         if (null !== $client && $client instanceof Client) {
             $serverRequest = $this->createRequest($client, $customer->id, $args, $scope = []);
             $reponse = app(AccessTokenController::class)->issueToken($serverRequest);
-            $data = json_decode($reponse->content(), true);
-
-            $customer->token_type = $data['token_type'];
-            $customer->expires_in = $data['expires_in'];
-            $customer->access_token = $data['access_token'];
-            $customer->refresh_token = $data['refresh_token'];
+            $customer->token_info = json_decode($reponse->content());
 
             return $customer;
         }

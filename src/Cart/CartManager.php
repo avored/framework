@@ -89,7 +89,7 @@ class CartManager
             $cartProduct->save();
         } else {
             $data = [
-                'visitor_id' => $this->visitor,
+                'visitor_id' => $this->visitor(),
                 'product_id' => $product->id,
                 'qty' => $qty
             ];
