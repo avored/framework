@@ -58,8 +58,9 @@ class CustomerUpdateMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        /** @var \Avored\Framework\Database\Models\Customer $customer */
+        $customer = Auth::guard('customer')->user();
 
-        dd('fixed this one');
         $customer->update($args);
 
         return $customer;
