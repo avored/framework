@@ -74,6 +74,8 @@ class CustomerQuery extends Query
             return $this->customerRepository->find($args['id']);
         }
 
+        dd(Auth::guard('customer')->user()->image_path_url);
+
         return $this->customerRepository->find(Auth::guard('customer')->user()->id);
     }
 }

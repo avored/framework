@@ -4,6 +4,7 @@ namespace AvoRed\Framework\Graphql\Mutations\Customer;
 
 use AvoRed\Framework\Database\Contracts\CustomerModelInterface;
 use AvoRed\Framework\Database\Models\Customer;
+use AvoRed\Framework\Document\Document;
 use AvoRed\Framework\Graphql\Traits\AuthorizedTrait;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -53,6 +54,10 @@ class CustomerUpdateMutation extends Mutation
                 'name' => 'last_name',
                 'type' => Type::nonNull(Type::string())
             ],
+            'profile_image' => [
+                'name' => 'profile_image',
+                'type' => GraphQL::type('Upload'),
+            ],
         ];
     }
 
@@ -60,6 +65,12 @@ class CustomerUpdateMutation extends Mutation
     {
         /** @var \Avored\Framework\Database\Models\Customer $customer */
         $customer = Auth::guard('customer')->user();
+        
+
+        if (isset($args['profile_image'])) {
+            $document = Document::uploadPublicly($args['profile_image']);
+            $customer->imagePath()->updateOrCreate(optional($customer->imagePath)->toArray() ?? [], $document);
+        }
 
         $customer->update($args);
 

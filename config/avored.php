@@ -131,6 +131,7 @@ return [
 
         'types' => [
             'Token' => TokenType::class,
+            \Rebing\GraphQL\Support\UploadType::class,
             'Category' => CategoryType::class,
             'Product' => ProductType::class,
             'Customer' => CustomerType::class,

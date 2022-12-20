@@ -40,6 +40,10 @@ class CustomerType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The customer for the image path'
             ],
+            'image_path_url' => [
+                'type' => Type::string(),
+                'description' => 'The customer for the image path url'
+            ],
             'id' => [
                 'type' => Type::string(),
                 'description' => 'The customer for the id'
