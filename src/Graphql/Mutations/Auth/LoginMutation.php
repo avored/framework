@@ -47,8 +47,8 @@ class LoginMutation extends Mutation
     protected function rules(array $rules = []): array
     {
         return [
-            'email' => ['required', 'max:255'],
-            'password' => ['required', 'max:255']
+            'email' => ['required', 'max:255', 'email'],
+            'password' => ['required', 'max:64']
         ];
     }
 

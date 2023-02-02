@@ -65,7 +65,6 @@ class ResetPasswordMutation extends Mutation
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-
         $response = $this->broker()->reset($args, function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
@@ -90,6 +89,22 @@ class ResetPasswordMutation extends Mutation
     {
         return Password::broker('customers');
     }
+
+
+    /**
+     * Setup the Validation rules for login mutation
+     *
+     * @return array $rules
+     */
+    protected function rules(array $rules = []): array
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ];
+    }
+
 
     /**
      * Reset the given user's password.
