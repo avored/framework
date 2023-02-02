@@ -152,7 +152,7 @@ Alpine.data('app', () => ({
                 }
             })
         this.showConfirmationModal = false
-    }
+    },
     init() {
         console.log('sdfds')
     }

@@ -64,10 +64,10 @@ class Customer extends BaseModel
      */
     public function getImagePathUrlAttribute()
     {
-        if ($this->attributes['image_path'] === null) {
+        if ($this->imagePath === null) {
             return 'https://placehold.it/250x250';
         }
-        return asset('storage/'.$this->attributes['image_path']);
+        return asset('storage/'. $this->imagePath->path);
     }
 
     /**
@@ -149,5 +149,13 @@ class Customer extends BaseModel
     public function orderComments()
     {
         // <!-- return $this->morphMany(OrderComment::class, 'commentable'); -->
+    }
+
+    /**
+     * Get the staff profile image.
+     */
+    public function imagePath()
+    {
+        return $this->morphOne(Document::class, 'documentable');
     }
 }

@@ -131,7 +131,7 @@ class ProductType extends GraphQLType
      */
     protected function resolveMainImageUrlField($product, $args)
     {
-        $document = $product->document()->first();
+        $document = $product->documents()->first();
 
         if (is_null($document)) {
             $color = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);

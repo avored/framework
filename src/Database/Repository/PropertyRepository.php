@@ -5,6 +5,7 @@ namespace AvoRed\Framework\Database\Repository;
 use AvoRed\Framework\Database\Models\Property;
 use AvoRed\Framework\Database\Contracts\PropertyModelInterface;
 use AvoRed\Framework\Database\Traits\FilterTrait;
+use Illuminate\Support\Collection;
 
 class PropertyRepository extends BaseRepository implements PropertyModelInterface
 {
@@ -40,6 +41,15 @@ class PropertyRepository extends BaseRepository implements PropertyModelInterfac
     public function model(): Property
     {
         return $this->model;
+    }
+
+    /**
+     * Get all the properties which should apply to all the products.
+     * @return \Illuminate\Support\Collection $products
+     */
+    public function getAllProductProperties(): Collection
+    {
+        return $this->model()->where('use_for_all_products', true)->get();
     }
 
 
